@@ -16,7 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @Slf4j
-@RequestMapping
+@RequestMapping("/member/*")
 public class MemberController {
 
 	@Autowired
