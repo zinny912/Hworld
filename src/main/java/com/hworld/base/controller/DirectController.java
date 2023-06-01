@@ -21,7 +21,7 @@ import com.hworld.base.vo.DirectVO;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
-@RequestMapping("/direct/*")
+
 @Slf4j
 public class DirectController {
 	
@@ -29,12 +29,12 @@ public class DirectController {
 	private DirectService directService;
 
 	//상품 리스트 
-	@GetMapping("list")
+	@GetMapping("test")
 	@ResponseBody
 	public ModelAndView getList(ModelAndView mv , Pager pager) throws Exception{
-//		List<DirectVO>ar = directService.getList(pager);
-//		mv.addObject("list", ar);
-		mv.setViewName("index");
+		List<DirectVO>ar = directService.getList(pager);
+		mv.addObject("list", ar);
+		mv.setViewName("test");
 
 		return mv;
 	}
@@ -45,7 +45,7 @@ public class DirectController {
 		directVO = directService.getDetail(directVO);
 		
 		mv.addObject("directVO", directVO);
-		mv.setViewName("direct/detail");
+		mv.setViewName("directDetail");
 		
 		return mv;
 		
@@ -55,7 +55,7 @@ public class DirectController {
 	public ModelAndView setInsert(@ModelAttribute DirectVO directVO)throws Exception{
 		ModelAndView mv = new ModelAndView();
 		
-		mv.setViewName("direct/add");
+		mv.setViewName("directAdd");
 		return mv;
 	}
 	//상품 추가 
@@ -63,7 +63,7 @@ public class DirectController {
 	public ModelAndView setInsert(@Valid DirectVO directVO, BindingResult bindingResult)throws Exception{
 		ModelAndView mv = new ModelAndView();
 		int result = directService.setInsert(directVO);
-		mv.setViewName("redirect:./list");
+		mv.setViewName("redirect:./directList");
 		return mv;
 	}
 	//상품 삭제 
@@ -71,7 +71,7 @@ public class DirectController {
 	public ModelAndView setDelete(DirectVO directVO)throws Exception{
 		ModelAndView mv = new ModelAndView();
 		int result = directService.setDelete(directVO);
-		mv.setViewName("redirect:./list");
+		mv.setViewName("redirect:./directList");
 		return mv;
 	}
 	

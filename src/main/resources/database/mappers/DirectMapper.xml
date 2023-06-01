@@ -20,12 +20,12 @@
   	<select id="getList" resultType="DirectVO" parameterType="Pager">
   		SELECT * FROM DIRECT
   		<include refid="search"></include>
-		ORDER BY NUM DESC 
+		ORDER BY UPLOADDATE DESC  
 		LIMIT #{startRow}, #{perPage}
   	</select>
   	
 	<!-- 상품 개수 -->  	
-	<select id="getTotalCount" parameterType="Pager" resultType="long">
+	<select id="getTotalCount" parameterType="Pager" resultType="Long">
 		SELECT COUNT(DIRECTCODE) FROM DIRECT
 		<include refid="search"></include>
 	</select> 
@@ -49,5 +49,9 @@
 		WHERE DIRECTCODE = #{directCode}
 	</update>
 	
+  	
+  	
+  	
+  	
   	
   </mapper>
