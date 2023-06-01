@@ -33,4 +33,5 @@ public class MemberController {
 		mv.setViewName("index");
 		return mv;
 	}
+	
 }
