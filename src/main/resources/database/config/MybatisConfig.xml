@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"https://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<typeAliases>
+		<!-- 공통 VO 입력 -->
+		<typeAlias type="com.hworld.base.util.Pager" alias="Pager"/>
+		
+		
+		<!-- 개별 VO 입력 -->
+		<typeAlias type="com.hworld.base.vo.MemberVO" alias="MemberVO"/>
+		
+		
+	</typeAliases>
+</configuration>
