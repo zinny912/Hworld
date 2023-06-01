@@ -5,9 +5,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
+ <c:import url="./style.jsp"></c:import>
 <title>Insert title here</title>
 </head>
-<body>
+
+<body class="theme-color2 light ltr">
+
+<c:import url="./header.jsp"></c:import>
+
 	<h1>상품 리스트</h1>
 				<table>
 					<tbody>
@@ -27,5 +32,7 @@
                     
                     </tbody>
               </table>
+              
+<c:import url="./footer.jsp"></c:import>          
 </body>
 </html>
