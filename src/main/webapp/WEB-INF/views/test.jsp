@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
- <c:import url="./style.jsp"></c:import>
+ <c:import url="/temp/style.jsp"></c:import>
 <title>Insert title here</title>
 </head>
 
