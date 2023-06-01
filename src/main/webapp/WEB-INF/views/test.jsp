@@ -5,13 +5,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
- <c:import url="/temp/style.jsp"></c:import>
+ <c:import url="./temp/style.jsp"></c:import>
 <title>Insert title here</title>
 </head>
 
 <body class="theme-color2 light ltr">
 
-<c:import url="./header.jsp"></c:import>
+<c:import url="./temp/header.jsp"></c:import>
 
 	<h1>상품 리스트</h1>
 				<table>
@@ -33,6 +33,6 @@
                     </tbody>
               </table>
               
-<c:import url="./footer.jsp"></c:import>          
+<c:import url="./temp/footer.jsp"></c:import>          
 </body>
 </html>
