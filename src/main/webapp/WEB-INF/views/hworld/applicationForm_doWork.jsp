@@ -428,7 +428,7 @@
     <!-- Cart Section End -->
 
   
-<!-- <div class="modal fade quick-view-modal" id="quick-view1">
+<div class="modal fade quick-view-modal" id="quick-view1">
     <div class="modal-dialog modal-lg modal-dialog-centered col-12">
         <div class="modal-content">
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -518,10 +518,7 @@
                             </div>
                         </div>
                     </div>
-				</div> -->
-				<!-- 유의사항 end -->
- 
-
-	<c:import url="../temp/footer.jsp"></c:import>          
+				</div>
+				<!-- 유의사항 end -->     
 </body>
 </html>
