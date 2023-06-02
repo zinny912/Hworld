@@ -1,10 +1,10 @@
 package com.hworld.base.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -20,18 +20,7 @@ import lombok.extern.slf4j.Slf4j;
 public class MemberController {
 	
 	@Autowired
-	private MemberService memberService;
-	
-	@GetMapping("/")
-	public ModelAndView getMemberList() throws Exception{
-		ModelAndView mv = new ModelAndView();
-		
-		List<MemberVO> ar = memberService.getMemberList();
-		
-		mv.addObject("list", ar);
-		mv.setViewName("index");
-		return mv;
-	}
+	private MemberService memberService;	
 	
 	// 로그인 페이지
 	@GetMapping("login")
@@ -98,13 +87,22 @@ public class MemberController {
 	}
 	
 	// 회원가입 페이지
-	@GetMapping("signUp")
-	public ModelAndView m9() throws Exception{
+	@GetMapping("signUp") 
+	public ModelAndView setMemberAdd() throws Exception{
+		MemberVO memberVO = new MemberVO();
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("hworld/signUp");
 		return modelAndView;
 	}
 	
+	@PostMapping("signUp")
+	public String setMemberAdd(MemberVO memberVO) throws Exception {
+		ModelAndView modelAndView = new ModelAndView();
+		/* 회원가입 쿼리 실행 */
+		memberService.setMemberAdd(memberVO);
+		
+		return "redirect:/";
+	}
 	// 회선확인(명칭 확정 필요) 페이지
 	@GetMapping("signUpPrecheck")
 	public ModelAndView m10() throws Exception{
@@ -128,5 +126,7 @@ public class MemberController {
 		modelAndView.setViewName("hworld/signUpSuccess");
 		return modelAndView;
 	}
+	
+	
 	
 }

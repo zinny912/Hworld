@@ -41,7 +41,7 @@
 
                 <!-- 버튼 영역 -->
                 <div class="button login">
-                    <button onclick="location.href = 'search-shop.html';" type="submit">
+                    <button onclick="location.href = '/etc/findShop';" type="submit">
                         <span>대리점 찾기</span>
                         <i class="fa fa-check"></i>
                     </button>
