@@ -5,19 +5,21 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import lombok.extern.slf4j.Slf4j;
 
 @Controller
-@RequestMapping("/etc/*")
-public class EtcController {
-	// 작업 규모가 커지면 controller 따로 분리
+@Slf4j
+@RequestMapping("/form/*")
+public class ApplicationController {
+	//가입 신청서 관련 controller
 	
-	// 대리점 찾기
-	@GetMapping("findShop")
-	public ModelAndView d1() throws Exception{
+	//신청서 페이지
+	@GetMapping("application")
+	public ModelAndView m15(String name) throws Exception{
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("hworld/findShop");
+		modelAndView.setViewName("hworld/applicationForm");
+		log.info("{}", name);
 		return modelAndView;
 	}
-	
-	
+
 }

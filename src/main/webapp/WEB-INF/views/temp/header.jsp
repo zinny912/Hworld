@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 
-    <!-- header start -->
+    <!-- header start - 절대경로 사용 -->
     <header class="header-style-2" id="home">
         <div class="main-header navbar-searchbar">
             <div class="container-fluid-lg" style="padding-top:2%;">
@@ -13,7 +13,7 @@
                         <div class="main-menu">
                             <div class="menu-left">
                                 <div class="brand-logo">
-                                    <a href="index.html">
+                                    <a href="/">
                                         <svg class="svg-icon">
                                             <use class="fill-color" xlink:href="/assets/svg/icons.svg#logo"></use>
                                         </svg>
@@ -37,55 +37,55 @@
                                                 </li>
                                                 
                                                 <li class="">
-                                                    <a href="javascript:void(0)" class="nav-link menu-title fw-bold fs-6">요금제/부가서비스</a>
+                                                    <a href="/plan/planList" class="nav-link menu-title fw-bold fs-6">요금제/부가서비스</a>
                                                 </li>
 
                                                 <li class="dropdown">
-                                                    <a href="javascript:void(0)" class="nav-link menu-title">
+                                                    <a href="#" class="nav-link menu-title">
                                                         <div class="gradient-title fw-bold fs-6">Direct shop</div>
                                                     </a>
                                                     <ul class="nav-submenu menu-content fw-bold">
                                                         <li>
-                                                            <a href="product-4-image.html">휴대폰</a>
+                                                            <a href="/direct/phoneList">휴대폰</a>
                                                         </li>
                                                         <li>
-                                                            <a href="product-360-view.html">음향기기</a>
+                                                            <a href="/direct/accessoryList">액세서리</a>
                                                         </li>
                                                         <li>
-                                                            <a href="product-360-view.html">악세사리</a>
+                                                            <a href="#">음향기기</a>
                                                         </li>
                                                         <li>
-                                                            <a href="product-360-view.html">기타</a>
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                                <li class="dropdown">
-                                                    <a href="javascript:void(0)" class="nav-link menu-title fw-bold fs-6">고객지원</a>
-                                                    <ul class="nav-submenu menu-content fw-bold">
-                                                        <li>
-                                                            <a href="404.html">공지사항</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="log-in.html">1:1 문의</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="sign-up.html">자료실</a>
+                                                            <a href="#">기타</a>
                                                         </li>
                                                     </ul>
                                                 </li>
                                                 <li class="dropdown">
-                                                    <a href="javascript:void(0)" class="nav-link menu-title fw-bold fs-6">이벤트</a>
+                                                    <a href="/cs/home" class="nav-link menu-title fw-bold fs-6">고객지원</a>
                                                     <ul class="nav-submenu menu-content fw-bold">
                                                         <li>
-                                                            <a href="404.html">진행중인 이벤트</a>
+                                                            <a href="/cs/notice">공지사항</a>
                                                         </li>
                                                         <li>
-                                                            <a href="log-in.html">지난 이벤트</a>
+                                                            <a href="/cs/inquiry">1:1 문의</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="/cs/document">자료실</a>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                                <li class="dropdown">
+                                                    <a href="#" class="nav-link menu-title fw-bold fs-6">이벤트</a>
+                                                    <ul class="nav-submenu menu-content fw-bold">
+                                                        <li>
+                                                            <a href="/event/present">진행중인 이벤트</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="/event/past">지난 이벤트</a>
                                                         </li>
                                                     </ul>
                                                 </li>
                                                 <li class="">
-                                                    <a href="javascript:void(0)" class="nav-link menu-title fw-bold fs-6">매장찾기</a>
+                                                    <a href="/etc/findShop" class="nav-link menu-title fw-bold fs-6">매장찾기</a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -95,10 +95,10 @@
                                         <ul>
                                             <ul>
                                                 <li>
-                                                    <a href="log-in.html" class="d-block fw-bold fs-6 me-3">로그인</a>
+                                                    <a href="/member/login" class="d-block fw-bold fs-6 me-3">로그인</a>
                                                 </li>
                                                 <li>
-                                                    <a href="sign-up.html" class="d-block fw-bold fs-6">회원 가입</a>
+                                                    <a href="/member/signUp" class="d-block fw-bold fs-6">회원 가입</a>
                                                 </li>
                                             </ul>
 
@@ -110,10 +110,10 @@
                                                 <div class="onhover-div profile-dropdown">
                                                     <ul>
                                                         <li>
-                                                            <a href="log-in.html" class="d-block">마이페이지</a>
+                                                            <a href="/myPage" class="d-block">마이페이지</a>
                                                         </li>
                                                         <li>
-                                                            <a href="sign-up.html" class="d-block">로그아웃</a>
+                                                            <a href="/member/logout" class="d-block">로그아웃</a>
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -172,7 +172,7 @@
                                                             <div class="cart-btn">
                                                                 <h6 class="cart-total"><span class="font-light">Total:</span> $
                                                                     542.00</h6>
-                                                                <button onclick="location.href = 'cart.html';" type="button"
+                                                                <button onclick="location.href = '/cart';" type="button"
                                                                     class="btn btn-solid-default btn-block">
                                                                     구매하기
                                                                 </button>

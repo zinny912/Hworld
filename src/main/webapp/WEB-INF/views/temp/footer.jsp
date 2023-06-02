@@ -8,7 +8,7 @@
                     <div class="col-xl-3 col-lg-4 col-md-6">
                         <div class="footer-contact">
                             <div class="brand-logo">
-                                <a href="index.html" class="footer-logo">
+                                <a href="/" class="footer-logo">
                                     <svg class="svg-icon">
                                         <use class="fill-color" xlink:href="/assets/svg/icons.svg#logo"></use>
                                     </svg>
@@ -49,19 +49,22 @@
                             <div class="footer-content">
                                 <ul>
                                     <li>
-                                        <a href="index.html" class="font-dark">Home</a>
+                                        <a href="/" class="font-dark">Home</a>
                                     </li>
                                     <li>
-                                        <a href="shop-left-sidebar.html" class="font-dark">Shop</a>
+                                        <a href="/plan/planList" class="font-dark">요금제/부가서비스</a>
                                     </li>
                                     <li>
-                                        <a href="about-us.html" class="font-dark">About Us</a>
+                                        <a href="#" class="font-dark">DIRECT SHOP</a>
                                     </li>
                                     <li>
-                                        <a href="blog-details.html" class="font-dark">Blog</a>
+                                        <a href="/cs/home" class="font-dark">고객지원</a>
                                     </li>
                                     <li>
-                                        <a href="contact-us.html" class="font-dark">Contact</a>
+                                        <a href="#" class="font-dark">이벤트</a>
+                                    </li>
+                                    <li>
+                                        <a href="/etc/findShop" class="font-dark">매장찾기</a>
                                     </li>
                                 </ul>
                             </div>
@@ -75,19 +78,19 @@
                             <div class="footer-content">
                                 <ul>
                                     <li>
-                                        <a href="shop-left-sidebar.html" class="font-dark">Latest Shoes</a>
+                                        <a href="#" class="font-dark">Latest Shoes</a>
                                     </li>
                                     <li>
-                                        <a href="shop-left-sidebar.html" class="font-dark">Branded Jeans</a>
+                                        <a href="#" class="font-dark">Branded Jeans</a>
                                     </li>
                                     <li>
-                                        <a href="shop-left-sidebar.html" class="font-dark">New Jackets</a>
+                                        <a href="#" class="font-dark">New Jackets</a>
                                     </li>
                                     <li>
-                                        <a href="shop-left-sidebar.html" class="font-dark">Colorfull Hoodies</a>
+                                        <a href="#" class="font-dark">Colorfull Hoodies</a>
                                     </li>
                                     <li>
-                                        <a href="shop-left-sidebar.html" class="font-dark">Shiner Goggles</a>
+                                        <a href="#" class="font-dark">Shiner Goggles</a>
                                     </li>
                                 </ul>
                             </div>
@@ -101,19 +104,19 @@
                             <div class="footer-content">
                                 <ul>
                                     <li>
-                                        <a href="user-dashboard.html" class="font-dark">Your Orders</a>
+                                        <a href="#" class="font-dark">Your Orders</a>
                                     </li>
                                     <li>
-                                        <a href="user-dashboard.html" class="font-dark">Your Account</a>
+                                        <a href="#" class="font-dark">Your Account</a>
                                     </li>
                                     <li>
-                                        <a href="order-tracking.html" class="font-dark">Track Orders</a>
+                                        <a href="#" class="font-dark">Track Orders</a>
                                     </li>
                                     <li>
-                                        <a href="wishlist.html" class="font-dark">Your Wishlist</a>
+                                        <a href="#" class="font-dark">Your Wishlist</a>
                                     </li>
                                     <li>
-                                        <a href="faq.html" class="font-dark">Shopping FAQs</a>
+                                        <a href="#" class="font-dark">Shopping FAQs</a>
                                     </li>
                                 </ul>
                             </div>
