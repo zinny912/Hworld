@@ -64,7 +64,39 @@
 
 <body class="theme-color2 light ltr">
 <!-- <body class="theme-color2 light-gray-bg"> -->
-<%-- <c:import url="../temp/header.jsp"></c:import> --%>
+<c:import url="../temp/header.jsp"></c:import>
+<!-- Breadcrumb section start -->
+    <section class="breadcrumb-section section-b-space">
+        <ul class="circles">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h3>가입신청서</h3>
+                    <nav>
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <a href="index.html">
+                                    <i class="fas fa-home"></i>
+                                </a>
+                            </li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb section end -->
 
     <!-- Cart Section Start -->
     <section class="section-b-space">
@@ -519,6 +551,9 @@
                         </div>
                     </div>
 				</div>
-				<!-- 유의사항 end -->     
+				<!-- 유의사항 end -->
+ 
+
+	<c:import url="../temp/footer.jsp"></c:import>          
 </body>
 </html>
