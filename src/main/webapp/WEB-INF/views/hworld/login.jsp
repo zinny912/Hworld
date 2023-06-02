@@ -19,7 +19,7 @@
                 <!-- 홈 이동 - 2안 -->
                 <div class="d-flex justify-content-center">
                     <a href="index.html">
-                        <h2><img src=".//assets/images/logos/2.png"></h2>
+                        <h2><img src="/assets/images/logos/2.png"></h2>
                     </a>
                 </div>
                 <div class="login-title">
