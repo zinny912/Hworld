@@ -64,7 +64,39 @@
 
 <body class="theme-color2 light ltr">
 <!-- <body class="theme-color2 light-gray-bg"> -->
-<%-- <c:import url="../temp/header.jsp"></c:import> --%>
+<c:import url="../temp/header.jsp"></c:import>
+<!-- Breadcrumb section start -->
+    <section class="breadcrumb-section section-b-space">
+        <ul class="circles">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h3>가입신청서</h3>
+                    <nav>
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <a href="index.html">
+                                    <i class="fas fa-home"></i>
+                                </a>
+                            </li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb section end -->
 
     <!-- Cart Section Start -->
     <section class="section-b-space">
@@ -428,7 +460,7 @@
     <!-- Cart Section End -->
 
   
-<!-- <div class="modal fade quick-view-modal" id="quick-view1">
+<div class="modal fade quick-view-modal" id="quick-view1">
     <div class="modal-dialog modal-lg modal-dialog-centered col-12">
         <div class="modal-content">
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -518,51 +550,10 @@
                             </div>
                         </div>
                     </div>
-				</div> -->
+				</div>
 				<!-- 유의사항 end -->
  
 
-<!-- tap to top Section Start -->
-    <div class="tap-to-top">
-        <a href="#home">
-            <i class="fas fa-chevron-up"></i>
-        </a>
-    </div>
-    <!-- tap to top Section End -->
-
-
-
-    <!-- feather icon js-->
-    <script src="/assets/js/feather/feather.min.js"></script>
-
-    <!-- lazyload js-->
-    <script src="/assets/js/lazysizes.min.js"></script>
-
-    <!-- Slick js-->
-    <script src="/assets/js/slick/slick.js"></script>
-    <script src="/assets/js/slick/slick-animation.min.js"></script>
-    <script src="/assets/js/slick/custom_slick.js"></script>
-
-    <!-- newsletter js -->
-    <script src="/assets/js/newsletter.js"></script>
-
-    <!-- add to cart modal resize -->
-    <script src="/assets/js/cart_modal_resize.js"></script>
-
-    <!-- Add To Home js -->
-    <script src="/assets/js/pwa.js"></script>
-
-    <!-- add to cart modal resize -->
-    <script src="/assets/js/cart_modal_resize.js"></script>
-
-    <!-- feather icon js-->
-    <script src="/assets/js/timer1.js"></script>
-
-    <!-- notify js -->
-    <script src="/assets/js/bootstrap/bootstrap-notify.min.js"></script>
-
-    <!-- script js -->
-    <script src="/assets/js/theme-setting.js"></script>
-    <script src="/assets/js/script.js"></script>          
+	<c:import url="../temp/footer.jsp"></c:import>          
 </body>
 </html>

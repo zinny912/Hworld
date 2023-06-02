@@ -7,6 +7,7 @@
 <head>
 	<meta charset="UTF-8">
     <c:import url="./temp/style.jsp"></c:import>
+    <link id="color-link" rel="stylesheet" type="text/css" href="/assets/css/demo1.css">
     <title>H WORLD</title>    
     <style>
       
