@@ -21,59 +21,122 @@ import com.hworld.base.vo.DirectVO;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
-
+@RequestMapping("/direct/*")
 @Slf4j
 public class DirectController {
 	
 	@Autowired
 	private DirectService directService;
+	
+	// 휴대폰 리스트 페이지
+	@GetMapping("phoneList")
+	public ModelAndView d1() throws Exception{
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("hworld/phoneList");
+		return modelAndView;
+	}
+	
+	// 휴대폰 상세 페이지
+	@GetMapping("phoneDetail")
+	public ModelAndView d2() throws Exception{
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("hworld/phoneDetail");
+		return modelAndView;
+	}
+	
+	// 액세서리 리스트 페이지
+	@GetMapping("accessoryList")
+	public ModelAndView d3() throws Exception{
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("hworld/accessoryList");
+		return modelAndView;
+	}
+	
+	// 액세서리 리스트 페이지
+	@GetMapping("accessoryDetail")
+	public ModelAndView d4() throws Exception{
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("hworld/accessoryDetail");
+		return modelAndView;
+	}
+	
+	// 휴대폰 & 액세서리 상품 추가 페이지
+	@GetMapping("directAdd")
+	public ModelAndView d5() throws Exception{
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("hworld/directAdd");
+		return modelAndView;
+	}
+	// 휴대폰 & 악세사리 상품 수정 페이지
+	@GetMapping("directUpdate")
+	public ModelAndView d6() throws Exception{
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("hworld/directUpdate");
+		return modelAndView;
+	}
+	
+	// 상품 번호 이동 페이지
+	@GetMapping("directNumMove")
+	public ModelAndView d7() throws Exception{
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("hworld/directNumMove");
+		return modelAndView;
+	}
+	
+	// 휴대폰 주문 페이지
+	@GetMapping("phoneOrder")
+	public ModelAndView d8() throws Exception{
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("hworld/phoneOrder");
+		return modelAndView;
+	}
+	
+	// 액세서리 주문 페이지
+	@GetMapping("accessoryOrder")
+	public ModelAndView d9() throws Exception{
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("hworld/accessoryOrder");
+		return modelAndView;
+	}
+	
+	
 
-	//상품 리스트 
-	@GetMapping("test")
-	@ResponseBody
-	public ModelAndView getList(ModelAndView mv , Pager pager) throws Exception{
-		List<DirectVO>ar = directService.getList(pager);
-		mv.addObject("list", ar);
-		mv.setViewName("test");
-
-		return mv;
-	}
-	//상품 상세페이지 
-	@GetMapping("detail")
-	public ModelAndView getDetail(DirectVO directVO)throws Exception{
-		ModelAndView mv = new ModelAndView();
-		directVO = directService.getDetail(directVO);
-		
-		mv.addObject("directVO", directVO);
-		mv.setViewName("directDetail");
-		
-		return mv;
-		
-	}
-	//상품 추가 
-	@GetMapping("add")
-	public ModelAndView setInsert(@ModelAttribute DirectVO directVO)throws Exception{
-		ModelAndView mv = new ModelAndView();
-		
-		mv.setViewName("directAdd");
-		return mv;
-	}
-	//상품 추가 
-	@PostMapping("add")
-	public ModelAndView setInsert(@Valid DirectVO directVO, BindingResult bindingResult)throws Exception{
-		ModelAndView mv = new ModelAndView();
-		int result = directService.setInsert(directVO);
-		mv.setViewName("redirect:./directList");
-		return mv;
-	}
-	//상품 삭제 
-	@PostMapping("delete")
-	public ModelAndView setDelete(DirectVO directVO)throws Exception{
-		ModelAndView mv = new ModelAndView();
-		int result = directService.setDelete(directVO);
-		mv.setViewName("redirect:./directList");
-		return mv;
-	}
+	/*
+	 * //상품 리스트
+	 * 
+	 * @GetMapping("test")
+	 * 
+	 * @ResponseBody public ModelAndView getList(ModelAndView mv , Pager pager)
+	 * throws Exception{ List<DirectVO>ar = directService.getList(pager);
+	 * mv.addObject("list", ar); mv.setViewName("test");
+	 * 
+	 * return mv; } //상품 상세페이지
+	 * 
+	 * @GetMapping("detail") public ModelAndView getDetail(DirectVO directVO)throws
+	 * Exception{ ModelAndView mv = new ModelAndView(); directVO =
+	 * directService.getDetail(directVO);
+	 * 
+	 * mv.addObject("directVO", directVO); mv.setViewName("directDetail");
+	 * 
+	 * return mv;
+	 * 
+	 * } //상품 추가
+	 * 
+	 * @GetMapping("add") public ModelAndView setInsert(@ModelAttribute DirectVO
+	 * directVO)throws Exception{ ModelAndView mv = new ModelAndView();
+	 * 
+	 * mv.setViewName("directAdd"); return mv; } //상품 추가
+	 * 
+	 * @PostMapping("add") public ModelAndView setInsert(@Valid DirectVO directVO,
+	 * BindingResult bindingResult)throws Exception{ ModelAndView mv = new
+	 * ModelAndView(); int result = directService.setInsert(directVO);
+	 * mv.setViewName("redirect:./directList"); return mv; } //상품 삭제
+	 * 
+	 * @PostMapping("delete") public ModelAndView setDelete(DirectVO directVO)throws
+	 * Exception{ ModelAndView mv = new ModelAndView(); int result =
+	 * directService.setDelete(directVO); mv.setViewName("redirect:./directList");
+	 * return mv; }
+	 */
 	
 	
 	

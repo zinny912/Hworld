@@ -15,9 +15,9 @@
                                 <div class="brand-logo">
                                     <a href="index.html">
                                         <svg class="svg-icon">
-                                            <use class="fill-color" xlink:href="assets/svg/icons.svg#logo"></use>
+                                            <use class="fill-color" xlink:href="/assets/svg/icons.svg#logo"></use>
                                         </svg>
-                                        <img src="assets/images/logo.png" class="img-fluid lazyload" alt="logo">
+                                        <img src="/assets/images/logo.png" class="img-fluid lazyload" alt="logo">
                                     </a>
                                 </div>
                             </div>
@@ -131,7 +131,7 @@
                                                         <ul class="custom-scroll">
                                                             <li>
                                                             <div class="media">
-                                                                <img src="assets/images/fashion/product/front/1.jpg"
+                                                                <img src="/assets/images/fashion/product/front/1.jpg"
                                                                 class="img-fluid blur-up lazyload" alt="">
                                                                 <div class="media-body">
                                                                     <h6>Slim Fit Plastic Coat</h6>
@@ -151,7 +151,7 @@
                                                             </li>
                                                             <li>
                                                                 <div class="media">
-                                                                <img src="assets/images/fashion/product/front/7.jpg"
+                                                                <img src="/assets/images/fashion/product/front/7.jpg"
                                                                     class="img-fluid blur-up lazyload" alt="">
                                                                     <div class="media-body">
                                                                         <h6>Womens Stylish Jacket</h6>
