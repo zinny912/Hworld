@@ -16,6 +16,7 @@ public interface DirectDAO {
 	
 	//상품 리스트 조회 
 	public List<DirectVO> getList(Pager pager) throws Exception;
+
 	
 	//상품 하나 조회
 	public DirectVO getDetail(DirectVO directVO) throws Exception;

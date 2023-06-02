@@ -18,11 +18,14 @@
   
   <!-- 상품 리스트 -->
   	<select id="getList" resultType="DirectVO" parameterType="Pager">
-  		SELECT * FROM DIRECT
+  		SELECT D.*, AVG(RATE) FROM DIRECT D
   		<include refid="search"></include>
+		INNER JOIN ORDERS OS 
+		INNER JOIN REVIEW R ON OS.ORDERNUM = R.ORDERNUM
 		ORDER BY UPLOADDATE DESC  
 		LIMIT #{startRow}, #{perPage}
   	</select>
+  
   	
 	<!-- 상품 개수 -->  	
 	<select id="getTotalCount" parameterType="Pager" resultType="Long">

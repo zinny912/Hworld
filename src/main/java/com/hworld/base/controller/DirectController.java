@@ -30,18 +30,21 @@ public class DirectController {
 	
 	// 휴대폰 리스트 페이지
 	@GetMapping("phoneList")
-	public ModelAndView d1() throws Exception{
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("hworld/phoneList");
-		return modelAndView;
+	public ModelAndView getList(ModelAndView mv , Pager pager) throws Exception{
+		List<DirectVO>ar = directService.getList(pager);
+		mv.addObject("list", ar);
+		mv.setViewName("hworld/phoneList");
+		return mv;
 	}
 	
 	// 휴대폰 상세 페이지
 	@GetMapping("phoneDetail")
-	public ModelAndView d2() throws Exception{
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("hworld/phoneDetail");
-		return modelAndView;
+	public ModelAndView getDetail(DirectVO directVO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+//		directVO = directService.getDetail(directVO);
+//		mv.addObject("directVO", directVO);		
+		mv.setViewName("hworld/phoneDetail");
+		return mv;
 	}
 	
 	// 액세서리 리스트 페이지
@@ -102,21 +105,18 @@ public class DirectController {
 	
 
 	/*
-	 * //상품 리스트
+	
 	 * 
-	 * @GetMapping("test")
+	 *  //상품 상세페이지
 	 * 
-	 * @ResponseBody public ModelAndView getList(ModelAndView mv , Pager pager)
-	 * throws Exception{ List<DirectVO>ar = directService.getList(pager);
-	 * mv.addObject("list", ar); mv.setViewName("test");
-	 * 
-	 * return mv; } //상품 상세페이지
-	 * 
-	 * @GetMapping("detail") public ModelAndView getDetail(DirectVO directVO)throws
-	 * Exception{ ModelAndView mv = new ModelAndView(); directVO =
+	 * @GetMapping("detail") 
+	 * public ModelAndView getDetail(DirectVO directVO)throws
+	 * Exception{ 
+	 * ModelAndView mv = new ModelAndView(); directVO =
 	 * directService.getDetail(directVO);
 	 * 
-	 * mv.addObject("directVO", directVO); mv.setViewName("directDetail");
+	 * mv.addObject("directVO", directVO); 
+	 * mv.setViewName("directDetail");
 	 * 
 	 * return mv;
 	 * 
