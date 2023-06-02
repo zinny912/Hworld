@@ -178,6 +178,3 @@
     <script src="/assets/js/theme-setting.js"></script>
     <script src="/assets/js/script.js"></script>
 
-</body>
-
-</html>
