@@ -33,7 +33,7 @@
 	      -webkit-box-pack: center;
 	          -ms-flex-pack: center;
 	              justify-content: center; }
-	      .product-right .size-detail ul li.selected {
+	      .product-right .size-detail ul li .selected {
 	        -webkit-box-shadow: 0 2px 7px rgba(0, 0, 0, 0.2);
 	                box-shadow: 0 2px 7px rgba(0, 0, 0, 0.2); }
 	      .product-right .size-detail ul li + li {
@@ -51,7 +51,7 @@
 	
 	    .zcustom-box2 {
 	    margin:auto;    
-	    width: 600px;
+	    width: 95%;
 	    border-radius: 5px;
 	    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 	    border-bottom:0px solid lightgray;
@@ -64,14 +64,17 @@
 
 <body class="theme-color2 light ltr">
 <!-- <body class="theme-color2 light-gray-bg"> -->
-<%-- <c:import url="../temp/header.jsp"></c:import> --%>
+<c:import url="../temp/header.jsp"></c:import>
 
     <!-- Cart Section Start -->
     <section class="section-b-space">
+    	<div class="container my-4" style="padding: 0px 130px;">
+    	<h2 class="mb-3 fw-bold text-center">가입 신청서</h2>
+    	</div>
         <div class="container" style="padding: 0px 130px;">
             <div class="row g-4">
                 <div class="col-lg-7">
-                    <h3 class="mb-3 fw-bold text-center">가입 신청서</h3>
+                    <!-- h3 가입신청서 제목 원위치 -->
                     <form class="needs-validation">
                         <div class="row g-4">
                             <!-- 가입자 정보 -->
@@ -79,21 +82,21 @@
                             <h5 class="mb-3 fw-bold">가입자 정보 입력</h5>
                             <div class="col-md-12">
                                 <label for="fname" class="form-label">가입자 이름</label>
-                                <input type="text" class="form-control" id="fname" placeholder="Enter Your Name">
+                                <input type="text" class="form-control" id="fname" name="name" placeholder="Enter Your Name">
                             </div>
 
                             <!-- 주민등록번호 -->
                             <div class="row mt-2">
                             <div class="col">
                                 <label for="fnum" class="form-label">주민등록번호</label>
-                                <input type="text" class="form-control" id="fnum" >
+                                <input type="text" class="form-control" id="fnum" name="rrnf">
                             </div>
                             <div class="col-md-1 mt-4 pt-3">
                                 <h2 class="text-center">-</h2>
                             </div>
                             <div class="col">
                                 <label for="lnum" class="form-label">&nbsp;</label>
-                                <input type="text" class="form-control" id="fnum" >
+                                <input type="password" class="form-control" id="fnum" name="rrnl">
                             </div>
                             </div>
                             <!-- 가입자 주소  -->
@@ -106,7 +109,7 @@
 
                             <div class="col-md-3" style="padding-left: 0px;">
                                 <label for="btn2" class="form-label">&nbsp;&nbsp;&nbsp;</label>
-                                <button class="btn btn-solid-default btn-full" id="btn2" style="padding-left: 4px; padding-right: 4px; height: 61%; font-size: calc(12px + (13 - 12) * ((100vw - 320px) / (1920 - 320)));">주소 찾기</button>
+                                <button class="btn btn-solid-default btn-full" onclick="execution_daum_address()" id="btn2" type="button" style="padding-left: 4px; padding-right: 4px; height: 61%; font-size: calc(12px + (13 - 12) * ((100vw - 320px) / (1920 - 320)));">주소 찾기</button>
                             </div>
 
                             <!-- 2. 도로명주소/지번  -->
@@ -116,7 +119,7 @@
 
                             <!-- 3. 상세주소   -->
                             <div class="col-md-12 mt-3">
-                                <input type="text" class="form-control" id="address2">
+                                <input type="text" class="form-control" id="address3">
                             </div>
                         </div>
                         </div>
@@ -426,99 +429,69 @@
                 </div>
     </section>
     <!-- Cart Section End -->
-
-  
-<div class="modal fade quick-view-modal" id="quick-view1">
-    <div class="modal-dialog modal-lg modal-dialog-centered col-12">
-        <div class="modal-content">
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            <div class="modal-body">
-                <div class="row gy-4">
-                                    <div class="col-12">
-                                        <div class="product-right">
-                                            <div class="size-detail">
-                                                <h2 class="mb-3 fw-bolder">요금제 선택</h2>
-                                                <ul class="nav border-0" style="color:black;">
-                                                    <li class="nav-item" >
-                                                    <a class="nav-link active" style="color:black;" data-bs-toggle="tab" href="#tab-1">5G 요금제</a>
-                                                    </li>
-                                                    <li class="nav-item">
-                                                    <a class="nav-link" style="color:black;" data-bs-toggle="tab" href="#tab-2">시니어 요금제</a>
-                                                    </li>
-                                                    <li class="nav-item">
-                                                    <a class="nav-link" style="color:black;" data-bs-toggle="tab" href="#tab-3">청소년 요금제</a>
-                                                    </li>
-                                                    <li class="nav-item">
-                                                    <a class="nav-link" style="color:black;" data-bs-toggle="tab" href="#tab-4">ZEM 요금제</a>
-                                                    </li>
-                                                    <li class="nav-item">
-                                                    <a class="nav-link" style="color:black;" data-bs-toggle="tab" href="#tab-5">군인 요금제</a>
-                                                    </li>
-                                                </ul>
-                                                    <div class="tab-content">
-                                                        <div class="tab-pane fade show active" id="tab-1">
-                                                            <div class="row col-md-12 my-3 mx-3">
-                                                                <div class="form-check custome-radio-box">
-                                                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="credit">
-                                                                    <label class="form-check-label" for="credit">5G 프리미어</label>
-                                                                </div>
-                                                                <div class="form-check custome-radio-box">
-                                                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="debit">
-                                                                    <label class="form-check-label" for="debit">5G 베이직</label>
-                                                                </div>
-                                                                <div class="form-check custome-radio-box">
-                                                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="paypal">
-                                                                    <label class="form-check-label" for="paypal">5G 심플</label>
-                                                                </div>
-                                                                <div class="form-check custome-radio-box">
-                                                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="paypal">
-                                                                    <label class="form-check-label" for="paypal">5G 슬림</label>
-                                                                </div> 
-                                                            </div>
-                                                        </div>
-                                                        <div class="tab-pane fade" id="tab-2">
-                                                            <div class="row col-md-12 my-3 mx-3">
-                                                                <div class="form-check custome-radio-box">
-                                                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="credit">
-                                                                    <label class="form-check-label" for="credit">시니어 A형</label>
-                                                                </div>
-                                                                <div class="form-check custome-radio-box">
-                                                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="debit">
-                                                                    <label class="form-check-label" for="debit">시니어 B형</label>
-                                                                </div>
-                                                                <div class="form-check custome-radio-box">
-                                                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="paypal">
-                                                                    <label class="form-check-label" for="paypal">시니어 C형</label>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="tab-pane fade" id="tab-3">청소년 요금제의 내용입니다.</div>
-                                                        <div class="tab-pane fade" id="tab-4">ZEM 요금제의 내용입니다.</div>
-                                                        <div class="tab-pane fade" id="tab-5">군인 요금제의 내용입니다.</div>
-                                                    </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-3 ">    
-                                            <div class="product-btns">
-                                                <button onclick="location.href='상품상세페이지.html';" type="button" class="btn btn-solid-default btn-lg col-md-12"
-                                                    data-bs-dismiss="modal">선택하기</button>
-                                            </div>
-                                        </div>
-
-                                        <div class="support-agreed-msg">
-                                            <strong>※ 공시지원금, 선택약정할인 중 1개만 신청할 수 있습니다.</strong>
-                                            
-                                            <span class="font-s cl-gray1">
-                                              ※ 월 33,000원 이하 요금제를 이용 하거나 해당 요금제로 변경하면 7% 추가
-                                              요금 할인을 받을 수 없습니다.
-                                            </span>
-                                          </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-				</div>
-				<!-- 유의사항 end -->     
+    
+    <!-- tap to top Section Start -->
+    <div class="tap-to-top">
+        <a href="#home">
+            <i class="fas fa-chevron-up"></i>
+        </a>
+    </div>
+    <!-- tap to top Section End -->
+    
+    <c:import url="../temp/footer.jsp"></c:import>  
+			
+	<!-- 다음 주소 찾기 API -->
+	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script>
+	/* 다음 주소 연동 */
+	function execution_daum_address(){
+		
+	    new daum.Postcode({
+	        oncomplete: function(data) {
+	            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
+	            
+	            // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+	            // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+	            var addr = ''; // 주소 변수
+	            var extraAddr = ''; // 참고항목 변수
+	            //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+	            if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+	                addr = data.roadAddress;
+	            } else { // 사용자가 지번 주소를 선택했을 경우(J)
+	                addr = data.jibunAddress;
+	            }
+	            // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+	            if(data.userSelectedType === 'R'){
+	                // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+	                // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+	                if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+	                    extraAddr += data.bname;
+	                }
+	                // 건물명이 있고, 공동주택일 경우 추가한다.
+	                if(data.buildingName !== '' && data.apartment === 'Y'){
+	                    extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+	                }
+	                // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+	                if(extraAddr !== ''){
+	                    extraAddr = ' (' + extraAddr + ')';
+	                }
+	                // 주소변수 문자열과 참고항목 문자열 합치기
+	      			addr += extraAddr;
+	            
+	            } else {
+	                addr += ' ';
+	            }
+	            // 우편번호와 주소 정보를 해당 필드에 넣는다.
+	            $('#address1').val(data.zonecode);
+	            //$("[name=memberAddr1]").val(data.zonecode);	// 대체가능
+	            $('#address2').val(addr);
+	            //$("[name=memberAddr2]").val(addr);			// 대체가능
+	            // 상세주소 입력란 disabled 속성 변경 및 커서를 상세주소 필드로 이동한다.
+	            $('#address3').attr("readonly",false);
+	            $('#address3').focus(); 
+	        }
+	    }).open();   
+	}
+	</script>
 </body>
 </html>
