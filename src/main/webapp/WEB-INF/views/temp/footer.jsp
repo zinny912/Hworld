@@ -139,12 +139,6 @@
 
 
 
-    <!-- latest jquery-->
-    <script src="/assets/js/jquery-3.5.1.min.js"></script>
-
-    <!-- Bootstrap js-->
-    <script src="/assets/js/bootstrap/bootstrap.bundle.min.js"></script>
-
     <!-- feather icon js-->
     <script src="/assets/js/feather/feather.min.js"></script>
 
