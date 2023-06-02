@@ -7,11 +7,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 @Controller
-@RequestMapping("/customerSupport/*")
+@RequestMapping("/cs/*")
 public class CustomerSupportController {
 	
 	// 고객지원
-	@GetMapping("")
+	@GetMapping("home")
 	public ModelAndView c1() throws Exception{
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("hworld/customerSupport");
@@ -27,18 +27,18 @@ public class CustomerSupportController {
 	}
 	
 	// 1:1 문의
-	@GetMapping("1vs1Inquiry")
+	@GetMapping("inquiry")
 	public ModelAndView c3() throws Exception{
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("hworld/1vs1Inquiry");
+		modelAndView.setViewName("hworld/inquiry");
 		return modelAndView;
 	}
 	
 	// 신청서/자료실
-	@GetMapping("applicationForm")
+	@GetMapping("document")
 	public ModelAndView c4() throws Exception{
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("hworld/applicationForm");
+		modelAndView.setViewName("hworld/document");
 		return modelAndView;
 	}
 }

@@ -11,14 +11,18 @@ import org.springframework.web.servlet.ModelAndView;
 import com.hworld.base.service.MemberService;
 import com.hworld.base.vo.MemberVO;
 
+import lombok.extern.slf4j.Slf4j;
+
 
 @Controller
+@Slf4j
 @RequestMapping("/member/*")
 public class MemberController {
 	
 	@Autowired
 	private MemberService memberService;
 	
+	@GetMapping("/")
 	public ModelAndView getMemberList() throws Exception{
 		ModelAndView mv = new ModelAndView();
 		
@@ -36,6 +40,7 @@ public class MemberController {
 		modelAndView.setViewName("hworld/login");
 		return modelAndView;
 	}
+	
 	// 로그인 했을 때 대표 회선 정보가 없을 때 뜨는 페이지
 	@GetMapping("loginFirst")
 	public ModelAndView m2() throws Exception{
@@ -43,6 +48,7 @@ public class MemberController {
 		modelAndView.setViewName("hworld/loginFirst");
 		return modelAndView;
 	}
+	
 	// 계정 활성화 페이지
 	@GetMapping("loginDormantAccount")
 	public ModelAndView m3() throws Exception{
