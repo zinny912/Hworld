@@ -522,6 +522,47 @@
 				<!-- 유의사항 end -->
  
 
-	<c:import url="../temp/footer.jsp"></c:import>          
+<!-- tap to top Section Start -->
+    <div class="tap-to-top">
+        <a href="#home">
+            <i class="fas fa-chevron-up"></i>
+        </a>
+    </div>
+    <!-- tap to top Section End -->
+
+
+
+    <!-- feather icon js-->
+    <script src="/assets/js/feather/feather.min.js"></script>
+
+    <!-- lazyload js-->
+    <script src="/assets/js/lazysizes.min.js"></script>
+
+    <!-- Slick js-->
+    <script src="/assets/js/slick/slick.js"></script>
+    <script src="/assets/js/slick/slick-animation.min.js"></script>
+    <script src="/assets/js/slick/custom_slick.js"></script>
+
+    <!-- newsletter js -->
+    <script src="/assets/js/newsletter.js"></script>
+
+    <!-- add to cart modal resize -->
+    <script src="/assets/js/cart_modal_resize.js"></script>
+
+    <!-- Add To Home js -->
+    <script src="/assets/js/pwa.js"></script>
+
+    <!-- add to cart modal resize -->
+    <script src="/assets/js/cart_modal_resize.js"></script>
+
+    <!-- feather icon js-->
+    <script src="/assets/js/timer1.js"></script>
+
+    <!-- notify js -->
+    <script src="/assets/js/bootstrap/bootstrap-notify.min.js"></script>
+
+    <!-- script js -->
+    <script src="/assets/js/theme-setting.js"></script>
+    <script src="/assets/js/script.js"></script>          
 </body>
 </html>
