@@ -4,13 +4,13 @@
 
 <!DOCTYPE html>
     <link rel="manifest" href="./manifest.json" />
-    <link rel="icon" href="assets/images/favicon/2.png" type="image/x-icon" />
-    <link rel="apple-touch-icon" href="assets/images/favicon/2.png" />
+    <link rel="icon" href="/assets/images/favicon/2.png" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="/assets/images/favicon/2.png" />
     <meta name="theme-color" content="#e22454" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
     <meta name="apple-mobile-web-app-title" content="Hworld" />
-    <meta name="msapplication-TileImage" content="assets/images/favicon/2.png" />
+    <meta name="msapplication-TileImage" content="/assets/images/favicon/2.png" />
     <meta name="msapplication-TileColor" content="#FFFFFF" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -24,7 +24,7 @@
     <meta name="description" content="Hworld">
     <meta name="keywords" content="Hworld">
     <meta name="author" content="Hworld">
-    <link rel="icon" href="assets/images/favicon/2.png" type="image/x-icon" />
+    <link rel="icon" href="/assets/images/favicon/2.png" type="image/x-icon" />
     <title>H WORLD</title>
 
     <!-- Google font -->
@@ -32,21 +32,21 @@
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- bootstrap css -->
-    <link id="rtl-link" rel="stylesheet" type="text/css" href="assets/css/vendors/bootstrap.css">
+    <link id="rtl-link" rel="stylesheet" type="text/css" href="/assets/css/vendors/bootstrap.css">
 
     <!-- font-awesome css -->
-    <link rel="stylesheet" type="text/css" href="assets/css/vendors/font-awesome.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/vendors/font-awesome.css">
 
     <!-- feather icon css -->
-    <link rel="stylesheet" type="text/css" href="assets/css/vendors/feather-icon.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/vendors/feather-icon.css">
 
     <!-- animation css -->
-    <link rel="stylesheet" type="text/css" href="assets/css/vendors/animate.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/vendors/animate.css">
 
     <!-- slick css -->
-    <link rel="stylesheet" type="text/css" href="assets/css/vendors/slick/slick.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/vendors/slick/slick-theme.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/vendors/slick/slick.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/vendors/slick/slick-theme.css">
 
     <!-- Theme css -->
-    <link id="color-link" rel="stylesheet" type="text/css" href="assets/css/demo2.css">
+    <link id="color-link" rel="stylesheet" type="text/css" href="/assets/css/demo2.css">
    
