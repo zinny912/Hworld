@@ -51,7 +51,7 @@
                 </div>
 
                 <div class="button login">
-                    <button onclick="location.href = 'log-in.html';">
+                    <button onclick="location.href = '/member/login';">
                         <span>로그인하기</span>
                         <i class="fa fa-check"></i>
                     </button>

@@ -3,7 +3,9 @@ package com.hworld.base.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -96,12 +98,21 @@ public class MemberController {
 	}
 	
 	@PostMapping("signUp")
-	public String setMemberAdd(MemberVO memberVO) throws Exception {
-		ModelAndView modelAndView = new ModelAndView();
-		/* 회원가입 쿼리 실행 */
-		memberService.setMemberAdd(memberVO);
+	public ModelAndView setMemberAdd(MemberVO memberVO) throws Exception {
 		
-		return "redirect:/";
+		ModelAndView modelAndView = new ModelAndView();
+		
+		
+		
+		int result = memberService.setMemberAdd(memberVO);
+		System.out.print("회원가입 결과 : {}" + result);
+		
+		modelAndView.setViewName("redirect:../");
+		
+		return modelAndView;
+		
+//		memberService.setMemberAdd(memberVO);
+//		return "redirect:/";
 	}
 	// 회선확인(명칭 확정 필요) 페이지
 	@GetMapping("signUpPrecheck")

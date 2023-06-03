@@ -6,6 +6,9 @@
 
 <head>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
 	<c:import url="../temp/style.jsp"></c:import>    
     <title>회원 가입</title>
 </head>
@@ -24,100 +27,97 @@
                 </div>
                 <div class="login-title">
                     <h2 style="margin-top: 15px;">회원 가입</h2>
-                </div>
-
-                <!-- <div class="login-title">
-                    <h2>회원 가입</h2>
-                </div> -->
-
-                <!-- 정보 입력 영역 -->
-                <div class="input">
-                    <input type="email" name="email" id="email" placeholder="사용자 계정">
-                    <span class="spin"></span>
-                </div>
-
-                <div class="row gx-md-3 gy-3">
-                    <div class="col-md-6">
-                        <div class="input">                            
-                            <input type="password" name="pw" id="pw" placeholder="비밀번호">
-                            <span class="spin"></span>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6">
-                        <div class="input">                            
-                            <input type="password" name="pwCheck" id="pwCheck" placeholder="비밀번호 확인">
-                            <span class="spin"></span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="input">                   
-                    <input type="text" name="name" id="name" placeholder="이름">
-                    <span class="spin"></span>
-                </div>
-
-                <div class="row gx-md-3 gy-3">
-                    <div class="col-md-6">
-                        <div class="input">                            
-                            <input type="text" name="rrnf" id="rrnf" placeholder="주민등록번호 앞자리">
-                            <span class="spin"></span>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6">
-                        <div class="input">                            
-                            <input type="password" name="rrnl" id="rrnl" placeholder="주민등록번호 뒷자리">
-                            <span class="spin"></span>
-                        </div>
-                    </div>
-                </div>
-				
-				<div class="mb-3 row">
-					<label for="address1" class="col-sm-2 col-form-label"><b>주소</b></label>
-					<div class="col-sm-8">
-						<input class="form-control address_input_1" name="address1" readonly="readonly">
-					</div>
-					
-					<button class="col-auto row" onclick="execution_daum_address()">
-						<span>주소 찾기</span>
-					</button>
-				</div>
-				<div class="mb-3 row justify-content-end">
-					<div class="col-sm-10">
-						<input class="form-control address_input_2" name="address2" readonly="readonly">
-					</div>
-				</div>
-				<div class="mb-3 row justify-content-end">
-					<div class="col-sm-10">
-						<input class="form-control address_input_3" name="address3" readonly="readonly">						
-					</div>
-				</div>
-				
-				
-                <!-- <div class="input">
-                    <label for="address">주소</label>
-                    <input type="text" name="address" id="address">
-                    <span class="spin"></span>
-                </div> -->
-
-                <div class="input">
-                    <input type="tel" name="telNum" id="telNum" placeholder="연락처">
-                    <span class="spin"></span>
-                </div>
-
-                <!-- 필요없다면 지우기 -->
-                <div class="input">
-                    <p>이메일 인증(또는 전화번호)</p>
-                    <p>precheck/지금페이지 인증 어떻게? 두번은 번거로울지도..</p>
-                </div>
-
-                <div class="button login">
-                    <button onclick="location.href = '/member/signUpSuccess';">
-                        <span>가입하기</span>
-                        <i class="fa fa-check"></i>
-                    </button>
-                </div>
+                </div>                
+				<form action="./signUp" id="signUpForm" method="post" modelAttribute="memberVO">
+		                <!-- 정보 입력 영역 -->
+		                <div class="input">
+		                    <input type="email" name="email" id="email" placeholder="사용자 계정">
+		                    <span class="spin"></span>
+		                </div>
+		
+		                <div class="row gx-md-3 gy-3">
+		                    <div class="col-md-6">
+		                        <div class="input">                            
+		                            <input type="password" name="pw" id="pw" placeholder="비밀번호">
+		                            <span class="spin"></span>
+		                        </div>
+		                    </div>
+		
+		                    <div class="col-md-6">
+		                        <div class="input">                            
+		                            <input type="password" name="pwCheck" id="pwCheck" placeholder="비밀번호 확인">
+		                            <span class="spin"></span>
+		                        </div>
+		                    </div>
+		                </div>
+		
+		                <div class="input">                   
+		                    <input type="text" name="name" id="name" placeholder="이름">
+		                    <span class="spin"></span>
+		                </div>
+		
+		                <div class="row gx-md-3 gy-3">
+		                    <div class="col-md-6">
+		                        <div class="input">                            
+		                            <input type="text" name="rrnf" id="rrnf" placeholder="주민등록번호 앞자리">
+		                            <span class="spin"></span>
+		                        </div>
+		                    </div>
+		
+		                    <div class="col-md-6">
+		                        <div class="input">                            
+		                            <input type="password" name="rrnl" id="rrnl" placeholder="주민등록번호 뒷자리">
+		                            <span class="spin"></span>
+		                        </div>
+		                    </div>
+		                </div>
+						
+						<div class="mb-3 row">
+							<label for="address1" class="col-sm-2 col-form-label"><b>주소</b></label>
+							<div class="col-sm-8">
+								<input class="form-control address_input_1" name="address1" readonly="readonly">
+							</div>
+							
+							<button class="col-auto row" type="button" onclick="execution_daum_address()">
+								<span>주소 찾기</span>
+							</button>
+						</div>
+						<div class="mb-3 row justify-content-end">
+							<div class="col-sm-10">
+								<input class="form-control address_input_2" name="address2" readonly="readonly">
+							</div>
+						</div>
+						<div class="mb-3 row justify-content-end">
+							<div class="col-sm-10">
+								<input class="form-control address_input_3" name="address3" readonly="readonly">						
+							</div>
+						</div>
+						
+						
+		                <!-- <div class="input">
+		                    <label for="address">주소</label>
+		                    <input type="text" name="address" id="address">
+		                    <span class="spin"></span>
+		                </div> -->
+		
+		                <div class="input">
+		                    <input type="tel" name="telNum" id="telNum" placeholder="연락처">
+		                    <span class="spin"></span>
+		                </div>
+		
+		                <!-- 필요없다면 지우기 -->
+		                <div class="input">
+		                    <p>이메일 인증(또는 전화번호)</p>
+		                    <p>precheck/지금페이지 인증 어떻게? 두번은 번거로울지도..</p>
+		                </div>
+		
+		                <div class="button login" >
+		                    <button type="submit">
+		                        <span>가입하기</span>
+		                        <i class="fa fa-check"></i>
+		                    </button>
+		                </div>
+		        </form>
 
                 <p><a href="/member/login" class="theme-color">이미 계정이 있으신가요?</a></p>
             </div>
@@ -126,7 +126,7 @@
     <!-- Sign Up Section End -->
 
     <div class="bg-overlay"></div>
-    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
 /* 다음 주소 연동 */

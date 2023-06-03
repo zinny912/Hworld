@@ -22,7 +22,8 @@ public class MemberService {
 
 	@Autowired
 	private MemberDAO memberDAO;
-		
+	
+	
 	public int setMemberAdd(MemberVO memberVO) throws Exception {
 		return memberDAO.setMemberAdd(memberVO);
 	}		

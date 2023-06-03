@@ -12,6 +12,7 @@ public class MemberVO {
 	private Integer memberNum;
 	private String email;
 	private String pw;
+	private String pwCheck;
 	private String name;
 	private String address1;
 	private String address2;
@@ -23,6 +24,6 @@ public class MemberVO {
 	private Integer memberState;
 	private Integer adminCheck;
 	private String telNum;
-	private Integer OwnCheck;
+	private Integer ownCheck;
 	
 }
