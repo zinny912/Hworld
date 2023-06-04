@@ -10,7 +10,8 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		
 		
 		<!-- 개별 VO 입력 -->
-		<!--  -->
+		<!-- ApplicationForm -->
+		<typeAlias type="com.hworld.base.vo.ApplicationVO" alias="ApplicationVO"/>
 		
 		<!-- Member -->
 		<typeAlias type="com.hworld.base.vo.MemberVO" alias="MemberVO"/>
