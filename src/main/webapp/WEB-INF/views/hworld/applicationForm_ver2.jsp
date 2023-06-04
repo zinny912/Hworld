@@ -33,9 +33,9 @@
 	      -webkit-box-pack: center;
 	          -ms-flex-pack: center;
 	              justify-content: center; }
-	      /* .product-right .size-detail ul li .selected {
+	      .product-right .size-detail ul li .selected {
 	        -webkit-box-shadow: 0 2px 7px rgba(0, 0, 0, 0.2);
-	                box-shadow: 0 2px 7px rgba(0, 0, 0, 0.2); } */
+	                box-shadow: 0 2px 7px rgba(0, 0, 0, 0.2); }
 	      .product-right .size-detail ul li + li {
 	        margin-left: 10px; }
 	        
@@ -69,14 +69,14 @@
     	<div class="container my-4" style="padding: 0px 130px;">
     	<h2 class="mb-3 fw-bold text-center">가입 신청서</h2>
     	</div>
-        <!-- 전체 컨테이너 -->
         <div class="container" style="padding: 0px 130px;">
             <div class="row g-4">
-                <!-- 좌측영역 -->
+                <!-- 좌측영역 시작 -->
                 <div class="col-lg-7">
-                    <form class="needs-validation" action="" method="POST">
+                    <form class="needs-validation">
                         <div class="row g-4">
-                            <!-- 가입자 정보 시작 -->
+
+                            <!-- 가입자 정보 -->
                             <div class="zcustom-box">
                                 <h5 class="mb-3 fw-bold">가입자 정보 입력</h5>
                                 <div class="col-md-12">
@@ -86,34 +86,34 @@
 
                                 <!-- 주민등록번호 -->
                                 <div class="row mt-2">
-                                    <div class="col">
-                                        <label for="fnum" class="form-label">주민등록번호</label>
-                                        <input type="text" class="form-control" id="fnum" name="rrnf">
-                                    </div>
-                                    <div class="col-md-1 mt-4 pt-3">
-                                        <h2 class="text-center">-</h2>
-                                    </div>
-                                    <div class="col">
-                                        <label for="lnum" class="form-label">&nbsp;</label>
-                                        <input type="password" class="form-control" id="fnum" name="rrnl">
-                                    </div>
+                                <div class="col">
+                                    <label for="fnum" class="form-label">주민등록번호</label>
+                                    <input type="text" class="form-control" id="fnum" name="rrnf">
+                                </div>
+                                <div class="col-md-1 mt-4 pt-3">
+                                    <h2 class="text-center">-</h2>
+                                </div>
+                                <div class="col">
+                                    <label for="lnum" class="form-label">&nbsp;</label>
+                                    <input type="password" class="form-control" id="fnum" name="rrnl">
+                                </div>
                                 </div>
                                 <!-- 가입자 주소  -->
                                 <div class="row mt-2">
                                     <!-- 1. 우편번호  -->
                                     <div class="col-md-9">
                                         <label for="address1" class="form-label">가입자 주소</label>
-                                        <input type="text" class="form-control" id="address1" name="address1">
+                                        <input type="text" class="form-control" id="address1">
                                     </div>
 
                                     <div class="col-md-3" style="padding-left: 0px;">
-                                        <label for="findAddress" class="form-label">&nbsp;&nbsp;&nbsp;</label>
-                                        <button class="btn btn-solid-default btn-full" onclick="execution_daum_address()" id="findAddress" type="button" style="padding-left: 4px; padding-right: 4px; height: 61%; font-size: calc(12px + (13 - 12) * ((100vw - 320px) / (1920 - 320)));">주소 찾기</button>
+                                        <label for="btn2" class="form-label">&nbsp;&nbsp;&nbsp;</label>
+                                        <button class="btn btn-solid-default btn-full" onclick="execution_daum_address()" id="btn2" type="button" style="padding-left: 4px; padding-right: 4px; height: 61%; font-size: calc(12px + (13 - 12) * ((100vw - 320px) / (1920 - 320)));">주소 찾기</button>
                                     </div>
 
                                     <!-- 2. 도로명주소/지번  -->
                                     <div class="col-md-12 mt-3">
-                                        <input type="text" class="form-control" id="address2" name="address2">
+                                        <input type="text" class="form-control" id="address2">
                                     </div>
 
                                     <!-- 3. 상세주소   -->
@@ -122,26 +122,27 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- 가입자 정보 끝 -->
-
-                            <!-- 회선정보 입력 -->
+                        
+                            <!-- 회선 정보 박스 -->
                             <div class="zcustom-box">
                                 <h5 class="mb-3 fw-bold">회선 정보 입력</h5>
                                 <div class="product-right">
                                     <div class="size-detail">
                                         <h6 class="mb-3 fw-bolder">가입유형</h6>
                                         <ul class="nav border-0" style="color:black;">
-                                            <li class="nav-item" id="joinType1">
+                                            <li class="nav-item">
                                             <a class="nav-link active" style="color:black;">신규가입</a>
                                             </li>
-                                            <li class="nav-item" id="joinType2">
-                                            <a class="nav-link" style="color:black;">번호이동</a>
+                                            <li class="nav-item">
+                                            <a class="nav-link" style="color:black;" >번호이동</a>
                                             </li>
-                                            <li class="nav-item" id="joinType3">
-                                            <a class="nav-link" style="color:black;">기기변경</a>
+                                            <li class="nav-item">
+                                            <a class="nav-link" style="color:black;" >기기변경</a>
                                             </li>
                                         </ul>
-                                    </div>                        
+                                    </div>  
+    
+                                    
                                     
                                 <!-- 신규가입 폰 번호 -->
                                     <div class="col-md-12 mt-3 mb-3">
@@ -186,23 +187,23 @@
                                                         <a class="nav-link" style="color:black;" data-bs-toggle="tab" href="#tab-5">군인 요금제</a>
                                                         </li>
                                                     </ul>
-                                                        <div class="tab-content" id="planArea">
+                                                        <div class="tab-content">
                                                             <div class="tab-pane fade show active" id="tab-1">
                                                                 <div class="row col-md-12 mt-3 mx-3">
                                                                     <div class="form-check custome-radio-box">
-                                                                        <input class="form-check-input" type="radio" name="flexRadioDefault" value="5G 프리미어" id="5g1">
+                                                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="credit">
                                                                         <label class="form-check-label" for="credit">5G 프리미어</label>
                                                                     </div>
                                                                     <div class="form-check custome-radio-box">
-                                                                        <input class="form-check-input" type="radio" name="flexRadioDefault" value="5G 베이직" id="5g2">
+                                                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="debit">
                                                                         <label class="form-check-label" for="debit">5G 베이직</label>
                                                                     </div>
                                                                     <div class="form-check custome-radio-box">
-                                                                        <input class="form-check-input" type="radio" name="flexRadioDefault" value="5G 심플" id="5g3">
+                                                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="paypal">
                                                                         <label class="form-check-label" for="paypal">5G 심플</label>
                                                                     </div>
                                                                     <div class="form-check custome-radio-box">
-                                                                        <input class="form-check-input" type="radio" name="flexRadioDefault" value="5G 슬림" id="5g4">
+                                                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="paypal">
                                                                         <label class="form-check-label" for="paypal">5G 슬림</label>
                                                                     </div> 
                                                                 </div>
@@ -210,15 +211,15 @@
                                                             <div class="tab-pane fade" id="tab-2">
                                                                 <div class="row col-md-12 mt-3 mx-3">
                                                                     <div class="form-check custome-radio-box">
-                                                                        <input class="form-check-input" type="radio" name="flexRadioDefault" value="시니어 A형" id="senior1">
+                                                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="credit">
                                                                         <label class="form-check-label" for="credit">시니어 A형</label>
                                                                     </div>
                                                                     <div class="form-check custome-radio-box">
-                                                                        <input class="form-check-input" type="radio" name="flexRadioDefault" value="시니어 B형" id="senior2">
+                                                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="debit">
                                                                         <label class="form-check-label" for="debit">시니어 B형</label>
                                                                     </div>
                                                                     <div class="form-check custome-radio-box">
-                                                                        <input class="form-check-input" type="radio" name="flexRadioDefault" value="시니어 C형" id="senior3">
+                                                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="paypal">
                                                                         <label class="form-check-label" for="paypal">시니어 C형</label>
                                                                     </div>
                                                                 </div>
@@ -263,13 +264,12 @@
                                                                         </div>   
                                                                     </div>
                                                                 
-                                                </div>
+                                                    </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <!-- 요금제 선택 끝 -->
-
+                                </div>            
+                                
                                 <!-- 절차 끝 구분선 -->
                                 <hr class="mb-4">
 
@@ -278,24 +278,24 @@
                                     <div>
                                         <jsp:include page="./applicationTextArea.jsp"></jsp:include>
                                     </div>
+
                                     <div class="mt-3 mb-4 d-flex justify-content-center">
                                             <input class="checkbox_animated check-it mt-1" type="checkbox" id="flexCheckDefault11">
                                             <label class="form-check-label checkout-label" for="flexCheckDefault11" style="font-weight: bolder;">약관에 동의했습니다.</label>
                                     </div>
                                     <div class="mx-auto col-6 row">
-                                        <button class="btn btn-solid-default w-75 mx-auto" id="fillApplication" style="padding-left: 4px; padding-right: 4px; height: 61%; font-size: calc(12px + (13 - 12) * ((100vw - 320px) / (1920 - 320)));">            
+                                        <button class="btn btn-solid-default w-75 mx-auto" id="btn2" style="padding-left: 4px; padding-right: 4px; height: 61%; font-size: calc(12px + (13 - 12) * ((100vw - 320px) / (1920 - 320)));">            
                                             가입하기
                                         </button>
                                     </div>
                                 </div>
                             </div>
-                            <!-- 회선정보 입력 끝 -->
                         </div>
                     </form>
                 </div>
                 <!-- 좌측영역 끝 -->
 
-                <!-- 우측영역 시작 -->
+                <!-- 우측영역 -->
                 <div class="col-lg-5">
                     <div class="your-cart-box">
                         <ul class="list-group mb-3">
@@ -303,9 +303,9 @@
                                 <h3 class="mt-3 mb-1 text-capitalize">iPhone 14 Plus</h3>
                                 <h4 class="my-1" style="color: #fff;">옐로 l 128G</h4>
         
-                                <h6 class="mt-4" style="color: #fff;" id="billJoinType">-</h6>
-                                <h6 class="my-1" style="color: #fff;" id="billPlan">-</h6>
+                                <h6 class="mt-4" style="color: #fff;">기기변경</h6>
                                 <h6 class="my-1" style="color: #fff;">24개월 할부</h6>
+                                <h6 class="my-1" style="color: #fff;">시니어 요금제</h6>
                                 <h6 class="mt-1 mb-4" style="color: #fff;">요금할인</h6>
                             </li>
                             <li class="list-group-item lh-condensed active">
@@ -336,10 +336,8 @@
                     </div>
                 </div>
                 <!-- 우측영역 끝 -->
-
             </div>
-        </div>
-        <!-- 전체 컨테이너 끝 -->
+        </div>      
     </section>
     <!-- Cart Section End -->
     
@@ -350,9 +348,6 @@
         </a>
     </div>
     <!-- tap to top Section End -->
-
-    <!-- applicationForm.jsp에서 쓸 js파일 삽입 -->
-    <script src="/assets/js/applicationForm.js"></script>
     
     <!-- feather icon js-->
     <script src="/assets/js/feather/feather.min.js"></script>

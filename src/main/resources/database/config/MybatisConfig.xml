@@ -10,6 +10,8 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		
 		
 		<!-- 개별 VO 입력 -->
+		<!--  -->
+		
 		<!-- Member -->
 		<typeAlias type="com.hworld.base.vo.MemberVO" alias="MemberVO"/>
 		
@@ -23,6 +25,10 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.hworld.base.vo.PlanVO" alias="PlanVO"/>
 		<typeAlias type="com.hworld.base.vo.QnaVO" alias="QnaVO"/>
 		<typeAlias type="com.hworld.base.vo.ReviewVO" alias="ReviewVO"/> -->
+		
+		<!-- Board -->
+		<!-- <typeAlias type="com.hworld.base.vo.BoardVO" alias="BoardVO"/>
+		<typeAlias type="com.hworld.base.vo.NoticeVO" alias="NoticeVO"/> -->
 		
 		
 		

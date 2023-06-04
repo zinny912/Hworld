@@ -9,12 +9,12 @@ import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @Slf4j
-@RequestMapping("/form/*")
+@RequestMapping
 public class ApplicationController {
 	//가입 신청서 관련 controller
 	
 	//신청서 페이지
-	@GetMapping("application")
+	@GetMapping("formApp")
 	public ModelAndView m15(String name) throws Exception{
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("hworld/applicationForm");
