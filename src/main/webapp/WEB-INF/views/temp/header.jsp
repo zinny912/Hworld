@@ -98,7 +98,7 @@
                                                     <a href="/member/login" class="d-block fw-bold fs-6 me-3">로그인</a>
                                                 </li>
                                                 <li>
-                                                    <a href="/member/signUp" class="d-block fw-bold fs-6">회원 가입</a>
+                                                    <a href="/member/signUpPrecheck" class="d-block fw-bold fs-6">회원 가입</a>
                                                 </li>
                                             </ul>
 

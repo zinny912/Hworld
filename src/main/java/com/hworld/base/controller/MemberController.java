@@ -116,10 +116,15 @@ public class MemberController {
 	}
 	// 회선확인(명칭 확정 필요) 페이지
 	@GetMapping("signUpPrecheck")
-	public ModelAndView m10() throws Exception{
+	public ModelAndView signUpPrecheck() throws Exception{
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("hworld/signUpPrecheck");
 		return modelAndView;
+	}
+	
+	@PostMapping("signUpPrecheck")
+	public ModelAndView signUpPrecheck() throws Exception {
+		
 	}
 	
 	// 회선확인 - 회선이 없는 사용자가 가입 시도시 뜨는 페이지
