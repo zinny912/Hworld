@@ -365,7 +365,7 @@
     <div class="tap-to-top">
         <a href="#home">
             <i class="fas fa-chevron-up"></i>
-        </a>
+        </a>q
     </div>
     <!-- tap to top Section End -->
 
