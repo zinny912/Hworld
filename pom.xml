@@ -18,6 +18,14 @@
 		<java.version>11</java.version>
 	</properties>
 	<dependencies>
+		
+		<!-- https://mvnrepository.com/artifact/com.jcraft/jsch -->
+		<!--SFTP연결--> 
+		<dependency>
+			<groupId>com.jcraft</groupId>
+			<artifactId>jsch</artifactId>
+			<version>0.1.55</version>
+		</dependency>
 		<!-- custom start -->
 		<!-- Spring Form 검증 -->
 		<dependency>
