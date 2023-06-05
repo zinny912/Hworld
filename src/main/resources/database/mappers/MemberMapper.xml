@@ -6,8 +6,20 @@
 <mapper namespace="com.hworld.base.dao.MemberDAO">
 	
 	<insert id="setMemberAdd" parameterType="MemberVO">
-		INSERT INTO MEMBER2(MEMBERNUM, EMAIL, PW, NAME, ADDRESS1, ADDRESS2, ADDRESS3, RRNF, RRNL, JOINDATE, MEMBERSTATE, ADMINCHECK, PHONENUM, OWNCHECK, SALT)
+		INSERT INTO MEMBER(MEMBERNUM, EMAIL, PW, NAME, ADDRESS1, ADDRESS2, ADDRESS3, RRNF, RRNL, JOINDATE, MEMBERSTATE, ADMINCHECK, PHONENUM, OWNCHECK, SALT)
 		VALUES(#{memberNum}, #{email}, #{pw}, #{name}, #{address1}, #{address2}, #{address3}, #{rrnf}, #{rrnl}, now(), 1, 1, #{phoneNum}, 1, #{salt})
 	</insert>
-
+	
+	<!-- 아이디 중복검사 -->
+  	<select id="emailCheck" parameterType="MemberVO" resultType="MemberVO">
+  		SELECT EMAIL FROM MEMBER WHERE EMAIL = #{email}  		  	
+  	</select>
+  	
+  	<select id="getMemberLogin" parameterType="MemberVO" resultType="MemberVO">
+		SELECT * FROM MEMBER
+		WHERE EMAIL = #{email}		
+	</select>
+	
+	
+	
 </mapper>

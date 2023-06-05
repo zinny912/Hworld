@@ -9,9 +9,10 @@ public interface MemberDAO {
 	
 	public int setMemberAdd(MemberVO memberVO) throws Exception;
 	
+	public MemberVO emailCheck(MemberVO memberVO) throws Exception;
+	
 	public MemberVO getMemberLogin(MemberVO memberVO) throws Exception;
 	
 	public int getMemberLogout(MemberVO memberVO) throws Exception;
-	
-	public MemberVO idDuplicateCheck(MemberVO memberVO) throws Exception;
+
 }

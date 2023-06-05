@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 
 import com.hworld.base.dao.MemberDAO;
+import com.hworld.base.util.SHA256Util;
 import com.hworld.base.vo.MemberVO;
 
 import lombok.extern.slf4j.Slf4j;
@@ -25,15 +26,24 @@ public class MemberService {
 	
 	
 	public int setMemberAdd(MemberVO memberVO) throws Exception {
+		
+		String salt = SHA256Util.generateSalt();
+		memberVO.setSalt(salt);
+		
+		String rrnl = memberVO.getRrnl();
+		rrnl = SHA256Util.getEncrypt(rrnl, salt);
+		
+		memberVO.setRrnl(rrnl);
+		
 		return memberDAO.setMemberAdd(memberVO);
 	}		
-		
-	public MemberVO getMemberLogin(MemberVO memberVO) throws Exception {
-		return memberDAO.getMemberLogin(memberVO);
+			
+	public MemberVO emailCheck(MemberVO memberVO) throws Exception {
+		return memberDAO.emailCheck(memberVO);
 	}
 	
-	public MemberVO idDuplicateCheck(MemberVO memberVO) throws Exception {
-		return memberDAO.idDuplicateCheck(memberVO);
+	public MemberVO getMemberLogin(MemberVO memberVO) throws Exception {
+		return memberDAO.getMemberLogin(memberVO);
 	}
 	
 	public int getMemberLogout(MemberVO memberVO) throws Exception {

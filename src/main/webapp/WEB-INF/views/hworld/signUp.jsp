@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -28,11 +29,12 @@
                 <div class="login-title">
                     <h2 style="margin-top: 15px;">회원 가입</h2>
                 </div>                
-				<form action="./signUp" id="signUpForm" method="post" modelAttribute="memberVO">
+				<form:form action="./signUp" id="signUpForm" method="post" modelAttribute="memberVO">
 		                <!-- 정보 입력 영역 -->
-		                <div class="input">
-		                    <input type="email" name="email" id="email" placeholder="사용자 계정">
+		                <div class="input">		                			                
+		                    <input type="email" name="email" id="email" placeholder="사용자 계정">		                    
 		                    <span class="spin"></span>
+		                    <form:errors path="email"></form:errors> 
 		                </div>
 		
 		                <div class="row gx-md-3 gy-3">
@@ -117,7 +119,7 @@
 		                        <i class="fa fa-check"></i>
 		                    </button>
 		                </div>
-		        </form>
+		        </form:form>
 
                 <p><a href="/member/login" class="theme-color">이미 계정이 있으신가요?</a></p>
             </div>
@@ -129,6 +131,8 @@
 
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
+
+
 /* 다음 주소 연동 */
 function execution_daum_address(){
 	

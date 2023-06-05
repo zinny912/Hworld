@@ -2,6 +2,9 @@ package com.hworld.base.vo;
 
 import java.sql.Date;
 
+import javax.validation.constraints.NotBlank;
+
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,6 +13,7 @@ import lombok.Setter;
 public class MemberVO {
 	
 	private Integer memberNum;
+	@NotBlank
 	private String email;
 	private String pw;
 	private String pwCheck;

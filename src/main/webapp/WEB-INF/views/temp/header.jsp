@@ -93,6 +93,7 @@
                                 </nav>
                                     <div class="menu-right">
                                         <ul>
+                                            <c:if test="${empty memberVO}">
                                             <ul>
                                                 <li>
                                                     <a href="/member/login" class="d-block fw-bold fs-6 me-3">로그인</a>
@@ -101,7 +102,8 @@
                                                     <a href="/member/signUpPrecheck" class="d-block fw-bold fs-6">회원 가입</a>
                                                 </li>
                                             </ul>
-
+											</c:if>
+											<c:if test="${not empty memberVO}">
                                             <!-- 로그인 후 로그인 글씨가 user icon으로 변경되고 마이페이지로 이동할 수 있게 끔 -->
                                             <li class="onhover-dropdown">
                                                 <div class="cart-media">
@@ -181,6 +183,7 @@
                                                     </div>
                                                 </div>
                                             </li>
+                                            </c:if>
                                         <!-- 장바구니 아이콘 드랍다운 end -->
                                         </ul>
                                     </div>
