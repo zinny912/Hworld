@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.hworld.base.dao.ApplicationDAO">
+	
+	<insert id="setFormAdd" parameterType="ApplicationVO">
+		INSERT INTO APPLICATIONFORM2(APPNUM, NAME, RRNF, RRNL, ADDRESS1, ADDRESS2, ADDRESS3, PLANNUM, PHONENUM, DISKIND, PHONESUBPRICE, STARTDATE, DIRECTNAME)
+		VALUES(NULL, #{name}, #{rrnf}, #{rrnl}, #{address1}, #{address2}, #{address3}, #{planNum}, #{phoneNum}, #{disKind}, 0, NOW(), #{directName})
+	</insert>
+
+</mapper>
