@@ -2,17 +2,21 @@ package com.hworld.base.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hworld.base.service.CustomerSupportService;
 import com.hworld.base.util.Pager;
 import com.hworld.base.vo.BoardVO;
 import com.hworld.base.vo.NoticeVO;
+import com.hworld.base.vo.QnaVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -47,15 +51,36 @@ public class CustomerSupportController {
 	
 	
 	// 1:1 문의
-	@GetMapping("inquiry")
-	public ModelAndView c3() throws Exception{
+	@GetMapping("qna")
+	public ModelAndView setQnaInsert(HttpSession session) throws Exception{
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("hworld/inquiry");
+		modelAndView.setViewName("hworld/qna");
+		modelAndView.addObject("list", csService.setQnaInsert(session));
 		return modelAndView;
 	}
 	
-	@PostMapping("inquiry")
-	public ModelAndView setInquiryAdd();
+	@PostMapping("qna")
+	public ModelAndView setQnaInsert(QnaVO qnaVO, HttpSession session, MultipartFile file) throws Exception {
+		
+		ModelAndView mv = new ModelAndView();
+		
+		String msg = "문의 등록 실패";
+		
+		int result = csService.setQnaInsert(qnaVO, session, file);
+		
+		if(result > 0)  {
+			msg = "문의 등록 성공";
+		}
+		
+		mv.addObject("result", msg);
+		mv.addObject("url", "./qna");
+			
+		
+		mv.setViewName("common/result");
+		
+		return mv;
+		
+	}
 	
 	// 신청서/자료실
 	@GetMapping("archive")

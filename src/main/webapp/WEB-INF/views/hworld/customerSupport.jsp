@@ -103,7 +103,7 @@
                         <div class="faq-image">
                             <img src="/assets/images/inner-page/faq/faq.png" class="img-fluid blur-up lazyload" alt="">
                         </div>
-                        <h2 class="fw-bold"><a href="inquiry">1:1 문의</a></h2><br>
+                        <h2 class="fw-bold"><a href="qna">1:1 문의</a></h2><br>
                         <h5>궁금한 사항을 1:1 문의로 남겨주시면 신속히 답변드리겠습니다</h5>
                     </div>
                 </div>
