@@ -127,16 +127,16 @@
                                             <nav>
                                                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
                                                     <button class="nav-link button active" id="nav-home-tab" data-bs-toggle="tab"
-                                                        data-bs-target="#desc" type="button">계정 문의</button>
+                                                        data-bs-target="#account" type="button">계정 문의</button>
 
                                                     <button class="nav-link" id="nav-question-tab" data-bs-toggle="tab"
-                                                        data-bs-target="#question" type="button">요금조회/납부</button>
+                                                        data-bs-target="#fee" type="button">요금조회/납부</button>
 
                                                     <button class="nav-link button" id="nav-speci-tab" data-bs-toggle="tab"
-                                                        data-bs-target="#speci" type="button">요금제 문의</button>
+                                                        data-bs-target="#plan" type="button">요금제 문의</button>
 
                                                     <button class="nav-link button" id="nav-size-tab" data-bs-toggle="tab"
-                                                        data-bs-target="#nav-guide" type="button">서류 문의</button>
+                                                        data-bs-target="#document" type="button">서류 문의</button>
 
                                                     <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab"
                                                     data-bs-target="#etc" type="button">기타/불만 접수</button>
@@ -144,120 +144,122 @@
                                             </nav>
 
                                             <!-- 문의 작성 테이블 Section Start -->
-
                                             <div class="tab-content" id="nav-tabContent">
-                                                <div class="tab-pane fade show active" id="desc">
-                                                    <div class="row g-4">
-                                                        <div class="col-12 overflow-visible">
-                                                            <div class="tracker-table pt-0" >  
-                                                                <div class="table-responsive">
-                                                                    <table class="table">
-                                                                        <tbody>
-                                                                            <tr class="table-head">
-                                                                                <th scope="row" rowspan="2" class="text-center align-middle h-100" >
-                                                                                    <div class="d-flex">
-                                                                                        <h6 class="mx-2 fw-bold">문의 번호</h6>
-                                                                                        <i class="fa fa-star" ></i>
-                                                                                    </div>
-                                                                                </th>
-                                                                                <td colspan="5" >보유회선 1건</th>
-                                                                            </tr>
-                                        
-                                                                            <tr>
-                                                                                <td colspan="5">
-                                                                                    <div class="form-check custome-radio-box my-lg-5 ps-5 d-flex justify-content-start">
-                                                                                        <h4>
-                                                                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="credit">
-                                                                                            <label class="form-check-label" for="credit">
-                                                                                        </h4>
-                                                                                        
-                                                                                            <div class="d-flex">
-                                                                                                <h3 class="mx-2"><i class="fa fa-mobile"></i></h3>
-                                                                                                <h5 class="title1 fw-bold">휴대폰 </h5>
-                                                                                                <h6 class="ms-2"> 010-54**-78** l 갤럭시 s20+_256G</h6>
-                                                                                            </div>
-                                                                                        </label>
-                                                                                    </div>
-                                                                                    <!-- 선택 완료 누르면 리스트에서 회선 하나만 보여줌(레퍼런스 : T World) -->
-                                                                                    <!-- <div>
-                                                                                        <button type="button" class="btn btn-solid-default btn-spacing">
-                                                                                            <span>선택 완료</span>
-                                                                                        </button>
-                                                                                    </div> -->
-                                                                                </td>
-                                                                            </tr>
-                                        
-                                                                            <tr>
-                                                                                <th scope="row" class="text-center align-middle h-100" >
-                                                                                    <div class="d-flex">
-                                                                                        <h6 class="mx-2 fw-bold">제목</h6>
-                                                                                        <i class="fa fa-star" ></i>
-                                                                                    </div>
-                                                                                </th>
-                                                                                <td colspan="5">
-                                                                                    <div class="col-md-12">
-                                                                                        <input type="text" class="form-control" id="fname">
-                                                                                    </div>
-                                                                                </td>
-                                                                            </tr>
-                                        
-                                                                            <tr>
-                                                                                <th scope="row" class="text-center align-middle h-100" >
-                                                                                    <div class="d-flex">
-                                                                                        <h6 class="mx-2 fw-bold">내용</h6>
-                                                                                        <i class="fa fa-star" ></i>
-                                                                                    </div>
-                                                                                </th>
-                                                                                <td colspan="5">
-                                                                                    <div class="col-md-12">
-                                                                                        <textarea class="form-control" name="" id="" cols="30" rows="10"></textarea>
-                                                                                    </div>
-                                                                                    <div class="col-md-12">
-                                                                                        <p style="text-align: right;">0 자 입력 / 최대 12,000 자</p>
-                                                                                    </div>
-                                                                                    <div style="text-align: start;">
-                                                                                        <p style="line-height: 0.7;">* 2018년 10월 18일(목) 산업안전보건법 고객응대근로자 보호조치가 시행되었습니다.</p>
-                                                                                        <p style="line-height: 0.7;">고객 응대 근로자에게 폭언, 폭행, 성희롱 등을 하지 말아 주세요.  </p>
-                                                                                        <p style="line-height: 2;">* 문의 접수 시 내용에 폭언, 욕설, 비속어 등이 포함된 경우, 답변을 받으실 수 없습니다.</p>
-                                                                                    </div>
-                                                                                </td>
-                                                                            </tr>
-                                        
-                                                                            <tr>
-                                                                                <th scope="row" rowspan="5" class="text-center align-middle h-100" >
-                                                                                    <div class="d-flex">
-                                                                                        <h6 class="mx-2 fw-bold">파일 첨부</h6>
-                                                                                    </div>
-                                                                                </th>
-                                                                                <td colspan="5">
-                                                                                    <div class="mb-3">
-                                                                                        <input class="form-control" type="file" id="formFile">
-                                                                                    </div>
-                                                                                    <div class="mt-lg-5" style="text-align: start;">
-                                                                                        <p style="line-height: 0.7;">* 첨부 파일 용량은 파일당 3MB를 초과하실 수 없으며, 최대 5개까지 등록하실 수 있습니다.</p>
-                                                                                        <p style="line-height: 0.7;">* 이미지(jpg, jpeg, gif, png)파일을 첨부하실 수 있습니다.</p>
-                                                                                    </div>
-                                                                                </td>
-                                                                            </tr>
-                                        
-                                                                            <tr>
-                                                                            </tr>
-                                                                        </tbody>
-                                                                    </table>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-12 d-flex justify-content-center me-5 my-lg-5">
-                                                            <button class="btn btn-solid-default mx-2 " type="button">작성 완료</button>
-                                                            <button class="btn btn-solid-default " type="button">취소</button>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
+												<form action="./inquiry" method="post" >
+	                                                <div class="tab-pane fade show active" id="account">
+	                                                    <div class="row g-4">
+	                                                        <div class="col-12 overflow-visible">
+	                                                            <div class="tracker-table pt-0" >  
+	                                                                <div class="table-responsive">
+	                                                                    <table class="table">
+	                                                                        <tbody>
+	                                                                            <tr class="table-head">
+	                                                                                <th scope="row" rowspan="2" class="text-center align-middle h-100" >
+	                                                                                    <div class="d-flex">
+	                                                                                        <h6 class="mx-2 fw-bold">문의 번호</h6>
+	                                                                                        <i class="fa fa-star" ></i>
+	                                                                                    </div>
+	                                                                                </th>
+	                                                                                <td colspan="5" >보유회선 1건</td>
+	                                                                            </tr>
+	                                        
+	                                                                            <tr>
+	                                                                                <td colspan="5">
+	                                                                                    <div class="form-check custome-radio-box my-lg-5 ps-5 d-flex justify-content-start">
+	                                                                                        <h4>
+	                                                                                            <input class="form-check-input" type="radio" name="serialNum" id="credit">
+	                                                                                            <label class="form-check-label" for="credit"></label>
+	                                                                                        </h4>
+	                                                                                        
+	                                                                                            <div class="d-flex">
+	                                                                                                <h3 class="mx-2"><i class="fa fa-mobile"></i></h3>
+	                                                                                                <h5 class="title1 fw-bold">휴대폰 </h5>
+	                                                                                                <h6 class="ms-2"> 010-54**-78** l 갤럭시 s20+_256G</h6>
+	                                                                                            </div>
+	                                                                                        
+	                                                                                    </div>
+	                                                                                    <!-- 선택 완료 누르면 리스트에서 회선 하나만 보여줌(레퍼런스 : T World) -->
+	                                                                                    <!-- <div>
+	                                                                                        <button type="button" class="btn btn-solid-default btn-spacing">
+	                                                                                            <span>선택 완료</span>
+	                                                                                        </button>
+	                                                                                    </div> -->
+	                                                                                </td>
+	                                                                            </tr>
+	                                        
+	                                                                            <tr>
+	                                                                                <th scope="row" class="text-center align-middle h-100" >
+	                                                                                    <div class="d-flex">
+	                                                                                        <h6 class="mx-2 fw-bold">제목</h6>
+	                                                                                        <i class="fa fa-star" ></i>
+	                                                                                    </div>
+	                                                                                </th>
+	                                                                                <td colspan="5">
+	                                                                                    <div class="col-md-12">
+	                                                                                        <input type="text" class="form-control" id="fname" name="title">
+	                                                                                    </div>
+	                                                                                </td>
+	                                                                            </tr>
+	                                        
+	                                                                            <tr>
+	                                                                                <th scope="row" class="text-center align-middle h-100" >
+	                                                                                    <div class="d-flex">
+	                                                                                        <h6 class="mx-2 fw-bold">내용</h6>
+	                                                                                        <i class="fa fa-star" ></i>
+	                                                                                    </div>
+	                                                                                </th>
+	                                                                                <td colspan="5">
+	                                                                                    <div class="col-md-12">
+	                                                                                        <textarea class="form-control" name="contents" id="" cols="30" rows="10"></textarea>
+	                                                                                    </div>
+	                                                                                    <div class="col-md-12">
+	                                                                                        <p style="text-align: right;">0 자 입력 / 최대 12,000 자</p>
+	                                                                                    </div>
+	                                                                                    <div style="text-align: start;">
+	                                                                                        <p style="line-height: 0.7;">* 2018년 10월 18일(목) 산업안전보건법 고객응대근로자 보호조치가 시행되었습니다.</p>
+	                                                                                        <p style="line-height: 0.7;">고객 응대 근로자에게 폭언, 폭행, 성희롱 등을 하지 말아 주세요.  </p>
+	                                                                                        <p style="line-height: 2;">* 문의 접수 시 내용에 폭언, 욕설, 비속어 등이 포함된 경우, 답변을 받으실 수 없습니다.</p>
+	                                                                                    </div>
+	                                                                                </td>
+	                                                                            </tr>
+	                                        
+	                                                                            <tr>
+	                                                                                <th scope="row" rowspan="5" class="text-center align-middle h-100" >
+	                                                                                    <div class="d-flex">
+	                                                                                        <h6 class="mx-2 fw-bold">파일 첨부</h6>
+	                                                                                    </div>
+	                                                                                </th>
+	                                                                                <td colspan="5">
+	                                                                                    <div class="mb-3">
+	                                                                                        <input class="form-control" type="file" id="formFile" name="file">
+	                                                                                    </div>
+	                                                                                    <div class="mt-lg-5" style="text-align: start;">
+	                                                                                        <p style="line-height: 0.7;">* 첨부 파일 용량은 파일당 3MB를 초과하실 수 없으며, 최대 5개까지 등록하실 수 있습니다.</p>
+	                                                                                        <p style="line-height: 0.7;">* 이미지(jpg, jpeg, gif, png)파일을 첨부하실 수 있습니다.</p>
+	                                                                                    </div>
+	                                                                                </td>
+	                                                                            </tr>
+	                                        
+	                                                                            <tr>
+	                                                                            </tr>
+	                                                                        </tbody>
+	                                                                    </table>
+	                                                                </div>
+	                                                            </div>
+	                                                        </div>
+	                                                        <div class="col-md-12 d-flex justify-content-center me-5 my-lg-5">
+	                                                            <button class="btn btn-solid-default mx-2 " type="submit">작성 완료</button>
+	                                                            <button class="btn btn-solid-default " type="button">취소</button>
+	                                                        </div>
+	                                                    </div>
+	
+	                                                </div>
+	                                                
+                                                </form>
 
                                                 
 
-                                                <div class="tab-pane fade" id="speci">
+                                                <div class="tab-pane fade" id="fee">
                                                     <div class="row g-4">
                                                         <div class="col-12 overflow-visible">
                                                             <div class="tracker-table pt-0" >  
@@ -271,7 +273,7 @@
                                                                                         <i class="fa fa-star" ></i>
                                                                                     </div>
                                                                                 </th>
-                                                                                <td colspan="5" style="text-align: left; padding-left: 60px;">보유회선 1건</th>
+                                                                                <td colspan="5" style="text-align: left; padding-left: 60px;">보유회선 1건</td>
                                                                             </tr>
                                         
                                                                             <tr>
@@ -279,7 +281,7 @@
                                                                                     <div class="form-check custome-radio-box my-lg-5 ps-5 d-flex justify-content-start">
                                                                                         <h4>
                                                                                             <input class="form-check-input" type="radio" name="flexRadioDefault" id="credit">
-                                                                                            <label class="form-check-label" for="credit">
+                                                                                            <label class="form-check-label" for="credit">   </label>
                                                                                         </h4>
                                                                                         
                                                                                             <div class="d-flex">
@@ -287,7 +289,7 @@
                                                                                                 <h5 class="title1 fw-bold">휴대폰 </h5>
                                                                                                 <h6 class="ms-2"> 010-54**-78** l 갤럭시 s20+_256G</h6>
                                                                                             </div>
-                                                                                        </label>
+                                                                                     
                                                                                     </div>
                                                                                     <!-- 선택 완료 누르면 리스트에서 회선 하나만 보여줌(레퍼런스 : T World) -->
                                                                                     <!-- <div>
@@ -365,7 +367,7 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="tab-pane fade" id="nav-guide" >
+                                                <div class="tab-pane fade" id="plan" >
                                                     <div class="row g-4">
                                                         <div class="col-12 overflow-visible">
                                                             <div class="tracker-table pt-0" >  
@@ -379,7 +381,7 @@
                                                                                         <i class="fa fa-star" ></i>
                                                                                     </div>
                                                                                 </th>
-                                                                                <td colspan="5" style="text-align: left; padding-left: 60px;">보유회선 1건</th>
+                                                                                <td colspan="5" style="text-align: left; padding-left: 60px;">보유회선 1건</td>
                                                                             </tr>
                                         
                                                                             <tr>
@@ -387,7 +389,7 @@
                                                                                     <div class="form-check custome-radio-box my-lg-5 ps-5 d-flex justify-content-start">
                                                                                         <h4>
                                                                                             <input class="form-check-input" type="radio" name="flexRadioDefault" id="credit">
-                                                                                            <label class="form-check-label" for="credit">
+                                                                                            <label class="form-check-label" for="credit"></label>
                                                                                         </h4>
                                                                                         
                                                                                             <div class="d-flex">
@@ -395,7 +397,7 @@
                                                                                                 <h5 class="title1 fw-bold">휴대폰 </h5>
                                                                                                 <h6 class="ms-2"> 010-54**-78** l 갤럭시 s20+_256G</h6>
                                                                                             </div>
-                                                                                        </label>
+                                                                                        
                                                                                     </div>
                                                                                     <!-- 선택 완료 누르면 리스트에서 회선 하나만 보여줌(레퍼런스 : T World) -->
                                                                                     <!-- <div>
@@ -487,7 +489,7 @@
                                                                                         <i class="fa fa-star" ></i>
                                                                                     </div>
                                                                                 </th>
-                                                                                <td colspan="5" style="text-align: left; padding-left: 60px;">보유회선 1건</th>
+                                                                                <td colspan="5" style="text-align: left; padding-left: 60px;">보유회선 1건</td>
                                                                             </tr>
                                         
                                                                             <tr>
@@ -495,7 +497,7 @@
                                                                                     <div class="form-check custome-radio-box my-lg-5 ps-5 d-flex justify-content-start">
                                                                                         <h4>
                                                                                             <input class="form-check-input" type="radio" name="flexRadioDefault" id="credit">
-                                                                                            <label class="form-check-label" for="credit">
+                                                                                            <label class="form-check-label" for="credit">  </label>
                                                                                         </h4>
                                                                                         
                                                                                             <div class="d-flex">
@@ -503,7 +505,7 @@
                                                                                                 <h5 class="title1 fw-bold">휴대폰 </h5>
                                                                                                 <h6 class="ms-2"> 010-54**-78** l 갤럭시 s20+_256G</h6>
                                                                                             </div>
-                                                                                        </label>
+                                                                                      
                                                                                     </div>
                                                                                     <!-- 선택 완료 누르면 리스트에서 회선 하나만 보여줌(레퍼런스 : T World) -->
                                                                                     <!-- <div>
@@ -581,7 +583,7 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="tab-pane fade" id="review" >
+                                                <div class="tab-pane fade" id="document" >
                                                     <div class="row g-4">
                                                         <div class="col-12 overflow-visible">
                                                             <div class="tracker-table pt-0" >  
@@ -595,7 +597,7 @@
                                                                                         <i class="fa fa-star" ></i>
                                                                                     </div>
                                                                                 </th>
-                                                                                <td colspan="5" style="text-align: left; padding-left: 60px;">보유회선 1건</th>
+                                                                                <td colspan="5" style="text-align: left; padding-left: 60px;">보유회선 1건</td>
                                                                             </tr>
                                         
                                                                             <tr>
@@ -603,7 +605,7 @@
                                                                                     <div class="form-check custome-radio-box my-lg-5 ps-5 d-flex justify-content-start">
                                                                                         <h4>
                                                                                             <input class="form-check-input" type="radio" name="flexRadioDefault" id="credit">
-                                                                                            <label class="form-check-label" for="credit">
+                                                                                            <label class="form-check-label" for="credit"></label>
                                                                                         </h4>
                                                                                         
                                                                                             <div class="d-flex">
@@ -611,7 +613,7 @@
                                                                                                 <h5 class="title1 fw-bold">휴대폰 </h5>
                                                                                                 <h6 class="ms-2"> 010-54**-78** l 갤럭시 s20+_256G</h6>
                                                                                             </div>
-                                                                                        </label>
+
                                                                                     </div>
                                                                                     <!-- 선택 완료 누르면 리스트에서 회선 하나만 보여줌(레퍼런스 : T World) -->
                                                                                     <!-- <div>
@@ -711,7 +713,7 @@
                                                                                     <div class="form-check custome-radio-box my-lg-5 ps-5 d-flex justify-content-start">
                                                                                         <h4>
                                                                                             <input class="form-check-input" type="radio" name="flexRadioDefault" id="credit">
-                                                                                            <label class="form-check-label" for="credit">
+                                                                                            <label class="form-check-label" for="credit"></label>
                                                                                         </h4>
                                                                                         
                                                                                             <div class="d-flex">
@@ -719,7 +721,7 @@
                                                                                                 <h5 class="title1 fw-bold">휴대폰 </h5>
                                                                                                 <h6 class="ms-2"> 010-54**-78** l 갤럭시 s20+_256G</h6>
                                                                                             </div>
-                                                                                        </label>
+                                                                                        
                                                                                     </div>
                                                                                     <!-- 선택 완료 누르면 리스트에서 회선 하나만 보여줌(레퍼런스 : T World) -->
                                                                                     <!-- <div>
