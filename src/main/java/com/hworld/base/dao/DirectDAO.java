@@ -1,6 +1,7 @@
 package com.hworld.base.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -16,6 +17,8 @@ public interface DirectDAO {
 	
 	//상품 리스트 조회 
 	public List<DirectVO> getList(Pager pager) throws Exception;
+	
+	public List<Map<String, Object>> getFileList() throws Exception;
 	
 	//상품 하나 조회
 	public DirectVO getDetail(DirectVO directVO) throws Exception;

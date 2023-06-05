@@ -72,7 +72,7 @@ public class SFTPManager {
     /**
   	 * @method	upload
   	 * @desc	원격지 파일업로드
-  	 * @param   String fielName   : 파일 풀경로     (ex. /SKY/sky.txt)
+  	 * @param   String fileName   : 파일 풀경로     (ex. /SKY/sky.txt)
   	 * @param   String remoteDir  : 원격지 디렉토리 (ex. /home/data/)
   	 * @param   String newFileName: 업로드할 파일명 (ex. sky_new.txt))
   	 * @return	N/A
@@ -113,7 +113,7 @@ public class SFTPManager {
       /**
   	 * @method	download
   	 * @desc	원격지 파일 다운로드
-  	 * @param   String fielName   : 원격지 풀경로   (ex. /home/data/sky_new.txt)
+  	 * @param   String fileName   : 원격지 풀경로   (ex. /home/data/sky_new.txt)
   	 * @param   String localDir   : 다운받을 경로   (ex. /SKY/)
   	 * @return	N/A
   	 * @throws	Exception

@@ -37,6 +37,7 @@ public class SKYService  {
     private String workFileDirEAI;
 
 	private DirectService directService;
+	private Pager pager;
 	
      /**
 	 * @method	saveSKY
@@ -51,7 +52,7 @@ public class SKYService  {
 		boolean isUpload  = false;
 
 		// 파일만들 리스트
-	    List<Map<String, Object>> skyList = directService.getList(Pager); //   .selectList("SKYMapper.selectSKYList");
+	    List<Map<String, Object>> skyList = directService.getFileList(); //   .selectList("SKYMapper.selectSKYList");
 		
 		if (skyList .size() > 0 && skyList != null) {
 			
@@ -60,7 +61,7 @@ public class SKYService  {
 			
 			String filename =   rlyId + "$" 
 			                  + dcmCode + "$"
-			                  + DateUtil.getCurrentDate() + ".txt";  //yyyyMMdd
+			                  + DateUtil.getCurrentDate() + ".txt";  //yyyyMMdd / 얘도 자동완성해서 import해보기 안되면 다른 날짜클래스 받아올 수 있는거 넣어서 써도 될거같
 			//filename = SKY$SUNDAY$20210608.txt
 			String filePath = workFileDirEAI + "send/" + filename;
 			
@@ -85,8 +86,8 @@ public class SKYService  {
 					    writer.newLine();
 				     }
 			     }
-            } catch (IOException e) {
-				LOGGER.error("saveSKY : {} ", e);
+            } catch (IOException e) { //exception은 자동완성으로 import
+				LOGGER.error("saveSKY : {} ", e); //log.error로 수정
 			} finally {
 				if (writer != null) {writer.close();}
 			}

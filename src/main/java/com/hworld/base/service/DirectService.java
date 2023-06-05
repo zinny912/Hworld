@@ -1,6 +1,7 @@
 package com.hworld.base.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -42,5 +43,9 @@ public class DirectService {
 		return directDAO.setDelete(directVO);
 	}
 	
+	//상품 이미지리스트 
+	public List<Map<String, Object>> getFileList() throws Exception {
+		return directDAO.getFileList();
+	}
 	
 }
