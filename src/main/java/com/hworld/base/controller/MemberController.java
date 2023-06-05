@@ -2,6 +2,7 @@ package com.hworld.base.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,7 +23,12 @@ import lombok.extern.slf4j.Slf4j;
 public class MemberController {
 	
 	@Autowired
-	private MemberService memberService;	
+	private MemberService memberService;
+	
+	@Bean
+	BCryptPasswordEncoder pwEncoder() {
+		return new BCryptPasswordEncoder();
+	};
 	
 	// 로그인 페이지
 	@GetMapping("login")
@@ -102,7 +108,12 @@ public class MemberController {
 		
 		ModelAndView modelAndView = new ModelAndView();
 		
+		String rawPw = ""; // 인코딩 전 비밀번호
+		String encodePw = ""; // 인코딩 후 비밀번호
 		
+		rawPw = memberVO.getPw(); // 비밀번호 데이터 얻음
+		encodePw = pwEncoder().encode(rawPw); // 비밀번호 인코딩
+		memberVO.setPw(encodePw); // 인코딩된 비밀번호 member 객체에 다시 저장
 		
 		int result = memberService.setMemberAdd(memberVO);
 		System.out.print("회원가입 결과 : {}" + result);
@@ -121,7 +132,7 @@ public class MemberController {
 		modelAndView.setViewName("hworld/signUpPrecheck");
 		return modelAndView;
 	}
-	
+//	ApplicationFormVO applicationFormVO
 	@PostMapping("signUpPrecheck")
 	public ModelAndView signUpPrecheck() throws Exception {
 		

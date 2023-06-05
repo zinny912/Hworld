@@ -23,7 +23,8 @@ public class MemberVO {
 	private Date numberChangeDate;
 	private Integer memberState;
 	private Integer adminCheck;
-	private String telNum;
+	private String phoneNum;
 	private Integer ownCheck;
+	private String salt;
 	
 }

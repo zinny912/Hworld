@@ -6,8 +6,8 @@
 <mapper namespace="com.hworld.base.dao.MemberDAO">
 	
 	<insert id="setMemberAdd" parameterType="MemberVO">
-		INSERT INTO MEMBER(MEMBERNUM, EMAIL, PW, NAME, ADDRESS1, ADDRESS2, ADDRESS3, RRNF, RRNL, JOINDATE, MEMBERSTATE, ADMINCHECK, TELNUM, OWNCHECK)
-		VALUES(#{memberNum}, #{email}, #{pw}, #{name}, #{address1}, #{address2}, #{address3}, #{rrnf}, #{rrnl}, now(), 1, 1, #{telNum}, 1)
+		INSERT INTO MEMBER2(MEMBERNUM, EMAIL, PW, NAME, ADDRESS1, ADDRESS2, ADDRESS3, RRNF, RRNL, JOINDATE, MEMBERSTATE, ADMINCHECK, PHONENUM, OWNCHECK, SALT)
+		VALUES(#{memberNum}, #{email}, #{pw}, #{name}, #{address1}, #{address2}, #{address3}, #{rrnf}, #{rrnl}, now(), 1, 1, #{phoneNum}, 1, #{salt})
 	</insert>
 
 </mapper>
