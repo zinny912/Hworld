@@ -1,10 +1,15 @@
 package com.hworld.base.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hworld.base.service.ApplicationService;
@@ -21,7 +26,7 @@ public class ApplicationController {
 	@Autowired
 	private ApplicationService applicationService;
 	
-	//신청서 페이지
+	//신청서 페이지 들어가는 것
 	@GetMapping("application")
 	public ModelAndView setFormAdd() throws Exception{
 		ModelAndView mv = new ModelAndView();

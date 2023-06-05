@@ -80,8 +80,8 @@
                             <div class="zcustom-box">
                                 <h5 class="mb-3 fw-bold">가입자 정보 입력</h5>
                                 <div class="col-md-12">
-                                    <label for="fname" class="form-label">가입자 이름</label>
-                                    <input type="text" class="form-control" id="fname" name="name" placeholder="Enter Your Name">
+                                    <label for="name" class="form-label">가입자 이름</label>
+                                    <input type="text" class="form-control" id="name" name="name" placeholder="Enter Your Name">
                                 </div>
 
                                 <!-- 주민등록번호 -->

@@ -5,9 +5,17 @@
   
 <mapper namespace="com.hworld.base.dao.ApplicationDAO">
 	
+	<!-- 신청서 테이블에 insert -->
 	<insert id="setFormAdd" parameterType="ApplicationVO">
 		INSERT INTO APPLICATIONFORM2(APPNUM, NAME, RRNF, RRNL, ADDRESS1, ADDRESS2, ADDRESS3, PLANNUM, PHONENUM, DISKIND, PHONESUBPRICE, STARTDATE, DIRECTNAME)
 		VALUES(NULL, #{name}, #{rrnf}, #{rrnl}, #{address1}, #{address2}, #{address3}, #{planNum}, #{phoneNum}, #{disKind}, 0, NOW(), #{directName})
 	</insert>
+	
+	<!-- 신청서vo의 주민번호와 회원 테이블의 주민번호가 일치하는 정보가 있는지 확인 -->
+	<select id="getMemberSearch" parameterType="ApplicationVO" resultType="MemberVO">
+		SELECT MEMBERNUM FROM MEMBER
+		WHERE RRNF = #{rrnf} AND RRNL = #{rrnl}
+	</select>
+	
 
 </mapper>

@@ -1,8 +1,11 @@
 package com.hworld.base.dao;
 
+import java.io.EOFException;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import com.hworld.base.vo.ApplicationVO;
+import com.hworld.base.vo.MemberVO;
 
 @Mapper
 public interface ApplicationDAO {
@@ -10,8 +13,8 @@ public interface ApplicationDAO {
 	//1.신청서 DB INSERT
 	public int setFormAdd(ApplicationVO applicationVO) throws Exception;
 	
-	//2.신청서 기반(주민번호, 이름)으로 일치하는 회원정보가 있는지 검색
-	
+	//2.신청서 기반(주민번호)으로 일치하는 회원정보가 있는지 검색
+	public MemberVO getMemberSearch(ApplicationVO applicationVO) throws Exception;
 	
 	//3-1a.일치하는 회원이 없으면 회원번호 생성
 	
