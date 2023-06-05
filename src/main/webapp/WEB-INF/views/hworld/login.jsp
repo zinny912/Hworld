@@ -54,6 +54,11 @@
 	                    <input type="password" name="pw" id="pw" placeholder="비밀번호">
 	                    <span class="spin"></span>
 	                </div>
+	                
+	                <div class="input">                    
+	                    <input type="password" name="rrnl" id="rrnl" placeholder="주민번호뒷자리">
+	                    <span class="spin"></span>
+	                </div>
 	
 	                <div class="input">
 	                    <p>로그인 5회 이상 실패시 보안 문자 표시 영역</p>
