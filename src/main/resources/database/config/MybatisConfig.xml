@@ -25,6 +25,9 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.hworld.base.vo.ReviewVO" alias="ReviewVO"/> -->
 		
 		
+		<typeAlias type="com.hworld.base.vo.BoardVO" alias="BoardVO"/>
+		<typeAlias type="com.hworld.base.vo.NoticeVO" alias="NoticeVO"/>
+		
 		
 	</typeAliases>
 </configuration>

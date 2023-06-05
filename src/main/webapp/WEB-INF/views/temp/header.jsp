@@ -69,7 +69,7 @@
                                                             <a href="/cs/inquiry">1:1 문의</a>
                                                         </li>
                                                         <li>
-                                                            <a href="/cs/document">자료실</a>
+                                                            <a href="/cs/archive">자료실</a>
                                                         </li>
                                                     </ul>
                                                 </li>

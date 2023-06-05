@@ -80,39 +80,7 @@
             </div>
         </div>
     </section>
-        <!-- Breadcrumb section start -->
-        <!-- <section class="breadcrumb-section section-b-space">
-            <ul class="circles">
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-            </ul>
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <h3>고객지원</h3>
-                        <nav>
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item">
-                                    <a href="index.html">
-                                        <i class="fas fa-home"></i>
-                                    </a>
-                                </li>
-                                <li class="breadcrumb-item active" aria-current="page">Contact us</li>
-                            </ol>
-                        </nav>
-                    </div>
-                </div>
-            </div>
-        </section> -->
-        <!-- Breadcrumb section end -->
+
     <!-- Breadcrumb section end -->
 
     <!-- FAQ Section Start -->
@@ -135,7 +103,7 @@
                         <div class="faq-image">
                             <img src="/assets/images/inner-page/faq/faq.png" class="img-fluid blur-up lazyload" alt="">
                         </div>
-                        <h2 class="fw-bold"><a href="1vs1Inquiry">1:1 문의</a></h2><br>
+                        <h2 class="fw-bold"><a href="inquiry">1:1 문의</a></h2><br>
                         <h5>궁금한 사항을 1:1 문의로 남겨주시면 신속히 답변드리겠습니다</h5>
                     </div>
                 </div>
@@ -146,7 +114,7 @@
                             <img src="/assets/images/inner-page/faq/community.png" class="img-fluid blur-up lazyload"
                                 alt="">
                         </div>
-                        <h2 class="fw-bold"><a href="applicationForm">신청서/자료실</a></h2><br>
+                        <h2 class="fw-bold"><a href="archive">신청서/자료실</a></h2><br>
                         <h5>가입/변경/해지 관련 신청·동의서 다운로드</h5>
                     </div>
                 </div>
