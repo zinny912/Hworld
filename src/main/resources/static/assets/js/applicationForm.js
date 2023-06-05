@@ -73,7 +73,7 @@ $('#discountArea').on("click", function(){
     let disKindAllTxt = $('input[name="disKind"]:checked').siblings('label').text(); //전체 label text
 
     //span을 제외한 label text
-    let disKindTxt = $('input[name="disKind"]:checked').siblings('label')     // label 요소를 복제합니다
+    let disKindTxt = $('input[name="disKind"]:checked').siblings('label').clone()     // label 요소를 복제합니다
                                                         .children('span')    // span 요소를 선택합니다
                                                         .remove()            // 선택한 span 요소를 제거합니다
                                                         .end()               // 원래의 복제된 요소로 돌아갑니다
