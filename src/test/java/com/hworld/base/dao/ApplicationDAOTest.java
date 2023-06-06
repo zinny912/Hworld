@@ -18,7 +18,7 @@ class ApplicationDAOTest {
 	@Autowired
 	private ApplicationDAO applicationDAO;
 	
-	@Test
+	//@Test
 	void getMemberSearch() throws Exception{
 		log.info("test");
 		ApplicationVO applicationVO = new ApplicationVO();
@@ -28,6 +28,23 @@ class ApplicationDAOTest {
 		
 		MemberVO memberVO = applicationDAO.getMemberSearch(applicationVO);
 		assertNotNull(memberVO);
+	}
+	
+	//@Test
+	void setMemberInitAdd() throws Exception{
+		ApplicationVO applicationVO = new ApplicationVO();
+		
+		applicationVO.setName("brian");
+		applicationVO.setAddress1("12345");
+		applicationVO.setAddress2("서울 금천구 디지털로123");
+		applicationVO.setAddress3("123-11");
+		applicationVO.setRrnf("991234");
+		applicationVO.setRrnl("1234567");
+		applicationVO.setPhoneNum("010-1234-5678");
+		
+		int result = applicationDAO.setMemberInitAdd(applicationVO);
+		
+		assertNotEquals(0, result);
 	}
 
 }

@@ -32,8 +32,8 @@
 	 	
 	<!-- 상품 등록 --> 	
 	<insert id="setInsert" parameterType="DirectVO">
-		INSERT INTO DIRECT(DIRECTCODE, DIRECTNAME, DIRECTCONTENTS, DIRECTPRICE, DIRECTFILEPATH, DIRECTSTOCK, CATEGORYCODE, BRANDCODE, COLORCODE, SAVECAPACITY)
-		VALUES (#{directCode}, #{directName}, #{directContents}, #{directPrice}, #{directFilePath}, #{directStock}, #{categoryCode},#{brandCode},#{colorCode}, #{saveCapacity})
+		INSERT INTO DIRECT(DIRECTCODE, DIRECTNAME, DIRECTCONTENTS, DIRECTPRICE, DIRECTFILEPATH, DIRECTSTOCK, CATEGORYCODE, BRANDCODE, COLORCODE, SAVECAPACITY, UPLOADDATE)
+		VALUES (#{directCode}, #{directName}, #{directContents}, #{directPrice}, #{directFilePath}, #{directStock}, #{categoryCode}, #{brandCode}, #{colorCode}, #{saveCapacity}, NOW())
 	</insert>
 	 	
   	<!-- 상품 삭제 -->
