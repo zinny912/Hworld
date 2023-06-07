@@ -24,14 +24,15 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.hworld.base.vo.OrderVO " alias="OrderVO"/>
 		<typeAlias type="com.hworld.base.vo.OrderDirectVO" alias="OrderDirectVO"/>
 		<typeAlias type="com.hworld.base.vo.PlanVO" alias="PlanVO"/>
-		<typeAlias type="com.hworld.base.vo.QnaVO" alias="QnaVO"/>
 		<typeAlias type="com.hworld.base.vo.ReviewVO" alias="ReviewVO"/> -->
 		
+		<!-- Telephone -->
+		<typeAlias type="com.hworld.base.vo.TelephoneVO" alias="TelephoneVO"/>
+		
 		<!-- Board -->
-		<!-- <typeAlias type="com.hworld.base.vo.BoardVO" alias="BoardVO"/>
-		<typeAlias type="com.hworld.base.vo.NoticeVO" alias="NoticeVO"/> -->
-		
-		
+		<typeAlias type="com.hworld.base.vo.BoardVO" alias="BoardVO"/>
+		<typeAlias type="com.hworld.base.vo.NoticeVO" alias="NoticeVO"/>
+		<typeAlias type="com.hworld.base.vo.QnaVO" alias="QnaVO"/>
 		
 	</typeAliases>
 </configuration>
