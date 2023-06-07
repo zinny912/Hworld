@@ -20,9 +20,6 @@ public class DirectVO {
     //Direct 가격
     private Integer directPrice;
 
-    //Direct 파일 경로
-    private String directFilePath;
-
     //Direct 재고
     private Integer directStock;
 
@@ -40,5 +37,5 @@ public class DirectVO {
     
     //업로드 날짜
     private Date uploadDate;
-
+    	
 }

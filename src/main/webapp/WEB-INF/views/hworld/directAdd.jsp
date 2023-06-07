@@ -144,9 +144,9 @@
                                 <input type="hidden" id="directCode" name="directCode">
                             </div> -->
                             
-                            <div class="col-md-2 mt-5 d-flex me-5">
-                            	<button type="button" class="btn btn-solid-default btn-sm mt-2" id="optionAdd">+옵션추가</button>    
-                            	<button type="button" class="btn btn-sm mt-2" id="optionAdd">-옵션삭제</button>                            
+                            <div class="col-md-2 mt-5 d-flex ">
+                            	<button type="button" class="btn btn-outline-danger btn-sm mt-2 me-2" id="optionAdd">+옵션추가</button>    
+                            	<button type="button" class="btn btn-outline-secondary btn-sm mt-2" id="optionDelete">-옵션삭제</button>                            
                             	                        
                             </div>
 
@@ -157,12 +157,12 @@
                             
                             
                                 <div class="mb-2">
-                                    <label for="validationCustom04" class="form-label">썸네일 이미지</label>
-                                    <input class="form-control" type="file" id="formFile">
+                                    <label for="directThumbFilePath" class="form-label">썸네일 이미지</label>
+                                    <input class="form-control" type="file" id="directThumbFilePath" name="multipartFiles">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="validationCustom04" class="form-label">상품 이미지</label>
-                                    <input class="form-control" type="file" id="formFile">
+                                    <label for="directFilePath" class="form-label">상품 이미지</label>
+                                    <input class="form-control" type="file" id="directFilePath" name="multipartFiles">
                                 </div>
             
                             <!-- 상세정보 서머노트하자 -->
@@ -223,6 +223,11 @@
 					
         $('.option').append(child);
 	})
+	
+	//옵션 삭제 
+	$('#optionDelete').click(()=>{
+		$('.options').last().remove();
+	});
 	
 	//제품코드 합치기 
     function generateDirectCode(event) {

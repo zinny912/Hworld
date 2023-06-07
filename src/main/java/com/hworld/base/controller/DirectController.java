@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hworld.base.service.DirectService;
@@ -83,9 +84,11 @@ public class DirectController {
 //		return modelAndView;
 //	}
 	@PostMapping("directAdd")
-	public ModelAndView setInsert(String categoryCode, String brandCode, String directName, String directContents, String directFilePath, 
-			String[] colorCode, String[] saveCapacity, Integer[] directPrice, Integer[] directStock, String[] directCode, DirectVO directVO) throws Exception{
+	public ModelAndView setInsert(String categoryCode, String brandCode, String directName, String directContents,
+			String[] colorCode, String[] saveCapacity, Integer[] directPrice, Integer[] directStock, String[] directCode, DirectVO directVO, MultipartFile[] multipartFiles) throws Exception{
 		ModelAndView modelAndView = new ModelAndView();
+		
+		System.out.println(multipartFiles);
 		
 		//반복문으로 directVO 하나 완성하기 + 완성될 때 서비스로 insert 메서드 호출
 		for(int i=0; i<directCode.length; i++) {
@@ -94,26 +97,18 @@ public class DirectController {
 			directVO2.setBrandCode(brandCode);
 			directVO2.setDirectName(directName);
 			directVO2.setDirectContents(directContents);
-			directVO2.setDirectFilePath(directFilePath);
 			directVO2.setColorCode(colorCode[i]);
 			directVO2.setSaveCapacity(saveCapacity[i]);
 			directVO2.setDirectPrice(directPrice[i]);
 			directVO2.setDirectStock(directStock[i]);
 			directVO2.setDirectCode(directCode[i]);
+
 			
-			log.error("*********** 카테고리코드: {}", directVO2.getCategoryCode());
-			log.error("*********** 브랜드코드: {}", directVO2.getBrandCode());
-			log.error("*********** 상품명: {}", directVO2.getDirectName());
-			log.error("*********** 색깔코드: {}", directVO2.getColorCode());
-			log.error("*********** 저장용량: {}", directVO2.getSaveCapacity());
-			log.error("*********** 상품가격: {}", directVO2.getDirectPrice());
-			log.error("*********** 상품재고: {}", directVO2.getDirectStock());
-			log.error("*********** 상품코드: {}", directVO2.getDirectCode());
 			
-			directService.setInsert(directVO2);
+			directService.setInsert(directVO2, multipartFiles);
 		}
 		
-		modelAndView.setViewName("hworld/directAdd");
+		modelAndView.setViewName("redirect:./phoneList");
 		return modelAndView;
 	}
 
