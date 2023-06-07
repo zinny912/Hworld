@@ -21,9 +21,6 @@ public class DirectVO {
     //Direct 가격
     private Integer directPrice;
 
-    //Direct 파일 경로
-    private String directFilePath;
-
     //Direct 재고
     private Integer directStock;
 
@@ -40,7 +37,7 @@ public class DirectVO {
     private String saveCapacity;
     
     private Date uploadDate;
-    
+
     
     //리뷰 별점 가져오기 위한 VO 설정 (쿼리에서 받아옴)
     private Double rate;
@@ -62,5 +59,4 @@ public class DirectVO {
 //	}
   
     
-
 }
