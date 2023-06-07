@@ -137,8 +137,7 @@
     </div>
     <!-- tap to top Section End -->
 
-
-
+	
     <!-- feather icon js-->
     <script src="/assets/js/feather/feather.min.js"></script>
 
@@ -171,4 +170,3 @@
     <!-- script js -->
     <script src="/assets/js/theme-setting.js"></script>
     <script src="/assets/js/script.js"></script>
-

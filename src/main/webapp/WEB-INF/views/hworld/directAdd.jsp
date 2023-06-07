@@ -110,7 +110,7 @@
                        
                             <!-- 출고가 -->
 
-                            <!-- <div class="col-md-2">
+                            <div class="col-md-2">
                                 <label for="colorCode" class="form-label">색상</label>
                                 <div class="col-12">
                                     <select class="form-select custome-form-select" id="colorCode" name="colorCode">
@@ -139,27 +139,23 @@
                             <div class="col-md-3">
                                 <label for="dircetStock" class="form-label">재고 수량</label>
                                 <input type="text" class="form-control" id="directStock" placeholder="숫자만 입력" name="directStock">
-                            </div>
-                            <div class="col-md-3">
-                                <input type="hidden" id="directCode" name="directCode">
-                            </div> -->
-                            
+                            </div> 
                             <div class="col-md-2 mt-5">
                             	<button type="button" class="btn btn-solid-default btn-sm mt-2" id="optionAdd">+옵션추가</button>                            
                             </div>
-                            
-							<div class="option">
+                                <input type="hidden" id="directCode" name="directCode">
+                           <div class="option">
                            
                             </div>
                             
                             
                                 <div class="mb-2">
                                     <label for="validationCustom04" class="form-label">썸네일 이미지</label>
-                                    <input class="form-control" type="file" id="formFile">
+                                    <input class="form-control" type="file" id="formFile" name="formFile">
                                 </div>
                                 <div class="mb-3">
                                     <label for="validationCustom04" class="form-label">상품 이미지</label>
-                                    <input class="form-control" type="file" id="formFile">
+                                    <input class="form-control" type="file" id="formFile2" name="formFile">
                                 </div>
             
                             <!-- 상세정보 서머노트하자 -->
