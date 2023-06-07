@@ -32,7 +32,7 @@
 				<form:form action="./signUp" id="signUpForm" method="post" modelAttribute="memberVO">
 		                <!-- 정보 입력 영역 -->
 		                <div class="input">
-		                    <input type="email" name="email" id="email" placeholder="사용자 계정">		                    
+		                    <input class="col-3" type="email" name="email" id="email" placeholder="사용자 계정">		                    
 		                    <span class="spin"></span>
 		                    <form:errors path="email"></form:errors> 
 		                </div>
