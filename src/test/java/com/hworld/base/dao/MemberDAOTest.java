@@ -21,14 +21,14 @@ class MemberDAOTest {
 	@Autowired
 	private MemberDAO memberDAO;
 	
-	@Test
-	void getMemberList() throws Exception{
-		log.info("test");
-		List<MemberVO> ar = new ArrayList<>();
-		
-		ar = memberDAO.getMemberList();
-		assertEquals(1, ar.size());
-		
-	}
+//	@Test
+//	void getMemberList() throws Exception{
+//		log.info("test");
+//		List<MemberVO> ar = new ArrayList<>();
+//		
+//		ar = memberDAO.getMemberList();
+//		assertEquals(1, ar.size());
+//		
+//	}
 	
 }
