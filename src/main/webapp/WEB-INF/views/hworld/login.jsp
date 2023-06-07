@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -39,51 +40,55 @@
                         </div>
                     </div>
                 </div> -->
-
-                <!-- 정보 입력 영역 -->
-                <div class="input">
-                    <label for="name">사용자 계정</label>
-                    <input type="text" name="name" id="name" required>
-                    <span class="spin"></span>
-                    <div class="valid-feedback">
-                        계정을 입력해주세요
-                    </div>
-                </div>
-
-                <div class="input">
-                    <label for="pass">비밀번호</label>
-                    <input type="password" name="pass" id="pass">
-                    <span class="spin"></span>
-                </div>
-
-                <div class="input">
-                    <p>로그인 5회 이상 실패시 보안 문자 표시 영역</p>
-                </div>
-
-                <a href="forgot.html" class="pass-forgot">계정정보를 잊어버리셨나요?</a>
-
-                <!-- 버튼 영역 -->
-                <div class="button login">
-                    <button onclick="location.href = 'index.html';" type="submit">
-                        <span>로그인</span>
-                        <i class="fa fa-check"></i>
-                    </button>
-                </div>
-
-                <!-- 나중에 지울 버튼 영역 -->
-                <div class="button login">
-                    <button onclick="location.href = 'log-in-first.html';" type="submit">
-                        <span>최초로그인(회선등록)</span>
-                        <i class="fa fa-check"></i>
-                    </button>
-                </div>
-
-                <div class="button login">
-                    <button onclick="location.href = 'log-in-dormant-account.html';" type="submit">
-                        <span>로그인(휴면계정)</span>
-                        <i class="fa fa-check"></i>
-                    </button>
-                </div>
+				<form:form action="./login" id="loginForm" method="post" modelAttribute="memberVO">
+	                <!-- 정보 입력 영역 -->
+	                <div class="input">                    
+	                    <input type="text" name="email" id="email" required placeholder="사용자 계정">
+	                    <span class="spin"></span>
+	                    <div class="valid-feedback">
+	                        계정을 입력해주세요
+	                    </div>
+	                </div>
+	
+	                <div class="input">                    
+	                    <input type="password" name="pw" id="pw" placeholder="비밀번호">
+	                    <span class="spin"></span>
+	                </div>
+	                
+	                <div class="input">                    
+	                    <input type="password" name="rrnl" id="rrnl" placeholder="주민번호뒷자리">
+	                    <span class="spin"></span>
+	                </div>
+	
+	                <div class="input">
+	                    <p>로그인 5회 이상 실패시 보안 문자 표시 영역</p>
+	                </div>
+	
+	                <a href="forgot.html" class="pass-forgot">계정정보를 잊어버리셨나요?</a>
+	
+	                <!-- 버튼 영역 -->
+	                <div class="button login">
+	                    <button type="submit">
+	                        <span>로그인</span>
+	                        <i class="fa fa-check"></i>
+	                    </button>
+	                </div>
+	
+	                <!-- 나중에 지울 버튼 영역 -->
+	                <div class="button login">
+	                    <button onclick="location.href = 'log-in-first.html';" type="submit">
+	                        <span>최초로그인(회선등록)</span>
+	                        <i class="fa fa-check"></i>
+	                    </button>
+	                </div>
+	
+	                <div class="button login">
+	                    <button onclick="location.href = 'log-in-dormant-account.html';" type="submit">
+	                        <span>로그인(휴면계정)</span>
+	                        <i class="fa fa-check"></i>
+	                    </button>
+	                </div>
+                </form:form>
                 <!-- 나중에 지울 버튼 끝 -->
 
                 <!-- <p class="sign-category">

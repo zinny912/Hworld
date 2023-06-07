@@ -1,5 +1,7 @@
 package com.hworld.base.vo;
 
+import java.sql.Date;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -35,5 +37,8 @@ public class DirectVO {
 
     //저장 용량
     private String saveCapacity;
+    
+    //업로드 날짜
+    private Date uploadDate;
 
 }
