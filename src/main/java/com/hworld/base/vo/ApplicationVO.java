@@ -24,4 +24,8 @@ public class ApplicationVO {
 	private Date startDate;
 	private String directName;
 	
+	
+	//주고받는 내부용으로 사용
+	private Integer memberNum;
+	
 }

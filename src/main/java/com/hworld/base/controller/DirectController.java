@@ -67,6 +67,56 @@ public class DirectController {
 		modelAndView.setViewName("hworld/directAdd");
 		return modelAndView;
 	}
+//	@PostMapping("directAdd")
+//	public ModelAndView setInsert(DirectVO directVO) throws Exception{
+//		ModelAndView modelAndView = new ModelAndView();
+//		log.error("*********** 카테고리코드: {}", directVO.getCategoryCode());
+//		log.error("*********** 브랜드코드: {}", directVO.getBrandCode());
+//		log.error("*********** 상품명: {}", directVO.getDirectName());
+//		log.error("*********** 색깔코드: {}", directVO.getColorCode());
+//		log.error("*********** 저장용량: {}", directVO.getSaveCapacity());
+//		log.error("*********** 상품가격: {}", directVO.getDirectPrice());
+//		log.error("*********** 상품재고: {}", directVO.getDirectStock());
+//		log.error("*********** 상품코드: {}", directVO.getDirectCode());
+//		//directService.setInsert(directVO);
+//		modelAndView.setViewName("hworld/directAdd");
+//		return modelAndView;
+//	}
+	@PostMapping("directAdd")
+	public ModelAndView setInsert(String categoryCode, String brandCode, String directName, String directContents, String directFilePath, 
+			String[] colorCode, String[] saveCapacity, Integer[] directPrice, Integer[] directStock, String[] directCode, DirectVO directVO) throws Exception{
+		ModelAndView modelAndView = new ModelAndView();
+		
+		//반복문으로 directVO 하나 완성하기 + 완성될 때 서비스로 insert 메서드 호출
+		for(int i=0; i<directCode.length; i++) {
+			DirectVO directVO2 = new DirectVO();
+			directVO2.setCategoryCode(categoryCode);
+			directVO2.setBrandCode(brandCode);
+			directVO2.setDirectName(directName);
+			directVO2.setDirectContents(directContents);
+			directVO2.setDirectFilePath(directFilePath);
+			directVO2.setColorCode(colorCode[i]);
+			directVO2.setSaveCapacity(saveCapacity[i]);
+			directVO2.setDirectPrice(directPrice[i]);
+			directVO2.setDirectStock(directStock[i]);
+			directVO2.setDirectCode(directCode[i]);
+			
+			log.error("*********** 카테고리코드: {}", directVO2.getCategoryCode());
+			log.error("*********** 브랜드코드: {}", directVO2.getBrandCode());
+			log.error("*********** 상품명: {}", directVO2.getDirectName());
+			log.error("*********** 색깔코드: {}", directVO2.getColorCode());
+			log.error("*********** 저장용량: {}", directVO2.getSaveCapacity());
+			log.error("*********** 상품가격: {}", directVO2.getDirectPrice());
+			log.error("*********** 상품재고: {}", directVO2.getDirectStock());
+			log.error("*********** 상품코드: {}", directVO2.getDirectCode());
+			
+			directService.setInsert(directVO2);
+		}
+		
+		modelAndView.setViewName("hworld/directAdd");
+		return modelAndView;
+	}
+
 	// 휴대폰 & 악세사리 상품 수정 페이지
 	@GetMapping("directUpdate")
 	public ModelAndView d6() throws Exception{
