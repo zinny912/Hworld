@@ -48,7 +48,7 @@ public class ApplicationService {
 			memberVO = applicationDAO.getMemberSearch(applicationVO);
 		}
 		//여기까지 memberVO에 회원번호가 들어있음. 이걸 applicationVO에 집어넣음
-		//applicationVO.setMemberNum(memberVO.getMemberNum());
+		applicationVO.setMemberNum(memberVO.getMemberNum());
 		
 //		a.가입신청서 정보 기반으로 회선VO 만들고
 //		b.회선VO에 memberNum 넣기
