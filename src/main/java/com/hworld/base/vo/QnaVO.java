@@ -10,31 +10,19 @@ import java.util.Date;
 
 @Getter
 @Setter
-public class QnaVO {
-    /**
-     * QNA 번호
-     */
-    private Integer qnaNum;
-
-    /**
-     * 제목
-     */
-    private String title;
-
-    /**
-     * 내용
-     */
-    private String contents;
-
+public class QnaVO extends BoardVO{
+   
+	private Integer orderNum;
+	
+	private String directCode;
+	
+	private Integer serialNum;
+	
     /**
      * 답변
      */
     private String reply;
 
-    /**
-     * 등록일
-     */
-    private Date regDate;
 
     /**
      * 상태
