@@ -144,9 +144,12 @@
                                 <input type="hidden" id="directCode" name="directCode">
                             </div> -->
                             
-                            <div class="col-md-2 mt-5">
-                            	<button type="button" class="btn btn-solid-default btn-sm mt-2" id="optionAdd">+옵션추가</button>                            
+                            <div class="col-md-2 mt-5 d-flex me-5">
+                            	<button type="button" class="btn btn-solid-default btn-sm mt-2" id="optionAdd">+옵션추가</button>    
+                            	<button type="button" class="btn btn-sm mt-2" id="optionAdd">-옵션삭제</button>                            
+                            	                        
                             </div>
+
                             
 							<div class="option">
                            
