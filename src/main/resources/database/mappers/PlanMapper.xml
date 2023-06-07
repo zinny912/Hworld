@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="com.hworld.base.dao.PlanDAO">
+ 
+ <select id="getPlanList" resultType="PlanVO">
+ 	SELECT P.*, CC.NOTE AS note, CC.TYPE AS type
+	FROM PLAN2 P
+	INNER JOIN COMMONCODE CC ON (P.CATEGORYCODE = CC.CODE)
+	WHERE (P.PLANNUM LIKE CONCAT(CC.TYPE, '%'))
+ </select>
+ 
+ 
+ 
+  <!--  5G요금제 -->
+ <!--<select id="getGeneralList" resultType="PlanVO" >
+ 	SELECT P.*, CC.NOTE AS note, CC.TYPE AS type
+	FROM PLAN2 P
+	INNER JOIN COMMONCODE CC ON (P.CATEGORYCODE = CC.CODE)
+	WHERE P.PLANNUM LIKE 'G%' AND CC.TYPE = 'G'
+ </select>
+  시니어 요금제
+ <select id="getSeniorList" resultType="PlanVO">
+ 	SELECT P.*, CC.NOTE AS note, CC.TYPE AS type
+	FROM PLAN2 P
+	INNER JOIN COMMONCODE CC ON (P.CATEGORYCODE = CC.CODE)
+	WHERE P.PLANNUM LIKE 'S%' AND CC.TYPE = 'S'
+ </select>
+ 
+ Teen 요금제
+ <select id="getTeenList" resultType="PlanVO">
+ 	SELECT P.*, CC.NOTE AS note, CC.TYPE AS type
+	FROM PLAN2 P
+	INNER JOIN COMMONCODE CC ON (P.CATEGORYCODE = CC.CODE)
+	WHERE P.PLANNUM LIKE 'T%' AND CC.TYPE = 'T'
+ </select>
+  	 ZEM 요금제
+ <select id="getZemList" resultType="PlanVO">
+ 	SELECT P.*, CC.NOTE AS note, CC.TYPE AS type
+	FROM PLAN2 P
+	INNER JOIN COMMONCODE CC ON (P.CATEGORYCODE = CC.CODE)
+	WHERE P.PLANNUM LIKE 'Z%' AND CC.TYPE = 'Z'
+ </select>
+  	 복지 요금제
+  <select id="getWelfareList" resultType="PlanVO">
+ 	SELECT P.*, CC.NOTE AS note, CC.TYPE AS type
+	FROM PLAN2 P
+	INNER JOIN COMMONCODE CC ON (P.CATEGORYCODE = CC.CODE)
+	WHERE P.PLANNUM LIKE 'W%' AND CC.TYPE = 'W'
+ </select>
+  	군인요금제
+ <select id="getHeroList" resultType="PlanVO">
+ 	SELECT P.*, CC.NOTE AS note, CC.TYPE AS type
+	FROM PLAN2 P
+	INNER JOIN COMMONCODE CC ON (P.CATEGORYCODE = CC.CODE)
+	WHERE P.PLANNUM LIKE 'H%' AND CC.TYPE = 'H'
+ </select> -->
+
+</mapper>
