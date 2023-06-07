@@ -7,11 +7,14 @@ import lombok.Setter;
 @Setter
 public class PlanVO {
 	//요금제VO
-    private Integer planNum;
+    private String planNum;
     private String planName;
     private Integer planPrice;
-    private Integer dataCapacity;
+    private String dataCapacity;
     private String categoryCode;
     private String planExplain;
     private String planExplainSM;
+    
+    private String note;
+    private String type;
 }

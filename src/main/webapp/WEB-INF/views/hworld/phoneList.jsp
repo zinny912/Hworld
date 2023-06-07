@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
-    <c:import url="../temp/style.jsp"></c:import>
+   <c:import url="../temp/style.jsp"></c:import>
     <style>
         .btn-solid-after {
            background-color: #e22454; 
@@ -28,7 +29,6 @@
            background-color: #e22454; 
            color: #fff; 
        }
-       
    
     /* 요금제 변경 모달 버튼 */
     .quick-view-modal .product-right .size-detail {
@@ -67,18 +67,29 @@
            border-bottom : 1px solid lightgray;
            border-radius: 0;
            margin: -1px 0px 3px 0px;
+   
        }
        
-       .product-style-2 .product-box .product-details h5 {
+        .product-style-2 .product-box .product-details h5 {
 				  white-space: normal;
 				  overflow: visible;
 				  text-overflow: unset;
 				}
+				
+h3.d-flex span {
+  vertical-align: baseline;
+  position: relative;
+  top: 5px; /* 원하는 위치로 조정 */
+}
    </style>
 </head>
 
 <body class="theme-color2 light ltr">
-<c:import url="../temp/header.jsp"></c:import>
+
+
+    <c:import url="../temp/header.jsp"></c:import>
+
+
 
     <!-- Breadcrumb section start -->
     <section class="breadcrumb-section section-b-space">
@@ -120,89 +131,93 @@
             <div class="row">
                 <div class="col-lg-12 col-12 ratio_30">
                     <div class="row gx-4 gy-5">
-			                        <div class="col-12">
-			                            <div class="filter-show-button mb-3">
-			                                <a href="javascript:void(0)" class="mobile-filter border-top-0">
-			                                    <i data-feather="align-left" class="img-fluid blur-up lazyloaded"></i>
-			                                    <h5>latest filter</h5>
-			                                </a>
-			                            </div>
-			                        </div>
+                        <div class="col-12">
+                            <div class="filter-show-button mb-3">
+                                <a href="javascript:void(0)" class="mobile-filter border-top-0">
+                                    <i data-feather="align-left" class="img-fluid blur-up lazyloaded"></i>
+                                    <h5>latest filter</h5>
+                                </a>
+                            </div>
+                        </div>
 
                         <div class="col-12 m-0">
                             <div class="top-filter-section">
-                                		<ul>
-			                                    <li class="back-btn">
-			                                        <div class="mobile_back text-end">
-			                                            <span>Back</span>
-			                                            <i aria-hidden="true" class="fa fa-angle-right ps-2"></i>
-			                                        </div>
-			                                    </li>
-                                    		<div class="mx-2 col-2">
-                                 				<li class="onclick-title">
-                                     					<h6 class="text-center">제조사</h6>
-                                        		<ul class="onclick-content">
-                                              <li>
-                                                  <div class="form-check ps-0 custome-form-check">
-                                                      <input class="checkbox_animated check-it" type="checkbox"
-                                                          id="flexCheckDefault">
-                                                      <label class="form-check-label" for="flexCheckDefault">Apple</label>
-                                                  </div>
-                                              </li>
-                                              <li>
-                                                  <div class="form-check ps-0 custome-form-check">
-                                                      <input class="checkbox_animated check-it" type="checkbox"
-                                                          id="flexCheckDefault">
-                                                      <label class="form-check-label" for="flexCheckDefault">삼성</label>
-                                                  </div>
-                                              </li>
-                                        		</ul>
-                                        		</li>
-                                 						
-                                    		</div>
-	                                		<div class="mx-2 col-2">
-			                                    <li class="onclick-title text-center">                                    
-			                                        <a href="javascript:void(0)" style="color: black;" data-bs-toggle="modal" id="cartEffect" data-bs-target="#quick-view2"> 
-			                                            요금제
-			                                        </a>
-			                                    </li>
-	                                		</div>
+                                <ul>
+                                    <li class="back-btn">
+                                        <div class="mobile_back text-end">
+                                            <span>Back</span>
+                                            <i aria-hidden="true" class="fa fa-angle-right ps-2"></i>
+                                        </div>
+                                    </li>
 
-                                		<div class="mx-2 col-2">
-                                    		<li class="onclick-title">
-                                        		<h6 class="text-center">할인방법</h6>
-                                        		<ul class="onclick-content">
-		                                            <li>
-		                                                <div class="form-check ps-0 custome-form-check">
-		                                                    <input class="checkbox_animated check-it" type="checkbox"
-		                                                        id="flexCheckDefault19">
-		                                                    <label class="form-check-label" for="flexCheckDefault19">선택약정 (12개월)</label>
-		                                                </div>
+                                    <div class="mx-2 col-2">
+                                        <li class="onclick-title">
+                                            <h6 class="text-center">제조사</h6>
+                                            <ul class="onclick-content">
+                                                <li>
+                                                    <div class="form-check ps-0 custome-form-check">
+                                                        <input class="checkbox_animated check-it" type="checkbox"
+                                                            id="flexCheckDefault">
+                                                        <label class="form-check-label" for="flexCheckDefault">Apple</label>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="form-check ps-0 custome-form-check">
+                                                        <input class="checkbox_animated check-it" type="checkbox"
+                                                            id="flexCheckDefault">
+                                                        <label class="form-check-label" for="flexCheckDefault">삼성</label>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </div>
+                                	<div class="mx-2 col-2">
+	                                    <li class="onclick-title text-center">                                    
+	                                        <a href="javascript:void(0)" style="color: black;" data-bs-toggle="modal" id="cartEffect" data-bs-target="#palnTB"> 
+	                                            요금제
+	                                        </a>
+	                                    </li>
+                                	</div>
+                                	<div class="mx-2 col-2">
+                                    	<li class="onclick-title">
+                                        	<h6 class="text-center">할인방법</h6>
+	                                        <ul class="onclick-content">
+	                                            <li>
+	                                                <div class="form-check ps-0 custome-form-check">
+	                                                    <input class="checkbox_animated check-it" type="checkbox"
+	                                                        id="flexCheckDefault19">
+	                                                    <label class="form-check-label" for="flexCheckDefault19">선택약정 (12개월)</label>
+	                                                </div>
 		                                            </li>
-		                                            <li>
-		                                                <div class="form-check ps-0 custome-form-check">
-		                                                    <input class="checkbox_animated check-it" type="checkbox"
-		                                                        id="flexCheckDefault19">
-		                                                    <label class="form-check-label" for="flexCheckDefault19">선택약정 (24개월)</label>
-		                                                </div>
-		                                            </li>
-		                                            <li>
-		                                                <div class="form-check ps-0 custome-form-check">
-		                                                    <input class="checkbox_animated check-it" type="checkbox"
-		                                                        id="flexCheckDefault19">
-		                                                    <label class="form-check-label" for="flexCheckDefault19">공시지원금 (24개월)</label>
-		                                                </div>
-		                                            </li>
-                                        		</ul>
-                                    		</li>
-                                		</div>
-                                	</ul>
+	                                            <li>
+	                                                <div class="form-check ps-0 custome-form-check">
+	                                                    <input class="checkbox_animated check-it" type="checkbox"
+	                                                        id="flexCheckDefault19">
+	                                                    <label class="form-check-label" for="flexCheckDefault19">선택약정 (24개월)</label>
+	                                                </div>
+	                                            </li>
+	                                            <li>
+	                                                <div class="form-check ps-0 custome-form-check">
+	                                                    <input class="checkbox_animated check-it" type="checkbox"
+	                                                        id="flexCheckDefault19">
+	                                                    <label class="form-check-label" for="flexCheckDefault19">공시지원금 (24개월)</label>
+	                                                </div>
+	                                            </li>
+                                           
+                                        	</ul>
+                                    	</li>
+                                	</div>
+
+                              </ul>
                             </div>
                         </div>
-                    </div>
+                   </div>
+                  
+                  
                     <div class="row g-4">
 
-                        <!-- label and featured section --> 
+                        <!-- label and featured section -->
+                        
                         <div class="col-12">
                             <div class="filter-options">
                                 <div class="select-options">
@@ -213,16 +228,16 @@
                                                 정렬
                                             </button>
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                                <li>
-                                                    <a class="dropdown-item" href="javascript:void(0)">최신순</a>
-                                                </li>
-                                                <li>
-                                                    <a class="dropdown-item" href="javascript:void(0)">낮은 가격순</a>
-                                                </li>
-                                                <li>
-                                                    <a class="dropdown-item" href="javascript:void(0)">높은 가격순</a>
-                                                </li>
-                                            </ul>
+								                <li>
+								                    <a class="dropdown-item"  href="phoneList?sorting=latest">최신순</a>
+								                </li>
+								                <li>
+								                    <a class="dropdown-item" href="phoneList?sorting=priceL">낮은 가격순</a>
+								                </li>
+								                <li>
+								                    <a class="dropdown-item" href="phoneList?sorting=priceH">높은 가격순</a>
+								                </li>
+								            </ul>
                                         </div>
                                     </div>
                                 </div>
@@ -252,62 +267,71 @@
                                                     alt="">
                                             </a>
                                         </li>
-                                      
+                                        
                                     </ul>
                                 </div>
+                                
                             </div>
                         </div>
+                    </div>
                     </div>
                     <!-- label and featured section -->
 
                     <!-- Prodcut setion -->
                     <div
-                        class="row g-sm-4 g-3 row-cols-xl-5 row-cols-lg-4 row-cols-md-3 row-cols-2 gx-sm-4 gx-3 mt-1 custom-gy-5 product-style-2 ratio_asos product-list-section">
-                       <c:forEach items="${list}" var="direct">
-	                        <div>
-	                            <div class="product-box">
+                        class="row g-sm-4 g-3 row-cols-xl-5 row-cols-lg-4 row-cols-md-3 row-cols-2 gx-sm-4 gx-3 mt-1 custom-gy-5 product-style-2 ratio_asos product-list-section"> 
+	                   <c:forEach items="${list}" var="direct">
+	                   <div>
+	                   		<div class="product-box">
 	                                <div class="img-wrapper">
 	                                    <div class="front">
-	                                        <a href="#">
+	                                        <a href="./phoneDetail?directCode=${direct.slicedCode}">
 	                                            <img src="/assets/images/electronics/product/1.jpg"
-	                                                class="bg-img blur-up lazyload" alt="">
+	                                                class="bg-img  lazyload" alt="">
 	                                        </a>
 	                                    </div>
 	                                </div>
-	                                <div class="product-details">
-	                                    <div class="rating-details">
-	                                        <span class="font-light grid-content">${direct.directCode }</span>
-	                                        <ul class="rating mt-0">
-	                            
-	                                            <li>
-	                                                <i class="fas fa-star theme-color"></i>
-	                                            </li>
-	                                            <li>
-	                                                <i class="fas fa-star theme-color"></i>
-	                                            </li>
-	                                            <li>
-	                                                <i class="fas fa-star"></i>
-	                                            </li>
-	                                            <li>
-	                                                <i class="fas fa-star"></i>
-	                                            </li>
-	                                            <li>
-	                                                <i class="fas fa-star"></i>
-	                                            </li>
-	                                        </ul>
-	                                    </div>
-	                                    <div class="main-price">
-	                                        <a href="#" class="font-default">
-	                                            <h5 class="ms-0 white-space">${direct.directName}</h5>
-	                                        </a>
-	                                        <h3 class="theme-color ">${direct.directPrice}</h3>
-	                                    </div>
-	                                </div>
-	                            </div>
-	                        </div>
-						</c:forEach>    
-					</div>
-                          
+  
+				                   <div class="product-details">
+			                           <div class="rating-details">
+			                                     <span class="font-light grid-content">${direct.slicedCode}
+			                                     </span>
+			                                     
+			                           <ul class="rating mt-0">
+			                          	<li>
+							                <i class="fas fa-star ${direct.rate >= 0.5 ? 'theme-color' : ''}"></i>
+									    </li>
+									    <li>
+							                <i class="fas fa-star ${direct.rate >= 1.5 ? 'theme-color' : ''}"></i>
+							            </li>
+							            <li>
+							                <i class="fas fa-star ${direct.rate >= 2.5 ? 'theme-color' : ''}"></i>
+							            </li>
+							            <li>
+							                <i class="fas fa-star ${direct.rate >= 3.5 ? 'theme-color' : ''}"></i>
+							            </li>
+							            <li>
+							                <i class="fas fa-star ${direct.rate >= 4.5 ? 'theme-color' : ''}"></i>
+							            </li>
+							        	</ul>        
+									</div>
+									
+		                            <div class="main-price">
+		                               <h5 class="ms-0"> <a href="./phoneDetail?directCode=${direct.directCode}" class="font-default">
+		                                    ${direct.directName}
+		                                </a></h5>
+		                               
+		                                <h3 class="theme-color d-flex" id="renewPrice${direct.directCode}">
+						                    ${direct.initPrice}
+						                    
+						                </h3>
+		                            </div>
+                        		 </div>
+		                       </div>
+		                   </div>
+                   </c:forEach>
+                  </div>
+                        
                     <!-- Prodcut setion -->
                     <div class="">
                         <nav class="page-section d-flex justify-content-end" style="position: relative;">
@@ -345,8 +369,10 @@
     </section>
     <!-- Shop Section end -->
 
+   
+
 <!-- 요금제 모달창 start -->
-<div class="modal fade quick-view-modal" id="quick-view2">
+<div class="modal fade quick-view-modal" id="palnTB">
     <div class="modal-dialog modal-lg modal-dialog-centered col-12">
         <div class="modal-content">
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -430,10 +456,48 @@
 
 </div>
 <!-- 요금제 모달창 end -->
+ <!-- tap to top Section Start -->
+<!--    <div class="tap-to-top">
+        <a href="#home">
+            <i class="fas fa-chevron-up"></i>
+        </a>
+    </div>  -->
+    <!-- tap to top Section End -->
+ <c:import url="../temp/footer.jsp"></c:import>
 
+ 
 
-   
-<c:import url="../temp/footer.jsp"></c:import>
+ <!-- Add To Home js -->
+    <script src="/assets/js/pwa.js"></script>
+
+    <!-- Price Filter js -->
+    <script src="/assets/js/price-filter.js"></script>
+
+    <!--Plugin JavaScript file-->
+    <script src="/assets/js/ion.rangeSlider.min.js"></script> 
+
+    <!-- Filter Hide and show Js -->
+    <script src="/assets/js/filter.js"></script>
+
+    <!-- Notify js-->
+    <script src="/assets/js/bootstrap/bootstrap-notify.min.js"></script>
+
+  
+    
+    
+ <script>
+$(document).ready(function() {
+    const prices = document.querySelectorAll('[id^="renewPrice"]');
+    for (var i = 0; i < prices.length; i++) {
+        const price = parseInt(prices[i].innerHTML);
+        const renewPrice = price.toLocaleString();
+        prices[i].innerHTML =renewPrice + '<span class="price-unit" style="text-decoration:none; color:black;">원</span>';
+       	
+    }
+});
+</script>
+
+    
 </body>
 
 </html>

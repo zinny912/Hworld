@@ -6313,8 +6313,8 @@ header .main-navbar {
 .color-variant .bg-blue1 {
   background-color: #88d1f4; }
 
-.color-variant .bg-light1 {
-  background-color: #f0f3f8; }
+.color-variant .bg-gray1 {
+  background-color: #bfbfbf; }
 
 .color-variant .bg-black1 {
   background-color: #000; }
@@ -12555,9 +12555,9 @@ hr {
     .color-variant li + li {
       margin-left: 0; }
     .color-variant li:nth-child(1) {
-      background-color: #f1e7e6; }
-    .color-variant li:nth-child(3) {
       background-color: #bfbfbf; }
+    .color-variant li:nth-child(3) {
+      background-color: black; }
     .color-variant li.active {
       position: relative; }
       .color-variant li.active:after {

@@ -626,7 +626,7 @@
     <!-- tap to top Section End -->
 
     <div class="bg-overlay"></div>
-
+<c:import url="./temp/footer.jsp"></c:import>
     <script>
     const avatarInput = document.querySelector('#avatarInput');
     const avatarName = document.querySelector('.input-file__name');
@@ -648,7 +648,8 @@
 
     </script>
 
-<c:import url="./temp/footer.jsp"></c:import>
+
+<c:import url="./temp/commonJS.jsp"></c:import>
 </body>
 
 </html>
