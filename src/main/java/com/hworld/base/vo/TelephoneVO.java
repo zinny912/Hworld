@@ -9,15 +9,15 @@ import lombok.Setter;
 @Setter
 public class TelephoneVO {
 	private Integer serialNum;
-	private Integer planNum;
+	private String planNum;
 	private Integer memberNum;
-	private Integer applicationNum;
+	private Integer appNum;
 	private String phoneNum;
 	private Date contractDate;
 	private Date expireDate;
 	private Date endDate;
 	private Integer kingCheck;
-	private String phoneName;
+	private String directName;
 	private Integer phoneOriPrice;
 	private Integer phoneSubPrice;
 	private Integer phoneTotalPrice;
