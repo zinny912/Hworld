@@ -22,13 +22,10 @@ public interface ApplicationDAO {
 	
 	
 	//3-2a.일치하는 회원이 있으면 회원번호 받아오기
-	
-	
 	//3-2b.받아온 회원번호로 회선VO 만들기
 	public int setTelephoneInitAdd(ApplicationVO applicationVO) throws Exception;
 	
-	//4.회선VO insert
+	//phone 번호(unique)를 기반으로 salt값 가져오기
 	
 	
-	//5.끝?
 }
