@@ -106,16 +106,16 @@ public class MemberController {
 		String rawPw = ""; // 인코딩 전 비밀번호
 		String encodePw = ""; // 인코딩 후 비밀번호
 		
-		String rawRrnl = "";
-		String encodeRrnl = "";
+		String rawRrnl = ""; // 인코딩 전 주민등록번호 뒷자리
+		String encodeRrnl = ""; // 인코딩 후 주민등록번호 뒷자리
 		
 		rawPw = memberVO.getPw(); // 비밀번호 데이터 얻음
 		encodePw = pwEncoder().encode(rawPw); // 비밀번호 인코딩
-		memberVO.setPw(encodePw); // 인코딩된 비밀번호 member 객체에 다시 저장
+		memberVO.setPw(encodePw); // 인코딩 된 비밀번호 member 객체에 다시 저장
 		
-		rawRrnl = memberVO.getRrnl();
-		encodeRrnl = pwEncoder().encode(rawRrnl);
-		memberVO.setRrnl(encodeRrnl);		
+		rawRrnl = memberVO.getRrnl(); // 주민등록번호 뒷자리 데이터 얻음
+		encodeRrnl = pwEncoder().encode(rawRrnl); // 주민등록번호 뒷자리 인코딩
+		memberVO.setRrnl(encodeRrnl); // 인코딩 된 주민등록번호 뒷자리 member 객체에 다시 저장		
 		
 		int result = memberService.setMemberAdd(memberVO);
 		System.out.print("회원가입 결과 : {}" + result);
@@ -124,8 +124,6 @@ public class MemberController {
 		
 		return modelAndView;
 		
-//		memberService.setMemberAdd(memberVO);
-//		return "redirect:/";
 	}
 	
 	@GetMapping("emailCheck")
