@@ -31,25 +31,22 @@
                 </div> -->
 
                 <!-- 정보 입력 영역 -->
-                <div class="input">
-                    <label for="name">이름</label>
-                    <input type="text" name="name" id="name">
+                <div class="input">                    
+                    <input type="text" name="name" id="name" placeholder="이름">
                     <span class="spin"></span>
                 </div>
 
                 <div class="row gx-md-3 gy-3">
                     <div class="col-md-6">
-                        <div class="input">
-                            <label for="birth">주민등록번호 앞자리</label>
-                            <input type="text" name="birth" id="birth">
+                        <div class="input">                            
+                            <input type="text" name="birth" id="birth" placeholder="주민등록번호 앞자리">
                             <span class="spin"></span>
                         </div>
                     </div>
 
                     <div class="col-md-6">
-                        <div class="input">
-                            <label for="RRN">주민등록번호 뒷자리</label>
-                            <input type="password" name="RRN" id="RRN">
+                        <div class="input">                            
+                            <input type="password" name="RRN" id="RRN" placeholder="주민등록번호 뒷자리">
                             <span class="spin"></span>
                         </div>
                     </div>
@@ -62,7 +59,7 @@
 
                 <!-- 버튼 영역 -->
                 <div class="button login">
-                    <button onclick="location.href = 'sign-up.html';">
+                    <button type="submit">
                         <span>확인(회선O)</span>
                         <i class="fa fa-check"></i>
                     </button>
@@ -70,7 +67,7 @@
 
                 <!-- 나중에 지울 버튼 -->
                 <div class="button login">
-                    <button onclick="location.href = 'sign-up-first.html';">
+                    <button onclick="location.href = '/etc/findShop';">
                         <span>대리점 위치안내(회선 X)</span>
                         <i class="fa fa-check"></i>
                     </button>
