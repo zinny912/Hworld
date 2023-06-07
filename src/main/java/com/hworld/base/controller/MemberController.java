@@ -106,9 +106,16 @@ public class MemberController {
 		String rawPw = ""; // 인코딩 전 비밀번호
 		String encodePw = ""; // 인코딩 후 비밀번호
 		
+		String rawRrnl = "";
+		String encodeRrnl = "";
+		
 		rawPw = memberVO.getPw(); // 비밀번호 데이터 얻음
 		encodePw = pwEncoder().encode(rawPw); // 비밀번호 인코딩
 		memberVO.setPw(encodePw); // 인코딩된 비밀번호 member 객체에 다시 저장
+		
+		rawRrnl = memberVO.getRrnl();
+		encodeRrnl = pwEncoder().encode(rawRrnl);
+		memberVO.setRrnl(encodeRrnl);		
 		
 		int result = memberService.setMemberAdd(memberVO);
 		System.out.print("회원가입 결과 : {}" + result);
