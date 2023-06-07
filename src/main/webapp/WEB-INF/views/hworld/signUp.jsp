@@ -22,7 +22,7 @@
             <div class="box">
                 <!-- 홈 버튼 -->
                 <div class="d-flex justify-content-center">
-                    <a href="index.html">
+                    <a href="/">
                         <h2><img src="/assets/images/logos/2.png"></h2>
                     </a>
                 </div>
@@ -30,82 +30,88 @@
                     <h2 style="margin-top: 15px;">회원 가입</h2>
                 </div>                
 				<form:form action="./signUp" id="signUpForm" method="post" modelAttribute="memberVO">
+					
 		                <!-- 정보 입력 영역 -->
-		                <div class="input">
-		                    <input class="col-3" type="email" name="email" id="email" placeholder="사용자 계정">		                    
-		                    <span class="spin"></span>
-		                    <form:errors path="email"></form:errors> 
+		                <div class="mt-5">
+		                	<div class="mb-3 row">
+		                		<div class="col-9">
+				                    <input class="form-control" type="email" name="email" id="email" placeholder="사용자 계정">		                    			                    
+
+			                    </div>
+			                    
+			                    <button class="col-3 row btn btn-solid-default btn-sm fw-bold" type="button" onclick="execution_daum_address()">
+									인증번호 전송
+								</button>								
+		                    </div> 
+		                </div>
+		                		                
+		                <div class="mt-5">
+		                	<div class="mb-3 row">
+		                		<div class="col-9">
+				                    <input class="form-control" type="email" name="email" id="email" placeholder="인증번호 입력">		                    			                    
+			                    </div>
+			                    
+			                    <button class="col-3 row btn btn-solid-default btn-sm fw-bold" type="button" onclick="execution_daum_address()">
+									확인
+								</button>								
+		                    </div> 
 		                </div>
 		
-		                <div class="row gx-md-3 gy-3">
-		                    <div class="col-md-6">
-		                        <div class="input">                            
-		                            <input type="password" name="pw" id="pw" placeholder="비밀번호">
-		                            <span class="spin"></span>
-		                        </div>
+	                	<div class="mb-4 row">
+	                		<div class="col-12">
+			                	<input class="form-control" type="password" name="pw" id="pw" placeholder="비밀번호">
+                            </div>
+                        </div>		                			                    		                                                                               
+                        
+                        <div class="mb-4 row">
+                        	<div class="col-12">
+                        		<input class="form-control" type="password" name="pwCheck" id="pwCheck" placeholder="비밀번호 확인">                            
+                        	</div>                            
+		                </div>
+				                
+	                	<div class="mb-4 row">
+	                		<div class="col-12">
+		                		<input class="form-control" type="text" name="name" id="name" placeholder="이름">				                   
+	                		</div>                   		                    
+		                </div>	                		
+		                
+	                	<div class="mb-4 row">
+		                    <div class="col-6">		                                                   
+	                            <input class="form-control" type="text" name="rrnf" id="rrnf" placeholder="주민등록번호 앞자리">		                            
 		                    </div>
-		
-		                    <div class="col-md-6">
-		                        <div class="input">                            
-		                            <input type="password" name="pwCheck" id="pwCheck" placeholder="비밀번호 확인">
-		                            <span class="spin"></span>
-		                        </div>
+	
+		                    <div class="col-6">
+	                            <input class="form-control" type="password" name="rrnl" id="rrnl" placeholder="주민등록번호 뒷자리">		                            
 		                    </div>
 		                </div>
-		
-		                <div class="input">                   
-		                    <input type="text" name="name" id="name" placeholder="이름">
-		                    <span class="spin"></span>
-		                </div>
-		
-		                <div class="row gx-md-3 gy-3">
-		                    <div class="col-md-6">
-		                        <div class="input">                            
-		                            <input type="text" name="rrnf" id="rrnf" placeholder="주민등록번호 앞자리">
-		                            <span class="spin"></span>
-		                        </div>
-		                    </div>
-		
-		                    <div class="col-md-6">
-		                        <div class="input">                            
-		                            <input type="password" name="rrnl" id="rrnl" placeholder="주민등록번호 뒷자리">
-		                            <span class="spin"></span>
-		                        </div>
-		                    </div>
-		                </div>																									           
-						
-		                <div class="input">
-		                    <input type="tel" name="phoneNum" id="phoneNum" placeholder="연락처">
-		                    <span class="spin"></span>
-		                </div>
+		                																									           								                
+	                	<div class="mb-4 row">
+	                		<div class="col-12">
+		                		<input class="form-control" type="tel" name="phoneNum" id="phoneNum" placeholder="연락처">
+	                		</div>		                		
+	                	</div>
+		                    
+		                
+													
+						<div class="mb-4 row">
+							<div class="col-9">
+								<input class="form-control address_input_1" name="address1" readonly="readonly" placeholder="우편번호">
+							</div>
 							
-						<div style="margin-top: 130px;">	
-							<div class="mb-3 row">
-								<div class="col-9">
-									<input class="form-control address_input_1" name="address1" readonly="readonly" placeholder="우편번호">
-								</div>
-								
-								<button class="col-3 row btn btn-solid-default btn-sm fw-bold" type="button" onclick="execution_daum_address()">
-									<span>주소 찾기</span>
-								</button>
-							</div>
-							<div class="mb-3 row">
-								<div class="col-12">
-									<input class="form-control address_input_2" name="address2" readonly="readonly" placeholder="도로명 주소">
-								</div>
-							</div>
-							<div class="mb-3 row">
-								<div class="col-12">
-									<input class="form-control address_input_3" name="address3" readonly="readonly" placeholder="상세 주소">						
-								</div>
+							<button class="col-3 row btn btn-solid-default btn-sm fw-bold" type="button" onclick="execution_daum_address()">
+								<span>주소 찾기</span>
+							</button>
+						</div>
+						<div class="mb-4 row">
+							<div class="col-12">
+								<input class="form-control address_input_2" name="address2" readonly="readonly" placeholder="도로명 주소">
 							</div>
 						</div>
-						
-		                <!-- 필요없다면 지우기 -->
-		                <div class="input">
-		                    <p>이메일 인증(또는 전화번호)</p>
-		                    <p>precheck/지금페이지 인증 어떻게? 두번은 번거로울지도..</p>
-		                </div>
+						<div class="mb-4 row">
+							<div class="col-12">
+								<input class="form-control address_input_3" name="address3" readonly="readonly" placeholder="상세 주소">						
+							</div>
+						</div>														               
 		
 		                <div class="button login" >
 		                    <button type="submit">
