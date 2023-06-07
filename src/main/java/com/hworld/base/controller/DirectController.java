@@ -1,5 +1,7 @@
 package com.hworld.base.controller;
 
+import java.sql.Array;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -10,7 +12,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -30,18 +34,34 @@ public class DirectController {
 	
 	// 휴대폰 리스트 페이지
 	@GetMapping("phoneList")
-	public ModelAndView d1() throws Exception{
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("hworld/phoneList");
-		return modelAndView;
+	public ModelAndView getList(@RequestParam(value = "sorting", defaultValue = "latest")String sorting, ModelAndView mv , Pager pager) throws Exception{
+		 List<DirectVO> ar;
+		    if (sorting.equals("latest")) {
+		        // 최신순으로 리스트 조회
+		        ar = directService.getList(pager);
+		    } else if (sorting.equals("priceL")) {
+		        // 낮은 가격순으로 리스트 조회
+		        ar = directService.getListByPriceL(pager);
+		    } else if (sorting.equals("priceH")) {
+		        // 높은 가격순으로 리스트 조회
+		        ar = directService.getListByPriceH(pager);
+		    } else {
+		        // 기본적으로 최신순으로 리스트 조회
+		        ar = directService.getList(pager);
+		    }  
+		mv.addObject("list", ar);
+		mv.setViewName("hworld/phoneList");
+		return mv;
 	}
-	
+
 	// 휴대폰 상세 페이지
 	@GetMapping("phoneDetail")
-	public ModelAndView d2() throws Exception{
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("hworld/phoneDetail");
-		return modelAndView;
+	public ModelAndView getDetail(DirectVO directVO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		directVO = directService.getDetail(directVO);
+		mv.addObject("directVO", directVO);		
+		mv.setViewName("hworld/phoneDetail");
+		return mv;
 	}
 	
 	// 액세서리 리스트 페이지
@@ -67,56 +87,42 @@ public class DirectController {
 		modelAndView.setViewName("hworld/directAdd");
 		return modelAndView;
 	}
-//	@PostMapping("directAdd")
-//	public ModelAndView setInsert(DirectVO directVO) throws Exception{
-//		ModelAndView modelAndView = new ModelAndView();
-//		log.error("*********** 카테고리코드: {}", directVO.getCategoryCode());
-//		log.error("*********** 브랜드코드: {}", directVO.getBrandCode());
-//		log.error("*********** 상품명: {}", directVO.getDirectName());
-//		log.error("*********** 색깔코드: {}", directVO.getColorCode());
-//		log.error("*********** 저장용량: {}", directVO.getSaveCapacity());
-//		log.error("*********** 상품가격: {}", directVO.getDirectPrice());
-//		log.error("*********** 상품재고: {}", directVO.getDirectStock());
-//		log.error("*********** 상품코드: {}", directVO.getDirectCode());
-//		//directService.setInsert(directVO);
-//		modelAndView.setViewName("hworld/directAdd");
-//		return modelAndView;
-//	}
 	@PostMapping("directAdd")
-	public ModelAndView setInsert(String categoryCode, String brandCode, String directName, String directContents, String directFilePath, 
-			String[] colorCode, String[] saveCapacity, Integer[] directPrice, Integer[] directStock, String[] directCode, DirectVO directVO) throws Exception{
-		ModelAndView modelAndView = new ModelAndView();
-		
-		//반복문으로 directVO 하나 완성하기 + 완성될 때 서비스로 insert 메서드 호출
-		for(int i=0; i<directCode.length; i++) {
-			DirectVO directVO2 = new DirectVO();
-			directVO2.setCategoryCode(categoryCode);
-			directVO2.setBrandCode(brandCode);
-			directVO2.setDirectName(directName);
-			directVO2.setDirectContents(directContents);
-			directVO2.setDirectFilePath(directFilePath);
-			directVO2.setColorCode(colorCode[i]);
-			directVO2.setSaveCapacity(saveCapacity[i]);
-			directVO2.setDirectPrice(directPrice[i]);
-			directVO2.setDirectStock(directStock[i]);
-			directVO2.setDirectCode(directCode[i]);
-			
-			log.error("*********** 카테고리코드: {}", directVO2.getCategoryCode());
-			log.error("*********** 브랜드코드: {}", directVO2.getBrandCode());
-			log.error("*********** 상품명: {}", directVO2.getDirectName());
-			log.error("*********** 색깔코드: {}", directVO2.getColorCode());
-			log.error("*********** 저장용량: {}", directVO2.getSaveCapacity());
-			log.error("*********** 상품가격: {}", directVO2.getDirectPrice());
-			log.error("*********** 상품재고: {}", directVO2.getDirectStock());
-			log.error("*********** 상품코드: {}", directVO2.getDirectCode());
-			
-			directService.setInsert(directVO2);
-		}
-		
-		modelAndView.setViewName("hworld/directAdd");
-		return modelAndView;
-	}
+	   public ModelAndView setInsert(String categoryCode, String brandCode, String directName, String directContents, String directFilePath, 
+	         String[] colorCode, String[] saveCapacity, Integer[] directPrice, Integer[] directStock, String[] directCode, DirectVO directVO) throws Exception{
+	      ModelAndView modelAndView = new ModelAndView();
+	      
+	      //반복문으로 directVO 하나 완성하기 + 완성될 때 서비스로 insert 메서드 호출
+	      for(int i=0; i<directCode.length; i++) {
+	         DirectVO directVO2 = new DirectVO();
+	         directVO2.setCategoryCode(categoryCode);
+	         directVO2.setBrandCode(brandCode);
+	         directVO2.setDirectName(directName);
+	         directVO2.setDirectContents(directContents);
+	         directVO2.setDirectFilePath(directFilePath);
+	         directVO2.setColorCode(colorCode[i]);
+	         directVO2.setSaveCapacity(saveCapacity[i]);
+	         directVO2.setDirectPrice(directPrice[i]);
+	         directVO2.setDirectStock(directStock[i]);
+	         directVO2.setDirectCode(directCode[i]);
 
+	         directService.setInsert(directVO2);
+	      }
+	      
+	      modelAndView.setViewName("hworld/directAdd");
+	      return modelAndView;
+	   }
+	
+//	@GetMapping("checkStock")
+//	public ModelAndView getPrice(ModelAndView mv, DirectVO directVO) throws Exception {
+//	  
+//	  
+//	  
+//	  mv.addObject("price", price); // 가격을 ModelAndView에 추가
+//	  mv.setViewName("pricePage"); // 가격을 보여줄 페이지로 이동
+//	  return mv; // 가격을 문자열로 반환
+//	}
+	
 	// 휴대폰 & 악세사리 상품 수정 페이지
 	@GetMapping("directUpdate")
 	public ModelAndView d6() throws Exception{
@@ -152,21 +158,18 @@ public class DirectController {
 	
 
 	/*
-	 * //상품 리스트
+	
 	 * 
-	 * @GetMapping("test")
+	 *  //상품 상세페이지
 	 * 
-	 * @ResponseBody public ModelAndView getList(ModelAndView mv , Pager pager)
-	 * throws Exception{ List<DirectVO>ar = directService.getList(pager);
-	 * mv.addObject("list", ar); mv.setViewName("test");
-	 * 
-	 * return mv; } //상품 상세페이지
-	 * 
-	 * @GetMapping("detail") public ModelAndView getDetail(DirectVO directVO)throws
-	 * Exception{ ModelAndView mv = new ModelAndView(); directVO =
+	 * @GetMapping("detail") 
+	 * public ModelAndView getDetail(DirectVO directVO)throws
+	 * Exception{ 
+	 * ModelAndView mv = new ModelAndView(); directVO =
 	 * directService.getDetail(directVO);
 	 * 
-	 * mv.addObject("directVO", directVO); mv.setViewName("directDetail");
+	 * mv.addObject("directVO", directVO); 
+	 * mv.setViewName("directDetail");
 	 * 
 	 * return mv;
 	 * 

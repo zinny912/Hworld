@@ -110,7 +110,7 @@
                        
                             <!-- 출고가 -->
 
-                            <!-- <div class="col-md-2">
+                            <div class="col-md-2">
                                 <label for="colorCode" class="form-label">색상</label>
                                 <div class="col-12">
                                     <select class="form-select custome-form-select" id="colorCode" name="colorCode">
@@ -158,11 +158,11 @@
                             
                                 <div class="mb-2">
                                     <label for="validationCustom04" class="form-label">썸네일 이미지</label>
-                                    <input class="form-control" type="file" id="formFile">
+                                    <input class="form-control" type="file" id="formFile" name="formFile">
                                 </div>
                                 <div class="mb-3">
                                     <label for="validationCustom04" class="form-label">상품 이미지</label>
-                                    <input class="form-control" type="file" id="formFile">
+                                    <input class="form-control" type="file" id="formFile2" name="formFile">
                                 </div>
             
                             <!-- 상세정보 서머노트하자 -->

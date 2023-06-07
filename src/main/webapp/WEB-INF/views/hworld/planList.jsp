@@ -7,7 +7,8 @@
 <head>
 	<meta charset="UTF-8">
     <c:import url="../temp/style.jsp"></c:import>
-    <title>요금제&부가서비스 리스트</title>
+
+    
 </head>
 
 <body class="theme-color2 light ltr">
@@ -75,77 +76,86 @@
                 </div>
                 <div class="container">
                     <div class="category-option">
+                    <!-- 5G 요금제 리스트 generalList -->
                         <div class="accordion category-name" id="accordionExample">
                             <div class="accordion-item category-rating show">
                                 <h2 class="accordion-header"  id="headingThree">
                                     <button class="accordion-button" style="background-color:#fff;" type="button" data-bs-toggle="collapse"
                                         data-bs-target="#collapseThree">
-                                        <h3 class="fs-4 fw-bolder">5G 요금제</h3> <span style="color:#7E7E7E; margin-left:10%; font-weight: 400; font-size:16px" >세상 빠른 속도의 H world의 5G </span>
+            <c:choose>
+            <c:when test="${not empty planList && planList[0].type == 'G'}">
+                <h3 class="fs-4 fw-bolder">${planList[0].note}</h3>
+                <span style="color:#7E7E7E; margin-left:10%; font-weight: 400; font-size:16px">세상 빠른 속도의 H world의 5G</span>
+            </c:when>
+            
+        </c:choose>
                                     </button>
                                 </h2>
                                 <div id="collapseThree" class="accordion-collapse collapse show"
                                     aria-labelledby="headingThree" data-bs-parent="#accordionExample">
                                     <div class="accordion-body ">
                                         <ul class="category-list">
-                                            <li>
-                                        <table class="table cart-table">
-                                        <thead>
-                                            <tr class="table-head ">
-                                                <th scope="col" style="color:#7E7E7E;"><strong class="fs-5">요금제</strong></th>
-                                                <th scope="col" style="color:#7E7E7E;"><strong class="fs-5">데이터</strong></th>
-                                                <th scope="col" style="color:#7E7E7E;"><strong class="fs-5">문자</strong></th>
-                                                <th scope="col" style="color:#7E7E7E;"><strong class="fs-5">통화</strong></th>
-                                                <th scope="col" style="color:#7E7E7E;"><strong class="fs-5">월정액</strong></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody> 
+                                        <li>
+	                                       <table class="table cart-table">
+	                                        <thead>
+	                                            <tr class="table-head ">
+	                                                <th scope="col" style="color:#7E7E7E;"><strong class="fs-5">요금제</strong></th>
+	                                                <th scope="col" style="color:#7E7E7E;"><strong class="fs-5">데이터</strong></th>
+	                                                <th scope="col" style="color:#7E7E7E;"><strong class="fs-5">문자</strong></th>
+	                                                <th scope="col" style="color:#7E7E7E;"><strong class="fs-5">통화</strong></th>
+	                                                <th scope="col" style="color:#7E7E7E;"><strong class="fs-5">월정액</strong></th>
+	                                            </tr>
+	                                        </thead>
+                                       	 	<tbody> 
+                                        	<c:forEach items="${planList}"  var="plan">
+                                        	<c:if test="${plan.type == 'G'}">
                                             <tr>
                                                 <td> <a href="zyougeumje_detail.html">
-                                                        <strong class="text-left fs-4 m-0 ">5G 프리미어</strong></a></td>
-                                                <td> <p class="fs-5 m-0">무제한</p></td>
-                                                <td><p class="fs-5 m-0">무제한</p></td>
-                                                <td> <p class="fs-5 m-0">무제한</p></td>
-                                                <td><strong class="fs-4 m-0 theme-color">88,000</strong><span class="fs-6">원</span></td>
+                                                        <strong class="text-left fs-4 m-0 ">${plan.planName }</strong></a></td>
+                                                <td> 
+                                                	<p class="fs-5 m-0">
+                                                	<c:choose>
+												      <c:when test="${plan.dataCapacity eq '무제한'}">
+												        무제한
+												      </c:when>
+												      <c:otherwise>
+												        ${plan.dataCapacity} GB
+												      </c:otherwise>
+												    </c:choose></td>
+                                                <td><p class="fs-5 m-0">기본제공</p></td>
+                                                <td> <p class="fs-5 m-0">기본제공</p></td>
+                                                <td><strong class="fs-4 m-0 theme-color" id="commaPrice${plan.planNum}">${plan.planPrice}</strong><span class="fs-6">원</span></td>
                                             </tr>
-                                            <tr>
-                                                <td> <a href="#">
-                                                        <strong class="fs-4 m-0 ">5G 베이직</strong></a></td>
-                                                <td><p class="fs-5 m-0">50GB</p></td>
-                                                <td><p class="fs-5 m-0">무제한</p></td>
-                                                <td><p class="fs-5 m-0">무제한</p></td>
-                                                <td><strong class="fs-4 m-0 theme-color">77,000</strong><span class="fs-6">원</span></td>
-                                            </tr>
-                                            <tr>
-                                                <td> <a href="#">
-                                                        <strong class="fs-4 m-0">5G 심플</strong></a></td>
-                                                <td><p class="fs-5 m-0">30GB</p></td>
-                                                <td><p class="fs-5 m-0">무제한</p></td>
-                                                <td><p class="fs-5 m-0">무제한</p></td>
-                                                <td><strong class="fs-4 m-0 theme-color">66,000</strong><span class="fs-6">원</span></td>
-                                            </tr>
-                                            <tr>
-                                                <td> <a href="#">
-                                                        <strong class="fs-4 m-0">5G 슬림</strong></a></td>
-                                                <td><p class="fs-5 m-0">8GB</p></td>
-                                                <td><p class="fs-5 m-0">무제한</p></td>
-                                                <td><p class="fs-5 m-0">무제한</p></td>
-                                                <td><strong class="fs-4 m-0 theme-color">55,000</strong><span class="fs-6">원</span></td>
-                                            </tr>
-                                        </tbody>
-                                            </table>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                                            </c:if>
+                                            </c:forEach>
+                                        	</tbody>
+                                           </table>
+                                   	</li>
+                                	</ul>
+                            	</div>
+                        	</div>
+                    	</div>
+                	</div>
+                	<!-- 5G요금제 리스트 끝  -->
+                	<!-- 시니어 요금제 리스트 시작 -->
                     <div class="accordion category-name"  id="accordionExample1">
                             <div class="accordion-item category-rating">
                                 <h2 class="accordion-header" id="headingThree1">
                                     <button class="accordion-button" style="background-color:#fff;" type="button" data-bs-toggle="collapse"
                                         data-bs-target="#collapseThree1">
-                                        <h3 class="fs-4 fw-bolder">시니어 요금제</h3> <span style="color:#7E7E7E; margin-left:5%; font-weight:400; font-size:16px;" >65세 이상 중장년을 위한 H world의 5G 요금제</span>
-                                    </button>
+                                       <c:if test="${not empty planList}">
+										    <c:set var="sPlan" value="${null}" />
+										    <c:forEach items="${planList}" var="plan">
+										        <c:if test="${plan.type == 'S'}">
+										            <c:set var="sPlan" value="${plan}" />
+										        </c:if>
+										    </c:forEach>
+										    <c:if test="${not empty sPlan}">
+										        <h3 class="fs-4 fw-bolder">${sPlan.note}</h3>
+										        <span style="color:#7E7E7E; margin-left:10%; font-weight: 400; font-size:16px">65세 이상의 중장년을 위한 H world의 요금제</span>
+										    </c:if>
+										</c:if>
+                                     </button>
                                 </h2>
                                 <div id="collapseThree1" class="accordion-collapse collapse"
                                     aria-labelledby="headingThree" data-bs-parent="#accordionExample1">
@@ -163,36 +173,28 @@
                                                     </tr>
                                                     </thead>
                                                     <tbody> 
+                                                    <c:forEach items="${planList}"  var="plan">
+                                                    <c:if test="${plan.type == 'S'}">
                                                         <tr>
                                                             <td> <a href="zyougeumje_detail.html">
-                                                                    <strong class="text-left fs-4 m-0 ">시니어A형</strong></a>
+                                                                    <strong class="text-left fs-4 m-0 ">${plan.planName}</strong></a>
                                                                     
                                                             </td>
-                                                            <td> <p class="fs-5 m-0">10GB</p></td>
-                                                            <td><p class="fs-5 m-0">무제한</p></td>
-                                                            <td> <p class="fs-5 m-0">무제한</p></td>
-                                                            <td><strong class="fs-4 m-0 theme-color">55,000</strong><span class="fs-6">원</span></td>
+                                                            <td> <p class="fs-5 m-0">
+			                                                	<c:choose>
+															      <c:when test="${plan.dataCapacity eq '무제한'}">
+															        무제한
+															      </c:when>
+															      <c:otherwise>
+															        ${plan.dataCapacity} GB
+															      </c:otherwise>
+															    </c:choose></td>
+                                                            <td><p class="fs-5 m-0">기본제공</p></td>
+                                                            <td> <p class="fs-5 m-0">기본제공</p></td>
+                                                            <td><strong class="fs-4 m-0 theme-color" id="commaPrice${plan.planNum}">${plan.planPrice}</strong>
                                                         </tr>
-                                                        <tr>
-                                                            <td> <a href="#">
-                                                                    <strong class="fs-4 m-0 ">시니어B형</strong></a>
-                                                                    <p>70세이상만 신청가능</p>
-                                                                </td>
-                                                            <td><p class="fs-5 m-0">9GB</p></td>
-                                                            <td><p class="fs-5 m-0">무제한</p></td>
-                                                            <td><p class="fs-5 m-0">무제한</p></td>
-                                                            <td><strong class="fs-4 m-0 theme-color">44,000</strong><span class="fs-6">원</span></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td> <a href="#">
-                                                                    <strong class="fs-4 m-0">시니어C형</strong></a>
-                                                                    <p>80세이상만 신청가능</p>
-                                                                </td>
-                                                            <td><p class="fs-5 m-0">8GB</p></td>
-                                                            <td><p class="fs-5 m-0">무제한</p></td>
-                                                            <td><p class="fs-5 m-0">무제한</p></td>
-                                                            <td><strong class="fs-4 m-0 theme-color">33,000</strong><span class="fs-6">원</span></td>
-                                                        </tr>
+                                                        </c:if>
+                                                        </c:forEach>
                                                         </tbody>
                                                     </table>
                                                 </li>
@@ -201,212 +203,9 @@
                                     </div>
                                 </div>
                             </div>
-                                         <div class="accordion category-name"  id="accordionExample2">
-                                            <div class="accordion-item category-rating">
-                                                <h2 class="accordion-header" id="headingThree2">
-                                                    <button class="accordion-button" style="background-color:#fff;" type="button" data-bs-toggle="collapse"
-                                                        data-bs-target="#collapseThree2">
-                                                        <h3 class="fs-4 fw-bolder">청소년 요금제</h3> <span style="color:#7E7E7E; margin-left:5%; font-weight:400; font-size:16px;" >18세 이하 어린이를 위한 H world의 5G 요금제</span>
-                                                    </button>
-                                                </h2>
-                                                <div id="collapseThree2" class="accordion-collapse collapse"
-                                                    aria-labelledby="headingThree" data-bs-parent="#accordionExample2">
-                                                    <div class="accordion-body category-scroll">
-                                                        <ul class="category-list">
-                                                            <li>
-                                                                <table class="table cart-table">
-                                                                <thead>
-                                                                    <tr class="table-head ">
-                                                                        <th scope="col" style="color:#7E7E7E;"><strong class="fs-5">요금제</strong></th>
-                                                                        <th scope="col" style="color:#7E7E7E;"><strong class="fs-5">데이터</strong></th>
-                                                                        <th scope="col" style="color:#7E7E7E;"><strong class="fs-5">문자</strong></th>
-                                                                        <th scope="col" style="color:#7E7E7E;"><strong class="fs-5">통화</strong></th>
-                                                                        <th scope="col" style="color:#7E7E7E;"><strong class="fs-5">월정액</strong></th>
-                                                                    </tr>
-                                                                    </thead>
-                                                                    <tbody> 
-                                                                        <tr>
-                                                                            <td> <a href="yougeumje_detail.html">
-                                                                                    <strong class="text-left fs-4 m-0 ">***H틴***</strong></a>      
-                                                                            </td>
-                                                                            <td> <p class="fs-5 m-0">4GB</p></td>
-                                                                            <td><p class="fs-5 m-0">무제한</p></td>
-                                                                            <td> <p class="fs-5 m-0">무제한</p></td>
-                                                                            <td><strong class="fs-4 m-0 theme-color">33,000</strong><span class="fs-6">원</span></td>
-                                                                        </tr>
-                                                                       
-                                                                        </tbody>
-                                                                    </table>
-                                                                </li>
-                                                         </ul>
-                                                     </div>
-                                                 </div>
-                                             </div>
-                                         </div>
-                                         <div class="accordion category-name"  id="accordionExample3">
-                                            <div class="accordion-item category-rating">
-                                                <h2 class="accordion-header" id="headingThree3">
-                                                    <button class="accordion-button" style="background-color:#fff;" type="button" data-bs-toggle="collapse"
-                                                        data-bs-target="#collapseThree3">
-                                                        <h3 class="fs-4 fw-bolder">ZEM 요금제</h3> <span style="color:#7E7E7E; margin-left:5%; font-weight:400; font-size:16px;" >12세 이하 어린이를 위한 H world의 5G 요금제</span>
-                                                    </button>
-                                                </h2>
-                                                <div id="collapseThree3" class="accordion-collapse collapse "
-                                                    aria-labelledby="headingThree" data-bs-parent="#accordionExample3">
-                                                    <div class="accordion-body ">
-                                                        <ul class="category-list">
-                                                            <li>
-                                                                <table class="table cart-table">
-                                                                <thead>
-                                                                    <tr class="table-head ">
-                                                                        <th scope="col" style="color:#7E7E7E;"><strong class="fs-5">요금제</strong></th>
-                                                                        <th scope="col" style="color:#7E7E7E;"><strong class="fs-5">데이터</strong></th>
-                                                                        <th scope="col" style="color:#7E7E7E;"><strong class="fs-5">문자</strong></th>
-                                                                        <th scope="col" style="color:#7E7E7E;"><strong class="fs-5">통화</strong></th>
-                                                                        <th scope="col" style="color:#7E7E7E;"><strong class="fs-5">월정액</strong></th>
-                                                                    </tr>
-                                                                    </thead>
-                                                                    <tbody> 
-                                                                        <tr>
-                                                                            <td> <a href="zyougeumje_detail.html">
-                                                                                    <strong class="text-left fs-4 m-0 ">ZEM 베이직</strong></a>      
-                                                                            </td>
-                                                                            <td> <p class="fs-5 m-0">4GB</p></td>
-                                                                            <td><p class="fs-5 m-0">무제한</p></td>
-                                                                            <td> <p class="fs-5 m-0">무제한</p></td>
-                                                                            <td><strong class="fs-4 m-0 theme-color">33,000</strong><span class="fs-6">원</span></td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td> <a href="zyougeumje_detail.html">
-                                                                                    <strong class="text-left fs-4 m-0 ">ZEM 슬림</strong></a>      
-                                                                            </td>
-                                                                            <td> <p class="fs-5 m-0">2GB</p></td>
-                                                                            <td><p class="fs-5 m-0">무제한</p></td>
-                                                                            <td> <p class="fs-5 m-0">무제한</p></td>
-                                                                            <td><strong class="fs-4 m-0 theme-color">22,000</strong><span class="fs-6">원</span></td>
-                                                                        </tr>
-                                                                        </tbody>
-                                                                    </table>
-                                                                </li>
-                                                         </ul>
-                                                     </div>
-                                                 </div>
-                                             </div>
-                                         </div>
-    
-                                         <div class="accordion category-name"  id="accordionExample4">
-                                            <div class="accordion-item category-rating">
-                                                <h2 class="accordion-header" id="headingThree4">
-                                                    <button class="accordion-button" style="background-color:#fff;" type="button" data-bs-toggle="collapse"
-                                                        data-bs-target="#collapseThree4">
-                                                        <h3 class="fs-4 fw-bolder">복지 요금제</h3> <span style="color:#7E7E7E; margin-left:5%; font-weight:400; font-size:16px;" >복지혜택을 받는 분들을 위한 H world의 5G 요금제</span>
-                                                    </button>
-                                                </h2>
-                                                <div id="collapseThree4" class="accordion-collapse collapse "
-                                                    aria-labelledby="headingThree" data-bs-parent="#accordionExample4">
-                                                    <div class="accordion-body ">
-                                                        <ul class="category-list">
-                                                            <li>
-                                                                <table class="table cart-table">
-                                                                <thead>
-                                                                    <tr class="table-head ">
-                                                                        <th scope="col" style="color:#7E7E7E;"><strong class="fs-5">요금제</strong></th>
-                                                                        <th scope="col" style="color:#7E7E7E;"><strong class="fs-5">데이터</strong></th>
-                                                                        <th scope="col" style="color:#7E7E7E;"><strong class="fs-5">문자</strong></th>
-                                                                        <th scope="col" style="color:#7E7E7E;"><strong class="fs-5">통화</strong></th>
-                                                                        <th scope="col" style="color:#7E7E7E;"><strong class="fs-5">월정액</strong></th>
-                                                                    </tr>
-                                                                    </thead>
-                                                                    <tbody> 
-                                                                        <tr>
-                                                                            <td> <a href="zyougeumje_detail.html">
-                                                                                    <strong class="text-left fs-4 m-0 ">베이직 복지</strong></a>      
-                                                                            </td>
-                                                                            <td> <p class="fs-5 m-0">무제한</p></td>
-                                                                            <td><p class="fs-5 m-0">무제한</p></td>
-                                                                            <td> <p class="fs-5 m-0">무제한</p></td>
-                                                                            <td><strong class="fs-4 m-0 theme-color">55,000</strong><span class="fs-6">원</span></td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td> <a href="zyougeumje_detail.html">
-                                                                                    <strong class="text-left fs-4 m-0 ">심플 복지</strong></a>      
-                                                                            </td>
-                                                                            <td> <p class="fs-5 m-0">100GB</p></td>
-                                                                            <td><p class="fs-5 m-0">무제한</p></td>
-                                                                            <td> <p class="fs-5 m-0">무제한</p></td>
-                                                                            <td><strong class="fs-4 m-0 theme-color">44,000</strong><span class="fs-6">원</span></td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td> <a href="zyougeumje_detail.html">
-                                                                                    <strong class="text-left fs-4 m-0 ">슬림 복지</strong></a>      
-                                                                            </td>
-                                                                            <td> <p class="fs-5 m-0">15GB</p></td>
-                                                                            <td><p class="fs-5 m-0">무제한</p></td>
-                                                                            <td> <p class="fs-5 m-0">무제한</p></td>
-                                                                            <td><strong class="fs-4 m-0 theme-color">33,000</strong><span class="fs-6">원</span></td>
-                                                                        </tr>
-                                                                        </tbody>
-                                                                    </table>
-                                                                </li>
-                                                         </ul>
-                                                     </div>
-                                                 </div>
-                                             </div>
-                                         </div>
-                                    
-                                         <div class="accordion category-name"  id="accordionExample5">
-                                            <div class="accordion-item category-rating">
-                                                <h2 class="accordion-header" id="headingThree5">
-                                                    <button class="accordion-button" style="background-color:#fff;" type="button" data-bs-toggle="collapse"
-                                                        data-bs-target="#collapseThree5">
-                                                        <h3 class="fs-4 fw-bolder">군인 요금제</h3> <span style="color:#7E7E7E; margin-left:5%; font-weight:400; font-size:16px;" >충성! 나라 지키는 Hero를 위한 H world의 5G 요금제</span>
-                                                    </button>
-                                                </h2>
-                                                <div id="collapseThree5" class="accordion-collapse collapse "
-                                                    aria-labelledby="headingThree" data-bs-parent="#accordionExample5">
-                                                    <div class="accordion-body ">
-                                                        <ul class="category-list">
-                                                            <li>
-                                                                <table class="table cart-table">
-                                                                <thead>
-                                                                    <tr class="table-head ">
-                                                                        <th scope="col" style="color:#7E7E7E;"><strong class="fs-5">요금제</strong></th>
-                                                                        <th scope="col" style="color:#7E7E7E;"><strong class="fs-5">데이터</strong></th>
-                                                                        <th scope="col" style="color:#7E7E7E;"><strong class="fs-5">문자</strong></th>
-                                                                        <th scope="col" style="color:#7E7E7E;"><strong class="fs-5">통화</strong></th>
-                                                                        <th scope="col" style="color:#7E7E7E;"><strong class="fs-5">월정액</strong></th>
-                                                                    </tr>
-                                                                    </thead>
-                                                                    <tbody> 
-                                                                        <tr>
-                                                                            <td> <a href="zyougeumje_detail.html">
-                                                                                    <strong class="text-left fs-4 m-0 ">Hero 55</strong></a>
-                                                                                    <p>현역 일반병사만 가입가능</p>   
-                                                                            </td>
-                                                                            <td> <p class="fs-5 m-0">100GB</p></td>
-                                                                            <td><p class="fs-5 m-0">무제한</p></td>
-                                                                            <td> <p class="fs-5 m-0">무제한</p></td>
-                                                                            <td><strong class="fs-4 m-0 theme-color">55,000</strong><span class="fs-6">원</span></td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td> <a href="zyougeumje_detail.html">
-                                                                                    <strong class="text-left fs-4 m-0 ">Hero 33</strong></a>  
-                                                                                    <p>현역 일반병사만 가입가능</p>    
-                                                                            </td>
-                                                                            <td> <p class="fs-5 m-0">2GB/일</p></td>
-                                                                            <td><p class="fs-5 m-0">무제한</p></td>
-                                                                            <td> <p class="fs-5 m-0">무제한</p></td>
-                                                                            <td><strong class="fs-4 m-0 theme-color">33,000</strong><span class="fs-6">원</span></td>
-                                                                        </tr>
-                                                                        </tbody>
-                                                                    </table>
-                                                                </li>
-                                                         </ul>
-                                                     </div>
-                                                 </div>
-                                             </div>
-                                         </div>
-                                    </section>
+                         </div>
+                      </div>  
+				</section>
                             </div>
                         </div>
                     </div>  
@@ -542,7 +341,22 @@
          
     </section>
     <!-- Shop Section end -->    
+ 
+  
 <c:import url="../temp/footer.jsp"></c:import>
+
+      <script>
+$(document).ready(function() {
+    const prices = document.querySelectorAll('[id^="commaPrice"]');
+    for (var i = 0; i < prices.length; i++) {
+        const price = parseInt(prices[i].innerHTML);
+        const commaPrice = price.toLocaleString();
+        prices[i].innerHTML =commaPrice ;
+       	
+    }
+});
+</script> 
+  
 </body>
 
 </html>
