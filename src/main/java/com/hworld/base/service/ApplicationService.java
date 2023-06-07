@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.hworld.base.dao.ApplicationDAO;
+import com.hworld.base.util.SHA256Util;
 import com.hworld.base.vo.ApplicationVO;
 import com.hworld.base.vo.MemberVO;
 
@@ -30,6 +31,22 @@ public class ApplicationService {
 		
 		
 		//1.최초 신청서 db에 insert
+		//신청서 db에 insert 하기전에 rrnl값을 암호화 해야할거같은데.
+		//평문 주민뒷자리를 rrnlOrigin에 저장
+		applicationVO.setRrnlOrigin(applicationVO.getRrnl()); 
+		//패스워드 인코더로 rrnl 암호화 해서 저장
+//		salt 사용을 하고싶었는데 rrnl을 확실히 찾을 수 있는 key값이 없음
+//		String salt = SHA256Util.generateSalt();
+//		applicationVO.setSalt(salt);
+//		
+//		String rrnl = applicationVO.getRrnl();
+//		rrnl = SHA256Util.getEncrypt(rrnl, salt);
+//		
+//		applicationVO.setRrnl(rrnl);
+		
+		log.error(">>>>>>>>>>>>>>>>>>>>>>>>>> {} ", applicationVO.getRrnl());
+		log.error(">>>>>>>>>>>>>>>>>>>>>>>>>> {} ", applicationVO.getRrnlOrigin());
+		
 		int result = applicationDAO.setFormAdd(applicationVO);
 		log.error(applicationVO.getAppNum().toString());
 		
@@ -60,8 +77,8 @@ public class ApplicationService {
 		
 		//3-2a.회원번호가 있음
 		//3-2b.회원번호(신청서VO)로 회선VO 만들기
-		
 		result = applicationDAO.setTelephoneInitAdd(applicationVO);
+		
 		
 		return result;
 	}

@@ -1,9 +1,17 @@
 package com.hworld.base.controller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.hworld.base.dao.PlanDAO;
+import com.hworld.base.service.PlanService;
+import com.hworld.base.util.Pager;
+import com.hworld.base.vo.PlanVO;
 
 
 
@@ -11,12 +19,32 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/plan/*")
 public class PlanController {
 	
+	@Autowired
+	private PlanService planService;
+	
+	
 	// 요금제&부가서비스 리스트
 	@GetMapping("planList")
-	public ModelAndView e1() throws Exception{
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("hworld/planList");
-		return modelAndView;
+	public ModelAndView getList() throws Exception{
+		ModelAndView mv= new ModelAndView();
+		List<PlanVO> planList = planService.getPlanList();
+//		List<PlanVO> generalList = planService.getGeneralList();
+//        List<PlanVO> seniorList = planService.getSeniorList();
+//        List<PlanVO> teenList = planService.getTeenList();
+//        List<PlanVO> zemList = planService.getZemList();
+//        List<PlanVO> heroList = planService.getHeroList();
+//        List<PlanVO> welfareList = planService.getWelfareList();
+//        
+//		
+//		mv.addObject("generalList", generalList);
+//		mv.addObject("seniorList",  seniorList);
+//		mv.addObject("teenList",  teenList);
+//		mv.addObject("zemList",  zemList);
+//		mv.addObject("heroList",  heroList);
+//		mv.addObject("welfareList",  welfareList);
+		mv.addObject("planList",planList);
+		mv.setViewName("hworld/planList");
+		return mv;
 	}
 	
 	// 요금제&부가서비스 리스트

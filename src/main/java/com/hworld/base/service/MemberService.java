@@ -27,13 +27,13 @@ public class MemberService {
 	
 	public int setMemberAdd(MemberVO memberVO) throws Exception {
 		
-		String salt = SHA256Util.generateSalt();
-		memberVO.setSalt(salt);
-		
-		String rrnl = memberVO.getRrnl();
-		rrnl = SHA256Util.getEncrypt(rrnl, salt);
-		
-		memberVO.setRrnl(rrnl);
+//		String salt = SHA256Util.generateSalt();
+//		memberVO.setSalt(salt);
+//		
+//		String rrnl = memberVO.getRrnl();
+//		rrnl = SHA256Util.getEncrypt(rrnl, salt);
+//		
+//		memberVO.setRrnl(rrnl);
 		
 		return memberDAO.setMemberAdd(memberVO);
 	}		

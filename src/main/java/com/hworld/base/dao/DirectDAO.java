@@ -1,5 +1,6 @@
 package com.hworld.base.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -17,6 +18,11 @@ public interface DirectDAO {
 	
 	//상품 리스트 조회 
 	public List<DirectVO> getList(Pager pager) throws Exception;
+//	public DirectVO getPriceList(DirectVO directVO) throws Exception;
+
+	//상품 sorting 
+	public List<DirectVO> getListByPriceH(Pager pager) throws Exception;
+	public List<DirectVO> getListByPriceL(Pager pager) throws Exception;
 	
 	public List<Map<String, Object>> getFileList() throws Exception;
 	
@@ -40,6 +46,8 @@ public interface DirectDAO {
 	
 	//파일 삭제 
 	public int setFileDelete (DirectVO directVO) throws Exception;
+
+	public ArrayList<DirectVO> getDirectList();
 		 
 		
 }

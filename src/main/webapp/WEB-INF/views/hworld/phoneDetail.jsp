@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,7 +30,7 @@
         background-color: #e22454; 
         color: #fff; 
     }
-
+    
  /* 요금제 변경 모달 버튼 */
  .quick-view-modal .product-right .size-detail {
   padding: 20px 0;
@@ -71,651 +72,6 @@
     }
 </style>
 
-<style>
-    /* 제품 상세내용 CSS */
-    .point-color {
-        color: #f55500 !important;
-    }
-
-    .p_description .block-link {
-        display: block;
-        font-size: 0;
-    }
-
-    .p_description .block-link img {
-        display: block;
-        width: 100%;
-    }
-
-    .p_description .desc-group {
-        padding: 30px 0;
-    }
-
-    .p_description .desc-group p.line-desc {
-        text-align: center;
-        font-size: 17px;
-        line-height: 1.4;
-        letter-spacing: -.05em;
-    }
-
-    .p_description .desc-group p.line-desc .line-tit {
-        font-size: 28px;
-    }
-
-    .p_description .desc-group p.line-desc+p.line-desc {
-        margin-top: 20px;
-    }
-
-    .p_description h3.h3-tit {
-        margin-top: 65px;
-        margin-bottom: 15px;
-        text-align: left;
-        line-height: 1.3;
-        color: #000;
-        font-size: 34px;
-        font-weight: normal;
-        word-break: keep-all;
-    }
-
-    .p_description h3.h3-tit:first-child {
-        margin-top: 0;
-    }
-
-    .p_description h3.h3-tit span {
-        color: #f55500;
-    }
-
-    .p_description h3.h3-tit.single {
-        margin-bottom: 40px;
-    }
-
-    .p_description p.sub-description {
-        margin: 20px 0 40px;
-        text-align: left;
-        font-size: 16px;
-        color: #000;
-        line-height: 1.4;
-        word-break: keep-all;
-    }
-
-    .p_description p.sub-description span {
-        color: #f55500;
-    }
-
-    .p_description .exclamation_tit {
-        margin-top: 13px;
-        font-size: 14px;
-        font-weight: normal;
-        color: #444;
-        letter-spacing: 0;
-    }
-
-    .p_description p.exclamation,
-    .p_description ul.exclamation {
-        margin-top: 10px !important;
-    }
-
-    .p_description p.exclamation,
-    .p_description ul.exclamation li {
-        margin-top: 5px;
-        padding-left: 24px;
-        padding-bottom: 2px;
-        font-size: 14px;
-        color: #444;
-        background: url("https://cdnw.shop.tworld.co.kr/public/img/event_2019/0220/icon_Web/info1.png") 0 0 no-repeat;
-    }
-
-    .p_description div.img-section>img {
-        display: block;
-        vertical-align: top;
-    }
-
-    .p_description {
-        max-width: 770px;
-        margin: 0 auto;
-        letter-spacing: -0.05em;
-    }
-
-    /* 테이블 보정 */
-    .p_description .tbl_row {
-        width: 770px;
-        margin-top: 40px !important;
-    }
-
-    .p_description .tbl_row tr th {
-        font-weight: bold;
-        padding-left: 10px;
-        padding-right: 10px;
-    }
-
-    .p_description .tbl_row tr td {
-        padding-left: 10px;
-        padding-right: 10px;
-    }
-
-    /* 주의사항, 유의사항 */
-    .p_description .feature_notice_area {
-        padding: 29px 60px 27px 30px;
-        border: 1px solid #ccc;
-        letter-spacing: -1px;
-        text-align: left;
-    }
-
-    .p_description .feature_notice_area.mt {
-        margin-top: 3rem;
-    }
-
-    .p_description .feature_notice_area .tit {
-        height: 53px;
-        padding: 0 0 2px 75px;
-        font-weight: bold;
-        color: #333;
-        font-size: 24px;
-        line-height: 53px;
-        background: url('https://cdnw.shop.tworld.co.kr/pimg/webeditor/201802/21/20180221121351_file0.jpg') 0 50% no-repeat;
-    }
-
-    .p_description .feature_notice_area ul.noticeList {
-        padding-left: 75px;
-    }
-
-    .p_description .feature_notice_area ul.noticeList>li {
-        position: relative;
-        padding-left: 8px;
-        margin-top: 6px;
-        color: #666;
-        font-size: 16px;
-        line-height: 1.5;
-    }
-
-    .p_description .feature_notice_area ul.noticeList.num>li {
-        list-style-type: decimal;
-    }
-
-    .p_description .feature_notice_area ul.noticeList>li:before {
-        content: '';
-        position: absolute;
-        top: 11px;
-        left: 0;
-        height: 3px;
-        width: 3px;
-        border-radius: 50%;
-        background-color: #8c8c8c;
-    }
-
-    .p_description .feature_notice_area ul.noticeList.num>li:before {
-        display: none;
-    }
-
-    .p_description .feature_notice_area ul.noticeList>li:first-child {
-        margin-top: 3px;
-    }
-
-    .p_description .feature_notice_area sup {
-        position: relative;
-        top: 2px;
-        display: inline-block;
-        margin-top: -5px;
-    }
-
-    .p_description .feature_notice_area .link_txt {
-        color: #2e93fa;
-        text-decoration: underline;
-    }
-
-    .info-section {
-        border: 1px solid #e6e6e6;
-        border-width: 0 1px 1px 1px;
-        font-size: 16px;
-        color: #000;
-        line-height: 1.6;
-    }
-
-    .info-section ul li:first-child {
-        border-top: none;
-    }
-
-    .info-section ul li {
-        margin: 0 29px;
-        padding: 40px 15px;
-        border-top: 1px solid #e6e6e6;
-        text-indent: -16px;
-    }
-
-    .info-section ul li a {
-        color: #489bdf;
-        text-decoration: underline;
-    }
-
-    .p_description .img-section {
-        position: relative;
-    }
-
-    .p_description .img-section .tp_btn {
-        position: absolute;
-        background: transparent;
-        z-index: 1
-    }
-
-    .p_description .img-section .tp_btn.share-css-clear {
-        right: auto;
-        top: auto;
-    }
-
-    .p_description .img-section .tp_btn.show {
-        background: rgba(244, 255, 52, .4)
-    }
-
-    .p_description button.tp_btn {
-        padding: 0;
-        color: transparent;
-        background-color: transparent;
-        border: none;
-    }
-
-    /*안내사항*/
-    .p_description .feature_notice_area .guide {
-        padding-left: 75px;
-    }
-
-    .p_description .feature_notice_area .tit-guide {
-        height: 53px;
-        padding: 0 0 2px 75px;
-        font-weight: bold;
-        color: #333;
-        font-size: 24px;
-        line-height: 53px;
-        background: url('https://cdnw.shop.tworld.co.kr/pimg/webeditor/201802/21/20180221121351_file0.jpg') 0 50% no-repeat;
-    }
-
-    .p_description .feature_notice_area .guide p {
-        position: relative;
-        margin-top: 3px;
-        font-size: 16px;
-        line-height: 1.5;
-    }
-
-    .p_description .feature_notice_area .guide strong {
-        position: relative;
-        display: block;
-        margin-top: 15px;
-        font-size: 16px;
-        line-height: 1.5;
-    }
-
-    .p_description .feature_notice_area .guide p.bullet {
-        position: relative;
-        padding-left: 8px;
-        margin-top: 3px;
-        font-size: 16px;
-        line-height: 1.5;
-    }
-
-    .p_description .feature_notice_area .guide p.bullet:before {
-        content: '';
-        position: absolute;
-        top: 11px;
-        left: 0;
-        height: 3px;
-        width: 3px;
-        border-radius: 50%;
-        background-color: #8c8c8c;
-    }
-
-    /*느낌표마크 안내*/
-    .p_description .exclamation-guide {
-        background: #f5f5f5;
-        padding: 20px 32px;
-    }
-
-    .p_description .exclamation-guide .desc {
-        font-size: 18px;
-        line-height: 26px;
-        min-height: 28px;
-        font-weight: normal;
-        color: #ef4b49;
-        padding: 4px 0 0 42px;
-        background: url(https://cdnw.shop.tworld.co.kr/pimg/plan_editor/201904/18883263759870406.png) 0 50% no-repeat;
-    }
-
-    .p_description .exclamation-guide .h4-tit {
-        font-size: 20px;
-        font-weight: bold;
-        height: 40px;
-        color: #ef4b49;
-        padding: 4px 0 0 42px;
-        background: url("https://cdnw.shop.tworld.co.kr/pimg/plan_editor/201904/18883263759870406.png") 0 0 no-repeat;
-    }
-
-    .p_description .exclamation-guide p,
-    .p_description .exclamation-guide sup {
-        padding-left: 40px;
-    }
-
-    .p_description .exclamation-guide p {
-        font-size: 16px;
-        line-height: 1.3;
-    }
-
-    .p_description .exclamation-guide sup {
-        font-size: 14px;
-        line-height: 1.5;
-        color: #8d8d8d;
-        margin-top: 10px;
-        display: block;
-    }
-
-    /* 특별한 약속 */
-    .package-area {
-        padding: 40px 30px;
-        background-color: #f9f9f9;
-    }
-
-    .package-area ul li:first-child strong {
-        padding-top: 0;
-    }
-
-    .package-area ul li strong {
-        display: block;
-        padding-top: 30px;
-        padding-bottom: 10px;
-        font-size: 24px;
-        font-weight: normal;
-        line-height: 1.4;
-    }
-
-    .package-area strong span {
-        color: #ea002c;
-    }
-
-    .package-area p {
-        padding-left: 15px;
-        font-size: 16px;
-        line-height: 1.4;
-    }
-
-    .p_description .img-section .tp_btn {
-        position: absolute;
-        background: transparent;
-        z-index: 1
-    }
-
-    .p_description .img-section .tp_btn.share-css-clear {
-        right: auto;
-        top: auto;
-    }
-
-    .p_description .img-section .tp_btn.show {
-        background: rgba(244, 255, 52, .4)
-    }
-
-    @media (max-width:736px) {
-        .p_description {
-            width: 100%;
-        }
-
-        .p_description .desc-group {
-            padding: 20px 0;
-        }
-
-        .p_description .desc-group p.line-desc {
-            font-size: 14px;
-        }
-
-        .p_description .desc-group p.line-desc .line-tit {
-            font-size: 20px;
-        }
-
-        .p_description .desc-group p.line-desc+p.line-desc {
-            margin-top: 12px;
-        }
-
-        .p_description .feature_notice_area {
-            padding: 15px 15px 15px 25px;
-        }
-
-        .p_description .feature_notice_area .tit {
-            height: 26px;
-            padding: 2px 34px 0;
-            margin-bottom: 10px;
-            font-weight: bold;
-            color: #333;
-            font-size: 18px;
-            line-height: 24px;
-            background: url('https://cdnw.shop.tworld.co.kr/pimg/webeditor/201802/21/20180221121351_file0.jpg') 0 50% no-repeat;
-            background-size: 26px 26px;
-        }
-
-        .p_description .feature_notice_area ul.noticeList {
-            padding-left: 0;
-        }
-
-        .p_description .feature_notice_area ul.noticeList>li {
-            font-size: 13px;
-        }
-
-        .p_description .feature_notice_area ul.noticeList>li:before {
-            top: 7px;
-            left: 0;
-        }
-
-        .p_description .feature_notice_area .tit-guide {
-            height: 30px;
-            padding: 2px 0 0 34px;
-            margin-bottom: 10px;
-            font-weight: bold;
-            color: #333;
-            font-size: 15px;
-            line-height: 24px;
-            background: url('https://cdnw.shop.tworld.co.kr/pimg/webeditor/201802/21/20180221121351_file0.jpg') 0 50% no-repeat;
-            background-size: 26px 26px;
-        }
-
-        .p_description .feature_notice_area .guide {
-            padding-left: 0;
-        }
-
-        .p_description .feature_notice_area .guide p,
-        .p_description .feature_notice_area .guide strong,
-        .p_description .feature_notice_area .guide p.bullet {
-            font-size: 13px;
-        }
-
-        .p_description .feature_notice_area .guide p.bullet {
-            word-break: keep-all;
-        }
-
-        .p_description .feature_notice_area .guide strong {
-            margin-top: 8px;
-        }
-
-        .p_description .feature_notice_area .guide p.bullet:before {
-            top: 7px;
-            left: 0;
-        }
-
-        .p_description h3.h3-tit {
-            font-size: 26px;
-            line-height: 1.2;
-        }
-
-        .p_description p.exclamation,
-        .p_description ul.exclamation li {
-            font-size: 13px;
-        }
-
-        .p_description p.sub-description,
-        .info-section {
-            font-size: 15px;
-        }
-
-        .p_description br {
-            display: none;
-        }
-
-        .p_description br.important {
-            display: block;
-        }
-
-        .p_description .tbl_row {
-            width: 100%;
-        }
-
-        .info-section ul li {
-            margin: 0 15px;
-        }
-
-        .p_description .exclamation-guide .h4-tit {
-            font-size: 15px;
-            height: 35px;
-            background-size: 26px 26px;
-            padding: 4px 0 0 34px;
-        }
-
-        .p_description .exclamation-guide {
-            padding: 15px;
-        }
-
-        .p_description .exclamation-guide p,
-        .p_description .exclamation-guide sup {
-            padding-left: 0;
-        }
-
-        .p_description .exclamation-guide p {
-            font-size: 13px;
-        }
-
-        .p_description .exclamation-guide sup {
-            font-size: 12px;
-        }
-
-        .p_description .mt65 {
-            margin-top: 40px !important;
-        }
-
-        .package-area {
-            padding: 30px 20px;
-        }
-
-        .package-area ul li strong {
-            padding-top: 15px;
-            padding-bottom: 10px;
-            font-size: 18px;
-        }
-
-        .package-area p {
-            padding-left: 0;
-            font-size: 15px;
-        }
-    }
-
-    .p_description .mt10 {
-        margin-top: 10px !important;
-    }
-
-    .p_description .mt20 {
-        margin-top: 20px !important;
-    }
-
-    .p_description .mt40 {
-        margin-top: 40px !important;
-    }
-
-    .p_description .mt65 {
-        margin-top: 65px !important;
-    }
-
-    .tbl_row {
-        border: solid 1px black;
-    }
-
-    .accordion-group-header.side-type {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
-
-    .-mb-8n-2 {
-        margin-bottom: 16px !important;
-    }
-
-    .product-option-item.color .product-color .color-chips .c-ick-var {
-        position: relative;
-        margin-right: 12px;
-        vertical-align: middle;
-    }
-
-    .c-ick-var {
-        display: inline-block;
-        position: relative;
-    }
-
-    .product-option-item.color .product-color .color-chips .c-ick-var .label {
-        overflow: hidden;
-        width: 26px;
-        height: 26px;
-        text-indent: -999px;
-        border-radius: 100%;
-        -webkit-box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.4);
-        box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.4);
-    }
-
-    .product-option-item.color .product-color .color-chips .c-ick-var.checked:before {
-        position: absolute;
-        top: -4px;
-        left: -4px;
-        width: 32px;
-        height: 32px;
-        border: 1px solid #000;
-        border-radius: 100%;
-        content: "";
-    }
-
-    .c-ick-var input[type=checkbox], .c-ick-var input[type=radio] {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
-        filter: alpha(opacity=0);
-        opacity: 0;
-        width: 0;
-        height: 0;
-    }
-
-    .product-option-item.color .product-color:after {
-        clear: both;
-        display: block;
-        content: "";
-    }
-    
-    .desc-info dd + dt {
-        position: relative;
-        padding-left: 13px;
-    }
-    
-    .desc-info dd + dt::before {
-        content: "";
-        position: absolute;
-        left: 6px;
-        top: 2px;
-        width: 1px;
-        height: 12px;
-        background-color: #e1e1e1;
-    }
-
-    [type=reset], [type=submit], button, html [type=button] {
-        cursor: pointer;
-        -webkit-appearance: button;
-    }
-    
-    .colorGroup{
-        width: 30px;
-        height: 30px;
-        border-radius: 50%;
-        border: gray 2px solid;
-    }                                    
-</style> <!-- // admin 소스 -->
-
 </head>
 
 <body class="theme-color2 light ltr">
@@ -736,24 +92,7 @@
                                                     class="img-fluid bg-img blur-up lazyload" alt="">
                                             </div>
                                         </div>
-                                        <div class="col-6">
-                                            <div>
-                                                <img src="/assets/images/fashion/galaxy21u2.png"
-                                                    class="img-fluid bg-img blur-up lazyload" alt="">
-                                            </div>
-                                        </div>
-                                        <div class="col-6">
-                                            <div>
-                                                <img src="/assets/images/fashion/galaxy21u3.png"
-                                                    class="img-fluid bg-img blur-up lazyload" alt="">
-                                            </div>
-                                        </div>
-                                        <div class="col-6">
-                                            <div>
-                                                <img src="/assets/images/fashion/galaxy21u4.png"
-                                                    class="img-fluid bg-img blur-up lazyload" alt="">
-                                            </div>
-                                        </div>
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -765,17 +104,17 @@
                                         <a href="javascript:void(0)" data-bs-toggle="modal"
                                                     data-bs-target="#productdel">삭제</a>
                                     </div>
-                                    <div class="brand" style="font-size: 27px; color: gray;">
-                                        Samsung                                        
+                                    <div class="brand" style="font-size: 27px; color: gray;" id="productCode">
+                                       ${directVO.value}   ${directVO.directCode}                                     
                                     </div>
                                     <div class="details-image-concept mt-0" style="font-size: 35px;">
-                                        갤럭시 S21 울트라
+                                        ${directVO.directName}
                                     </div>
                                     <div>
                                         <h3 class="mt-3 ">출고가</h3>
                                     </div>
                                     <p>
-                                        <span class="price-detail theme-color fw-bold">1,155,000</span>
+                                        <span class="price-detail theme-color fw-bold" id="renewPrice">${directVO.directPrice}</span>
                                         <span class="unit">원</span>
                                     </p>
 
@@ -783,12 +122,12 @@
                                         <div class="option-title-area">
                                             <h3 class="option-title mb-2">색상</h3>
                                         </div>
-                                        <div class="color-types">
-                                            <ul class="color-variant mb-0">
-                                                <li class="bg-white  border boder-1 selected"></li>
-                                                <li class="bg-light1"></li>
-                                                <li class="bg-blue1"></li>
-                                                <li class="bg-black1"></li>
+
+                                         <div class="color-types">
+                                            <ul class="color-variant mb-0" >
+                                                <li class="bg-white border boder-1 selected" value="W" name="colorCode"></li>
+                                                <li class="bg-gray1" value="G" name="colorCode"></li>
+                                                <li class="bg-black1" value="B" name="colorCode"></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -798,19 +137,28 @@
                                         </div>
                                         <div>
                                             <span>
-                                                <input type="radio" hidden name="_productCapacity">
-                                                    <label for="_productCapacity1" class="btn btn-outline-custom m-1 capacity">
-                                                        <span>128G</span>
+                                                <input type="radio" hidden name="saveCapacity" value="128" disabled>
+                                                    <label for="saveCapacity" class="btn btn-outline-custom m-1 capacity">
+                                                        <span >128G</span>
                                                     </label>
                                             </span>
                                             <span>
-                                                <input type="radio" hidden name="_productCapacity">
-                                                <label for="_productCapacity1" class="btn m-1 btn-outline-custom capacity">
+                                                <input type="radio" hidden name="saveCapacity" value="256" disabled>
+                                                <label for="saveCapacity" class="btn m-1 btn-outline-custom capacity">
                                                     <span>256G</span>
+                                                </label>
+                                            </span>
+                                            <span>
+                                                <input type="radio" hidden name="saveCapacity" value="512" disabled>
+                                                <label for="saveCapacity" class="btn m-1 btn-outline-custom capacity">
+                                                    <span>512G</span>
                                                 </label>
                                             </span>
                                         </div>
                                     </div>
+                                    <input type="hidden" id="directCode" name="directCode">
+                                    <input type="hidden" id="categoryCode" name="categoryCode">
+                                    <input type="hidden" id="brandCode" name="brandCode">
                                     <hr>
                                     <div class="product-option-item join">
                                         <div class="option-title-area">
@@ -914,41 +262,6 @@
                                                     <label for="_discountFamily1" class="label"><span class="labelin">적용하지 않음</span></label>
                                                 </span>
                                             </div>
-                                           
-                                            <!-- 22.01.24 보안문자 영역 추가 및 수정 + CASE 추가 -->
-                                            <div class="form-group-wrap" id="captchaRegion_lineAuth" style="display:none;">
-                                                <div class="cont">
-                                                    <div class="form-group secur-wrap">
-                                                        <div class="securnum-show">
-                                                            <p class="show-box">
-                                                                <!-- [D]보안 문자가 그려지는 영역 -->
-                                                                <img src="/captcha/captchaImg?rdn=0.47251426717341016" id="captchaImg_lineAuth" alt="보안문자" style="width: 100%; height: 100%;">
-                                                            </p>
-                                                            <ul class="btn-box">
-                                                                <li><button type="button" class="btn-sound" name="captchaAudio" id="captchaAudio_lineAuth" data-gubun="_lineAuth">음성듣기</button></li>
-                                                                <li><button type="button" class="btn-reload" name="captchaReload" id="captchaReload_lineAuth" data-gubun="_lineAuth">새로고침</button></li>
-                                                            </ul>
-                                                        </div>
-                                                        <span class="c-input-outline">
-                                                            <input type="text" class="input" autocomplete="off" name="captchaAnswer" id="captchaAnswer_lineAuth" data-gubun="_lineAuth" onkeypress="javascript:if(event.keyCode==13){return false;};" placeholder="보안문자 (이미지의 문자 입력)" maxlength="6" value="" numberonly="" role="" style="text-transform: uppercase;">
-                                                                <p class="secur-msg" id="securFailed_lineAuth" style="display:none;">보안 문자를 정확하게 입력해 주세요</p>
-                                                                <p class="secur-msg" id="securValid_lineAuth" style="display:none;">보안 문자를 정확하게 입력하였습니다</p>
-                                                        </span>
-                                                        <p class="notice_msg" id="noticeMsg_lineAuth">* 보안문자 입력 후 인증을 다시 진행하세요.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="option-other" id="discountWelfare" style="display: none;">
-                                                <span class="option">
-                                                    <span class="c-chk" style="display: none;">
-                                                        <input type="checkbox" name="_discountWelfare" id="_discountWelfare1">
-                                                        <label for="_discountWelfare1" class="label">복지할인</label>
-                                                    </span>
-                                                <!-- 복지할인 안내 : 생계/의료 수급자 case -->
-                                                <!-- 복지할인 안내 : 주거/교육 수급자 case -->
-                                                    </span>
-                                                <span class="price"></span>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -974,179 +287,10 @@
 
                         <div class="tab-content" id="nav-tabContent">
                             <div id="desc" class="tab-pane fade show active"><!-- 여기부터 admin 소스 -->
-                                <div class="p_description"><br>
-                                    <h3 class="h3-tit single">팬텀 컬러와 초고화질을 자랑하는, <br>
-                                        <span>Galaxy S21 Ultra 5G</span>
-                                    </h3>
-                                    <div class="img-section">
-                                        <img src="https://cdnw.shop.tworld.co.kr/pimg/plan_editor/202101/75058103878994230.jpg"
-                                            alt="">
-                                        <div class="hidden">
-                                            <p>CPU 종류 : Octa-Core | 디스플레이 크기 : 173.0 mm | 색상 : 팬텀 블랙, 팬텀 실버</p>
-                                            <ol>
-                                                <li>1억 8백만 초고화질과 100배 스페이스 줌</li>
-                                                <li>컨텐츠 맞춤 주사율 120 Hz 디스플레이</li>
-                                                <li>S 시리즈 최초 S펜 기능 지원</li>
-                                            </ol>
-                                        </div>
-                                    </div>
-
-                                    <h3 class="h3-tit">컨투어 컷 후면 카메라 디자인과 <br>신비로운 <span>팬텀 컬러</span></h3>
-                                    <p class="sub-description">눈길을 사로잡는 팬텀컬러로 완성된 갤럭시 S21 Ultra 5G를 만나보세요. <br>컨투어 컷 후면
-                                        카메라 디자인과 무광의 헤이즈 마감으로 고급스러움을 더했습니다.</p>
-                                    <div class="img-section">
-                                        <img src="https://cdnw.shop.tworld.co.kr/pimg/plan_editor/202101/75058106364874602.jpg"
-                                            alt="">
-                                    </div>
-                                    <p class="exclamation">해당 이미지는 연출된 이미지이며, 실제 제품과 차이가 있을 수 있습니다.</p>
-
-                                    <h3 class="h3-tit">너무 멀어서라는 핑계와 <span>멀어지세요</span></h3>
-                                    <p class="sub-description">갤럭시의 모든 줌을 능가하는 듀얼 줌 시스템. 100배 스페이스 줌으로 더 빠르고 부드럽게,
-                                        <br>무엇보다 또렷하게 확대해 줍니다. 새로워진 줌 락 기능으로 훨씬 안정적인 줌 촬영이 가능해졌습니다.</p>
-                                    <div class="img-section">
-                                        <img src="https://cdnw.shop.tworld.co.kr/pimg/plan_editor/202101/75058109018996969.jpg"
-                                            alt="">
-                                    </div>
-                                    <ul class="exclamation">
-                                        <li>100배 스페이스 줌은 10배 광학 줌을 포함하며 최대 100배 초해상도 줌까지 확장됩니다. <br>초고해상도 줌에는 디지털 줌이
-                                            포함되어 있어 이미지 품질이 다소 저하될 수 있습니다.</li>
-                                        <li>해당 기능은 후면 카메라에 한해 사용 가능합니다.</li>
-                                    </ul>
-
-                                    <h3 class="h3-tit">1억 800만 <span>초고화소 센서</span></h3>
-                                    <p class="sub-description">디테일한 능력을 가진 1억 800만 초고화소 카메라. 사진 속 아주 작은 부분을 크게 확대해도
-                                        <br>디테일과 색감까지 선명하게 표현할 수 있습니다.</p>
-                                    <div class="img-section">
-                                        <img src="https://cdnw.shop.tworld.co.kr/pimg/plan_editor/202101/75058111481556433.jpg"
-                                            alt="">
-                                    </div>
-                                    <h3 class="h3-tit">인물 모드로 찍는 <span>인생사진</span></h3>
-                                    <p class="sub-description">AI가 접목된 인물 모드는 스튜디오에서 촬영하듯, 조명을 이상적으로 조절해 줍니다. <br>이목구비는
-                                        물론 빛의 앵글과 방향까지 분석하고 피사계 심도를 측정할 수 있기에 가능한 기술입니다.</p>
-                                    <div class="img-section">
-                                        <img src="https://cdnw.shop.tworld.co.kr/pimg/plan_editor/202101/75058113741667181.jpg"
-                                            alt="">
-                                    </div>
-                                    <h3 class="h3-tit">어두운 밤에도 선명한 <span>야간 사진</span></h3>
-                                    <p class="sub-description">야간 모드로 저조도 촬영 기술의 놀라운 혁신을 경험할 수 있습니다. <br>밤의 어둠 속에서도 환하고
-                                        강렬한 색감을 포착하며, 짧은 촬영 시간에도 노이즈가 적은 <br>또렷한 사진을 남길 수 있습니다.</p>
-                                    <div class="img-section">
-                                        <img src="https://cdnw.shop.tworld.co.kr/pimg/plan_editor/202101/75058115979263209.jpg"
-                                            alt="">
-                                    </div>
-                                    <h3 class="h3-tit"><span>S펜으로</span> 손끝에 세밀한 능력을</h3>
-                                    <p class="sub-description">갤럭시 S시리즈 최초의 S펜입니다. 당신이 펜을 쓸 수 있게 됐다는 건, <br>갤럭시가 스마트폰의
-                                        한계를 다시 썼다는 뜻입니다.</p>
-                                    <div class="img-section">
-                                        <img src="https://cdnw.shop.tworld.co.kr/pimg/plan_editor/202101/75058118094347196.jpg"
-                                            alt="">
-                                    </div>
-                                    <ul class="exclamation">
-                                        <li>갤럭시 S21 Ultra 5G에만 해당됩니다.</li>
-                                        <li>S펜은 별도 판매이며, 앱에 따라 응답 속도가 다를 수 있습니다.</li>
-                                        <li>S펜은 블루투스를 지원하지 않으며, 무선 제어 기능이 지원되지 않습니다.</li>
-                                    </ul>
-
-                                    <h3 class="h3-tit">따로 또 같이 작게 크게 보는 <span>스크린</span></h3>
-                                    <p class="sub-description">구글 듀오를 활용한 빅 스크린 영상통화. 친구와 연인 사이에 안부를 전하는 놀랍도록 편리한 방법입니다.
-                                        <br>호환 또한 자유롭기에, 멀리 있지만 소중한 사람들과 언제 어디서나 가까워질 수 있습니다.</p>
-                                    <div class="img-section">
-                                        <img src="https://cdnw.shop.tworld.co.kr/pimg/plan_editor/202101/75058120186191901.jpg"
-                                            alt="">
-                                    </div>
-                                    <ul class="exclamation">
-                                        <li>이해를 돕기 위해 연출된 이미지입니다.</li>
-                                        <li>Google Duo 관련 표기는 Google LLC. 의 상표입니다.</li>
-                                        <li>구글 듀오 사용 시 구글 계정 가입이 필요할 수 있습니다.</li>
-                                    </ul>
-
-                                    <h3 class="h3-tit">어댑티브 <span>120Hz 디스플레이</span></h3>
-                                    <p class="sub-description">사용하는 콘텐츠에 따라 주사율을 자동으로 조절하여 부드러운 화면 전환이 가능합니다.</p>
-                                    <div class="img-section">
-                                        <img src="https://cdnw.shop.tworld.co.kr/pimg/plan_editor/202101/75058122074418364.jpg"
-                                            alt="">
-                                    </div>
-                                    <p class="exclamation">갤럭시 S21 Ultra 5G의 화면을 지각화해 측정한 크기는 173.0mm이며, 직각화 하지 않고 측정한
-                                        크기는 168.7mm입니다. <br>둥근 모서리와 전면 카메라 홀로 인해 실제 보이는 영역은 사이즈보다 작습니다.</p>
-
-                                    <h3 class="h3-tit">올 데이를 넘어서는 <span>올 데이 파워</span></h3>
-                                    <p class="sub-description">5G환경에서도 하루 종일, 아니 그 이상 사용할 수 있는 갤럭시 S21 Ultra 5G의 인텔리전트
-                                        배터리, 전력을 효율적으로 사용하는 디스플레이. 프로세서와 결합하여, 최대 5,000mAh 대용량의 파워를 24시간 이상 보여줍니다.</p>
-                                    <div class="img-section">
-                                        <img src="https://cdnw.shop.tworld.co.kr/pimg/plan_editor/202101/75058124748716133.jpg"
-                                            alt="">
-                                    </div>
-                                    <p class="exclamation">제3의 실험실 환경에서 측정한 배터리 용량입니다. 일반적인 수치는 IEC 61960 표준에 따라 테스트한
-                                        배터리 샘플들의 용량 편차를 고려해 추정한 평균 수치입니다. 정격(최소) 용량은 갤럭시 S21 Ultra 5G의 경우 4,855mAh입니다.
-                                        <br>실제 배터리 수명은 네트워크 환경, 사용 패턴 및 기타 요인에 따라 달라질 수 있습니다.</p>
-
-                                    <h3 class="h3-tit single">제품 사양</h3>
-                                    <table class="tbl_row">
-                                        <caption>제품 사양</caption>
-                                        <colgroup>
-                                            <col style="width:20%">
-                                            <col>
-                                        </colgroup>
-                                        <tbody>
-                                            <tr>
-                                                <th scope="row">제품명</th>
-                                                <td>Galaxy S21 Ultra 5G</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">디스플레이</th>
-                                                <td>6.8” Dynamic AMOLED 2X WQHD+ 엣지 디스플레이</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">CPU</th>
-                                                <td>Exynos 2100</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">OS</th>
-                                                <td>Android</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">메모리</th>
-                                                <td>RAM 12GB / ROM 256GB <br>RAM 16GB / ROM 512GB</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">외장 메모리</th>
-                                                <td>미지원</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">카메라</th>
-                                                <td>전면 4,000만(F2.2) <br>후면 1,000만(F2.4 망원1) + 1,000만(F4.9 망원2) +
-                                                    10,800만(F1.8 광각) <br>+ 1,200만(F2.2 초광각)</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">네트워크</th>
-                                                <td>5G</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">USIM</th>
-                                                <td>Nano 유심</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">크기</th>
-                                                <td>75.6 X 165.1 X 8.9mm</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">무게</th>
-                                                <td>227g</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">배터리</th>
-                                                <td>5,000mAh</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">특징</th>
-                                                <td>S펜</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">제조국</th>
-                                                <td>한국</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                <div class="p_description">
+                                 
+                                    ${directVO.directContents}
+                                  
                                 </div>
                                
                             </div>
@@ -1456,8 +600,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
     </section>
     <!-- Shop Section end -->
 
@@ -1690,7 +832,18 @@
     </div>
 </div>
 <!-- 상품 삭제 모달창 End -->
-
+<c:import url="../temp/footer.jsp"></c:import>
+<script>
+$(document).ready(function() {
+    const prices = document.querySelectorAll('[id^="renewPrice"]');
+    for (var i = 0; i < prices.length; i++) {
+        const price = parseInt(prices[i].innerHTML);
+        const renewPrice = price.toLocaleString();
+        prices[i].innerHTML =renewPrice;
+       	
+    }
+});
+</script>
     <!-- 버튼 select js -->
     <script>
         const capacity = document.getElementsByClassName('capacity');
@@ -1756,6 +909,43 @@
         }
         
     </script>
+   <script type="text/javascript">
+    function generateDirectCode(event) {
+        event.preventDefault();
+        
+        let categoryCode = document.getElementById("categoryCode").value;
+        let brandCode = document.getElementById("brandCode").value;
+        let colorCode = document.querySelector("input[name='colorCode']:checked").value;
+        let saveCapacity = document.querySelector("input[name='saveCapacity']:checked").value;
+        let productCode = document.getElementById("productCode").innerText;
+
+        let directCode = "P" + categoryCode + "B" + brandCode + "C" + colorCode + "V" + saveCapacity + productCode;
+
+        // AJAX를 통해 서버로 제품 코드 전송 및 응답 처리
+        $.ajax({
+		  url: "/checkStock",
+		  method: "GET",
+		  data: { directCode: directCode },
+		  success: function(response) {
+		    // 응답 처리 로직 작성
+		    // 예: 재고가 있으면 구매 가능, 없으면 구매 불가능 등
+		    alert(response);
+		    if (response === "구매 가능") {
+	            // 재고가 있을 경우, 용량 선택 버튼 활성화
+	            $("input[name='saveCapacity']").prop("disabled", false);
+	        } else {
+	            // 재고가 없을 경우, 용량 선택 버튼 비활성화
+	            $("input[name='saveCapacity']").prop("disabled", true);
+	        }
+	    },
+		  error: function(xhr, status, error) {
+		    // 에러 처리 로직 작성
+		    console.log(error);
+		  }
+		});
+</script>
+    
+     
 
 <!--  하단 금액 바 고정하는 JS-->
 <script>
@@ -1770,7 +960,26 @@
   }
 });
 </script>
-<c:import url="../temp/footer.jsp"></c:import>
+<script>
+
+	$('.color-variant').on('click', 'li', function() {
+	    // 선택된 요소에 대한 처리를 여기에 작성합니다.
+	    // 선택된 요소는 $(this)를 사용하여 가져올 수 있습니다.
+	    // 예를 들어, 선택된 요소의 value 값을 가져오려면 $(this).attr('value')를 사용합니다.
+	    
+	    // 선택된 요소의 value 값 가져오기
+	    var selectedValue = $(this).attr('value');
+	    
+	    // 선택된 요소에 대한 처리 예시: 콘솔에 선택된 값을 출력합니다.
+	    console.log('Selected value: ' + selectedValue);
+	    
+	    // 선택된 요소에 대한 추가 처리를 진행합니다.
+	    // ...
+	  });
+
+</script>
+
+<c:import url="../temp/commonJS.jsp"></c:import>
 </body>
 
 </html>

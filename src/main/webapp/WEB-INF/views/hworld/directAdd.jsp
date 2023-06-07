@@ -110,7 +110,7 @@
                        
                             <!-- 출고가 -->
 
-                            <!-- <div class="col-md-2">
+                            <div class="col-md-2">
                                 <label for="colorCode" class="form-label">색상</label>
                                 <div class="col-12">
                                     <select class="form-select custome-form-select" id="colorCode" name="colorCode">

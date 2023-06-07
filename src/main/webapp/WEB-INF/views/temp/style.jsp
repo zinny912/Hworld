@@ -26,12 +26,6 @@
     <meta name="author" content="Hworld">
     <link rel="icon" href="/assets/images/favicon/2.png" type="image/x-icon" />
     <title>H WORLD</title>
-    
-    <!-- jQuery -->
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    
-    <!-- Bootstrap js-->
-    <script src="/assets/js/bootstrap/bootstrap.bundle.min.js"></script>
 
     <!-- Google font -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -55,4 +49,11 @@
 
     <!-- Theme css -->
     <link id="color-link" rel="stylesheet" type="text/css" href="/assets/css/demo2.css">
+    
+    <!-- jQuery -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <!-- Bootstrap js-->
+    <script src="/assets/js/bootstrap/bootstrap.bundle.min.js"></script>
    
+ 	

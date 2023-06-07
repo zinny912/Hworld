@@ -13,27 +13,107 @@
 			<if test="kind=='dircetContents'">
 				CONTENTS LIKE CONCAT('%',#{search},'%')
 			</if>
+			<if test="kind=='slicedCode'">
+				CONTENTS LIKE CONCAT('%',#{search},'%')
+			</if>
 		</where>
 	</sql>
   
   <!-- 상품 리스트 -->
+  <select id="getPrice" resultType="DirectVO" parameterType="DirectVO">
+  		SELECT SUBSTRING(DIRECTCODE, -5) AS slicedCode,
+        DIRECTCODE, DIRECTSTOCK, CATEGORYCODE, BRANDCODE, COLORCODE, SAVECAPACITY 
+		FROM DIRECT
+  	</select>
+   
+ 
   	<select id="getList" resultType="DirectVO" parameterType="Pager">
-  		SELECT * FROM DIRECT
-  		<include refid="search"></include>
-		ORDER BY UPLOADDATE DESC  
+  		SELECT SUBSTRING(D.directCode, -5) AS slicedCode,
+       D.*,
+       MIN(D.DIRECTPRICE) AS INITPRICE,
+       AVG(R.RATE) AS rate
+		FROM DIRECT D
+		LEFT JOIN ORDERDIRECT OD ON SUBSTRING(D.directCode, -5) = SUBSTRING(OD.DIRECTCODE, -5)
+		LEFT JOIN REVIEW R ON OD.ORDERNUM = R.ORDERNUM
+		GROUP BY SUBSTRING(D.DIRECTCODE, -5), D.DIRECTNAME, D.DIRECTCONTENTS
+		ORDER BY D.UPLOADDATE DESC
 		LIMIT #{startRow}, #{perPage}
   	</select>
   	
+  	<select id="getListByPriceL" resultType="DirectVO" parameterType="Pager">
+  		SELECT SUBSTRING(D.directCode, -5) AS slicedCode,
+       D.*,
+       MIN(D.DIRECTPRICE) AS INITPRICE,
+       AVG(R.RATE) AS rate
+		FROM DIRECT D
+		LEFT JOIN ORDERDIRECT OD ON SUBSTRING(D.directCode, -5) = SUBSTRING(OD.DIRECTCODE, -5)
+		LEFT JOIN REVIEW R ON OD.ORDERNUM = R.ORDERNUM
+		GROUP BY SUBSTRING(D.DIRECTCODE, -5), D.DIRECTNAME, D.DIRECTCONTENTS
+		ORDER BY INITPRICE ASC
+		LIMIT #{startRow}, #{perPage}
+  	</select>
+  	
+  	<select id="getListByPriceH" resultType="DirectVO" parameterType="Pager">
+  		SELECT SUBSTRING(D.directCode, -5) AS slicedCode,
+       D.*,
+       MIN(D.DIRECTPRICE) AS INITPRICE,
+       AVG(R.RATE) AS rate
+		FROM DIRECT D
+		LEFT JOIN ORDERDIRECT OD ON SUBSTRING(D.directCode, -5) = SUBSTRING(OD.DIRECTCODE, -5)
+		LEFT JOIN REVIEW R ON OD.ORDERNUM = R.ORDERNUM
+		GROUP BY SUBSTRING(D.DIRECTCODE, -5), D.DIRECTNAME, D.DIRECTCONTENTS
+		ORDER BY INITPRICE DESC
+		LIMIT #{startRow}, #{perPage}
+  	</select>
+
 	<!-- 상품 개수 -->  	
 	<select id="getTotalCount" parameterType="Pager" resultType="Long">
 		SELECT COUNT(DIRECTCODE) FROM DIRECT
 		<include refid="search"></include>
+	</select> 
+	<!-- 상품 디테일 페이지 default 값으로 P01/BS/ -->
+	<select id="getDetail" parameterType="DirectVO" resultType="DirectVO">
+		SELECT D.*, CC.VALUE AS value
+			FROM DIRECT D
+			INNER JOIN COMMONCODE CC ON D.BRANDCODE = CC.CODE
+			WHERE CC.TYPE = 'B'
+			AND EXISTS (
+			    SELECT 1
+			    FROM COMMONCODE CC1
+			    WHERE D.DIRECTCODE LIKE CONCAT('%', CC1.type, CC1.code, '%')
+			      AND CC1.TYPE = 'P' AND CC1.CODE = '01'
+			)
+			AND EXISTS (
+			    SELECT 1
+			    FROM COMMONCODE CC2
+			    WHERE D.DIRECTCODE LIKE CONCAT('%', CC2.TYPE, CC2.CODE, '%')
+			      AND CC2.TYPE = 'B' AND (CC2.CODE = 'S' OR CC2.CODE = 'A')
+			)
+			AND EXISTS (
+			    SELECT 1
+			    FROM COMMONCODE CC3
+			    WHERE D.DIRECTCODE LIKE CONCAT('%', CC3.type, CC3.code, '%')
+			      AND CC3.TYPE = 'C' AND CC3.CODE = 'W'
+			)
+			AND EXISTS (
+			    SELECT 1
+			    FROM COMMONCODE CC4
+			    WHERE D.DIRECTCODE LIKE CONCAT('%', CC4.type, CC4.code, '%')
+			      AND CC4.TYPE = 'V' AND CC4.CODE = '128'
+			)
+			AND EXISTS (
+			    SELECT 1
+			    FROM DIRECT D2
+			    WHERE SUBSTRING(D.DIRECTCODE,-5) =SUBSTRING(#{directCode},-5)
+			     AND D.DIRECTCODE = D2.DIRECTCODE
+			)
 	</select> 
 	 	
 	<!-- 상품 등록 --> 	
 	<insert id="setInsert" parameterType="DirectVO">
 		INSERT INTO DIRECT(DIRECTCODE, DIRECTNAME, DIRECTCONTENTS, DIRECTPRICE, DIRECTSTOCK, CATEGORYCODE, BRANDCODE, COLORCODE, SAVECAPACITY, UPLOADDATE)
 		VALUES (#{directCode}, #{directName}, #{directContents}, #{directPrice}, #{directStock}, #{categoryCode}, #{brandCode}, #{colorCode}, #{saveCapacity}, NOW())
+
 	</insert>
 	 	
   	<!-- 상품 삭제 -->
@@ -48,10 +128,5 @@
 		SET DIRECTNAME = #{directName}, DIRECTCONTENTS = #{directContents}, DIRECTPRICE = #{directPrice}, DIRECTSTOCK = #{directStock}
 		WHERE DIRECTCODE = #{directCode}
 	</update>
-	
-  	
-  	
-  	
-  	
-  	
+
   </mapper>
