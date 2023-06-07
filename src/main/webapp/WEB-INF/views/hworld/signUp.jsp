@@ -103,7 +103,7 @@
 		                </div> -->
 		
 		                <div class="input">
-		                    <input type="tel" name="telNum" id="telNum" placeholder="연락처">
+		                    <input type="tel" name="phoneNum" id="phoneNum" placeholder="연락처">
 		                    <span class="spin"></span>
 		                </div>
 		
