@@ -30,6 +30,9 @@ public class ApplicationService {
 		
 		
 		//1.최초 신청서 db에 insert
+		//신청서 db에 insert 하기전에 rrnl값을 암호화 해야할거같은데.
+		
+		
 		int result = applicationDAO.setFormAdd(applicationVO);
 		log.error(applicationVO.getAppNum().toString());
 		
