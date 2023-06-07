@@ -1,14 +1,33 @@
 package com.hworld.base.controller;
 
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.hworld.base.service.CustomerSupportService;
+import com.hworld.base.util.Pager;
+import com.hworld.base.vo.BoardVO;
+import com.hworld.base.vo.NoticeVO;
+import com.hworld.base.vo.QnaVO;
+
+import lombok.extern.slf4j.Slf4j;
 
 
 @Controller
 @RequestMapping("/cs/*")
+@Slf4j
 public class CustomerSupportController {
+	
+	@Autowired
+	private CustomerSupportService csService;
 	
 	// 고객지원
 	@GetMapping("home")
@@ -18,27 +37,56 @@ public class CustomerSupportController {
 		return modelAndView;
 	}
 	
-	// 고객지원
+	// 공지사항
 	@GetMapping("notice")
-	public ModelAndView c2() throws Exception{
+	public ModelAndView getNoticeList(Pager pager) throws Exception{
 		ModelAndView modelAndView = new ModelAndView();
+		
+		List<BoardVO> list = csService.getNoticeList(pager);
+		log.info("공지사항 리스트 사이즈 =====================> {}", list.size());
 		modelAndView.setViewName("hworld/notice");
+		modelAndView.addObject("list", list);
 		return modelAndView;
 	}
 	
+	
 	// 1:1 문의
-	@GetMapping("inquiry")
-	public ModelAndView c3() throws Exception{
+	@GetMapping("qna")
+	public ModelAndView setQnaInsert(HttpSession session) throws Exception{
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("hworld/inquiry");
+		modelAndView.setViewName("hworld/qna");
+		modelAndView.addObject("list", csService.setQnaInsert(session));
 		return modelAndView;
+	}
+	
+	@PostMapping("qna")
+	public ModelAndView setQnaInsert(QnaVO qnaVO, HttpSession session, MultipartFile file) throws Exception {
+		
+		ModelAndView mv = new ModelAndView();
+		
+		String msg = "문의 등록 실패";
+		
+		int result = csService.setQnaInsert(qnaVO, session, file);
+		
+		if(result > 0)  {
+			msg = "문의 등록 성공";
+		}
+		
+		mv.addObject("result", msg);
+		mv.addObject("url", "./qna");
+			
+		
+		mv.setViewName("common/result");
+		
+		return mv;
+		
 	}
 	
 	// 신청서/자료실
-	@GetMapping("document")
+	@GetMapping("archive")
 	public ModelAndView c4() throws Exception{
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("hworld/document");
+		modelAndView.setViewName("hworld/archive");
 		return modelAndView;
 	}
 }

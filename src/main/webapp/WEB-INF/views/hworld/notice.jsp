@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -109,14 +109,21 @@
                             <div class="search-bar col-12">
                                 <div class="d-flex justify-content-end">
                                     <div class="col-8">
-
                                     </div>
-                                    <div class="input-group search-bar">
-                                        <input type="search" class="form-control" placeholder="Search">
-                                        <button class="input-group-text t" id="basic-addon3">
-                                            <i class="fas fa-search"></i>
-                                        </button>
+                                    
+                                    <div class="col-4">
+           	                           	<form action="./notice" method="get">
+                                    	<div class="input-group search-bar">
+	                                  
+	                                     	<input type="hidden" name="page" value="1">
+	                                        <input type="search" name="search" value="${pager.search}" class="form-control" placeholder="Search">
+	                                        <button class="input-group-text t" id="basic-addon3" type="submit">
+	                                            <i class="fas fa-search"></i>
+	                                        </button>
+	                                    </div>
+                                 		 </form>
                                     </div>
+   
                                 </div>
                             </div>
                         </div>
@@ -132,121 +139,53 @@
                                 </thead>
 
                                 <tbody>
-                                    <tr>
-                                        <td>
-                                            <p>중요</p>
-                                        </td>
-                                        <td>
-                                            <p class="fw-bold"><a href="#">3 SW. Summit St. Lithonia, GA 30038</a></p>
-                                        </td>
-                                        <td>
-                                            <p>64555</p>
-                                        </td>
-                                        <td>
-                                            <p>21/05/2021</p>
-                                        </td>
-                                    </tr>
+                                	<c:forEach items="${list}" var="boardVO">
+	                                    <tr>
+	                                    	<c:if test="${boardVO.noticeCheck eq 1}">
+		                   	                    <td>
+		                                            <p>${boardVO.noticeCheck}</p>
+		                                        </td>
+	                                    	</c:if>
+	                                    	<c:if test="${boardVO.noticeCheck eq 0}">
+		                                        <td>
+		                                            <p>${boardVO.num }</p>
+		                                        </td>
+	                                    	</c:if>
+	                                        <td>
+	                                            <p class="fw-bold"><a href="noticeDetail?num=${boardVO.num}">${boardVO.title}</a></p>
+	                                        </td>
+	                                        <td>
+	                                            <p>${boardVO.hit}</p>
+	                                        </td>
+	                                        <td>
+	                                            <p>${boardVO.regDate}</p>
+	                                        </td>
+	                                    </tr>
+                                    </c:forEach>
 
-                                    <tr>
-                                        <td>
-                                            <p>중요</p>
-                                        </td>
-                                        <td>
-                                            <p class="fw-bold"><a href="#">70 Rockwell Lane Falls Church, VA 22041</a></p>
-                                        </td>
-                                        <td>
-                                            <p>999</p>
-                                        </td>
-                                        <td>
-                                            <p>15/04/2021</p>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>
-                                            <p>1</p>
-                                        </td>
-                                        <td>
-                                            <p class="fw-bold"><a href="#">13 Durham St. The Villages, FL 32162</a></p>
-                                        </td>
-                                        <td>
-                                            <p>1</p>
-                                        </td>
-                                        <td>
-                                            <p>04/05/2021</p>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>
-                                            <p>2</p>
-                                        </td>
-                                        <td>
-                                            <p class="fw-bold"><a href="#">38 Saxon Lane Mobile, AL 36605</a></p>
-                                        </td>
-                                        <td>
-                                            <p>905</p>
-                                        </td>
-                                        <td>
-                                            <p>30/04/2021</p>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>
-                                            <p>3</p>
-                                        </td>
-                                        <td>
-                                            <p class="fw-bold"><a href="#">3 Willow Street Chillicothe, OH 45601</a></p>
-                                        </td>
-                                        <td>
-                                            <p>201</p>
-                                        </td>
-                                        <td>
-                                            <p>02/02/2021</p>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>
-                                            <p>4</p>
-                                        </td>
-                                        <td>
-                                            <p class="fw-bold"><a href="#">35 Brickyard Rd. Marshalltown, IA 50158</a></p>
-                                        </td>
-                                        <td>
-                                            <p>305</p>
-                                        </td>
-                                        <td>
-                                            <p>14/01/2021</p>
-                                        </td>
-                                    </tr>
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
             </div>
+            
             <nav class="page-section mb-5 d-flex justify-content-end" style="position: relative;">
                 <ul class="pagination mx-auto">
-                    <li class="page-item">
-                        <a class="page-link" href="javascript:void(0)" aria-label="Previous">
+                    <li class="page-item ${pager.pre ? '' : 'disabled' }">
+                        <a class="page-link" href="notice?page=${pager.startNum-1}&search=${pager.search}" aria-label="Previous">
                             <span aria-hidden="true">
                                 <i class="fas fa-chevron-left"></i>
                             </span>
                         </a>
                     </li>
-                    <li class="page-item active">
-                        <a class="page-link" href="javascript:void(0)">1</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="javascript:void(0)">2</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="javascript:void(0)">3</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" aria-label="Next">
+                    <c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
+   	                    <li class="page-item">
+                        	<a class="page-link" href="notice?page=${i}&search=${pager.search}">${i}</a>
+                    	</li>
+                    </c:forEach>
+                    <li class="page-item ${pager.next ? '' : 'disabled' }">
+                        <a class="page-link" href="notice?page=${pager.lastNum+1}&search=${pager.search}" aria-label="Next">
                             <span aria-hidden="true">
                                 <i class="fas fa-chevron-right"></i>
                             </span>

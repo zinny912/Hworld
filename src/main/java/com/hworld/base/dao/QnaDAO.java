@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.hworld.base.util.Pager;
 import com.hworld.base.vo.QnaVO;
+import com.hworld.base.vo.TelephoneVO;
 
 @Mapper
 public interface QnaDAO {
@@ -18,6 +19,9 @@ public interface QnaDAO {
 
     // Q&A 상세 조회
     public QnaVO getDetail(QnaVO qnaVO) throws Exception;
+    
+    // 회선 조회
+    public List<TelephoneVO> getTelephoneList(TelephoneVO telephoneVO) throws Exception;
 
     // Q&A 등록
     public int setInsert(QnaVO qnaVO) throws Exception;

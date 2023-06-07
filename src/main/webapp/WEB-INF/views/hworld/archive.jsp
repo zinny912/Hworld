@@ -249,7 +249,7 @@
                         </div>
                         <h2 class="mb-2 fw-bold"><a href="./notice.html">가입</a></h2>
                         <h5 class="mb-3">H World 유무선 통합 신청서</h5>
-                            <a class="btn btn-solid-default btn-spacing" href="#">
+                            <a class="btn btn-solid-default btn-spacing" href="#" onclick="window.print();">
                                 다운로드 <i class="bi bi-download"></i>
                             </a>
                     </div>

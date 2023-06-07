@@ -8,7 +8,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class TelephoneVO {
-	
 	private Integer serialNum;
 	private String planNum;
 	private Integer memberNum;
@@ -16,7 +15,15 @@ public class TelephoneVO {
 	private String phoneNum;
 	private Date contractDate;
 	private Date expireDate;
+	private Date endDate;
+	private Integer kingCheck;
 	private String directName;
-
+	private Integer phoneOriPrice;
+	private Integer phoneSubPrice;
+	private Integer phoneTotalPrice;
+	private Integer phoneBalance;
+	private Date stopStartDate;
+	private Date stopEndDate;
+	private Integer disKind;
 	
-}
+}	
