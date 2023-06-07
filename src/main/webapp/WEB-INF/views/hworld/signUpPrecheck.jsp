@@ -18,7 +18,7 @@
             <div class="box">
                 <!-- 홈 버튼 -->
                 <div class="d-flex justify-content-center">
-                    <a href="index.html">
+                    <a href="/">
                         <h2><img src="/assets/images/logos/2.png"></h2>
                     </a>
                 </div>
@@ -31,31 +31,28 @@
                 </div> -->
 
                 <!-- 정보 입력 영역 -->
-                <div class="input">                    
-                    <input type="text" name="name" id="name" placeholder="이름">
-                    <span class="spin"></span>
-                </div>
-
-                <div class="row gx-md-3 gy-3">
-                    <div class="col-md-6">
-                        <div class="input">                            
-                            <input type="text" name="birth" id="birth" placeholder="주민등록번호 앞자리">
-                            <span class="spin"></span>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6">
-                        <div class="input">                            
-                            <input type="password" name="RRN" id="RRN" placeholder="주민등록번호 뒷자리">
-                            <span class="spin"></span>
-                        </div>
-                    </div>
+                <div class="mt-5">
+	                <div class="mb-4 row">
+	               		<div class="col-12">
+	                		<input class="form-control" type="text" name="name" id="name" placeholder="이름">				                   
+	               		</div>                   		                    
+	                </div>	                		
+			                
+	               	<div class="mb-4 row">
+	                    <div class="col-6">		                                                   
+	                           <input class="form-control" type="text" name="rrnf" id="rrnf" placeholder="주민등록번호 앞자리">		                            
+	                    </div>
+	
+	                    <div class="col-6">
+	                           <input class="form-control" type="password" name="rrnl" id="rrnl" placeholder="주민등록번호 뒷자리">		                            
+	                    </div>
+	                </div>
                 </div>
 
                 <!-- 필요없다면 지우기 -->
-                <div class="input">
+                <!-- <div class="input">
                     <p>(가능한 경우)이름+주민등록번호 인증하고 다음페이지 넘어가기</p>
-                </div>
+                </div> -->
 
                 <!-- 버튼 영역 -->
                 <div class="button login">
