@@ -73,7 +73,7 @@
 	</select> 
 	<!-- 상품 디테일 페이지 default 값으로 P01/BS/ -->
 	<select id="getDetail" parameterType="DirectVO" resultType="DirectVO">
-		SELECT D.*, CC.VALUE AS value
+		SELECT D.*, CC.VALUE AS value, SUBSTRING(D.DIRECTCODE,-5) AS slicedCode
 			FROM DIRECT D
 			INNER JOIN COMMONCODE CC ON D.BRANDCODE = CC.CODE
 			WHERE CC.TYPE = 'B'

@@ -160,9 +160,8 @@
                                     </div>
                                     
                                     <input type="hidden" id="directCode" name="directCode">
-                                    <input type="hidden" id="categoryCode" name="categoryCode" value="${directVO.categoryCode}">
-                                    <input type="hidden" id="brandCode" name="brandCode" value="${directVO.brandCode}">
-                                    <input type="hidden" id="slicedCode" name="slicedCode" value="${directVO.slicedCode}">
+                                    <input type="hidden" id="categoryCode" name="categoryCode">
+                                    <input type="hidden" id="brandCode" name="brandCode">
                                     <hr>
                                     <div class="product-option-item join">
                                         <div class="option-title-area">
@@ -847,44 +846,23 @@ $(document).ready(function() {
        	
     }
 
-    //Option 선택시 directCode 완성된 것을 $('#directCode').val에 저장
-    $('.optionArea').on('click', 'li[name="colorCode"]', function() { //컬러 선택시
+    $('.optionArea').on('click', 'li[name="colorCode"]', function() {
     var selectedOptions = getSelectedOptions();
-    //console.log('Selected options:', selectedOptions);
+    console.log('Selected options:', selectedOptions);
 
-    //추가작업
-    let colorCode = selectedOptions.colorCode;
-    let saveCapacity = selectedOptions.saveCapacity;
-    let categoryCode = $("#categoryCode").val();
-    let brandCode = $("#brandCode").val();
-    let slicedCode = $("#slicedCode").val();
-    let directCode = '';
-    if(colorCode!=null && saveCapacity!=null){
-        directCode = "P" + categoryCode + "B" + brandCode + "C" + colorCode + "V" + saveCapacity + slicedCode;
-        console.log(directCode);
-        $('#directCode').val(directCode);
-    }
+    // 선택된 색상 코드와 용량에 대한 추가 처리를 진행합니다.
+    // ...
   });
 
-  $('.optionArea').on('click', 'label.capacity', function() { //용량 선택시
+  $('.optionArea').on('click', 'label.capacity', function() {
     var saveCapacity = $(this).prev('input[name="saveCapacity"]');
     saveCapacity.prop('checked', true);
 
     var selectedOptions = getSelectedOptions();
-    //console.log('Selected options:', selectedOptions);
+    console.log('Selected options:', selectedOptions);
 
-    //추가작업
-    let colorCode2 = selectedOptions.colorCode;
-    let saveCapacity2 = selectedOptions.saveCapacity;
-    let categoryCode2 = $("#categoryCode").val();
-    let brandCode2 = $("#brandCode").val();
-    let slicedCode2 = $("#slicedCode").val();
-    let directCode2 = '';
-    if(colorCode2!=null && saveCapacity2!=null){
-        directCode2 = "P" + categoryCode2 + "B" + brandCode2 + "C" + colorCode2 + "V" + saveCapacity2 + slicedCode2;
-        console.log(directCode2);
-        $('#directCode').val(directCode2);
-    }
+    // 선택된 색상 코드와 용량에 대한 추가 처리를 진행합니다.
+    // ...
   });
 
 });

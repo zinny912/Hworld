@@ -127,7 +127,7 @@
 		                			                		                		                
 	                	<div class="mb-4 row">
 	                		<div class="col-9">
-			                    <input class="form-control" type="email" name="email" id="email" placeholder="인증번호 입력">		                    			                    
+			                    <input class="form-control" type="emailCheck" name="emailCheck" id="emailCheck" placeholder="인증번호 입력">		                    			                    
 		                    </div>		                    
 		                    <button class="col-3 row btn btn-solid-default btn-sm fw-bold" type="button" onclick="execution_daum_address()">
 								확인
