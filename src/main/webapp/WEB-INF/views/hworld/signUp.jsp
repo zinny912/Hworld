@@ -31,7 +31,7 @@
                 </div>                
 				<form:form action="./signUp" id="signUpForm" method="post" modelAttribute="memberVO">
 		                <!-- 정보 입력 영역 -->
-		                <div class="input">		                			                
+		                <div class="input">
 		                    <input type="email" name="email" id="email" placeholder="사용자 계정">		                    
 		                    <span class="spin"></span>
 		                    <form:errors path="email"></form:errors> 
@@ -72,41 +72,35 @@
 		                            <span class="spin"></span>
 		                        </div>
 		                    </div>
-		                </div>
+		                </div>																									           
 						
-						<div class="mb-3 row">
-							<label for="address1" class="col-sm-2 col-form-label"><b>주소</b></label>
-							<div class="col-sm-8">
-								<input class="form-control address_input_1" name="address1" readonly="readonly">
-							</div>
-							
-							<button class="col-auto row" type="button" onclick="execution_daum_address()">
-								<span>주소 찾기</span>
-							</button>
-						</div>
-						<div class="mb-3 row justify-content-end">
-							<div class="col-sm-10">
-								<input class="form-control address_input_2" name="address2" readonly="readonly">
-							</div>
-						</div>
-						<div class="mb-3 row justify-content-end">
-							<div class="col-sm-10">
-								<input class="form-control address_input_3" name="address3" readonly="readonly">						
-							</div>
-						</div>
-						
-						
-		                <!-- <div class="input">
-		                    <label for="address">주소</label>
-		                    <input type="text" name="address" id="address">
-		                    <span class="spin"></span>
-		                </div> -->
-		
 		                <div class="input">
 		                    <input type="tel" name="phoneNum" id="phoneNum" placeholder="연락처">
 		                    <span class="spin"></span>
 		                </div>
-		
+							
+						<div style="margin-top: 130px;">	
+							<div class="mb-3 row">
+								<div class="col-9">
+									<input class="form-control address_input_1" name="address1" readonly="readonly" placeholder="우편번호">
+								</div>
+								
+								<button class="col-3 row btn btn-solid-default btn-sm fw-bold" type="button" onclick="execution_daum_address()">
+									<span>주소 찾기</span>
+								</button>
+							</div>
+							<div class="mb-3 row">
+								<div class="col-12">
+									<input class="form-control address_input_2" name="address2" readonly="readonly" placeholder="도로명 주소">
+								</div>
+							</div>
+							<div class="mb-3 row">
+								<div class="col-12">
+									<input class="form-control address_input_3" name="address3" readonly="readonly" placeholder="상세 주소">						
+								</div>
+							</div>
+						</div>
+						
 		                <!-- 필요없다면 지우기 -->
 		                <div class="input">
 		                    <p>이메일 인증(또는 전화번호)</p>
