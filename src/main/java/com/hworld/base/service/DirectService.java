@@ -1,5 +1,6 @@
 package com.hworld.base.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,8 +32,10 @@ public class DirectService {
 	}
 	//상품 등록 
 	public int setInsert(DirectVO directVO)throws Exception{
-		return directDAO.setInsert(directVO);
+		int result = directDAO.setInsert(directVO);
+		return result;
 	}
+
 	//상품 수정 
 	public int setUpdate(DirectVO directVO) throws Exception{
 		return directDAO.setUpdate(directVO);
