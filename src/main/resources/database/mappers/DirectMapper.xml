@@ -20,9 +20,9 @@
 	</sql>
   
   <!-- 상품 리스트 -->
-  <select id="getPrice" resultType="DirectVO" parameterType="DirectVO">
-  		SELECT SUBSTRING(DIRECTCODE, -5) AS slicedCode,
-        DIRECTCODE, DIRECTSTOCK, CATEGORYCODE, BRANDCODE, COLORCODE, SAVECAPACITY 
+  <select id="getPrice" resultType="DirectVO" parameterType="String">
+  		SELECT
+        DIRECTSTOCK,DIRECTPRICE 
 		FROM DIRECT
 		WHERE DIRECTCODE = #{directCode}
   	</select>
@@ -133,19 +133,18 @@
 	 -->
 	
 	<!-- 요금제 리스트 가져오기 -->
-	<select id="getPlanList" resultType="DirectVO" parameterType="DirectVO">
-		SELECT * FROM PLAN P
-		LEFT OUTER JOIN DIRECT
+	<!-- <select id="getPlanList" resultType="getDetailResult" parameterType="DirectVO">
+		SELECT * FROM PLAN
+		LEFT OUTER JOIN
 		
 	
 	
-	</select>
+	</select> -->
 	 	
 	<!-- 상품 등록 --> 	
 	<insert id="setInsert" parameterType="DirectVO">
-		INSERT INTO DIRECT(DIRECTCODE, DIRECTNAME, DIRECTCONTENTS, DIRECTPRICE, DIRECTSTOCK, CATEGORYCODE, BRANDCODE, COLORCODE, SAVECAPACITY, UPLOADDATE)
-		VALUES (#{directCode}, #{directName}, #{directContents}, #{directPrice}, #{directStock}, #{categoryCode}, #{brandCode}, #{colorCode}, #{saveCapacity}, NOW())
-
+		INSERT INTO DIRECT(DIRECTCODE, DIRECTNAME, DIRECTCONTENTS, DIRECTPRICE, DIRECTFILEPATH, DIRECTSTOCK, CATEGORYCODE, BRANDCODE, COLORCODE, SAVECAPACITY, UPLOADDATE)
+		VALUES (#{directCode}, #{directName}, #{directContents}, #{directPrice}, #{directFilePath}, #{directStock}, #{categoryCode},#{brandCode},#{colorCode}, #{saveCapacity}, now())
 	</insert>
 	 	
   	<!-- 상품 삭제 -->

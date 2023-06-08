@@ -53,6 +53,17 @@ public class DirectService {
 	public DirectVO getDetail(DirectVO directVO)throws Exception{
 		return directDAO.getDetail(directVO);
 	}
+	
+	public DirectVO getPrice(String directCode) throws Exception {
+		log.error(directCode);
+		log.error("{}", directDAO.getPrice(directCode));
+		log.error("{}", directDAO.getPrice(directCode).getDirectPrice());
+		log.error("{}", directDAO.getPrice(directCode).getDirectStock());
+		return directDAO.getPrice(directCode);
+	}
+	
+	
+	
 		
 	//상품 등록 
 	public int setInsert(DirectVO directVO, MultipartFile[] multipartFiles)throws Exception{
@@ -73,10 +84,6 @@ public class DirectService {
 	//상품 삭제 
 	public int setDelete(DirectVO directVO) throws Exception{
 		return directDAO.setDelete(directVO);
-	}
-	public boolean getPrice(String directCode) {
-		// TODO Auto-generated method stub
-		return true;
 	}
 	
 }

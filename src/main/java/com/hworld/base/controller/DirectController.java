@@ -2,7 +2,9 @@ package com.hworld.base.controller;
 
 import java.sql.Array;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.validation.Valid;
 
@@ -119,34 +121,41 @@ public class DirectController {
 
 	
 	@GetMapping("checkStock")
-	public ModelAndView getPrice(ModelAndView mv, DirectVO directVO) throws Exception {
+	public ModelAndView getPrice(ModelAndView mv, @RequestParam("directCode") String directCode) throws Exception {
 		 // 재고 조회 로직을 수행하고 결과를 얻는다
-	    boolean hasStock = directService.getPrice(directVO.getDirectCode());
+	    DirectVO priceStock = directService.getPrice(directCode);
 
-	    if (hasStock) {
-	        mv.addObject("message", "구매 가능");
-	    } else {
-	        mv.addObject("message", "구매 불가능");
-	    }
-
-	    return mv;
-	}
-	  
-	@PostMapping("checkStock")
-	public ModelAndView getPrice(DirectVO directVO) throws Exception {
-		ModelAndView mv = new ModelAndView();
-		 // 재고 조회 로직을 수행하고 결과를 얻는다
-	    boolean hasStock = directService.getPrice(directVO.getDirectCode());
-
-	    if (hasStock) {
-	        mv.addObject("message", "구매 가능");
-	    } else {
-	        mv.addObject("message", "구매 불가능");
-	    }
-
+	   mv.addObject("checkStock", priceStock);
 	    return mv;
 	}
 	
+	@PostMapping("checkStock")
+	@ResponseBody
+	public Map<String, Object> getPrice(@RequestParam("directCode") String directCode) throws Exception {
+	    Map<String, Object> response = new HashMap<>();
+
+	    // 재고 조회 로직을 수행하고 결과를 얻는다
+	    DirectVO direct = directService.getPrice(directCode);
+	    response.put("directStock", direct.getDirectStock());
+	    response.put("directPrice", direct.getDirectPrice());
+
+	    return response;
+	}
+	  
+//	@PostMapping("checkStock")
+//	public ModelAndView getPrice(@RequestParam("directCode") String directCode) throws Exception {
+//		ModelAndView mv = new ModelAndView();
+//		 // 재고 조회 로직을 수행하고 결과를 얻는다
+//		DirectVO direct =directService.getPrice(directCode);
+//		log.error(directCode);
+//		log.error("{}",direct.getDirectStock());
+//		log.error("{}",direct.getDirectPrice());
+//		mv.addObject("directStock", direct.getDirectStock());
+//		mv.addObject("directPrice", direct.getDirectPrice());
+//		mv.setViewName("hworld/phoneDetail");
+//	    return mv;
+//	}
+//	
 	// 휴대폰 & 악세사리 상품 수정 페이지
 	@GetMapping("directUpdate")
 	public ModelAndView d6() throws Exception{

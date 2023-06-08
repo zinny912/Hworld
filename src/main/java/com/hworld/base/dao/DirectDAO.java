@@ -31,6 +31,9 @@ public interface DirectDAO {
 
 	//상품파일 조회 
 	public DirectVO getFileDetail(DirectVO directVO) throws Exception;
+	
+	//생성된 제품코드로 가격, 재고 조회해오기 
+	public DirectVO getPrice(String directCode) throws Exception;
 
 	//상품 추가  
 	public int setInsert(DirectVO directVO) throws Exception;

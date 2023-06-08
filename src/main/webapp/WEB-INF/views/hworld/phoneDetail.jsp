@@ -105,7 +105,10 @@
                                                     data-bs-target="#productdel">삭제</a>
                                     </div>
                                     <div class="brand" style="font-size: 27px; color: gray;" id="productCode">
-                                       ${directVO.value}   ${directVO.directCode}                                     
+                                       ${directVO.value}   ${directVO.directCode}                                   
+                                    </div>
+                                    <div class="brand" style="font-size: 27px; color: gray;" id="directCode">
+                                           	                                 
                                     </div>
                                     <div class="details-image-concept mt-0" style="font-size: 35px;">
                                         ${directVO.directName}
@@ -159,10 +162,11 @@
                                         </div>
                                     </div>
                                     
-                                    <input type="hidden" id="directCode" name="directCode">
+                                  
                                     <input type="hidden" id="categoryCode" name="categoryCode" value="${directVO.categoryCode}">
                                     <input type="hidden" id="brandCode" name="brandCode" value="${directVO.brandCode}">
                                     <input type="hidden" id="slicedCode" name="slicedCode" value="${directVO.slicedCode}">
+                                    <input type="text" id="directStock" name="directStock" value="${directVO.directStock }">
                                     <hr>
                                     <div class="product-option-item join">
                                         <div class="option-title-area">
@@ -839,13 +843,16 @@
 <c:import url="../temp/footer.jsp"></c:import>
 <script>
 $(document).ready(function() {
+	const commaPrice = function(){
     const prices = document.querySelectorAll('[id^="renewPrice"]');
     for (var i = 0; i < prices.length; i++) {
         const price = parseInt(prices[i].innerHTML);
         const renewPrice = price.toLocaleString();
         prices[i].innerHTML =renewPrice;
-          
-    }
+        }
+	};
+
+	commaPrice();
 
     //Option 선택시 directCode 완성된 것을 $('#directCode').val에 저장
     $('.optionArea').on('click', 'li[name="colorCode"]', function() { //컬러 선택시
@@ -862,7 +869,42 @@ $(document).ready(function() {
     if(colorCode!=null && saveCapacity!=null){
         directCode = "P" + categoryCode + "B" + brandCode + "C" + colorCode + "V" + saveCapacity + slicedCode;
         console.log(directCode);
-        $('#directCode').val(directCode);
+        $('#directCode').text(directCode);
+        $('#directStock').val('');
+        
+        $.ajax({
+            url: "/direct/checkStock",
+            type: 'POST',
+            dataType: 'json',
+            data: { directCode: directCode },
+            success: function(response) {
+            	const directStock = response.directStock;
+            	const directPrice = response.directPrice;
+            	
+                
+            	// 받아온 값이 null이 아닌지 확인
+                if (directStock == '' || directPrice == '') {
+                	// 값이 null인 경우 처리 로직
+                    console.log("데이터를 가져오지 못했습니다.");
+                    
+                } else {
+                	// 받아온 값으로 원하는 작업 수행
+                    // 예: 화면에 출력하거나 변수에 저장
+					$('#directStock').val(directStock);
+	                $('#renewPrice').val(directPrice);
+	                console.log(directStock);
+	                console.log(directPrice);
+                    // 예시) 화면에 출력
+                    $("#directStock").text(directStock);
+                    $("#renewPrice").text(directPrice);
+                }
+                commaPrice();
+            },
+            error: function(xhr, status, error) {
+                // 에러 처리
+            }
+        });
+    	//ajax 
     }
   });
 
@@ -883,12 +925,41 @@ $(document).ready(function() {
     if(colorCode2!=null && saveCapacity2!=null){
         directCode2 = "P" + categoryCode2 + "B" + brandCode2 + "C" + colorCode2 + "V" + saveCapacity2 + slicedCode2;
         console.log(directCode2);
-        $('#directCode').val(directCode2);
+        $('#directCode').text(directCode2);
+        $.ajax({
+            url: "/direct/checkStock",
+            type: 'POST',
+            dataType: 'json',
+            data: { directCode: directCode2 },
+            success: function(response) {
+            	const directStock = response.directStock;
+            	const directPrice = response.directPrice;
+            	$('#directStock').val(directStock);
+            	console.log(directStock);
+                $('#renewPrice').val(directPrice);
+                console.log(directPrice);
+                // 받아온 값이 null이 아닌지 확인
+                if (directStock !== null && directPrice !== null) {
+                    // 받아온 값으로 원하는 작업 수행
+                    // 예: 화면에 출력하거나 변수에 저장
+
+                    // 예시) 화면에 출력
+                    $("#directStock").text(directStock);
+                    $("#renewPrice").text(directPrice);
+                } else {
+                    // 값이 null인 경우 처리 로직
+                    console.log("데이터를 가져오지 못했습니다.");
+                }
+                commaPrice();
+            },
+            error: function(xhr, status, error) {
+                // 에러 처리
+            }
+        });
     }
   });
 
 });
-
 </script>
 
 <script>
@@ -912,6 +983,31 @@ $(document).ready(function() {
   return options;
 }
 </script>
+<!--         // AJAX를 통해 서버로 제품 코드 전송 및 응답 처리
+        $.ajax({
+        url: "/checkStock",
+        method: "GET",
+        data: { directCode: directCode },
+        success: function(response) {
+          // 응답 처리 로직 작성
+          // 예: 재고가 있으면 구매 가능, 없으면 구매 불가능 등
+          alert(response);
+          if (response === "구매 가능") {
+               // 재고가 있을 경우, 용량 선택 버튼 활성화
+               $("input[name='saveCapacity']").prop("disabled", false);
+           } else {
+               // 재고가 없을 경우, 용량 선택 버튼 비활성화
+               $("input[name='saveCapacity']").prop("disabled", true);
+           }
+       },
+        error: function(xhr, status, error) {
+          // 에러 처리 로직 작성
+          console.log(error);
+        }
+      });
+</script> -->
+    
+     
 
 
     <!-- 버튼 select js -->
@@ -980,31 +1076,6 @@ $(document).ready(function() {
         
     </script>
 
-<!--         // AJAX를 통해 서버로 제품 코드 전송 및 응답 처리
-        $.ajax({
-        url: "/checkStock",
-        method: "GET",
-        data: { directCode: directCode },
-        success: function(response) {
-          // 응답 처리 로직 작성
-          // 예: 재고가 있으면 구매 가능, 없으면 구매 불가능 등
-          alert(response);
-          if (response === "구매 가능") {
-               // 재고가 있을 경우, 용량 선택 버튼 활성화
-               $("input[name='saveCapacity']").prop("disabled", false);
-           } else {
-               // 재고가 없을 경우, 용량 선택 버튼 비활성화
-               $("input[name='saveCapacity']").prop("disabled", true);
-           }
-       },
-        error: function(xhr, status, error) {
-          // 에러 처리 로직 작성
-          console.log(error);
-        }
-      });
-</script> -->
-    
-     
 
 <!--  하단 금액 바 고정하는 JS -->
 <script>
@@ -1019,24 +1090,7 @@ $(document).ready(function() {
   }
 });
 </script>
-<script>
 
-	$('.color-variant').on('click', 'li', function() {
-	    // 선택된 요소에 대한 처리를 여기에 작성합니다.
-	    // 선택된 요소는 $(this)를 사용하여 가져올 수 있습니다.
-	    // 예를 들어, 선택된 요소의 value 값을 가져오려면 $(this).attr('value')를 사용합니다.
-	    
-	    // 선택된 요소의 value 값 가져오기
-	    var selectedValue = $(this).attr('value');
-	    
-	    // 선택된 요소에 대한 처리 예시: 콘솔에 선택된 값을 출력합니다.
-	    console.log('Selected value: ' + selectedValue);
-	    
-	    // 선택된 요소에 대한 추가 처리를 진행합니다.
-	    // ...
-	  });
-
-</script>
 
 <c:import url="../temp/commonJS.jsp"></c:import>
 
