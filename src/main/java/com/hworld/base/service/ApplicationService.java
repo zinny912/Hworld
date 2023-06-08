@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.hworld.base.dao.ApplicationDAO;
+import com.hworld.base.util.SHA256;
 import com.hworld.base.util.SHA256Util;
 import com.hworld.base.vo.ApplicationVO;
 import com.hworld.base.vo.MemberVO;
@@ -26,6 +27,9 @@ public class ApplicationService {
 		return new BCryptPasswordEncoder();
 	};
 	
+	@Autowired
+	private SHA256 sha256;	
+	
 	//신청서 db에 insert
 	public int setFormAdd(ApplicationVO applicationVO) throws Exception{
 		//작업 순서
@@ -42,15 +46,15 @@ public class ApplicationService {
 		//평문 주민뒷자리를 rrnlOrigin에 저장
 		applicationVO.setRrnlOrigin(applicationVO.getRrnl()); 
 		//BCryptPasswordEncoder로 rrnl 암호화 해서 저장
-		String rawRrnl = "";
-		String encodeRrnl = "";
+//		String rawRrnl = "";
+//		String encodeRrnl = "";
+//		
+//		rawRrnl = applicationVO.getRrnl();
+//		encodeRrnl = rrnlEncoder().encode(rawRrnl);
+//		applicationVO.setRrnl(encodeRrnl);		
 		
-		rawRrnl = applicationVO.getRrnl();
-		encodeRrnl = rrnlEncoder().encode(rawRrnl);
-		applicationVO.setRrnl(encodeRrnl);		
-		
-		log.error(">>>>>>>>>>>>>>>>>>>>>>>>>> {} ", applicationVO.getRrnl());
-		log.error(">>>>>>>>>>>>>>>>>>>>>>>>>> {} ", applicationVO.getRrnlOrigin());
+//		log.error(">>>>>>>>>>>>>>>>>>>>>>>>>> {} ", applicationVO.getRrnl());
+//		log.error(">>>>>>>>>>>>>>>>>>>>>>>>>> {} ", applicationVO.getRrnlOrigin());
 		
 		int result = applicationDAO.setFormAdd(applicationVO);
 		log.error(applicationVO.getAppNum().toString());
