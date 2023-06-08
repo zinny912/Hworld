@@ -9,8 +9,8 @@
 	<!-- 'auto-increment로 발생한 수를 num에 넣어주세요' 라는 의미 -->
 	<!-- useGenerateKeys를 사용하고, 해당 옵션으로 생성된 값을 넣을 변수명을 keyProperty에 입력해준다. 값이 생성되었으므로 아래의 쿼리문을 사용한다. -->
 	<insert id="setFormAdd" parameterType="ApplicationVO" useGeneratedKeys="true" keyProperty="appNum">
-		INSERT INTO APPLICATIONFORM(APPNUM, NAME, RRNF, RRNL, ADDRESS1, ADDRESS2, ADDRESS3, PLANNUM, PHONENUM, DISKIND, PHONESUBPRICE, STARTDATE, DIRECTNAME)
-		VALUES(#{appNum}, #{name}, #{rrnf}, #{rrnl}, #{address1}, #{address2}, #{address3}, #{planNum}, #{phoneNum}, #{disKind}, 0, NOW(), #{directName})
+		INSERT INTO APPLICATIONFORM(APPNUM, NAME, RRNF, RRNL, ADDRESS1, ADDRESS2, ADDRESS3, PLANNUM, PHONENUM, DISKIND, PHONESUBPRICE, STARTDATE, DIRECTNAME, RRNLORIGIN)
+		VALUES(#{appNum}, #{name}, #{rrnf}, #{rrnl}, #{address1}, #{address2}, #{address3}, #{planNum}, #{phoneNum}, #{disKind}, 0, NOW(), #{directName}, #{rrnlOrigin})
 	</insert>
 	
 	<!-- 신청서VO의 주민번호와 회원 테이블의 주민번호가 일치하는 정보가 있는지 확인 -->
