@@ -13,11 +13,6 @@ public class MailController {
 	
 	private final MailService mailService;
     
-    @GetMapping("/mailTest")
-    public String MailPage(){
-        return "Mail";
-    }
-
     @ResponseBody
     @PostMapping("/mail")
     public String MailSend(String mail){

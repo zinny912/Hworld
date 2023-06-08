@@ -59,7 +59,7 @@
 	                    <p>로그인 5회 이상 실패시 보안 문자 표시 영역</p>
 	                </div>
 	
-	                <a href="forgot.html" class="pass-forgot">계정정보를 잊어버리셨나요?</a>
+	                <a href="forgot" class="pass-forgot">계정정보를 잊어버리셨나요?</a>
 	
 	                <!-- 버튼 영역 -->
 	                <div class="button login">
@@ -70,17 +70,17 @@
 	                </div>
 	
 	                <!-- 나중에 지울 버튼 영역 -->
-	                <div class="button login">
+	                <!-- <div class="button login">
 	                    <button onclick="location.href = 'log-in-first.html';" type="submit">
 	                        <span>최초로그인(회선등록)</span>
 	                        <i class="fa fa-check"></i>
 	                    </button>
-	                </div>
+	                </div> -->
 	
 	                <div class="button login">
 	                    <button onclick="location.href = 'log-in-dormant-account.html';" type="submit">
 	                        <span>로그인(휴면계정)</span>
-	                        <i class="fa fa-check"></i>
+	                        <i class="fa fa-check"></i>	                		
 	                    </button>
 	                </div>
                 </form:form>
@@ -128,13 +128,48 @@
 
                 <!-- 회원가입 페이지 이동 -->
                 <p>아직 회원이 아니신가요? <a href="sign-up-precheck.html" class="theme-color">가입하기</a></p>
-
+				<div class="g-recaptcha" data-sitekey="6LfiGXwmAAAAAGV4y7cC0tEowoX-87amSkjeNVTi" style="display: "></div>
             </div>
         </div>
     </div>
     <!-- Log In Section End -->
 
-    <div class="bg-overlay"></div>   
+    <div class="bg-overlay"></div>
+    
+<script src="https://www.google.com/recaptcha/api.js"></script>
+<script>
+$(function() {
+$('.btn login').submit(function() {
+		var captcha = 1;
+		$.ajax({
+            url: '/pro/VerifyRecaptcha',
+            type: 'post',
+            data: {
+                recaptcha: $("#g-recaptcha-response").val()
+            },
+            success: function(data) {
+                switch (data) {
+                    case 0:
+                        console.log("자동 가입 방지 봇 통과");
+                        captcha = 0;
+                		break;
+                    case 1:
+                        alert("자동 가입 방지 봇을 확인 한뒤 진행 해 주세요.");
+                        break;
+                    default:
+                        alert("자동 가입 방지 봇을 실행 하던 중 오류가 발생 했습니다. [Error bot Code : " + Number(data) + "]");
+                   		break;
+                }
+            }
+        });
+		if(captcha != 0) {
+			return false;
+		} 
+});
+});
+</script>
+
+
 </body>
 
 </html>

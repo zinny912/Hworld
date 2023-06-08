@@ -15,7 +15,7 @@ public class MailService {
 	
 	private final JavaMailSender javaMailSender;
 
-    private static final String senderEmail= "kimdngml12@gmail.com";
+    private static final String senderEmail= "Hworld55555@gmail.com";
     
     private static int number;
 
@@ -23,13 +23,13 @@ public class MailService {
         number = (int)(Math.random() * (90000)) + 100000;// (int) Math.random() * (최댓값-최소값+1) + 최소값
      }
 
-     public MimeMessage CreateMail(String mail){
+     public MimeMessage CreateMail(String email){
          createNumber();
          MimeMessage message = javaMailSender.createMimeMessage();
 
          try {
              message.setFrom(senderEmail);
-             message.setRecipients(MimeMessage.RecipientType.TO, mail);
+             message.setRecipients(MimeMessage.RecipientType.TO, email);
              message.setSubject("이메일 인증");
              String body = "";
              body += "<h3>" + "요청하신 인증 번호입니다." + "</h3>";
@@ -43,9 +43,9 @@ public class MailService {
          return message;
      }
 
-     public int sendMail(String mail){
+     public int sendMail(String email){
 
-         MimeMessage message = CreateMail(mail);
+         MimeMessage message = CreateMail(email);
 
          javaMailSender.send(message);
 

@@ -36,19 +36,20 @@
 	                		<div class="col-9">	                		
 			                    <input class="form-control" type="email" name="email" id="email" placeholder="사용자 계정">		                    			                    
 							</div>			                    
-		                    <button class="col-3 row btn btn-solid-default btn-sm fw-bold email_btn" name="sendBtn" id="sendBtn" type="button" onclick="sendNumber()">
+		                    <button class="col-3 row btn btn-solid-default btn-sm fw-bold" name="sendBtn" id="sendBtn" type="button" onclick="sendNumber()">
 								인증번호 전송
 							</button>
 	                    </div> 
 		                			                		                		                
-	                	<div class="mb-4 row" id="mailNumber" name="mailNumber">
+	                	<div class="mb-4 row" id="emailNumber" name="emailNumber" style="display: none;">
 	                		<div class="col-9">
 			                    <input class="form-control" type="text" name="emailCheck" id="emailCheck" placeholder="인증번호 입력">		                    			                    
-		                    </div>		                    
-		                    <button class="col-3 row btn btn-solid-default btn-sm fw-bold" type="button" onclick="confirmNumber()">
+		                    </div>                    
+		                    <button class="col-3 row btn btn-solid-default btn-sm fw-bold" name="confirmBtn" id="confirmBtn" type="button" onclick="confirmNumber()">
 								확인
-							</button>								
-	                    </div> 		                
+							</button>
+	                    </div>
+	                    <input type="text" id="Confirm" name="Confirm" style="display: none" value="">
 		
 	                	<div class="mb-4 row">
 	                		<div class="col-12">
@@ -80,7 +81,7 @@
 		                																									           								                
 	                	<div class="mb-4 row">
 	                		<div class="col-12">
-		                		<input class="form-control" type="tel" name="phoneNum" id="phoneNum" placeholder="연락처">
+		                		<input class="form-control" type="tel" name="phoneNum" id="phoneNum" placeholder="연락처( '-' 빼고 입력해주세요 )">
 	                		</div>		                		
 	                	</div>
 		                    
@@ -121,15 +122,16 @@
     <!-- Sign Up Section End -->
 
     <div class="bg-overlay"></div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
 function sendNumber(){
-    $("#mailNumber").css("display","block");
+    $("#emailNumber").css("display","flex");
     $.ajax({
-        url:"/email",
+        url:"/mail",
         type:"post",
         dataType:"json",
-        data:{"email" : $("#email").val()},
+        data:{"mail" : $("#email").val()},
         success: function(data){
             alert("인증번호 발송");
             $("#Confirm").attr("value",data);
@@ -144,9 +146,12 @@ function confirmNumber(){
     if(number1 == number2){
         alert("인증되었습니다.");
     }else{
-        alert("번호가 다릅니다.");
+        alert("인증번호가 일치하지 않습니다.");
     }
 }
+
+
+
 
 /* var timer = null;
 var isRunning = false;
