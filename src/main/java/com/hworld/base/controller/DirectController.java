@@ -56,10 +56,15 @@ public class DirectController {
 
 	// 휴대폰 상세 페이지
 	@GetMapping("phoneDetail")
-	public ModelAndView getDetail(DirectVO directVO) throws Exception{
+	public ModelAndView getDetail(DirectVO directVO, String slicedCode) throws Exception{
 		ModelAndView mv = new ModelAndView();
-		List<DirectVO> directVOs = directService.getDetail(directVO);
-		mv.addObject("directVO", directVOs);		
+		List<DirectVO> ar = directService.getDetail(slicedCode);
+		
+		log.error(slicedCode);
+		log.error(ar.get(0).getDirectCode());
+
+		
+		mv.addObject("list", ar);		
 		mv.setViewName("hworld/phoneDetail");
 		return mv;
 	}
@@ -128,25 +133,19 @@ public class DirectController {
 //	}
 	
 	// 휴대폰 & 악세사리 상품 수정 페이지
-	@GetMapping("directUpdate")
-	public ModelAndView setUpdate(DirectVO directVO) throws Exception{
-		ModelAndView modelAndView = new ModelAndView();
-		String lastFiveDigits = directVO.getDirectCode().substring(directVO.getDirectCode().length() - 5);
-		 
-		directVO.setLastFiveDigits(lastFiveDigits);
-		 
-		List<DirectVO> lastFiveDigitsList = directService.getLastFiveDigits(directVO);
-		 
-		log.error(lastFiveDigits);
-		
-
-		System.out.println(lastFiveDigitsList.get(0).getDirectCode());
-		
-		modelAndView.setViewName("hworld/directUpdate");
-		modelAndView.addObject("directVO", directVO);
-		modelAndView.addObject("list", lastFiveDigitsList);
-		return modelAndView;
-	}
+//	@GetMapping("directUpdate")
+//	public ModelAndView setUpdate(DirectVO directVO) throws Exception{
+//		ModelAndView modelAndView = new ModelAndView();
+//		String slicedCode = directVO.getDirectCode().substring(directVO.getDirectCode().length() - 5);
+//		
+//		slicedCode.
+//
+//		
+//		modelAndView.setViewName("hworld/directUpdate");
+//		modelAndView.addObject("directVO", directVO);
+//		modelAndView.addObject("list", lastFiveDigitsList);
+//		return modelAndView;
+//	}
 	
 	@PostMapping("directUpdate")
 	public ModelAndView setUpdate(String categoryCode, String brandCode, String directName, String directContents,

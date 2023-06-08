@@ -285,7 +285,7 @@ h3.d-flex span {
 	                   		<div class="product-box">
 	                                <div class="img-wrapper">
 	                                    <div class="front">
-	                                        <a href="./phoneDetail?directCode=${direct.slicedCode}">
+	                                        <a href="./phoneDetail?slicedCode=${direct.slicedCode}">
 	                                            <img src="/assets/images/electronics/product/${direct.slicedCode}thumb"
 	                                                class="bg-img  lazyload" alt="">
 	                                        </a>
@@ -317,11 +317,11 @@ h3.d-flex span {
 									</div>
 									
 		                            <div class="main-price">
-		                               <h5 class="ms-0"> <a href="./phoneDetail?directCode=${direct.slicedCode}" class="font-default">
+		                               <h5 class="ms-0"> <a href="./phoneDetail?slicedCode=${direct.slicedCode}" class="font-default">
 		                                    ${direct.directName}
 		                                </a></h5>
 		                               
-		                                <h3 class="theme-color d-flex" id="renewPrice${direct.directCode}">
+		                                <h3 class="theme-color d-flex" id="renewPrice${direct.slicedCode}">
 						                    ${direct.initPrice}
 						                    
 						                </h3>
