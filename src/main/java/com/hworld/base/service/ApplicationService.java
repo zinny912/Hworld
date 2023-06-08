@@ -27,8 +27,6 @@ public class ApplicationService {
 		return new BCryptPasswordEncoder();
 	};
 	
-	@Autowired
-	private SHA256 sha256;	
 	
 	//신청서 db에 insert
 	public int setFormAdd(ApplicationVO applicationVO) throws Exception{
