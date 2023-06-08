@@ -2,6 +2,7 @@ package com.hworld.base.dao;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -22,6 +23,8 @@ public interface DirectDAO {
 	//상품 sorting 
 	public List<DirectVO> getListByPriceH(Pager pager) throws Exception;
 	public List<DirectVO> getListByPriceL(Pager pager) throws Exception;
+	
+	public List<Map<String, Object>> getFileList() throws Exception;
 	
 	//상품 하나 조회
 	public DirectVO getDetail(DirectVO directVO) throws Exception;
