@@ -8,7 +8,7 @@
 <head>
 	<meta charset="UTF-8">
     <c:import url="../temp/style.jsp"></c:import>
-    <title>상품등록 페이지</title>
+    <title>상품등록</title>
  <style>
     .boxone {
     width:50%;

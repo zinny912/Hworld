@@ -17,6 +17,7 @@ import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.view.AbstractView;
 
+import com.hworld.base.service.DirectService;
 import com.hworld.base.vo.DirectVO;
 
 import lombok.extern.slf4j.Slf4j;
@@ -102,6 +103,24 @@ public class FileManager extends AbstractView {
 		    }
 
 		    return fileName;
+		}
+		
+		public String updateFile(MultipartFile[] multipartFiles, DirectVO directVO) throws Exception{
+		
+		    File folder = new File(path);
+		    String fileName = directVO.getDirectCode().substring(directVO.getDirectCode().length() - 5);
+		    File isEmptyFile = new File(folder, fileName);
+		    File isEmptyThumbFile = new File(folder, fileName+"Thumb");
+
+
+		    if (isEmptyFile.exists()) {
+		    	isEmptyFile.delete();
+		    	isEmptyThumbFile.delete();
+		    	
+		    }
+
+		    return fileName;
+			
 		}
 
 
