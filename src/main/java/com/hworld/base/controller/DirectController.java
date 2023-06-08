@@ -113,15 +113,34 @@ public class DirectController {
 	      return modelAndView;
 	   }
 	
-//	@GetMapping("checkStock")
-//	public ModelAndView getPrice(ModelAndView mv, DirectVO directVO) throws Exception {
-//	  
-//	  
-//	  
-//	  mv.addObject("price", price); // 가격을 ModelAndView에 추가
-//	  mv.setViewName("pricePage"); // 가격을 보여줄 페이지로 이동
-//	  return mv; // 가격을 문자열로 반환
-//	}
+	@GetMapping("checkStock")
+	public ModelAndView getPrice(ModelAndView mv, DirectVO directVO) throws Exception {
+		 // 재고 조회 로직을 수행하고 결과를 얻는다
+	    boolean hasStock = directService.getPrice(directVO.getDirectCode());
+
+	    if (hasStock) {
+	        mv.addObject("message", "구매 가능");
+	    } else {
+	        mv.addObject("message", "구매 불가능");
+	    }
+
+	    return mv;
+	}
+	  
+	@PostMapping("checkStock")
+	public ModelAndView getPrice(DirectVO directVO) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		 // 재고 조회 로직을 수행하고 결과를 얻는다
+	    boolean hasStock = directService.getPrice(directVO.getDirectCode());
+
+	    if (hasStock) {
+	        mv.addObject("message", "구매 가능");
+	    } else {
+	        mv.addObject("message", "구매 불가능");
+	    }
+
+	    return mv;
+	}
 	
 	// 휴대폰 & 악세사리 상품 수정 페이지
 	@GetMapping("directUpdate")
@@ -157,40 +176,6 @@ public class DirectController {
 	
 	
 
-	/*
-	
-	 * 
-	 *  //상품 상세페이지
-	 * 
-	 * @GetMapping("detail") 
-	 * public ModelAndView getDetail(DirectVO directVO)throws
-	 * Exception{ 
-	 * ModelAndView mv = new ModelAndView(); directVO =
-	 * directService.getDetail(directVO);
-	 * 
-	 * mv.addObject("directVO", directVO); 
-	 * mv.setViewName("directDetail");
-	 * 
-	 * return mv;
-	 * 
-	 * } //상품 추가
-	 * 
-	 * @GetMapping("add") public ModelAndView setInsert(@ModelAttribute DirectVO
-	 * directVO)throws Exception{ ModelAndView mv = new ModelAndView();
-	 * 
-	 * mv.setViewName("directAdd"); return mv; } //상품 추가
-	 * 
-	 * @PostMapping("add") public ModelAndView setInsert(@Valid DirectVO directVO,
-	 * BindingResult bindingResult)throws Exception{ ModelAndView mv = new
-	 * ModelAndView(); int result = directService.setInsert(directVO);
-	 * mv.setViewName("redirect:./directList"); return mv; } //상품 삭제
-	 * 
-	 * @PostMapping("delete") public ModelAndView setDelete(DirectVO directVO)throws
-	 * Exception{ ModelAndView mv = new ModelAndView(); int result =
-	 * directService.setDelete(directVO); mv.setViewName("redirect:./directList");
-	 * return mv; }
-	 */
-	
 	
 	
 }

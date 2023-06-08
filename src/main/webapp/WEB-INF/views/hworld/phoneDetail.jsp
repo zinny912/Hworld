@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
+   <meta charset="UTF-8">
     <c:import url="../temp/style.jsp"></c:import>
     <title>Product 4 Image</title>
 <style>
@@ -118,47 +118,51 @@
                                         <span class="unit">원</span>
                                     </p>
 
-                                    <div class="product-option-item color">
-                                        <div class="option-title-area">
-                                            <h3 class="option-title mb-2">색상</h3>
-                                        </div>
+                                    <div class="optionArea">
+                                        <div class="product-option-item color">
+                                            <div class="option-title-area">
+                                                <h3 class="option-title mb-2">색상</h3>
+                                            </div>
 
-                                         <div class="color-types">
-                                            <ul class="color-variant mb-0" >
-                                                <li class="bg-white border boder-1 selected" value="W" name="colorCode"></li>
-                                                <li class="bg-gray1" value="G" name="colorCode"></li>
-                                                <li class="bg-black1" value="B" name="colorCode"></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div>
-                                            <h3 class="option-title mt-3 mb-2">용량</h3>
+                                            <div class="color-types">
+                                                <ul class="color-variant mb-0" >
+                                                    <li class="bg-white border boder-1" value="W" name="colorCode"></li>
+                                                    <li class="bg-gray1" value="G" name="colorCode"></li>
+                                                    <li class="bg-black1" value="B" name="colorCode"></li>
+                                                </ul>
+                                            </div>
                                         </div>
                                         <div>
-                                            <span>
-                                                <input type="radio" hidden name="saveCapacity" value="128" disabled>
-                                                    <label for="saveCapacity" class="btn btn-outline-custom m-1 capacity">
-                                                        <span >128G</span>
+                                            <div>
+                                                <h3 class="option-title mt-3 mb-2">용량</h3>
+                                            </div>
+                                            <div>
+                                                <span>
+                                                    <input type="radio" hidden name="saveCapacity" value="128" disabled>
+                                                        <label for="saveCapacity" class="btn btn-outline-custom m-1 capacity">
+                                                            <span >128G</span>
+                                                        </label>
+                                                </span>
+                                                <span>
+                                                    <input type="radio" hidden name="saveCapacity" value="256" disabled>
+                                                    <label for="saveCapacity" class="btn m-1 btn-outline-custom capacity">
+                                                        <span>256G</span>
                                                     </label>
-                                            </span>
-                                            <span>
-                                                <input type="radio" hidden name="saveCapacity" value="256" disabled>
-                                                <label for="saveCapacity" class="btn m-1 btn-outline-custom capacity">
-                                                    <span>256G</span>
-                                                </label>
-                                            </span>
-                                            <span>
-                                                <input type="radio" hidden name="saveCapacity" value="512" disabled>
-                                                <label for="saveCapacity" class="btn m-1 btn-outline-custom capacity">
-                                                    <span>512G</span>
-                                                </label>
-                                            </span>
+                                                </span>
+                                                <span>
+                                                    <input type="radio" hidden name="saveCapacity" value="512" disabled>
+                                                    <label for="saveCapacity" class="btn m-1 btn-outline-custom capacity">
+                                                        <span>512G</span>
+                                                    </label>
+                                                </span>
+                                            </div>
                                         </div>
                                     </div>
+                                    
                                     <input type="hidden" id="directCode" name="directCode">
-                                    <input type="hidden" id="categoryCode" name="categoryCode">
-                                    <input type="hidden" id="brandCode" name="brandCode">
+                                    <input type="hidden" id="categoryCode" name="categoryCode" value="${directVO.categoryCode}">
+                                    <input type="hidden" id="brandCode" name="brandCode" value="${directVO.brandCode}">
+                                    <input type="hidden" id="slicedCode" name="slicedCode" value="${directVO.slicedCode}">
                                     <hr>
                                     <div class="product-option-item join">
                                         <div class="option-title-area">
@@ -775,26 +779,26 @@
                         <p class="exemption-title" id="stickyTodayRwd" style="display:none; padding-bottom: 25px; font-size: 18px; letter-spacing: -0.42px; color: #cdcdcd;">[바로보상] 신청하신 는 최고 등급일 경우 <strong class="price" style="color: #fff; font-weight: bolder;">0원</strong> 보상 가능합니다.</p>
                         <p class="price-opt" style="position: relative; padding-top: 28px; min-width: 113px; height: 38px; line-height: normal; display: inline-block; vertical-align: middle; margin: 0; padding: 0; margin-block-start: 1em; margin-block-end: 1em; margin-inline-start: 0px; margin-inline-end: 0px;">
                             <span class="title" style="position: absolute; bottom: 3px; left: 0; color: #cdcdcd; font-size: 14px; white-space: nowrap; line-height: normal;">휴대폰 월 할부금</span>
-                            <em class="price" style="font-style: normal;">		
-                                <span class="num" style="font-family: TgothicBlack, Roboto, sans-serif; letter-spacing: 0; font-size: 26px; letter-spacing: -1px; color: #fff; font-weight: 700;">70,814</span>		
-                                <span class="unit" style="color: #fff; font-size: 16px;">원</span>	
+                            <em class="price" style="font-style: normal;">      
+                                <span class="num" style="font-family: TgothicBlack, Roboto, sans-serif; letter-spacing: 0; font-size: 26px; letter-spacing: -1px; color: #fff; font-weight: 700;">70,814</span>      
+                                <span class="unit" style="color: #fff; font-size: 16px;">원</span>   
                             </em>
                         </p>
                         <span class="ico-plus" style="font-weight: bolder; font-size: 20px; color: white; width: 20px; height: 20px; background-position: -446px -546px; margin: 0 28px; display: inline-block; vertical-align: middle; overflow: hidden; display: inline-block; background-image: url(../img/spr_img_v3.png); background-repeat: no-repeat;">+</span>
-                        <p class="price-opt" style="position: relative; padding-top: 28px; min-width: 113px; height: 38px; line-height: normal; display: inline-block; vertical-align: middle; margin: 0; padding: 0; margin-block-start: 1em; margin-block-end: 1em; margin-inline-start: 0px; margin-inline-end: 0px;">	
-                            <span class="title" style="position: absolute; bottom: 3px; left: 0; color: #cdcdcd; font-size: 14px; white-space: nowrap;">월 통신요금</span>	
-                            <em class="price" style="font-style: normal;">		
+                        <p class="price-opt" style="position: relative; padding-top: 28px; min-width: 113px; height: 38px; line-height: normal; display: inline-block; vertical-align: middle; margin: 0; padding: 0; margin-block-start: 1em; margin-block-end: 1em; margin-inline-start: 0px; margin-inline-end: 0px;">   
+                            <span class="title" style="position: absolute; bottom: 3px; left: 0; color: #cdcdcd; font-size: 14px; white-space: nowrap;">월 통신요금</span>   
+                            <em class="price" style="font-style: normal;">      
                                 <span class="num" style="font-family: TgothicBlack, Roboto, sans-serif; font-size: 26px; letter-spacing: -1px; color: #fff; font-weight: 700;">69,000</span>
-                                <span class="unit" style="color: #fff; font-size: 16px;">원</span>	
+                                <span class="unit" style="color: #fff; font-size: 16px;">원</span>   
                             </em>
                         </p>
                         <span class="ico-equal" style="font-weight: bolder; font-size: 20px; color: white; width: 20px; height: 20px; background-position: -470px -546px; margin: 0 28px; display: inline-block; vertical-align: middle; overflow: hidden;  background-image: url(../img/spr_img_v3.png); background-repeat: no-repeat;">=</span>
-                        <div class="price-sum" style="position: absolute; padding-top: 28px; min-width: 113px; height: 38px; line-height: normal; display: inline-block; vertical-align: middle; margin: 0; padding: 0; margin-block-start: 1em; margin-block-end: 1em; margin-inline-start: 0px; margin-inline-end: 0px;">	
-                            <span class="title" style="position: absolute; bottom: 3px; left: 0; color: #cdcdcd; font-size: 14px; white-space: nowrap;">예상 월 납부 금액</span>	
-                            <strong class="price" style="display: inline-block; font-weight: bolder;">		
-                                <span class="num" style="font-family: TgothicBlack, Roboto, sans-serif; font-size: 26px; letter-spacing: -1px; color: #fff; font-weight: 700;">139,814</span>		
-                                <span class="unit" style="font-size: 22px; font-weight: 400; color: #fff;">원</span>	
-                            </strong>	
+                        <div class="price-sum" style="position: absolute; padding-top: 28px; min-width: 113px; height: 38px; line-height: normal; display: inline-block; vertical-align: middle; margin: 0; padding: 0; margin-block-start: 1em; margin-block-end: 1em; margin-inline-start: 0px; margin-inline-end: 0px;">   
+                            <span class="title" style="position: absolute; bottom: 3px; left: 0; color: #cdcdcd; font-size: 14px; white-space: nowrap;">예상 월 납부 금액</span>   
+                            <strong class="price" style="display: inline-block; font-weight: bolder;">      
+                                <span class="num" style="font-family: TgothicBlack, Roboto, sans-serif; font-size: 26px; letter-spacing: -1px; color: #fff; font-weight: 700;">139,814</span>      
+                                <span class="unit" style="font-size: 22px; font-weight: 400; color: #fff;">원</span>   
+                            </strong>   
                             <span class="dsc" style="margin-left: 5px; color: #959595; font-size: 12px;">
                                 <button type="button" class="btn-text" id="feeDetail" style="color: #3b98e6; cursor: pointer; -webkit-appearance: button; padding: 0; border: 0; background-color: transparent; text-transform: none; overflow: visible; font: inherit; margin: 0; writing-mode: horizontal-tb !important; letter-spacing: normal; word-spacing: normal; text-indent: 0px; text-shadow: none; display: inline-block; text-align: center; box-sizing: border-box;">할부 수수료</button> 
                                 5.9%포함
@@ -840,10 +844,76 @@ $(document).ready(function() {
         const price = parseInt(prices[i].innerHTML);
         const renewPrice = price.toLocaleString();
         prices[i].innerHTML =renewPrice;
-       	
+          
     }
+
+    //Option 선택시 directCode 완성된 것을 $('#directCode').val에 저장
+    $('.optionArea').on('click', 'li[name="colorCode"]', function() { //컬러 선택시
+    var selectedOptions = getSelectedOptions();
+    //console.log('Selected options:', selectedOptions);
+
+    //추가작업
+    let colorCode = selectedOptions.colorCode;
+    let saveCapacity = selectedOptions.saveCapacity;
+    let categoryCode = $("#categoryCode").val();
+    let brandCode = $("#brandCode").val();
+    let slicedCode = $("#slicedCode").val();
+    let directCode = '';
+    if(colorCode!=null && saveCapacity!=null){
+        directCode = "P" + categoryCode + "B" + brandCode + "C" + colorCode + "V" + saveCapacity + slicedCode;
+        console.log(directCode);
+        $('#directCode').val(directCode);
+    }
+  });
+
+  $('.optionArea').on('click', 'label.capacity', function() { //용량 선택시
+    var saveCapacity = $(this).prev('input[name="saveCapacity"]');
+    saveCapacity.prop('checked', true);
+
+    var selectedOptions = getSelectedOptions();
+    //console.log('Selected options:', selectedOptions);
+
+    //추가작업
+    let colorCode2 = selectedOptions.colorCode;
+    let saveCapacity2 = selectedOptions.saveCapacity;
+    let categoryCode2 = $("#categoryCode").val();
+    let brandCode2 = $("#brandCode").val();
+    let slicedCode2 = $("#slicedCode").val();
+    let directCode2 = '';
+    if(colorCode2!=null && saveCapacity2!=null){
+        directCode2 = "P" + categoryCode2 + "B" + brandCode2 + "C" + colorCode2 + "V" + saveCapacity2 + slicedCode2;
+        console.log(directCode2);
+        $('#directCode').val(directCode2);
+    }
+  });
+
 });
+
 </script>
+
+<script>
+    function getSelectedOptions() {
+  var options = {
+    colorCode: null,
+    saveCapacity: null
+  };
+
+  var colorCode = $('.optionArea li[name="colorCode"].selected').attr('value');
+  var saveCapacity = $('.optionArea input[name="saveCapacity"]:checked').val();
+
+  if (colorCode) {
+    options.colorCode = colorCode;
+  }
+
+  if (saveCapacity) {
+    options.saveCapacity = saveCapacity;
+  }
+
+  return options;
+}
+</script>
+
+
     <!-- 버튼 select js -->
     <script>
         const capacity = document.getElementsByClassName('capacity');
@@ -909,45 +979,34 @@ $(document).ready(function() {
         }
         
     </script>
-   <script type="text/javascript">
-    function generateDirectCode(event) {
-        event.preventDefault();
-        
-        let categoryCode = document.getElementById("categoryCode").value;
-        let brandCode = document.getElementById("brandCode").value;
-        let colorCode = document.querySelector("input[name='colorCode']:checked").value;
-        let saveCapacity = document.querySelector("input[name='saveCapacity']:checked").value;
-        let productCode = document.getElementById("productCode").innerText;
 
-        let directCode = "P" + categoryCode + "B" + brandCode + "C" + colorCode + "V" + saveCapacity + productCode;
-
-        // AJAX를 통해 서버로 제품 코드 전송 및 응답 처리
+<!--         // AJAX를 통해 서버로 제품 코드 전송 및 응답 처리
         $.ajax({
-		  url: "/checkStock",
-		  method: "GET",
-		  data: { directCode: directCode },
-		  success: function(response) {
-		    // 응답 처리 로직 작성
-		    // 예: 재고가 있으면 구매 가능, 없으면 구매 불가능 등
-		    alert(response);
-		    if (response === "구매 가능") {
-	            // 재고가 있을 경우, 용량 선택 버튼 활성화
-	            $("input[name='saveCapacity']").prop("disabled", false);
-	        } else {
-	            // 재고가 없을 경우, 용량 선택 버튼 비활성화
-	            $("input[name='saveCapacity']").prop("disabled", true);
-	        }
-	    },
-		  error: function(xhr, status, error) {
-		    // 에러 처리 로직 작성
-		    console.log(error);
-		  }
-		});
-</script>
+        url: "/checkStock",
+        method: "GET",
+        data: { directCode: directCode },
+        success: function(response) {
+          // 응답 처리 로직 작성
+          // 예: 재고가 있으면 구매 가능, 없으면 구매 불가능 등
+          alert(response);
+          if (response === "구매 가능") {
+               // 재고가 있을 경우, 용량 선택 버튼 활성화
+               $("input[name='saveCapacity']").prop("disabled", false);
+           } else {
+               // 재고가 없을 경우, 용량 선택 버튼 비활성화
+               $("input[name='saveCapacity']").prop("disabled", true);
+           }
+       },
+        error: function(xhr, status, error) {
+          // 에러 처리 로직 작성
+          console.log(error);
+        }
+      });
+</script> -->
     
      
 
-<!--  하단 금액 바 고정하는 JS-->
+<!--  하단 금액 바 고정하는 JS -->
 <script>
     window.addEventListener('scroll', function() {
     const stickyCart = document.querySelector('.sticky-bottom-cart');
@@ -962,6 +1021,6 @@ $(document).ready(function() {
 </script>
 
 <c:import url="../temp/commonJS.jsp"></c:import>
-</body>
 
+</body>
 </html>

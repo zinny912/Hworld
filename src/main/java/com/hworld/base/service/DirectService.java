@@ -62,6 +62,10 @@ public class DirectService {
 	public int setDelete(DirectVO directVO) throws Exception{
 		return directDAO.setDelete(directVO);
 	}
+	public boolean getPrice(String directCode) {
+		// TODO Auto-generated method stub
+		return true;
+	}
 	
 	
 }
