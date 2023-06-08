@@ -1019,6 +1019,24 @@ $(document).ready(function() {
   }
 });
 </script>
+<script>
+
+	$('.color-variant').on('click', 'li', function() {
+	    // 선택된 요소에 대한 처리를 여기에 작성합니다.
+	    // 선택된 요소는 $(this)를 사용하여 가져올 수 있습니다.
+	    // 예를 들어, 선택된 요소의 value 값을 가져오려면 $(this).attr('value')를 사용합니다.
+	    
+	    // 선택된 요소의 value 값 가져오기
+	    var selectedValue = $(this).attr('value');
+	    
+	    // 선택된 요소에 대한 처리 예시: 콘솔에 선택된 값을 출력합니다.
+	    console.log('Selected value: ' + selectedValue);
+	    
+	    // 선택된 요소에 대한 추가 처리를 진행합니다.
+	    // ...
+	  });
+
+</script>
 
 <c:import url="../temp/commonJS.jsp"></c:import>
 

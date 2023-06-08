@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hworld.base.service.DirectService;
@@ -88,30 +89,34 @@ public class DirectController {
 		return modelAndView;
 	}
 	@PostMapping("directAdd")
-	   public ModelAndView setInsert(String categoryCode, String brandCode, String directName, String directContents, String directFilePath, 
-	         String[] colorCode, String[] saveCapacity, Integer[] directPrice, Integer[] directStock, String[] directCode, DirectVO directVO) throws Exception{
-	      ModelAndView modelAndView = new ModelAndView();
-	      
-	      //반복문으로 directVO 하나 완성하기 + 완성될 때 서비스로 insert 메서드 호출
-	      for(int i=0; i<directCode.length; i++) {
-	         DirectVO directVO2 = new DirectVO();
-	         directVO2.setCategoryCode(categoryCode);
-	         directVO2.setBrandCode(brandCode);
-	         directVO2.setDirectName(directName);
-	         directVO2.setDirectContents(directContents);
-	         directVO2.setDirectFilePath(directFilePath);
-	         directVO2.setColorCode(colorCode[i]);
-	         directVO2.setSaveCapacity(saveCapacity[i]);
-	         directVO2.setDirectPrice(directPrice[i]);
-	         directVO2.setDirectStock(directStock[i]);
-	         directVO2.setDirectCode(directCode[i]);
+	public ModelAndView setInsert(String categoryCode, String brandCode, String directName, String directContents,
+			String[] colorCode, String[] saveCapacity, Integer[] directPrice, Integer[] directStock, String[] directCode, DirectVO directVO, MultipartFile[] multipartFiles) throws Exception{
+		ModelAndView modelAndView = new ModelAndView();
+		
+		System.out.println(multipartFiles);
+		
+		//반복문으로 directVO 하나 완성하기 + 완성될 때 서비스로 insert 메서드 호출
+		for(int i=0; i<directCode.length; i++) {
+			DirectVO directVO2 = new DirectVO();
+			directVO2.setCategoryCode(categoryCode);
+			directVO2.setBrandCode(brandCode);
+			directVO2.setDirectName(directName);
+			directVO2.setDirectContents(directContents);
+			directVO2.setColorCode(colorCode[i]);
+			directVO2.setSaveCapacity(saveCapacity[i]);
+			directVO2.setDirectPrice(directPrice[i]);
+			directVO2.setDirectStock(directStock[i]);
+			directVO2.setDirectCode(directCode[i]);
 
-	         directService.setInsert(directVO2);
-	      }
-	      
-	      modelAndView.setViewName("hworld/directAdd");
-	      return modelAndView;
-	   }
+			
+			
+			directService.setInsert(directVO2, multipartFiles);
+		}
+		
+		modelAndView.setViewName("redirect:./phoneList");
+		return modelAndView;
+	}
+
 	
 	@GetMapping("checkStock")
 	public ModelAndView getPrice(ModelAndView mv, DirectVO directVO) throws Exception {

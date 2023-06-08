@@ -23,6 +23,8 @@ public class ApplicationVO {
 	private Integer phoneSubPrice;
 	private Date startDate;
 	private String directName;
+	private String salt; //암호화 컬럼
+	private String rrnlOrigin; //**** 나중에 삭제해야하는 컬럼 - 주민번호 뒷자리 평문저장
 	
 	
 	//주고받는 내부용으로 사용
