@@ -109,7 +109,7 @@
                             </div>
                        
                             <!-- 출고가 -->
-
+<!-- 
                             <div class="col-md-2">
                                 <label for="colorCode" class="form-label">색상</label>
                                 <div class="col-12">
@@ -142,7 +142,7 @@
                             </div>
                             <div class="col-md-3">
                                 <input type="hidden" id="directCode" name="directCode">
-                            </div> -->
+                            </div>  -->
                             
                             <div class="col-md-2 mt-5 d-flex ">
                             	<button type="button" class="btn btn-outline-danger btn-sm mt-2 me-2" id="optionAdd">+옵션추가</button>    
