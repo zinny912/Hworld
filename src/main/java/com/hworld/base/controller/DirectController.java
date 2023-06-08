@@ -61,6 +61,7 @@ public class DirectController {
 	public ModelAndView getDetail(DirectVO directVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		List<DirectVO> directVOs = directService.getDetail(directVO);
+		log.error("{}", directVOs);
 		mv.addObject("directVO", directVOs);		
 		mv.setViewName("hworld/phoneDetail");
 		return mv;
@@ -118,28 +119,28 @@ public class DirectController {
 		return modelAndView;
 	}
 
-	
-	@GetMapping("checkStock")
-	public ModelAndView getPrice(ModelAndView mv, @RequestParam("directCode") String directCode) throws Exception {
-		 // 재고 조회 로직을 수행하고 결과를 얻는다
-	    DirectVO priceStock = directService.getPrice(directCode);
-
-	   mv.addObject("checkStock", priceStock);
-	    return mv;
-	}
-	
-	@PostMapping("checkStock")
-	@ResponseBody
-	public Map<String, Object> getPrice(@RequestParam("directCode") String directCode) throws Exception {
-	    Map<String, Object> response = new HashMap<>();
-
-	    // 재고 조회 로직을 수행하고 결과를 얻는다
-	    DirectVO direct = directService.getPrice(directCode);
-	    response.put("directStock", direct.getDirectStock());
-	    response.put("directPrice", direct.getDirectPrice());
-
-	    return response;
-	}
+//	
+//	@GetMapping("checkStock")
+//	public ModelAndView getPrice(ModelAndView mv, @RequestParam("directCode") String directCode) throws Exception {
+//		 // 재고 조회 로직을 수행하고 결과를 얻는다
+//	    DirectVO priceStock = directService.getPrice(directCode);
+//
+//	   mv.addObject("checkStock", priceStock);
+//	    return mv;
+//	}
+//	
+//	@PostMapping("checkStock")
+//	@ResponseBody
+//	public Map<String, Object> getPrice(@RequestParam("directCode") String directCode) throws Exception {
+//	    Map<String, Object> response = new HashMap<>();
+//
+//	    // 재고 조회 로직을 수행하고 결과를 얻는다
+//	    DirectVO direct = directService.getPrice(directCode);
+//	    response.put("directStock", direct.getDirectStock());
+//	    response.put("directPrice", direct.getDirectPrice());
+//
+//	    return response;
+//	}
 	  
 //	@PostMapping("checkStock")
 //	public ModelAndView getPrice(@RequestParam("directCode") String directCode) throws Exception {

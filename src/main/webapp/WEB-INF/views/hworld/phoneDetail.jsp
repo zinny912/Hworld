@@ -96,7 +96,9 @@
                                     </div>
                                 </div>
                             </div>
-
+<c:forEach items="${directVO}" var="direct">
+${direct.value} ${direct.slicedCode}
+</c:forEach>
                             <div class="col-md-6">
                                 <div class="cloth-details-size ">
                                     <div class="admin-update-delete d-flex justify-content-end">

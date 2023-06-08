@@ -42,17 +42,23 @@ public class DirectService {
 	
 	//상품 상세페이지 
 	public List<DirectVO> getDetail(DirectVO directVO)throws Exception{
+		List<DirectVO> results = directDAO.getDetail(directVO);
+		if (results != null && !results.isEmpty()) {
+	        System.out.println(results.get(0));
+	        return results;
+	    }
+		System.out.println(directDAO.getDetail(directVO).get(0));
 		return directDAO.getDetail(directVO);
 	}
 	
-	public DirectVO getPrice(String directCode) throws Exception {
-		log.error(directCode);
-		log.error("{}", directDAO.getPrice(directCode));
-		log.error("{}", directDAO.getPrice(directCode).getDirectPrice());
-		log.error("{}", directDAO.getPrice(directCode).getDirectStock());
-		return directDAO.getPrice(directCode);
-	}
-	
+//	public DirectVO getPrice(String directCode) throws Exception {
+//		log.error(directCode);
+//		log.error("{}", directDAO.getPrice(directCode));
+//		log.error("{}", directDAO.getPrice(directCode).getDirectPrice());
+//		log.error("{}", directDAO.getPrice(directCode).getDirectStock());
+//		return directDAO.getPrice(directCode);
+//	}
+//	
 	
 	
 		

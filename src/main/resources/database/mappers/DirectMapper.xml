@@ -58,18 +58,11 @@
 		<include refid="search"></include>
 	</select> 
 	<!-- 상품 디테일 페이지 default 값으로 P01/BS/ -->
-	<select id="getDetail" parameterType="DirectVO" resultType="DirectVO">
-	    SELECT D.*, CC.VALUE AS value, RIGHT(D.DIRECTCODE, 5) as slicedCode
-	    FROM DIRECT D
-	    INNER JOIN COMMONCODE CC ON D.BRANDCODE = CC.CODE
-	    WHERE CC.TYPE = 'B'
-	    AND EXISTS (
-	        SELECT *
-	        FROM COMMONCODE CC
-	        WHERE D.DIRECTCODE LIKE CONCAT('%', CC.TYPE, CC.CODE, '%')
-	          AND CC.TYPE = 'B' AND (CC.CODE = 'S' OR CC.CODE = 'A')
-	        AND RIGHT(D.DIRECTCODE, 5) = RIGHT(#{directCode}, 5)
-	    )
+	<select id="getDetail" parameterType="DirectVO" resultType="DirectVO"> 
+	   SELECT D.*, CC.VALUE AS value, RIGHT(D.DIRECTCODE, 5) AS slicedCode
+		FROM DIRECT D
+		INNER JOIN COMMONCODE CC ON D.BRANDCODE = CC.CODE
+		WHERE RIGHT(D.DIRECTCODE, 5) = #{slicedCode}
 	</select>
 
 
@@ -92,9 +85,6 @@
 		WHERE SUBSTRING(directCode, -5) AS slicedCode = SUBSTRING(#{directCode}, -5)
 	</update>
 	
-	<select id="getLastFiveDigits" resultType="DirectVO">
-        SELECT * FROM DIRECT
-        WHERE SUBSTRING(directCode, -5) = #{lastFiveDigits}
-    </select>
+
 
   </mapper>

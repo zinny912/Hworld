@@ -317,7 +317,7 @@ h3.d-flex span {
 									</div>
 									
 		                            <div class="main-price">
-		                               <h5 class="ms-0"> <a href="./phoneDetail?directCode=${direct.slicedCode}" class="font-default">
+		                               <h5 class="ms-0"> <a href="./phoneDetail?slicedCode=${direct.slicedCode}" class="font-default">
 		                                    ${direct.directName}
 		                                </a></h5>
 		                               
