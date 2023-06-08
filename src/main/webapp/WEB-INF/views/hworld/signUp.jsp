@@ -36,16 +36,16 @@
 	                		<div class="col-9">	                		
 			                    <input class="form-control" type="email" name="email" id="email" placeholder="사용자 계정">		                    			                    
 							</div>			                    
-		                    <button class="col-3 row btn btn-solid-default btn-sm fw-bold email_btn" type="button">
+		                    <button class="col-3 row btn btn-solid-default btn-sm fw-bold email_btn" name="sendBtn" id="sendBtn" type="button" onclick="sendNumber()">
 								인증번호 전송
 							</button>
 	                    </div> 
 		                			                		                		                
-	                	<div class="mb-4 row">
+	                	<div class="mb-4 row" id="mailNumber" name="mailNumber">
 	                		<div class="col-9">
 			                    <input class="form-control" type="text" name="emailCheck" id="emailCheck" placeholder="인증번호 입력">		                    			                    
 		                    </div>		                    
-		                    <button class="col-3 row btn btn-solid-default btn-sm fw-bold" type="button" onclick="execution_daum_address()">
+		                    <button class="col-3 row btn btn-solid-default btn-sm fw-bold" type="button" onclick="confirmNumber()">
 								확인
 							</button>								
 	                    </div> 		                
@@ -69,11 +69,11 @@
 		                </div>	                		
 		                
 	                	<div class="mb-4 row">
-		                    <div class="col-6">		                                                   
+		                    <div class="col-6" style="padding-right: 6px">		                                                   
 	                            <input class="form-control" type="text" name="rrnf" id="rrnf" placeholder="주민등록번호 앞자리">		                            
 		                    </div>
 	
-		                    <div class="col-6">
+		                    <div class="col-6" style="padding-left: 6px">
 	                            <input class="form-control" type="password" name="rrnl" id="rrnl" placeholder="주민등록번호 뒷자리">		                            
 		                    </div>
 		                </div>
@@ -121,10 +121,34 @@
     <!-- Sign Up Section End -->
 
     <div class="bg-overlay"></div>
-
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
-var timer = null;
+function sendNumber(){
+    $("#mailNumber").css("display","block");
+    $.ajax({
+        url:"/email",
+        type:"post",
+        dataType:"json",
+        data:{"email" : $("#email").val()},
+        success: function(data){
+            alert("인증번호 발송");
+            $("#Confirm").attr("value",data);
+        }
+    });
+}
+
+function confirmNumber(){
+    var number1 = $("#emailCheck").val();
+    var number2 = $("#Confirm").val();
+
+    if(number1 == number2){
+        alert("인증되었습니다.");
+    }else{
+        alert("번호가 다릅니다.");
+    }
+}
+
+/* var timer = null;
 var isRunning = false;
 
 $(".email_btn").on("click", function() {
@@ -158,13 +182,13 @@ function startTimer(count, display) {
       clearInterval(timer);
       alert("시간초과");
       display.html("시간초과");
-     /*  $("button").attr("disabled", true); */
+//      $("button").attr("disabled", true);
       isRunning = false;
     }
   }, 1000);
   isRunning = true;
 }
-
+ */
 /* 다음 주소 연동 */
 function execution_daum_address(){
 	
