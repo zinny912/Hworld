@@ -53,10 +53,8 @@ public class DirectVO {
     //요금제 리스트 가져오기 위한 VO 설정 (요금제 선택)
     private List<PlanVO> planList;
 
-//	public int getPriceByColorAndCapacity(String colorCode, String saveCapacity) {
-//		// TODO Auto-generated method stub
-//		return 0;
-//	}
-  
+    
+    private String lastFiveDigits;
+     
     
 }

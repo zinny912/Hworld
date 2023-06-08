@@ -100,12 +100,12 @@
                             <div class="col-md-6">
                                 <div class="cloth-details-size ">
                                     <div class="admin-update-delete d-flex justify-content-end">
-                                        <a href="zproduct_detail_edit.html" class="me-3">수정</a>
+                                        <a href="./directUpdate?directCode=${directVO.slicedCode}" class="me-3">수정</a>
                                         <a href="javascript:void(0)" data-bs-toggle="modal"
                                                     data-bs-target="#productdel">삭제</a>
                                     </div>
                                     <div class="brand" style="font-size: 27px; color: gray;" id="productCode">
-                                       ${directVO.value}   ${directVO.directCode}                                     
+                                       ${directVO.value}   ${directVO.slicedCode}                                     
                                     </div>
                                     <div class="details-image-concept mt-0" style="font-size: 35px;">
                                         ${directVO.directName}
