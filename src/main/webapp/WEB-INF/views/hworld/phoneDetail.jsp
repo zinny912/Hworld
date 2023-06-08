@@ -102,7 +102,7 @@ ${direct.value} ${direct.slicedCode}
                             <div class="col-md-6">
                                 <div class="cloth-details-size ">
                                     <div class="admin-update-delete d-flex justify-content-end">
-                                        <a href="./directUpdate?directCode=${directVO.slicedCode}" class="me-3">수정</a>
+                                        <a href="./directUpdate?slicedCode=${directVO.slicedCode}" class="me-3">수정</a>
                                         <a href="javascript:void(0)" data-bs-toggle="modal"
                                                     data-bs-target="#productdel">삭제</a>
                                     </div>

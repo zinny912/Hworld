@@ -18,10 +18,9 @@ public interface DirectDAO {
 	
 	//상품 리스트 조회 
 	public List<DirectVO> getList(Pager pager) throws Exception;
-
 	
 	//상품 하나 옵션 다수 조회
-	public List<DirectVO> getDetail(DirectVO directVO) throws Exception;
+	public List<DirectVO> getDetail(String slicedCode) throws Exception;
 
 	//상품파일 조회 
 	public DirectVO getFileDetail(DirectVO directVO) throws Exception;
@@ -44,7 +43,5 @@ public interface DirectDAO {
 	//파일 삭제 
 	public int setFileDelete (DirectVO directVO) throws Exception;
 
-	
-	public List<DirectVO> getLastFiveDigits(DirectVO directVO)throws Exception;
-		
+			
 }

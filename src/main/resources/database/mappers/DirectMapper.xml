@@ -57,6 +57,7 @@
 		SELECT COUNT(DIRECTCODE) FROM DIRECT
 		<include refid="search"></include>
 	</select> 
+	
 	<!-- 상품 디테일 페이지 default 값으로 P01/BS/ -->
 	<select id="getDetail" parameterType="DirectVO" resultType="DirectVO"> 
 	   SELECT D.*, CC.VALUE AS value, RIGHT(D.DIRECTCODE, 5) AS slicedCode
@@ -82,9 +83,8 @@
 	<update id="setUpdate" parameterType="DirectVO">
 		UPDATE DIRECT
 		SET DIRECTNAME = #{directName}, DIRECTCONTENTS = #{directContents}, DIRECTPRICE = #{directPrice}, DIRECTSTOCK = #{directStock}, CATEGORYCODE = #{categoryCode}, BRANDCODE = #{brandCode}, COLORCODE = #{colorCode}, SAVECAPACITY = #{saveCapacity}
-		WHERE SUBSTRING(directCode, -5) AS slicedCode = SUBSTRING(#{directCode}, -5)
+		WHERE SUBSTRING(directCode, -5) AS slicedCode = SUBSTRING(#{slicedCode})
 	</update>
-	
 
 
   </mapper>

@@ -40,27 +40,13 @@ public class DirectService {
 	}
 	
 	
-	//상품 상세페이지 
-	public List<DirectVO> getDetail(DirectVO directVO)throws Exception{
-		List<DirectVO> results = directDAO.getDetail(directVO);
-		if (results != null && !results.isEmpty()) {
-	        System.out.println(results.get(0));
-	        return results;
-	    }
-		System.out.println(directDAO.getDetail(directVO).get(0));
-		return directDAO.getDetail(directVO);
+	// 상품 하나 옵션 다수 조회
+	public List<DirectVO> getDetail(String slicedCode) throws Exception {
+		
+		
+	    return directDAO.getDetail(slicedCode);
 	}
-	
-//	public DirectVO getPrice(String directCode) throws Exception {
-//		log.error(directCode);
-//		log.error("{}", directDAO.getPrice(directCode));
-//		log.error("{}", directDAO.getPrice(directCode).getDirectPrice());
-//		log.error("{}", directDAO.getPrice(directCode).getDirectStock());
-//		return directDAO.getPrice(directCode);
-//	}
-//	
-	
-	
+
 		
 	//상품 등록 
 	public int setInsert(DirectVO directVO, MultipartFile[] multipartFiles)throws Exception{
@@ -82,12 +68,7 @@ public class DirectService {
 		
 		return directDAO.setUpdate(directVO);
 	}
-	
-	public List<DirectVO> getLastFiveDigits(DirectVO directVO) throws Exception {
-	    return directDAO.getLastFiveDigits(directVO);
-	}
 
-	
 	
 	//상품 삭제 
 	public int setDelete(DirectVO directVO) throws Exception{
