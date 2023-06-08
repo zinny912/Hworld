@@ -179,7 +179,12 @@
                                                 <div class="size-detail">
                                                     <h6 class="mb-3 fw-bolder">요금제 선택</h6>
                                                     <ul class="nav border-0" style="color:black;">
-                                                        <li class="nav-item" >
+                                                    <c:forEach items="${existPlanList}" var="i" varStatus="status">
+                                                    	<li class="nav-item">
+                                                    		<a class="nav-link" style="color:black;" data-bs-toggle="tab" href="#tab-${status.count}">${i.note}</a>
+                                                    	</li>
+                                                    </c:forEach>
+                                                        <!-- <li class="nav-item">
                                                         <a class="nav-link active" style="color:black;" data-bs-toggle="tab" href="#tab-1">5G 요금제</a>
                                                         </li>
                                                         <li class="nav-item">
@@ -193,10 +198,15 @@
                                                         </li>
                                                         <li class="nav-item">
                                                         <a class="nav-link" style="color:black;" data-bs-toggle="tab" href="#tab-5">군인 요금제</a>
-                                                        </li>
+                                                        </li> -->
                                                     </ul>
                                                     <!-- 이부분 나중에 forEach로 페이지 로딩될 때 또는 ajax로 버튼 눌렀을 때 db에서 불러와서 태그 완성하기 -->
                                                     <div class="tab-content" id="planArea">
+                                                    	<!-- 리스트 뿌려주기 -->
+                                                    
+                                                    
+                                                    
+                                                    
                                                         <div class="tab-pane fade show active" id="tab-1">
                                                             <div class="row col-md-12 mt-3 mx-3">
                                                                 <div class="form-check custome-radio-box">

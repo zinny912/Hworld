@@ -2,6 +2,7 @@ package com.hworld.base.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -18,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.hworld.base.service.ApplicationService;
 import com.hworld.base.vo.ApplicationVO;
+import com.hworld.base.vo.PlanVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -37,9 +39,49 @@ public class ApplicationController {
 		
 		//검증을 위한 빈 application 객체 보내기
 		mv.addObject(new ApplicationVO());
+		
+		//페이지 로딩시 필요한 정보
+		//요금제 정보 호출, 담기
+		List<PlanVO> existPlanList = applicationService.getExistPlanList();
+		List<PlanVO> allPlanList = applicationService.getPlanList();
+
+		List<PlanVO> gList = new ArrayList<>();
+		List<PlanVO> sList = new ArrayList<>();
+		List<PlanVO> tList = new ArrayList<>();
+		List<PlanVO> zList = new ArrayList<>();
+		List<PlanVO> wList = new ArrayList<>();
+		List<PlanVO> hList = new ArrayList<>();
+
+		//패턴별로 리스트를 분류
+		for (PlanVO plan : allPlanList) {
+		    String planNum = plan.getPlanNum();
+		    if (planNum.startsWith("G")) {
+		        gList.add(plan);
+		    } else if (planNum.startsWith("S")) {
+		        sList.add(plan);
+		    } else if (planNum.startsWith("T")) {
+		        tList.add(plan);
+		    } else if (planNum.startsWith("Z")) {
+		        zList.add(plan);
+		    } else if (planNum.startsWith("W")) {
+		        wList.add(plan);
+		    } else if (planNum.startsWith("H")) {
+		        hList.add(plan);
+		    }
+		}
+		
+		mv.addObject("existList", existPlanList);
+		mv.addObject("gList", gList);
+		mv.addObject("sList", sList);
+		mv.addObject("tList", tList);
+		mv.addObject("zList", zList);
+		mv.addObject("wList", wList);
+		mv.addObject("hList", hList);
+		
 		mv.setViewName("hworld/applicationForm");
 		return mv;
 	}
+	
 	
 	//신청서 db insert
 	@PostMapping("application")

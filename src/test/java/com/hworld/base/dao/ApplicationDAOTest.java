@@ -2,12 +2,15 @@ package com.hworld.base.dao;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.hworld.base.vo.ApplicationVO;
 import com.hworld.base.vo.MemberVO;
+import com.hworld.base.vo.PlanVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -18,6 +21,7 @@ class ApplicationDAOTest {
 	@Autowired
 	private ApplicationDAO applicationDAO;
 	
+	//memberSearch
 	//@Test
 	void getMemberSearch() throws Exception{
 		log.info("test");
@@ -30,6 +34,7 @@ class ApplicationDAOTest {
 		assertNotNull(memberVO);
 	}
 	
+	//initMemberAdd
 	//@Test
 	void setMemberInitAdd() throws Exception{
 		ApplicationVO applicationVO = new ApplicationVO();
@@ -46,5 +51,15 @@ class ApplicationDAOTest {
 		
 		assertNotEquals(0, result);
 	}
-
+	
+	//planList
+	@Test
+	void getPlanList() throws Exception{
+		PlanVO planVO = new PlanVO();
+		
+		List<PlanVO> ar = applicationDAO.getPlanList();
+		
+		assertEquals(0, ar.size());
+	}
+	
 }
