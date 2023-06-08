@@ -32,6 +32,8 @@ public class Pager {
    private String search;
    
    private String slicedCode;
+   private String sortType;
+
       
    //시작 index 번호를 계산하는 메서드
    public void makeStartRow() {

@@ -38,19 +38,10 @@ public class DirectService {
 		pager.makeNum(directDAO.getTotalCount(pager));
 		return directDAO.getList(pager);
 	}
-	public List<DirectVO> getListByPriceH(Pager pager) throws Exception {
-		pager.makeStartRow();
-		pager.makeNum(directDAO.getTotalCount(pager));
-		return directDAO.getListByPriceH(pager);
-	};
-	public List<DirectVO> getListByPriceL(Pager pager) throws Exception {
-		pager.makeStartRow();
-		pager.makeNum(directDAO.getTotalCount(pager));
-		return directDAO.getListByPriceL(pager);
-	};
+	
 	
 	//상품 상세페이지 
-	public DirectVO getDetail(DirectVO directVO)throws Exception{
+	public List<DirectVO> getDetail(DirectVO directVO)throws Exception{
 		return directDAO.getDetail(directVO);
 	}
 	
@@ -78,9 +69,20 @@ public class DirectService {
 
 
 	//상품 수정 
-	public int setUpdate(DirectVO directVO) throws Exception{
+	public int setUpdate(DirectVO directVO, MultipartFile[] multipartFiles) throws Exception{
+		
+		String fileName = fileManager.updateFile(multipartFiles, directVO);
+		fileName = fileManager.saveFile(multipartFiles, directVO);	
+		
 		return directDAO.setUpdate(directVO);
 	}
+	
+	public List<DirectVO> getLastFiveDigits(DirectVO directVO) throws Exception {
+	    return directDAO.getLastFiveDigits(directVO);
+	}
+
+	
+	
 	//상품 삭제 
 	public int setDelete(DirectVO directVO) throws Exception{
 		return directDAO.setDelete(directVO);
