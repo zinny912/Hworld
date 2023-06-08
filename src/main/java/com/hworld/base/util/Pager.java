@@ -31,7 +31,6 @@ public class Pager {
    private String kind;
    private String search;
    
-   private String slicedCode;
    private String sortType;
 
       
