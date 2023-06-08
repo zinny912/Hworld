@@ -55,15 +55,12 @@
 	                    <span class="spin"></span>
 	                </div>	                	                
 	
-	                <div class="input">
-	                    <p>로그인 5회 이상 실패시 보안 문자 표시 영역</p>
-	                </div>
-	
 	                <a href="forgot" class="pass-forgot">계정정보를 잊어버리셨나요?</a>
 	
+
 	                <!-- 버튼 영역 -->
 	                <div class="button login">
-	                    <button type="submit">
+	                    <button type="button" id="login_btn">
 	                        <span>로그인</span>
 	                        <i class="fa fa-check"></i>
 	                    </button>
@@ -127,8 +124,8 @@
                 </div> -->
 
                 <!-- 회원가입 페이지 이동 -->
-                <p>아직 회원이 아니신가요? <a href="sign-up-precheck.html" class="theme-color">가입하기</a></p>
-				<div class="g-recaptcha" data-sitekey="6LfiGXwmAAAAAGV4y7cC0tEowoX-87amSkjeNVTi" style="display: "></div>
+                <p style="margin-top: 0px">아직 회원이 아니신가요? <a href="sign-up-precheck.html" class="theme-color">가입하기</a></p>
+				<div class="g-recaptcha" data-sitekey="6LfiGXwmAAAAAGV4y7cC0tEowoX-87amSkjeNVTi" style="margin-left: 50px; padding-top: 465px;"></div>
             </div>
         </div>
     </div>
@@ -136,37 +133,32 @@
 
     <div class="bg-overlay"></div>
     
-<script src="https://www.google.com/recaptcha/api.js"></script>
-<script>
-$(function() {
-$('.btn login').submit(function() {
-		var captcha = 1;
-		$.ajax({
-            url: '/pro/VerifyRecaptcha',
-            type: 'post',
-            data: {
-                recaptcha: $("#g-recaptcha-response").val()
-            },
-            success: function(data) {
-                switch (data) {
-                    case 0:
-                        console.log("자동 가입 방지 봇 통과");
-                        captcha = 0;
-                		break;
-                    case 1:
-                        alert("자동 가입 방지 봇을 확인 한뒤 진행 해 주세요.");
-                        break;
-                    default:
-                        alert("자동 가입 방지 봇을 실행 하던 중 오류가 발생 했습니다. [Error bot Code : " + Number(data) + "]");
-                   		break;
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<!-- 구글 리캡차 -->
+<script src='https://www.google.com/recaptcha/api.js'></script>
+<script type="text/javascript">
+     
+    $(function() {
+        $('#login_btn').click(function() {                      
+            $.ajax({
+                url: '/VerifyRecaptcha',
+                type: 'post',
+                data: {recaptcha: $("#g-recaptcha-response").val()},
+                success: function(res) {
+                    const data=JSON.parse(res);
+                    if(data.success){                       
+						$("#loginForm").submit();
+                    }else{
+                        alert("자동 가입 방지 봇을 확인 한뒤 진행 해 주세요.");                               
+                    }               
                 }
-            }
+            }); 
+             
+             
+             
         });
-		if(captcha != 0) {
-			return false;
-		} 
-});
-});
+         
+    });
 </script>
 
 

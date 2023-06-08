@@ -27,6 +27,10 @@ public class MemberService {
 	
 	public int setMemberAdd(MemberVO memberVO) throws Exception {
 		
+		String rrnl = memberVO.getRrnl();
+        memberVO.setRrnl(SHA256Util.encryptMD5(memberVO.getRrnl()));
+                
+		
 //		String salt = SHA256Util.generateSalt();
 //		memberVO.setSalt(salt);
 //		
