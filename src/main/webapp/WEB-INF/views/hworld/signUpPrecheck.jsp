@@ -39,11 +39,11 @@
 	                </div>	                		
 			                
 	               	<div class="mb-4 row">
-	                    <div class="col-6">		                                                   
+	                    <div class="col-6" style="padding-right: 6px">		                                                   
 	                           <input class="form-control" type="text" name="rrnf" id="rrnf" placeholder="주민등록번호 앞자리">		                            
 	                    </div>
 	
-	                    <div class="col-6">
+	                    <div class="col-6" style="padding-left: 6px">
 	                           <input class="form-control" type="password" name="rrnl" id="rrnl" placeholder="주민등록번호 뒷자리">		                            
 	                    </div>
 	                </div>
