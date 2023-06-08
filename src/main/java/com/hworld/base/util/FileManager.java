@@ -84,19 +84,21 @@ public class FileManager extends AbstractView {
 		    String fileName = directVO.getDirectCode().substring(directVO.getDirectCode().length() - 5);
 		    log.warn(fileName);
 		    System.out.println(fileName);
-
-		    // 파일 저장
-		    if (multipartFiles != null && multipartFiles.length > 0 && multipartFiles[0] != null) {
-		        File file = new File(folder, fileName); // 저장할 파일 경로 생성
-		        multipartFiles[0].transferTo(file);
+		    
+		    // 썸네일 파일 저장
+		    if (multipartFiles != null && multipartFiles.length > 1 && multipartFiles[0] != null) {
+		    	String thumbFileName = fileName + "thumb";
+		    	File thumbFile = new File(folder, thumbFileName); // 썸네일 파일 경로 생성
+		    	multipartFiles[0].transferTo(thumbFile);
+		    	log.error(thumbFileName);
 		    }
 
-		    // 썸네일 파일 저장
-		    if (multipartFiles != null && multipartFiles.length > 1 && multipartFiles[1] != null) {
-		        String thumbFileName = fileName + "thumb";
-		        File thumbFile = new File(folder, thumbFileName); // 썸네일 파일 경로 생성
-		        multipartFiles[1].transferTo(thumbFile);
-		        log.error(thumbFileName);
+		    // 파일 저장
+		    if (multipartFiles != null && multipartFiles.length > 0 && multipartFiles[1] != null) {
+		        File file = new File(folder, fileName); // 저장할 파일 경로 생성
+		        multipartFiles[1].transferTo(file);
+		        log.error(fileName);
+
 		    }
 
 		    return fileName;
