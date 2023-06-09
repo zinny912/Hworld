@@ -72,40 +72,60 @@ public class FileManager extends AbstractView {
 	
 		//1. HDD에 파일을 저장하고 저장된 파일명을 리턴
 		public String saveFile(MultipartFile[] multipartFiles, DirectVO directVO) throws Exception {
-
-		    //1. 폴더 생성
-		    File folder = new File(path); // 저장할 폴더
-
-		    if (!folder.exists()) {
-		        folder.mkdirs();
-		        log.warn(path);
+			
+			String msg ="파일이 없어요";
+						
+			//파일이 있는 경우 
+		    if (multipartFiles.length>0) {
+		    	
+		    	//1. 폴더 생성
+		    	File folder = new File(path); // 저장할 폴더
+		    	
+		    	if (!folder.exists()) {
+		    		folder.mkdirs();
+		    		log.warn(path);
+		    	}
+		    	
+		    	//2. 저장할 파일 이름 생성(directCode의 끝 5자리) 
+		    	String fileName = directVO.getDirectCode().substring(directVO.getDirectCode().length() - 5);
+		    	log.warn(fileName);
+		    	System.out.println(fileName);
+		    	
+		    	// 썸네일 파일 저장
+		    	if (multipartFiles != null && multipartFiles.length > 0 && multipartFiles[0] != null) {
+		    		String thumbFileName = fileName + "thumb";
+		    		File thumbFile = new File(folder, thumbFileName); // 썸네일 파일 경로 생성
+		    		
+		    		// 파일이 이미 존재하는 경우 건너뛰기 
+		    		if (!thumbFile.exists()) {
+		    			multipartFiles[0].transferTo(thumbFile);
+		    			System.out.println( "썸네일 파일 없어서 추가함 ~~~" );
+		    			
+		    			log.error(thumbFileName);
+		    		}
+		    	}
+		    	
+		    	// 파일 저장
+		    	if (multipartFiles != null && multipartFiles.length > 0 && multipartFiles[1] != null) {
+		    		File file = new File(folder, fileName); // 저장할 파일 경로 생성
+		    		System.out.println( "파일 있어서 건너뜀~ ");
+		    		
+		    		// 파일이 이미 존재하는 경우 건너뛰기
+		    		if (!file.exists()) {
+		    			multipartFiles[1].transferTo(file);
+		    			System.out.println( "파일 없어서 추가함 ~~~" );
+		    			log.error(fileName);
+		    		}
+		    		
+		    	}
+		    	
+		    	return fileName;
 		    }
 
-		    //2. 저장할 파일 이름 생성(directCode의 끝 5자리) 
-		    String fileName = directVO.getDirectCode().substring(directVO.getDirectCode().length() - 5);
-		    log.warn(fileName);
-		    System.out.println(fileName);
-		    
-		    // 썸네일 파일 저장
-		    if (multipartFiles != null && multipartFiles.length > 1 && multipartFiles[0] != null) {
-		    	String thumbFileName = fileName + "thumb";
-		    	File thumbFile = new File(folder, thumbFileName); // 썸네일 파일 경로 생성
-		    	multipartFiles[0].transferTo(thumbFile);
-		    	log.error(thumbFileName);
-		    }
-
-		    // 파일 저장
-		    if (multipartFiles != null && multipartFiles.length > 0 && multipartFiles[1] != null) {
-		        File file = new File(folder, fileName); // 저장할 파일 경로 생성
-		        multipartFiles[1].transferTo(file);
-		        log.error(fileName);
-
-		    }
-
-		    return fileName;
+		    return msg;
 		}
 		
-		public String updateFile(MultipartFile[] multipartFiles, DirectVO directVO) throws Exception{
+		public String deleteFile(MultipartFile[] multipartFiles, DirectVO directVO) throws Exception{
 		
 		    File folder = new File(path);
 		    String fileName = directVO.getDirectCode().substring(directVO.getDirectCode().length() - 5);
@@ -116,7 +136,7 @@ public class FileManager extends AbstractView {
 		    if (isEmptyFile.exists()) {
 		    	isEmptyFile.delete();
 		    	isEmptyThumbFile.delete();
-		    	
+		    System.out.println("파일 지워짐~~~~");
 		    }
 
 		    return fileName;
