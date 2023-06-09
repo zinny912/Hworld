@@ -96,80 +96,73 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div class="col-md-6">
                                 <div class="cloth-details-size ">
                                     <div class="admin-update-delete d-flex justify-content-end">
-                                        <a href="./directUpdate?slicedCode=${directVO.slicedCode}" class="me-3">수정</a>
+                                        <a href="zproduct_detail_edit.html" class="me-3">수정</a>
                                         <a href="javascript:void(0)" data-bs-toggle="modal"
                                                     data-bs-target="#productdel">삭제</a>
-                                    </div>    
-                          <div id="directList">
-							  <c:forEach items="${list}" var="direct" varStatus="status">
-							  
-							    <div class="brand direct-item" style="font-size: 27px; color: gray;" id="productCode"
-							      data-direct-code="${direct.directCode}" data-direct-price="${direct.directPrice}"
-							      data-direct-stock="${direct.directStock}" style="display:none;">
-							      ${direct.value} ${direct.slicedCode} ${direct.directCode}
-							    </div>
-							    <div class="details-image-concept mt-0" style="font-size: 35px;">
-							      ${direct.directName}
-							    </div>
-							    <div>
-							      <h3 class="mt-3 ">출고가</h3>
-							    </div>
-							    <p>
-							      <span class="price-detail theme-color fw-bold" id="renewPrice" >${direct.directPrice}</span>
-							      <span class="unit">원</span>
-							    </p>
-							    <div class="optionArea">
-							      <div class="product-option-item color">
-							        <div class="option-title-area">
-							          <h3 class="option-title mb-2">색상</h3>
-							        </div>
-							        <div class="color-types">
-							          <ul class="color-variant mb-0">
-							            <li class="bg-white border boder-1 selected" value="W" name="colorCode"></li>
-							            <li class="bg-gray1" value="G" name="colorCode"></li>
-							            <li class="bg-black1" value="B" name="colorCode"></li>
-							          </ul>
-							        </div>
-							      </div>
-							      <div>
-							        <div>
-							          <h3 class="option-title mt-3 mb-2">용량</h3>
-							        </div>
-							        <div>
-							          <span>
-							            <input type="radio" hidden name="saveCapacity" value="128" disabled>
-							            <label for="saveCapacity" class="btn btn-outline-custom m-1 capacity">
-							              <span>128G</span>
-							            </label>
-							          </span>
-							          <span>
-							            <input type="radio" hidden name="saveCapacity" value="256" disabled>
-							            <label for="saveCapacity" class="btn m-1 btn-outline-custom capacity">
-							              <span>256G</span>
-							            </label>
-							          </span>
-							          <span>
-							            <input type="radio" hidden name="saveCapacity" value="512" disabled>
-							            <label for="saveCapacity" class="btn m-1 btn-outline-custom capacity">
-							              <span>512G</span>
-							            </label>
-							          </span>
-							        </div>
-							      </div>
-							      <input type="hidden" id="directCode" name="directCode" value="${direct.directCode}">
-							      <input type="hidden" id="categoryCode" name="categoryCode" value="${direct.categoryCode}">
-							      <input type="hidden" id="brandCode" name="brandCode" value="${direct.brandCode}">
-							      <input type="hidden" id="slicedCode" name="slicedCode" value="${direct.slicedCode}">
-							      <input type="hidden" id="directStock" name="directStock" value="${direct.directStock}">
-							      <hr>
-							    </div>
-							  </c:forEach>
-							  
-							</div>
-                                
+                                    </div>
+                                    <div class="brand" style="font-size: 27px; color: gray;" id="productCode">
+                                       ${directVO.value}   ${directVO.directCode}                                     
+                                    </div>
+                                    <div class="details-image-concept mt-0" style="font-size: 35px;">
+                                        ${directVO.directName}
+                                    </div>
+                                    <div>
+                                        <h3 class="mt-3 ">출고가</h3>
+                                    </div>
+                                    <p>
+                                        <span class="price-detail theme-color fw-bold" id="renewPrice">${directVO.directPrice}</span>
+                                        <span class="unit">원</span>
+                                    </p>
+
+                                    <div class="optionArea">
+                                        <div class="product-option-item color">
+                                            <div class="option-title-area">
+                                                <h3 class="option-title mb-2">색상</h3>
+                                            </div>
+
+                                            <div class="color-types">
+                                                <ul class="color-variant mb-0" >
+                                                    <li class="bg-white border boder-1" value="W" name="colorCode"></li>
+                                                    <li class="bg-gray1" value="G" name="colorCode"></li>
+                                                    <li class="bg-black1" value="B" name="colorCode"></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div>
+                                                <h3 class="option-title mt-3 mb-2">용량</h3>
+                                            </div>
+                                            <div>
+                                                <span>
+                                                    <input type="radio" hidden name="saveCapacity" value="128" disabled>
+                                                        <label for="saveCapacity" class="btn btn-outline-custom m-1 capacity">
+                                                            <span >128G</span>
+                                                        </label>
+                                                </span>
+                                                <span>
+                                                    <input type="radio" hidden name="saveCapacity" value="256" disabled>
+                                                    <label for="saveCapacity" class="btn m-1 btn-outline-custom capacity">
+                                                        <span>256G</span>
+                                                    </label>
+                                                </span>
+                                                <span>
+                                                    <input type="radio" hidden name="saveCapacity" value="512" disabled>
+                                                    <label for="saveCapacity" class="btn m-1 btn-outline-custom capacity">
+                                                        <span>512G</span>
+                                                    </label>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <input type="hidden" id="directCode" name="directCode">
+                                    <input type="hidden" id="categoryCode" name="categoryCode">
+                                    <input type="hidden" id="brandCode" name="brandCode">
+                                    <hr>
                                     <div class="product-option-item join">
                                         <div class="option-title-area">
                                             <h3 class="option-title mt-3 mb-2">가입유형</h3>
@@ -844,15 +837,61 @@
 <!-- 상품 삭제 모달창 End -->
 <c:import url="../temp/footer.jsp"></c:import>
 <script>
-	const commaPrice = function(){
+$(document).ready(function() {
     const prices = document.querySelectorAll('[id^="renewPrice"]');
     for (var i = 0; i < prices.length; i++) {
         const price = parseInt(prices[i].innerHTML);
         const renewPrice = price.toLocaleString();
         prices[i].innerHTML =renewPrice;
-        }
+       	
+    }
+
+    $('.optionArea').on('click', 'li[name="colorCode"]', function() {
+    var selectedOptions = getSelectedOptions();
+    console.log('Selected options:', selectedOptions);
+
+    // 선택된 색상 코드와 용량에 대한 추가 처리를 진행합니다.
+    // ...
+  });
+
+  $('.optionArea').on('click', 'label.capacity', function() {
+    var saveCapacity = $(this).prev('input[name="saveCapacity"]');
+    saveCapacity.prop('checked', true);
+
+    var selectedOptions = getSelectedOptions();
+    console.log('Selected options:', selectedOptions);
+
+    // 선택된 색상 코드와 용량에 대한 추가 처리를 진행합니다.
+    // ...
+  });
+
+});
+
 </script>
-<script src="../assets/js/newDirectCode.js"></script>
+
+<script>
+    function getSelectedOptions() {
+  var options = {
+    colorCode: null,
+    saveCapacity: null
+  };
+
+  var colorCode = $('.optionArea li[name="colorCode"].selected').attr('value');
+  var saveCapacity = $('.optionArea input[name="saveCapacity"]:checked').val();
+
+  if (colorCode) {
+    options.colorCode = colorCode;
+  }
+
+  if (saveCapacity) {
+    options.saveCapacity = saveCapacity;
+  }
+
+  return options;
+}
+</script>
+
+
     <!-- 버튼 select js -->
     <script>
         const capacity = document.getElementsByClassName('capacity');
@@ -917,7 +956,44 @@
             })
         }
         
+    </script>
+   <script type="text/javascript">
+    function generateDirectCode(event) {
+        event.preventDefault();
+        
+        let categoryCode = document.getElementById("categoryCode").value;
+        let brandCode = document.getElementById("brandCode").value;
+        let colorCode = document.querySelector("input[name='colorCode']:checked").value;
+        let saveCapacity = document.querySelector("input[name='saveCapacity']:checked").value;
+        let productCode = document.getElementById("productCode").innerText;
+
+        let directCode = "P" + categoryCode + "B" + brandCode + "C" + colorCode + "V" + saveCapacity + productCode;
+
+        // AJAX를 통해 서버로 제품 코드 전송 및 응답 처리
+        $.ajax({
+		  url: "/checkStock",
+		  method: "GET",
+		  data: { directCode: directCode },
+		  success: function(response) {
+		    // 응답 처리 로직 작성
+		    // 예: 재고가 있으면 구매 가능, 없으면 구매 불가능 등
+		    alert(response);
+		    if (response === "구매 가능") {
+	            // 재고가 있을 경우, 용량 선택 버튼 활성화
+	            $("input[name='saveCapacity']").prop("disabled", false);
+	        } else {
+	            // 재고가 없을 경우, 용량 선택 버튼 비활성화
+	            $("input[name='saveCapacity']").prop("disabled", true);
+	        }
+	    },
+		  error: function(xhr, status, error) {
+		    // 에러 처리 로직 작성
+		    console.log(error);
+		  }
+		});
 </script>
+    
+     
 
 <!--  하단 금액 바 고정하는 JS -->
 <script>
@@ -932,7 +1008,6 @@
   }
 });
 </script>
-
 
 <c:import url="../temp/commonJS.jsp"></c:import>
 </body>
