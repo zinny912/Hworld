@@ -3,9 +3,13 @@ package com.hworld.base.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,13 +35,15 @@ public class ApplicationController {
 	public ModelAndView setFormAdd() throws Exception{
 		ModelAndView mv = new ModelAndView();
 		
+		//검증을 위한 빈 application 객체 보내기
+		mv.addObject(new ApplicationVO());
 		mv.setViewName("hworld/applicationForm");
 		return mv;
 	}
 	
 	//신청서 db insert
 	@PostMapping("application")
-	public ModelAndView setFormAdd(ApplicationVO applicationVO) throws Exception{
+	public ModelAndView setFormAdd(@Valid ApplicationVO applicationVO, BindingResult bindingResult) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		
 		//insert 작업
