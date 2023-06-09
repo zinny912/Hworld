@@ -60,6 +60,13 @@
 	    background-color: #eff2f7;
 	    }
 	    
+	    .ellipsis {
+		  width: 50%;
+		  white-space: nowrap;
+		  overflow: hidden;
+		  text-overflow: ellipsis;  /* 말줄임 적용 */
+		}
+	    
 	</style>
 </head>
 
@@ -231,6 +238,21 @@
 	                                                   				<form:radiobutton path="planNum" cssClass="form-check-input" id="${i.planNum}" value="${i.planNum}" data-plan-price="${i.planPrice}"/>
 	                                                   				<label class="form-check-label" for="${i.planNum}">${i.planName}</label>
 	                                                            </div>
+	                                                            <div class="d-flex justify-content-between mb-1">
+	                                                            	<label class="form-check-label ellipsis">
+	                                                            		${i.planExplainSM}
+	                                                            	</label>
+	                                                            	<label class="form-check-label"> 데이터 
+	                                                            	<c:choose>
+	                                                            		<c:when test="${i.dataCapacity eq '무제한'}">
+	                                                            			<c:set var="modiCapacity" value="${i.dataCapacity}"></c:set>
+	                                                            		</c:when>
+	                                                            		<c:otherwise>
+	                                                            			<c:set var="modiCapacity" value="${i.dataCapacity}GB"></c:set>
+	                                                            		</c:otherwise>
+	                                                            	</c:choose>
+	                                                            	${modiCapacity}, ${i.planPrice}원/월</label>
+	                                                            </div>
 		                                                   	</c:forEach>
                                                    			</div>
                                                    		</div>
@@ -243,6 +265,21 @@
 			                                                   	<div class="form-check custome-radio-box">
 	                                                   				<form:radiobutton path="planNum" cssClass="form-check-input" id="${i.planNum}" value="${i.planNum}" data-plan-price="${i.planPrice}"/>
 	                                                   				<label class="form-check-label" for="${i.planNum}">${i.planName}</label>
+	                                                            </div>
+	                                                            <div class="d-flex justify-content-between mb-1">
+	                                                            	<label class="form-check-label ellipsis">
+	                                                            		${i.planExplainSM}
+	                                                            	</label>
+	                                                            	<label class="form-check-label"> 데이터 
+	                                                            	<c:choose>
+	                                                            		<c:when test="${i.dataCapacity eq '무제한'}">
+	                                                            			<c:set var="modiCapacity" value="${i.dataCapacity}"></c:set>
+	                                                            		</c:when>
+	                                                            		<c:otherwise>
+	                                                            			<c:set var="modiCapacity" value="${i.dataCapacity}GB"></c:set>
+	                                                            		</c:otherwise>
+	                                                            	</c:choose>
+	                                                            	${modiCapacity}, ${i.planPrice}원/월</label>
 	                                                            </div>
 		                                                   	</c:forEach>
                                                    			</div>
@@ -257,6 +294,21 @@
 	                                                   				<form:radiobutton path="planNum" cssClass="form-check-input" id="${i.planNum}" value="${i.planNum}" data-plan-price="${i.planPrice}"/>
 	                                                   				<label class="form-check-label" for="${i.planNum}">${i.planName}</label>
 	                                                            </div>
+	                                                            <div class="d-flex justify-content-between mb-1">
+	                                                            	<label class="form-check-label ellipsis">
+	                                                            		${i.planExplainSM}
+	                                                            	</label>
+	                                                            	<label class="form-check-label"> 데이터 
+	                                                            	<c:choose>
+	                                                            		<c:when test="${i.dataCapacity eq '무제한'}">
+	                                                            			<c:set var="modiCapacity" value="${i.dataCapacity}"></c:set>
+	                                                            		</c:when>
+	                                                            		<c:otherwise>
+	                                                            			<c:set var="modiCapacity" value="${i.dataCapacity}GB"></c:set>
+	                                                            		</c:otherwise>
+	                                                            	</c:choose>
+	                                                            	${modiCapacity}, ${i.planPrice}원/월</label>
+	                                                            </div>
 		                                                   	</c:forEach>
                                                    			</div>
                                                    		</div>
@@ -269,6 +321,21 @@
 			                                                   	<div class="form-check custome-radio-box">
 	                                                   				<form:radiobutton path="planNum" cssClass="form-check-input" id="${i.planNum}" value="${i.planNum}" data-plan-price="${i.planPrice}"/>
 	                                                   				<label class="form-check-label" for="${i.planNum}">${i.planName}</label>
+	                                                            </div>
+	                                                            <div class="d-flex justify-content-between mb-1">
+	                                                            	<label class="form-check-label ellipsis">
+	                                                            		${i.planExplainSM}
+	                                                            	</label>
+	                                                            	<label class="form-check-label"> 데이터 
+	                                                            	<c:choose>
+	                                                            		<c:when test="${i.dataCapacity eq '무제한'}">
+	                                                            			<c:set var="modiCapacity" value="${i.dataCapacity}"></c:set>
+	                                                            		</c:when>
+	                                                            		<c:otherwise>
+	                                                            			<c:set var="modiCapacity" value="${i.dataCapacity}GB"></c:set>
+	                                                            		</c:otherwise>
+	                                                            	</c:choose>
+	                                                            	${modiCapacity}, ${i.planPrice}원/월</label>
 	                                                            </div>
 		                                                   	</c:forEach>
                                                    			</div>
@@ -283,6 +350,21 @@
 	                                                   				<form:radiobutton path="planNum" cssClass="form-check-input" id="${i.planNum}" value="${i.planNum}" data-plan-price="${i.planPrice}"/>
 	                                                   				<label class="form-check-label" for="${i.planNum}">${i.planName}</label>
 	                                                            </div>
+	                                                            <div class="d-flex justify-content-between mb-1">
+	                                                            	<label class="form-check-label ellipsis">
+	                                                            		${i.planExplainSM}
+	                                                            	</label>
+	                                                            	<label class="form-check-label"> 데이터 
+	                                                            	<c:choose>
+	                                                            		<c:when test="${i.dataCapacity eq '무제한'}">
+	                                                            			<c:set var="modiCapacity" value="${i.dataCapacity}"></c:set>
+	                                                            		</c:when>
+	                                                            		<c:otherwise>
+	                                                            			<c:set var="modiCapacity" value="${i.dataCapacity}GB"></c:set>
+	                                                            		</c:otherwise>
+	                                                            	</c:choose>
+	                                                            	${modiCapacity}, ${i.planPrice}원/월</label>
+	                                                            </div>
 		                                                   	</c:forEach>
                                                    			</div>
                                                    		</div>
@@ -295,6 +377,21 @@
 			                                                   	<div class="form-check custome-radio-box">
 	                                                   				<form:radiobutton path="planNum" cssClass="form-check-input" id="${i.planNum}" value="${i.planNum}" data-plan-price="${i.planPrice}"/>
 	                                                   				<label class="form-check-label" for="${i.planNum}">${i.planName}</label>
+	                                                            </div>
+	                                                            <div class="d-flex justify-content-between mb-1">
+	                                                           		<label class="form-check-label ellipsis">
+	                                                            		${i.planExplainSM}
+	                                                            	</label>
+	                                                            	<label class="form-check-label"> 데이터 
+	                                                            	<c:choose>
+	                                                            		<c:when test="${i.dataCapacity eq '무제한'}">
+	                                                            			<c:set var="modiCapacity" value="${i.dataCapacity}"></c:set>
+	                                                            		</c:when>
+	                                                            		<c:otherwise>
+	                                                            			<c:set var="modiCapacity" value="${i.dataCapacity}GB"></c:set>
+	                                                            		</c:otherwise>
+	                                                            	</c:choose>
+	                                                            	${modiCapacity}, ${i.planPrice}원/월</label>
 	                                                            </div>
 		                                                   	</c:forEach>
                                                    			</div>
@@ -445,7 +542,7 @@
     <div class="tap-to-top">
         <a href="#home">
             <i class="fas fa-chevron-up"></i>
-        </a>q
+        </a>
     </div>
     <!-- tap to top Section End -->
 

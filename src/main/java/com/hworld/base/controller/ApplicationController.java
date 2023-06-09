@@ -89,14 +89,12 @@ public class ApplicationController {
 	public ModelAndView setFormAdd(@Valid ApplicationVO applicationVO, BindingResult bindingResult) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		
+		if(bindingResult.hasErrors()) {
+			log.warn("========== 에러가 발생함 ==========");
+			mv.setViewName("hworld/applicationForm");
+		}
+		
 		//insert 작업
-		//하기전에 parameter 받아오기
-		System.out.println(applicationVO.getName());
-		log.warn("=============> name : {} ", applicationVO.getName());
-		log.warn("=============> rrnl : {} ", applicationVO.getRrnl());
-		log.warn("=============> address3 : {} ", applicationVO.getAddress3());
-		log.warn("=============> disKind : {} ", applicationVO.getDisKind());
-		log.warn("=============> directName : {} ", applicationVO.getDirectName());
 		
 		int result = applicationService.setFormAdd(applicationVO);
 		log.warn("=============> result : {} ", result);
