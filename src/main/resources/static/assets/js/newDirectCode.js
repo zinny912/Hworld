@@ -1,4 +1,5 @@
 $(document).ready(function() {
+	
   const commaPrice = function() {
     const prices = document.querySelectorAll('[id^="renewPrice"]');
     for (var i = 0; i < prices.length; i++) {
@@ -7,6 +8,13 @@ $(document).ready(function() {
       prices[i].innerHTML = renewPrice;
     }
   };
+  
+  $('.noStock').hide();
+  
+  $('.titlebox:first').show();
+  
+  // 나머지 리스트 요소를 숨김
+  $('.titlebox:not(:first)').hide();
 
   commaPrice();
  // Option 선택시 directCode 완성된 것을 $('#directCode').val에 저장
@@ -54,17 +62,27 @@ $(document).ready(function() {
 
   // 일치하는 directCode를 가진 titlebox를 표시하고 나머지는 숨김
   function updateTitleBoxVisibility(directCode) {
-    var directListItems = $('#directList').find('.direct-item');
+    const directListItems = $('#directList').find('.direct-item');
+    let matchingItemFound = false;
     directListItems.each(function() {
-      var listItem = $(this);
-      var listItemDirectCode = listItem.attr('data-direct-code');
+      const listItem = $(this);
+      const listItemDirectCode = listItem.attr('data-direct-code');
 
       if (listItemDirectCode === directCode) {
-        listItem.closest('.titlebox').show();
+        listItem.closest('.titlebox').show(); 
+        matchingItemFound = true;  
       } else {
         listItem.closest('.titlebox').hide();
       }
+      
     });
+  if (!matchingItemFound) {
+    $('.noStock').show(); // 일치하는 제품이 없는 경우 재고없음을 나타내는 div를 보여줌
+  } else {
+    $('.noStock').hide(); // 일치하는 제품이 있는 경우 재고없음을 나타내는 div를 숨김
+  }  
+
+
   }
 
 

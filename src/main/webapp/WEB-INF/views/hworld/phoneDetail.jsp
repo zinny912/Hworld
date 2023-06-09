@@ -104,6 +104,9 @@
                                                     data-bs-target="#productdel">삭제</a>
                                     </div>    
                           <div id="directList">
+                          		<div class="noStock" style="display:none;">
+                          			<h2 class="theme-color">선택하신 제품은 재고가 없습니다.</h2>
+                          		</div>
 							  <c:forEach items="${list}" var="direct" varStatus="status">
 							  <div class="titlebox">
 							    <div class="brand direct-item" style="font-size: 27px; color: gray;" id="productCode"
@@ -128,6 +131,8 @@
 							      <input type="text" id="directStock" name="directStock" value="${direct.directStock}" readonly>
 							    </div>
 							    </c:forEach>
+							
+							
 							    <div class="optionArea">
 							      <div class="product-option-item color">
 							        <div class="option-title-area">
@@ -147,19 +152,19 @@
 							        </div>
 							        <div>
 							          <span>
-							            <input type="radio" hidden name="saveCapacity" value="128" disabled>
+							            <input type="radio" hidden name="saveCapacity" value="128">
 							            <label for="saveCapacity" class="btn btn-outline-custom m-1 capacity">
 							              <span>128G</span>
 							            </label>
 							          </span>
 							          <span>
-							            <input type="radio" hidden name="saveCapacity" value="256" disabled>
+							            <input type="radio" hidden name="saveCapacity" value="256">
 							            <label for="saveCapacity" class="btn m-1 btn-outline-custom capacity">
 							              <span>256G</span>
 							            </label>
 							          </span>
 							          <span>
-							            <input type="radio" hidden name="saveCapacity" value="512" disabled>
+							            <input type="radio" hidden name="saveCapacity" value="512">
 							            <label for="saveCapacity" class="btn m-1 btn-outline-custom capacity">
 							              <span>512G</span>
 							            </label>
