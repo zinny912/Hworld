@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import com.hworld.base.util.Pager;
@@ -39,6 +41,6 @@ public interface DirectDAO {
 	
 	//파일 삭제 
 	public int setFileDelete (DirectVO directVO) throws Exception;
-
+	
 			
 }

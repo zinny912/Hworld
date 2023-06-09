@@ -5,6 +5,9 @@ import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.apache.catalina.util.URLEncoder;
@@ -73,18 +76,42 @@ public class DirectController {
 	
 	// 액세서리 리스트 페이지
 	@GetMapping("accessoryList")
-	public ModelAndView d3() throws Exception{
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("hworld/accessoryList");
-		return modelAndView;
+	public ModelAndView getAccList(ModelAndView mv, Pager pager, @RequestParam(value = "sortType", defaultValue = "latest") String sortType, HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+	    // sortType에 따라 정렬 유형 설정
+	    if (sortType.equals("priceHigh")) {
+	        pager.setSortType("priceHigh");
+	    } else if (sortType.equals("priceLow")) {
+	        pager.setSortType("priceLow");
+	    } else {
+	        pager.setSortType("latest");
+	    }
+	    
+	    List<DirectVO> ar = directService.getList(pager);
+	    
+//	    directService.setSeenList(request, response, null);
+	    
+	    List<DirectVO> recentlyViewedProducts = directService.getseenList(request);
+	    
+	    mv.addObject("recentlyViewedProducts", recentlyViewedProducts);
+	    mv.addObject("list", ar);
+	    mv.setViewName("hworld/accessoryList");
+	    
+	    return mv;
 	}
+
 	
-	// 액세서리 리스트 페이지
+	// 액세서리 디테일 페이지
 	@GetMapping("accessoryDetail")
-	public ModelAndView d4() throws Exception{
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("hworld/accessoryDetail");
-		return modelAndView;
+	public ModelAndView getAccDetail(DirectVO directVO, String slicedCode, HttpServletRequest request, HttpServletResponse response) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		List<DirectVO> ar = directService.getDetail(slicedCode);
+
+	    directService.setSeenList(request, response, slicedCode);
+
+		mv.addObject("list", ar);		
+		mv.setViewName("hworld/accessoryDetail");
+		return mv;
 	}
 	
 	// 휴대폰 & 액세서리 상품 추가 페이지
@@ -205,42 +232,8 @@ public class DirectController {
 		return modelAndView;
 	}
 	
-	
 
-	/*
-	
-	 * 
-	 *  //상품 상세페이지
-	 * 
-	 * @GetMapping("detail") 
-	 * public ModelAndView getDetail(DirectVO directVO)throws
-	 * Exception{ 
-	 * ModelAndView mv = new ModelAndView(); directVO =
-	 * directService.getDetail(directVO);
-	 * 
-	 * mv.addObject("directVO", directVO); 
-	 * mv.setViewName("directDetail");
-	 * 
-	 * return mv;
-	 * 
-	 * } //상품 추가
-	 * 
-	 * @GetMapping("add") public ModelAndView setInsert(@ModelAttribute DirectVO
-	 * directVO)throws Exception{ ModelAndView mv = new ModelAndView();
-	 * 
-	 * mv.setViewName("directAdd"); return mv; } //상품 추가
-	 * 
-	 * @PostMapping("add") public ModelAndView setInsert(@Valid DirectVO directVO,
-	 * BindingResult bindingResult)throws Exception{ ModelAndView mv = new
-	 * ModelAndView(); int result = directService.setInsert(directVO);
-	 * mv.setViewName("redirect:./directList"); return mv; } //상품 삭제
-	 * 
-	 * @PostMapping("delete") public ModelAndView setDelete(DirectVO directVO)throws
-	 * Exception{ ModelAndView mv = new ModelAndView(); int result =
-	 * directService.setDelete(directVO); mv.setViewName("redirect:./directList");
-	 * return mv; }
-	 */
-	
+
 	
 	
 }
