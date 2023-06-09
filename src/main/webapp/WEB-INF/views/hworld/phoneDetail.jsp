@@ -104,17 +104,18 @@
                                         <a href="javascript:void(0)" data-bs-toggle="modal"
                                                     data-bs-target="#productdel">삭제</a>
                                     </div>
+							<c:forEach items="${list}" var="direct">
                                     <div class="brand" style="font-size: 27px; color: gray;" id="productCode">
-                                       ${directVO.value}   ${directVO.slicedCode}                                     
+                                       ${direct.value}   ${direct.slicedCode}                                     
                                     </div>
                                     <div class="details-image-concept mt-0" style="font-size: 35px;">
-                                        ${directVO.directName}
+                                        ${direct.directName}
                                     </div>
                                     <div>
                                         <h3 class="mt-3 ">출고가</h3>
                                     </div>
                                     <p>
-                                        <span class="price-detail theme-color fw-bold" id="renewPrice">${directVO.directPrice}</span>
+                                        <span class="price-detail theme-color fw-bold" id="renewPrice">${direct.directPrice}</span>
                                         <span class="unit">원</span>
                                     </p>
 
@@ -156,10 +157,11 @@
                                             </span>
                                         </div>
                                     </div>
-                                    <input type="hidden" id="directCode" name="directCode">
+                                    <input type="hidden" id="directCode" name="directCode" >
                                     <input type="hidden" id="categoryCode" name="categoryCode">
                                     <input type="hidden" id="brandCode" name="brandCode">
                                     <hr>
+                                 </c:forEach>
                                     <div class="product-option-item join">
                                         <div class="option-title-area">
                                             <h3 class="option-title mt-3 mb-2">가입유형</h3>
