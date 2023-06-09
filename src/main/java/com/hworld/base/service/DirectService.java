@@ -51,8 +51,10 @@ public class DirectService {
 	//상품 등록 
 	public int setInsert(DirectVO directVO, MultipartFile[] multipartFiles)throws Exception{
 		
-		String fileName = fileManager.saveFile(multipartFiles, directVO);
-
+		String fileName = fileManager.deleteFile(multipartFiles, directVO);
+		fileName = fileManager.saveFile(multipartFiles, directVO);
+				
+		
 		int result = directDAO.setInsert(directVO);
 		
 		return result;
@@ -62,16 +64,18 @@ public class DirectService {
 	//상품 수정 
 	public int setUpdate(DirectVO directVO, MultipartFile[] multipartFiles) throws Exception{
 		
-		String fileName = fileManager.updateFile(multipartFiles, directVO);
+		String fileName = fileManager.deleteFile(multipartFiles, directVO);
 		fileName = fileManager.saveFile(multipartFiles, directVO);	
-		
+
 		return directDAO.setUpdate(directVO);
 	}
 
 	
 	//상품 삭제 
-	public int setDelete(DirectVO directVO) throws Exception{
-		return directDAO.setDelete(directVO);
+	public int setDelete(String slicedCode) throws Exception{
+		
+		
+		return directDAO.setDelete(slicedCode);
 	}
 	
 }

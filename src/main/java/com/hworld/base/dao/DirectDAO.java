@@ -38,7 +38,7 @@ public interface DirectDAO {
 	public int setUpdate(DirectVO directVO) throws Exception;
 	
 	//상품 삭제
-	public int setDelete(DirectVO directVO) throws Exception;
+	public int setDelete(String slicedCode) throws Exception;
 	
 	//파일 삭제 
 	public int setFileDelete (DirectVO directVO) throws Exception;

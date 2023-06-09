@@ -1,5 +1,6 @@
 package com.hworld.base.controller;
 
+import java.nio.charset.StandardCharsets;
 import java.sql.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,6 +9,7 @@ import java.util.Map;
 
 import javax.validation.Valid;
 
+import org.apache.catalina.util.URLEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -161,26 +163,27 @@ public class DirectController {
 //	}
 //	
 	// 휴대폰 & 악세사리 상품 수정 페이지
-//	@GetMapping("directUpdate")
-//	public ModelAndView setUpdate(DirectVO directVO) throws Exception{
-//		ModelAndView modelAndView = new ModelAndView();
-//		String slicedCode = directVO.getDirectCode().substring(directVO.getDirectCode().length() - 5);
-//		
-//		slicedCode.
-//
-//		
-//		modelAndView.setViewName("hworld/directUpdate");
-//		modelAndView.addObject("directVO", directVO);
-//		modelAndView.addObject("list", lastFiveDigitsList);
-//		return modelAndView;
-//	}
+	@GetMapping("directUpdate")
+	public ModelAndView setUpdate(DirectVO directVO, String slicedCode) throws Exception{
+		ModelAndView modelAndView = new ModelAndView();
+		List<DirectVO> ar = directService.getDetail(slicedCode);
+
+		
+		modelAndView.setViewName("hworld/directUpdate");
+		modelAndView.addObject("directVO", directVO);
+		modelAndView.addObject("list", ar);
+		return modelAndView;
+	}
 	
 	@PostMapping("directUpdate")
 	public ModelAndView setUpdate(String categoryCode, String brandCode, String directName, String directContents,
-			String[] colorCode, String[] saveCapacity, Integer[] directPrice, Integer[] directStock, String[] directCode, DirectVO directVO, MultipartFile[] multipartFiles) throws Exception{
+			String[] colorCode, String[] saveCapacity, Integer[] directPrice, Integer[] directStock, String[] directCode, DirectVO directVO, MultipartFile[] multipartFiles, String slicedCode) throws Exception{
 		ModelAndView modelAndView = new ModelAndView();
 		
-		System.out.println(multipartFiles);
+		slicedCode = directVO.getDirectCode().substring(directVO.getDirectCode().length() - 5);
+		directService.setDelete(slicedCode);
+		
+		System.out.println(slicedCode);
 		
 		//반복문으로 directVO 하나 완성하기 + 완성될 때 서비스로 insert 메서드 호출
 		for(int i=0; i<directCode.length; i++) {
@@ -196,12 +199,11 @@ public class DirectController {
 			directVO2.setDirectCode(directCode[i]);
 
 			
-			
-			directService.setUpdate(directVO2, multipartFiles);
+			directService.setInsert(directVO2, multipartFiles);
 		}
+
 		
-		modelAndView.setViewName("redirect:./phoneList");
-//		modelAndView.addObject("URL", "./phoneDetail?directCode="+directVO.getDirectCode());
+		modelAndView.setViewName("redirect:/direct/phoneDetail?slicedCode="+slicedCode);
 		return modelAndView;
 	}
 	
