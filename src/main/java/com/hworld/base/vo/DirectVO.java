@@ -1,6 +1,7 @@
 package com.hworld.base.vo;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 import lombok.Getter;
@@ -37,8 +38,8 @@ public class DirectVO {
     private String saveCapacity;
     
     //업로드 날짜 
-    private Date uploadDate;
-
+    private Timestamp uploadDate;
+    
     //리뷰 별점 가져오기 위한 VO 설정 (쿼리에서 받아옴)
     private Double rate;
     
