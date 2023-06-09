@@ -52,8 +52,7 @@ public class DirectService {
 	public int setInsert(DirectVO directVO, MultipartFile[] multipartFiles)throws Exception{
 		
 		String fileName = fileManager.saveFile(multipartFiles, directVO);
-				
-		
+
 		int result = directDAO.setInsert(directVO);
 		
 		return result;
