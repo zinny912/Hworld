@@ -92,7 +92,7 @@
                                                     class="img-fluid bg-img blur-up lazyload" alt="">
                                             </div>
                                         </div>
-                                        
+ 
                                     </div>
                                 </div>
                             </div>
@@ -105,10 +105,10 @@
                                     </div>    
                           <div id="directList">
 							  <c:forEach items="${list}" var="direct" varStatus="status">
-							  
+							  <div class="titlebox">
 							    <div class="brand direct-item" style="font-size: 27px; color: gray;" id="productCode"
 							      data-direct-code="${direct.directCode}" data-direct-price="${direct.directPrice}"
-							      data-direct-stock="${direct.directStock}" style="display:none;">
+							      data-direct-stock="${direct.directStock}">
 							      ${direct.value} ${direct.slicedCode} ${direct.directCode}
 							    </div>
 							    <div class="details-image-concept mt-0" style="font-size: 35px;">
@@ -121,6 +121,13 @@
 							      <span class="price-detail theme-color fw-bold" id="renewPrice" >${direct.directPrice}</span>
 							      <span class="unit">원</span>
 							    </p>
+							     <input type="hidden" id="directCode" name="directCode" value="${direct.directCode}">
+							      <input type="hidden" id="categoryCode" name="categoryCode" value="${direct.categoryCode}">
+							      <input type="hidden" id="brandCode" name="brandCode" value="${direct.brandCode}">
+							      <input type="hidden" id="slicedCode" name="slicedCode" value="${direct.slicedCode}">
+							      <input type="text" id="directStock" name="directStock" value="${direct.directStock}" readonly>
+							    </div>
+							    </c:forEach>
 							    <div class="optionArea">
 							      <div class="product-option-item color">
 							        <div class="option-title-area">
@@ -159,15 +166,8 @@
 							          </span>
 							        </div>
 							      </div>
-							      <input type="hidden" id="directCode" name="directCode" value="${direct.directCode}">
-							      <input type="hidden" id="categoryCode" name="categoryCode" value="${direct.categoryCode}">
-							      <input type="hidden" id="brandCode" name="brandCode" value="${direct.brandCode}">
-							      <input type="hidden" id="slicedCode" name="slicedCode" value="${direct.slicedCode}">
-							      <input type="hidden" id="directStock" name="directStock" value="${direct.directStock}">
+							     
 							      <hr>
-							    </div>
-							  </c:forEach>
-							  
 							</div>
                                 
                                     <div class="product-option-item join">
