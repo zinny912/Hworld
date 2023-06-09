@@ -85,27 +85,28 @@
                                 <label for="categoryCode" class="form-label" >카테고리</label>
                                 <div class="col-12">
                                     <select class="form-select custome-form-select" id="categoryCode" name="categoryCode">
-                                        <option selected="" value="01"> 휴대폰</option>                                   
+                                        <option value="01" ${list.get(0).getCategoryCode().equals("P") ? 'selected' : ''}>휴대폰</option>
                                     </select>
                                 </div>
                             </div> 
+                            
                             <div class="col-md-6">
                                 <label for="brandCode" class="form-label" >브랜드</label>
                                 <div class="col-12">
-                                    <select class="form-select custome-form-select" id="brandCode" name="brandCode" >
-   										<option value="S">삼성</option>
-            							<option value="A">애플</option>
+                                    <select class="form-select custome-form-select" id="brandCode" name="brandCode">
+            							<option value="S" ${list.get(0).getBrandCode().equals("S") ? 'selected' : ''}>삼성</option>
+								        <option value="A" ${list.get(0).getBrandCode().equals("A") ? 'selected' : ''}>애플</option>
                                     </select>
                                 </div>
                             </div>
 
                             <div class="col-md-6">
                                 <label for="directName" class="form-label">상품명</label>
-                                <input type="text" class="form-control" id="directName" placeholder="상품명" name="directName" value="${directVO.directName}">
+                                <input type="text" class="form-control" id="directName" placeholder="상품명" name="directName" value="${list.get(0).getDirectName()}" readonly="readonly">
                             </div>
                             <div class="col-md-6">
                                 <label for="directCode" class="form-label">제품코드</label>
-                                <input type="text" class="form-control" id="productCode" placeholder="ex) G2301" value="${directVO.slicedCode}" readonly="readonly">
+                                <input type="text" class="form-control" id="productCode" value="${directVO.slicedCode}" readonly="readonly">
                             </div>
                        
                            	<div class="col-md-2 mt-5 d-flex ">
@@ -122,28 +123,29 @@
 									<div class="row g-2 my-2 options">
 						    			<div class="col-md-3">
 								            <div class="col-12">
-								                <select class="form-select custome-form-select" name="colorCode" value="${directCode.colorCode}">
-								                    <option value="W">white</option>
-								                    <option value="G">gray</option>
-								                    <option value="B">black</option>
+								                <select class="form-select custome-form-select" name="colorCode">
+								                	<option value="" ${directCode.colorCode == '' ? 'selected' : ''}>없음</option>
+								                    <option value="W" ${directCode.colorCode == 'W' ? 'selected' : ''}>white</option>
+										            <option value="G" ${directCode.colorCode == 'G' ? 'selected' : ''}>gray</option>
+										            <option value="B" ${directCode.colorCode == 'B' ? 'selected' : ''}>black</option>
 								                </select>
 								            </div>
 								        </div> 
 								        <div class="col-md-3">
 								            <div class="col-12">
-								                <select class="form-select custome-form-select" name="saveCapacity" value="${option.saveCapacity}">
-								                    <option selected="" value="">없음</option>                                
-								                    <option value="128">128GB</option>                                    
-								                    <option value="256">256GB</option>
-								                    <option value="512">512GB</option>
+								                <select class="form-select custome-form-select" name="saveCapacity" >
+										            <option value="" ${directCode.saveCapacity == '' ? 'selected' : ''}>없음</option>
+										            <option value="128" ${directCode.saveCapacity == '128' ? 'selected' : ''}>128GB</option>
+										            <option value="256" ${directCode.saveCapacity == '256' ? 'selected' : ''}>256GB</option>
+										            <option value="512" ${directCode.saveCapacity == '512' ? 'selected' : ''}>512GB</option>
 								                </select>
 								            </div>
 								        </div> 
 								        <div class="col-md-3">
-								            <input type="text" class="form-control" name="directPrice" value="${option.directPrice}" placeholder="금액 숫자만 입력"> 
+								            <input type="text" class="form-control" name="directPrice" value="${directCode.directPrice}" placeholder="금액 숫자만 입력"> 
 								        </div>
 								        <div class="col-md-3">
-								            <input type="text" class="form-control" name="directStock" value="${option.directStock}" placeholder="재고 숫자만 입력">
+								            <input type="text" class="form-control" name="directStock" value="${directCode.directStock}" placeholder="재고 숫자만 입력">
 								        </div> 
 								        <input type="hidden" id="directCode" name="directCode">
 								     </div>
@@ -170,7 +172,7 @@
 
                             <!-- 확인버튼 -->
                             <div class="col-12 d-flex justify-content-center">
-                                <button type="submit" class="btn btn-solid-default mx-auto" id="btn2">등록하기</button>
+                                <button type="submit" class="btn btn-solid-default mx-auto" id="btn2" >수정하기</button>
                             </div> 
                         </div>
                     </form>
@@ -181,28 +183,26 @@
     <!-- Shop Section end -->       
 <c:import url="../temp/footer.jsp"></c:import>
 
+<!-- <script>
+    // JavaScript 코드
+    // 선택한 값이 hidden input의 value에 설정되도록 함
+    let brandCodeSelect = document.getElementById("brandCode");
+    let selectedBrandCodeInput = document.getElementById("selectedBrandCode"); // hidden input 요소의 ID
 
-<script>
-    var brandCodeSelect = document.getElementById('brandCode');
-    var directCode = '${directVO.directCode}';
-
-    if (directCode.length >= 5 && directCode.charAt(4) === 'S') {
-        brandCodeSelect.value = 'S';
-    } else if (directCode.length >= 5 && directCode.charAt(4) === 'A') {
-        brandCodeSelect.value = 'A';
-    }
-
-    brandCodeSelect.addEventListener('change', function() {
-        // 선택된 옵션을 변경하지 않도록 다시 원래 값으로 되돌립니다.
-        if (directCode.length >= 5 && directCode.charAt(4) === 'S') {
-            brandCodeSelect.value = 'S';
-        } else if (directCode.length >= 5 && directCode.charAt(4) === 'A') {
-            brandCodeSelect.value = 'A';
-        } else if (directCode.length >=5 && directCode.charAt(1)==='P'){
-        	categoryCodeSelect.value = 'P';
-        }
+    brandCodeSelect.addEventListener("change", function() {
+        selectedBrandCodeInput.value = brandCodeSelect.value;
     });
-</script>
+    
+    
+    // JavaScript 코드
+    // 선택한 값이 hidden input의 value에 설정되도록 함
+    let categoryCodeSelect = document.getElementById("categoryCode");
+    let selectedCategoryCodeInput = document.getElementById("selectedCategoryCode"); // hidden input 요소의 ID
+
+    brandCodeSelect.addEventListener("change", function() {
+        selectedCategoryCodeInput.value = categoryCodeSelect.value;
+    });
+</script> -->
 
 
 <script>	

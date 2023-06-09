@@ -29,15 +29,6 @@ public class MemberService {
 		
 		String rrnl = memberVO.getRrnl();
         memberVO.setRrnl(SHA256Util.encryptMD5(memberVO.getRrnl()));
-                
-		
-//		String salt = SHA256Util.generateSalt();
-//		memberVO.setSalt(salt);
-//		
-//		String rrnl = memberVO.getRrnl();
-//		rrnl = SHA256Util.getEncrypt(rrnl, salt);
-//		
-//		memberVO.setRrnl(rrnl);
 		
 		return memberDAO.setMemberAdd(memberVO);
 	}		

@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.hworld.base.dao.ApplicationDAO;
-import com.hworld.base.util.SHA256;
 import com.hworld.base.util.SHA256Util;
 import com.hworld.base.vo.ApplicationVO;
 import com.hworld.base.vo.MemberVO;
@@ -21,11 +20,6 @@ public class ApplicationService {
 	
 	@Autowired
 	private ApplicationDAO applicationDAO;
-	
-	@Bean
-	BCryptPasswordEncoder rrnlEncoder() {
-		return new BCryptPasswordEncoder();
-	};
 	
 	
 	//신청서 db에 insert
@@ -42,35 +36,29 @@ public class ApplicationService {
 		//1.최초 신청서 db에 insert
 		//신청서 db에 insert 하기전에 rrnl값을 암호화 해야할거같은데.
 		//평문 주민뒷자리를 rrnlOrigin에 저장
-		applicationVO.setRrnlOrigin(applicationVO.getRrnl()); 
-		//BCryptPasswordEncoder로 rrnl 암호화 해서 저장
-//		String rawRrnl = "";
-//		String encodeRrnl = "";
-//		
-//		rawRrnl = applicationVO.getRrnl();
-//		encodeRrnl = rrnlEncoder().encode(rawRrnl);
-//		applicationVO.setRrnl(encodeRrnl);		
+		applicationVO.setRrnlOrigin(applicationVO.getRrnl());
 		
-//		log.error(">>>>>>>>>>>>>>>>>>>>>>>>>> {} ", applicationVO.getRrnl());
-//		log.error(">>>>>>>>>>>>>>>>>>>>>>>>>> {} ", applicationVO.getRrnlOrigin());
+		//SHA256Util을 이용해서 hash암호화
+		applicationVO.setRrnl(SHA256Util.encryptMD5(applicationVO.getRrnl()));
 		
-		int result = applicationDAO.setFormAdd(applicationVO);
+		log.error(">>>>>>>>>>>>>>>>>>>>>>>>>> 암호화: {} ", applicationVO.getRrnl());
+		log.error(">>>>>>>>>>>>>>>>>>>>>>>>>> 암호화전: {} ", applicationVO.getRrnlOrigin());
 		log.error(applicationVO.getAppNum().toString());
 		
-//		boolean check = rrnlEncoder().matches(rawRrnl, encodeRrnl);
-//		log.error(">>>>>>>>>>>>>>>>>>>>>>>>>> {} ", check);
+		int result = applicationDAO.setFormAdd(applicationVO);
 		
 		//방금 auto_increment로 생성한 appNum을 어케 알지?
 		//useGenerateKeys, keyProperty 사용하기
 		
 		//2.신청서에 적힌 주민번호가 일치하는 회원이 있으면 회원번호를 받아옴 -> 일치하는 정보가 있으면 3-2a부터 진행
-		applicationVO.setRrnl(encodeRrnl);
-		log.error(">>>>>>>>>>>>>>>>>>>>>>>>>> appRrnl: {} ", applicationVO.getRrnl());
 		
 		MemberVO memberVO = applicationDAO.getMemberSearch(applicationVO);
 		
-		boolean check = rrnlEncoder().matches(applicationVO.getRrnl(), memberVO.getRrnl());
-		log.error(">>>>>>>>>>>>>>>>>>>>>>>>>> {} ", check);
+		boolean check = false;
+		if(memberVO!=null) {
+			check=true;
+		}
+		log.error(">>>>>>>>>>>>>>>>>>>>>>>>>> 일치여부: {} ", applicationVO.getRrnlOrigin());
 		
 //		//회원번호가 들어있으면 MemberVO가 null이 아님. 들어있지 않으면 null
 //		//3-1a.회원번호 정보가 없음.
