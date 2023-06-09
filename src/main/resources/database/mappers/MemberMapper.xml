@@ -20,6 +20,12 @@
 		WHERE EMAIL = #{email}		
 	</select>
 	
+	<select id="emailSearch" parameterType="MemberVO" resultType="MemberVO">
+		<![CDATA[
+		    SELECT * FROM MEMBER
+		    WHERE NAME = #{name} AND PHONENUM = #{phoneNum}
+		]]>    
+</select>
 	
 	
 </mapper>

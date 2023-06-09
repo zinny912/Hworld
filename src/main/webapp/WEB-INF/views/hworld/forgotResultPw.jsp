@@ -43,7 +43,7 @@
             <div class="box">
                 <!-- 홈 버튼 -->
                 <div class="d-flex justify-content-center">
-                    <a href="index.html">
+                    <a href="/">
                         <h2><img src="/assets/images/logos/2.png"></h2>
                     </a>
                 </div>
@@ -88,7 +88,7 @@
 
                 <!-- 버튼 영역 -->
                 <div class="button login button-1">
-                    <button onclick="location.href = 'log-in.html';">
+                    <button onclick="location.href = 'login';">
                         <span>로그인 화면으로</span>
                         <i class="fa fa-check"></i>
                     </button>

@@ -9,9 +9,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -61,7 +63,7 @@ public class MemberController {
 	
 	// 계정정보 찾기 페이지
 	@GetMapping("forgot")
-	public ModelAndView m5() throws Exception{
+	public ModelAndView forgot() throws Exception{
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("hworld/forgot");
 		return modelAndView;
@@ -69,7 +71,7 @@ public class MemberController {
 	
 	// 아이디 찾기 페이지
 	@GetMapping("forgotId")
-	public ModelAndView m6() throws Exception{
+	public ModelAndView forgotId(HttpServletRequest request, MemberVO memberVO) throws Exception{
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("hworld/forgotId");
 		return modelAndView;
@@ -77,18 +79,51 @@ public class MemberController {
 	
 	// 비밀번호 찾기 페이지
 	@GetMapping("forgotPw")
-	public ModelAndView m7() throws Exception{
+	public ModelAndView forgotPw(HttpServletRequest request, MemberVO memberVO) throws Exception{
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("hworld/forgotPw");
 		return modelAndView;
 	}
 	
-	// 조회결과 페이지
-	@GetMapping("forgotResult")
-	public ModelAndView m8() throws Exception{
+	// 이메일 찾기 조회결과 페이지
+	@PostMapping("forgotResultEmail")
+	public String forgotResultEmail(HttpServletRequest request, Model model, @RequestParam(required = false, value = "name") String name, @RequestParam(required = false, value = "phoneNum") String phoneNum, MemberVO memberVO) throws Exception{		
+		
+		try {
+		    
+		    memberVO.setName(name);
+		    memberVO.setPhoneNum(phoneNum);
+		    MemberVO memberSearch = memberService.emailSearch(memberVO);
+		    
+		    model.addAttribute("memberVO", memberSearch);
+		 
+		} catch (Exception e) {
+		    System.out.println(e.toString());
+		    model.addAttribute("msg", "오류가 발생되었습니다.");
+		}
+		
+		return "/hworld/forgotResultEmail";
+	}
+	
+	// 비밀번호 찾기 조회결과 페이지
+	@GetMapping("forgotResultPw")
+	public String forgotResultPw(HttpServletRequest request, Model model, @RequestParam(required = true, value = "name") String name, @RequestParam(required = true, value = "phoneNum") String phoneNum, MemberVO memberVO) throws Exception{
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("hworld/forgotResult");
-		return modelAndView;
+		
+		try {
+		    
+		    memberVO.setName(name);
+		    memberVO.setPhoneNum(phoneNum);
+		    MemberVO memberSearch = memberService.emailSearch(memberVO);
+		    
+		    model.addAttribute("memberVO", memberSearch);
+		 
+		} catch (Exception e) {
+		    System.out.println(e.toString());
+		    model.addAttribute("msg", "오류가 발생되었습니다.");
+		}
+		
+		return "/hworld/forgotResultPw";
 	}
 	
 	// 회원가입 페이지
