@@ -42,6 +42,7 @@ public class ApplicationController {
 		
 		//페이지 로딩시 필요한 정보
 		//요금제 정보 호출, 담기
+		//나중에 고칠때 각각의 요금제 List들을 existList에 넣어서 jsp로 보내고 jsp 수정해보기.
 		List<PlanVO> existPlanList = applicationService.getExistPlanList();
 		List<PlanVO> allPlanList = applicationService.getPlanList();
 
