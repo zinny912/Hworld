@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.hworld.base.service.ApplicationService;
 import com.hworld.base.vo.ApplicationVO;
+import com.hworld.base.vo.DirectVO;
 import com.hworld.base.vo.PlanVO;
 
 import lombok.extern.slf4j.Slf4j;
@@ -44,7 +45,13 @@ public class ApplicationController {
 		//요금제 정보 호출, 담기
 		//나중에 고칠때 각각의 요금제 List들을 existList에 넣어서 jsp로 보내고 jsp 수정해보기.
 		List<PlanVO> existPlanList = applicationService.getExistPlanList();
-		List<PlanVO> allPlanList = applicationService.getPlanList();
+		List<PlanVO> planList = applicationService.getPlanList();
+		for(PlanVO planVO : planList) {
+			log.info(">>>>>>>>>>>>>>>>>>>>>>>>>> {} {} ", planVO.getPlanName(), planVO.getDisPercent());
+		}
+		
+		//상품 정보 호출
+		List<DirectVO> directList = applicationService.getDirectList();
 
 		List<PlanVO> gList = new ArrayList<>();
 		List<PlanVO> sList = new ArrayList<>();
@@ -54,7 +61,7 @@ public class ApplicationController {
 		List<PlanVO> hList = new ArrayList<>();
 
 		//패턴별로 리스트를 분류
-		for (PlanVO plan : allPlanList) {
+		for (PlanVO plan : planList) {
 		    String planNum = plan.getPlanNum();
 		    if (planNum.startsWith("G")) {
 		        gList.add(plan);
@@ -71,6 +78,7 @@ public class ApplicationController {
 		    }
 		}
 		
+		//
 		mv.addObject("existList", existPlanList);
 		mv.addObject("gList", gList);
 		mv.addObject("sList", sList);
@@ -78,6 +86,9 @@ public class ApplicationController {
 		mv.addObject("zList", zList);
 		mv.addObject("wList", wList);
 		mv.addObject("hList", hList);
+		
+		//
+		mv.addObject("directList", directList);
 		
 		mv.setViewName("hworld/applicationForm");
 		return mv;
@@ -89,20 +100,39 @@ public class ApplicationController {
 	public ModelAndView setFormAdd(@Valid ApplicationVO applicationVO, BindingResult bindingResult) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		
+		//에러가 발생한 경우 여기서 view 리턴
 		if(bindingResult.hasErrors()) {
-			log.warn("========== 에러가 발생함 ==========");
+			log.info("========== 에러가 발생함 ==========");
 			mv.setViewName("hworld/applicationForm");
+			return mv;
 		}
 		
-		//insert 작업
 		
+		//에러가 없는경우 insert 작업
 		int result = applicationService.setFormAdd(applicationVO);
-		log.warn("=============> result : {} ", result);
-		
-		
+		log.info("=============> result : {} ", result);
 		mv.setViewName("hworld/applicationForm");
 		//성공하면 결과에 따라 alert띄우기 해도 될듯. 나중에 index 등으로 바꾸기
 		return mv;
 	}
-
+	
+	
+	//directCode 2번째 셀렉트박스 ajax 요청
+	@GetMapping("getSelectedDirectList")
+	public ModelAndView getSelectedDirectList(DirectVO directVO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		log.info("ajax 요청 진입");
+		
+		List<DirectVO> ar = applicationService.getSelectedDirectList(directVO);
+		
+		for(DirectVO directVO2 : ar) {
+			log.info(">>>>>>>>>>>>>>>>>>>>>> {} ", directVO2.getDirectCode());
+		}
+		
+		mv.addObject("selectedList", ar);
+		
+		mv.setViewName("hworld/ajaxDirectOption");
+		return mv;
+	}
 }

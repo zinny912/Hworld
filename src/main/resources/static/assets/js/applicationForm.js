@@ -10,9 +10,6 @@ $(function(){
     });
 })
 
-//전역변수
-const age='';
-
 
 //폼 넘길때 데이터가 잘 넘어가는지 확인하고자 할 때 쓰는 것
 //let $frm = $('#appForm').serialize();
@@ -39,14 +36,6 @@ function calculateAge(figure) {
     return age;
 }
 
-
-//가입하기 버튼 눌렀을 때
-$('#completeForm').click(function(){
-    console.log('가입하기 버튼');
-    let $frm = $('#appForm').serialize();
-    alert($frm);
-    $('#appForm').submit();
-})
 
 
 //가입유형 확인
@@ -89,6 +78,43 @@ $('#joinType3').click(function(){
 })
 
 
+//제품명의 셀렉트값 변동 이벤트
+$('#slicedCode').change(function(){
+    let slicedCode = $(this).val();
+    console.log('선택된 옵션: ' + slicedCode);
+
+    //ajax로 select box를 만들 정보 요청
+    //ajax 확인할 때는 alert창으로
+    $.ajax({
+        type: 'GET',
+        url: './getSelectedDirectList',
+        data: {
+            slicedCode: slicedCode
+        },
+        success: function(response) {
+        // 응답 처리 로직 작성
+        //박스 초기화 후 for문 돌리기
+        // $('#directCode').empty();
+        // for(let i=0; i<response.length; i++){
+		//  let directCode = response.directCode[i];
+		//  $('#directCode').append('<option value=\"'+directCode+'\">'+directCode+'</option>');
+		// }
+        $('#directCode').empty();
+        $('#directCode').html(response);
+        },
+        error: function(error) {
+        // 에러 처리 로직 작성
+        console.log(error);
+        }
+    });
+
+});
+
+
+//제품코드의 셀렉트값 변동 이벤트
+
+
+
 //요금제 선택 확인
 $('#planArea').on("click", function(){
     let plan = $('input[name="planNum"]:checked').val();
@@ -122,9 +148,9 @@ $('#planArea input[type="radio"]').on('change', function() {
         maximumAge = 18;
     }
 
-    console.log("age: "+age);
-    console.log("minimumAge: "+minimumAge);
-    console.log("maximumAge: "+maximumAge);
+    // console.log("age: "+age);
+    // console.log("minimumAge: "+minimumAge);
+    // console.log("maximumAge: "+maximumAge);
 
     if (age < minimumAge && minimumAge != 0) {
         alert(minimumAge + '세 이하는 해당 요금제를 사용할 수 없습니다.');
@@ -140,16 +166,6 @@ $('#planArea input[type="radio"]').on('change', function() {
         $('#billPlan').text(planTxt);
     }
   });
-
-//   $('.planArea input[name="planNum"]').change(function() {
-//     // 라디오 버튼이 선택되었을 때 실행할 코드 작성
-//     if ($(this).is(':checked')) {
-//       // 선택된 라디오 버튼의 값을 가져오기
-//       var selectedValue = $(this).val();
-//       console.log('선택된 값: ' + selectedValue);
-//       // 추가적인 작업 수행
-//     }
-//   });
 
 
 //할인 유형 선택 확인
@@ -168,3 +184,87 @@ $('#discountArea').on("click", function(){
     //input tag에 값 넣기
 })
 
+
+//제품코드, 요금제 선택에 변동이 있을 때 확인
+$('input[name="planNum"], select[name="directCode"]').change(function() {
+    // 선택된 planNum의 할인율
+    let disPercent = $('input[name="planNum"]:checked').attr('data-dp');
+    let planPrice = $('input[name="planNum"]:checked').attr('data-plan-price');
+
+    // 선택된 option의 data-direct-price 값 가져오기
+    let directPrice = $('select[name="directCode"] option:selected').attr('data-direct-price');
+
+    // 할인 유형 확인
+    let disKind = $('input[name="disKind"]:checked').val();
+
+    // 할인 가격 계산
+    // disKind=0 : 공시지원금 / =1, 2 : 선택약정
+
+    if(disPercent>0 && directPrice>0){
+        let disPrice = (1-(disPercent*1)) * (directPrice*1);
+        let disPlan12 = planPrice*0.25*12;
+        let disPlan24 = planPrice*0.25*24;
+
+        //10단위 버림
+        disPrice = Math.floor(disPrice / 10) * 10;
+        disPlan12 = Math.floor(disPlan12 / 10) * 10;
+        disPlan24 = Math.floor(disPlan24 / 10) * 10;
+
+        let nPrice0 = "-"+disPrice;
+        let nPrice1 = "-"+disPlan12;
+        let nPrice2 = "-"+disPlan24;
+
+        //할인 가격을 표시
+        $('#dis0').empty();
+        $('#dis1').empty();
+        $('#dis2').empty();
+        $('#dis0').text(nPrice0);
+        $('#dis1').text(nPrice1);
+        $('#dis2').text(nPrice2);
+        // $('#dis0').text(formatPrice(disPrice));
+    }
+
+});
+
+  // 가격 포맷을 위한 함수
+//   function formatPrice(price) {
+//     return price.toLocaleString('en-US');
+//   }
+
+
+//가입하기 버튼 눌렀을 때
+$('#completeForm').click(function(){
+    console.log('가입하기 버튼');
+    //let $frm = $('#appForm').serialize();
+    //alert($frm);
+
+
+
+    //전화번호 길이 체크
+    let length = $('#phoneNum').val().length;
+
+
+    //가입폼 전송
+    //$('#appForm').submit();
+})
+
+
+
+//유효성 검사
+//전화번호 11자리, 숫자만 입력
+$('#phoneNum').on("blur", function() {
+    let checkValue = $(this).val().replace(/[^\d]/g, "");
+    $(this).val(checkValue);
+
+    console.log('checkValue====>'+checkValue);
+    console.log('checkValue.length=====>'+checkValue.length);
+    
+    let length = checkValue.length;
+
+    if(length != 11) {
+        //this.setCustomValidity("전화번호는 11자리여야 합니다.");
+        alert("전화번호는 11자리여야 합니다.");
+        $('#phoneNum').val("");
+    }
+
+})
