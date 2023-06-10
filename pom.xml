@@ -19,6 +19,24 @@
 	</properties>
 	
 	<dependencies>
+		<!-- Google reCAPTCHA -->
+		<dependency>
+			<groupId>net.tanesha.recaptcha4j</groupId>
+		    <artifactId>recaptcha4j</artifactId>
+		    <version>0.0.7</version>
+		</dependency>
+		
+		<!-- 구글 리캡챠 사용하기 위한 json -->
+		<dependency>
+		    <groupId>javax.json</groupId>
+		    <artifactId>javax.json-api</artifactId>		    
+		</dependency>
+		<dependency>
+		    <groupId>org.glassfish</groupId>
+		    <artifactId>javax.json</artifactId>
+		    <version>1.1</version>
+		</dependency>
+		
 		<!-- custom start -->
 		<!-- Security taglibs-->
 		<dependency>
@@ -46,6 +64,12 @@
 	        <groupId>org.springframework.boot</groupId>
 	        <artifactId>spring-boot-starter-mail</artifactId>
 	    </dependency>
+	    
+	    <!-- https://mvnrepository.com/artifact/org.springframework/spring-context-support -->
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-context-support</artifactId>		    
+		</dependency>
 		
 		<!-- Spring Form 검증 -->
 		<dependency>
