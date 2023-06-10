@@ -37,6 +37,14 @@ public class MemberService {
 		return memberDAO.emailCheck(memberVO);
 	}
 	
+	public int memberPwCheck(MemberVO memberVO) throws Exception {
+		return memberDAO.memberPwCheck(memberVO);
+	}
+	
+	public void passwordUpdate(MemberVO memberVO) throws Exception {
+		memberDAO.passwordUpdate(memberVO);
+	}
+	
 	public MemberVO getMemberLogin(MemberVO memberVO) throws Exception {
 		return memberDAO.getMemberLogin(memberVO);
 	}

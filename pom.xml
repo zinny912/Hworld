@@ -19,6 +19,12 @@
 	</properties>
 	
 	<dependencies>
+		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
+		<dependency>
+		    <groupId>org.apache.commons</groupId>
+		    <artifactId>commons-lang3</artifactId>		 
+		</dependency>
+		
 		<!-- Google reCAPTCHA -->
 		<dependency>
 			<groupId>net.tanesha.recaptcha4j</groupId>

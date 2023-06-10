@@ -7,7 +7,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	<typeAliases>
 		<!-- 공통 VO 입력 -->
 		<typeAlias type="com.hworld.base.util.Pager" alias="Pager"/>
-		
+		<typeAlias type="java.lang.Integer" alias="Integer"/>
 		
 		<!-- 개별 VO 입력 -->
 		<!-- ApplicationForm -->

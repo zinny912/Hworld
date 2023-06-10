@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -87,7 +88,7 @@ public class MemberController {
 	
 	// 이메일 찾기 조회결과 페이지
 	@PostMapping("forgotResultEmail")
-	public String forgotResultEmail(HttpServletRequest request, Model model, @RequestParam(required = false, value = "name") String name, @RequestParam(required = false, value = "phoneNum") String phoneNum, MemberVO memberVO) throws Exception{		
+	public String forgotResultEmail(HttpServletRequest request, Model model, @RequestParam(required = true, value = "name") String name, @RequestParam(required = true, value = "phoneNum") String phoneNum, MemberVO memberVO) throws Exception{
 		
 		try {
 		    
@@ -106,17 +107,27 @@ public class MemberController {
 	}
 	
 	// 비밀번호 찾기 조회결과 페이지
-	@GetMapping("forgotResultPw")
-	public String forgotResultPw(HttpServletRequest request, Model model, @RequestParam(required = true, value = "name") String name, @RequestParam(required = true, value = "phoneNum") String phoneNum, MemberVO memberVO) throws Exception{
-		ModelAndView modelAndView = new ModelAndView();
+	@PostMapping("forgotResultPw")
+	public String forgotResultPw(HttpServletRequest request, Model model, @RequestParam(required = true, value = "name") String name, @RequestParam(required = true, value = "email") String email, MemberVO memberVO) throws Exception{
 		
 		try {
 		    
 		    memberVO.setName(name);
-		    memberVO.setPhoneNum(phoneNum);
-		    MemberVO memberSearch = memberService.emailSearch(memberVO);
+		    memberVO.setEmail(email);	
+		    int memberSearch = memberService.memberPwCheck(memberVO);
 		    
-		    model.addAttribute("memberVO", memberSearch);
+		    if(memberSearch == 0) {
+		        model.addAttribute("msg", "기입된 정보가 잘못되었습니다. 다시 입력해주세요.");
+		        return "/hworld/forgotPw";
+		    }
+		    
+		    String newPw = RandomStringUtils.randomAlphanumeric(10);
+		    String encodePw = pwEncoder().encode(newPw);
+		    memberVO.setPw(encodePw);
+		    
+		    memberService.passwordUpdate(memberVO);
+		    
+		    model.addAttribute("newPw", newPw);
 		 
 		} catch (Exception e) {
 		    System.out.println(e.toString());
@@ -142,16 +153,9 @@ public class MemberController {
 		String rawPw = ""; // 인코딩 전 비밀번호
 		String encodePw = ""; // 인코딩 후 비밀번호
 		
-//		String rawRrnl = ""; // 인코딩 전 주민등록번호 뒷자리
-//		String encodeRrnl = ""; // 인코딩 후 주민등록번호 뒷자리
-		
 		rawPw = memberVO.getPw(); // 비밀번호 데이터 얻음
 		encodePw = pwEncoder().encode(rawPw); // 비밀번호 인코딩
-		memberVO.setPw(encodePw); // 인코딩 된 비밀번호 member 객체에 다시 저장
-		
-//		rawRrnl = memberVO.getRrnl(); // 주민등록번호 뒷자리 데이터 얻음
-//		encodeRrnl = pwEncoder().encode(rawRrnl); // 주민등록번호 뒷자리 인코딩
-//		memberVO.setRrnl(encodeRrnl); // 인코딩 된 주민등록번호 뒷자리 member 객체에 다시 저장		
+		memberVO.setPw(encodePw); // 인코딩 된 비밀번호 member 객체에 다시 저장	
 		
 		int result = memberService.setMemberAdd(memberVO);
 		System.out.print("회원가입 결과 : {}" + result);

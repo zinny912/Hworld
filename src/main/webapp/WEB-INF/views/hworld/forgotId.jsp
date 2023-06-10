@@ -13,7 +13,7 @@
 </head>
 
 <body class="theme-color2 light ltr">
-	<form:form action="./forgotId" id="forgotIdForm" method="post" modelAttribute="memberVO">
+	<form:form action="./forgotResultEmail" id="forgotIdForm" method="post" modelAttribute="memberVO">
 	    <!-- Sign Up Section Start -->
 	    <div class="login-section">
 	        <div class="materialContainer">
@@ -84,7 +84,7 @@ function findBtn() {
 	}
  
 	if ($("#phoneNum").val() == null || $("#phoneNum").val() == "") {
-	alert("전화번호를 입력해주세요.");
+	alert("연락처를 입력해주세요.");
 	$("#phoneNum").focus();
 	 
 	return false;

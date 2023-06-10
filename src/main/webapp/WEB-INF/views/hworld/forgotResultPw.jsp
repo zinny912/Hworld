@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -53,17 +54,7 @@
 
                 <!-- <div class="login-title mb-3">
                     <h2>조회 결과</h2>
-                </div> -->
-
-                <!-- 검색 결과 표시 영역 -->
-                <!-- ID/PW 검색 실패시 -->
-                <!-- 하얀색 경고표시 + 애니메이션은 icon, floating까지 -->
-                <div class="image d-flex justify-content-center my-5">
-                    <img class="icon floating" src=".//assets/images/exclamation.png" alt="" style="width: 40%;">
-                </div>
-                <div class="search-result my-2" style="text-align: center;">
-                    <h3>일치하는 사용자가 없습니다.</h3>
-                </div>
+                </div> -->              
 
                 <!-- ID/PW 검색 성공시 -->
                 <!-- 초록색 체크무늬 아이콘 -->
@@ -82,7 +73,7 @@
                 </div>
 
                 <div class="search-result my-2" style="text-align: center;">
-                    <h3>사용자 계정은 <%-- ${} --%> 입니다.</h3>
+                    <h3>새로운 비밀번호는 ${newPw} 입니다.</h3>
                     <h3>등록된 이메일로 임시 비밀번호를 발송했습니다.</h3>
                 </div>
 
@@ -98,7 +89,14 @@
     </div>
     <!-- Sign Up Section End -->
     <div class="bg-overlay"></div>
-
+<script>
+var path = "${pageContext.request.contextPath }";
+ 
+$(document).ready(function() {
+ 
+});
+ 
+</script>
 </body>
 
 </html>

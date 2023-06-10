@@ -25,7 +25,20 @@
 		    SELECT * FROM MEMBER
 		    WHERE NAME = #{name} AND PHONENUM = #{phoneNum}
 		]]>    
-</select>
+	</select>
+	
+	<select id="memberPwCheck" parameterType="MemberVO" resultType="java.lang.Integer">
+		<![CDATA[
+		    SELECT COUNT(*) FROM MEMBER
+		    WHERE NAME = #{name} AND EMAIL = #{email}
+		]]>    
+	</select>
+	 
+	    
+	<update id="passwordUpdate" parameterType="MemberVO" >
+	    UPDATE MEMBER SET PW =#{pw}
+	    WHERE NAME = #{name} AND EMAIL = #{email}
+	</update>
 	
 	
 </mapper>

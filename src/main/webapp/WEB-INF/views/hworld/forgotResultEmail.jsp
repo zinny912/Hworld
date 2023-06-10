@@ -56,32 +56,37 @@
 	                <!-- <div class="login-title mb-3">
 	                    <h2>조회 결과</h2>
 	                </div> -->
-	
-	                <!-- 검색 결과 표시 영역 -->
-	                <!-- ID/PW 검색 실패시 -->
-	                <!-- 하얀색 경고표시 + 애니메이션은 icon, floating까지 -->
-	                <div class="image d-flex justify-content-center my-5">
-	                    <img class="icon floating" src="/assets/images/exclamation.png" alt="" style="width: 40%;">
-	                </div>
-	                <div class="search-result my-2" style="text-align: center;">
-	                    <h3>일치하는 사용자가 없습니다.</h3>
-	                </div>
-	
-	                <!-- ID/PW 검색 성공시 -->
-	                <!-- 초록색 체크무늬 아이콘 -->
-	                <div class="success-icon" style="background-color: white;">
-	                    <div class="main-container">
-	                        <div class="check-container">
-	                            <div class="check-background">
-	                                <svg viewBox="0 0 65 51" fill="none" xmlns="http://www.w3.org/2000/svg">
-	                                    <path d="M7 25L27.3077 44L58.5 7" stroke="white" stroke-width="13"
-	                                        stroke-linecap="round" stroke-linejoin="round" />
-	                                </svg>
-	                            </div>
-	                            <div class="check-shadow"></div>
-	                        </div>
-	                    </div>
-	                </div>
+					
+					<c:choose>                                                                          
+			            <c:when test="${empty memberVO}">
+			                <!-- 검색 결과 표시 영역 -->
+			                <!-- ID/PW 검색 실패시 -->
+			                <!-- 하얀색 경고표시 + 애니메이션은 icon, floating까지 -->
+			                <div class="image d-flex justify-content-center my-5">
+			                    <img class="icon floating" src="/assets/images/exclamation.png" alt="" style="width: 40%;">
+			                </div>
+			                <div class="search-result my-2" style="text-align: center;">
+			                    <h3>일치하는 사용자가 없습니다.</h3>
+			                </div>
+		            	</c:when>                                                           
+		            	<c:otherwise>
+			                <!-- ID/PW 검색 성공시 -->
+			                <!-- 초록색 체크무늬 아이콘 -->
+			                <div class="success-icon" style="background-color: white;">
+			                    <div class="main-container">
+			                        <div class="check-container">
+			                            <div class="check-background">
+			                                <svg viewBox="0 0 65 51" fill="none" xmlns="http://www.w3.org/2000/svg">
+			                                    <path d="M7 25L27.3077 44L58.5 7" stroke="white" stroke-width="13"
+			                                        stroke-linecap="round" stroke-linejoin="round" />
+			                                </svg>
+			                            </div>
+			                            <div class="check-shadow"></div>
+			                        </div>
+			                    </div>
+			                </div>
+		                </c:otherwise>
+		            </c:choose>
 	
 	                <div class="search-result my-2" style="text-align: center;">
 	                    <c:choose>                                                                          
