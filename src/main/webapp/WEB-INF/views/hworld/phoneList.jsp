@@ -229,13 +229,13 @@ h3.d-flex span {
                                             </button>
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
 								                <li>
-								                    <a class="dropdown-item"  href="phoneList?sorting=latest">최신순</a>
+								                    <a class="dropdown-item"  href="phoneList">최신순</a>
 								                </li>
 								                <li>
-								                    <a class="dropdown-item" href="phoneList?sorting=priceL">낮은 가격순</a>
+								                    <a class="dropdown-item" href="phoneList?sortType=priceLow">낮은 가격순</a>
 								                </li>
 								                <li>
-								                    <a class="dropdown-item" href="phoneList?sorting=priceH">높은 가격순</a>
+								                    <a class="dropdown-item" href="phoneList?sortType=priceHigh">높은 가격순</a>
 								                </li>
 								            </ul>
                                         </div>
@@ -285,8 +285,8 @@ h3.d-flex span {
 	                   		<div class="product-box">
 	                                <div class="img-wrapper">
 	                                    <div class="front">
-	                                        <a href="./phoneDetail?directCode=${direct.slicedCode}">
-	                                            <img src="/assets/images/electronics/product/1.jpg"
+	                                        <a href="./phoneDetail?slicedCode=${direct.slicedCode}">
+	                                            <img src="/assets/images/electronics/product/${direct.slicedCode}thumb"
 	                                                class="bg-img  lazyload" alt="">
 	                                        </a>
 	                                    </div>
@@ -317,11 +317,11 @@ h3.d-flex span {
 									</div>
 									
 		                            <div class="main-price">
-		                               <h5 class="ms-0"> <a href="./phoneDetail?directCode=${direct.directCode}" class="font-default">
+		                               <h5 class="ms-0"> <a href="./phoneDetail?slicedCode=${direct.slicedCode}" class="font-default">
 		                                    ${direct.directName}
 		                                </a></h5>
 		                               
-		                                <h3 class="theme-color d-flex" id="renewPrice${direct.directCode}">
+		                                <h3 class="theme-color d-flex" id="renewPrice${direct.slicedCode}">
 						                    ${direct.initPrice}
 						                    
 						                </h3>

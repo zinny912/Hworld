@@ -21,9 +21,6 @@ public class DirectVO {
     //Direct 가격
     private Integer directPrice;
 
-    //Direct 파일 경로
-    private String directFilePath;
-
     //Direct 재고
     private Integer directStock;
 
@@ -39,28 +36,22 @@ public class DirectVO {
     //저장 용량
     private String saveCapacity;
     
+    //업로드 날짜 
     private Date uploadDate;
-    
-    
+
     //리뷰 별점 가져오기 위한 VO 설정 (쿼리에서 받아옴)
     private Double rate;
     
     //제품코드에서 제품명만 가져오기 위한 VO 설정
     private String slicedCode;
     
-    //같은 제품명 중 제일 낮은 가격이 대표값으로 리스트에 나오게 하기 위한 VO 설정 
+    //같은 제품명 중 제일 낮은 가격이 대표값으로 리스트에 나오게 하기 위한 VO 설정 (쿼리) 
     private String initPrice;
     
     private String value;
     
     //요금제 리스트 가져오기 위한 VO 설정 (요금제 선택)
     private List<PlanVO> planList;
-
-//	public int getPriceByColorAndCapacity(String colorCode, String saveCapacity) {
-//		// TODO Auto-generated method stub
-//		return 0;
-//	}
-  
+     
     
-
 }

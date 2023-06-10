@@ -29,6 +29,5 @@ public class MemberVO {
 	private Integer adminCheck;
 	private String phoneNum;
 	private Integer ownCheck;
-	private String salt;
 	
 }

@@ -8,7 +8,7 @@
 <head>
 	<meta charset="UTF-8">
     <c:import url="../temp/style.jsp"></c:import>
-    <title>상품등록 페이지</title>
+    <title>상품등록</title>
  <style>
     .boxone {
     width:50%;
@@ -109,7 +109,7 @@
                             </div>
                        
                             <!-- 출고가 -->
-
+<!-- 
                             <div class="col-md-2">
                                 <label for="colorCode" class="form-label">색상</label>
                                 <div class="col-12">
@@ -139,23 +139,30 @@
                             <div class="col-md-3">
                                 <label for="dircetStock" class="form-label">재고 수량</label>
                                 <input type="text" class="form-control" id="directStock" placeholder="숫자만 입력" name="directStock">
-                            </div> 
-                            <div class="col-md-2 mt-5">
-                            	<button type="button" class="btn btn-solid-default btn-sm mt-2" id="optionAdd">+옵션추가</button>                            
                             </div>
+                            <div class="col-md-3">
                                 <input type="hidden" id="directCode" name="directCode">
-                           <div class="option">
+                            </div>  -->
+                            
+                            <div class="col-md-2 mt-5 d-flex ">
+                            	<button type="button" class="btn btn-outline-danger btn-sm mt-2 me-2" id="optionAdd">+옵션추가</button>    
+                            	<button type="button" class="btn btn-outline-secondary btn-sm mt-2" id="optionDelete">-옵션삭제</button>                            
+                            	                        
+                            </div>
+
+                            
+							<div class="option">
                            
                             </div>
                             
                             
                                 <div class="mb-2">
-                                    <label for="validationCustom04" class="form-label">썸네일 이미지</label>
-                                    <input class="form-control" type="file" id="formFile" name="formFile">
+                                    <label for="directThumbFilePath" class="form-label">썸네일 이미지</label>
+                                    <input class="form-control" type="file" id="directThumbFilePath" name="multipartFiles">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="validationCustom04" class="form-label">상품 이미지</label>
-                                    <input class="form-control" type="file" id="formFile2" name="formFile">
+                                    <label for="directFilePath" class="form-label">상품 이미지</label>
+                                    <input class="form-control" type="file" id="directFilePath" name="multipartFiles">
                                 </div>
             
                             <!-- 상세정보 서머노트하자 -->
@@ -216,6 +223,11 @@
 					
         $('.option').append(child);
 	})
+	
+	//옵션 삭제 
+	$('#optionDelete').click(()=>{
+		$('.options').last().remove();
+	});
 	
 	//제품코드 합치기 
     function generateDirectCode(event) {

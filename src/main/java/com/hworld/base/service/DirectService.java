@@ -1,7 +1,14 @@
 package com.hworld.base.service;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
+import javax.naming.spi.DirStateFactory.Result;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -9,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.hworld.base.dao.DirectDAO;
+import com.hworld.base.util.FileManager;
 import com.hworld.base.util.Pager;
 import com.hworld.base.vo.DirectVO;
 
@@ -20,6 +28,9 @@ public class DirectService {
 
 	@Autowired
 	private DirectDAO directDAO;
+	@Autowired
+	private FileManager fileManager;
+
 	
 	//상품 리스트
 	public List<DirectVO> getList(Pager pager) throws Exception{
@@ -27,41 +38,41 @@ public class DirectService {
 		pager.makeNum(directDAO.getTotalCount(pager));
 		return directDAO.getList(pager);
 	}
-	public List<DirectVO> getListByPriceH(Pager pager) throws Exception {
-		pager.makeStartRow();
-		pager.makeNum(directDAO.getTotalCount(pager));
-		return directDAO.getListByPriceH(pager);
-	};
-	public List<DirectVO> getListByPriceL(Pager pager) throws Exception {
-		pager.makeStartRow();
-		pager.makeNum(directDAO.getTotalCount(pager));
-		return directDAO.getListByPriceL(pager);
-	};
 	
-	//상품 상세페이지 
-	public DirectVO getDetail(DirectVO directVO)throws Exception{
-		return directDAO.getDetail(directVO);
+	
+	// 상품 하나 옵션 다수 조회
+	public List<DirectVO> getDetail(String slicedCode) throws Exception {
+		
+		
+	    return directDAO.getDetail(slicedCode);
 	}
-	
-//	public DirectVO getPriceList(DirectVO directVO)throws Exception{
-//		return directDAO.getPriceList(directVO);
-//	}
-	
+
+		
 	//상품 등록 
-	 public int setInsert(DirectVO directVO)throws Exception{
-	      int result = directDAO.setInsert(directVO);
-	      return result;
-	   }
-	
+	public int setInsert(DirectVO directVO, MultipartFile[] multipartFiles)throws Exception{
+		
+		String fileName = fileManager.saveFile(multipartFiles, directVO);
+				
+		
+		int result = directDAO.setInsert(directVO);
+		
+		return result;
+	}
+
 
 	//상품 수정 
-	public int setUpdate(DirectVO directVO) throws Exception{
+	public int setUpdate(DirectVO directVO, MultipartFile[] multipartFiles) throws Exception{
+		
+		String fileName = fileManager.updateFile(multipartFiles, directVO);
+		fileName = fileManager.saveFile(multipartFiles, directVO);	
+		
 		return directDAO.setUpdate(directVO);
 	}
+
+	
 	//상품 삭제 
 	public int setDelete(DirectVO directVO) throws Exception{
 		return directDAO.setDelete(directVO);
 	}
-	
 	
 }
