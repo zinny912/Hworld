@@ -100,12 +100,24 @@
 	                </div>
 	
 	                <!-- 버튼 영역 -->
-	                <div class="button login button-1">
-	                    <button onclick="location.href = 'login';">
-	                        <span>로그인 화면으로</span>
-	                        <i class="fa fa-check"></i>
-	                    </button>
-	                </div>
+	                <c:choose>                                                                          
+			            <c:when test="${empty memberVO}">
+			                <div class="button login button-1">
+			                    <button type="button" onclick="location.href = 'forgotId';">
+			                        <span>돌아가기</span>
+			                        <i class="fa fa-check"></i>
+			                    </button>
+			                </div>
+	                	</c:when>
+	                	<c:otherwise>
+			                <div class="button login button-2">
+			                    <button type="button" onclick="location.href = 'login';">
+			                        <span>로그인 화면으로</span>
+			                        <i class="fa fa-check"></i>
+			                    </button>
+			                </div>
+	                	</c:otherwise>                                              
+			        </c:choose>
 	            </div>
 	        </div>
 	    </div>

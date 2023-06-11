@@ -89,12 +89,12 @@ function findBtn() {
 		return false;
 	}
 	 
-	if (confirm("비밀번호를 찾으시겠습니까?")) {
+	/* if (confirm("비밀번호를 찾으시겠습니까?")) {
 	 
 		$("#forgotPwForm").submit();
 	 
 		return false;
-	}
+	} */
 }
 
 /* $("#findBtns").click(function () {
@@ -143,7 +143,7 @@ $(function() {
             success: function(res) {
                 const data=JSON.parse(res);
                 if(data.success){                       
-		$("#loginForm").submit();
+		$("#forgotPwForm").submit();
                 }else{
                     alert("자동 방지 봇을 확인한 후 진행해주세요.");                               
                 }               

@@ -61,6 +61,25 @@
     <div class="bg-overlay"></div>
 <script src='https://www.google.com/recaptcha/api.js'></script>
 <script type="text/javascript">
+//캡챠
+$(function() {
+    $('#findBtns').click(function() {                      
+        $.ajax({
+            url: '/VerifyRecaptcha',
+            type: 'post',
+            data: {recaptcha: $("#g-recaptcha-response").val()},
+            success: function(res) {
+                const data=JSON.parse(res);
+                if(data.success){                       
+		$("#forgotIdForm").submit();
+                }else{
+                    alert("자동 방지 봇을 확인한 후 진행해주세요.");                               
+                }               
+            }
+        });   
+    });         
+});
+
 // 아이디 찾기
 var path = "${pageContext.request.contextPath }";
 
@@ -97,31 +116,13 @@ function findBtn() {
 	}
 	 
 	 
-	if (confirm("아이디를 찾으시겠습니까?")) {
-	$("#forgotIdForm").submit();
+	/* if (confirm("아이디를 찾으시겠습니까?")) {
+	$("#forgotIdForm").button();
 	 
 	return false;
-	}
+	} */
+	
 }
-
-// 캡챠
-$(function() {
-    $('#findBtns').click(function() {                      
-        $.ajax({
-            url: '/VerifyRecaptcha',
-            type: 'post',
-            data: {recaptcha: $("#g-recaptcha-response").val()},
-            success: function(res) {
-                const data=JSON.parse(res);
-                if(data.success){                       
-		$("#loginForm").submit();
-                }else{
-                    alert("자동 방지 봇을 확인한 후 진행해주세요.");                               
-                }               
-            }
-        });   
-    });         
-});
 </script>
 </body>
 

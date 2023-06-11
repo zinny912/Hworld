@@ -833,7 +833,7 @@
                                         </div>
                                     </li>
 
-                                    <%-- <li>
+                                    <li>
                                     <div class="left">
                                         <h6 class="font-light">Password</h6>
                                     </div>
@@ -842,7 +842,7 @@
                                     </div>
                                     <a href="javascript:void(0)" data-bs-toggle="modal"
                                         data-bs-target="#resetPassword">수정</a>
-                                    </li> --%>
+                                    </li>
 
                                     <li>
                                         <div class="left">
