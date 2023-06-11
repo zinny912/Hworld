@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.hworld.base.dao.ApplicationDAO;
 import com.hworld.base.util.SHA256Util;
 import com.hworld.base.vo.ApplicationVO;
+import com.hworld.base.vo.DirectVO;
 import com.hworld.base.vo.MemberVO;
 import com.hworld.base.vo.PlanVO;
 
@@ -99,5 +100,14 @@ public class ApplicationService {
 		return applicationDAO.getPlanList();
 	}
 	
+	//getDirectList
+	public List<DirectVO> getDirectList() throws Exception{
+		return applicationDAO.getDirectList();
+	}
+	
+	//getSelectedDirectList
+	public List<DirectVO> getSelectedDirectList(DirectVO directVO) throws Exception{
+		return applicationDAO.getSelectedDirectList(directVO);
+	}
 	
 }

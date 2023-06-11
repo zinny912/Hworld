@@ -85,6 +85,17 @@
 		SET DIRECTNAME = #{directName}, DIRECTCONTENTS = #{directContents}, DIRECTPRICE = #{directPrice}, DIRECTSTOCK = #{directStock}, CATEGORYCODE = #{categoryCode}, BRANDCODE = #{brandCode}, COLORCODE = #{colorCode}, SAVECAPACITY = #{saveCapacity}
 		WHERE RIGHT(DIRECTCODE, 5) = #{slicedCode}
 	</update>
+	
+	
+	<!-- 리뷰 -->
+	<select id="getReviewList" parameterType="DirectVO" resultType="ReviewVO">
+	SELECT R.*, D.DIRECTNAME, D.DIRECTCODE, SUBSTRING(D.DIRECTCODE, -5) AS slicedCode
+		FROM REVIEW R
+		LEFT JOIN ORDERDIRECT OD ON OD.ORDERNUM = R.ORDERNUM
+		LEFT JOIN DIRECT D ON D.DIRECTCODE =OD.DIRECTCODE
+		HAVING SLICEDCODE = #{slicedCode}
+		ORDER BY R.REGDATE DESC
+	</select>
 
 
   </mapper>

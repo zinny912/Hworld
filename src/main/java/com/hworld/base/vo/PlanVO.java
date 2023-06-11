@@ -15,6 +15,10 @@ public class PlanVO {
     private String planExplain;
     private String planExplainSM;
     
+    //할인요금 계산을 위한 disPercent 추가
+    private Double disPercent;
+    
+    //commonCode 사용
     private String note;
     private String type;
 }

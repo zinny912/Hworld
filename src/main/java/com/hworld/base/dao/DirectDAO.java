@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.hworld.base.util.Pager;
 import com.hworld.base.vo.DirectVO;
+import com.hworld.base.vo.ReviewVO;
 
 
 @Mapper
@@ -39,6 +40,7 @@ public interface DirectDAO {
 	
 	//파일 삭제 
 	public int setFileDelete (DirectVO directVO) throws Exception;
-
-			
+	
+	//
+	public List<ReviewVO> getReviewList(DirectVO directVO) throws Exception;
 }
