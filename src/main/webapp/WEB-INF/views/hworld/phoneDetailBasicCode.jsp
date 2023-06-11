@@ -100,22 +100,21 @@
                             <div class="col-md-6">
                                 <div class="cloth-details-size ">
                                     <div class="admin-update-delete d-flex justify-content-end">
-                                        <a href="./directUpdate?slicedCode=${directVO.slicedCode}" class="me-3">수정</a>
+                                        <a href="zproduct_detail_edit.html" class="me-3">수정</a>
                                         <a href="javascript:void(0)" data-bs-toggle="modal"
                                                     data-bs-target="#productdel">삭제</a>
                                     </div>
-							<c:forEach items="${list}" var="direct">
                                     <div class="brand" style="font-size: 27px; color: gray;" id="productCode">
-                                       ${direct.value}   ${direct.slicedCode}                                     
+                                       ${directVO.value}   ${directVO.directCode}                                     
                                     </div>
                                     <div class="details-image-concept mt-0" style="font-size: 35px;">
-                                        ${direct.directName}
+                                        ${directVO.directName}
                                     </div>
                                     <div>
                                         <h3 class="mt-3 ">출고가</h3>
                                     </div>
                                     <p>
-                                        <span class="price-detail theme-color fw-bold" id="renewPrice">${direct.directPrice}</span>
+                                        <span class="price-detail theme-color fw-bold" id="renewPrice">${directVO.directPrice}</span>
                                         <span class="unit">원</span>
                                     </p>
 
@@ -159,11 +158,11 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <input type="hidden" id="directCode" name="directCode" >
+                                    
+                                    <input type="hidden" id="directCode" name="directCode">
                                     <input type="hidden" id="categoryCode" name="categoryCode">
                                     <input type="hidden" id="brandCode" name="brandCode">
                                     <hr>
-                                 </c:forEach>
                                     <div class="product-option-item join">
                                         <div class="option-title-area">
                                             <h3 class="option-title mt-3 mb-2">가입유형</h3>
@@ -847,44 +846,23 @@ $(document).ready(function() {
        	
     }
 
-    //Option 선택시 directCode 완성된 것을 $('#directCode').val에 저장
-    $('.optionArea').on('click', 'li[name="colorCode"]', function() { //컬러 선택시
+    $('.optionArea').on('click', 'li[name="colorCode"]', function() {
     var selectedOptions = getSelectedOptions();
-    //console.log('Selected options:', selectedOptions);
+    console.log('Selected options:', selectedOptions);
 
-    //추가작업
-    let colorCode = selectedOptions.colorCode;
-    let saveCapacity = selectedOptions.saveCapacity;
-    let categoryCode = $("#categoryCode").val();
-    let brandCode = $("#brandCode").val();
-    let slicedCode = $("#slicedCode").val();
-    let directCode = '';
-    if(colorCode!=null && saveCapacity!=null){
-        directCode = "P" + categoryCode + "B" + brandCode + "C" + colorCode + "V" + saveCapacity + slicedCode;
-        console.log(directCode);
-        $('#directCode').val(directCode);
-    }
+    // 선택된 색상 코드와 용량에 대한 추가 처리를 진행합니다.
+    // ...
   });
 
-  $('.optionArea').on('click', 'label.capacity', function() { //용량 선택시
+  $('.optionArea').on('click', 'label.capacity', function() {
     var saveCapacity = $(this).prev('input[name="saveCapacity"]');
     saveCapacity.prop('checked', true);
 
     var selectedOptions = getSelectedOptions();
-    //console.log('Selected options:', selectedOptions);
+    console.log('Selected options:', selectedOptions);
 
-    //추가작업
-    let colorCode2 = selectedOptions.colorCode;
-    let saveCapacity2 = selectedOptions.saveCapacity;
-    let categoryCode2 = $("#categoryCode").val();
-    let brandCode2 = $("#brandCode").val();
-    let slicedCode2 = $("#slicedCode").val();
-    let directCode2 = '';
-    if(colorCode2!=null && saveCapacity2!=null){
-        directCode2 = "P" + categoryCode2 + "B" + brandCode2 + "C" + colorCode2 + "V" + saveCapacity2 + slicedCode2;
-        console.log(directCode2);
-        $('#directCode').val(directCode2);
-    }
+    // 선택된 색상 코드와 용량에 대한 추가 처리를 진행합니다.
+    // ...
   });
 
 });

@@ -56,45 +56,46 @@
 		SELECT COUNT(DIRECTCODE) FROM DIRECT
 		<include refid="search"></include>
 	</select> 
+	
 	<!-- 상품 디테일 페이지 default 값으로 P01/BS/ -->
-	<select id="getDetail" parameterType="DirectVO" resultType="DirectVO">
-	    SELECT D.*, CC.VALUE AS value, RIGHT(D.DIRECTCODE, 5) as slicedCode
-	    FROM DIRECT D
-	    INNER JOIN COMMONCODE CC ON D.BRANDCODE = CC.CODE
-	    WHERE CC.TYPE = 'B'
-	    AND EXISTS (
-	        SELECT *
-	        FROM COMMONCODE CC
-	        WHERE D.DIRECTCODE LIKE CONCAT('%', CC.TYPE, CC.CODE, '%')
-	          AND CC.TYPE = 'B' AND (CC.CODE = 'S' OR CC.CODE = 'A')
-	        AND RIGHT(D.DIRECTCODE, 5) = RIGHT(#{directCode}, 5)
-	    )
+	<select id="getDetail" parameterType="DirectVO" resultType="DirectVO"> 
+	   SELECT D.*, CC.VALUE AS value, RIGHT(D.DIRECTCODE, 5) AS slicedCode
+		FROM DIRECT D
+		INNER JOIN COMMONCODE CC ON D.BRANDCODE = CC.CODE
+		WHERE RIGHT(D.DIRECTCODE, 5) = #{slicedCode}
 	</select>
 
 
 	<!-- 상품 등록 --> 	
 	<insert id="setInsert" parameterType="DirectVO">
 		INSERT INTO DIRECT(DIRECTCODE, DIRECTNAME, DIRECTCONTENTS, DIRECTPRICE, DIRECTSTOCK, CATEGORYCODE, BRANDCODE, COLORCODE, SAVECAPACITY, UPLOADDATE)
-		VALUES (#{directCode}, #{directName}, #{directContents}, #{directPrice}, #{directStock}, #{categoryCode}, #{brandCode}, #{colorCode}, #{saveCapacity}, NOW())
+		VALUES (#{directCode}, #{directName}, #{directContents}, #{directPrice}, #{directStock}, #{categoryCode}, #{brandCode}, #{colorCode}, #{saveCapacity}, now())
 
 	</insert>
 	 	
   	<!-- 상품 삭제 -->
- 	<delete id="setDelete" parameterType="DirectVO">
-		DELETE FROM DIRECT
-		WHERE SUBSTRING(directCode, -5) AS slicedCode = SUBSTRING(#{directCode}, -5)
+	<delete id="setDelete" parameterType="DirectVO">
+	  DELETE FROM DIRECT
+	  WHERE directCode LIKE CONCAT('%', #{slicedCode}, '%')
 	</delete>
 	
 	<!-- 상품 수정 -->
 	<update id="setUpdate" parameterType="DirectVO">
 		UPDATE DIRECT
 		SET DIRECTNAME = #{directName}, DIRECTCONTENTS = #{directContents}, DIRECTPRICE = #{directPrice}, DIRECTSTOCK = #{directStock}, CATEGORYCODE = #{categoryCode}, BRANDCODE = #{brandCode}, COLORCODE = #{colorCode}, SAVECAPACITY = #{saveCapacity}
-		WHERE SUBSTRING(directCode, -5) AS slicedCode = SUBSTRING(#{directCode}, -5)
+		WHERE RIGHT(DIRECTCODE, 5) = #{slicedCode}
 	</update>
 	
-	<select id="getLastFiveDigits" resultType="DirectVO">
-        SELECT * FROM DIRECT
-        WHERE SUBSTRING(directCode, -5) = #{lastFiveDigits}
-    </select>
+	
+	<!-- 리뷰 -->
+	<select id="getReviewList" parameterType="DirectVO" resultType="ReviewVO">
+	SELECT R.*, D.DIRECTNAME, D.DIRECTCODE, SUBSTRING(D.DIRECTCODE, -5) AS slicedCode
+		FROM REVIEW R
+		LEFT JOIN ORDERDIRECT OD ON OD.ORDERNUM = R.ORDERNUM
+		LEFT JOIN DIRECT D ON D.DIRECTCODE =OD.DIRECTCODE
+		HAVING SLICEDCODE = #{slicedCode}
+		ORDER BY R.REGDATE DESC
+	</select>
+
 
   </mapper>

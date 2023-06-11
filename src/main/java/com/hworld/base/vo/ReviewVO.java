@@ -10,7 +10,7 @@ import lombok.Setter;
 @Setter
 public class ReviewVO {
     //리뷰 번호
-    private Integer reviewNum;
+    private Integer num;
 
     //제목
     private String title;
