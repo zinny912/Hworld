@@ -25,7 +25,8 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.hworld.base.vo.CartVO" alias="CartVO"/>
 		<typeAlias type="com.hworld.base.vo.EPlanVO" alias="EPlanVO"/>
 		<typeAlias type="com.hworld.base.vo.OrderVO " alias="OrderVO"/>
-		<typeAlias type="com.hworld.base.vo.OrderDirectVO" alias="OrderDirectVO"/> -->
+		<typeAlias type="com.hworld.base.vo.OrderDirectVO" alias="OrderDirectVO"/>-->
+		<typeAlias type="com.hworld.base.vo.ReviewVO" alias="ReviewVO"/> 
 		
 		<!-- Telephone -->
 		<typeAlias type="com.hworld.base.vo.TelephoneVO" alias="TelephoneVO"/>
