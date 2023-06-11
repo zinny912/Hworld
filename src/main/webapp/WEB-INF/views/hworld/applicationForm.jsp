@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+    <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -89,7 +90,9 @@
                                 <h5 class="mb-3 fw-bold">가입자 정보 입력</h5>
                                 <div class="col-md-12">
                                     <label for="name" class="form-label">가입자 이름</label>
-                                    <input type="text" class="form-control" id="name" name="name">
+                                    <form:input path="name" cssClass="form-control" id="name"/>
+                                    <form:errors path="name"></form:errors>
+                                    <!-- <input type="text" class="form-control" id="name" name="name"> -->
                                 </div>
 
                                 <!-- 주민등록번호 -->
@@ -97,6 +100,7 @@
                                     <div class="col">
                                         <label for="rrnf" class="form-label">주민등록번호</label>
                                         <form:input path="rrnf" cssClass="form-control" id="rrnf"/>
+                                        <form:errors path="rrnf"></form:errors>
                                         <!-- <input type="text" class="form-control" id="rrnf" name="rrnf"> -->
                                     </div>
                                     <div class="col-md-1 mt-4 pt-3">
@@ -160,20 +164,32 @@
                                     <div class="col-md-12 mt-3 mb-3">
                                         <label for="phoneNum" class="form-label">휴대폰 번호</label>
                                         <form:input path="phoneNum" cssClass="form-control" id="phoneNum" placeholder="숫자만 입력"/>
-                                        <!-- <input type="text" class="form-control" id="phoneNum" name="phoneNum" placeholder="숫자만입력"> -->
-                                    </div>
-                                    <div class="d-flex col-md-12">
-                                        <div class="col-md-6 mt-3 mb-3 me-1">
-                                            <label for="directName" class="form-label">제품명</label>
-                                            <form:input path="directName" cssClass="form-control" id="directName" placeholder="ex) 아이폰 14+"/>
-                                            <!-- <input type="text" class="form-control" id="directName" name="directName" placeholder="ex)갤럭시 23"> -->
-                                        </div> 
-                                        <div class="col-md-6 mt-3 mb-3">
-                                            <label for="directCode" class="form-label">제품코드</label>
-                                            <%-- <form:input path="directCode" cssClass="form-control" id="directCode" placeholder="ex) P01BACWV128I1402"/> --%>
-                                            <input type="text" class="form-control" id="directCode" name="directCode" placeholder="ex) P01BACWV128I1402">
-                                        </div> 
-                                    </div>   
+                                        <form:errors path="phoneNum"></form:errors>
+									</div>
+
+
+									<!-- 셀렉트 박스 -->
+									<div class="d-flex col-md-12">
+										<!-- 제품명 영역 -->
+										<div class="col-md-6 mt-3 mb-3 me-1">
+											<label for="slicedCode" class="form-label">제품명</label>
+											<select name="slicedCode" class="form-control" id="slicedCode">
+												<option value="0" selected>제품명 선택</option>
+												<c:if test="${not empty directList}">
+													<c:forEach items="${directList}" var="i">
+														<option value="${i.slicedCode}">${i.directName}</option>
+													</c:forEach>
+												</c:if>
+											</select>			
+										</div>
+										<!-- 제품코드 영역 ajax -->
+										<div class="col-md-6 mt-3 mb-3">
+											<label for="directCode" class="form-label">제품코드</label>
+											<select name="directCode" class="form-control" id="directCode">
+												<option value="0" selected>제품코드 선택</option>
+											</select>
+										</div>
+									</div>
                                 </div>    
                                 
                         
@@ -235,7 +251,7 @@
                                                    			<div class="row col-md-12 mt-3 mx-3">
 		                                                   	<c:forEach items="${gList}" var="i" varStatus="status">
 			                                                   	<div class="form-check custome-radio-box">
-	                                                   				<form:radiobutton path="planNum" cssClass="form-check-input" id="${i.planNum}" value="${i.planNum}" data-plan-price="${i.planPrice}"/>
+	                                                   				<form:radiobutton path="planNum" cssClass="form-check-input" id="${i.planNum}" value="${i.planNum}" data-plan-price="${i.planPrice}" data-dp="${i.disPercent}"/>
 	                                                   				<label class="form-check-label" for="${i.planNum}">${i.planName}</label>
 	                                                            </div>
 	                                                            <div class="d-flex justify-content-between mb-1">
@@ -263,7 +279,7 @@
                                                    			<div class="row col-md-12 mt-3 mx-3">
 		                                                   	<c:forEach items="${sList}" var="i" varStatus="status">
 			                                                   	<div class="form-check custome-radio-box">
-	                                                   				<form:radiobutton path="planNum" cssClass="form-check-input" id="${i.planNum}" value="${i.planNum}" data-plan-price="${i.planPrice}"/>
+	                                                   				<form:radiobutton path="planNum" cssClass="form-check-input" id="${i.planNum}" value="${i.planNum}" data-plan-price="${i.planPrice}" data-dp="${i.disPercent}"/>
 	                                                   				<label class="form-check-label" for="${i.planNum}">${i.planName}</label>
 	                                                            </div>
 	                                                            <div class="d-flex justify-content-between mb-1">
@@ -291,7 +307,7 @@
                                                    			<div class="row col-md-12 mt-3 mx-3">
 		                                                   	<c:forEach items="${tList}" var="i" varStatus="status">
 			                                                   	<div class="form-check custome-radio-box">
-	                                                   				<form:radiobutton path="planNum" cssClass="form-check-input" id="${i.planNum}" value="${i.planNum}" data-plan-price="${i.planPrice}"/>
+	                                                   				<form:radiobutton path="planNum" cssClass="form-check-input" id="${i.planNum}" value="${i.planNum}" data-plan-price="${i.planPrice}" data-dp="${i.disPercent}"/>
 	                                                   				<label class="form-check-label" for="${i.planNum}">${i.planName}</label>
 	                                                            </div>
 	                                                            <div class="d-flex justify-content-between mb-1">
@@ -319,7 +335,7 @@
                                                    			<div class="row col-md-12 mt-3 mx-3">
 		                                                   	<c:forEach items="${zList}" var="i" varStatus="status">
 			                                                   	<div class="form-check custome-radio-box">
-	                                                   				<form:radiobutton path="planNum" cssClass="form-check-input" id="${i.planNum}" value="${i.planNum}" data-plan-price="${i.planPrice}"/>
+	                                                   				<form:radiobutton path="planNum" cssClass="form-check-input" id="${i.planNum}" value="${i.planNum}" data-plan-price="${i.planPrice}" data-dp="${i.disPercent}"/>
 	                                                   				<label class="form-check-label" for="${i.planNum}">${i.planName}</label>
 	                                                            </div>
 	                                                            <div class="d-flex justify-content-between mb-1">
@@ -347,7 +363,7 @@
                                                    			<div class="row col-md-12 mt-3 mx-3">
 		                                                   	<c:forEach items="${wList}" var="i" varStatus="status">
 			                                                   	<div class="form-check custome-radio-box">
-	                                                   				<form:radiobutton path="planNum" cssClass="form-check-input" id="${i.planNum}" value="${i.planNum}" data-plan-price="${i.planPrice}"/>
+	                                                   				<form:radiobutton path="planNum" cssClass="form-check-input" id="${i.planNum}" value="${i.planNum}" data-plan-price="${i.planPrice}" data-dp="${i.disPercent}"/>
 	                                                   				<label class="form-check-label" for="${i.planNum}">${i.planName}</label>
 	                                                            </div>
 	                                                            <div class="d-flex justify-content-between mb-1">
@@ -375,7 +391,7 @@
                                                    			<div class="row col-md-12 mt-3 mx-3">
 		                                                   	<c:forEach items="${hList}" var="i" varStatus="status">
 			                                                   	<div class="form-check custome-radio-box">
-	                                                   				<form:radiobutton path="planNum" cssClass="form-check-input" id="${i.planNum}" value="${i.planNum}" data-plan-price="${i.planPrice}"/>
+	                                                   				<form:radiobutton path="planNum" cssClass="form-check-input" id="${i.planNum}" value="${i.planNum}" data-plan-price="${i.planPrice}" data-dp="${i.disPercent}"/>
 	                                                   				<label class="form-check-label" for="${i.planNum}">${i.planName}</label>
 	                                                            </div>
 	                                                            <div class="d-flex justify-content-between mb-1">
@@ -408,15 +424,6 @@
                                                                     선택약정할인(통신료 25% 할인)이 제공되지 않습니다.</h6>
                                                         </div>
                                                     </div>        
-                                                        <!-- <ul class="nav border-0 d-flex" >
-                                                            <li class="nav-item mx-auto" style="height: 140px; width: 40%; border-radius: 5px;">
-                                                            <div class="nav-link active" style="color:black;">
-                                                                <h6 class="text-start mb-3" style="margin-top:-0px;">공시지원금</h6>
-                                                                <h3 class="mb-2" style="margin-left:60px;">휴대폰 가격 1회 할인</h3>
-                                                                <div style="margin-left:95px; margin-top:30px;"><span>총</span><span class="fs-4">-579,000</span><span>원</span></div>
-                                                            </div>
-                                                            </li>
-                                                        </ul> -->
                                                     <!-- 0: 공시지원금, 1: 선택약정 12개월, 2: 선택약정 24개월 -->
                                                     <!-- 나중에 span 부분에 요금 할인되는거 계산해서 넣기 -->
                                                     <div id="discountArea">
@@ -429,9 +436,9 @@
                                                                 <div class="form-check custome-radio-box">
                                                                     <!-- <input class="form-check-input mx-2" type="radio" name="disKind" id="discount0" value="0"> -->
                                                                     <form:radiobutton path="disKind" cssClass="form-check-input mx-2" id="discount0" value="0"/>
-                                                                    <label class="form-check-label d-flex" for="paypal"> 공시지원금 
-                                                                        <span class="justify-content-end" style="margin-left:100px;">총</span> <span class="fs-4" style="margin-top:-10px;">-579,000</span> <span>원</span> </label>
-                                                                </div> 
+                                                                    <label class="form-check-label d-flex justify-content-between" for="paypal"> 공시지원금 
+                                                                        <span class="justify-content-end" style="margin-left:100px;">총</span> <span class="fs-4" id="dis0" style="margin-top:-10px;"> </span> <span>원</span> </label>
+                                                                </div>
                                                             </div> 
                                                         </div>
 
@@ -444,14 +451,14 @@
                                                                 <div class="form-check custome-radio-box">
                                                                     <!-- <input class="form-check-input mx-2" type="radio" name="disKind" id="discount1" value="1"> -->
                                                                     <form:radiobutton path="disKind" cssClass="form-check-input mx-2" id="discount1" value="1"/>
-                                                                    <label class="form-check-label d-flex" for="paypal">12개월 할인 
-                                                                        <span class="justify-content-end " style="margin-left:103px;">총</span> <span class="fs-4" style="margin-top:-10px; ">-520,000</span> <span>원</span> </label>
+                                                                    <label class="form-check-label d-flex justify-content-between" for="paypal">12개월 할인 
+                                                                        <span class="justify-content-end " style="margin-left:103px;">총</span> <span class="fs-4" id="dis1" style="margin-top:-10px; "> </span> <span>원</span> </label>
                                                                 </div> 
                                                                 <div class="form-check custome-radio-box">
                                                                     <!-- <input class="form-check-input mx-2" type="radio" name="disKind" id="discount2" value="2"> -->
                                                                     <form:radiobutton path="disKind" cssClass="form-check-input mx-2" id="discount2" value="2"/>
-                                                                    <label class="form-check-label d-flex" for="paypal">24개월 할인  
-                                                                        <span class="justify-content-end" style="margin-left:100px;">총</span> <span class="fs-4" style="margin-top:-10px;">-620,000</span> <span>원</span> </label>
+                                                                    <label class="form-check-label d-flex justify-content-between" for="paypal">24개월 할인  
+                                                                        <span class="justify-content-end" style="margin-left:100px;">총</span> <span class="fs-4" id="dis2" style="margin-top:-10px;"> </span> <span>원</span> </label>
                                                                 </div> 
                                                             </div>   
                                                         </div>

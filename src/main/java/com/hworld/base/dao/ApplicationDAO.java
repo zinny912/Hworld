@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.hworld.base.vo.ApplicationVO;
+import com.hworld.base.vo.DirectVO;
 import com.hworld.base.vo.MemberVO;
 import com.hworld.base.vo.PlanVO;
 
@@ -28,11 +29,17 @@ public interface ApplicationDAO {
 	//3-2b.받아온 회원번호로 회선VO 만들기
 	public int setTelephoneInitAdd(ApplicationVO applicationVO) throws Exception;
 	
-	//존재하는 요금제 타입 가져오기
+	//존재하는 plan 타입 가져오기
 	public List<PlanVO> getExistPlanList() throws Exception;
 	
-	//요금제 list 가져오기
+	//plan list 가져오기
 	public List<PlanVO> getPlanList() throws Exception;
+	
+	//direct list 가져오기
+	public List<DirectVO> getDirectList() throws Exception;
+	
+	//getSelectedDirectList
+	public List<DirectVO> getSelectedDirectList(DirectVO directVO) throws Exception;
 	
 	
 }

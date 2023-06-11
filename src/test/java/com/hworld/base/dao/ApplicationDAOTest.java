@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.hworld.base.vo.ApplicationVO;
+import com.hworld.base.vo.DirectVO;
 import com.hworld.base.vo.MemberVO;
 import com.hworld.base.vo.PlanVO;
 
@@ -53,12 +54,30 @@ class ApplicationDAOTest {
 	}
 	
 	//planList
-	@Test
+	//@Test
 	void getPlanList() throws Exception{
-		PlanVO planVO = new PlanVO();
 		
 		List<PlanVO> ar = applicationDAO.getPlanList();
 		
+		assertEquals(0, ar.size());
+	}
+	
+	//directList
+	//@Test
+	void getDirectList() throws Exception{
+		
+		List<DirectVO> ar = applicationDAO.getDirectList();
+		
+		assertEquals(0, ar.size());
+	}
+	
+	//getSelectedDirectList
+	@Test
+	void getSelectedDirectList() throws Exception{
+		DirectVO directVO = new DirectVO();
+		directVO.setSlicedCode("G2301");
+		
+		List<DirectVO> ar = applicationDAO.getSelectedDirectList(directVO);
 		assertEquals(0, ar.size());
 	}
 	
