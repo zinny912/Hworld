@@ -32,6 +32,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.hworld.base.service.DirectService;
 import com.hworld.base.util.Pager;
 import com.hworld.base.vo.DirectVO;
+import com.hworld.base.vo.PlanVO;
 import com.hworld.base.vo.ReviewVO;
 
 import lombok.extern.slf4j.Slf4j;
@@ -71,11 +72,70 @@ public class DirectController {
 
 	    List<DirectVO> ar = directService.getDetail(slicedCode);
 	    List<ReviewVO> reviews = directService.getReview(slicedCode); //slicedCode로 페이징된 리뷰 목록 조회
-	    	
-		    mv.addObject("list", ar);
-		    mv.addObject("review",reviews);
-		    mv.setViewName("hworld/phoneDetail");
+	    List<PlanVO> existPlanList = directService.getExistPlanList();
+	    List<PlanVO> planList = directService.getPlanList();
+	    for(PlanVO planVO : planList) {
+			
+		}
+	    
+	    List<PlanVO> gList = new ArrayList<>();
+		List<PlanVO> sList = new ArrayList<>();
+		List<PlanVO> tList = new ArrayList<>();
+		List<PlanVO> zList = new ArrayList<>();
+		List<PlanVO> wList = new ArrayList<>();
+		List<PlanVO> hList = new ArrayList<>();
 
+	    for (PlanVO plan : planList) {
+		    String planNum = plan.getPlanNum();
+		    if (planNum.startsWith("G")) {
+		        gList.add(plan);
+		    } else if (planNum.startsWith("S")) {
+		        sList.add(plan);
+		    } else if (planNum.startsWith("T")) {
+		        tList.add(plan);
+		    } else if (planNum.startsWith("Z")) {
+		        zList.add(plan);
+		    } else if (planNum.startsWith("W")) {
+		        wList.add(plan);
+		    } else if (planNum.startsWith("H")) {
+		        hList.add(plan);
+		    }
+		}
+		
+		//
+		mv.addObject("existList", existPlanList);
+		mv.addObject("gList", gList);
+		mv.addObject("sList", sList);
+		mv.addObject("tList", tList);
+		mv.addObject("zList", zList);
+		mv.addObject("wList", wList);
+		mv.addObject("hList", hList);
+		
+	    mv.addObject("list", ar);
+	    mv.addObject("review",reviews);
+	    mv.setViewName("hworld/phoneDetail");
+
+		return mv;
+	}
+//	@GetMapping("selectedPlan")
+//	public ModelAndView getSelectedPlan(PlanVO planVO) throws Exception{
+//		ModelAndView mv = new ModelAndView();
+//		PlanVO selectedPlan = directService.getSelectedPlan(planVO);
+//		
+//		log.error("{}<========= 선택된 데이터",selectedPlan);
+//		 mv.addObject("result", selectedPlan);
+//		 mv.setViewName("hworld/selectedPlan"); // 결과를 보여줄 JSP 페이지의 이름
+//		return mv;
+//	}
+	
+	@PostMapping("selectedPlan")
+	public ModelAndView getSelectedPlan(@RequestParam("slicedCode") String slicedCode,PlanVO planVO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		PlanVO selectedPlan = directService.getSelectedPlan(planVO);
+		log.error(slicedCode);
+		log.error("{}<========= 선택된 데이터",selectedPlan);
+		 mv.addObject("result", selectedPlan);
+		 mv.setViewName("redirect:/direct/phoneDetail?slicedCode=" + slicedCode); // 결과를 보여줄 JSP 페이지의 이름
 		return mv;
 	}
 	

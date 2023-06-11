@@ -19,6 +19,7 @@ import com.hworld.base.dao.DirectDAO;
 import com.hworld.base.util.FileManager;
 import com.hworld.base.util.Pager;
 import com.hworld.base.vo.DirectVO;
+import com.hworld.base.vo.PlanVO;
 import com.hworld.base.vo.ReviewVO;
 
 import lombok.extern.slf4j.Slf4j;
@@ -103,5 +104,21 @@ public class DirectService {
 	public int setReviewUpdate(ReviewVO reviewVO) throws Exception{
 		return directDAO.setReviewUpdate(reviewVO);
 	}
+	
+	//getExistPlanList
+	public List<PlanVO> getExistPlanList() throws Exception{
+		return directDAO.getExistPlanList();
+	}
+	
+	//getPlanList
+	public List<PlanVO> getPlanList() throws Exception{
+		return directDAO.getPlanList();
+	}
+	
+	//getSelectedPlan
+	public PlanVO getSelectedPlan(PlanVO planVO) throws Exception{
+		return directDAO.getSelectedPlan(planVO);
+	}
+		
 	
 }

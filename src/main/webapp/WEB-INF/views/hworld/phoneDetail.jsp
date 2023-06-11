@@ -278,14 +278,15 @@
                                                     <div class="inner">
                                                         <div class="info">
                                                             <div class="tit">
-                                                                <span class="sub-tit" id="subscriptionNm" style="overflow: hidden; font-size: 22px; font-weight: 700; letter-spacing: -0.5px; text-overflow: ellipsis;">프리미어 88</span><br>
-                                                                <h2 class="main-tit" id="dataDefaultQty" style="margin: 3px 0 3px; font-size: 16px; font-weight: 400; letter-spacing: -0.56px; padding-right: 100px;"> 데이터 / 전화 / 문자 무제한</h2>                                                            
+                                                                <span class="sub-tit" id="selectedPlanName" style="overflow: hidden; font-size: 22px; font-weight: 700; letter-spacing: -0.5px; text-overflow: ellipsis;">선택된 요금제 이름</span><br>
+                                                                <h2 class="main-tit" id="dataDefaultQty" style="margin: 3px 0 3px; font-size: 16px; font-weight: 400; letter-spacing: -0.56px; padding-right: 100px;"> 데이터 무제한</h2>                                                            
                                                             </div>
+                                                            <div id="resultContainer'"></div>
                                                             <div class="data" style="position: absolute; top: 35px; right: 0; text-align: right;">
-                                                                <h2 class="price theme-color" id="subscriptionPrice" style="letter-spacing: -0.2px; display: block; margin-top: 6px; color: #000; font-weight: 700;">
-                                                                    69,000 <span style="color:black; font-size:20px;">원/월</span>
+                                                                <h2 class="price theme-color" id="selectedPlanPrice" style="letter-spacing: -0.2px; display: block; margin-top: 6px; color: #000; font-weight: 700;">
+                                                                    선택된 요금제 금액 <span style="color:black; font-size:20px;">원/월</span>
                                                                 </h2>
-                                                            </div>
+                                                            </div> 
                                                             <div class="d-flex justify-content-end">
                                                                 <a href="javascript:void(0)" data-bs-toggle="modal" id="cartEffect" data-bs-target="#quick-view2"
                                                                 class="btn" style="margin-top:-95px; margin-right:-30px;" > 
@@ -618,84 +619,274 @@
         <div class="modal-content">
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             <div class="modal-body">
-                <div class="row gy-4">
-                                    <div class="col-12">
-                                        <div class="product-right">
-                                            <div class="size-detail">
-                                                <h2 class="mb-3 fw-bolder">요금제 선택</h2>
-                                                <ul class="nav border-0" style="color:black;">
-                                                    <li class="nav-item" >
-                                                    <a class="nav-link active" style="color:black;" data-bs-toggle="tab" href="#tab-1">5G 요금제</a>
-                                                    </li>
-                                                    <li class="nav-item">
-                                                    <a class="nav-link" style="color:black;" data-bs-toggle="tab" href="#tab-2">시니어 요금제</a>
-                                                    </li>
-                                                    <li class="nav-item">
-                                                    <a class="nav-link" style="color:black;" data-bs-toggle="tab" href="#tab-3">청소년 요금제</a>
-                                                    </li>
-                                                    <li class="nav-item">
-                                                    <a class="nav-link" style="color:black;" data-bs-toggle="tab" href="#tab-4">ZEM 요금제</a>
-                                                    </li>
-                                                    <li class="nav-item">
-                                                    <a class="nav-link" style="color:black;" data-bs-toggle="tab" href="#tab-5">군인 요금제</a>
-                                                    </li>
-                                                </ul>
-                                                    <div class="tab-content">
-                                                        <div class="tab-pane fade show active" id="tab-1">
-                                                            <div class="row col-md-12 my-3 mx-3">
-                                                                <div class="form-check custome-radio-box">
-                                                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="credit">
-                                                                    <label class="form-check-label" for="credit">5G 프리미어</label>
-                                                                </div>
-                                                                <div class="form-check custome-radio-box">
-                                                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="debit">
-                                                                    <label class="form-check-label" for="debit">5G 베이직</label>
-                                                                </div>
-                                                                <div class="form-check custome-radio-box">
-                                                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="paypal">
-                                                                    <label class="form-check-label" for="paypal">5G 심플</label>
-                                                                </div>
-                                                                <div class="form-check custome-radio-box">
-                                                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="paypal">
-                                                                    <label class="form-check-label" for="paypal">5G 슬림</label>
-                                                                </div> 
-                                                            </div>
-                                                        </div>
-                                                        <div class="tab-pane fade" id="tab-2">
-                                                            <div class="row col-md-12 my-3 mx-3">
-                                                                <div class="form-check custome-radio-box">
-                                                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="credit">
-                                                                    <label class="form-check-label" for="credit">시니어 A형</label>
-                                                                </div>
-                                                                <div class="form-check custome-radio-box">
-                                                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="debit">
-                                                                    <label class="form-check-label" for="debit">시니어 B형</label>
-                                                                </div>
-                                                                <div class="form-check custome-radio-box">
-                                                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="paypal">
-                                                                    <label class="form-check-label" for="paypal">시니어 C형</label>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="tab-pane fade" id="tab-3">청소년 요금제의 내용입니다.</div>
-                                                        <div class="tab-pane fade" id="tab-4">ZEM 요금제의 내용입니다.</div>
-                                                        <div class="tab-pane fade" id="tab-5">군인 요금제의 내용입니다.</div>
-                                                    </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-3 ">    
-                                            <div class="product-btns">
-                                                <button onclick="location.href='상품상세페이지.html';" type="button" class="btn btn-solid-default btn-lg col-md-12"
+                 <div>
+                         <div class="row gy-4">
+                             <div class="col-12">
+                                 <div class="product-right">
+                                     <div class="size-detail">
+                                         <h6 class="mb-3 fw-bolder">요금제 선택</h6>
+                                         <!-- 요금제 유형 영역, 주석처리한거 써도 되기는한데 순서가 안맞을 수 있어서 아래처럼 처리함 -->
+                                         <ul class="nav border-0" style="color:black;">
+                                         <c:forEach items="${existList}" var="i">
+                                         	<c:if test="${i.note eq '5G 요금제'}">
+                                         		<li class="nav-item">
+                                          		<a class="nav-link" style="color:black;" data-bs-toggle="tab" href="#tab-1" id="">${i.note}</a>
+                                          	</li>
+                                         	</c:if>
+                                         	<c:if test="${i.note eq '시니어 요금제'}">
+                                         		<li class="nav-item">
+                                          		<a class="nav-link" style="color:black;" data-bs-toggle="tab" href="#tab-2" id="tab-s">${i.note}</a>
+                                          	</li>
+                                         	</c:if>
+                                         	<c:if test="${i.note eq '청소년 요금제'}">
+                                         		<li class="nav-item">
+                                          		<a class="nav-link" style="color:black;" data-bs-toggle="tab" href="#tab-3">${i.note}</a>
+                                          	</li>
+                                         	</c:if>
+                                         	<c:if test="${i.note eq '어린이 요금제'}">
+                                         		<li class="nav-item">
+                                          		<a class="nav-link" style="color:black;" data-bs-toggle="tab" href="#tab-4">${i.note}</a>
+                                          	</li>
+                                         	</c:if>
+                                         	<c:if test="${i.note eq '복지 요금제'}">
+                                         		<li class="nav-item">
+                                          		<a class="nav-link" style="color:black;" data-bs-toggle="tab" href="#tab-5">${i.note}</a>
+                                          	</li>
+                                         	</c:if>
+                                         	<c:if test="${i.note eq '군인 요금제'}">
+                                         		<li class="nav-item">
+                                          		<a class="nav-link" style="color:black;" data-bs-toggle="tab" href="#tab-6">${i.note}</a>
+                                          	</li>
+                                         	</c:if>
+                                         </c:forEach>
+                                         <%-- <c:forEach items="${existList}" var="i" varStatus="status">
+                                         	<li class="nav-item">
+                                         		<a class="nav-link" style="color:black;" data-bs-toggle="tab" href="#tab-${status.count}">${i.note}</a>
+                                         	</li>
+                                         </c:forEach> --%>
+                                         </ul>
+                                         
+                                         <!-- 요금제 상세 영역 -->
+                                         <div class="tab-content" id="planArea">
+                                         	<!-- 상세 리스트 -->
+                                         	<!-- 5G -->
+                                  			<c:if test="${not empty gList}">
+                                         	<div class="tab-pane fade show active" id="tab-1">
+                                        			<div class="row col-md-12 mt-3 mx-3">
+                                          	<c:forEach items="${gList}" var="i" varStatus="status">
+                                          	<div class="mt-1" style="border-box:0px; box-shadow:1px 1px 2px 0px gray;  width:97%;">
+                                           	<div class="form-check custome-radio-box mt-1">
+                                         				<input type="radio" name="planNum" class="form-check-input my-2" id="${i.planNum}" value="${i.planNum}" data-plan-price="${i.planPrice}" data-dp="${i.disPercent}"/>
+                                         				<label class="form-check-label fs-5" for="${i.planNum}">${i.planName}</label>
+                                                  </div>
+                                                  <div class="d-flex justify-content-between mb-1">
+                                                  	<label class="form-check-label ellipsis fs-6 mx-3" style="color:gray;">
+                                                  		${i.planExplainSM}
+                                                  	</label>
+                                                  	<label class="form-check-label me-3 "> <span class="fs-6">데이터 </span>
+                                                  	
+                                                  	<span class="fw-bold fs-6">
+                                                  	<c:choose>
+                                                  		<c:when test="${i.dataCapacity eq '무제한'}">
+                                                  			<c:set var="modiCapacity" value="${i.dataCapacity}"></c:set>
+                                                  		</c:when>
+                                                  		<c:otherwise>
+                                                  			<c:set var="modiCapacity" value="${i.dataCapacity}GB"></c:set>
+                                                  		</c:otherwise>
+                                                  	</c:choose>
+                                                  	
+                                                  	${modiCapacity}</span>, <span class="theme-color fs-6 fw-bold">${i.planPrice}</span><span class="fs-6">원</span>/월</label>
+                                                  </div>                                       
+                                                 </div>
+                                          	</c:forEach>
+                                        			</div>
+                                        		</div>
+                                         	</c:if>
+                                         	<!-- 시니어 -->
+											<c:if test="${not empty sList}">
+												<div class="tab-pane fade" id="tab-2">
+                                        			<div class="row col-md-12 mt-3 mx-3">
+                                          	<c:forEach items="${sList}" var="i" varStatus="status">
+                                          		<div class="mt-1" style="border-box:0px; box-shadow:1px 1px 2px 0px gray;  width:97%;">
+                                           	<div class="form-check custome-radio-box mt-1">
+                                         				<input type="radio" name="planNum" class="form-check-input my-2" id="${i.planNum}" value="${i.planNum}" data-plan-price="${i.planPrice}" data-dp="${i.disPercent}"/>
+                                         				<label class="form-check-label fs-5" for="${i.planNum}">${i.planName}</label>
+                                                  </div>
+                                                  <div class="d-flex justify-content-between mb-1">
+                                                  	<label class="form-check-label ellipsis fs-6 mx-3" style="color:gray;">
+                                                  		${i.planExplainSM}
+                                                  	</label>
+                                                  	<label class="form-check-label me-3 "> <span class="fs-6">데이터 </span>
+                                                  	
+                                                  	<span class="fw-bold fs-6">
+                                                  	<c:choose>
+                                                  		<c:when test="${i.dataCapacity eq '무제한'}">
+                                                  			<c:set var="modiCapacity" value="${i.dataCapacity}"></c:set>
+                                                  		</c:when>
+                                                  		<c:otherwise>
+                                                  			<c:set var="modiCapacity" value="${i.dataCapacity}GB"></c:set>
+                                                  		</c:otherwise>
+                                                  	</c:choose>
+                                                  	
+                                                  	${modiCapacity}</span>, <span class="theme-color fs-6 fw-bold">${i.planPrice}</span><span class="fs-6">원</span>/월</label>
+                                                  </div>                                       
+                                                 </div>
+                                          	</c:forEach>
+                                        			</div>
+                                        		</div>
+											</c:if>
+											<!-- 청소년 -->
+											<c:if test="${not empty tList}">
+											<div class="tab-pane fade" id="tab-3">
+                                        			<div class="row col-md-12 mt-3 mx-3">
+                                          	<c:forEach items="${tList}" var="i" varStatus="status">
+                                           	<div class="mt-1" style="border-box:0px; box-shadow:1px 1px 2px 0px gray;  width:97%;">
+                                           	<div class="form-check custome-radio-box mt-1">
+                                         				<input type="radio" name="planNum" class="form-check-input my-2" id="${i.planNum}" value="${i.planNum}" data-plan-price="${i.planPrice}" data-dp="${i.disPercent}"/>
+                                         				<label class="form-check-label fs-5" for="${i.planNum}">${i.planName}</label>
+                                                  </div>
+                                                  <div class="d-flex justify-content-between mb-1">
+                                                  	<label class="form-check-label ellipsis fs-6 mx-3" style="color:gray;">
+                                                  		${i.planExplainSM}
+                                                  	</label>
+                                                  	<label class="form-check-label me-3 "> <span class="fs-6">데이터 </span>
+                                                  	
+                                                  	<span class="fw-bold fs-6">
+                                                  	<c:choose>
+                                                  		<c:when test="${i.dataCapacity eq '무제한'}">
+                                                  			<c:set var="modiCapacity" value="${i.dataCapacity}"></c:set>
+                                                  		</c:when>
+                                                  		<c:otherwise>
+                                                  			<c:set var="modiCapacity" value="${i.dataCapacity}GB"></c:set>
+                                                  		</c:otherwise>
+                                                  	</c:choose>
+                                                  	
+                                                  	${modiCapacity}</span>, <span class="theme-color fs-6 fw-bold">${i.planPrice}</span><span class="fs-6">원</span>/월</label>
+                                                  </div>                                       
+                                                 </div>
+                                          	</c:forEach>
+                                        			</div>
+                                        		</div>
+                                         	</c:if>
+
+												<!-- 어린이 -->
+												<c:if test="${not empty zList}">
+												<div class="tab-pane fade" id="tab-4">
+                                        			<div class="row col-md-12 mt-3 mx-3">
+                                          	<c:forEach items="${zList}" var="i" varStatus="status">
+                                           	<div class="mt-1" style="border-box:0px; box-shadow:1px 1px 2px 0px gray;  width:97%;">
+                                           	<div class="form-check custome-radio-box mt-1">
+                                         				<input type="radio" name="planNum" class="form-check-input my-2" id="${i.planNum}" value="${i.planNum}" data-plan-price="${i.planPrice}" data-dp="${i.disPercent}"/>
+                                         				<label class="form-check-label fs-5" for="${i.planNum}">${i.planName}</label>
+                                                  </div>
+                                                  <div class="d-flex justify-content-between mb-1">
+                                                  	<label class="form-check-label ellipsis fs-6 mx-3" style="color:gray;">
+                                                  		${i.planExplainSM}
+                                                  	</label>
+                                                  	<label class="form-check-label me-3 "> <span class="fs-6">데이터 </span>
+                                                  	
+                                                  	<span class="fw-bold fs-6">
+                                                  	<c:choose>
+                                                  		<c:when test="${i.dataCapacity eq '무제한'}">
+                                                  			<c:set var="modiCapacity" value="${i.dataCapacity}"></c:set>
+                                                  		</c:when>
+                                                  		<c:otherwise>
+                                                  			<c:set var="modiCapacity" value="${i.dataCapacity}GB"></c:set>
+                                                  		</c:otherwise>
+                                                  	</c:choose>
+                                                  	
+                                                  	${modiCapacity}</span>, <span class="theme-color fs-6 fw-bold">${i.planPrice}</span><span class="fs-6">원</span>/월</label>
+                                                  </div>                                       
+                                                 </div>
+                                          	</c:forEach>
+                                        			</div>
+                                        		</div>
+                                         	</c:if>
+											<!-- 복지 -->
+											<c:if test="${not empty wList}">
+											<div class="tab-pane fade" id="tab-5">
+                                        			<div class="row col-md-12 mt-3 mx-3">
+                                          	<c:forEach items="${wList}" var="i" varStatus="status">
+                                           	<div class="mt-1" style="border-box:0px; box-shadow:1px 1px 2px 0px gray;  width:97%;">
+                                           	<div class="form-check custome-radio-box mt-1">
+                                         				<input type="radio" name="planNum" class="form-check-input my-2" id="${i.planNum}" value="${i.planNum}" data-plan-price="${i.planPrice}" data-dp="${i.disPercent}"/>
+                                         				<label class="form-check-label fs-5" for="${i.planNum}">${i.planName}</label>
+                                                  </div>
+                                                  <div class="d-flex justify-content-between mb-1">
+                                                  	<label class="form-check-label ellipsis fs-6 mx-3" style="color:gray;">
+                                                  		${i.planExplainSM}
+                                                  	</label>
+                                                  	<label class="form-check-label me-3 "> <span class="fs-6">데이터 </span>
+                                                  	
+                                                  	<span class="fw-bold fs-6">
+                                                  	<c:choose>
+                                                  		<c:when test="${i.dataCapacity eq '무제한'}">
+                                                  			<c:set var="modiCapacity" value="${i.dataCapacity}"></c:set>
+                                                  		</c:when>
+                                                  		<c:otherwise>
+                                                  			<c:set var="modiCapacity" value="${i.dataCapacity}GB"></c:set>
+                                                  		</c:otherwise>
+                                                  	</c:choose>
+                                                  	
+                                                  	${modiCapacity}</span>, <span class="theme-color fs-6 fw-bold">${i.planPrice}</span><span class="fs-6">원</span>/월</label>
+                                                  </div>                                       
+                                                 </div>
+                                          	</c:forEach>
+                                        			</div>
+                                        		</div>
+                                         	</c:if>
+												<!-- 군인 -->
+												<c:if test="${not empty hList}">
+												<div class="tab-pane fade" id="tab-6">
+                                        			<div class="row col-md-12 mt-3 mx-3">
+                                          	<c:forEach items="${hList}" var="i" varStatus="status">
+                                           	<div class="mt-1" style="border-box:0px; box-shadow:1px 1px 2px 0px gray;  width:97%;">
+                                           	<div class="form-check custome-radio-box mt-1">
+                                         				<input type="radio" name="planNum" class="form-check-input my-2" id="${i.planNum}" value="${i.planNum}" data-plan-price="${i.planPrice}" data-dp="${i.disPercent}"/>
+                                         				<label class="form-check-label fs-5" for="${i.planNum}">${i.planName}</label>
+                                                  </div>
+                                                  <div class="d-flex justify-content-between mb-1">
+                                                  	<label class="form-check-label ellipsis fs-6 mx-3" style="color:gray;">
+                                                  		${i.planExplainSM}
+                                                  	</label>
+                                                  	<label class="form-check-label me-3 "> <span class="fs-6">데이터 </span>
+                                                  	
+                                                  	<span class="fw-bold fs-6">
+                                                  	<c:choose>
+                                                  		<c:when test="${i.dataCapacity eq '무제한'}">
+                                                  			<c:set var="modiCapacity" value="${i.dataCapacity}"></c:set>
+                                                  		</c:when>
+                                                  		<c:otherwise>
+                                                  			<c:set var="modiCapacity" value="${i.dataCapacity}GB"></c:set>
+                                                  		</c:otherwise>
+                                                  	</c:choose>
+                                                  	
+                                                  	${modiCapacity}</span>, <span class="theme-color fs-6 fw-bold">${i.planPrice}</span><span class="fs-6">원</span>/월</label>
+                                                  </div>                                       
+                                                 </div>
+                                          	</c:forEach>
+                                        			</div>
+                                        		</div>
+                                         	</c:if>
+										
+	 										<div class="col-12">
+                                         	<div class="product-btns">
+                                                <button onclick="sendSelectedValue()" type="button"  class=" btn btn-solid-default btn-lg col-md-3 d-block mx-auto"
                                                     data-bs-dismiss="modal">선택하기</button>
                                             </div>
                                             </div>
+                                         
+                                         </div>
+                                
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-</div>
+                </div>
+			</div>
+		</div>
+		</div>
 <!-- 변경하기 모달창 end -->
 
 		     <!-- 리뷰작성-->
@@ -1000,6 +1191,44 @@
     const directName = $('.directNameValue').data('direct-name'); // 해당 후기 작성 버튼에 연결된 제품의 directName 값을 가져옴
     $('#directName2').text(directName); // 모달 창 내에서 제품명을 표시하는 곳에 directName 값을 설정
   });
+</script>
+<script>
+function sendSelectedValue() {
+    // 선택한 값을 가져오기
+    const selectedValue = document.querySelector('input[name="planNum"]:checked').value;
+
+    alert("선택한 값: " + selectedValue);
+    // Ajax 요청 보내기
+    $.ajax({
+        url: '/direct/selectedPlan', // 선택한 값을 처리할 JSP 페이지의 URL
+        method: 'POST',
+        data: { planNum: selectedValue },
+        success: function(result) {
+            // Ajax 요청이 성공한 경우의 처리
+            
+           
+            console.log(result.planName);
+            // 선택한 값이 서버로 전달되었고, 서버에서 필요한 처리를 한 후 응답을 받을 수 있습니다.
+            console.log('선택한 값이 서버로 전달되었습니다.');
+            // 추가적인 처리나 리다이렉션 등을 수행할 수 있습니다.
+            // 데이터를 이전 페이지로 전달하기 위해 쿼리 문자열을 생성합니다.
+            // 결과를 특정 HTML 요소에 입력해주기
+    var resultContainer = document.getElementById('resultContainer');
+    resultContainer.textContent = result; // 결과를 텍스트로 설정하거나
+    //resultContainer.innerHTML = result; // 결과를 HTML로 설정할 수도 있습니다.
+            
+            // 이전 페이지로 리다이렉션합니다.
+           location.href = '/direct/phoneDetail?slicedCode='+ slicedCode;
+        },
+        error: function(xhr, status, error) {
+            // Ajax 요청이 실패한 경우의 처리
+            console.error('Ajax 요청이 실패하였습니다:', error);
+            console.log('나는야 ', result);
+            
+            // 실패 시에 대한 처리를 수행할 수 있습니다.
+        }
+    });
+}
 </script>
 
 
