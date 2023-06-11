@@ -5,6 +5,7 @@
   
 <mapper namespace="com.hworld.base.dao.MemberDAO">
 	
+	<!-- 회원가입 -->
 	<insert id="setMemberAdd" parameterType="MemberVO">
 		INSERT INTO MEMBER(MEMBERNUM, EMAIL, PW, NAME, ADDRESS1, ADDRESS2, ADDRESS3, RRNF, RRNL, JOINDATE, MEMBERSTATE, ADMINCHECK, PHONENUM, OWNCHECK)
 		VALUES(#{memberNum}, #{email}, #{pw}, #{name}, #{address1}, #{address2}, #{address3}, #{rrnf}, #{rrnl}, now(), 1, 1, #{phoneNum}, 1)
@@ -15,11 +16,13 @@
   		SELECT EMAIL FROM MEMBER WHERE EMAIL = #{email}  		  	
   	</select>
   	
+  	<!-- 로그인 -->
   	<select id="getMemberLogin" parameterType="MemberVO" resultType="MemberVO">
 		SELECT * FROM MEMBER
 		WHERE EMAIL = #{email}		
 	</select>
 	
+	<!-- 이메일 찾기 -->
 	<select id="emailSearch" parameterType="MemberVO" resultType="MemberVO">
 		<![CDATA[
 		    SELECT * FROM MEMBER
@@ -27,18 +30,21 @@
 		]]>    
 	</select>
 	
+	<!-- 비밀번호 찾기 -->
 	<select id="memberPwCheck" parameterType="MemberVO" resultType="java.lang.Integer">
 		<![CDATA[
 		    SELECT COUNT(*) FROM MEMBER
 		    WHERE NAME = #{name} AND EMAIL = #{email}
 		]]>    
 	</select>
-	 
-	    
+	
+	<!-- 비밀번호 찾기시 DB 업데이트 -->
 	<update id="passwordUpdate" parameterType="MemberVO" >
 	    UPDATE MEMBER SET PW =#{pw}
 	    WHERE NAME = #{name} AND EMAIL = #{email}
 	</update>
+	
+	<!--  -->
 	
 	
 </mapper>

@@ -885,21 +885,21 @@
                             <div class="security-details">
                                 <h5 class="font-light mt-3">안녕하세요 <span> ${memberVO.name}님 </span>
                                 </h5>
-                                <p class="font-light mt-1">계정 삭제를 원하신다면 아래 항목을 확인 해주세요.
+                                <p class="font-light mt-1">회원 탈퇴를 원하신다면 아래 항목을 확인 해주세요.
                                 </p>
                             </div>
                             <div class="security-details-1 mb-0">
                                 <div class="page-title">
                                     <h4 class="fw-bold">주의 사항</h4>
                                 </div>
-                                <p class="font-light">계정을 삭제하면 프로필, 개인 설정 및 기타 모든 관련 정보가 영구적으로 제거됩니다. 계정이 삭제되면 로그아웃되며 다시 로그인할 수 없습니다.</p>
+                                <p class="font-light">회원을 탈퇴하면 개인 설정 및 기타 모든 관련 정보가 영구적으로 제거됩니다. 회원 탈퇴를 하게 되면 로그아웃되며 다시 로그인할 수 없습니다.</p>
 
-                                <p class="font-light mb-4">위의 내용을 이해하고 동의하며 여전히 계정을 삭제하려면 아래를 클릭하십시오.
+                                <p class="font-light mb-4">위의 내용을 이해하고 동의하며 여전히 회원 탈퇴를 원하시면 아래를 클릭하십시오.
 
                                 </p>
 
                                 <button class="btn btn-solid-default btn-sm fw-bold rounded" data-bs-toggle="modal"
-                                    data-bs-target="#deleteModal">계정 삭제</button>
+                                    data-bs-target="#deleteModal">회원 탈퇴</button>
                             </div>
                         </div>
                         <!-- 회원탈퇴 end -->
@@ -1126,11 +1126,11 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body pb-3 text-center mt-4">
-                    <h4>정말로 계정을 삭제하시겠습니까?</h4>
+                    <h4>정말로 회원을 탈퇴하시겠습니까?</h4>
                 </div>
                 <div class="modal-footer d-block text-center mb-4">
                     <button class="btn btn-solid-default btn-sm fw-bold rounded" data-bs-target="#doneModal"
-                        data-bs-toggle="modal" data-bs-dismiss="modal">삭제</button>
+                        data-bs-toggle="modal" data-bs-dismiss="modal">탈퇴</button>
                 </div>
             </div>
         </div>
