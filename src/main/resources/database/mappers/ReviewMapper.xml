@@ -5,11 +5,30 @@
   
 <mapper namespace="com.hworld.base.dao.ReviewDAO">
 
+	<sql id="search">
+		<where>
+			<if test="kind=='directName'">
+				TITLE LIKE CONCAT('%',#{search},'%')
+			</if>
+			<if test="kind=='dircetContents'">
+				CONTENTS LIKE CONCAT('%',#{search},'%')
+			</if>
+		</where>
+	</sql>
 
-<select id="getReveiw" resultType="ReviewVO">
-
-
-
-</select>
+	<select id="getReveiw" resultType="ReviewVO" parameterType="Pager">
+	 	SELECT R.*, D.DIRECTNAME, D.DIRECTCODE, SUBSTRING(D.DIRECTCODE, -5) AS slicedCode
+		FROM REVIEW R
+		LEFT JOIN ORDERDIRECT OD ON OD.ORDERNUM = R.ORDERNUM
+		LEFT JOIN DIRECT D ON D.DIRECTCODE =OD.DIRECTCODE
+		ORDER BY R.REGDATE DESC
+		LIMIT #{startRow}, #{perPage}
+	</select>
+	
+	<select id="getTotalCount" parameterType="Pager" resultType="Long">
+		SELECT COUNT(REVIEWNUM) FROM REVIEW
+		<include refid="search"></include>
+	</select> 
+	
 
 </mapper>

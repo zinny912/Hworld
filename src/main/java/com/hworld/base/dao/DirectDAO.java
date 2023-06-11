@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.hworld.base.util.Pager;
 import com.hworld.base.vo.DirectVO;
+import com.hworld.base.vo.ReviewVO;
 
 
 @Mapper
@@ -42,6 +43,23 @@ public interface DirectDAO {
 	
 	//파일 삭제 
 	public int setFileDelete (DirectVO directVO) throws Exception;
-
-			
+	
+	//리뷰 불러오기
+	public List<ReviewVO> getReview(String slicedCode) throws Exception;	
+	
+	//리뷰 총 개수 가져오기
+	public  Long getReviewCount(DirectVO directVO) throws Exception;
+	
+	//리뷰 하나 가져오기
+	public ReviewVO getReviewOne(ReviewVO reviewVO) throws Exception;
+	
+	//리뷰작성
+	public int setReviewAdd(ReviewVO reviewVO) throws Exception;
+	
+	//리뷰수정
+	public int setReviewUpdate(ReviewVO reviewVO) throws Exception;
+	
+	//리뷰삭제
+	public int setReviewDelete(ReviewVO reviewVO) throws Exception;
+	
 }
