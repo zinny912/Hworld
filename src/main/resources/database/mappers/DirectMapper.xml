@@ -88,11 +88,6 @@
 		HAVING slicedCode = #{slicedCode}
 		ORDER BY R.REGDATE DESC;
 	</select>
-	<!-- 리뷰 하나 가져오기 -->
-	<select id="getReviewOne" resultType="ReviewVO">
-		SELECT * FROM REVIEW
-		WHERE NUM = #{num}
-	</select>
 
 	<!-- 리뷰 총 개수 가져오기 -->
 	<select id="getReviewCount" parameterType="DirectVO" resultType="Long">

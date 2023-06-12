@@ -51,11 +51,6 @@ public class DirectService {
 		return directDAO.getReview(slicedCode);
 	}
 	
-	//상품 리뷰 하나 불러오기 
-	public ReviewVO getReviewOne(ReviewVO reviewVO) throws Exception {
-		return directDAO.getReviewOne(reviewVO);
-	}
-	
 	// 상품 리뷰 작성 
 	public int setReviewAdd(ReviewVO reviewVO) throws Exception {
 		

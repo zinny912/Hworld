@@ -51,9 +51,6 @@ public interface DirectDAO {
 	//리뷰 총 개수 가져오기
 	public  Long getReviewCount(DirectVO directVO) throws Exception;
 	
-	//리뷰 하나 가져오기
-	public ReviewVO getReviewOne(ReviewVO reviewVO) throws Exception;
-	
 	//리뷰작성
 	public int setReviewAdd(ReviewVO reviewVO) throws Exception;
 	

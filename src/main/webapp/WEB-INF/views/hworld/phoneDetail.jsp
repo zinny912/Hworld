@@ -46,6 +46,46 @@
 .rate:not(:checked) > label:hover ~ label {
   color: #ffa202;
 }
+
+.modalRate {
+  display: inline-block;
+  font-size: 0;
+  position: relative;
+  vertical-align: middle;
+}
+
+.modalRate input {
+  display: none;
+}
+
+.modalRate label {
+  float: right;
+  color: #ddd;
+  font-size: 24px;
+  transition: color 0.3s;
+  cursor: pointer;
+  margin-right: 2px;
+}
+
+.modalRate label:before {
+  content: "\f005";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  padding: 2px;
+}
+
+.modalRate input:checked ~ label,
+.modalRate input:hover ~ label {
+  color: #ffa202;
+}
+
+.modalRate:not(:checked) > label:hover,
+.modalRate:not(:checked) > label:hover ~ label {
+  color: #ffa202;
+}
+
+
+
      .btn-solid-after {
         background-color: #e22454; 
         color: #fff; 
@@ -324,7 +364,8 @@
 	                                    ${directVO.directContents}
 	                                </div>
 	                            </div>
-	                        </div>
+	                           
+	                        
 			<!-- 상품 문의 nav tap -->
 							<div class="tab-pane fade" id="question">
 							    <div class="accordion-group-header side-type mb-4">
@@ -511,13 +552,14 @@
 										</div>
                                             <h2 class="col-md-7" style="margin-top:-50px;">구매 후기</h2>
 											<c:forEach items="${review}" var="review">
-	                                            <div class="customer-section">
+	                                             <div class="customer-section" data-review="${review.num}" data-rate="${review.rate}">
 	                                                <div class="customer-details">
 	                                                    <c:set var="username" value="${fn:substringBefore(review.email, '@')}" />
 															<h5>${username}</h5>
 															<div class="admin-update-delete d-flex justify-content-end">
-						                                        <a href="javascript:void(0)" class="me-3" data-bs-toggle="modal"
-						                                                            data-bs-target="#updateReview" id="reviewUpdate">수정</a>
+						                                        <a href="javascript:void(0)" class="me-3 reviewUpdate" data-bs-toggle="modal"
+		                                                            data-bs-target="#updateReview" id="reviewUpdate${review.num}"
+		                                                            data-review-num="${review.num}">수정</a>
 						                                        <a href="javascript:void(0)" data-bs-toggle="modal"
 						                                                    data-bs-target="#reviewdel">삭제</a>
 	                                    					</div>    
@@ -910,39 +952,44 @@
 		        <div class="modal-header">
 		            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
 		        </div>
-                <form action="./reviewUpdate" method="post">
+                <!-- <form action="./reviewUpdate" method="post"> -->
                     <div class="modal-body">
 						<ul>
                             <li>
                                 <label class=""> 상품명</label>
                                 <span class="mx-3">|</span>
                                 <input class="fw-bold" id="modalRevName" name="productName" value="" readonly>
+                                
                             </li>
 						</ul>
                         <ul>
                             <li>
                                 <label class="form-label mt-3" style="vertical-align: middle;" for="rate" value="">평점</label>
-                                <div class="rate rating">
-                                    <input type="radio" id="modalRevStar1" name="rate" value="5"><label for="star1"></label>
-                                    <input type="radio" id="modalRevStar2" name="rate" value="4"><label for="star2"></label>
-                                    <input type="radio" id="modalRevStar3" name="rate" value="3"><label for="star3"></label>
-                                    <input type="radio" id="modalRevStar4" name="rate" value="2"><label for="star4"></label>
-                                    <input type="radio" id="modalRevStar5" name="rate" value="1"><label for="star5"></label>
+                                <div class="modalRate rating">
+                                    <input type="radio" id="modalRevStar1" name="rate" value="5"><label for="modalRevStar1"></label>
+                                    <input type="radio" id="modalRevStar2" name="rate" value="4"><label for="modalRevStar2"></label>
+                                    <input type="radio" id="modalRevStar3" name="rate" value="3"><label for="modalRevStar3"></label>
+                                    <input type="radio" id="modalRevStar4" name="rate" value="2"><label for="modalRevStar4"></label>
+                                    <input type="radio" id="modalRevStar5" name="rate" value="1"><label for="modalRevStar5"></label>
                                 </div>
                             </li>		
                         </ul>
                         <div class="mb-4 mt-2">
-                            <label for="contents" class="form-label" >구매 후기</label>
-                            <textarea class="form-control col-12"  placeholder="간단한 후기를 작성해주세요." id="modalRevContents" name="contents"><textarea>
+                            <label for="modalRevContents" class="form-label" >구매 후기</label>
+                            <textarea class="form-control col-12"  placeholder="간단한 후기를 작성해주세요." id="modalRevContents" name="contents">
+                            
+                            </textarea>
                         </div>   
                     </div>
-                        <input type="hidden" id="modalRevOrderNum" name="orderNum" value="">
-                        <input type="hidden" id="modalRevMemberNum" name="memberNum" value="">
+                    	<input type="text" id="modalRevRate" name="rate" value="">
+                    	<input type="text" id="modalRevNum" name="reviewNum" value="">
+                        <input type="text" id="modalRevOrderNum" name="orderNum" value="">
+                        <input type="text" id="modalRevMemberNum" name="memberNum" value="">
                         <input type="hidden" id="modalRevSlicedCode" name="slicedCode" value="${param.slicedCode}">
                     <div class="modal-footer pt-0 text-end d-block">
-                        <button type="button" class="btn btn-solid-default btn-sm" data-bs-dismiss="modal" onclick="form.submit()">작성</button>
+                        <button type="button" class="btn btn-solid-default btn-sm" data-bs-dismiss="modal" onclick="updateReviewConfirm()" id="updateReviewConfirm">작성</button>
                     </div>
-                </form>
+                <!-- </form> -->
             </div>
         </div>
     </div>
@@ -1166,6 +1213,8 @@
     }
   }
 </script>
+
+
 <!--<script>
     // JavaScript를 사용하여 orderNum과 memberNum 값을 설정
     const orderNumInput = document.getElementById('orderNum');

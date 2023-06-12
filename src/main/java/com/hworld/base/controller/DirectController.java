@@ -117,28 +117,19 @@ public class DirectController {
 
 		return mv;
 	}
-//	@GetMapping("selectedPlan")
-//	public ModelAndView getSelectedPlan(PlanVO planVO) throws Exception{
+
+//	@PostMapping("selectedPlan")
+//	public ModelAndView getSelectedPlan(@RequestParam("slicedCode") String slicedCode,PlanVO planVO) throws Exception{
 //		ModelAndView mv = new ModelAndView();
 //		PlanVO selectedPlan = directService.getSelectedPlan(planVO);
-//		
+//		log.error(slicedCode);
 //		log.error("{}<========= 선택된 데이터",selectedPlan);
 //		 mv.addObject("result", selectedPlan);
-//		 mv.setViewName("hworld/selectedPlan"); // 결과를 보여줄 JSP 페이지의 이름
+//		 mv.setViewName("redirect:/direct/phoneDetail?slicedCode=" + slicedCode); // 결과를 보여줄 JSP 페이지의 이름
 //		return mv;
 //	}
 	
-	@PostMapping("selectedPlan")
-	public ModelAndView getSelectedPlan(@RequestParam("slicedCode") String slicedCode,PlanVO planVO) throws Exception{
-		ModelAndView mv = new ModelAndView();
-		PlanVO selectedPlan = directService.getSelectedPlan(planVO);
-		log.error(slicedCode);
-		log.error("{}<========= 선택된 데이터",selectedPlan);
-		 mv.addObject("result", selectedPlan);
-		 mv.setViewName("redirect:/direct/phoneDetail?slicedCode=" + slicedCode); // 결과를 보여줄 JSP 페이지의 이름
-		return mv;
-	}
-	
+	//리뷰 추가
 	@PostMapping("reviewAdd")
 	public ModelAndView setReviewAdd(ReviewVO reviewVO, ModelAndView mv) throws Exception {
 		int result = directService.setReviewAdd(reviewVO);
@@ -242,18 +233,8 @@ public class DirectController {
 			directService.setInsert(directVO2, multipartFiles);
 		}
 
-		
 		modelAndView.setViewName("redirect:/direct/phoneDetail?slicedCode="+slicedCode);
 		return modelAndView;
-	}
-	// 리뷰 수정 페이지
-	@GetMapping("getReview")
-	public ModelAndView getReviewUpdate(ReviewVO reviewVO, @RequestParam("slicedCode") String slicedCode) throws Exception {
-		ModelAndView mv = new ModelAndView();
-	    reviewVO = directService.getReviewOne(reviewVO);
-	    mv.addObject("reviewVO", reviewVO);
-	    mv.setViewName("redirect:/direct/phoneDetail?slicedCode=" + slicedCode);  // 리뷰 수정 페이지의 뷰 이름을 설정합니다.
-	    return mv;
 	}
 
 	// 리뷰 수정 처리
@@ -290,9 +271,5 @@ public class DirectController {
 		modelAndView.setViewName("hworld/accessoryOrder");
 		return modelAndView;
 	}
-	
-	
 
-	
-	
 }
