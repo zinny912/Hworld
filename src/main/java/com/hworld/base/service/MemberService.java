@@ -27,14 +27,22 @@ public class MemberService {
 	
 	public int setMemberAdd(MemberVO memberVO) throws Exception {
 		
-		String rrnl = memberVO.getRrnl();
-        memberVO.setRrnl(SHA256Util.encryptMD5(memberVO.getRrnl()));
+		String RRN = memberVO.getRrnf()+"-"+memberVO.getRrnl();
+	    memberVO.setRrnl(SHA256Util.encryptMD5(RRN));
 		
 		return memberDAO.setMemberAdd(memberVO);
 	}		
-			
+	
 	public MemberVO emailCheck(MemberVO memberVO) throws Exception {
 		return memberDAO.emailCheck(memberVO);
+	}
+	
+	public int memberPwCheck(MemberVO memberVO) throws Exception {
+		return memberDAO.memberPwCheck(memberVO);
+	}
+	
+	public void passwordUpdate(MemberVO memberVO) throws Exception {
+		memberDAO.passwordUpdate(memberVO);
 	}
 	
 	public MemberVO getMemberLogin(MemberVO memberVO) throws Exception {
@@ -43,5 +51,9 @@ public class MemberService {
 	
 	public int getMemberLogout(MemberVO memberVO) throws Exception {
 		return memberDAO.getMemberLogout(memberVO);
+	}
+	
+	public MemberVO emailSearch(MemberVO memberVO) throws Exception {
+		return memberDAO.emailSearch(memberVO);
 	}
 }
