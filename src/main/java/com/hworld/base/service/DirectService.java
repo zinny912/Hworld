@@ -19,6 +19,8 @@ import com.hworld.base.dao.DirectDAO;
 import com.hworld.base.util.FileManager;
 import com.hworld.base.util.Pager;
 import com.hworld.base.vo.DirectVO;
+import com.hworld.base.vo.PlanVO;
+import com.hworld.base.vo.ReviewVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -39,13 +41,27 @@ public class DirectService {
 		return directDAO.getList(pager);
 	}
 	
-	
 	// 상품 하나 옵션 다수 조회
 	public List<DirectVO> getDetail(String slicedCode) throws Exception {
-		
-		
 	    return directDAO.getDetail(slicedCode);
 	}
+	
+	// 상품 리뷰 전체 불러오기
+	public List<ReviewVO> getReview(String slicedCode) throws Exception {
+		return directDAO.getReview(slicedCode);
+	}
+	
+	//상품 리뷰 하나 불러오기 
+	public ReviewVO getReviewOne(ReviewVO reviewVO) throws Exception {
+		return directDAO.getReviewOne(reviewVO);
+	}
+	
+	// 상품 리뷰 작성 
+	public int setReviewAdd(ReviewVO reviewVO) throws Exception {
+		
+		return directDAO.setReviewAdd(reviewVO);
+	}
+	
 
 		
 	//상품 등록 
@@ -77,5 +93,32 @@ public class DirectService {
 		
 		return directDAO.setDelete(slicedCode);
 	}
+	
+	//리뷰삭제
+	public int setReviewDelete(ReviewVO reviewVO) throws Exception{
+		return directDAO.setReviewDelete(reviewVO);
+		
+	}
+	
+	//리뷰수정
+	public int setReviewUpdate(ReviewVO reviewVO) throws Exception{
+		return directDAO.setReviewUpdate(reviewVO);
+	}
+	
+	//getExistPlanList
+	public List<PlanVO> getExistPlanList() throws Exception{
+		return directDAO.getExistPlanList();
+	}
+	
+	//getPlanList
+	public List<PlanVO> getPlanList() throws Exception{
+		return directDAO.getPlanList();
+	}
+	
+	//getSelectedPlan
+	public PlanVO getSelectedPlan(PlanVO planVO) throws Exception{
+		return directDAO.getSelectedPlan(planVO);
+	}
+		
 	
 }
