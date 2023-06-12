@@ -114,199 +114,194 @@
 <body class="theme-color2 light ltr">
 <c:import url="../temp/header.jsp"></c:import>
     <!-- Shop Section start -->
-    <section class="section1">
+<section class="section1">
         <div class="container">
             <div class="row gx-4 gy-5">
                 <div class="col-lg-12 col-12">
                     <div class="details-items">
                         <div class="row g-4">
-                            <div class="col-md-6">
-                                <div class="ratio_portrait">
-                                    <div class="row g-sm-3 g-2">
-                                        <div class="col-6">
-                                            <div>
-                                                <img src="/assets/images/fashion/galaxy21u1.png"
-                                                    class="img-fluid bg-img blur-up lazyload" alt="">
-                                            </div>
-                                        </div>
- 
-                                    </div>
-                                </div>
-                            </div>
+                        <!-- 상품 사진 이미지 div 태그 -->
+		                            <div class="col-md-6">
+		                                <div class="ratio_portrait">
+		                                    <div class="row g-sm-3 g-2">
+		                                        <div class="col-6">
+		                                            <div>
+		                                                <img src="/assets/images/fashion/galaxy21u1.png"
+		                                                    class="img-fluid bg-img blur-up lazyload" alt="">
+		                                            </div>
+		                                        </div>
+		                                    </div>
+		                                </div>
+		                            </div>
+                       <!-- 상품 사진 이미지 div 태그 end -->
                             <div class="col-md-6">
                                 <div class="cloth-details-size ">
                                     <div class="admin-update-delete d-flex justify-content-end">
                                         <a href="./directUpdate?slicedCode=${directVO.slicedCode}" class="me-3">수정</a>
-                                        <a href="javascript:void(0)" data-bs-toggle="modal"
-                                                    data-bs-target="#productdel">삭제</a>
+                                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#productdel">삭제</a>
                                     </div>    
-                          <div id="directList">
-                          		<div class="noStock" style="display:none;">
-                          			<h2 class="theme-color">선택하신 제품은 재고가 없습니다.</h2>
-                          		</div>
-							  <c:forEach items="${list}" var="direct" varStatus="status">
-							  <div class="titlebox">
-							    <div class="brand direct-item" style="font-size: 27px; color: gray;" id="productCode"
-							      data-direct-code="${direct.directCode}" data-direct-price="${direct.directPrice}"
-							      data-direct-stock="${direct.directStock}">
-							      ${direct.value} ${direct.slicedCode} ${direct.directCode}
-							    </div>
-							    <div class="details-image-concept mt-0" style="font-size: 35px;" id="directName">
-									  <span class="directNameValue" data-direct-name="${direct.directName}">${direct.directName}</span>
+								<div id="directList">
+									<div class="noStock" style="display:none;">
+										<h2 class="theme-color">선택하신 제품은 재고가 없습니다.</h2>
+									</div>
+										<c:forEach items="${list}" var="direct" varStatus="status">
+											<div class="titlebox">
+												<div class="brand direct-item" style="font-size: 27px; color: gray;" id="productCode"
+												data-direct-code="${direct.directCode}" data-direct-price="${direct.directPrice}"
+												data-direct-stock="${direct.directStock}">
+													${direct.value} ${direct.slicedCode} ${direct.directCode}
+												</div>
+													<div class="details-image-concept mt-0" style="font-size: 35px;" id="directName">
+														<span class="directNameValue" data-direct-name="${direct.directName}">${direct.directName}</span>
+													</div>
+													<div>
+														<h3 class="mt-3 ">출고가</h3>
+													</div>
+														<p>
+														<span class="price-detail theme-color fw-bold" id="renewPrice" >${direct.directPrice}</span>
+														<span class="unit">원</span>
+														</p>
+													<input type="hidden" id="directCode" name="directCode" value="${direct.directCode}">
+													<input type="hidden" id="categoryCode" name="categoryCode" value="${direct.categoryCode}">
+													<input type="hidden" id="brandCode" name="brandCode" value="${direct.brandCode}">
+													<input type="hidden" id="slicedCode" name="slicedCode" value="${direct.slicedCode}">
+													<input type="text" id="directStock" name="directStock" value="${direct.directStock}" readonly>
+											</div>
+										</c:forEach>
+										<div class="optionArea">
+											<div class="product-option-item color">
+										   		<div class="option-title-area">
+										      		<h3 class="option-title mb-2">색상</h3>
+										        </div>
+												<div class="color-types">
+													<ul class="color-variant mb-0">
+														<li class="bg-white border boder-1 selected" value="W" name="colorCode"></li>
+														<li class="bg-gray1" value="G" name="colorCode"></li>
+														<li class="bg-black1" value="B" name="colorCode"></li>
+													</ul>
+        										</div>
+											</div>
+										<div>
+												<div>
+													<h3 class="option-title mt-3 mb-2">용량</h3>
+												</div>
+											<div>
+												<span>
+												  <input type="radio" hidden name="saveCapacity" value="128">
+												  <label for="saveCapacity" class="btn btn-outline-custom m-1 capacity">
+												    <span>128G</span>
+												  </label>
+												</span>
+												<span>
+												  <input type="radio" hidden name="saveCapacity" value="256">
+												  <label for="saveCapacity" class="btn m-1 btn-outline-custom capacity">
+												    <span>256G</span>
+												  </label>
+												</span>
+												<span>
+												  <input type="radio" hidden name="saveCapacity" value="512">
+												  <label for="saveCapacity" class="btn m-1 btn-outline-custom capacity">
+												    <span>512G</span>
+												  </label>
+												</span>
+											</div>
+										</div>
+										<hr>
+										</div>
+                         
+										<div class="product-option-item join">
+											<div class="option-title-area">
+												<h3 class="option-title mt-3 mb-2">가입유형</h3>
+											</div>
+											<div class="option-types" id="joinType">
+												<span class="c-ick-btn">
+													<input type="radio" hidden name="_joinType" id="joinType1">
+													<label for="joinType1" class="btn m-1 btn-outline-custom joinType">
+														<span class="labelin">기기변경</span>
+													</label>
+												</span>
+												<span class="c-ick-btn">
+													<input type="radio" hidden name="_joinType" id="joinType2">
+													<label for="joinType2" class="btn m-1 btn-outline-custom joinType">
+														<span class="labelin">번호이동</span>
+													</label>
+												</span>
+												<span class="c-ick-btn">
+													<input type="radio" hidden name="_joinType" id="joinType3">
+													<label for="joinType3" class="btn m-1 btn-outline-custom joinType">
+														<span class="labelin">신규가입</span>
+													</label>
+												</span>
+											</div>
+										</div>                                    
+							<!-- 할인유형 선택  -->
+									<div class="product-option-item pay installment">
+											<div class="option-title-area">
+												<h3 class="option-title mt-3 mb-2">이용방법</h3>
+											</div>
+										<div class="option-types mb-3" id="payType">
+											<span class="c-ick-btn lg">
+												<input type="radio" hidden name="_payType" id="payType1">
+												<label for="payType1" class="btn m-1 btn-outline-custom payType">
+													<span class="labelin">12개월<br>약정할인</span>
+												</label>
+											</span>
+											<span class="c-ick-btn lg checked">
+												<input type="radio" hidden name="_payType" id="payType2" >
+												<label for="payType2" class="btn m-1 btn-outline-custom payType">
+													<span class="labelin">24개월<br>약정할인</span>
+												</label>
+											</span>
+											<span class="c-ick-btn lg">
+												<input type="radio" hidden name="_payType" id="payType3">
+												<label for="payType3" class="btn btn-outline-custom m-1 payType">
+													<span class="labelin">24개월<br>공시지원금</span>
+												</label>
+											</span>
+										</div>
+									</div>
+				<!-- 선택한 요금제 정보  -->	
+						<div class="product-option-item" style="position: relative; padding: 16px 0 30px 100px; border-top: 1px solid #d3d3d3;">
+							<div>
+								<div class="option-title-area mt-3" style="position: absolute; top: 42px; left: 0;">
+									<span class="option-title" style="display: inline-block; color: #5a5a5a; 
+									font-size: 14px; font-weight: 400;">요금제</span>
 								</div>
-							    <div>
-							      <h3 class="mt-3 ">출고가</h3>
-							    </div>
-							    <p>
-							      <span class="price-detail theme-color fw-bold" id="renewPrice" >${direct.directPrice}</span>
-							      <span class="unit">원</span>
-							    </p>
-							     <input type="hidden" id="directCode" name="directCode" value="${direct.directCode}">
-							      <input type="hidden" id="categoryCode" name="categoryCode" value="${direct.categoryCode}">
-							      <input type="hidden" id="brandCode" name="brandCode" value="${direct.brandCode}">
-							      <input type="hidden" id="slicedCode" name="slicedCode" value="${direct.slicedCode}">
-							      <input type="text" id="directStock" name="directStock" value="${direct.directStock}" readonly>
-							    </div>
-							    </c:forEach>
-							
-							
-							    <div class="optionArea">
-							      <div class="product-option-item color">
-							        <div class="option-title-area">
-							          <h3 class="option-title mb-2">색상</h3>
-							        </div>
-							        <div class="color-types">
-							          <ul class="color-variant mb-0">
-							            <li class="bg-white border boder-1 selected" value="W" name="colorCode"></li>
-							            <li class="bg-gray1" value="G" name="colorCode"></li>
-							            <li class="bg-black1" value="B" name="colorCode"></li>
-							          </ul>
-							        </div>
-							      </div>
-							      <div>
-							        <div>
-							          <h3 class="option-title mt-3 mb-2">용량</h3>
-							        </div>
-							        <div>
-							          <span>
-							            <input type="radio" hidden name="saveCapacity" value="128">
-							            <label for="saveCapacity" class="btn btn-outline-custom m-1 capacity">
-							              <span>128G</span>
-							            </label>
-							          </span>
-							          <span>
-							            <input type="radio" hidden name="saveCapacity" value="256">
-							            <label for="saveCapacity" class="btn m-1 btn-outline-custom capacity">
-							              <span>256G</span>
-							            </label>
-							          </span>
-							          <span>
-							            <input type="radio" hidden name="saveCapacity" value="512">
-							            <label for="saveCapacity" class="btn m-1 btn-outline-custom capacity">
-							              <span>512G</span>
-							            </label>
-							          </span>
-							        </div>
-							      </div>
-							     
-							      <hr>
 							</div>
-                                
-                                    <div class="product-option-item join">
-                                        <div class="option-title-area">
-                                            <h3 class="option-title mt-3 mb-2">가입유형</h3>
-                                        </div>
-                                        <div class="option-types" id="joinType">
-                                            <span class="c-ick-btn">
-                                                <input type="radio" hidden name="_joinType" id="joinType1">
-                                                <label for="joinType1" class="btn m-1 btn-outline-custom joinType">
-                                                    <span class="labelin">기기변경</span>
-                                                </label>
-                                            </span>
-                                            <span class="c-ick-btn">
-                                                <input type="radio" hidden name="_joinType" id="joinType2">
-                                                <label for="joinType2" class="btn m-1 btn-outline-custom joinType">
-                                                    <span class="labelin">번호이동</span>
-                                                </label>
-                                            </span>
-                                            <span class="c-ick-btn">
-                                                <input type="radio" hidden name="_joinType" id="joinType3">
-                                                <label for="joinType3" class="btn m-1 btn-outline-custom joinType">
-                                                    <span class="labelin">신규가입</span>
-                                                </label>
-                                            </span>
-                                        </div>
-                                    </div>                                    
-
-                                    <div class="product-option-item pay installment">
-                                        <div class="option-title-area">
-                                            <h3 class="option-title mt-3 mb-2">이용방법</h3>
-                                        </div>
-                                        <div class="option-types mb-3" id="payType">
-                                            <span class="c-ick-btn lg">
-                                                <input type="radio" hidden name="_payType" id="payType1">
-                                                <label for="payType1" class="btn m-1 btn-outline-custom payType">
-                                                    <span class="labelin">12개월<br>약정할인</span>
-                                                </label>
-                                            </span>
-                                            <span class="c-ick-btn lg checked">
-                                                <input type="radio" hidden name="_payType" id="payType2" >
-                                                <label for="payType2" class="btn m-1 btn-outline-custom payType">
-                                                    <span class="labelin">24개월<br>약정할인</span>
-                                                </label>
-                                            </span>
-                                            <span class="c-ick-btn lg">
-                                                <input type="radio" hidden name="_payType" id="payType3">
-                                                <label for="payType3" class="btn btn-outline-custom m-1 payType">
-                                                    <span class="labelin">24개월<br>공시지원금</span>
-                                                </label>
-                                            </span>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="product-option-item" style="position: relative; padding: 16px 0 30px 100px; border-top: 1px solid #d3d3d3;">
-                                        <div>
-                                            <div class="option-title-area mt-3" style="position: absolute; top: 42px; left: 0;">
-                                                <div class="option-title" style="display: inline-block; color: #5a5a5a; font-size: 14px; font-weight: 400;">
-                                                    요금제
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="product-option-item compare mt-3" id="subscriptionInfo">
-                                            <dl class="compare-inner" style="display: block; margin-block-start: 1em; margin-block-end: 1em; margin-inline-start: 0px; margin-inline-end: 0px; margin: 0; padding: 0;">
-                                                <dt class="compare-title">
-                                                    <div class="inner">
-                                                        <div class="info">
-                                                            <div class="tit">
-                                                                <span class="sub-tit" id="selectedPlanName" style="overflow: hidden; font-size: 22px; font-weight: 700; letter-spacing: -0.5px; text-overflow: ellipsis;">선택된 요금제 이름</span><br>
-                                                                <h2 class="main-tit" id="dataDefaultQty" style="margin: 3px 0 3px; font-size: 16px; font-weight: 400; letter-spacing: -0.56px; padding-right: 100px;"> 데이터 무제한</h2>                                                            
-                                                            </div>
-                                                            <div id="resultContainer'"></div>
-                                                            <div class="data" style="position: absolute; top: 35px; right: 0; text-align: right;">
-                                                                <h2 class="price theme-color" id="selectedPlanPrice" style="letter-spacing: -0.2px; display: block; margin-top: 6px; color: #000; font-weight: 700;">
-                                                                    선택된 요금제 금액 <span style="color:black; font-size:20px;">원/월</span>
-                                                                </h2>
-                                                            </div> 
-                                                            <div class="d-flex justify-content-end">
-                                                                <a href="javascript:void(0)" data-bs-toggle="modal" id="cartEffect" data-bs-target="#quick-view2"
-                                                                class="btn" style="margin-top:-95px; margin-right:-30px;" > 
-                                                                <span style="text-decoration: underline; color:black;">요금제 변경하기</span> 
-                                                            </a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </dt>            
-                                            </dl>                                                        
-                                        </div>
-                                        
-                                           
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+							<div class="product-option-item compare mt-3" id="subscriptionInfo">
+								<div class="compare-inner" style="display: block; margin-block-start: 1em; margin-block-end: 1em; margin-inline-start: 0px; margin-inline-end: 0px; margin: 0; padding: 0;">
+									<div class="compare-title">
+										<div class="info">
+											<div class="tit">
+												<span class="sub-tit" id="selectedPlanName" style="overflow: hidden; font-size: 22px; font-weight: 700; letter-spacing: -0.5px; 
+												text-overflow: ellipsis;" data-plan-name="">선택된 요금제 이름</span>
+												<br>
+												<h2 class="main-tit" id="dataDefaultQty" style="margin: 3px 0 3px; font-size: 16px; font-weight: 400; letter-spacing: -0.56px; 
+												padding-right: 100px;"> 데이터 <span id="dataGB"></span> </h2>                                                            
+											</div>
+											<div class="data" style="position: absolute; top: 35px; right: 0; text-align: right;">
+												<h2 class="price theme-color" id="planPrice" style="letter-spacing: -0.2px; display: block; margin-top: 4px; margin-right:50px; 
+												color: #000; font-weight: 700;" data-plan-price="" data-dp="">선택된 요금제 금액</h2> 
+												<p style="color:black; font-size:15px; margin-top:-20px;" class="fw-bold">원/월</p>
+											</div> 
+											<div class="d-flex justify-content-end">
+											    <a href="javascript:void(0)" data-bs-toggle="modal" id="cartEffect" data-bs-target="#quick-view2"
+											    class="btn" style="margin-top:-95px; margin-right:-30px;" > 
+												<span style="text-decoration: underline; color:black;">요금제 변경하기</span> 
+			                                    </a>
+			                                </div>
+										</div>
+									</div>            
+								</div>
+							</div>
                         </div>
-                    </div>
-                </div>
+                      <!-- 선택한 요금제 정보 end -->	  
+                    	</div> <!-- id = "diretList" div -->
+	                </div>
+	            </div>
+        	</div> 
+    	</div><!-- 상품 이미지까지 감싸는 태그 -->	
+    </div>
 
                 <div class="col-12">
                     <div class="cloth-review">
@@ -322,58 +317,52 @@
                                     data-bs-target="#review" type="button">상품리뷰</button>
                             </div>
                         </nav>
-
-                        <div class="tab-content" id="nav-tabContent">
-                            <div id="desc" class="tab-pane fade show active"><!-- 여기부터 admin 소스 -->
-                                <div class="p_description">
-                                 
-                                    ${directVO.directContents}
-                                  
-                                </div>
-                               
-                            </div>
-                            </div>
-
-                            <div class="tab-pane fade" id="question">
-                                <div class="accordion-group-header side-type mb-4">
-                                    
-                                    <h2 class="left title m-0">상품 문의 (문의Count)</h2>
-                                    <div class="d-flex justify-content-end">
-                                        
-                                        <button class="btn btn-solid-default btn-sm fw-bold me-4" style="margin-top:-25px;" data-bs-toggle="modal"
-                                                            data-bs-target="#addQna">
-                                                            문의 작성</button>
+			<!-- 상품 상세정보 nav tap -->
+	                        <div class="tab-content" id="nav-tabContent">
+	                            <div id="desc" class="tab-pane fade show active">
+	                                <div class="p_description">
+	                                    ${directVO.directContents}
+	                                </div>
+	                            </div>
+	                        </div>
+			<!-- 상품 문의 nav tap -->
+							<div class="tab-pane fade" id="question">
+							    <div class="accordion-group-header side-type mb-4">
+							        <h2 class="left title m-0">상품 문의 (문의Count)</h2>
+							        <div class="d-flex justify-content-end">
+							        	<button class="btn btn-solid-default btn-sm fw-bold me-4" style="margin-top:-25px;" data-bs-toggle="modal"
+                                         data-bs-target="#addQna">문의 작성</button>
                                     </div>
                                 </div>
-                                <div class="container mb-5">
-                                    <div class="category-option">
-                                        <div class="accordion category-name" id="accordionExample">
-                                            <div class="accordion-item category-rating">
-                                                <h2 class="accordion-header"  id="headingThree" style="padding:0px;">
-                                                    <button class="accordion-button" style="background-color:#fff; padding:0px;" type="button" data-bs-toggle="collapse"
-                                                        data-bs-target="#collapseThree">
-                                                        <div class="d-flex col-10">
-                                                        <span class="col-2 mx-2 theme-color">
-                                                           <span>답변완료</span>
-                                                        </span>
-                                                        <h5 class="col-7 me-5">Qna 타이틀(작성내용 앞부분 잘라서 보여주기)</h5> 
-                                                        <span class="user col-1 me-5" style="font-weight:400;">회원 ID @ 제외</span>
-                                                        <span class="date col-1" style="font-weight:400;">작성일</span>
-                                                    </div>  
-                                                    </button>
-                                                    
-                                                </h2>
-                                                <div id="collapseThree" class="accordion-collapse collapse"
-                                                    aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-                                                    <div class="accordion-body">
-                                                        <div class="card"><!----><!---->
-                                                            <div class="card-body"><!----><!---->                                                            
-                                                                <span class="cate col-1">
-                                                                    <span class="fw-bold text-danger">Q 회원 문의</span>
-                                                                </span>
+                                	<div class="container mb-5">
+                                    	<div class="category-option">
+                                        	<div class="accordion category-name" id="accordionExample">
+                                            	<div class="accordion-item category-rating">
+                                                	<h2 class="accordion-header"  id="headingThree" style="padding:0px;">
+                                                    	<button class="accordion-button" style="background-color:#fff; padding:0px;" type="button" data-bs-toggle="collapse"
+                                                       	 data-bs-target="#collapseThree">
+                                                        	<div class="d-flex col-10">
+																<div class="col-2 mx-2 theme-color">
+                                                           			<span>답변완료</span>
+                                                        		</div>
+                                                       			<h5 class="col-7 me-5">Qna 타이틀(작성내용 앞부분 잘라서 보여주기)</h5> 
+                                                       				<span class="user col-1 me-5" style="font-weight:400;">회원 ID @ 제외</span>
+                                                       				<span class="date col-1" style="font-weight:400;">작성일</span>
+                                                    		</div>  
+                                                    	</button>
+                                                	</h2>
+                                                	<div id="collapseThree" class="accordion-collapse collapse"
+                                                    	aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                                                    	<div class="accordion-body">
+                                                        	<div class="card">
+                                                            	<div class="card-body"><!----><!---->                                                            
+	                                                                <span class="cate col-1">
+	                                                                    <span class="fw-bold text-danger">Q 회원 문의</span>
+	                                                                </span>
                                                                 <div>
                                                                 작성내용 
-                                                                </div><hr>
+                                                                </div>
+                                                                <hr>
                                                                 <div class="reply-box">
                                                                     <span class="cate col-1">
                                                                         <span class="fw-bold text-danger"> A 관리자 답변</span>
@@ -381,201 +370,176 @@
                                                                     <div>안녕하세요.
                                                                         관리자 답변 내용
                                                                     </div>
-                                                                    <span class="date">관리자 답변 작성일</span>
+                                                                    	<span class="date">관리자 답변 작성일</span>
                                                                 </div>
-                                                            </div><!----><!---->
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>   
-                                    </div>
-                                </div>  
-                             </div>
-<!-- 구매후기 시작 -->
+                                                            	</div><!----><!---->
+                                                        	</div>
+                                                    	</div>
+                                                	</div>
+                                            	</div>
+                                        	</div>   
+                                    	</div>
+                                	</div>  
+                             	</div>
+                             	<!-- 상품문의 끝 -->
+						<!-- 구매후기 시작 -->
                              <div class="tab-pane fade" id="review">
                                 <div class="row g-4 col-12">
                                     <div class="col-md-3" style="margin-top:-20px;">
                                         <div class="customer-rating mt-5 me-5" >
                                             <h2>평점</h2>
-                                  <div hidden>        
-			                       <c:set var="totalRating" value="0" />
-			                       ${totalRating}
-									<c:forEach items="${review}" var="review">
-    								<c:set var="totalRating" value="${totalRating + review.rate}" />
-   										<p> 이거 뭐야  ${totalRating} </p>
-									</c:forEach>
-								 	</div>
-									<c:set var="averageRating" value="${totalRating / review.size()}" />
-										<h5 class="font-light" hidden>${averageRating}</h5>
-                                            <ul class="rating my-2 d-inline-block">
-							                          	<li>
-											                <i class="fas fa-star ${averageRating >= 0.5 ? 'theme-color' : ''}"></i>
-													    </li>
-													    <li>
-											                <i class="fas fa-star ${averageRating >= 1.5 ? 'theme-color' : ''}"></i>
-											            </li>
-											            <li>
-											                <i class="fas fa-star ${averageRating >= 2.5 ? 'theme-color' : ''}"></i>
-											            </li>
-											            <li>
-											                <i class="fas fa-star ${averageRating >= 3.5 ? 'theme-color' : ''}"></i>
-											            </li>
-											            <li>
-											                <i class="fas fa-star ${averageRating >= 4.5 ? 'theme-color' : ''}"></i>
-											            </li>
-											        	</ul>  
-							
-                                            <div class="global-rating">
-                                                <h5 class="font-light">${review.size()}건</h5>
-                                            </div>
-
-													                                            <ul class="rating-progess">
-													    <li>
-													        <h5 class="me-3">5 점</h5>
-													        <c:set var="fiveStarCount" value="0" />
-													        <c:forEach items="${review}" var="r">
-													            <c:if test="${r.rate >= 4.5 && r.rate <= 5.0}">
-													                <c:set var="fiveStarCount" value="${fiveStarCount + 1}" />
-													            </c:if>
-													        </c:forEach>
-													        <div class="progress">
-													            <c:set var="fiveStarPercentage" value="${(fiveStarCount / fn:length(review)) * 100}" />
-													            <div class="progress-bar" role="progressbar" style="width: ${fn:substringBefore(fiveStarPercentage, '.')}%;"
-													                aria-valuenow="${fn:substringBefore(fiveStarPercentage, '.')}%" aria-valuemin="0" aria-valuemax="100"></div>
-													        </div>
-													        <h5 class="ms-3">
-													            <c:set var="fiveStarPercentage" value="${(fiveStarCount / fn:length(review)) * 100}" />
-													            <c:out value="${fn:substringBefore(fiveStarPercentage, '.')}%" />
-													        </h5>
-													    </li>
-													    <li>
-													        <h5 class="me-3">4 점</h5>
-													        <c:set var="fourStarCount" value="0" />
-													        <c:forEach items="${review}" var="r">
-													            <c:if test="${r.rate >= 3.5 && r.rate < 4.5}">
-													                <c:set var="fourStarCount" value="${fourStarCount + 1}" />
-													            </c:if>
-													        </c:forEach>
-													        <div class="progress">
-													            <c:set var="fourStarPercentage" value="${(fourStarCount / fn:length(review)) * 100}" />
-													            <div class="progress-bar" role="progressbar" style="width: ${fn:substringBefore(fourStarPercentage, '.')}%;"
-													                aria-valuenow="${fn:substringBefore(fourStarPercentage, '.')}%" aria-valuemin="0" aria-valuemax="100"></div>
-													        </div>
-													        <h5 class="ms-3">
-													            <c:set var="fourStarPercentage" value="${(fourStarCount / fn:length(review)) * 100}" />
-													            <c:out value="${fn:substringBefore(fourStarPercentage, '.')}%" />
-													        </h5>
-													    </li>
-													    <li>
-													        <h5 class="me-3">3 점</h5>
-													        <c:set var="threeStarCount" value="0" />
-													        <c:forEach items="${review}" var="r">
-													            <c:if test="${r.rate >= 2.5 && r.rate < 3.5}">
-													                <c:set var="threeStarCount" value="${threeStarCount + 1}" />
-													            </c:if>
-													        </c:forEach>
-													        <div class="progress">
-													            <c:set var="threeStarPercentage" value="${(threeStarCount / fn:length(review)) * 100}" />
-													            <div class="progress-bar" role="progressbar" style="width: ${fn:substringBefore(threeStarPercentage, '.')}%;"
-													                aria-valuenow="${fn:substringBefore(threeStarPercentage, '.')}%" aria-valuemin="0" aria-valuemax="100"></div>
-													        </div>
-													        <h5 class="ms-3">
-													            <c:set var="fourStarPercentage" value="${(threeStarCount / fn:length(review)) * 100}" />
-													            <c:out value="${fn:substringBefore(threeStarPercentage, '.')}%" />
-													        </h5>
-													    </li>
-													    <li>
-													        <h5 class="me-3">2 점</h5>
-													        <c:set var="twoStarCount" value="0" />
-													        <c:forEach items="${review}" var="r">
-													            <c:if test="${r.rate >= 1.5 && r.rate < 2.5}">
-													                <c:set var="twoStarCount" value="${twoStarCount + 1}" />
-													            </c:if>
-													        </c:forEach>
-													        <div class="progress">
-													            <c:set var="twoStarPercentage" value="${(twoStarCount / fn:length(review)) * 100}" />
-													            <div class="progress-bar" role="progressbar" style="width: ${fn:substringBefore(twoStarPercentage, '.')}%;"
-													                aria-valuenow="${fn:substringBefore(twoStarPercentage, '.')}%" aria-valuemin="0" aria-valuemax="100"></div>
-													        </div>
-													        <h5 class="ms-3">
-													            <c:set var="twoStarPercentage" value="${(twoStarCount / fn:length(review)) * 100}" />
-													            <c:out value="${fn:substringBefore(twoStarPercentage, '.')}%" />
-													        </h5>
-													    </li>
-													    <li>
-													        <h5 class="me-3">1 점</h5>
-													        <c:set var="oneStarCount" value="0" />
-													        <c:forEach items="${review}" var="r">
-													            <c:if test="${r.rate >= 0.5 && r.rate < 1.5}">
-													                <c:set var="oneStarCount" value="${oneStarCount + 1}" />
-													            </c:if>
-													        </c:forEach>
-													        <div class="progress">
-													            <c:set var="oneStarPercentage" value="${(oneStarCount / fn:length(review)) * 100}" />
-													            <div class="progress-bar" role="progressbar" style="width: ${fn:substringBefore(oneStarPercentage, '.')}%;"
-													                aria-valuenow="${fn:substringBefore(oneStarPercentage, '.')}%" aria-valuemin="0" aria-valuemax="100"></div>
-													        </div>
-													        <h5 class="ms-3">
-													            <c:set var="oneStarPercentage" value="${(oneStarCount / fn:length(review)) * 100}" />
-													            <c:out value="${fn:substringBefore(oneStarPercentage, '.')}%" />
-													        </h5>
-													    </li>
-													 </ul>
-													 <!-- 왼쪽 총 별점 퍼센테이지 및 평균 평점 -->
+			                                  		<div hidden>        
+								                       <c:set var="totalRating" value="0" />${totalRating}
+														<c:forEach items="${review}" var="review">
+					    									<c:set var="totalRating" value="${totalRating + review.rate}" /><p> 이거 뭐야  ${totalRating} </p>
+														</c:forEach>
+													</div>
+													<c:set var="averageRating" value="${totalRating / review.size()}" />
+														<h5 class="font-light" hidden>${averageRating}</h5>
+				                                            <ul class="rating my-2 d-inline-block">
+																<li><i class="fas fa-star ${averageRating >= 0.5 ? 'theme-color' : ''}"></i></li>
+																<li><i class="fas fa-star ${averageRating >= 1.5 ? 'theme-color' : ''}"></i></li>
+																<li><i class="fas fa-star ${averageRating >= 2.5 ? 'theme-color' : ''}"></i></li>
+																<li><i class="fas fa-star ${averageRating >= 3.5 ? 'theme-color' : ''}"></i></li>
+																<li><i class="fas fa-star ${averageRating >= 4.5 ? 'theme-color' : ''}"></i></li>
+											        		</ul>  
+			                                            <div class="global-rating">
+			                                                <h5 class="font-light">${review.size()}건</h5>
+			                                            </div>
+															<ul class="rating-progess">
+																<li>
+																    <h5 class="me-3">5 점</h5>
+																  <c:set var="fiveStarCount" value="0" />
+																	<c:forEach items="${review}" var="r">
+																		<c:if test="${r.rate >= 4.5 && r.rate <= 5.0}">
+																			<c:set var="fiveStarCount" value="${fiveStarCount + 1}" />
+																		</c:if>
+																	</c:forEach>
+																	<div class="progress">
+																	    <c:set var="fiveStarPercentage" value="${(fiveStarCount / fn:length(review)) * 100}" />
+																			<div class="progress-bar" role="progressbar" style="width: ${fn:substringBefore(fiveStarPercentage, '.')}%;"
+																			aria-valuenow="${fn:substringBefore(fiveStarPercentage, '.')}%" aria-valuemin="0" aria-valuemax="100"></div>
+																	</div>
+																	<h5 class="ms-3">
+																    <c:set var="fiveStarPercentage" value="${(fiveStarCount / fn:length(review)) * 100}" />
+																	<c:out value="${fn:substringBefore(fiveStarPercentage, '.')}%" />
+																    </h5>
+																</li>
+																<li>
+																    <h5 class="me-3">4 점</h5>
+																    <c:set var="fourStarCount" value="0" />
+																		<c:forEach items="${review}" var="r">
+																			<c:if test="${r.rate >= 3.5 && r.rate < 4.5}">
+																				<c:set var="fourStarCount" value="${fourStarCount + 1}" />
+																			</c:if>
+																		</c:forEach>
+																	<div class="progress">
+																    	<c:set var="fourStarPercentage" value="${(fourStarCount / fn:length(review)) * 100}" />
+																	<div class="progress-bar" role="progressbar" style="width: ${fn:substringBefore(fourStarPercentage, '.')}%;"
+																	aria-valuenow="${fn:substringBefore(fourStarPercentage, '.')}%" aria-valuemin="0" aria-valuemax="100"></div>
+																	</div>
+																	<h5 class="ms-3">
+																    <c:set var="fourStarPercentage" value="${(fourStarCount / fn:length(review)) * 100}" />
+																	<c:out value="${fn:substringBefore(fourStarPercentage, '.')}%" />
+																    </h5>
+																</li>
+																<li>
+																    <h5 class="me-3">3 점</h5>
+															    	<c:set var="threeStarCount" value="0" />
+																		<c:forEach items="${review}" var="r">
+																			<c:if test="${r.rate >= 2.5 && r.rate < 3.5}">
+																				<c:set var="threeStarCount" value="${threeStarCount + 1}" />
+																			</c:if>
+																		</c:forEach>
+																	<div class="progress">
+																	    <c:set var="threeStarPercentage" value="${(threeStarCount / fn:length(review)) * 100}" />
+																	<div class="progress-bar" role="progressbar" style="width: ${fn:substringBefore(threeStarPercentage, '.')}%;"
+																	aria-valuenow="${fn:substringBefore(threeStarPercentage, '.')}%" aria-valuemin="0" aria-valuemax="100"></div>
+																	</div>
+																	<h5 class="ms-3">
+																    <c:set var="fourStarPercentage" value="${(threeStarCount / fn:length(review)) * 100}" />
+																	<c:out value="${fn:substringBefore(threeStarPercentage, '.')}%" />
+																    </h5>
+																</li>
+																<li>
+																    <h5 class="me-3">2 점</h5>
+																    <c:set var="twoStarCount" value="0" />
+																		<c:forEach items="${review}" var="r">
+																			<c:if test="${r.rate >= 1.5 && r.rate < 2.5}">
+																				<c:set var="twoStarCount" value="${twoStarCount + 1}" />
+																			</c:if>
+																		</c:forEach>
+																	<div class="progress">
+																    	<c:set var="twoStarPercentage" value="${(twoStarCount / fn:length(review)) * 100}" />
+																	<div class="progress-bar" role="progressbar" style="width: ${fn:substringBefore(twoStarPercentage, '.')}%;"
+																	aria-valuenow="${fn:substringBefore(twoStarPercentage, '.')}%" aria-valuemin="0" aria-valuemax="100"></div>
+																	</div>
+																	<h5 class="ms-3">
+																    <c:set var="twoStarPercentage" value="${(twoStarCount / fn:length(review)) * 100}" />
+																	<c:out value="${fn:substringBefore(twoStarPercentage, '.')}%" />
+																    </h5>
+																</li>
+																<li>
+																    <h5 class="me-3">1 점</h5>
+																    <c:set var="oneStarCount" value="0" />
+																		<c:forEach items="${review}" var="r">
+																			<c:if test="${r.rate >= 0.5 && r.rate < 1.5}">
+																				<c:set var="oneStarCount" value="${oneStarCount + 1}" />
+																			</c:if>
+																		</c:forEach>
+																	<div class="progress">
+																	    <c:set var="oneStarPercentage" value="${(oneStarCount / fn:length(review)) * 100}" />
+																	<div class="progress-bar" role="progressbar" style="width: ${fn:substringBefore(oneStarPercentage, '.')}%;"
+																	aria-valuenow="${fn:substringBefore(oneStarPercentage, '.')}%" aria-valuemin="0" aria-valuemax="100"></div>
+																	</div>
+																	<h5 class="ms-3">
+																	    <c:set var="oneStarPercentage" value="${(oneStarCount / fn:length(review)) * 100}" />
+																		<c:out value="${fn:substringBefore(oneStarPercentage, '.')}%" />
+																    </h5>
+																</li>
+															</ul>
+								<!-- 왼쪽 총 별점 퍼센테이지 및 평균 평점 -->
                                        	 </div>
                                     </div>
 
-                                        <div class="customer-review-box col-md-9">
-                                             <div class="review-box d-flex justify-content-end">
-                                                    <div class="box-head">
-                                                        <button class="btn btn-solid-default btn-sm fw-bold writeReview" data-bs-toggle="modal"
-                                                            data-bs-target="#addReview">
-                                                            후기 작성</button>
-                                                    </div>
-                                            </div>
+									<div class="customer-review-box col-md-9">
+   										<div class="review-box d-flex justify-content-end">
+											<div class="box-head">
+											    <button class="btn btn-solid-default btn-sm fw-bold writeReview" data-bs-toggle="modal"
+											        data-bs-target="#addReview">후기 작성</button>
+											</div>
+										</div>
                                             <h2 class="col-md-7" style="margin-top:-50px;">구매 후기</h2>
-										<c:forEach items="${review}" var="review">
-                                            <div class="customer-section">
-                                                <div class="customer-details">
-                                                    <c:set var="username" value="${fn:substringBefore(review.email, '@')}" />
-														<h5>${username}</h5>
-														<div class="admin-update-delete d-flex justify-content-end">
-                                        <a href="javascript:void(0)" class="me-3" data-bs-toggle="modal"
-                                                            data-bs-target="#updateReview" id="reviewUpdate">수정</a>
-                                        <a href="javascript:void(0)" data-bs-toggle="modal"
-                                                    data-bs-target="#reviewdel">삭제</a>
-                                    </div>    
+											<c:forEach items="${review}" var="review">
+	                                            <div class="customer-section">
+	                                                <div class="customer-details">
+	                                                    <c:set var="username" value="${fn:substringBefore(review.email, '@')}" />
+															<h5>${username}</h5>
+															<div class="admin-update-delete d-flex justify-content-end">
+						                                        <a href="javascript:void(0)" class="me-3" data-bs-toggle="modal"
+						                                                            data-bs-target="#updateReview" id="reviewUpdate">수정</a>
+						                                        <a href="javascript:void(0)" data-bs-toggle="modal"
+						                                                    data-bs-target="#reviewdel">삭제</a>
+	                                    					</div>    
                                                     <ul class="rating my-2 d-inline-block">
-							                          	<li>
-											                <i class="fas fa-star ${review.rate >= 0.5 ? 'theme-color' : ''}"></i>
-													    </li>
-													    <li>
-											                <i class="fas fa-star ${review.rate >= 1.5 ? 'theme-color' : ''}"></i>
-											            </li>
-											            <li>
-											                <i class="fas fa-star ${review.rate >= 2.5 ? 'theme-color' : ''}"></i>
-											            </li>
-											            <li>
-											                <i class="fas fa-star ${review.rate >= 3.5 ? 'theme-color' : ''}"></i>
-											            </li>
-											            <li>
-											                <i class="fas fa-star ${review.rate >= 4.5 ? 'theme-color' : ''}"></i>
-											            </li>
-											        	</ul>        
-													<input id="reviewNum" value="${review.num}" data-comment-num="${review.num}">
-                                                    <p class="font-light" name="contents">${review.contents}</p>
-                                                    <input type="hidden" id="orderNum" name="orderNum" value="${review.orderNum}">
-													<input type="hidden" id="memberNum" name="memberNum" value="${review.memberNum}">
-													<input type="hidden" name="slicedCode" value="${param.slicedCode}">
-													
+							                          	<li> <i class="fas fa-star ${review.rate >= 0.5 ? 'theme-color' : ''}"></i></li>
+													    <li><i class="fas fa-star ${review.rate >= 1.5 ? 'theme-color' : ''}"></i></li>
+											            <li><i class="fas fa-star ${review.rate >= 2.5 ? 'theme-color' : ''}"></i></li>
+											            <li><i class="fas fa-star ${review.rate >= 3.5 ? 'theme-color' : ''}"></i></li>
+											            <li><i class="fas fa-star ${review.rate >= 4.5 ? 'theme-color' : ''}"></i></li>
+											        </ul>        
+														<input id="reviewNum" value="${review.num}" data-comment-num="${review.num}">
+	                                                    	<p class="font-light" name="contents">${review.contents}</p>
+	                                                    <input type="hidden" id="orderNum" name="orderNum" value="${review.orderNum}">
+														<input type="hidden" id="memberNum" name="memberNum" value="${review.memberNum}">
+														<input type="hidden" name="slicedCode" value="${param.slicedCode}">
 													<p class="date-custo font-light">
-													<fmt:formatDate value="${review.regDate}" pattern="yyyy/MM/dd" /><span></span></p>
-                                                </div>
-                                               </div>
-										</c:forEach>
+														<fmt:formatDate value="${review.regDate}" pattern="yyyy/MM/dd" /><span></span></p>
+                                                	</div>
+                                               	</div>
+											</c:forEach>
 										
-                                            <nav class="page-section d-flex justify-content-end"
+                          <!-- paging --> <nav class="page-section d-flex justify-content-end"
                                                 style="position: relative;">
                                                 <ul class="pagination mx-auto">
                                                     <li class="page-item">
@@ -603,14 +567,16 @@
                                                         </a>
                                                     </li>
                                                 </ul>
-                                                
-                                            </nav>
+                                            </nav> <!-- paging -->
                                         </div>
                                     </div>
-                            </div>
+                            	</div>
+                            	<!-- 구매후기 end -->
                         </div>
                     </div>
-    </section>
+		</div>
+	</div>
+</section>
     <!-- Shop Section end -->
 
 <!-- 변경하기 모달창 start -->
@@ -676,7 +642,7 @@
                                           	<c:forEach items="${gList}" var="i" varStatus="status">
                                           	<div class="mt-1" style="border-box:0px; box-shadow:1px 1px 2px 0px gray;  width:97%;">
                                            	<div class="form-check custome-radio-box mt-1">
-                                         				<input type="radio" name="planNum" class="form-check-input my-2" id="${i.planNum}" value="${i.planNum}" data-plan-price="${i.planPrice}" data-dp="${i.disPercent}"/>
+                                         				<input type="radio" name="planNum" class="form-check-input my-2" id="${i.planNum}" value="${i.planNum}"data-gb-value="${i.dataCapacity}"  data-plan-price="${i.planPrice}" data-dp="${i.disPercent}"/>
                                          				<label class="form-check-label fs-5" for="${i.planNum}">${i.planName}</label>
                                                   </div>
                                                   <div class="d-flex justify-content-between mb-1">
@@ -698,6 +664,7 @@
                                                   	${modiCapacity}</span>, <span class="theme-color fs-6 fw-bold">${i.planPrice}</span><span class="fs-6">원</span>/월</label>
                                                   </div>                                       
                                                  </div>
+                                                 
                                           	</c:forEach>
                                         			</div>
                                         		</div>
@@ -751,7 +718,7 @@
                                                   	</label>
                                                   	<label class="form-check-label me-3 "> <span class="fs-6">데이터 </span>
                                                   	
-                                                  	<span class="fw-bold fs-6">
+                                                  	<span class="fw-bold fs-6"> 
                                                   	<c:choose>
                                                   		<c:when test="${i.dataCapacity eq '무제한'}">
                                                   			<c:set var="modiCapacity" value="${i.dataCapacity}"></c:set>
@@ -871,7 +838,7 @@
 										
 	 										<div class="col-12">
                                          	<div class="product-btns">
-                                                <button onclick="sendSelectedValue()" type="button"  class=" btn btn-solid-default btn-lg col-md-3 d-block mx-auto"
+                                                <button onclick="onSelectConfirm()" type="button"  class=" btn btn-solid-default btn-lg col-md-3 d-block mx-auto"
                                                     data-bs-dismiss="modal">선택하기</button>
                                             </div>
                                             </div>
@@ -994,34 +961,35 @@
                         </div>
        <!-- 리뷰 수정 모달 end -->                 
     
-    <!-- 문의 작성-->
-    <div class="modal fade payment-modal" id="addPayment2">
-        <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                        </div>
-                            <div class="modal-body">
-                                <form>
-                                    <div class="col-md-12 mt-1 mb-0">
-                                        <label class=""> 상품명
-                                        <li><span class="mx-3">|</span></li>
-                                        <li><span class="fw-bold">Galaxy S21 Ultra 5G</span></li>
-                                    </label>
-                                        <div class="mt-2 mb-3">
-                                            <label for="card" class="form-label">상품 문의</label>
-                                            <textarea class="form-control col-12"  placeholder="해당 상품과 관련하여 궁금한 점을 작성해주세요."></textarea>
-                                        </div>
-                                        </form>
-                                    </div>
-                                    <div class="modal-footer d-flex justify-content-end">
-                                        <button class="btn btn-solid-default btn-sm" data-bs-dismiss="modal">작성</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    
-  
+	<!-- 문의 작성 -->
+    				<div class="modal fade payment-modal" id="addPayment2">
+				        <div class="modal-dialog modal-dialog-centered">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+								</div>
+									<div class="modal-body">
+									<form>
+										<div class="col-md-12 mt-1 mb-0">
+											<div class=""> 상품명
+												<ul>
+													<li><span class="mx-3">|</span></li>
+													<li><span class="fw-bold">Galaxy S21 Ultra 5G</span></li>
+												</ul>
+											</div>
+											<div class="mt-2 mb-3">
+												<label for="card" class="form-label">상품 문의</label>
+												<textarea class="form-control col-12"  placeholder="해당 상품과 관련하여 궁금한 점을 작성해주세요."></textarea>
+											</div>
+										</div>
+									</form>
+										<div class="modal-footer d-flex justify-content-end">
+											<button class="btn btn-solid-default btn-sm" data-bs-dismiss="modal">작성</button>
+										</div>
+					        		</div>
+					    	</div>
+						</div>
+					</div>
     <!-- 문의작성 모달 End -->
 
     <!-- sticky cart -->
@@ -1092,15 +1060,7 @@
 </div>
 <!-- 상품 삭제 모달창 End -->
 <c:import url="../temp/footer.jsp"></c:import>
-<script>
-	const commaPrice = function(){
-    const prices = document.querySelectorAll('[id^="renewPrice"]');
-    for (var i = 0; i < prices.length; i++) {
-        const price = parseInt(prices[i].innerHTML);
-        const renewPrice = price.toLocaleString();
-        prices[i].innerHTML =renewPrice;
-        }
-</script>
+
 <script src="../assets/js/newDirectCode.js"></script>
 <script src="../assets/js/updateReview.js"></script>
     <!-- 버튼 select js -->
@@ -1170,11 +1130,9 @@
 </script>
 
 
-
-
 <!--  하단 금액 바 고정하는 JS -->
 <script>
-    window.addEventListener('scroll', function() {
+   window.addEventListener('scroll', function() {
     const stickyCart = document.querySelector('.sticky-bottom-cart');
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
@@ -1192,46 +1150,35 @@
     $('#directName2').text(directName); // 모달 창 내에서 제품명을 표시하는 곳에 directName 값을 설정
   });
 </script>
-<script>
-function sendSelectedValue() {
+<script type="text/javascript">
+  // 모달창에서 값을 선택하고 확인 버튼을 클릭했을 때 호출되는 함수
+  function onSelectConfirm() {
     // 선택한 값을 가져오기
-    const selectedValue = document.querySelector('input[name="planNum"]:checked').value;
-
-    alert("선택한 값: " + selectedValue);
-    // Ajax 요청 보내기
-    $.ajax({
-        url: '/direct/selectedPlan', // 선택한 값을 처리할 JSP 페이지의 URL
-        method: 'POST',
-        data: { planNum: selectedValue },
-        success: function(result) {
-            // Ajax 요청이 성공한 경우의 처리
-            
-           
-            console.log(result.planName);
-            // 선택한 값이 서버로 전달되었고, 서버에서 필요한 처리를 한 후 응답을 받을 수 있습니다.
-            console.log('선택한 값이 서버로 전달되었습니다.');
-            // 추가적인 처리나 리다이렉션 등을 수행할 수 있습니다.
-            // 데이터를 이전 페이지로 전달하기 위해 쿼리 문자열을 생성합니다.
-            // 결과를 특정 HTML 요소에 입력해주기
-    var resultContainer = document.getElementById('resultContainer');
-    resultContainer.textContent = result; // 결과를 텍스트로 설정하거나
-    //resultContainer.innerHTML = result; // 결과를 HTML로 설정할 수도 있습니다.
-            
-            // 이전 페이지로 리다이렉션합니다.
-           location.href = '/direct/phoneDetail?slicedCode='+ slicedCode;
-        },
-        error: function(xhr, status, error) {
-            // Ajax 요청이 실패한 경우의 처리
-            console.error('Ajax 요청이 실패하였습니다:', error);
-            console.log('나는야 ', result);
-            
-            // 실패 시에 대한 처리를 수행할 수 있습니다.
-        }
-    });
-}
+    const selectedValue = document.querySelector('input[name="planNum"]:checked');
+    const planNameLabel = document.querySelector('label[for="' + selectedValue.id + '"]');
+    const planName = planNameLabel.innerText;
+    const planPrice = selectedValue.getAttribute('data-plan-price');
+    const dataGB = selectedValue.getAttribute('data-gb-value');
+    
+    // 가져온 값을 입력하기
+    setSelectedPlan(planName, planPrice, dataGB);
+  }
+  
+//모달창에서 선택한 값을 입력하는 함수
+  function setSelectedPlan(planName, planPrice, dataGB) {
+    // 선택한 요금제, 가격, 데이터 정보 가져오기
+    document.getElementById('selectedPlanName').textContent = planName;
+    document.getElementById('planPrice').textContent = planPrice;
+    
+    // 데이터 정보 처리
+    const dataGBElement = document.getElementById('dataGB');
+    if (dataGB === '무제한') {
+      dataGBElement.innerText = dataGB + '& 음성통화/문자 기본제공';
+    } else {
+      dataGBElement.innerText = dataGB + 'GB & 음성통화/문자 기본제공';
+    }
+  }
 </script>
-
-
 <!--<script>
     // JavaScript를 사용하여 orderNum과 memberNum 값을 설정
     const orderNumInput = document.getElementById('orderNum');

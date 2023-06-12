@@ -248,171 +248,201 @@
 	                                                   	<!-- 5G -->
                                              			<c:if test="${not empty gList}">
 	                                                   	<div class="tab-pane fade show active" id="tab-1">
-                                                   			<div class="row col-md-12 mt-3 mx-3">
+                                                   			<div class="row col-md-12 mt-3 mx-3 mb-3">
 		                                                   	<c:forEach items="${gList}" var="i" varStatus="status">
-			                                                   	<div class="form-check custome-radio-box">
-	                                                   				<form:radiobutton path="planNum" cssClass="form-check-input" id="${i.planNum}" value="${i.planNum}" data-plan-price="${i.planPrice}" data-dp="${i.disPercent}"/>
-	                                                   				<label class="form-check-label" for="${i.planNum}">${i.planName}</label>
-	                                                            </div>
-	                                                            <div class="d-flex justify-content-between mb-1">
-	                                                            	<label class="form-check-label ellipsis">
-	                                                            		${i.planExplainSM}
-	                                                            	</label>
-	                                                            	<label class="form-check-label"> 데이터 
-	                                                            	<c:choose>
-	                                                            		<c:when test="${i.dataCapacity eq '무제한'}">
-	                                                            			<c:set var="modiCapacity" value="${i.dataCapacity}"></c:set>
-	                                                            		</c:when>
-	                                                            		<c:otherwise>
-	                                                            			<c:set var="modiCapacity" value="${i.dataCapacity}GB"></c:set>
-	                                                            		</c:otherwise>
-	                                                            	</c:choose>
-	                                                            	${modiCapacity}, ${i.planPrice}원/월</label>
-	                                                            </div>
-		                                                   	</c:forEach>
-                                                   			</div>
-                                                   		</div>
-	                                                   	</c:if>
+			                                                   	<div class="mt-1" style="border-box:0px; box-shadow:1px 1px 2px 0px gray;  width:97%;">
+                                           				<div class="form-check custome-radio-box mt-1 ">
+                                         				<form:radiobutton path="planNum" cssclass="form-check-input my-2" id="${i.planNum}" value="${i.planNum}" data-plan-price="${i.planPrice}" data-dp="${i.disPercent}"/>
+                                         				<label class="form-check-label" style="font-size:17px;"for="${i.planNum}">${i.planName}</label>
+                                                  </div>
+                                                  <div class="d-flex justify-content-between mb-1">
+                                                  	<label class="form-check-label ellipsis mx-4" style="color:gray; font-size:14px;">
+                                                  		${i.planExplainSM}
+                                                  	</label>
+                                                  	<label class="form-check-label me-3 "> <span style="font-size:14px;">데이터 </span>
+                                                  	
+                                                  	<span class="fw-bold" style="font-size:14px;">
+                                                  	<c:choose>
+                                                  		<c:when test="${i.dataCapacity eq '무제한'}">
+                                                  			<c:set var="modiCapacity" value="${i.dataCapacity}"></c:set>
+                                                  		</c:when>
+                                                  		<c:otherwise>
+                                                  			<c:set var="modiCapacity" value="${i.dataCapacity}GB"></c:set>
+                                                  		</c:otherwise>
+                                                  	</c:choose>
+                                                  	
+                                                  	${modiCapacity}</span>, <span class="theme-color fw-bold" style="font-size:14px;">${i.planPrice}</span><span style="font-size:14px;">원</span>/월</label>
+                                                  </div>                                       
+                                                 </div>
+                                          	</c:forEach>
+                                        			</div>
+                                        		</div>
+                                         	</c:if>
 	                                                   	<!-- 시니어 -->
 														<c:if test="${not empty sList}">
 														<div class="tab-pane fade" id="tab-2">
                                                    			<div class="row col-md-12 mt-3 mx-3">
 		                                                   	<c:forEach items="${sList}" var="i" varStatus="status">
-			                                                   	<div class="form-check custome-radio-box">
-	                                                   				<form:radiobutton path="planNum" cssClass="form-check-input" id="${i.planNum}" value="${i.planNum}" data-plan-price="${i.planPrice}" data-dp="${i.disPercent}"/>
-	                                                   				<label class="form-check-label" for="${i.planNum}">${i.planName}</label>
-	                                                            </div>
-	                                                            <div class="d-flex justify-content-between mb-1">
-	                                                            	<label class="form-check-label ellipsis">
-	                                                            		${i.planExplainSM}
-	                                                            	</label>
-	                                                            	<label class="form-check-label"> 데이터 
-	                                                            	<c:choose>
-	                                                            		<c:when test="${i.dataCapacity eq '무제한'}">
-	                                                            			<c:set var="modiCapacity" value="${i.dataCapacity}"></c:set>
-	                                                            		</c:when>
-	                                                            		<c:otherwise>
-	                                                            			<c:set var="modiCapacity" value="${i.dataCapacity}GB"></c:set>
-	                                                            		</c:otherwise>
-	                                                            	</c:choose>
-	                                                            	${modiCapacity}, ${i.planPrice}원/월</label>
-	                                                            </div>
-		                                                   	</c:forEach>
-                                                   			</div>
-                                                   		</div>
-														</c:if>
+			                                                   	<div class="mt-1" style="border-box:0px; box-shadow:1px 1px 2px 0px gray;  width:97%;">
+                                           				<div class="form-check custome-radio-box mt-1 ">
+                                         				<form:radiobutton path="planNum" cssclass="form-check-input my-2" id="${i.planNum}" value="${i.planNum}" data-plan-price="${i.planPrice}" data-dp="${i.disPercent}"/>
+                                         				<label class="form-check-label" style="font-size:17px;"for="${i.planNum}">${i.planName}</label>
+                                                  </div>
+                                                  <div class="d-flex justify-content-between mb-1">
+                                                  	<label class="form-check-label ellipsis mx-4" style="color:gray; font-size:14px;">
+                                                  		${i.planExplainSM}
+                                                  	</label>
+                                                  	<label class="form-check-label me-3 "> <span style="font-size:14px;">데이터 </span>
+                                                  	
+                                                  	<span class="fw-bold" style="font-size:14px;">
+                                                  	<c:choose>
+                                                  		<c:when test="${i.dataCapacity eq '무제한'}">
+                                                  			<c:set var="modiCapacity" value="${i.dataCapacity}"></c:set>
+                                                  		</c:when>
+                                                  		<c:otherwise>
+                                                  			<c:set var="modiCapacity" value="${i.dataCapacity}GB"></c:set>
+                                                  		</c:otherwise>
+                                                  	</c:choose>
+                                                  	
+                                                  	${modiCapacity}</span>, <span class="theme-color fw-bold" style="font-size:14px;">${i.planPrice}</span><span style="font-size:14px;">원</span>/월</label>
+                                                  </div>                                       
+                                                 </div>
+                                          	</c:forEach>
+                                        			</div>
+                                        		</div>
+                                         	</c:if>
 														<!-- 청소년 -->
 														<c:if test="${not empty tList}">
 														<div class="tab-pane fade" id="tab-3">
                                                    			<div class="row col-md-12 mt-3 mx-3">
 		                                                   	<c:forEach items="${tList}" var="i" varStatus="status">
-			                                                   	<div class="form-check custome-radio-box">
-	                                                   				<form:radiobutton path="planNum" cssClass="form-check-input" id="${i.planNum}" value="${i.planNum}" data-plan-price="${i.planPrice}" data-dp="${i.disPercent}"/>
-	                                                   				<label class="form-check-label" for="${i.planNum}">${i.planName}</label>
-	                                                            </div>
-	                                                            <div class="d-flex justify-content-between mb-1">
-	                                                            	<label class="form-check-label ellipsis">
-	                                                            		${i.planExplainSM}
-	                                                            	</label>
-	                                                            	<label class="form-check-label"> 데이터 
-	                                                            	<c:choose>
-	                                                            		<c:when test="${i.dataCapacity eq '무제한'}">
-	                                                            			<c:set var="modiCapacity" value="${i.dataCapacity}"></c:set>
-	                                                            		</c:when>
-	                                                            		<c:otherwise>
-	                                                            			<c:set var="modiCapacity" value="${i.dataCapacity}GB"></c:set>
-	                                                            		</c:otherwise>
-	                                                            	</c:choose>
-	                                                            	${modiCapacity}, ${i.planPrice}원/월</label>
-	                                                            </div>
-		                                                   	</c:forEach>
-                                                   			</div>
-                                                   		</div>
-														</c:if>
+			                                                   	<div class="mt-1" style="border-box:0px; box-shadow:1px 1px 2px 0px gray;  width:97%;">
+                                           				<div class="form-check custome-radio-box mt-1 ">
+                                         				<form:radiobutton path="planNum" cssclass="form-check-input my-2" id="${i.planNum}" value="${i.planNum}" data-plan-price="${i.planPrice}" data-dp="${i.disPercent}"/>
+                                         				<label class="form-check-label" style="font-size:17px;"for="${i.planNum}">${i.planName}</label>
+                                                  </div>
+                                                  <div class="d-flex justify-content-between mb-1">
+                                                  	<label class="form-check-label ellipsis mx-4" style="color:gray; font-size:14px;">
+                                                  		${i.planExplainSM}
+                                                  	</label>
+                                                  	<label class="form-check-label me-3 "> <span style="font-size:14px;">데이터 </span>
+                                                  	
+                                                  	<span class="fw-bold" style="font-size:14px;">
+                                                  	<c:choose>
+                                                  		<c:when test="${i.dataCapacity eq '무제한'}">
+                                                  			<c:set var="modiCapacity" value="${i.dataCapacity}"></c:set>
+                                                  		</c:when>
+                                                  		<c:otherwise>
+                                                  			<c:set var="modiCapacity" value="${i.dataCapacity}GB"></c:set>
+                                                  		</c:otherwise>
+                                                  	</c:choose>
+                                                  	
+                                                  	${modiCapacity}</span>, <span class="theme-color fw-bold" style="font-size:14px;">${i.planPrice}</span><span style="font-size:14px;">원</span>/월</label>
+                                                  </div>                                       
+                                                 </div>
+                                          	</c:forEach>
+                                        			</div>
+                                        		</div>
+                                         	</c:if>
 														<!-- 어린이 -->
 														<c:if test="${not empty zList}">
 														<div class="tab-pane fade" id="tab-4">
                                                    			<div class="row col-md-12 mt-3 mx-3">
 		                                                   	<c:forEach items="${zList}" var="i" varStatus="status">
-			                                                   	<div class="form-check custome-radio-box">
-	                                                   				<form:radiobutton path="planNum" cssClass="form-check-input" id="${i.planNum}" value="${i.planNum}" data-plan-price="${i.planPrice}" data-dp="${i.disPercent}"/>
-	                                                   				<label class="form-check-label" for="${i.planNum}">${i.planName}</label>
-	                                                            </div>
-	                                                            <div class="d-flex justify-content-between mb-1">
-	                                                            	<label class="form-check-label ellipsis">
-	                                                            		${i.planExplainSM}
-	                                                            	</label>
-	                                                            	<label class="form-check-label"> 데이터 
-	                                                            	<c:choose>
-	                                                            		<c:when test="${i.dataCapacity eq '무제한'}">
-	                                                            			<c:set var="modiCapacity" value="${i.dataCapacity}"></c:set>
-	                                                            		</c:when>
-	                                                            		<c:otherwise>
-	                                                            			<c:set var="modiCapacity" value="${i.dataCapacity}GB"></c:set>
-	                                                            		</c:otherwise>
-	                                                            	</c:choose>
-	                                                            	${modiCapacity}, ${i.planPrice}원/월</label>
-	                                                            </div>
-		                                                   	</c:forEach>
-                                                   			</div>
-                                                   		</div>
-														</c:if>
+			                                                   <div class="mt-1" style="border-box:0px; box-shadow:1px 1px 2px 0px gray;  width:97%;">
+                                           				<div class="form-check custome-radio-box mt-1 ">
+                                         				<form:radiobutton path="planNum" cssclass="form-check-input my-2" id="${i.planNum}" value="${i.planNum}" data-plan-price="${i.planPrice}" data-dp="${i.disPercent}"/>
+                                         				<label class="form-check-label" style="font-size:17px;"for="${i.planNum}">${i.planName}</label>
+                                                  </div>
+                                                  <div class="d-flex justify-content-between mb-1">
+                                                  	<label class="form-check-label ellipsis mx-4" style="color:gray; font-size:14px;">
+                                                  		${i.planExplainSM}
+                                                  	</label>
+                                                  	<label class="form-check-label me-3 "> <span style="font-size:14px;">데이터 </span>
+                                                  	
+                                                  	<span class="fw-bold" style="font-size:14px;">
+                                                  	<c:choose>
+                                                  		<c:when test="${i.dataCapacity eq '무제한'}">
+                                                  			<c:set var="modiCapacity" value="${i.dataCapacity}"></c:set>
+                                                  		</c:when>
+                                                  		<c:otherwise>
+                                                  			<c:set var="modiCapacity" value="${i.dataCapacity}GB"></c:set>
+                                                  		</c:otherwise>
+                                                  	</c:choose>
+                                                  	
+                                                  	${modiCapacity}</span>, <span class="theme-color fw-bold" style="font-size:14px;">${i.planPrice}</span><span style="font-size:14px;">원</span>/월</label>
+                                                  </div>                                       
+                                                 </div>
+                                          	</c:forEach>
+                                        			</div>
+                                        		</div>
+                                         	</c:if>
 														<!-- 복지 -->
 														<c:if test="${not empty wList}">
 														<div class="tab-pane fade" id="tab-5">
                                                    			<div class="row col-md-12 mt-3 mx-3">
 		                                                   	<c:forEach items="${wList}" var="i" varStatus="status">
-			                                                   	<div class="form-check custome-radio-box">
-	                                                   				<form:radiobutton path="planNum" cssClass="form-check-input" id="${i.planNum}" value="${i.planNum}" data-plan-price="${i.planPrice}" data-dp="${i.disPercent}"/>
-	                                                   				<label class="form-check-label" for="${i.planNum}">${i.planName}</label>
-	                                                            </div>
-	                                                            <div class="d-flex justify-content-between mb-1">
-	                                                            	<label class="form-check-label ellipsis">
-	                                                            		${i.planExplainSM}
-	                                                            	</label>
-	                                                            	<label class="form-check-label"> 데이터 
-	                                                            	<c:choose>
-	                                                            		<c:when test="${i.dataCapacity eq '무제한'}">
-	                                                            			<c:set var="modiCapacity" value="${i.dataCapacity}"></c:set>
-	                                                            		</c:when>
-	                                                            		<c:otherwise>
-	                                                            			<c:set var="modiCapacity" value="${i.dataCapacity}GB"></c:set>
-	                                                            		</c:otherwise>
-	                                                            	</c:choose>
-	                                                            	${modiCapacity}, ${i.planPrice}원/월</label>
-	                                                            </div>
-		                                                   	</c:forEach>
-                                                   			</div>
-                                                   		</div>
-														</c:if>
+			                                                   	<div class="mt-1" style="border-box:0px; box-shadow:1px 1px 2px 0px gray;  width:97%;">
+                                           				<div class="form-check custome-radio-box mt-1 ">
+                                         				<form:radiobutton path="planNum" cssclass="form-check-input my-2" id="${i.planNum}" value="${i.planNum}" data-plan-price="${i.planPrice}" data-dp="${i.disPercent}"/>
+                                         				<label class="form-check-label" style="font-size:17px;"for="${i.planNum}">${i.planName}</label>
+                                                  </div>
+                                                  <div class="d-flex justify-content-between mb-1">
+                                                  	<label class="form-check-label ellipsis mx-4" style="color:gray; font-size:14px;">
+                                                  		${i.planExplainSM}
+                                                  	</label>
+                                                  	<label class="form-check-label me-3 "> <span style="font-size:14px;">데이터 </span>
+                                                  	
+                                                  	<span class="fw-bold" style="font-size:14px;">
+                                                  	<c:choose>
+                                                  		<c:when test="${i.dataCapacity eq '무제한'}">
+                                                  			<c:set var="modiCapacity" value="${i.dataCapacity}"></c:set>
+                                                  		</c:when>
+                                                  		<c:otherwise>
+                                                  			<c:set var="modiCapacity" value="${i.dataCapacity}GB"></c:set>
+                                                  		</c:otherwise>
+                                                  	</c:choose>
+                                                  	
+                                                  	${modiCapacity}</span>, <span class="theme-color fw-bold" style="font-size:14px;">${i.planPrice}</span><span style="font-size:14px;">원</span>/월</label>
+                                                  </div>                                       
+                                                 </div>
+                                          	</c:forEach>
+                                        			</div>
+                                        		</div>
+                                         	</c:if>
 														<!-- 군인 -->
 														<c:if test="${not empty hList}">
 														<div class="tab-pane fade" id="tab-6">
                                                    			<div class="row col-md-12 mt-3 mx-3">
 		                                                   	<c:forEach items="${hList}" var="i" varStatus="status">
-			                                                   	<div class="form-check custome-radio-box">
-	                                                   				<form:radiobutton path="planNum" cssClass="form-check-input" id="${i.planNum}" value="${i.planNum}" data-plan-price="${i.planPrice}" data-dp="${i.disPercent}"/>
-	                                                   				<label class="form-check-label" for="${i.planNum}">${i.planName}</label>
-	                                                            </div>
-	                                                            <div class="d-flex justify-content-between mb-1">
-	                                                           		<label class="form-check-label ellipsis">
-	                                                            		${i.planExplainSM}
-	                                                            	</label>
-	                                                            	<label class="form-check-label"> 데이터 
-	                                                            	<c:choose>
-	                                                            		<c:when test="${i.dataCapacity eq '무제한'}">
-	                                                            			<c:set var="modiCapacity" value="${i.dataCapacity}"></c:set>
-	                                                            		</c:when>
-	                                                            		<c:otherwise>
-	                                                            			<c:set var="modiCapacity" value="${i.dataCapacity}GB"></c:set>
-	                                                            		</c:otherwise>
-	                                                            	</c:choose>
-	                                                            	${modiCapacity}, ${i.planPrice}원/월</label>
-	                                                            </div>
-		                                                   	</c:forEach>
-                                                   			</div>
-                                                   		</div>
-														</c:if>
+			                                                   <div class="mt-1" style="border-box:0px; box-shadow:1px 1px 2px 0px gray;  width:97%;">
+                                           				<div class="form-check custome-radio-box mt-1 ">
+                                         				<form:radiobutton path="planNum" cssclass="form-check-input my-2" id="${i.planNum}" value="${i.planNum}" data-plan-price="${i.planPrice}" data-dp="${i.disPercent}"/>
+                                         				<label class="form-check-label" style="font-size:17px;"for="${i.planNum}">${i.planName}</label>
+                                                  </div>
+                                                  <div class="d-flex justify-content-between mb-1">
+                                                  	<label class="form-check-label ellipsis mx-4" style="color:gray; font-size:14px;">
+                                                  		${i.planExplainSM}
+                                                  	</label>
+                                                  	<label class="form-check-label me-3 "> <span style="font-size:14px;">데이터 </span>
+                                                  	
+                                                  	<span class="fw-bold" style="font-size:14px;">
+                                                  	<c:choose>
+                                                  		<c:when test="${i.dataCapacity eq '무제한'}">
+                                                  			<c:set var="modiCapacity" value="${i.dataCapacity}"></c:set>
+                                                  		</c:when>
+                                                  		<c:otherwise>
+                                                  			<c:set var="modiCapacity" value="${i.dataCapacity}GB"></c:set>
+                                                  		</c:otherwise>
+                                                  	</c:choose>
+                                                  	
+                                                  	${modiCapacity}</span>, <span class="theme-color fw-bold" style="font-size:14px;">${i.planPrice}</span><span style="font-size:14px;">원</span>/월</label>
+                                                  </div>                                       
+                                                 </div>
+                                          	</c:forEach>
+                                        			</div>
+                                        		</div>
+                                         	</c:if>
 	                                                   	<!-- 한번에 다 가져오는건 리스트 구조 변경 후에 도전! -->
                                                     </div>
                                                     
