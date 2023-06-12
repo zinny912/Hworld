@@ -535,19 +535,22 @@
                                                     </div>
                                             </div>
                                             <h2 class="col-md-7" style="margin-top:-50px;">구매 후기</h2>
+                                        <!-- 개별 구매후기 영역 -->
 										<c:forEach items="${review}" var="review">
-                                            <div class="customer-section">
+                                            <div class="customer-section" data-review="${review.num}" data-rate="${review.rate}">
                                                 <div class="customer-details">
                                                     <c:set var="username" value="${fn:substringBefore(review.email, '@')}" />
 														<h5>${username}</h5>
 														<div class="admin-update-delete d-flex justify-content-end">
-                                        <a href="javascript:void(0)" class="me-3" data-bs-toggle="modal"
-                                                            data-bs-target="#updateReview" id="reviewUpdate">수정</a>
-                                        <a href="javascript:void(0)" data-bs-toggle="modal"
-                                                    data-bs-target="#reviewdel">삭제</a>
-                                    </div>    
+                                                            <a href="javascript:void(0)" class="me-3 reviewUpdate" data-bs-toggle="modal"
+                                                            data-bs-target="#updateReview" id="reviewUpdate${review.num}"+
+                                                            data-review-num="${review.num}">수정</a>
+                                                            <a href="javascript:void(0)" data-bs-toggle="modal"
+                                                            data-bs-target="#reviewdel"
+                                                            data-review-num="${review.num}">삭제</a>
+                                                        </div>    
                                                     <ul class="rating my-2 d-inline-block">
-							                          	<li>
+							                            <li>
 											                <i class="fas fa-star ${review.rate >= 0.5 ? 'theme-color' : ''}"></i>
 													    </li>
 													    <li>
@@ -562,7 +565,7 @@
 											            <li>
 											                <i class="fas fa-star ${review.rate >= 4.5 ? 'theme-color' : ''}"></i>
 											            </li>
-											        	</ul>        
+											        </ul>
 													<input id="reviewNum" value="${review.num}" data-comment-num="${review.num}">
                                                     <p class="font-light" name="contents">${review.contents}</p>
                                                     <input type="hidden" id="orderNum" name="orderNum" value="${review.orderNum}">
@@ -889,110 +892,97 @@
 		</div>
 <!-- 변경하기 모달창 end -->
 
-		     <!-- 리뷰작성-->
-		     <div class="modal payment-modal" id="addReview">
-		        <div class="modal-dialog modal-dialog-centered">
-		           <div class="modal-content">
-		                 <div class="modal-header">
-		                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-		                 </div>
-                       		<form action="/direct/reviewAdd" method="post">
-                            	<div class="modal-body">
-								<ul>
-								    <li>
-								        <label class=""> 상품명</label>
-								        <span class="mx-3">|</span>
-								        <span class="fw-bold" id="directName2"></span>
-								    </li>
-								</ul>
-                                 <ul>
-                                 <li>
-                                    <label  class="form-label mt-3" style="vertical-align: middle;'">평점</label>
-		                                 <div class="rate">
-										<input type="radio" id="star1" name="rate" value="5">
-											<label for="star1"></label>
-										<input type="radio" id="star2" name="rate" value="4">
-											<label for="star2"></label>
-										<input type="radio" id="star3" name="rate" value="3">
-											<label for="star3"></label>
-										<input type="radio" id="star4" name="rate" value="2">
-											<label for="star4"></label>
-										<input type="radio" id="star5" name="rate" value="1">
-											<label for="star5"></label>
-										</div>
-								</li>		
-                                    </ul>
-                                    <div class="mb-4 mt-2">
-                                        <label for="contents" class="form-label" >구매 후기</label>
-                                        <textarea class="form-control col-12"  placeholder="간단한 후기를 작성해주세요." id="contents" name="contents" value=""></textarea>
-                                    </div>   
-                              </div>
-                              <label for="orderNum" class="form-label" >주문번호</label>
-                                <input type="text" id="orderNum" name="orderNum">
-                                <label for="memberNum" class="form-label" >회원번호</label>
-								<input type="text" id="memberNum" name="memberNum">
-								<input type="hidden" name="slicedCode" value="${param.slicedCode}">
-                                    <div class="modal-footer pt-0 text-end d-block">
-                                        <button type="button" class="btn btn-solid-default btn-sm" data-bs-dismiss="modal" onclick="form.submit()">작성</button>
-                                    </div>
-                                    </form>
+	<!-- 리뷰 작성-->
+	<div class="modal payment-modal" id="addReview">
+		<div class="modal-dialog modal-dialog-centered">
+		    <div class="modal-content">
+		        <div class="modal-header">
+		            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+		        </div>
+                <form action="./reviewAdd" method="post">
+                    <div class="modal-body">
+						<ul>
+							<li>
+                                <label class=""> 상품명</label>
+                                <span class="mx-3">|</span>
+                                <span class="fw-bold" id="directName2"></span>
+                            </li>
+                        </ul>
+                        <ul>
+                            <li>
+                                <label class="form-label mt-3" style="vertical-align: middle;">평점</label>
+                                <div class="rate rating">
+                                    <input type="radio" id="star1" name="rate" value="5"><label for="star1"></label>
+                                    <input type="radio" id="star2" name="rate" value="4"><label for="star2"></label>
+                                    <input type="radio" id="star3" name="rate" value="3"><label for="star3"></label>
+                                    <input type="radio" id="star4" name="rate" value="2"><label for="star4"></label>
+                                    <input type="radio" id="star5" name="rate" value="1"><label for="star5"></label>
                                 </div>
-                            </div>
+                            </li>		
+                        </ul>
+                        <div class="mb-4 mt-2">
+                            <label for="contents" class="form-label" >구매 후기</label>
+                            <textarea class="form-control col-12"  placeholder="간단한 후기를 작성해주세요." id="contents" name="contents" value=""></textarea>
                         </div>
-  
-    <!-- 리뷰작성 모달 End -->
-    
-   <!-- 리뷰 수정 모달 -->
-		     <div class="modal payment-modal" id="updateReview">
-		        <div class="modal-dialog modal-dialog-centered">
-		           <div class="modal-content">
-		                 <div class="modal-header">
-		                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-		                 </div>
-                       		<form action="/direct/reviewUpdate" method="post">
-                            	<div class="modal-body">
-								<ul>
-								    <li>
-								        <label class=""> 상품명</label>
-								        <span class="mx-3">|</span>
-								        <input class="fw-bold" id="directName2" name="productName" value="" readonly>
-								    </li>
-								</ul>
-                                 <ul>
-                                 <li>
-                                    <label  class="form-label mt-3" style="vertical-align: middle;'" for="rate" value="">평점</label>
-		                                 <div class="rate">
-										<input type="radio" id="star1" name="rate" value="5">
-											<label for="star1"></label>
-										<input type="radio" id="star2" name="rate" value="4">
-											<label for="star2"></label>
-										<input type="radio" id="star3" name="rate" value="3">
-											<label for="star3"></label>
-										<input type="radio" id="star4" name="rate" value="2">
-											<label for="star4"></label>
-										<input type="radio" id="star5" name="rate" value="1">
-											<label for="star5"></label>
-										</div>
-								</li>		
-                                    </ul>
-                                    <div class="mb-4 mt-2">
-                                        <label for="contents" class="form-label" >구매 후기</label>
-                                        <textarea class="form-control col-12"  placeholder="간단한 후기를 작성해주세요." id="contents" name="contents" value=""></textarea>
-                                    </div>   
-                              </div>
-                              <label for="orderNum" class="form-label" >주문번호</label>
-                                <input type="text" id="orderNum" name="orderNum" value="">
-                                <label for="memberNum" class="form-label" >회원번호</label>
-								<input type="text" id="memberNum" name="memberNum" value="">
-								<input type="text" name="slicedCode" value="${param.slicedCode}">
-                                    <div class="modal-footer pt-0 text-end d-block">
-                                        <button type="button" class="btn btn-solid-default btn-sm" data-bs-dismiss="modal" onclick="form.submit()">작성</button>
-                                    </div>
-                                    </form>
+                    </div>
+                        <label for="orderNum" class="form-label" >주문번호</label>
+                        <input type="text" id="orderNum" name="orderNum">
+                        <label for="memberNum" class="form-label" >회원번호</label>
+                        <input type="text" id="memberNum" name="memberNum">
+                        <input type="hidden" name="slicedCode" value="${param.slicedCode}">
+                    <div class="modal-footer pt-0 text-end d-block">
+                        <button type="button" class="btn btn-solid-default btn-sm" data-bs-dismiss="modal" onclick="form.submit()">작성</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- 리뷰 작성 모달 End -->
+
+    <!-- 리뷰 수정 모달 -->
+	<div class="modal payment-modal" id="updateReview">
+		<div class="modal-dialog modal-dialog-centered">
+		    <div class="modal-content" id="modalRevUpdate">
+		        <div class="modal-header">
+		            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+		        </div>
+                <form action="./reviewUpdate" method="post">
+                    <div class="modal-body">
+						<ul>
+                            <li>
+                                <label class=""> 상품명</label>
+                                <span class="mx-3">|</span>
+                                <input class="fw-bold" id="modalRevName" name="productName" value="" readonly>
+                            </li>
+						</ul>
+                        <ul>
+                            <li>
+                                <label class="form-label mt-3" style="vertical-align: middle;" for="rate" value="">평점</label>
+                                <div class="rate rating">
+                                    <input type="radio" id="modalRevStar1" name="rate" value="5"><label for="star1"></label>
+                                    <input type="radio" id="modalRevStar2" name="rate" value="4"><label for="star2"></label>
+                                    <input type="radio" id="modalRevStar3" name="rate" value="3"><label for="star3"></label>
+                                    <input type="radio" id="modalRevStar4" name="rate" value="2"><label for="star4"></label>
+                                    <input type="radio" id="modalRevStar5" name="rate" value="1"><label for="star5"></label>
                                 </div>
-                            </div>
-                        </div>
-       <!-- 리뷰 수정 모달 end -->                 
+                            </li>		
+                        </ul>
+                        <div class="mb-4 mt-2">
+                            <label for="contents" class="form-label" >구매 후기</label>
+                            <textarea class="form-control col-12"  placeholder="간단한 후기를 작성해주세요." id="modalRevContents" name="contents"><textarea>
+                        </div>   
+                    </div>
+                        <input type="hidden" id="modalRevOrderNum" name="orderNum" value="">
+                        <input type="hidden" id="modalRevMemberNum" name="memberNum" value="">
+                        <input type="hidden" id="modalRevSlicedCode" name="slicedCode" value="${param.slicedCode}">
+                    <div class="modal-footer pt-0 text-end d-block">
+                        <button type="button" class="btn btn-solid-default btn-sm" data-bs-dismiss="modal" onclick="form.submit()">작성</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- 리뷰 수정 모달 end -->                 
     
     <!-- 문의 작성-->
     <div class="modal fade payment-modal" id="addPayment2">
@@ -1192,44 +1182,52 @@
     $('#directName2').text(directName); // 모달 창 내에서 제품명을 표시하는 곳에 directName 값을 설정
   });
 </script>
-<script>
-function sendSelectedValue() {
-    // 선택한 값을 가져오기
-    const selectedValue = document.querySelector('input[name="planNum"]:checked').value;
 
-    alert("선택한 값: " + selectedValue);
-    // Ajax 요청 보내기
-    $.ajax({
-        url: '/direct/selectedPlan', // 선택한 값을 처리할 JSP 페이지의 URL
-        method: 'POST',
-        data: { planNum: selectedValue },
-        success: function(result) {
-            // Ajax 요청이 성공한 경우의 처리
-            
-           
-            console.log(result.planName);
-            // 선택한 값이 서버로 전달되었고, 서버에서 필요한 처리를 한 후 응답을 받을 수 있습니다.
-            console.log('선택한 값이 서버로 전달되었습니다.');
-            // 추가적인 처리나 리다이렉션 등을 수행할 수 있습니다.
-            // 데이터를 이전 페이지로 전달하기 위해 쿼리 문자열을 생성합니다.
-            // 결과를 특정 HTML 요소에 입력해주기
-    var resultContainer = document.getElementById('resultContainer');
-    resultContainer.textContent = result; // 결과를 텍스트로 설정하거나
-    //resultContainer.innerHTML = result; // 결과를 HTML로 설정할 수도 있습니다.
-            
-            // 이전 페이지로 리다이렉션합니다.
-           location.href = '/direct/phoneDetail?slicedCode='+ slicedCode;
-        },
-        error: function(xhr, status, error) {
-            // Ajax 요청이 실패한 경우의 처리
-            console.error('Ajax 요청이 실패하였습니다:', error);
-            console.log('나는야 ', result);
-            
-            // 실패 시에 대한 처리를 수행할 수 있습니다.
-        }
+
+<script>
+    //javaScript를 이용하여 리뷰업데이트창 뜨게하기
+    //class에 reviewUpdate를 줘서 모든 수정창에 이벤트가 걸리게 함
+    $('.reviewUpdate').click(function() {
+        const reviewNum = $(this).data('review-num');
+        const directName = $('.directNameValue').data('direct-name');
+        
+
+        // reviewNum에 해당하는 요소들의 값을 가져오기
+        const $reviewSection = $('.customer-section[data-review="' + reviewNum + '"]');
+        const contents = $reviewSection.find('p[name="contents"]').text();
+        const orderNum = $reviewSection.find('#orderNum').val();
+        const memberNum = $reviewSection.find('#memberNum').val();
+        const rate = $reviewSection.data('rate');
+        //const slicedCode = $reviewSection.find('input[name="slicedCode"]').val();
+
+        // 가져온 값을 확인하기 위해 출력
+        // console.log("========== 구분선 ==========")
+        // console.log('reviewNum:', reviewNum);
+        // console.log('Contents:', contents);
+        // console.log('OrderNum:', orderNum);
+        // console.log('MemberNum:', memberNum);
+        // console.log('rate:', rate);
+        // console.log('SlicedCode:', slicedCode);
+
+        // 값 입력
+        $('#modalRevName').val(directName);
+        $('#modalRevContents').text(contents);
+        $('#modalRevOrderNum').val(orderNum);
+        $('#modalRevMemberNum').val(memberNum);
+        //$('#modalRevSlicedCode').val(slicedCode);
+
+        //별점 수정 ing...
+        // $('#modalRevUpdate').each(function() {
+        //     $(this).find('.rating i').each(function(index) {
+        //     const starValue = (index + 1) * 0.5;
+        //     if (rate >= starValue) {
+        //     $(this).addClass('theme-color');
+        //     }
+        // });
+        // });
     });
-}
 </script>
+
 
 
 <!--<script>
