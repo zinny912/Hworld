@@ -915,35 +915,7 @@
             </div>
         </div>
     </section>
-    <!-- user dashboard section end -->    
-
-    <!-- 주소 수정 Modal Start -->
-    <!-- <div class="modal fade reset-email-modal" id="resetEmail">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h3 class="modal-title" id="exampleModalLabel">주소 수정</h3>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body pt-3">
-                    <form>
-                        <div class="mb-3">
-                            <label for="email" class="form-label font-light">주소</label>
-                            <input type="email" class="form-control" id="email">
-                        </div>
-                        <div class="mb-3">
-                            <label for="comfirmEmail" class="form-label font-light">상세 주소</label>
-                            <input type="email" class="form-control" id="comfirmEmail">
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer pt-0">
-                    <button class="btn btn-solid-default rounded-1" data-bs-dismiss="modal">수정</button>
-                </div>
-            </div>
-        </div>
-    </div> -->
-    <!-- 주소 수정 Modal End -->
+    <!-- user dashboard section end -->
 
     <!-- 비밀번호 수정 Modal Start -->
     <div class="modal fade add-address-modal" id="resetPassword">
@@ -953,24 +925,24 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form:form action="./myPage" id="update_pw" method="post" modelAttribute="memberVO">
                         <div class="mb-3">
-                            <label for="name" class="form-label font-light">현재 비밀번호</label>
-                            <input type="password" class="form-control" id="name">
+                            <label for="pw" class="form-label font-light">현재 비밀번호</label>
+                            <input type="password" class="form-control" id="">
                         </div>
                         <div class="mb-3">
-                            <label for="address" class="form-label font-light">변경할 비밀번호</label>
-                            <input type="password" class="form-control" id="address">
+                            <label for="pw" class="form-label font-light">변경할 비밀번호</label>
+                            <input type="password" class="form-control" id="pw">
                         </div>
                         <div>
-                            <label for="number" class="form-label font-light">변경할 비밀번호 확인</label>
-                            <input type="password" class="form-control" id="number" >
+                            <label for="pwCheck" class="form-label font-light">변경할 비밀번호 확인</label>
+                            <input type="password" class="form-control" id="pwCheck" >
                         </div>
-                    </form>
-                </div>
-                <div class="modal-footer pt-0 text-end d-block">
-                    
-                    <button class="btn btn-solid-default rounded-1" data-bs-dismiss="modal">수정</button>
+		                <div class="modal-footer pt-0 text-end d-block">
+		                    
+		                    <button class="update_pw btn btn-solid-default rounded-1" type="submit">수정</button>
+		                </div>
+                    </form:form>
                 </div>
             </div>
         </div>
@@ -979,7 +951,7 @@
     
     
     <!-- 가입 정보 수정 Modal Start -->
-    <div class="modal fade add-info-modal" id="resetInfo">
+    <%-- <div class="modal fade add-info-modal" id="resetInfo">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
@@ -1028,7 +1000,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --%>
     <!-- 비밀번호 수정 Modal End -->
 
     <!-- Add Number Modal Start -->
