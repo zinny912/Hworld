@@ -2,12 +2,20 @@ package com.hworld.base.controller;
 
 import java.nio.charset.StandardCharsets;
 import java.sql.Array;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import javax.validation.Valid;
 
 import org.apache.catalina.util.URLEncoder;
@@ -27,6 +35,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.hworld.base.service.DirectService;
 import com.hworld.base.util.Pager;
 import com.hworld.base.vo.DirectVO;
+import com.hworld.base.vo.PlanVO;
+import com.hworld.base.vo.ReviewVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -50,8 +60,10 @@ public class DirectController {
 	        } else {
 	        	pager.setSortType("latest");
 	        }
-	        List<DirectVO> ar = directService.getList(pager);
-	        	        
+
+	        List<DirectVO> ar = directService.getList(pager); 
+	        log.error(ar.get(0).getDirectCode());
+	        
 		mv.addObject("list", ar);
 		mv.setViewName("hworld/phoneList");
 		return mv;
@@ -59,12 +71,85 @@ public class DirectController {
 
 	// 휴대폰 상세 페이지
 	@GetMapping("phoneDetail")
-	public ModelAndView getDetail(DirectVO directVO, String slicedCode) throws Exception{
+	public ModelAndView getDetail(String slicedCode) throws Exception{
 		ModelAndView mv = new ModelAndView();
-		List<DirectVO> ar = directService.getDetail(slicedCode);
+
+	    List<DirectVO> ar = directService.getDetail(slicedCode);
+	    List<ReviewVO> reviews = directService.getReview(slicedCode); //slicedCode로 페이징된 리뷰 목록 조회
+	    List<PlanVO> existPlanList = directService.getExistPlanList();
+	    List<PlanVO> planList = directService.getPlanList();
+	    for(PlanVO planVO : planList) {
+			
+		}
+	    
+	    List<PlanVO> gList = new ArrayList<>();
+		List<PlanVO> sList = new ArrayList<>();
+		List<PlanVO> tList = new ArrayList<>();
+		List<PlanVO> zList = new ArrayList<>();
+		List<PlanVO> wList = new ArrayList<>();
+		List<PlanVO> hList = new ArrayList<>();
+
+	    for (PlanVO plan : planList) {
+		    String planNum = plan.getPlanNum();
+		    if (planNum.startsWith("G")) {
+		        gList.add(plan);
+		    } else if (planNum.startsWith("S")) {
+		        sList.add(plan);
+		    } else if (planNum.startsWith("T")) {
+		        tList.add(plan);
+		    } else if (planNum.startsWith("Z")) {
+		        zList.add(plan);
+		    } else if (planNum.startsWith("W")) {
+		        wList.add(plan);
+		    } else if (planNum.startsWith("H")) {
+		        hList.add(plan);
+		    }
+		}
 		
-		mv.addObject("list", ar);		
-		mv.setViewName("hworld/phoneDetail");
+		//
+		mv.addObject("existList", existPlanList);
+		mv.addObject("gList", gList);
+		mv.addObject("sList", sList);
+		mv.addObject("tList", tList);
+		mv.addObject("zList", zList);
+		mv.addObject("wList", wList);
+		mv.addObject("hList", hList);
+		
+	    mv.addObject("list", ar);
+	    mv.addObject("review",reviews);
+	    mv.setViewName("hworld/phoneDetail");
+
+		return mv;
+	}
+//	@GetMapping("selectedPlan")
+//	public ModelAndView getSelectedPlan(PlanVO planVO) throws Exception{
+//		ModelAndView mv = new ModelAndView();
+//		PlanVO selectedPlan = directService.getSelectedPlan(planVO);
+//		
+//		log.error("{}<========= 선택된 데이터",selectedPlan);
+//		 mv.addObject("result", selectedPlan);
+//		 mv.setViewName("hworld/selectedPlan"); // 결과를 보여줄 JSP 페이지의 이름
+//		return mv;
+//	}
+	
+	@PostMapping("selectedPlan")
+	public ModelAndView getSelectedPlan(@RequestParam("slicedCode") String slicedCode,PlanVO planVO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		PlanVO selectedPlan = directService.getSelectedPlan(planVO);
+		log.error(slicedCode);
+		log.error("{}<========= 선택된 데이터",selectedPlan);
+		 mv.addObject("result", selectedPlan);
+		 mv.setViewName("redirect:/direct/phoneDetail?slicedCode=" + slicedCode); // 결과를 보여줄 JSP 페이지의 이름
+		return mv;
+	}
+	
+	@PostMapping("reviewAdd")
+	public ModelAndView setReviewAdd(ReviewVO reviewVO, ModelAndView mv) throws Exception {
+		int result = directService.setReviewAdd(reviewVO);
+		String slicedCode = reviewVO.getSlicedCode();  // reviewVO에서 slicedCode 값을 가져온다
+		String redirectUrl = "/direct/phoneDetail?slicedCode=" + slicedCode;  // 리다이렉트할 URL을 생성한다
+
+		mv.setViewName("redirect:" + redirectUrl);  // 리다이렉트할 URL을 설정한다
 		return mv;
 	}
 	
@@ -143,17 +228,7 @@ public class DirectController {
 	}
 
 	
-//	@GetMapping("checkStock")
-//	public ModelAndView getPrice(ModelAndView mv, DirectVO directVO) throws Exception {
-//	  
-//	  
-//	  
-//	  mv.addObject("price", price); // 가격을 ModelAndView에 추가
-//	  mv.setViewName("pricePage"); // 가격을 보여줄 페이지로 이동
-//	  return mv; // 가격을 문자열로 반환
-//	}
-	
-	// 휴대폰 & 악세사리 상품 수정 페이지
+	// 휴대폰 상품 수정 페이지
 	@GetMapping("directUpdate")
 	public ModelAndView setUpdate(DirectVO directVO, String slicedCode) throws Exception{
 		ModelAndView modelAndView = new ModelAndView();
@@ -196,8 +271,26 @@ public class DirectController {
 		modelAndView.setViewName("redirect:/direct/phoneDetail?slicedCode="+slicedCode);
 		return modelAndView;
 	}
-	
-	
+	// 리뷰 수정 페이지
+	@GetMapping("getReview")
+	public ModelAndView getReviewUpdate(ReviewVO reviewVO, @RequestParam("slicedCode") String slicedCode) throws Exception {
+		ModelAndView mv = new ModelAndView();
+	    reviewVO = directService.getReviewOne(reviewVO);
+	    mv.addObject("reviewVO", reviewVO);
+	    mv.setViewName("redirect:/direct/phoneDetail?slicedCode=" + slicedCode);  // 리뷰 수정 페이지의 뷰 이름을 설정합니다.
+	    return mv;
+	}
+
+	// 리뷰 수정 처리
+	@PostMapping("reviewUpdate")
+	public ModelAndView postReviewUpdate(ReviewVO reviewVO) throws Exception {
+	    ModelAndView mv = new ModelAndView();
+	    int result = directService.setReviewUpdate(reviewVO);
+	    String slicedCode = reviewVO.getSlicedCode();  // reviewVO에서 slicedCode 값을 가져옵니다.
+	    String redirectUrl = "/direct/phoneDetail?slicedCode=" + slicedCode;  // 리다이렉트할 URL을 생성합니다.
+	    mv.setViewName("redirect:" + redirectUrl);  // 리다이렉트할 URL을 설정합니다.
+	    return mv;
+	}
 	
 	// 상품 번호 이동 페이지
 	@GetMapping("directNumMove")
@@ -223,7 +316,6 @@ public class DirectController {
 		return modelAndView;
 	}
 	
-
 
 	
 	

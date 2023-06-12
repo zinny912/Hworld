@@ -54,5 +54,5 @@ public class DirectVO {
     //요금제 리스트 가져오기 위한 VO 설정 (요금제 선택)
     private List<PlanVO> planList;
      
-    
+ 
 }
