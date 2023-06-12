@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -833,16 +834,13 @@
                                         </div>
                                     </li>
 
-                                    <li>
+                                    <!-- <li>
                                     <div class="left">
                                         <h6 class="font-light">Password</h6>
-                                    </div>
-                                    <div class="right">
-                                        <h6>${member.pw}</h6>
-                                    </div>
+                                    </div>                                    
                                     <a href="javascript:void(0)" data-bs-toggle="modal"
                                         data-bs-target="#resetPassword">수정</a>
-                                    </li>
+                                    </li> -->
 
                                     <li>
                                         <div class="left">
@@ -871,7 +869,14 @@
                                             <h6>(${memberVO.address1}) ${memberVO.address2}, ${memberVO.address3}</h6>
                                         </div>
                                         
-                                        <a href="javascript:void(0)" data-bs-target="#resetEmail" onclick="execution_daum_address()">수정</a>
+                                        <!-- <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#resetInfo">수정</a> -->
+                                    </li>
+                                    
+                                    <li class="justify-content-center mt-5">                                    
+                                    	<button class="btn btn-solid-default btn-sm fw-bold ms-auto" data-bs-toggle="modal" data-bs-target="#resetPassword" style="margin-right: 5px">비밀번호 변경</button>
+	                                    <button class="btn btn-solid-default btn-sm fw-bold" data-bs-toggle="modal" data-bs-target="#resetInfo">가입 정보 변경</button>
+	                                    <!-- <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#resetPassword">비밀번호 변경</a>
+	                                    <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#resetInfo">가입 정보 변경</a> -->
                                     </li>
                                 </ul>
                             </div>
@@ -913,7 +918,7 @@
     <!-- user dashboard section end -->    
 
     <!-- 주소 수정 Modal Start -->
-    <div class="modal fade reset-email-modal" id="resetEmail">
+    <!-- <div class="modal fade reset-email-modal" id="resetEmail">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
@@ -937,7 +942,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <!-- 주소 수정 Modal End -->
 
     <!-- 비밀번호 수정 Modal Start -->
@@ -966,6 +971,60 @@
                 <div class="modal-footer pt-0 text-end d-block">
                     
                     <button class="btn btn-solid-default rounded-1" data-bs-dismiss="modal">수정</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 비밀번호 수정 Modal End -->
+    
+    
+    <!-- 가입 정보 수정 Modal Start -->
+    <div class="modal fade add-info-modal" id="resetInfo">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="submit" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                	<form:form action="./myPage" id="update_info" method="post" modelAttribute="memberVO">                    
+                        <div class="mb-3">
+                            <label for="name" class="form-label font-light">이름</label>
+                            <input type="text" class="form-control" id="name" name="name" value="${memberVO.name}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label font-light">이메일(아이디)</label>
+                            <input type="email" class="form-control" id="email" name="email" readonly="readonly" value="${memberVO.email}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="phoneNum" class="form-label font-light">번호</label>
+                            <input type="text" class="form-control" id="phoneNum" name="phoneNum" readonly="readonly" placeholder="회선 관리에서 바꿔주시길 바랍니다." value="${memberVO.phoneNum}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="rrnf" class="form-label font-light">생년월일</label>
+                            <input type="text" class="form-control" id="rrnf" name="rrnf" readonly="readonly" value="${memberVO.rrnf}">
+                        </div>
+                        <div class="mb-3 row">
+	                            <label for="address1" class="form-label font-light">우편번호</label>
+	                        <div class="col-9">
+	                            <input type="text" class="form-control address_input_1" id="address1" name="address1" readonly="readonly" value="${memberVO.address1}">
+	                        </div>
+	                        <button class="col-3 row btn btn-solid-default btn-sm fw-bold" type="button" onclick="execution_daum_address()">
+								<span>주소 찾기</span>
+							</button>
+						</div>
+						
+                        <div class="mb-3">
+                            <label for="address2" class="form-label font-light">도로명주소</label>
+                            <input type="text" class="form-control address_input_2" id="address2" name="address2" readonly="readonly" value="${memberVO.address2}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="address3" class="form-label font-light">상세주소</label>
+                            <input type="text" class="form-control address_input_3" id="address3" name="address3" value="${memberVO.address3}">
+                        </div>
+		                <div class="modal-footer pt-0 text-end d-block">
+		                    <button class="update_info btn btn-solid-default rounded-1" type="submit">수정</button>
+		                </div>
+                    </form:form>
                 </div>
             </div>
         </div>
@@ -1209,6 +1268,25 @@
     <!-- Comfirm stop Modal End -->
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
+var addressCheck = false 		// 주소
+$(document).ready(function(){
+	// 가입정보 업데이트 버튼(업데이트 기능 작동)
+	$(".update_info").click(function(){
+		
+		/* 입력값 변수 */		
+		var addr = $('.address_input_3').val();		// 주소 입력란
+		
+		/* 최종 유효성 검사 */
+		if(pwCheck&&pwckCheck&&pwckcorCheck&&addressCheck){
+			$("#update_info").attr("action", "/myPage");
+			$("#update_info").submit();			
+		}		
+		
+		return false;
+	});
+});
+
+
 /* 다음 주소 연동 */
 function execution_daum_address(){
 	

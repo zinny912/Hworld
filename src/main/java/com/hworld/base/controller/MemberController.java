@@ -158,7 +158,6 @@ public class MemberController {
 		memberVO.setPw(encodePw); // 인코딩 된 비밀번호 member 객체에 다시 저장	
 		
 		int result = memberService.setMemberAdd(memberVO);
-		System.out.print("회원가입 결과 : {}" + result);
 		
 		modelAndView.setViewName("hworld/signUpSuccess");
 		

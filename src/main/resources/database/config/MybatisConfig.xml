@@ -14,7 +14,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.hworld.base.vo.ApplicationVO" alias="ApplicationVO"/>
 		
 		<!-- Member -->
-		<typeAlias type="com.hworld.base.vo.MemberVO" alias="MemberVO"/>
+		<typeAlias type="com.hworld.base.vo.MemberVO" alias="MemberVO"/>		
 		
 		<!-- Direct -->
 		<typeAlias type="com.hworld.base.vo.DirectVO" alias="DirectVO"/>
