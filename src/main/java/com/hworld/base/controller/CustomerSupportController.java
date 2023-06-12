@@ -1,6 +1,7 @@
 package com.hworld.base.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -88,5 +89,20 @@ public class CustomerSupportController {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("hworld/archive");
 		return modelAndView;
+	}
+	
+	@GetMapping("prcTest")
+	public ModelAndView prcTest() throws Exception {
+		ModelAndView mv = new ModelAndView();
+		List<Map<String, Object>> mapList =  csService.prcTest();
+		for (Map<String, Object> map3 : mapList) {
+			
+			
+			log.error("===============================> {}", map3.toString());
+			
+		}
+		mv.addObject("list", mapList);
+		mv.setViewName("hworld/prcTest");
+		return mv;
 	}
 }
