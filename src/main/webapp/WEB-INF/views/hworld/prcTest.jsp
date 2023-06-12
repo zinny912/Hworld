@@ -183,9 +183,10 @@
 	                                                                                        <p style="text-align: right;">0 자 입력 / 최대 12,000 자</p>
 	                                                                                    </div>
 	                                                                                    <div style="text-align: start;">
-	                                                                                        <p style="line-height: 0.7;">* 2018년 10월 18일(목) 산업안전보건법 고객응대근로자 보호조치가 시행되었습니다.</p>
-	                                                                                        <p style="line-height: 0.7;">고객 응대 근로자에게 폭언, 폭행, 성희롱 등을 하지 말아 주세요.  </p>
-	                                                                                        <p style="line-height: 2;">* 문의 접수 시 내용에 폭언, 욕설, 비속어 등이 포함된 경우, 답변을 받으실 수 없습니다.</p>
+	                                                                                    <c:forEach items="${list}" var="map">
+	                                                                                    	<p style="line-height: 0.7;">${map.out_phonePayPrice }</p>
+	                                                                                    	<p style="line-height: 0.7;">${map.out_planPrice }</p>
+	                                                                                    </c:forEach>
 	                                                                                    </div>
 	                                                                                </td>
 	                                                                            </tr>

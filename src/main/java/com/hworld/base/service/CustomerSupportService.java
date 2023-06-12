@@ -1,6 +1,9 @@
 package com.hworld.base.service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -51,5 +54,34 @@ public class CustomerSupportService {
 	public int setQnaInsert(QnaVO qnaVO, HttpSession session, MultipartFile multipartFile) throws Exception {
 		qnaVO.setMemberNum(1);
 		return qnaDAO.setInsert(qnaVO);
+	}
+	
+	public List<Map<String, Object>> prcTest () throws Exception {
+		
+		
+		
+		Map<String, Object> map1 = new HashMap<>();
+		map1.put("param1", "P01BACBV512I1402");
+		map1.put("param2", 2);
+		map1.put("param3", "G01");
+		
+		Map<String, Object> map2 = new HashMap<>();
+		map2.put("param1", "P01BSCBV128G2301");
+		map2.put("param2", 2);
+		map2.put("param3", "G01");
+		
+		List<Map<String, Object>> list = new ArrayList<>();
+		list.add(map1);
+		list.add(map2);
+		
+		
+		for (Map<String, Object> map3 : list) {
+			qnaDAO.prcTest(map3);
+			
+		}
+		
+
+		
+		return list;
 	}
 }
