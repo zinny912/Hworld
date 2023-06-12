@@ -19,14 +19,6 @@
 		</where>
 	</sql>
   
-  	<!-- 상품 리스트 -->
-  	<select id="getPrice" resultType="DirectVO" parameterType="DirectVO">
-  		SELECT SUBSTRING(DIRECTCODE, -5) AS slicedCode,
-        DIRECTCODE, DIRECTSTOCK, CATEGORYCODE, BRANDCODE, COLORCODE, SAVECAPACITY 
-		FROM DIRECT
-  	</select>
-   
- 
   	<select id="getList" resultType="DirectVO" parameterType="Pager">
     SELECT SUBSTRING(D.directCode, -5) AS slicedCode,
         D.*,
@@ -57,12 +49,13 @@
 		<include refid="search"></include>
 	</select> 
 	
-	<!-- 상품 디테일 페이지 default 값으로 P01/BS/ -->
+	<!-- 상품 디테일 페이지 상품 하나 다중 옵션 리스트-->
 	<select id="getDetail" parameterType="DirectVO" resultType="DirectVO"> 
 	   SELECT D.*, CC.VALUE AS value, RIGHT(D.DIRECTCODE, 5) AS slicedCode
 		FROM DIRECT D
 		INNER JOIN COMMONCODE CC ON D.BRANDCODE = CC.CODE
 		WHERE RIGHT(D.DIRECTCODE, 5) = #{slicedCode}
+		ORDER BY D.DIRECTPRICE ASC
 	</select>
 
 
@@ -85,6 +78,72 @@
 		SET DIRECTNAME = #{directName}, DIRECTCONTENTS = #{directContents}, DIRECTPRICE = #{directPrice}, DIRECTSTOCK = #{directStock}, CATEGORYCODE = #{categoryCode}, BRANDCODE = #{brandCode}, COLORCODE = #{colorCode}, SAVECAPACITY = #{saveCapacity}
 		WHERE RIGHT(DIRECTCODE, 5) = #{slicedCode}
 	</update>
+	<!-- 총 리뷰 가져오기 -->
+	<select id="getReview" resultType="ReviewVO" parameterType="DirectVO">
+	 	SELECT R.*, M.EMAIL AS email, D.DIRECTNAME, D.DIRECTCODE, SUBSTRING(D.DIRECTCODE, -5) AS slicedCode
+		FROM REVIEW R
+		LEFT JOIN ORDERDIRECT OD ON OD.ORDERNUM = R.ORDERNUM
+		LEFT JOIN DIRECT D ON D.DIRECTCODE =OD.DIRECTCODE
+		LEFT JOIN MEMBER M ON R.MEMBERNUM = M.MEMBERNUM
+		HAVING slicedCode = #{slicedCode}
+		ORDER BY R.REGDATE DESC;
+	</select>
+	<!-- 리뷰 하나 가져오기 -->
+	<select id="getReviewOne" resultType="ReviewVO">
+		SELECT * FROM REVIEW
+		WHERE NUM = #{num}
+	</select>
 
-
+	<!-- 리뷰 총 개수 가져오기 -->
+	<select id="getReviewCount" parameterType="DirectVO" resultType="Long">
+		SELECT COUNT(R.NUM), SUBSTRING(D.DIRECTCODE,-5) AS slicedCode 
+		FROM REVIEW R
+		LEFT JOIN ORDERDIRECT OD ON OD.ORDERNUM = R.ORDERNUM
+		INNER JOIN DIRECT D ON D.DIRECTCODE = OD.DIRECTCODE
+		WHERE SUBSTRING(D.DIRECTCODE,-5) =#{sliecdCode}
+	</select> 
+	<!-- 리뷰 작성 -->
+	<insert id="setReviewAdd" parameterType="ReviewVO">
+	INSERT INTO REVIEW (MEMBERNUM, ORDERNUM, CONTENTS, RATE, REGDATE)
+	VALUES (#{memberNum}, #{orderNum}, #{contents}, #{rate}, now())
+	</insert> 
+	<!-- 리뷰 수정 -->
+	<update id="setReviewUpdate" parameterType="ReviewVO">
+	UPDATE REVIEW
+	SET CONTENTS=#{contents}, RATE=#{rate}
+	WHERE NUM=#{num}
+	</update>
+	
+	<!-- 리뷰 삭제 -->
+	<delete id="setReviewDelete" parameterType="ReviewVO">
+	DELETE FROM REVIEW
+	WHERE NUM=#{num}
+	</delete>
+	
+	<!-- 상품문의 -->
+	
+	
+	<!-- Plan -->
+	<!-- existPlanList -->
+	<select id="getExistPlanList" resultType="PlanVO">
+		SELECT DISTINCT C.NOTE
+		FROM PLAN P
+		INNER JOIN COMMONCODE C ON SUBSTRING(P.PLANNUM, 1, 1) = C.TYPE
+	</select>
+	
+	<!-- planList + disPercent -->
+	<select id="getPlanList" resultType="PlanVO">
+		SELECT P.PLANNUM, P.PLANNAME, P.PLANPRICE, P.DATACAPACITY, P.CATEGORYCODE, P.PLANEXPLAIN, P.PLANEXPLAINSM, D.DISPERCENT 
+		FROM PLAN P
+		LEFT JOIN DISCODE D
+		ON(P.DISCODE=D.DISCODE)
+		WHERE PLANNUM LIKE 'G%' OR PLANNUM LIKE 'S%' OR PLANNUM LIKE 'T%' OR PLANNUM LIKE 'Z%' OR PLANNUM LIKE 'W%' OR PLANNUM LIKE 'H%'
+	</select>
+	
+	<!-- 선택한 요금제 -->
+	<select id="getSelectedPlan" resultType="PlanVO" parameterType="PlanVO">
+	SELECT * FROM PLAN
+	WHERE PLANNUM = #{planNum}
+	</select>
+	
   </mapper>

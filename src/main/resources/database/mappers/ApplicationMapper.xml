@@ -39,5 +39,39 @@
 		WHERE SERIALNUM=(SELECT MAX(SERIALNUM) FROM TELEPHONE))
 	</update> -->
 	
+	
+	<!-- Plan -->
+	<!-- existPlanList -->
+	<select id="getExistPlanList" resultType="PlanVO">
+		SELECT DISTINCT C.NOTE
+		FROM PLAN P
+		INNER JOIN COMMONCODE C ON SUBSTRING(P.PLANNUM, 1, 1) = C.TYPE
+	</select>
+	
+	<!-- planList + disPercent -->
+	<select id="getPlanList" resultType="PlanVO">
+		SELECT P.PLANNUM, P.PLANNAME, P.PLANPRICE, P.DATACAPACITY, P.CATEGORYCODE, P.PLANEXPLAIN, P.PLANEXPLAINSM, D.DISPERCENT 
+		FROM PLAN P
+		LEFT JOIN DISCODE D
+		ON(P.DISCODE=D.DISCODE)
+		WHERE PLANNUM LIKE 'G%' OR PLANNUM LIKE 'S%' OR PLANNUM LIKE 'T%' OR PLANNUM LIKE 'Z%' OR PLANNUM LIKE 'W%' OR PLANNUM LIKE 'H%'
+	</select>
+	
+	
+	<!-- Direct -->
+	<!-- getDirectList -->
+	<select id="getDirectList" resultType="DirectVO">
+		SELECT DIRECTCODE, RIGHT(DIRECTCODE, 5) AS slicedCode, DIRECTNAME, DIRECTSTOCK
+		FROM DIRECT
+		WHERE DIRECTCODE LIKE 'P01%'
+		GROUP BY slicedCode
+	</select>
+	
+	<!-- getSelectedDirectList -->
+	<select id="getSelectedDirectList" resultType="DirectVO" parameterType="DirectVO">
+		SELECT DIRECTCODE, RIGHT(DIRECTCODE, 5) AS slicedCode, DIRECTPRICE, COLORCODE, SAVECAPACITY
+		FROM DIRECT
+		WHERE DIRECTCODE LIKE 'P01%' AND DIRECTSTOCK != 0 AND RIGHT(DIRECTCODE, 5) = #{slicedCode}
+	</select>
 
 </mapper>

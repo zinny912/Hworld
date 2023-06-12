@@ -2,6 +2,10 @@ package com.hworld.base.vo;
 
 import java.sql.Date;
 
+import javax.validation.constraints.NotBlank;
+
+import org.springframework.boot.autoconfigure.AutoConfigureOrder;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,6 +22,7 @@ public class ApplicationVO {
 	private String address2;
 	private String address3;
 	private String planNum; //코드로 변경 가능성 있음
+	@NotBlank
 	private String phoneNum;
 	private Integer disKind; //0-공시지원금, 1-선택약정12개월, 2-선택약정24개월
 	private Integer phoneSubPrice;
