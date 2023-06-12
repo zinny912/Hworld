@@ -51,9 +51,7 @@ public class DirectController {
 	        	pager.setSortType("latest");
 	        }
 	        List<DirectVO> ar = directService.getList(pager);
-	        
-	        log.error(ar.get(0).getDirectCode());
-	        
+	        	        
 		mv.addObject("list", ar);
 		mv.setViewName("hworld/phoneList");
 		return mv;
@@ -64,10 +62,6 @@ public class DirectController {
 	public ModelAndView getDetail(DirectVO directVO, String slicedCode) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		List<DirectVO> ar = directService.getDetail(slicedCode);
-		
-		log.error(slicedCode);
-		log.error(ar.get(0).getDirectCode());
-
 		
 		mv.addObject("list", ar);		
 		mv.setViewName("hworld/phoneDetail");
@@ -89,9 +83,7 @@ public class DirectController {
 	    
 	    List<DirectVO> ar = directService.getList(pager);
 	    
-//	    directService.setSeenList(request, response, null);
-	    
-	    List<DirectVO> recentlyViewedProducts = directService.getseenList(request);
+	    List<DirectVO> recentlyViewedProducts = directService.getSeenList(request);
 	    
 	    mv.addObject("recentlyViewedProducts", recentlyViewedProducts);
 	    mv.addObject("list", ar);
@@ -99,6 +91,7 @@ public class DirectController {
 	    
 	    return mv;
 	}
+	
 
 	
 	// 액세서리 디테일 페이지
@@ -126,7 +119,6 @@ public class DirectController {
 			String[] colorCode, String[] saveCapacity, Integer[] directPrice, Integer[] directStock, String[] directCode, DirectVO directVO, MultipartFile[] multipartFiles) throws Exception{
 		ModelAndView modelAndView = new ModelAndView();
 		
-		System.out.println(multipartFiles);
 		
 		//반복문으로 directVO 하나 완성하기 + 완성될 때 서비스로 insert 메서드 호출
 		for(int i=0; i<directCode.length; i++) {
@@ -182,7 +174,6 @@ public class DirectController {
 		slicedCode = directVO.getDirectCode().substring(directVO.getDirectCode().length() - 5);
 		directService.setDelete(slicedCode);
 		
-		System.out.println(slicedCode);
 		
 		//반복문으로 directVO 하나 완성하기 + 완성될 때 서비스로 insert 메서드 호출
 		for(int i=0; i<directCode.length; i++) {

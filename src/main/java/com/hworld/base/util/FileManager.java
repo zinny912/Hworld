@@ -83,13 +83,10 @@ public class FileManager extends AbstractView {
 		    	
 		    	if (!folder.exists()) {
 		    		folder.mkdirs();
-		    		log.warn(path);
 		    	}
 		    	
 		    	//2. 저장할 파일 이름 생성(directCode의 끝 5자리) 
 		    	String fileName = directVO.getDirectCode().substring(directVO.getDirectCode().length() - 5);
-		    	log.warn(fileName);
-		    	System.out.println(fileName);
 		    	
 		    	// 썸네일 파일 저장
 		    	if (multipartFiles != null && multipartFiles.length > 0 && multipartFiles[0] != null) {
@@ -99,22 +96,17 @@ public class FileManager extends AbstractView {
 		    		// 파일이 이미 존재하는 경우 건너뛰기 
 		    		if (!thumbFile.exists()) {
 		    			multipartFiles[0].transferTo(thumbFile);
-		    			System.out.println( "썸네일 파일 없어서 추가함 ~~~" );
 		    			
-		    			log.error(thumbFileName);
 		    		}
 		    	}
 		    	
 		    	// 파일 저장
 		    	if (multipartFiles != null && multipartFiles.length > 0 && multipartFiles[1] != null) {
 		    		File file = new File(folder, fileName); // 저장할 파일 경로 생성
-		    		System.out.println( "파일 있어서 건너뜀~ ");
 		    		
 		    		// 파일이 이미 존재하는 경우 건너뛰기
 		    		if (!file.exists()) {
 		    			multipartFiles[1].transferTo(file);
-		    			System.out.println( "파일 없어서 추가함 ~~~" );
-		    			log.error(fileName);
 		    		}
 		    		
 		    	}
@@ -136,7 +128,6 @@ public class FileManager extends AbstractView {
 		    if (isEmptyFile.exists()) {
 		    	isEmptyFile.delete();
 		    	isEmptyThumbFile.delete();
-		    System.out.println("파일 지워짐~~~~");
 		    }
 
 		    return fileName;
