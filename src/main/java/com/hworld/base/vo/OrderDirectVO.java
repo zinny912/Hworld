@@ -15,7 +15,7 @@ public class OrderDirectVO {
     //주문 수량
     private Integer orderAmount;
 
-    //private List<MemberVO> memberVOs;
+    private List<MemberVO> memberVOs;
     private List<DirectVO> directVOs;
     private List<OrderVO> orderVOs;
     
