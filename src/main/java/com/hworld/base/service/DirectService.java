@@ -60,6 +60,10 @@ public class DirectService {
 	    return directDAO.getDetail(slicedCode);
 	}
 	
+	public List<DirectVO> getAccDetail(String slicedCode) throws Exception {
+		return directDAO.getAccDetail(slicedCode);
+	}
+	
 	// 상품 리뷰 전체 불러오기
 	public List<ReviewVO> getReview(String slicedCode) throws Exception {
 		return directDAO.getReview(slicedCode);
@@ -170,7 +174,7 @@ public class DirectService {
 
 	                for (String slicedCode : slicedCodes) {
 	                    // productId를 사용하여 상품 정보를 조회하는 로직을 구현
-	                    List<DirectVO> directVO = getDetail(slicedCode);
+	                    List<DirectVO> directVO = getAccDetail(slicedCode);
 	                    if (directVO != null) {
 	                        for (DirectVO product : directVO) {
 	                            if (!lowestPriceProductsMap.containsKey(slicedCode) || product.getDirectPrice() < lowestPrice) {

@@ -29,6 +29,9 @@ public interface DirectDAO {
 	
 	//상품 하나 옵션 다수 조회
 	public List<DirectVO> getDetail(String slicedCode) throws Exception;
+	
+	//악세사리 상품 하나 옵션 다수 조회
+	public List<DirectVO> getAccDetail(String slicedCode) throws Exception;
 
 	//상품파일 조회 
 	public DirectVO getFileDetail(DirectVO directVO) throws Exception;

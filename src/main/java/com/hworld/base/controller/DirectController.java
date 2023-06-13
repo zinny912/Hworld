@@ -23,12 +23,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -76,13 +76,17 @@ public class DirectController {
 		ModelAndView mv = new ModelAndView();
 
 	    List<DirectVO> ar = directService.getDetail(slicedCode);
-	    List<ReviewVO> reviews = directService.getReview(slicedCode); //slicedCode로 페이징된 리뷰 목록 조회
+	   
 	    List<PlanVO> existPlanList = directService.getExistPlanList();
 	    List<PlanVO> planList = directService.getPlanList();
 	    List<QnaVO> qnaList = directService.getDirectQna(qnaVO); 
-	    
-	    log.error(qnaVO.getSlicedCode());
-	    
+	    List<QnaVO> pQna = new ArrayList<>();
+		for(QnaVO qna : qnaList) {
+			String newCode = qna.getNewCode();
+			if(newCode.equals("P01")) {
+				pQna.add(qna);
+			}
+		}
 	    List<PlanVO> gList = new ArrayList<>();
 		List<PlanVO> sList = new ArrayList<>();
 		List<PlanVO> tList = new ArrayList<>();
@@ -107,9 +111,15 @@ public class DirectController {
 		    }
 		}
 	    
-		
-		
-		//
+	    List<ReviewVO> reviews = directService.getReview(slicedCode);//slicedCode로 페이징된 리뷰 목록 조회
+	    List<ReviewVO> pReview = new ArrayList<>();
+	    for(ReviewVO review : reviews) {
+	    	String categoryCode = review.getCategoryCode();
+	    	if(categoryCode.equals("01")) {
+	    		pReview.add(review);
+	    	}
+	    }
+	    
 		mv.addObject("existList", existPlanList);
 		mv.addObject("gList", gList);
 		mv.addObject("sList", sList);
@@ -118,10 +128,10 @@ public class DirectController {
 		mv.addObject("wList", wList);
 		mv.addObject("hList", hList);
 		
-		mv.addObject("qnaList", qnaList);
+		mv.addObject("qnaList", pQna);
 		
 	    mv.addObject("list", ar);
-	    mv.addObject("review",reviews);
+	    mv.addObject("review",pReview);
 	    mv.setViewName("hworld/phoneDetail");
 
 		return mv;
@@ -162,18 +172,35 @@ public class DirectController {
 	    
 	    return mv;
 	}
-	
 
-	
 	// 액세서리 디테일 페이지
 	@GetMapping("accessoryDetail")
-	public ModelAndView getAccDetail(DirectVO directVO, String slicedCode, HttpServletRequest request, HttpServletResponse response) throws Exception{
+	public ModelAndView getAccDetail(DirectVO directVO, String slicedCode, HttpServletRequest request, HttpServletResponse response, QnaVO qnaVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
-		List<DirectVO> ar = directService.getDetail(slicedCode);
-
+		List<DirectVO> ar = directService.getAccDetail(slicedCode);
+		
+		List<QnaVO> qnaList = directService.getDirectQna(qnaVO); 
+		List<QnaVO> accQna = new ArrayList<>();
+		for(QnaVO qna : qnaList) {
+			String newCode = qna.getNewCode();
+			if(!newCode.equals("P01")) {
+				accQna.add(qna);
+			}
+		}
+		
 	    directService.setSeenList(request, response, slicedCode);
+	    List<ReviewVO> reviews = directService.getReview(slicedCode);//slicedCode로 페이징된 리뷰 목록 조회
+	    List<ReviewVO> accReview = new ArrayList<>();
+	    for(ReviewVO review : reviews) {
+	    	String categoryCode = review.getCategoryCode();
+	    	if(!categoryCode.equals("01")) {
+	    		accReview.add(review);
+	    	}
+	    }
 
 		mv.addObject("list", ar);		
+		mv.addObject("qnaList", accQna);
+		mv.addObject("review",accReview);
 		mv.setViewName("hworld/accessoryDetail");
 		return mv;
 	}
@@ -190,7 +217,6 @@ public class DirectController {
 			String[] colorCode, String[] saveCapacity, Integer[] directPrice, Integer[] directStock, String[] directCode, DirectVO directVO, MultipartFile[] multipartFiles) throws Exception{
 		ModelAndView modelAndView = new ModelAndView();
 		
-		
 		//반복문으로 directVO 하나 완성하기 + 완성될 때 서비스로 insert 메서드 호출
 		for(int i=0; i<directCode.length; i++) {
 			DirectVO directVO2 = new DirectVO();
@@ -204,8 +230,6 @@ public class DirectController {
 			directVO2.setDirectStock(directStock[i]);
 			directVO2.setDirectCode(directCode[i]);
 
-			
-			
 			directService.setInsert(directVO2, multipartFiles);
 		}
 		
@@ -226,7 +250,6 @@ public class DirectController {
 			String[] colorCode, String[] saveCapacity, Integer[] directPrice, Integer[] directStock, String[] directCode, DirectVO directVO, MultipartFile[] multipartFiles) throws Exception{
 		ModelAndView modelAndView = new ModelAndView();
 		
-		
 		//반복문으로 directVO 하나 완성하기 + 완성될 때 서비스로 insert 메서드 호출
 		for(int i=0; i<directCode.length; i++) {
 			DirectVO directVO2 = new DirectVO();
@@ -240,8 +263,6 @@ public class DirectController {
 			directVO2.setDirectStock(directStock[i]);
 			directVO2.setDirectCode(directCode[i]);
 
-			
-			
 			directService.setInsert(directVO2, multipartFiles);
 		}
 		
@@ -256,7 +277,6 @@ public class DirectController {
 		ModelAndView modelAndView = new ModelAndView();
 		List<DirectVO> ar = directService.getDetail(slicedCode);
 
-		
 		modelAndView.setViewName("hworld/directUpdate");
 		modelAndView.addObject("directVO", directVO);
 		modelAndView.addObject("list", ar);
@@ -271,6 +291,40 @@ public class DirectController {
 		slicedCode = directVO.getDirectCode().substring(directVO.getDirectCode().length() - 5);
 		directService.setDelete(slicedCode);
 		
+		//반복문으로 directVO 하나 완성하기 + 완성될 때 서비스로 insert 메서드 호출
+		for(int i=0; i<directCode.length; i++) {
+			DirectVO directVO2 = new DirectVO();
+			directVO2.setCategoryCode(categoryCode);
+			directVO2.setBrandCode(brandCode);
+			directVO2.setDirectName(directName);
+			directVO2.setDirectContents(directContents);
+			directVO2.setColorCode(colorCode[i]);
+			directVO2.setSaveCapacity(saveCapacity[i]);
+			directVO2.setDirectPrice(directPrice[i]);
+			directVO2.setDirectStock(directStock[i]);
+			directVO2.setDirectCode(directCode[i]);
+
+			directService.setInsert(directVO2, multipartFiles);
+		}
+
+		modelAndView.setViewName("redirect:/direct/phoneDetail?slicedCode="+slicedCode);
+		return modelAndView;
+	}
+	@GetMapping("accessoryUpdate")
+	public ModelAndView setUpdate(ModelAndView mv,DirectVO directVO, String slicedCode) throws Exception{
+		List<DirectVO> ar = directService.getAccDetail(slicedCode);
+
+		mv.setViewName("hworld/accessoryUpdate");
+		mv.addObject("directVO", directVO);
+		mv.addObject("list", ar);
+		return mv;
+	}
+	@PostMapping("accessoryUpdate")
+	public ModelAndView setUpdate(ModelAndView mv, String categoryCode, String brandCode, String directName, String directContents,
+			String[] colorCode, String[] saveCapacity, Integer[] directPrice, Integer[] directStock, String[] directCode, DirectVO directVO, MultipartFile[] multipartFiles, String slicedCode) throws Exception{
+
+		slicedCode = directVO.getDirectCode().substring(directVO.getDirectCode().length() - 5);
+		directService.setDelete(slicedCode);
 		
 		//반복문으로 directVO 하나 완성하기 + 완성될 때 서비스로 insert 메서드 호출
 		for(int i=0; i<directCode.length; i++) {
@@ -285,13 +339,13 @@ public class DirectController {
 			directVO2.setDirectStock(directStock[i]);
 			directVO2.setDirectCode(directCode[i]);
 
-			
 			directService.setInsert(directVO2, multipartFiles);
 		}
 
-		modelAndView.setViewName("redirect:/direct/phoneDetail?slicedCode="+slicedCode);
-		return modelAndView;
+		mv.setViewName("redirect:/direct/accessoryDetail?slicedCode="+slicedCode);
+		return mv;
 	}
+
 	
 	
 	//리뷰 추가
@@ -300,18 +354,17 @@ public class DirectController {
 		int result = directService.setReviewAdd(reviewVO);
 		String slicedCode = reviewVO.getSlicedCode();  // reviewVO에서 slicedCode 값을 가져온다
 		String redirectUrl = "/direct/phoneDetail?slicedCode=" + slicedCode;  // 리다이렉트할 URL을 생성한다
-
+		
 		mv.setViewName("redirect:" + redirectUrl);  // 리다이렉트할 URL을 설정한다
 		return mv;
 	}
 		
-
 	// 리뷰 수정 처리
 	@PostMapping("reviewUpdate")
 	public ModelAndView setReviewUpdate(ReviewVO reviewVO) throws Exception {
 	    ModelAndView mv = new ModelAndView();
 	    int result = directService.setReviewUpdate(reviewVO);
-	    String slicedCode = reviewVO.getSlicedCode();  // reviewVO에서 slicedCode 값을 가져옵니다.
+	    String slicedCode = reviewVO.getSlicedCode(); // reviewVO에서 slicedCode 값을 가져옵니다.
 	    String redirectUrl = "/direct/phoneDetail?slicedCode=" + slicedCode;  // 리다이렉트할 URL을 생성합니다.
 	    mv.setViewName("redirect:" + redirectUrl);  // 리다이렉트할 URL을 설정합니다.
 	    return mv;
@@ -333,6 +386,8 @@ public class DirectController {
 	public ModelAndView setQnaAdd(QnaVO qnaVO, ModelAndView mv) throws Exception {
 		int result = directService.setQnaAdd(qnaVO);
 		String slicedCode = qnaVO.getSlicedCode();  // reviewVO에서 slicedCode 값을 가져온다
+		
+	    
 		String redirectUrl = "/direct/phoneDetail?slicedCode=" + slicedCode;  // 리다이렉트할 URL을 생성한다
 		mv.setViewName("redirect:" + redirectUrl);  // 리다이렉트할 URL을 설정한다
 		return mv;

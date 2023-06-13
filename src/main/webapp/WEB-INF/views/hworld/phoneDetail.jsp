@@ -185,7 +185,7 @@
                             <div class="col-md-6">
                                 <div class="cloth-details-size ">
                                     <div class="admin-update-delete d-flex justify-content-end">
-                                        <a href="./directUpdate?slicedCode=${directVO.slicedCode}" class="me-3">수정</a>
+                                        <a href="./directUpdate?slicedCode=${param.slicedCode}" class="me-3">수정</a>
                                         <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#productdel">삭제</a>
                                     </div>    
 								<div id="directList">
@@ -598,7 +598,7 @@
 	                                                    <c:set var="username" value="${fn:substringBefore(review.email, '@')}" />
 															<h5>${username}</h5>
 															<c:if test="${memberVO.memberNum eq review.memberNum }">
-															<div class="admin-update-delete d-flex justify-content-end">
+															<div class="update-delete d-flex justify-content-end">
 						                                        <a href="javascript:void(0)" class="me-3 reviewUpdate" data-bs-toggle="modal"
 		                                                            data-bs-target="#updateReview" id="reviewUpdate${review.num}"
 		                                                            data-review-num="${review.num}">수정</a>

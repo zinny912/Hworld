@@ -34,6 +34,7 @@ public class QnaVO extends BoardVO{
     private String filePath;
     
     private String email;
+    private String newCode;
 
     //private List<MemberVO> memberVOs;
 	private List<OrderVO> orderVOs;
