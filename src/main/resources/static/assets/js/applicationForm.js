@@ -45,8 +45,6 @@ function calculateAge(figure) {
     return age;
 }
 
-
-
 //가입유형 확인
 //신규가입 버튼
 $('#joinType1').click(function(){
@@ -189,10 +187,6 @@ $('#planArea input[type="radio"]').on('change', function() {
         maximumAge = 18;
     }
 
-    // console.log("age: "+age);
-    // console.log("minimumAge: "+minimumAge);
-    // console.log("maximumAge: "+maximumAge);
-
     if (age < minimumAge && minimumAge != 0) {
         alert(minimumAge + '세 이하는 해당 요금제를 사용할 수 없습니다.');
         $('#planArea input[type="radio"][value="' + planCode + '"]').prop('checked', false);
@@ -262,29 +256,16 @@ $('input[name="planNum"], select[name="directCode"]').change(function() {
         $('#dis0').text(nPrice0);
         $('#dis1').text(nPrice1);
         $('#dis2').text(nPrice2);
-        // $('#dis0').text(formatPrice(disPrice));
     }
 
 });
 
-  // 가격 포맷을 위한 함수
-//   function formatPrice(price) {
-//     return price.toLocaleString('en-US');
-//   }
-
 //월 요금계산 준비
 $('#directCode, input[name=planNum], input[name=disKind]').change(function() {
-    // 이벤트 작동하는 코드 작성
-    console.log('One of the conditions met!');
-
     //영수증 가격 출력
     const directCode = $('#directCode option:selected').val(); // 기기코드
     const planNum = $('input[name=planNum]:checked').val(); // 요금제번호
     const disKind = $('input[name=disKind]:checked').val(); // 할인유형
-
-    console.log(directCode);
-    console.log(planNum);
-    console.log(disKind);
 
     directCheck = isEmpty(directCode);
     planCheck = isEmpty(planNum);
@@ -306,15 +287,12 @@ $('#directCode, input[name=planNum], input[name=disKind]').change(function() {
                 $('#out_phonePayPrice').text('');
                 $('#out_planPrice').text('');
                 $('#totalPrice').text('');
-                console.log("월 기기값 계산", response.out_phonePayPrice);
-                console.log("월 요금 계산", response.out_planPrice);
                 $('#out_phonePayPrice').text(response.out_phonePayPrice);
                 $('#out_planPrice').text(response.out_planPrice);
                 $('#totalPrice').text(response.out_phonePayPrice*1 + response.out_planPrice*1);
             },
             error: function(error) {
                 // 에러 처리 로직 작성
-                alert('정보요청 실패');
                 console.log(error);
             }
         });
@@ -340,19 +318,17 @@ $('#completeForm').click(function(){
 $('#phoneNum').on("blur", function() {
     let checkValue = $(this).val().replace(/[^\d]/g, "");
     $(this).val(checkValue);
-
-    console.log('checkValue====>'+checkValue);
-    console.log('checkValue.length=====>'+checkValue.length);
     
     let length = checkValue.length;
 
     if(length != 11) {
         //this.setCustomValidity("전화번호는 11자리여야 합니다.");
-        alert("전화번호는 11자리여야 합니다.");
+        //alert("전화번호는 11자리여야 합니다.");
         $('#phoneNum').val("");
         $('#duplicateResult').empty();
+        $('#duplicateResult').append('<p class="theme-color">전화번호는 11자리여야 합니다.</p>');
     }else{
-        //번호 중복체크까지
+        //11자리인 경우 번호 중복체크
         //responseBody에 담겨져 응답 돌아옴
         $.ajax({
             type: 'GET',

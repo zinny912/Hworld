@@ -1,5 +1,7 @@
 package com.hworld.base.controller;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -36,6 +38,46 @@ public class MemberController {
 	
 	@Autowired
 	private BCryptPasswordEncoder pwEncoder;
+	
+	////회원가입 파트
+	//회원 확인 - 페이지 이동
+	@GetMapping("signUpPrecheck")
+	public ModelAndView getSignUpPrecheck() throws Exception{
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("hworld/signUpPrecheck");
+		return mv;
+	}
+	
+	//회원 확인 - 결과 전송
+	@PostMapping("signUpPrecheck")
+	public ModelAndView getSignUpPrecheck(MemberVO memberVO) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		Map<String, Object> result = memberService.getSignUpPrecheck(memberVO);
+		
+		Integer state = (Integer)result.get("state");
+		MemberVO account = (MemberVO)result.get("account");
+		
+		log.error("========================== {} ", state);
+		if(state!=1) {
+			log.error("========================== {} ", account.getRrnf());
+			log.error("========================== {} ", account.getRrnl());
+			if(state!=2) {
+				log.error("========================== {} ", account.getName());	
+			}
+		}
+		
+		mv.setViewName("redirect:./signUpPrecheck");
+		return mv;
+	}
+	
+	
+	
+	
+	
+	
+	////로그인&아웃 파트
+	
 	
 	// 로그인 했을 때 대표 회선 정보가 없을 때 뜨는 페이지
 	@GetMapping("loginFirst")
@@ -227,21 +269,6 @@ public class MemberController {
 		return "redirect:/";
 	} 
 
-	// 회원가입 완료 페이지(Get)
-	@GetMapping("signUpPrecheck")
-	public ModelAndView signUpPrecheck() throws Exception{
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("hworld/signUpPrecheck");
-		return modelAndView;
-	}
-	
-	// 회선확인(명칭 확정 필요) 페이지(Post)
-	@PostMapping("signUpPrecheck")
-	public ModelAndView signUpPrecheck(ApplicationVO applicationVO) throws Exception {
-		ModelAndView modelAndView = new ModelAndView();
-		
-		return modelAndView;
-	}
 	
 	// 회원가입 완료 페이지(Get)
 	@GetMapping("signUpSuccess")
