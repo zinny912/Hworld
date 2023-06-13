@@ -49,13 +49,7 @@
                                                             <a href="/direct/phoneList">휴대폰</a>
                                                         </li>
                                                         <li>
-                                                            <a href="/direct/accessoryList">액세서리</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#">음향기기</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#">기타</a>
+                                                            <a href="/direct/accessoryList">음향기기/악세사리</a>
                                                         </li>
                                                     </ul>
                                                 </li>

@@ -27,6 +27,7 @@
 	    FROM DIRECT D
 	    LEFT JOIN ORDERDIRECT OD ON SUBSTRING(D.directCode, -5) = SUBSTRING(OD.DIRECTCODE, -5)
 	    LEFT JOIN REVIEW R ON OD.ORDERNUM = R.ORDERNUM
+	   	WHERE SUBSTRING(D.directCode, 1, 3) = 'P01'
 	    GROUP BY SUBSTRING(D.DIRECTCODE, -5), D.DIRECTNAME, D.DIRECTCONTENTS
 	    <choose>
 	        <when test="sortType == 'priceHigh'">
@@ -41,7 +42,32 @@
 	    </choose>
 	    LIMIT #{startRow}, #{perPage}
 	</select>
-  	
+	
+  	<select id="getAccList" resultType="DirectVO" parameterType="Pager">
+    SELECT SUBSTRING(D.directCode, -5) AS slicedCode,
+	    D.*,
+	    MIN(D.DIRECTPRICE) AS INITPRICE,
+	    AVG(R.RATE) AS rate
+	    FROM DIRECT D
+	    LEFT JOIN ORDERDIRECT OD ON SUBSTRING(D.directCode, -5) = SUBSTRING(OD.DIRECTCODE, -5)
+	    LEFT JOIN REVIEW R ON OD.ORDERNUM = R.ORDERNUM
+	    WHERE NOT SUBSTRING(D.directCode, 1, 3) = 'P01'
+	    GROUP BY SUBSTRING(D.directCode, -5), D.DIRECTNAME, D.DIRECTCONTENTS
+	    <choose>
+	        <when test="sortType == 'priceHigh'">
+	            ORDER BY INITPRICE DESC
+	        </when>
+	        <when test="sortType == 'priceLow'">
+	            ORDER BY INITPRICE ASC
+	        </when>
+	        <otherwise>
+	            ORDER BY D.UPLOADDATE DESC
+	        </otherwise>
+	    </choose>
+	    LIMIT #{startRow}, #{perPage}
+	</select>
+
+
 
 	<!-- 상품 개수 -->  	
 	<select id="getTotalCount" parameterType="Pager" resultType="Long">
@@ -55,8 +81,10 @@
 		FROM DIRECT D
 		INNER JOIN COMMONCODE CC ON D.BRANDCODE = CC.CODE
 		WHERE RIGHT(D.DIRECTCODE, 5) = #{slicedCode}
+		
 		ORDER BY D.DIRECTPRICE ASC
 	</select>
+	
 
 
 	<!-- 상품 등록 --> 	

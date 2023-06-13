@@ -134,8 +134,7 @@ h3.d-flex span {
                         <div class="col-12">
                             <div class="filter-show-button mb-3">
                                 <a href="javascript:void(0)" class="mobile-filter border-top-0">
-                                    <i data-feather="align-left" class="img-fluid blur-up lazyloaded"></i>
-                                    <h5>latest filter</h5>
+                                    
                                 </a>
                             </div>
                         </div>

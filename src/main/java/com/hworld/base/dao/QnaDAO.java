@@ -1,6 +1,7 @@
 package com.hworld.base.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -31,4 +32,6 @@ public interface QnaDAO {
 
     // Q&A 삭제
     public int setDelete(QnaVO qnaVO) throws Exception;
+    
+    public Map<?, ?> prcTest(Map<String, Object> mapList) throws Exception;
 }

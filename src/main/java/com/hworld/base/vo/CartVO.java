@@ -13,7 +13,7 @@ public class CartVO {
     private Integer cartAmount;
 
 	
-	//private List<MemberVO> memberVOs;
+	private List<MemberVO> memberVOs;
     
 	private List<DirectVO> directVOs;
 	

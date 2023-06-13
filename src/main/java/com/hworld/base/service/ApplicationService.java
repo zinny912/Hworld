@@ -1,6 +1,8 @@
 package com.hworld.base.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -75,20 +77,22 @@ public class ApplicationService {
 		//여기까지 memberVO에 회원번호가 들어있음. 이걸 applicationVO에 집어넣음
 		applicationVO.setMemberNum(memberVO.getMemberNum());
 		
-//		a.가입신청서 정보 기반으로 회선VO 만들고
-//		b.회선VO에 memberNum 넣기
-//		c.(필요한경우)direct table정보로 기기값, 요금 등 업데이트
-//		아니면 신청서VO에 기기값 이런거 hidden 으로 input(컨트롤러에서 받아와야할거같음)
-//				
-//		회선VO 만들 때, 상품(Direct)에서 불러올 수 있는 내용은 여기서 불러와서 입력하게끔? 해야할거같음
-		
-		
 		//3-2a.회원번호가 있음
 		//3-2b.회원번호(신청서VO)로 회선VO 만들기
-		result = applicationDAO.setTelephoneInitAdd(applicationVO);
+		//프로시저 호출해서 회선VO INSERT
+		Map<String, Integer> telephone = new HashMap<>();
+		telephone.put("appNum", applicationVO.getAppNum());
+		telephone.put("memberNum", applicationVO.getMemberNum());
+		log.info(" :::::::::::::::::::::::: {} ", telephone.get("appNum"));
+		log.info(" :::::::::::::::::::::::: {} ", telephone.get("memberNum"));
+		
+		result = applicationDAO.setTelephoneInitAdd(telephone);
+		
+		log.info(" :::::::::::::::::::::::: {} ", result);
 		
 		return result;
 	}
+	
 	
 	//getExistPlanList
 	public List<PlanVO> getExistPlanList() throws Exception{
@@ -110,4 +114,20 @@ public class ApplicationService {
 		return applicationDAO.getSelectedDirectList(directVO);
 	}
 	
+	//getMonthlyPay
+	public Map<?, ?> getMonthlyPay(Map<String, Object> monthlyPay) throws Exception{
+		return applicationDAO.getMonthlyPay(monthlyPay);
+	}
+	
+	//isDuplicatePhoneNum
+	public boolean isDuplicatePhoneNum(String phoneNum) throws Exception{
+		boolean check = false;
+		
+		String result = applicationDAO.isDuplicatePhoneNum(phoneNum);
+		if(result != null) {
+			check = true;
+		}
+		log.info(" :::::::::::::::::::: service check value : {} ", check);
+		return check;
+	}
 }
