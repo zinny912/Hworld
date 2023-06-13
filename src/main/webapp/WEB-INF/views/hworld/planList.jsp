@@ -176,7 +176,7 @@
                                                     <c:forEach items="${planList}"  var="plan">
                                                     <c:if test="${plan.type == 'S'}">
                                                         <tr>
-                                                            <td> <a href="zyougeumje_detail.html">
+                                                            <td> <a href="./plan">
                                                                     <strong class="text-left fs-4 m-0 ">${plan.planName}</strong></a>
                                                                     
                                                             </td>

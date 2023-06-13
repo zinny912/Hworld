@@ -18,4 +18,5 @@ public class OrderDirectVO {
     
     private Integer totalPrice;
     
+    
 }

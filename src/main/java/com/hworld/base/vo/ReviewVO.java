@@ -31,6 +31,8 @@ public class ReviewVO {
     private Long count;
     
     private String slicedCode;
+
+    private String categoryCode;
     //private List<MemberVO>memberVOs;
     private List<OrderVO> orderVOs;
     

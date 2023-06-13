@@ -1,13 +1,13 @@
 $(document).ready(function() {
 	
-  const commaPrice = function() {
-    const prices = document.querySelectorAll('[id^="renewPrice"]');
-    for (var i = 0; i < prices.length; i++) {
-      const price = parseInt(prices[i].innerHTML);
-      const renewPrice = price.toLocaleString();
-      prices[i].innerHTML = renewPrice;
-    }
-  };
+ const commaPrice = function() {
+  const prices = document.querySelectorAll('[id^="renewPrice"]');
+  for (var i = 0; i < prices.length; i++) {
+    const price = parseInt(prices[i].innerHTML);
+    const formattedPrice = price.toLocaleString();
+    prices[i].innerHTML = formattedPrice;
+  }
+};
   
   $('.noStock').hide();
   

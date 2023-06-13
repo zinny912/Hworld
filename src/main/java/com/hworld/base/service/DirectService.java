@@ -27,6 +27,7 @@ import com.hworld.base.util.Pager;
 import com.hworld.base.vo.DirectVO;
 import com.hworld.base.vo.MemberVO;
 import com.hworld.base.vo.PlanVO;
+import com.hworld.base.vo.QnaVO;
 import com.hworld.base.vo.ReviewVO;
 
 import lombok.extern.slf4j.Slf4j;
@@ -60,14 +61,13 @@ public class DirectService {
 	    return directDAO.getDetail(slicedCode);
 	}
 	
+	public List<DirectVO> getAccDetail(String slicedCode) throws Exception {
+		return directDAO.getAccDetail(slicedCode);
+	}
+	
 	// 상품 리뷰 전체 불러오기
 	public List<ReviewVO> getReview(String slicedCode) throws Exception {
 		return directDAO.getReview(slicedCode);
-	}
-	
-	//상품 리뷰 하나 불러오기 
-	public ReviewVO getReviewOne(ReviewVO reviewVO) throws Exception {
-		return directDAO.getReviewOne(reviewVO);
 	}
 	
 	// 상품 리뷰 작성 
@@ -175,7 +175,7 @@ public class DirectService {
 
 	                for (String slicedCode : slicedCodes) {
 	                    // productId를 사용하여 상품 정보를 조회하는 로직을 구현
-	                    List<DirectVO> directVO = getDetail(slicedCode);
+	                    List<DirectVO> directVO = getAccDetail(slicedCode);
 	                    if (directVO != null) {
 	                        for (DirectVO product : directVO) {
 	                            if (!lowestPriceProductsMap.containsKey(slicedCode) || product.getDirectPrice() < lowestPrice) {
@@ -218,6 +218,20 @@ public class DirectService {
 	public int setReviewUpdate(ReviewVO reviewVO) throws Exception{
 		return directDAO.setReviewUpdate(reviewVO);
 	}
+	
+	//상품문의 가져오기 
+	public List<QnaVO> getDirectQna(QnaVO qnaVO) throws Exception{
+		return directDAO.getDirectQna(qnaVO);
+	}
+	//상품문의 작성
+	public int setQnaAdd(QnaVO qnaVO) throws Exception{
+		return directDAO.setQnaAdd(qnaVO);
+	}
+	//상품문의 답글작성
+	public int setReplyAdd(QnaVO qnaVO) throws Exception{
+		return directDAO.setReplyAdd(qnaVO);
+	}
+	
 	
 	//getExistPlanList
 	public List<PlanVO> getExistPlanList() throws Exception{

@@ -78,17 +78,17 @@
             <div class="row g-4 justify-content-center">
                 <div class="col-lg-7" >
                     <h3 class="mb-3 fw-bold">상품</h3>
-                    <form action="./accessoryAdd" method="post" enctype="multipart/form-data" class="needs-validation" onsubmit="return generateDirectCode(event)" id="form">
+                    <form action="./accessoryUpdate" method="post" enctype="multipart/form-data" class="needs-validation" onsubmit="return generateDirectCode(event)" id="form">
                         <div class="row g-4">
                             <!-- 상품 정보 -->
                             <div class="col-md-6">
                                 <label for="categoryCode" class="form-label" >카테고리</label>
                                 <div class="col-12">
                                     <select class="form-select custome-form-select" id="categoryCode" name="categoryCode">
-                                        <option selected="" value="02">음향기기</option>  
-                                        <option value="03">충전기기</option>                                   
-                                        <option value="04">워치</option>                                   
-                                        <option value="05">케이스/기타</option>                                   
+                                        <option value="02" ${list.get(0).getCategoryCode().equals("02") ? 'selected' : ''}>음향기기</option>  
+                                        <option value="03" ${list.get(0).getCategoryCode().equals("03") ? 'selected' : ''}>충전기기</option>                                   
+                                        <option value="04" ${list.get(0).getCategoryCode().equals("04") ? 'selected' : ''}>워치</option>                                   
+                                        <option value="05" ${list.get(0).getCategoryCode().equals("05") ? 'selected' : ''}>케이스/기타</option>                                   
                                                                          
                                     </select>
                                 </div>
@@ -97,9 +97,9 @@
                                 <label for="brandCode" class="form-label" >브랜드</label>
                                 <div class="col-12">
                                     <select class="form-select custome-form-select" id="brandCode" name="brandCode">
-                                        <option selected="" value="S">삼성</option>
-                                        <option value="A">애플</option>
-                                        <option value="0">해당 없음</option>
+                                        <option value="S" ${list.get(0).getBrandCode().equals("S") ? 'selected' : ''}>삼성</option>
+								        <option value="A" ${list.get(0).getBrandCode().equals("A") ? 'selected' : ''}>애플</option>
+                                        <option value="0" ${list.get(0).getBrandCode().equals("0") ? 'selected' : ''}>해당 없음</option>
                                         
                                     </select>
                                 </div>
@@ -107,60 +107,49 @@
 
                             <div class="col-md-6">
                                 <label for="directName" class="form-label">상품명</label>
-                                <input type="text" class="form-control" id="directName" placeholder="상품명" name="directName">
+                                <input type="text" class="form-control" id="directName" placeholder="상품명" name="directName" value="${list.get(0).getDirectName()}" readonly="readonly">
                             </div>
                             <div class="col-md-6">
                                 <label for="directCode" class="form-label">제품코드</label>
-                                <input type="text" class="form-control" id="productCode" placeholder="ex) G2301">
+                                <input type="text" class="form-control" id="productCode" placeholder="ex) G2301" value="${directVO.slicedCode}" readonly="readonly">
                             </div>
-                       
-                            <!-- 출고가 -->
-<!-- 
-                            <div class="col-md-2">
-                                <label for="colorCode" class="form-label">색상</label>
-                                <div class="col-12">
-                                    <select class="form-select custome-form-select" id="colorCode" name="colorCode">
-                                        <option selected="" value="">없음</option>
-                                        <option value="W">white</option>
-                                        <option value="G">gray</option>
-                                        <option value="B">black</option>
-                                    </select>
-                                </div>
-                            </div> 
-                            <div class="col-md-2">
-                                <label for="saveCapacity" class="form-label">용량</label>
-                                <div class="col-12">
-                                    <select class="form-select custome-form-select" id="saveCapacity" name="saveCapacity">
-                                        <option selected="" value="">없음</option>                                
-                                        <option value="128">128GB</option>                                    
-                                        <option value="256">256GB</option>
-                                        <option value="512">512GB</option>
-                                    </select>
-                                </div>
-                            </div> 
-                            <div class="col-md-3">
-                                <label for="directPrice" class="form-label">상품금액</label>
-                                <input type="text" class="form-control" id="directPrice" placeholder="숫자만 입력" name="directPrice"> 
-                            </div>
-                            <div class="col-md-3">
-                                <label for="dircetStock" class="form-label">재고 수량</label>
-                                <input type="text" class="form-control" id="directStock" placeholder="숫자만 입력" name="directStock">
-                            </div>
-                            <div class="col-md-3">
-                                <input type="hidden" id="directCode" name="directCode">
-                            </div>  -->
-                            
-                            
                             <div class="col-md-2 mt-5 d-flex ">
                             	<button type="button" class="btn btn-outline-danger btn-sm mt-2 me-2" id="optionAdd">+옵션추가</button>    
-                            	<button type="button" class="btn btn-outline-secondary btn-sm mt-2" id="optionDelete">-옵션삭제</button>                            
-                            	                        
+                            	<button type="button" class="btn btn-outline-secondary btn-sm mt-2" id="optionDelete">-옵션삭제</button>                                                   
                             </div>
 
-                            
-							<div class="option">
-                           
+                            <div class="option">
+								<c:forEach items="${list}" var="directCode" varStatus="index"> 
+									<div class="row g-2 my-2 options">
+						    			<div class="col-md-4">
+								            <div class="col-12">
+								                <select class="form-select custome-form-select" name="colorCode">
+								                	
+								                	<option value="0" ${directCode.colorCode == '0' ? 'selected' : ''}>없음</option>
+								                    <option value="W" ${directCode.colorCode == 'W' ? 'selected' : ''}>white</option>
+										            <option value="G" ${directCode.colorCode == 'G' ? 'selected' : ''}>gray</option>
+										            <option value="B" ${directCode.colorCode == 'B' ? 'selected' : ''}>black</option>
+								                </select>
+								             </div>
+								        </div>  
+								                <select class="form-select custome-form-select" name="saveCapacity" hidden>
+										            <option value="000" selected="" >없음</option>
+								                </select>
+								     
+								       
+								        <div class="col-md-4">
+								            <input type="text" class="form-control" name="directPrice" value="${directCode.directPrice}" placeholder="금액 숫자만 입력"> 
+								        </div>
+								        <div class="col-md-4">
+								            <input type="text" class="form-control" name="directStock" value="${directCode.directStock}" placeholder="재고 숫자만 입력">
+								        </div> 
+								        <input type="hidden" id="directCode" name="directCode">
+								     </div>
+															
+                           		</c:forEach> 
+    							
                             </div>
+							
                             
                             
                                 <div class="mb-2">
