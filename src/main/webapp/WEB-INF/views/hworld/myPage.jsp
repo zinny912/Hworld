@@ -950,7 +950,7 @@
     
     
     <!-- 가입 정보 수정 Modal Start -->
-    <%-- <div class="modal fade add-info-modal" id="resetInfo">
+    <div class="modal fade add-info-modal" id="resetInfo">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
@@ -999,7 +999,7 @@
                 </div>
             </div>
         </div>
-    </div> --%>
+    </div>
     <!-- 비밀번호 수정 Modal End -->
 
     <!-- Add Number Modal Start -->
