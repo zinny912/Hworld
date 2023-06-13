@@ -15,7 +15,7 @@ import java.util.Map;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.apache.catalina.util.URLEncoder;
@@ -35,6 +35,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.hworld.base.service.DirectService;
 import com.hworld.base.util.Pager;
 import com.hworld.base.vo.DirectVO;
+import com.hworld.base.vo.OrderDirectVO;
 import com.hworld.base.vo.PlanVO;
 import com.hworld.base.vo.QnaVO;
 import com.hworld.base.vo.ReviewVO;
@@ -422,8 +423,9 @@ public class DirectController {
 	
 	// 액세서리 주문 페이지
 	@GetMapping("accessoryOrder")
-	public ModelAndView d9() throws Exception{
+	public ModelAndView setInsert(OrderDirectVO orderDirectVO, HttpSession session) throws Exception{
 		ModelAndView modelAndView = new ModelAndView();
+		log.error(null);
 		modelAndView.setViewName("hworld/accessoryOrder");
 		return modelAndView;
 	}

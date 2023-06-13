@@ -152,6 +152,7 @@
 									<div class="noStock" style="display:none;">
 										<h2 class="theme-color">선택하신 제품은 재고가 없습니다.</h2>
 									</div>
+									<form action="./accessoryOrder" method="GET">
 										<c:forEach items="${list}" var="direct" varStatus="status">
 											<div class="titlebox">
 												<div class="brand direct-item" style="font-size: 27px; color: gray;" id="productCode"
@@ -166,7 +167,7 @@
 														<h3 class="mt-3 ">출고가</h3>
 													</div>
 														<p>
-														<span class="price-detail theme-color fw-bold" id="renewPrice" >${direct.directPrice}</span>
+														<span class="price-detail theme-color fw-bold" id="renewPrice">${direct.directPrice}</span>
 														<span class="unit">원</span>
 														</p>
 													<input type="hidden" id="directCode" name="directCode" value="${direct.directCode}">
@@ -174,6 +175,8 @@
 													<input type="hidden" id="brandCode" name="brandCode" value="${direct.brandCode}">
 													<input type="hidden" id="slicedCode" name="slicedCode" value="${direct.slicedCode}">
 													<input type="text" id="directStock" name="directStock" value="${direct.directStock}" readonly>
+													<input type="hidden" id="directPrice" name="directPrice" value="${direct.directPrice}">
+													<input type="hidden" id="totalPrice" name="totalPrice" value="${direct.totalPrice}">
 											</div>
 										</c:forEach>
 										<div class="optionArea">
@@ -186,6 +189,7 @@
 														<li class="bg-white border boder-1 selected" value="W" name="colorCode"></li>
 														<li class="bg-gray1" value="G" name="colorCode"></li>
 														<li class="bg-black1" value="B" name="colorCode"></li>
+														<li class="bg-blue border border-1 text-center align-center" value="0" name="colorCode">없음</li>
 													</ul>
         										</div>
 											</div>
@@ -198,21 +202,22 @@
                                                 <p>선택한 옵션</p>
                                             </div>
                                             <div class="col-md-7 mt-1" style="color: black;">
-                                                <h5>화이트</h5>
+                                                <input type="text" value="" id="colorName">
                                             </div>                                            
                                 <!-- 수량 버튼 -->
-                                            <div class=" d-flex quantity-wrapper " style="padding:5px 0px; justify-content: center; margin-top:-10px; margin-left:-150px;">
-                                                <button class="btn quantity-left-minus" style="height:5px; width:5px; padding:10px; margin-top:-6px; ">-</button>
-                                                <span class="input-wrapper">
-                                                    <input type="text" class="input-number text-center" style="width: 35px; padding:5px 5px; border:1px solid #c7c7c5; border-radius: 5px;"  value="1">
-                                                </span>
-                                                <button class="btn quantity-right-plus" style="height:5px; margin-top:-6px; padding:10px 5px; ">+</button>
-                                            </div>
-                                            <div>
-                                                <p class="price theme-color2 fs-4 d-flex" id="subscriptionPrice" style="letter-spacing: -0.5px; color: #000; margin-left:120px;">
-                                                    15,000 <span class="mt-1 mx-1" style="color:black; font-size:15px; font-weight: 400;">원</span>
-                                                </p>
-                                            </div>
+                                           <div class="d-flex quantity-wrapper" style="padding: 5px 0px; justify-content: center; margin-top: -10px; margin-left: -150px;">
+											  <button class="btn quantity-left-minus" style="height: 5px; width: 5px; padding: 10px; margin-top: -6px;">-</button>
+											  <span class="input-wrapper">
+											    <input type="text" class="input-number text-center" style="width: 35px; padding: 5px 5px; border: 1px solid #c7c7c5; border-radius: 5px;" value="1">
+											  </span>
+											  <button class="btn quantity-right-plus" style="height: 5px; margin-top: -6px; padding: 10px 5px;">+</button>
+											  <span id="totalQty" style="margin-left: 10px;"></span>
+											</div>
+											<div>
+											  <p class="price theme-color2 fs-4 d-flex" id="subscriptionPrice" style="letter-spacing: -0.5px; color: #000; margin-left: 120px;">
+											    15,000 <span class="mt-1 mx-1" style="color: black; font-size: 15px; font-weight: 400;">원</span>
+											  </p>
+											</div>
                                             <div class="mx-5">
                                                 <td class="align-middle">
                                                     <div>
@@ -251,11 +256,13 @@
                                                         <button type="button" class="btn btn-outline-custom btn-spacing me-1" style="margin-left:-100px;">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="34" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart pe-1"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
                                                         </button> </a>                    
-                                                    <button type="button" class="btn btn-solid" id="orderBtn" style= "width: 700px; height: 54px; font-size: 18px; display: inline-block; padding: 0 10px; text-align: center; ">주문하기</button>
+                                                    <button type="submit" class="btn btn-solid" id="orderBtn" style= "width: 700px; height: 54px; font-size: 18px; display: inline-block; padding: 0 10px; text-align: center;">주문하기</button>
                                                 </div> 
                                                 </div>                                                      
                                             </div>
                                         </div>
+                                        
+                                        </form>
                                     </div>
                                 </div>
                         </div>
@@ -797,140 +804,13 @@
 <!-- 상품 삭제 모달창 End -->   
 
     <div class="bg-overlay"></div>
-<script src="../assets/js/newDirectCode.js"></script>
 <script src="../assets/js/updateReview.js"></script>
+<script src="../assets/js/accessoryDetail.js"></script>
 
-    <script>
-        $(".quantity-wrapper .quantity-right-plus").on("click", function () {
-            var $qty = $(this).siblings(".input-wrapper").find(".input-number");
-            var currentVal = parseInt($qty.val(), 10);
-            if (!isNaN(currentVal)) {
-                $qty.val(currentVal + 1);
-            }
-            });
-
-            $(".quantity-wrapper .quantity-left-minus").on("click", function () {
-            var $qty = $(this).siblings(".input-wrapper").find(".input-number");
-            var currentVal = parseInt($qty.val(), 10);
-            if (!isNaN(currentVal) && currentVal > 1) {
-                $qty.val(currentVal - 1);
-            }
-            });
-    </script>
-    
-    <script>
-  // 후기 작성 버튼 클릭 시 모달 창이 열릴 때 실행되는 함수
-  $('#addReview').on('show.bs.modal', function (event) {
-    const directName = $('.directNameValue').data('direct-name'); // 해당 후기 작성 버튼에 연결된 제품의 directName 값을 가져옴
-    $('#directName2').text(directName); // 모달 창 내에서 제품명을 표시하는 곳에 directName 값을 설정
-  });
-  //문의 작성 버튼 클릭 시 모달 창이 열릴 때 실행되는 함수
-  $('#addQna').on('show.bs.modal', function (event) {
-	    const directName = $('.directNameValue').data('direct-name'); // 해당 후기 작성 버튼에 연결된 제품의 directName 값을 가져옴
-	    $('#directName3').text(directName); // 모달 창 내에서 제품명을 표시하는 곳에 directName 값을 설정
-	  });
-  
-  $('#addReply').on('show.bs.modal', function(event) {
-	  const button = $(event.relatedTarget); // 클릭한 버튼 요소
-	  const qnaNum = button.data('qna-num'); // data-qna-num 속성 값 가져오기
-	  const qnaContents = button.closest('.accordion-item').find('#qnaContentsQ').text().trim(); // 문의 내용 가져오기
-	  const directName = $('.directNameValue').data('direct-name'); // 해당 후기 작성 버튼에 연결된 제품의 directName 값을 가져옴
-	    $('#directName4').text(directName); // 모달 창 내에서 제품명을 표시하는 곳에 directName 값을 설정
-
-	  // 모달 내부 요소에 값 설정
-	  $(this).find('#modalQnaNum').val(qnaNum);
-	  $(this).find('#modelQnaContents').val(qnaContents);
-	});
-</script>
-<script>
-$(document).ready(function() {
-	
- const commaPrice = function() {
-  const prices = document.querySelectorAll('[id^="renewPrice"]');
-  for (var i = 0; i < prices.length; i++) {
-    const price = parseInt(prices[i].innerHTML);
-    const formattedPrice = price.toLocaleString();
-    prices[i].innerHTML = formattedPrice;
-  }
-};
-  
-  $('.noStock').hide();
-  
-  $('.titlebox:first').show();
-  
-  // 나머지 리스트 요소를 숨김
-  $('.titlebox:not(:first)').hide();
-
-  commaPrice();
- // Option 선택시 directCode 완성된 것을 $('#directCode').val에 저장
-  $('.optionArea').on('click', 'li[name="colorCode"]', function() { // 컬러 선택시
-    const selectedOptions = getSelectedOptions();
-
-    // 추가작업
-    let colorCode = selectedOptions.colorCode;
-    let categoryCode = $("#categoryCode").val();
-    let brandCode = $("#brandCode").val();
-    let slicedCode = $("#slicedCode").val();
-    let directCode = '';
-    if (colorCode != null) {
-      directCode = "P" + categoryCode + "B" + brandCode + "C" + colorCode + "V000" + slicedCode;
-      console.log('너의 이름은? :' + directCode);
-      $('#directCode').text(directCode);
-      updateTitleBoxVisibility(directCode); // 일치하는 titlebox 업데이트
-    }
-  });
-
-  // 일치하는 directCode를 가진 titlebox를 표시하고 나머지는 숨김
-  function updateTitleBoxVisibility(directCode) {
-    const directListItems = $('#directList').find('.direct-item');
-    let matchingItemFound = false;
-    directListItems.each(function() {
-      const listItem = $(this);
-      const listItemDirectCode = listItem.attr('data-direct-code');
-
-      if (listItemDirectCode === directCode) {
-        listItem.closest('.titlebox').show(); 
-        matchingItemFound = true;  
-      } else {
-        listItem.closest('.titlebox').hide();
-      }
-      
-    });
-  if (!matchingItemFound) {
-    $('.noStock').show(); // 일치하는 제품이 없는 경우 재고없음을 나타내는 div를 보여줌
-  } else {
-    $('.noStock').hide(); // 일치하는 제품이 있는 경우 재고없음을 나타내는 div를 숨김
-  }  
-
-
-  }
-
-
-function getSelectedOptions() {
-  var options = {
-    colorCode: null,
-  };
-
-  var colorCode = $('.optionArea li[name="colorCode"].selected').attr('value');
-  
-
-  if (colorCode) {
-    options.colorCode = colorCode;
-  }
-  return options;
-}
-
-
-}); 
-</script>
 
 <c:import url="../temp/footer.jsp"></c:import>    
 
-<script>
 
-
-
-</script>
 </body>
 
 </html>

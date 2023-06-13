@@ -19,4 +19,6 @@ public class OrderDirectVO {
     private List<DirectVO> directVOs;
     private List<OrderVO> orderVOs;
     
+    private Integer totalPrice;
+    
 }
