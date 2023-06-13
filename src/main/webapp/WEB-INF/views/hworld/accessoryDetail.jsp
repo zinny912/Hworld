@@ -176,7 +176,8 @@
 													<input type="hidden" id="slicedCode" name="slicedCode" value="${direct.slicedCode}">
 													<input type="text" id="directStock" name="directStock" value="${direct.directStock}" readonly>
 													<input type="hidden" id="directPrice" name="directPrice" value="${direct.directPrice}">
-													<input type="hidden" id="totalPrice" name="totalPrice" value="${direct.totalPrice}">
+													<input type="hidden" id="totalPrice" name="totalPrice" value="">
+													<input type="hidden" id="orderAmount" name="orderAmount" value="">
 											</div>
 										</c:forEach>
 										<div class="optionArea">
@@ -211,7 +212,7 @@
 											    <input type="text" class="input-number text-center" style="width: 35px; padding: 5px 5px; border: 1px solid #c7c7c5; border-radius: 5px;" value="1">
 											  </span>
 											  <button class="btn quantity-right-plus" style="height: 5px; margin-top: -6px; padding: 10px 5px;">+</button>
-											  <span id="totalQty" style="margin-left: 10px;"></span>
+											  <span id="totalQty" style="margin-left: 10px;" ></span>
 											</div>
 											<div>
 											  <p class="price theme-color2 fs-4 d-flex" id="subscriptionPrice" style="letter-spacing: -0.5px; color: #000; margin-left: 120px;">
@@ -236,29 +237,29 @@
                                                 </div>
                                             </div>
                                             <div class="product-option-item compare mt-3" id="subscriptionInfo">
-                                                <dl class="compare-inner" style="display: block; margin-block-start: 1em; margin-block-end: 1em; margin-inline-start: 0px; margin-inline-end: 0px; margin: 0; padding: 0;">
-                                                    <dt class="compare-title">
+                                                <div class="compare-inner" style="display: block; margin-block-start: 1em; margin-block-end: 1em; margin-inline-start: 0px; margin-inline-end: 0px; margin: 0; padding: 0;">
+                                                    <div class="compare-title">
                                                         <div class="inner">
-                                                            <div class="info">
-                                                            <div class="data" style="position: absolute; top: 35px; right: 0; text-align: right;">
-                                                                <h2 class="price theme-color" id="subscriptionPrice" style="letter-spacing: -0.2px; display: block; margin-top: 6px; color: #000; font-weight: 700;">
-                                                                    15,000 <span style="color:black; font-size:20px;">원</span>
-                                                                </h2>
-                                                            </div>
-                                                            </div>
+	                                                            <div class="info">
+	                                                            <div class="data" style="position: absolute; top: 35px; right: 0; text-align: right;">
+	                                                                <h2 class="price theme-color" id="subscriptionPrice" style="letter-spacing: -0.2px; display: block; margin-top: 6px; color: #000; font-weight: 700;">
+	                                                                    15,000 <span style="color:black; font-size:20px;">원</span>
+	                                                                </h2>
+	                                                            </div>
+	                                                            </div>
                                                         </div>
-                                                    </dt>            
-                                                </dl>  
-                                                <div class="btn-area" style="position: relative; padding-top:70px; float: center;"> 
-                                                    <div class="product-buttons"> 
-                                                        <a href="javascript:void(0)" data-bs-toggle="modal"
-                                                    data-bs-target="#cartinto">
-                                                        <button type="button" class="btn btn-outline-custom btn-spacing me-1" style="margin-left:-100px;">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="34" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart pe-1"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
-                                                        </button> </a>                    
-                                                    <button type="submit" class="btn btn-solid" id="orderBtn" style= "width: 700px; height: 54px; font-size: 18px; display: inline-block; padding: 0 10px; text-align: center;">주문하기</button>
-                                                </div> 
-                                                </div>                                                      
+                                                    </div>            
+                                                </div>  
+	                                                <div class="btn-area" style="position: relative; padding-top:70px; float: center;"> 
+	                                                    <div class="product-buttons"> 
+	                                                        <a href="javascript:void(0)" data-bs-toggle="modal"
+	                                                    data-bs-target="#cartinto">
+	                                                        <button type="button" class="btn btn-outline-custom btn-spacing me-1" style="margin-left:-100px;">
+	                                                            <svg xmlns="http://www.w3.org/2000/svg" width="34" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart pe-1"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+	                                                        </button> </a>                    
+	                                                    <button type="submit" class="btn btn-solid" id="orderBtn" style= "width: 700px; height: 54px; font-size: 18px; display: inline-block; padding: 0 10px; text-align: center;">주문하기</button>
+	                                                	</div> 
+	                                                </div>                                                      
                                             </div>
                                         </div>
                                         

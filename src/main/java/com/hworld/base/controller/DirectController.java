@@ -427,11 +427,15 @@ public class DirectController {
 	
 	// 액세서리 주문 페이지
 	@GetMapping("accessoryOrder")
-	public ModelAndView setInsert(OrderDirectVO orderDirectVO, HttpSession session) throws Exception{
-		ModelAndView modelAndView = new ModelAndView();
-		log.error(null);
-		modelAndView.setViewName("hworld/accessoryOrder");
-		return modelAndView;
+	public ModelAndView setInsert(OrderDirectVO orderDirectVO, HttpSession session) throws Exception {
+	    ModelAndView mv = new ModelAndView();
+	    log.error(orderDirectVO.getOrderAmount().toString());
+	    log.error(orderDirectVO.getTotalPrice().toString());
+		mv.addObject("orderDirectVO", orderDirectVO);
+	    mv.setViewName("hworld/accessoryOrder");
+	    return mv;
 	}
+
+
 
 }

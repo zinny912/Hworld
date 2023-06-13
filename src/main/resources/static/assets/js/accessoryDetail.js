@@ -116,29 +116,32 @@ function getSelectedOptions() {
 	}
 }); 
 
-$(".quantity-wrapper .quantity-right-plus").on("click", function () {
+$(".quantity-wrapper .quantity-right-plus").on("click", function() {
   var $qty = $(this).siblings(".input-wrapper").find(".input-number");
   var currentVal = parseInt($qty.val(), 10);
   if (!isNaN(currentVal)) {
     $qty.val(currentVal + 1);
-    calculateTotalPrice();
+    updateTotalPrice(); // 수량이 변경될 때 총 가격 업데이트
   }
 });
 
-$(".quantity-wrapper .quantity-left-minus").on("click", function () {
+$(".quantity-wrapper .quantity-left-minus").on("click", function() {
   var $qty = $(this).siblings(".input-wrapper").find(".input-number");
   var currentVal = parseInt($qty.val(), 10);
   if (!isNaN(currentVal) && currentVal > 1) {
     $qty.val(currentVal - 1);
-    calculateTotalPrice();
+    updateTotalPrice(); // 수량이 변경될 때 총 가격 업데이트
   }
 });
 
-function calculateTotalPrice() {
-  var selectedQty = parseInt($(".input-number").val(), 10);
-  var price = 15000; // 가격 값(원하는 값으로 변경해야 함)
-  var totalPrice = selectedQty * price;
-  $("#totalQty").text("총 가격: " + totalPrice + "원");
+function updateTotalPrice() {
+  const qty = parseInt($(".input-number").val(), 10);
+  const price = parseInt($("#renewPrice").text().replace(",", ""), 10);
+  const totalPrice = qty * price;
+  	$("#subscriptionPrice").text(totalPrice.toLocaleString()); // 총 가격 업데이트
+	$('#totalPrice').val(totalPrice);
+	$('#orderAmount').val(qty);
+	
 }
 
   // 후기 작성 버튼 클릭 시 모달 창이 열릴 때 실행되는 함수
