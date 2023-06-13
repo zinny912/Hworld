@@ -184,7 +184,7 @@
                                 </a>
                             </li>
                         </ul>
-                        <a href="directAdd" class="btn btn-solid-default m-1" style="position: absolute">상품 등록</a>
+                        <a href="accessoryAdd" class="btn btn-solid-default m-1" style="position: absolute">상품 등록</a>
                     </nav>
                 </div>
 

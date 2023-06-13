@@ -40,11 +40,18 @@ public class DirectService {
 	private FileManager fileManager;
 
 	
-	//상품 리스트
+	//휴대폰 상품 리스트
 	public List<DirectVO> getList(Pager pager) throws Exception{
 		pager.makeStartRow();
 		pager.makeNum(directDAO.getTotalCount(pager));
 		return directDAO.getList(pager);
+	}
+	
+	//악세사리 상품 리스트
+	public List<DirectVO> getAccList(Pager pager) throws Exception{
+		pager.makeStartRow();
+		pager.makeNum(directDAO.getTotalCount(pager));
+		return directDAO.getAccList(pager);
 	}
 	
 	// 상품 하나 옵션 다수 조회

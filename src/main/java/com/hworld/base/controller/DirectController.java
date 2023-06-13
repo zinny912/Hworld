@@ -166,7 +166,7 @@ public class DirectController {
 	        pager.setSortType("latest");
 	    }
 	    
-	    List<DirectVO> ar = directService.getList(pager);
+	    List<DirectVO> ar = directService.getAccList(pager);
 	    
 	    List<DirectVO> recentlyViewedProducts = directService.getSeenList(request);
 	    
@@ -194,7 +194,7 @@ public class DirectController {
 	
 	// 휴대폰 & 액세서리 상품 추가 페이지
 	@GetMapping("directAdd")
-	public ModelAndView d5() throws Exception{
+	public ModelAndView setInsert() throws Exception{
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("hworld/directAdd");
 		return modelAndView;
@@ -224,6 +224,42 @@ public class DirectController {
 		}
 		
 		modelAndView.setViewName("redirect:./phoneList");
+		return modelAndView;
+	}
+	
+	// 휴대폰 & 액세서리 상품 추가 페이지
+	@GetMapping("accessoryAdd")
+	public ModelAndView setAccInsert() throws Exception{
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("hworld/accessoryAdd");
+		return modelAndView;
+	}
+	
+	@PostMapping("accessoryAdd")
+	public ModelAndView setAccInsert(String categoryCode, String brandCode, String directName, String directContents,
+			String[] colorCode, String[] saveCapacity, Integer[] directPrice, Integer[] directStock, String[] directCode, DirectVO directVO, MultipartFile[] multipartFiles) throws Exception{
+		ModelAndView modelAndView = new ModelAndView();
+		
+		
+		//반복문으로 directVO 하나 완성하기 + 완성될 때 서비스로 insert 메서드 호출
+		for(int i=0; i<directCode.length; i++) {
+			DirectVO directVO2 = new DirectVO();
+			directVO2.setCategoryCode(categoryCode);
+			directVO2.setBrandCode(brandCode);
+			directVO2.setDirectName(directName);
+			directVO2.setDirectContents(directContents);
+			directVO2.setColorCode(colorCode[i]);
+			directVO2.setSaveCapacity(saveCapacity[i]);
+			directVO2.setDirectPrice(directPrice[i]);
+			directVO2.setDirectStock(directStock[i]);
+			directVO2.setDirectCode(directCode[i]);
+
+			
+			
+			directService.setInsert(directVO2, multipartFiles);
+		}
+		
+		modelAndView.setViewName("redirect:./accessoryList");
 		return modelAndView;
 	}
 
