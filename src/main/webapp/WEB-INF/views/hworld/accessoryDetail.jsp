@@ -1474,6 +1474,12 @@
             });
     </script>
 <c:import url="../temp/footer.jsp"></c:import>    
+
+<script>
+
+
+
+</script>
 </body>
 
 </html>
