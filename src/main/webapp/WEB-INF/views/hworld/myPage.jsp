@@ -925,22 +925,21 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <form:form action="./myPage" id="update_pw" method="post" modelAttribute="memberVO">
-                        <div class="mb-3">
+                    <form:form action="./myPage" id="pwUpdate" method="post" modelAttribute="memberVO">
+                        <!-- <div class="mb-3">
                             <label for="pw" class="form-label font-light">현재 비밀번호</label>
                             <input type="password" class="form-control" id="">
-                        </div>
+                        </div> -->
                         <div class="mb-3">
                             <label for="pw" class="form-label font-light">변경할 비밀번호</label>
-                            <input type="password" class="form-control" id="pw">
+                            <input type="password" class="form-control" id="npw">
                         </div>
                         <div>
                             <label for="pwCheck" class="form-label font-light">변경할 비밀번호 확인</label>
                             <input type="password" class="form-control" id="pwCheck" >
                         </div>
-		                <div class="modal-footer pt-0 text-end d-block">
-		                    
-		                    <button class="update_pw btn btn-solid-default rounded-1" type="submit">수정</button>
+		                <div class="modal-footer pt-0 text-end d-block">		                    
+		                    <button class="update_pw btn btn-solid-default rounded-1" type="submit" onclick="fnSubmit(); return false;">수정</button>
 		                </div>
                     </form:form>
                 </div>
@@ -1240,23 +1239,46 @@
     <!-- Comfirm stop Modal End -->
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
-var addressCheck = false 		// 주소
-$(document).ready(function(){
-	// 가입정보 업데이트 버튼(업데이트 기능 작동)
-	$(".update_info").click(function(){
-		
-		/* 입력값 변수 */		
-		var addr = $('.address_input_3').val();		// 주소 입력란
-		
-		/* 최종 유효성 검사 */
-		if(pwCheck&&pwckCheck&&pwckcorCheck&&addressCheck){
-			$("#update_info").attr("action", "/myPage");
-			$("#update_info").submit();			
-		}		
+var path = "${pageContext.request.contextPath }";
+
+$(document).ready(function() {
+	var msg = "${msg}";
+	if(msg != ""){
+	alert(msg);    
+	}
+});
+ 
+ 
+function fnSubmit() {
+ 
+	if ($("#npw").val() != "" && $("#pwCheck").val() == "") {
+		alert("비밀번호 확인을 입력해주세요.");
+		$("#npw").focus();
+		 
+		return false;
+	}
+ 
+	if ($("#npw").val() == "" && $("#pwCheck").val() != "") {
+		alert("비밀번호를 입력해주세요.");
+		$("#pwCheck").focus();
+		 
+		return false;
+	}
+ 
+	if ($("#npw").val() != $("#pwCheck").val()) {
+		alert("비밀번호가 일치하지 않습니다.");
+		$("#pwCheck").focus();
 		
 		return false;
-	});
-});
+	}
+ 
+	if (confirm("수정하시겠습니까??")) {
+	 
+		$("#pwUpdate").submit();
+		 
+		return false;
+	}
+}
 
 
 /* 다음 주소 연동 */

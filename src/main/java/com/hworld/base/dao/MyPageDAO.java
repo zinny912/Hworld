@@ -9,6 +9,5 @@ public interface MyPageDAO {
 	
 	public int memberUpdate(MemberVO memberVO) throws Exception;
 	
-	public int pwUpdate(MemberVO memberVO) throws Exception;
-	
+	public void pwUpdate(MemberVO memberVO) throws Exception;
 }

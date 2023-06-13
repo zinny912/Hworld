@@ -6,9 +6,12 @@ import java.util.Map;
 
 import javax.validation.Valid;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import org.springframework.validation.BindingResult;
 
 import com.hworld.base.dao.MemberDAO;
@@ -17,6 +20,7 @@ import com.hworld.base.vo.MemberVO;
 
 import lombok.extern.slf4j.Slf4j;
 
+
 @Service
 @Slf4j
 public class MemberService {
@@ -24,6 +28,8 @@ public class MemberService {
 	@Autowired
 	private MemberDAO memberDAO;
 	
+	@Autowired
+	private BCryptPasswordEncoder pwEncoder;
 	
 	public int setMemberAdd(MemberVO memberVO) throws Exception {
 		

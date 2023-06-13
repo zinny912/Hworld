@@ -4,19 +4,14 @@ package com.hworld.base.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.hworld.base.service.MemberService;
 import com.hworld.base.service.MyPageService;
 import com.hworld.base.vo.MemberVO;
 
@@ -30,12 +25,6 @@ public class MyPageController {
 	
 	@Autowired
 	private MyPageService myPageService;
-	
-	@Autowired
-	private MemberService memberService;
-	
-	@Autowired
-	private BCryptPasswordEncoder pwEncoder;
 	
 	
 	// 마이페이지 home (요금청구/납부)
@@ -59,6 +48,22 @@ public class MyPageController {
 //		return modelAndView;
 //	}
 	
+	@PostMapping("/myPage")
+	public String pwUpdate(HttpServletRequest request, RedirectAttributes redirectAttributes,Model model,HttpSession session,
+	        MemberVO memberVO) {
+	    
+	    try {
+	        myPageService.pwUpdate(memberVO);
+	        redirectAttributes.addFlashAttribute("msg", "수정하였습니다.");
+	        
+	    } catch (Exception e) {
+	        System.out.println(e.toString());
+	        redirectAttributes.addFlashAttribute("msg", "오류가 발생되었습니다.");
+	    }
+	    
+	    return "redirect:/myPage";
+	}
+	
 //	@PostMapping("/myPage")
 //	public ModelAndView pwUpdate(MemberVO memberVO) throws Exception {
 //		
@@ -79,13 +84,13 @@ public class MyPageController {
 //		
 //	}
 	
-	@PostMapping("/myPage")
-	public String pwUpdate(MemberVO memberVO){
-		int result = myPageService.pwUpdate(memberVO);
-		if(result==1) {
-			return "redirect:/myPage";
-		}
-		return "redirect:/myPage";
-	}
+//	@PostMapping("/myPage")
+//	public String pwUpdate(MemberVO memberVO){
+//		int result = myPageService.pwUpdate(memberVO);
+//		if(result==1) {
+//			return "redirect:/myPage";
+//		}
+//		return "redirect:/myPage";
+//	}
 	
 }

@@ -218,23 +218,23 @@ public class MemberController {
 	
 	// 로그아웃(Get)
 	@GetMapping("logout")
-	public String logoutMainGET(HttpServletRequest request) throws Exception {
+	public String logout(HttpServletRequest request) throws Exception {
 		
 		HttpSession session = request.getSession();
 		
 		session.invalidate();
 		
 		return "redirect:/";
-	}
-	
-	// 회선확인(명칭 확정 필요) 페이지(Get)
+	} 
+
+	// 회원가입 완료 페이지(Get)
 	@GetMapping("signUpPrecheck")
 	public ModelAndView signUpPrecheck() throws Exception{
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("hworld/signUpPrecheck");
 		return modelAndView;
 	}
-
+	
 	// 회선확인(명칭 확정 필요) 페이지(Post)
 	@PostMapping("signUpPrecheck")
 	public ModelAndView signUpPrecheck(ApplicationVO applicationVO) throws Exception {
