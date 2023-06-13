@@ -25,7 +25,7 @@
                                     <i class="fas fa-search"></i>
                                 </button>
                                 <form class="d-inline-flex">
-                                    <a href="add-new-user.html" class="align-items-center btn btn-theme">
+                                    <a href="memberAdd" class="align-items-center btn btn-theme">
                                         <i data-feather="plus-square"></i>Add New
                                     </a>
                                 </form>
