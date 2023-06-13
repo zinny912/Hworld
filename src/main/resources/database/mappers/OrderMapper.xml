@@ -5,26 +5,26 @@
   
   <mapper namespace="com.hworld.base.dao.OrderDAO">
   
-  	<select id="getList" resultType="orderVO">
+  	<select id="getList" resultType="OrderVO">
     SELECT SUBSTRING(D.directCode, -5) AS slicedCode, D.*, OD.*
     	FROM DIRECT D
 	    LEFT JOIN ORDERDIRECT OD ON SUBSTRING(D.directCode, -5) = SUBSTRING(OD.DIRECTCODE, -5)
 	</select>
 	
-	<select id="getDetail" resultType="orderVO">
+	<select id="getDetail" resultType="OrderVO">
     SELECT SUBSTRING(D.directCode, -5) AS slicedCode, D.*, OD.*
     	FROM DIRECT D
 	    LEFT JOIN ORDERDIRECT OD ON SUBSTRING(D.directCode, -5) = SUBSTRING(OD.DIRECTCODE, -5)
 	</select>
 
 	<!-- 상품 등록 --> 	
-<!-- 	<insert id="setInsert" parameterType="DirectVO">
+	<insert id="setInsert" parameterType="DirectVO">
 		INSERT INTO DIRECT(DIRECTCODE, DIRECTNAME, DIRECTCONTENTS, DIRECTPRICE, DIRECTSTOCK, CATEGORYCODE, BRANDCODE, COLORCODE, SAVECAPACITY, UPLOADDATE)
 		VALUES (#{directCode}, #{directName}, #{directContents}, #{directPrice}, #{directStock}, #{categoryCode}, #{brandCode}, #{colorCode}, #{saveCapacity}, now())
 
 	</insert>
 	 	
-  	상품 삭제
+<!--   	상품 삭제
 	<delete id="setDelete" parameterType="DirectVO">
 	  DELETE FROM DIRECT
 	  WHERE directCode LIKE CONCAT('%', #{slicedCode}, '%')

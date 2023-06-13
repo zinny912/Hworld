@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import javax.validation.Valid;
+import javax.websocket.server.PathParam;
 
 import org.apache.catalina.util.URLEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,6 +39,7 @@ import com.hworld.base.service.OrderService;
 import com.hworld.base.util.Pager;
 import com.hworld.base.vo.DirectVO;
 import com.hworld.base.vo.MemberVO;
+import com.hworld.base.vo.OrderDirectVO;
 import com.hworld.base.vo.OrderVO;
 import com.hworld.base.vo.PlanVO;
 import com.hworld.base.vo.ReviewVO;
@@ -351,15 +354,18 @@ public class DirectController {
 	
 	// 액세서리 주문 페이지
 	@GetMapping("accessoryOrder")
-	public ModelAndView setInsert(OrderVO orderVO, MemberVO memberVO) throws Exception{
-		ModelAndView mv = new ModelAndView();
+	public ModelAndView setInsert(@RequestParam("slicedCode") String slicedCode, OrderDirectVO orderDirectVO, MemberVO memberVO) throws Exception {
+	    ModelAndView mv = new ModelAndView();
+
+		List<DirectVO> ar = directService.getDetail(slicedCode);
 		
-		orderVO = orderService.getDetail(orderVO, memberVO);
+		System.out.println(ar.get(0).getDirectName());
 		
-		mv.addObject("orderVO", orderVO);
-		mv.setViewName("hworld/accessoryOrder");
-		return mv;
+	    mv.addObject("list", ar);
+	    mv.setViewName("hworld/accessoryOrder");
+	    return mv;
 	}
+
 	
 
 	
