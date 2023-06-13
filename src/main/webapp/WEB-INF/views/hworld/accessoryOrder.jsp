@@ -101,14 +101,14 @@
 
                             <div class="col-md-12">
                                 <label for="fname" class="form-label">받으시는 분</label>
-                                <input type="text" class="form-control" id="fname" placeholder="Enter Your Name">
+                                <input type="text" class="form-control" id="fname" placeholder="Enter Your Name" value="">
                             </div>
 
 
                             <!-- 기기변경 폰 번호 -->
                             <div class="col-md-12">
                                 <label for="fname" class="form-label">연락 가능 번호</label>
-                                <input type="text" class="form-control" id="fname" placeholder="Enter First Name" value="010-5439-7884">
+                                <input type="text" class="form-control" id="fname" placeholder="Enter First Name" value="">
                             </div>
 
                             <!-- <div class="row mt-3">

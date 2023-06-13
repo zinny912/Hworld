@@ -33,8 +33,11 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hworld.base.service.DirectService;
+import com.hworld.base.service.OrderService;
 import com.hworld.base.util.Pager;
 import com.hworld.base.vo.DirectVO;
+import com.hworld.base.vo.MemberVO;
+import com.hworld.base.vo.OrderVO;
 import com.hworld.base.vo.PlanVO;
 import com.hworld.base.vo.ReviewVO;
 
@@ -47,6 +50,8 @@ public class DirectController {
 	
 	@Autowired
 	private DirectService directService;
+	@Autowired
+	private OrderService orderService;
 	
 	// 휴대폰 리스트 페이지
 	@GetMapping("phoneList")
@@ -346,10 +351,14 @@ public class DirectController {
 	
 	// 액세서리 주문 페이지
 	@GetMapping("accessoryOrder")
-	public ModelAndView d9() throws Exception{
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("hworld/accessoryOrder");
-		return modelAndView;
+	public ModelAndView setInsert(OrderVO orderVO, MemberVO memberVO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		orderVO = orderService.getDetail(orderVO, memberVO);
+		
+		mv.addObject("orderVO", orderVO);
+		mv.setViewName("hworld/accessoryOrder");
+		return mv;
 	}
 	
 
