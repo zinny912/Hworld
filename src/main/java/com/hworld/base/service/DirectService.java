@@ -25,6 +25,7 @@ import com.hworld.base.dao.DirectDAO;
 import com.hworld.base.util.FileManager;
 import com.hworld.base.util.Pager;
 import com.hworld.base.vo.DirectVO;
+import com.hworld.base.vo.MemberVO;
 import com.hworld.base.vo.PlanVO;
 import com.hworld.base.vo.ReviewVO;
 
@@ -232,6 +233,7 @@ public class DirectService {
 	public PlanVO getSelectedPlan(PlanVO planVO) throws Exception{
 		return directDAO.getSelectedPlan(planVO);
 	}
+
 		
 	
 }
