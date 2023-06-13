@@ -254,7 +254,7 @@ public class MemberController {
 	
 	
 
-	///////////////////////////////////test login
+	///////////////////////////////////test login start
 	//테스트용 관리자계정 로그인 버튼
 	@ResponseBody
 	@PostMapping("testAdmin")
@@ -296,6 +296,7 @@ public class MemberController {
 		}
 		return result;
 	}
+	///////////////////////////////////test login finish
 	
 
 }
