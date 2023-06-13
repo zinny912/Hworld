@@ -662,18 +662,15 @@
 
     </script>
 <script>
+    //테스트용 자동로그인
     $('#testAdmin').click(function(){
         console.log("admin");
-        const email = "user01@gmail.com";
-        const pw = "user01";
-
-        console.log(email);
-        console.log(pw);
+        const email = "xbigbang5@gmail.com";
+        const pw = "12345";
 
         $.ajax({
             type: 'POST',
             url: '/member/testAdmin',
-            dataType: 'JSON',
             data: {
                 email: email,
                 pw: pw
@@ -681,16 +678,39 @@
             success: function(response) {
             // 응답 처리 로직 작성
                 console.log("성공", response);
+                location.reload();
             },
             error: function(error) {
             // 에러 처리 로직 작성
             console.log("실패", error);
+            location.reload();
             }
         });
     })
 
     $('#testMember').click(function(){
         console.log("member");
+        const email = "zinnybot5@gmail.com";
+        const pw = "12345";
+
+        $.ajax({
+            type: 'POST',
+            url: '/member/testMember',
+            data: {
+                email: email,
+                pw: pw
+            },
+            success: function(response) {
+            // 응답 처리 로직 작성
+                console.log("성공", response);
+                location.reload();
+            },
+            error: function(error) {
+            // 에러 처리 로직 작성
+            console.log("실패", error);
+            location.reload();
+            }
+        });
     })
 
 </script>

@@ -215,37 +215,44 @@ public class MemberController {
 	
 	///////////////////////////////////test login
 	//테스트용 관리자계정 로그인 버튼
-	
-		//MemberVO memberVO = new MemberVO();
-//		memberVO.setEmail("user01@gmail.com");
-//		memberVO.setPw("user01");
-//		
-//		String rawPw = "user01";
-//		String encodePw = "";
-//
-//		MemberVO membercheck = memberService.getMemberLogin(memberVO); // 제출한 아이디와 일치한 아이디가 있는지 확인
-//		log.error(" ::::::::::::::::: {} ", membercheck);
-//		
-//		encodePw = membercheck.getPw(); // DB에 저장한 인코딩된 비밀번호
-//		
-//		if(true == pwEncoder().matches(rawPw, encodePw)) { // 비밀번호 일치여부 판단				
-//			membercheck.setPw(""); // 인코딩된 비밀번호 정보 지움				
-//			session.setAttribute("memberVO", membercheck); // session에 사용자의 정보 저장
-//			mv.setViewName("/");
-//			return mv; // 메인페이지로 이동
-//		} else {
-//			rttr.addFlashAttribute("result", 0);
-//			mv.setViewName("/");
-//			return mv; // 로그인 페이지로 이동
-//		}
-	
-	
 	@ResponseBody
-	@PostMapping("./testAdmin")
-	public String testAdmin(HttpSession session, HttpServletRequest request, MemberVO memberVO, RedirectAttributes rttr) throws Exception {
+	@PostMapping("testAdmin")
+	public String testAdmin(HttpSession session, MemberVO memberVO, RedirectAttributes rttr) throws Exception {
+
+		String result = "success";
+		
+		MemberVO membercheck = memberService.getMemberLogin(memberVO); // 제출한 아이디와 일치한 아이디가 있는지 확인
+		String rawPw = memberVO.getPw(); // 사용자가 제출한 비밀번호
+		String encodePw = membercheck.getPw(); // DB에 저장한 인코딩된 비밀번호
+
+		if(true == pwEncoder().matches(rawPw, encodePw)) { // 비밀번호 일치여부 판단				
+			membercheck.setPw(""); // 인코딩된 비밀번호 정보 지움				
+			session.setAttribute("memberVO", membercheck); // session에 사용자의 정보 저장
+		} else {
+			rttr.addFlashAttribute("result", 0);
+			result="failure";
+		}
+		return result;
+	}
+	
+	//테스트용 관리자계정 로그인 버튼
+	@ResponseBody
+	@PostMapping("testMember")
+	public String testMember(HttpSession session, MemberVO memberVO, RedirectAttributes rttr) throws Exception {
 		
 		String result = "success";
 		
+		MemberVO membercheck = memberService.getMemberLogin(memberVO); // 제출한 아이디와 일치한 아이디가 있는지 확인
+		String rawPw = memberVO.getPw(); // 사용자가 제출한 비밀번호
+		String encodePw = membercheck.getPw(); // DB에 저장한 인코딩된 비밀번호
+		
+		if(true == pwEncoder().matches(rawPw, encodePw)) { // 비밀번호 일치여부 판단				
+			membercheck.setPw(""); // 인코딩된 비밀번호 정보 지움				
+			session.setAttribute("memberVO", membercheck); // session에 사용자의 정보 저장
+		} else {
+			rttr.addFlashAttribute("result", 0);
+			result="failure";
+		}
 		return result;
 	}
 	
