@@ -17,7 +17,7 @@
   	
   	<select id="getMemberLogin" parameterType="MemberVO" resultType="MemberVO">
 		SELECT * FROM MEMBER
-		WHERE EMAIL = #{email}		
+		WHERE EMAIL = #{email}
 	</select>
 	
 	

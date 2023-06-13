@@ -92,6 +92,7 @@ $('#slicedCode').change(function(){
     let slicedCode = $(this).val();
     let selectedOption = $('#slicedCode option:selected').text();
     console.log('선택된 옵션: ' + slicedCode);
+    $('#directName').val(selectedOption);
 
     //ajax로 select box를 만들 정보 요청
     //ajax 확인할 때는 alert창으로
