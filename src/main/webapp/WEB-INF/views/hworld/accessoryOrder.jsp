@@ -94,22 +94,26 @@
             <div class="row g-4">
                 <div class="col-lg-7">
                     <h3 class="mb-3 fw-bold">주문서</h3>
-                    <form class="needs-validation">
+                    <form action="../order/orderSuccess" method="post" class="needs-validation" id="form">
                         <div class="row g-4">
 
                             <!-- 가입자 정보 -->
 
                             <div class="col-md-12">
                                 <label for="fname" class="form-label">받으시는 분</label>
-                                <input type="text" class="form-control" id="fname" value="">
+                                <input type="text" class="form-control" id="name" name="orderReceiver" value="${memberVO.name}">
                             </div>
 
 
                             <!-- 기기변경 폰 번호 -->
                             <div class="col-md-12">
                                 <label for="fname" class="form-label">연락 가능 번호</label>
-                                <input type="text" class="form-control" id="fname" value="">
+                                <input type="text" class="form-control" id="orderTelNum" name="orderTelNum" value="${memberVO.phoneNum}">
                             </div>
+                            
+                               	<input type="text" class="form-control" id="orderState" name="orderState" value="1" hidden="">
+                               	<input type="text" class="form-control" id="memberNum" name="memberNum" value="${memberVO.memberNum}" hidden="">
+                               	
 
                             <!-- <div class="row mt-3">
                                 <h4 class="col-2 my-auto">요금제 </h4>
@@ -130,7 +134,7 @@
                             <!-- 1. 우편번호  -->
                             <div class="col-md-9">
                                 <label for="address1" class="form-label">배송 주소</label>
-                                <input type="text" class="form-control" id="address1">
+                                <input type="text" class="form-control" id="address1" name="address1">
                             </div>
 
                             <div class="col-md-3" style="padding-left: 0px;">
@@ -140,12 +144,12 @@
 
                             <!-- 2. 도로명주소/지번  -->
                             <div class="col-md-12 mt-3">
-                                <input type="text" class="form-control" id="address2">
+                                <input type="text" class="form-control" id="address2" name="address2">
                             </div>
 
                             <!-- 3. 상세주소   -->
                             <div class="col-md-12 mt-3">
-                                <input type="text" class="form-control" id="address2">
+                                <input type="text" class="form-control" id="address2" name="address3">
                             </div>
 
                             <!-- 절차 끝 구분선 -->
@@ -400,44 +404,42 @@
                                     </textarea>
                                 </div>
 
-                                <div class="mt-3 mb-5 d-flex justify-content-center">
-                                        <input class="checkbox_animated check-it" type="checkbox" id="flexCheckDefault11">
-                                        <label class="form-check-label checkout-label" for="flexCheckDefault11" style="font-weight: bolder;">약관에 동의했습니다.</label>
-                                </div>
-                                <div class="my-3 mx-auto col-6 row">
-                                    <button class="btn btn-solid-default w-75 mx-auto" id="btn2" style="padding-left: 4px; padding-right: 4px; height: 61%; font-size: calc(12px + (13 - 12) * ((100vw - 320px) / (1920 - 320)));">
-                                        결제하기
-                                    </button>
-                                </div>
+								 <div class="mt-3 mb-5 d-flex justify-content-center">
+								  <input class="checkbox_animated check-it" type="checkbox" id="flexCheckDefault11">
+								  <label class="form-check-label checkout-label" for="flexCheckDefault11" style="font-weight: bolder;">약관에 동의합니다.</label>
+								</div>
+								
+								<div class="my-3 mx-auto col-6 row">
+								  <button class="btn btn-solid-default w-75 mx-auto" id="btn2" style="padding-left: 4px; padding-right: 4px; height: 61%; font-size: calc(12px + (13 - 12) * ((100vw - 320px) / (1920 - 320)));">
+								    결제하기
+								  </button>
+								</div>
+
                         </div>
                     </div>
+              		</form>
                 </div>
-                    
 
 
                 <div class="col-lg-5">
                     <div class="your-cart-box">
                         <ul class="list-group mb-3">
+                        <c:forEach items="${list}" var="direct">
+                        
                             <li class="list-group-item lh-condensed active " style="background-color: #4f4f4f;">
-                                <h3 class="mt-3 mb-1 text-capitalize">${list.get(0).directName}</h3>
-                                <h4 class="my-1" style="color: #fff;">옐로 l 1개</h6>
+                                <h3 class="mt-3 mb-1 text-capitalize">${orderDirectVO.directVO.directName}</h3>
+                                <h4 class="my-1" style="color: #fff;">총 ${orderDirectVO.orderAmount}개</h4>
                                     
- 
-                                <h6 class="my-4" style="color: #fff;">택배배송</h6>
-                                    
-
-
+ 								<span class="d-flex my-2">
+                                	<h6 id="renewPrice" class="d-flex" style="color: #fff;">${orderDirectVO.directVO.directPrice}</h6>
+                                	<h6 style="color: #fff;">원</h6>
+                                </span>
                             </li>
-                            <li class="list-group-item lh-condensed active">
-                                <div class="row">
-                                    <div class="d-flex justify-content-between">
-                                        <span class="fw-bold" >주문금액 합계</span>
-                                        <span class="d-flex">
-                                            <h3 class="fw-bold" style="color: #7e7e7e;">153,123</h4>
-                                            <span class="fw-bold col-5">원</span>
-                                        </span>
-                                    </div>
-                                </div>
+                           </c:forEach>
+                            
+                            <li class="list-group-item d-flex lh-condensed justify-content-between active" style="padding: 20px 20px 15px;">
+                                     <span class="fw-bold" >주문금액 합계</span>
+                                     <h3 class="fw-bold " style="color: #7e7e7e;">153,123원 </h3>
                             </li>
                             <li class="list-group-item d-flex lh-condensed justify-content-between active" style="padding: 20px 20px 15px;">
                                 <span class="fw-bold">총 결제 금액</span>
@@ -445,6 +447,7 @@
                             </li>
         
                         </ul>
+                    </div>
                     </div>
                 </div>
     </section>
@@ -482,6 +485,24 @@
         </div>
     </div>   
 <c:import url="../temp/footer.jsp"></c:import>
+
+
+<script>
+$(document).ready(function() {
+    const prices = document.querySelectorAll('[id^="renewPrice"]');
+    for (var i = 0; i < prices.length; i++) {
+        const price = parseInt(prices[i].innerHTML);
+        const renewPrice = price.toLocaleString();
+        prices[i].innerHTML = renewPrice;
+    }
+});
+
+
+
+</script>
+
+
+
 </body>
 
 </html>

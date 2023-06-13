@@ -18,18 +18,19 @@ public class OrderService {
 	private OrderDAO orderDAO;
 	
     // 주문 리스트 조회
-	public List<OrderVO> getList(MemberVO memberVO) throws Exception{
-		return orderDAO.getList(memberVO);
+	public List<OrderVO> getList() throws Exception{
+		return orderDAO.getList();
 	}
 	
 	//주문 하나 조회 
-	public List<OrderDirectVO> getDetail(OrderVO orderVO, MemberVO memberVO) throws Exception{
-		return orderDAO.getDetail(orderVO, memberVO);
+	public OrderVO getDetail(OrderDirectVO orderDirectVO) throws Exception{
+		return orderDAO.getDetail(orderDirectVO);
 	}
 	
+	
 	//주문테이블 인서트  
-	public int setInsert(OrderDirectVO orderDirectVO, MemberVO memberVO) throws Exception {
-		return orderDAO.setInsert(orderDirectVO, memberVO);
+	public int setInsert(OrderVO orderVO) throws Exception {
+		return orderDAO.setInsert(orderVO);
 	}
 
 }

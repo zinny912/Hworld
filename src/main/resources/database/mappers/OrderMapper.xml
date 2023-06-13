@@ -17,10 +17,9 @@
 	    LEFT JOIN ORDERDIRECT OD ON SUBSTRING(D.directCode, -5) = SUBSTRING(OD.DIRECTCODE, -5)
 	</select>
 
-	<!-- 상품 등록 --> 	
-	<insert id="setInsert" parameterType="DirectVO">
-		INSERT INTO DIRECT(DIRECTCODE, DIRECTNAME, DIRECTCONTENTS, DIRECTPRICE, DIRECTSTOCK, CATEGORYCODE, BRANDCODE, COLORCODE, SAVECAPACITY, UPLOADDATE)
-		VALUES (#{directCode}, #{directName}, #{directContents}, #{directPrice}, #{directStock}, #{categoryCode}, #{brandCode}, #{colorCode}, #{saveCapacity}, now())
+	<insert id="setInsert" parameterType="OrderVO" useGeneratedKeys="true" keyProperty="orderNum">
+		INSERT INTO ORDERS(ORDERNUM, MEMBERNUM, ORDERDATE, ORDERSTATE, ORDERRECEIVER, ORDERADDRESS1, ORDERADDRESS2, ORDERADDRESS3, ORDERTELNUM)
+		VALUES (#{orderNum}, #{memberNum}, now(), #{orderState}, #{orderReceiver}, #{orderAddress1}, #{orderAddress2}, #{orderAddress3}, #{orderTelNum})
 
 	</insert>
 	 	

@@ -15,7 +15,7 @@ import java.util.Map;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import javax.websocket.server.PathParam;
 
@@ -53,8 +53,7 @@ public class DirectController {
 	
 	@Autowired
 	private DirectService directService;
-	@Autowired
-	private OrderService orderService;
+	
 	
 	// 휴대폰 리스트 페이지
 	@GetMapping("phoneList")
@@ -354,14 +353,10 @@ public class DirectController {
 	
 	// 액세서리 주문 페이지
 	@GetMapping("accessoryOrder")
-	public ModelAndView setInsert(@RequestParam("slicedCode") String slicedCode, OrderDirectVO orderDirectVO, MemberVO memberVO) throws Exception {
+	public ModelAndView setInsert(OrderDirectVO orderDirectVO, HttpSession session) throws Exception {
 	    ModelAndView mv = new ModelAndView();
 
-		List<DirectVO> ar = directService.getDetail(slicedCode);
-		
-		System.out.println(ar.get(0).getDirectName());
-		
-	    mv.addObject("list", ar);
+		mv.addObject("orderDirectVO", orderDirectVO);
 	    mv.setViewName("hworld/accessoryOrder");
 	    return mv;
 	}
