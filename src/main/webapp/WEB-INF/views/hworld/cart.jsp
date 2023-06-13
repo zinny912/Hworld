@@ -110,57 +110,54 @@
  
     <!-- Cart Section Start -->
     <section class="d-flex justify-content-center cart-section section-b-space" >
-        <div class="col-lg-10 " >
-                <div class="table-responsive ">
-                    <table class="table">
-                        <tbody>
-                        <div class="cart-allCheck-wrap" style="margin-left:57px;">                            
-                            <div class="qty-box d-flex">
-                                <div class="form-check custome-form-check">
-                                    <input class="checkbox_animated check-it" type="checkbox" id="flexCheckDefault" checked="checked">
-                                </div>
-                            <div class="d-flex" style="margin-left:10px;">
-                                <a class="text-decoration-underline theme-color d-block text-capitalize mt-1">전체 선택</a>
-                                <h6 class="text-center mt-2" style="color: gray;"> &nbsp;&nbsp;|&nbsp;&nbsp; </h6>
-                                <a class="text-decoration-underline theme-color d-block text-capitalize mt-1">선택 삭제</a>
-                            </div>  
-                        </div>
-                        </tbody>
-                    </table>
-                <div class="col-sm-12 table-responsive mt-2" >
-                    <table class="table cart-table" style="border-top:1px solid lightgray;">
+        <div class="col-lg-8" >
+                <div class="table-responsive d-flex">
+                    <table class="table cart-table" style="border-top:0px">
                         <tbody >
+                        	<tr>
+                        	<td>
+                            <div class="form-check custome-form-check">
+                                <input class="checkbox_animated check-it" type="checkbox" id="flexCheckDefault"  checked="checked">
+                            </div>  
+                        	</td>
+                        	<td>
+                                <a class="text-decoration-underline theme-color d-flex" style="margin-left: -20%">선택 삭제</a>
+                        	</td>
+                        	<td>
+                        	</td>
+                        	<td>
+                        	</td>
+                        	
+                        	</tr>
                             <tr>
                                 <td class="cart-check-wrap">
-                                        <div class="qty-box d-flex justify-content-end" >
+                                        <div class="qty-box d-flex" >
                                             <div class="form-check custome-form-check">
                                                 <input class="checkbox_animated check-it" type="checkbox"
                                                     id="flexCheckDefault10">
                                             </div>
                                         </div>
                                 </td>
-                                <td class="cart-content-wrap" >
-                                    <div class="">
-                                        <div class="col-md-3">
-                                            <h6 class="pt-1 pb-1">애플코리아</h6>
+                                <td class="cart-content-wrap">
+                                        <div class="col-md-2">
+                                            <h6 class="pt-1 pb-1">애플</h6>
                                         </div>
-                                        <div class="col-md-12 mt-3 mb-4">
+                                        <div class="mt-3 mb-3">
                                             <h2 class="fw-bold"><a href="product-left-sidebar.html">Yellow 케이스</a></h2> 
                                         </div>
-                                        <div class="col-md-10 d-flex ">
-                                            <div class="col-md-3" style="color: #7e7e7e;">
+                                        <div class="d-flex">
+                                            <div class="" style="color: #7e7e7e;">
                                                 <p>선택한 옵션</p>
                                             </div>
-                                            <div class="col-md-7" style="color: black;">
+                                            <div class="" style="color: black;">
                                                 <h5>스톰 블루</h5>
                                             </div>                                            
                                         </div>
-                                    </div>            
                                 </td>
                                 <td class="pt-3">
                                     <!-- 수량 버튼 만들어봄 -->
                                     <div  >
-                                        <div class=" d-flex quantity-wrapper " style="padding:5px 0px; justify-content: center;">
+                                        <div class=" d-flex quantity-wrapper " style="padding:5px 0px; justify-content: start;">
                                             <button class="btn quantity-left-minus" style="height:5px; width:5px; padding:10px; margin-top:-6px; ">-</button>
                                             <span class="input-wrapper">
                                                 <input type="text" class="input-number text-center" style="width: 35px; padding:5px 5px; border:1px solid #c7c7c5; border-radius: 5px;"  value="1">
@@ -172,12 +169,11 @@
                                 <td>
                                     <h2 class="td-color fw-bold">12,000원</h2>
                                 </td>
-                                <td class="pt-5" style="width: 10%; vertical-align: top; ">
-                                </td>
+                                
                             </tr>
-                            <tr>
+                             <tr>
                                 <td class="cart-check-wrap">
-                                        <div class="qty-box d-flex justify-content-end" >
+                                        <div class="qty-box d-flex" >
                                             <div class="form-check custome-form-check">
                                                 <input class="checkbox_animated check-it" type="checkbox"
                                                     id="flexCheckDefault10">
@@ -185,27 +181,25 @@
                                         </div>
                                 </td>
                                 <td class="cart-content-wrap" >
-                                    <div class="">
-                                        <div class="col-md-3">
-                                            <h6 class="pt-1 pb-1">애플코리아</h6>
+                                        <div class="col-md-2">
+                                            <h6 class="pt-1 pb-1">애플</h6>
                                         </div>
-                                        <div class="col-md-12 mt-3 mb-4">
+                                        <div class="mt-3 mb-3">
                                             <h2 class="fw-bold"><a href="product-left-sidebar.html">Yellow 케이스</a></h2> 
                                         </div>
-                                        <div class="col-md-10 d-flex ">
-                                            <div class="col-md-3" style="color: #7e7e7e;">
+                                        <div class="d-flex">
+                                            <div class="" style="color: #7e7e7e;">
                                                 <p>선택한 옵션</p>
                                             </div>
-                                            <div class="col-md-7" style="color: black;">
+                                            <div class="" style="color: black;">
                                                 <h5>스톰 블루</h5>
                                             </div>                                            
                                         </div>
-                                    </div>            
                                 </td>
                                 <td class="pt-3">
                                     <!-- 수량 버튼 만들어봄 -->
                                     <div  >
-                                        <div class=" d-flex quantity-wrapper " style="padding:5px 0px; justify-content: center;">
+                                        <div class=" d-flex quantity-wrapper " style="padding:5px 0px; justify-content: start;">
                                             <button class="btn quantity-left-minus" style="height:5px; width:5px; padding:10px; margin-top:-6px; ">-</button>
                                             <span class="input-wrapper">
                                                 <input type="text" class="input-number text-center" style="width: 35px; padding:5px 5px; border:1px solid #c7c7c5; border-radius: 5px;"  value="1">
@@ -217,18 +211,17 @@
                                 <td>
                                     <h2 class="td-color fw-bold">12,000원</h2>
                                 </td>
-                                <td class="pt-5" style="width: 10%; vertical-align: top; ">
-                                </td>
+                                
                             </tr>
                             
                         </tbody>
-                        <tbody>
+                        <tbody >
                             <tr class="cart-totalPrice-row">
                                 <td class="cart-totalPrice-wrap" colspan="7">
                                     <div class="d-flex justify-content-end">
-                                        <h5 class="me-5  fw-bold">총 결제 예상금액</h5>
+                                        <h5 class="fw-bold">총 결제 금액</h5>
                                         <h2 class="mx-5 fw-bold"></h2>
-                                        <button class="btn btn-solid-default btn-spacing" type="button">총 ?건 주문하기</button>
+                                        <button class="btn btn-solid-default btn-spacing" type="button">주문하기</button>
                                     </div>
                                 </td>
                             </tr>
@@ -236,69 +229,13 @@
                     </table>    
                 </div>
             </div>
-        </div>
     </section>
     <!-- Cart Section End -->    
-    <!-- 변경하기 모달창 start -->
-<div class="modal fade quick-view-modal" id="optionmo">
-    <div class="modal-dialog modal-sm modal-dialog-centered col-12">
-        <div class="modal-content">
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            <div class="modal-body">
-                <div class="row gy-4">
-                                    <div class="col-12">
-                                        <div class="product-right">
-                                            <div class="size-detail">
-                                                <h2 class="mb-3 fw-bolder">옵션 선택</h2>
-                                                <ul class="nav border-0" style="color:black;">
-                                                    <li class="nav-item" >
-                                                    <a class="nav-link active" style="color:black;" data-bs-toggle="tab" href="#tab-1">색상</a>
-                                                    </li>
-                                                </ul>
-                                                    <div class="tab-content">
-                                                        <div class="tab-pane fade show active" id="tab-1">
-                                                            <div class="row col-md-12 my-3 mx-3">
-                                                                <div class="form-check custome-radio-box">
-                                                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="credit">
-                                                                    <label class="form-check-label" for="credit">빨강</label>
-                                                                </div>
-                                                                <div class="form-check custome-radio-box">
-                                                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="debit">
-                                                                    <label class="form-check-label" for="debit">파랑</label>
-                                                                </div>
-                                                                <div class="form-check custome-radio-box">
-                                                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="paypal">
-                                                                    <label class="form-check-label" for="paypal">노랑</label>
-                                                                </div>
-                                                                <div class="form-check custome-radio-box">
-                                                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="paypal">
-                                                                    <label class="form-check-label" for="paypal">초록</label>
-                                                                </div> 
-                                                            </div>
-                                                        </div>
-                                                        
-                                                    </div>
-                                                </div>
-                                        <div class="col-12 justify-content-end">    
-                                            <div class="product-btns">
-                                                <button onclick="location.href='#';" type="button" class="btn btn-solid-default btn-sm text-center"
-                                                    data-bs-dismiss="modal">변경하기</button>
-                                            </div>
-                                            </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
-</div>
-<!-- 변경하기 모달창 end -->
 
 
 
     <script>
-    
-    
  // 수량 버튼에 대한 이벤트 핸들러 등록
     document.addEventListener('DOMContentLoaded', function() {
       var quantityInputs = document.querySelectorAll('.input-number');
