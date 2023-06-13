@@ -58,13 +58,35 @@ public class MemberController {
 		Integer state = (Integer)result.get("state");
 		MemberVO account = (MemberVO)result.get("account");
 		
-		log.error("========================== {} ", state);
-		if(state!=1) {
-			log.error("========================== {} ", account.getRrnf());
-			log.error("========================== {} ", account.getRrnl());
-			if(state!=2) {
-				log.error("========================== {} ", account.getName());	
-			}
+		//응답 구분
+		switch(state) {
+			case 1: //(state=1)주민번호 일치x
+				//신청서를 낸적 없는 회원. 회선 가입정보 없음. 홈페이지만 회원 가입하려는 회원
+				log.error("========================== state: {} ", state);
+				mv.setViewName("./signUp");
+				break;
+			case 2: //(state=2)주민번호 일치o, 이름 일치x
+				//일치하는 회원정보가 없다고 표시
+				log.error("========================== state: {} ", state);
+				log.error("========================== account's RRNF: {} ", account.getRrnf());
+				log.error("========================== account's RRNL: {} ", account.getRrnl());
+				break;
+			case 3: //(state=3)주민번호, 이름 일치o, id/pw == null
+				//신청서를 낸적 있는 회원. 회선 가입정보 있음. 기존에 입력된 정보 보여주고 id/pw 입력받기
+				log.error("========================== state: {} ", state);
+				log.error("========================== account's RRNF: {} ", account.getRrnf());
+				log.error("========================== account's RRNL: {} ", account.getRrnl());
+				log.error("========================== account's NAME: {} ", account.getName());
+				break;
+			case 4: //(state=4)주민번호, 이름 일치o, id/pw != null
+				//홈페이지에 가입한적 있는 기존 회원. 가입된 회원정보가 있으니 찾기페이지로 넘겨주기?
+				log.error("========================== state: {} ", state);
+				log.error("========================== account's RRNF: {} ", account.getRrnf());
+				log.error("========================== account's RRNL: {} ", account.getRrnl());
+				log.error("========================== account's NAME: {} ", account.getName());
+				log.error("========================== account's RRNF: {} ", account.getEmail());
+				log.error("========================== account's RRNF: {} ", account.getPw());
+				break;
 		}
 		
 		mv.setViewName("redirect:./signUpPrecheck");

@@ -40,6 +40,10 @@ public class MemberService {
 		//리턴할 Map 준비
 		Map<String, Object> result = new HashMap<>();
 		
+		//입력받은 rrnl을 암호화 하고 db 정보와 비교
+		String RRN = memberVO.getRrnf()+"-"+memberVO.getRrnl();
+	    memberVO.setRrnl(SHA256Util.encryptMD5(RRN));
+		
 		//주민번호가 일치하는 회원 가져오기
 		MemberVO checkRRN = memberDAO.getIdentifybyRRN(memberVO);
 		//주민번호와 이름이 일치하는 회원 가져오기
