@@ -33,6 +33,10 @@ public class OrderVO {
     //주문 전화번호
     private String orderTelNum;
     
-    private List<MemberVO> memberVOs;
-
+    private Integer memberNum;
+    
+    
+    private List<OrderDirectVO> orderDirectVOs;
+    
+    
 }
