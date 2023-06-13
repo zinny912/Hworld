@@ -70,6 +70,20 @@
 
 <body class="theme-color2 light ltr">
 <c:import url="./temp/header.jsp"></c:import>
+<!-- 관리자/회원 테스트용 로그인 버튼 시작, 테스트 후 필요없으면 삭제 -->
+<div class="d-flex justify-content-end">
+	<!-- <form action="/member/testAdmin" method="post">
+		<input type="hidden" name="email" value="user01@gmail.com">
+		<input type="hidden" name="pw" value="user01">
+    </form> -->
+
+	<button type="button" class="d-block fw-bold fs-6 me-3" id="testAdmin">관리자</button>
+    <button type="button" class="d-block fw-bold fs-6 me-3" id="testMember">일반회원</button>
+	
+	<!-- <form action="/member/loginMember" method="post">
+	</form> -->
+</div>
+<!-- 관리자/회원 테스트용 로그인 버튼 시작, 테스트 후 필요없으면 삭제 -->
     <!-- mobile fix menu start -->
     <div class="mobile-menu d-sm-none">
         <ul>
@@ -647,7 +661,39 @@
     });
 
     </script>
+<script>
+    $('#testAdmin').click(function(){
+        console.log("admin");
+        const email = "user01@gmail.com";
+        const pw = "user01";
 
+        console.log(email);
+        console.log(pw);
+
+        $.ajax({
+            type: 'POST',
+            url: '/member/testAdmin',
+            dataType: 'JSON',
+            data: {
+                email: email,
+                pw: pw
+            },
+            success: function(response) {
+            // 응답 처리 로직 작성
+                console.log("성공", response);
+            },
+            error: function(error) {
+            // 에러 처리 로직 작성
+            console.log("실패", error);
+            }
+        });
+    })
+
+    $('#testMember').click(function(){
+        console.log("member");
+    })
+
+</script>
 
 <c:import url="./temp/commonJS.jsp"></c:import>
 </body>
