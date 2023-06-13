@@ -85,7 +85,9 @@
                                 <label for="categoryCode" class="form-label" >카테고리</label>
                                 <div class="col-12">
                                     <select class="form-select custome-form-select" id="categoryCode" name="categoryCode">
-                                        <option value="01" ${list.get(0).getCategoryCode().equals("P") ? 'selected' : ''}>휴대폰</option>
+                                        <option value="01" ${list.get(0).getCategoryCode().equals("01") ? 'selected' : ''}>휴대폰</option>
+                                        
+                                        
                                     </select>
                                 </div>
                             </div> 

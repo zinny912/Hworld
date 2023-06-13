@@ -12,8 +12,41 @@
 	WHERE (P.PLANNUM LIKE CONCAT(CC.TYPE, '%'))
  </select>
  
+ <select id="getDetail" resultType="PlanVO" parameterType="PlanVO">
+ 	SELECT * FROM PLAN
+ 	WHERE PLANNUM=#{planNum}
+ </select>
+ 
+ <insert id="setPlanAdd" parameterType="PlanVO">
+ 	INSERT INTO PLAN (PLANNUM, DISCODE, PLANNAME, PLANPRICE, DATACAPACITY, CATEGORYCODE, PLANEXPLAIN, PLANEXPLAINSM)
+ 	VALUES(#{planNum},#{disCode}, #{planName}, #{planPrice}, #{dataCapacity}, #{categoryCode}, #{planExplain}, #{planExplainSM})
+ </insert>
+ 
+ <update id="setPlanUpdate" parameterType="PlanVO">
+ 	UPDATE PLAN 
+ 	SET DISCODE=#{disCode}, PLANNAME=#{planName}, PLANPRICE=#{planPrice}, DATACAPACITY=#{dataCapacity},CATEGORYCODE=#{categoryCode}, PLANEXPLAIN=#{planExplain}, PLANEXPLAINSM=#{planExplainSM})
+ </update>
+ 
+ <delete id="setPlanDelete" parameterType="PlanVO">
+ 	DELETE FROM PLAN WHERE PLANNUM=#{planNum}
+ </delete>
  
  
+ <select id="getEPlanList" resultType="EPlanVO">
+ 	SELECT * FROM EPLAN;
+ </select>
+ 
+ <select id="getEPlanDetail" resultType="EPlanVO" parameterType="EPlanVO">
+ 	SELECT * FROM EPLAN
+ 	WHERE EPLANNUM=#{ePlanNum}
+ 
+ </select>
+ 
+ <!-- <insert id="setEPlanAdd" parameterType="EPlanVO">
+ 	INSERT INTO EPLAN
+ 	VALUES()
+ </insert>
+  -->
   <!--  5G요금제 -->
  <!--<select id="getGeneralList" resultType="PlanVO" >
  	SELECT P.*, CC.NOTE AS note, CC.TYPE AS type
