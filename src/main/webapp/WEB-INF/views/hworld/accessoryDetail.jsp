@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%-- <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -699,24 +699,6 @@
                                     <div class="row g-sm-3 g-2">
                                         <div class="col-6">
                                             <div>
-                                                <img src="assets/images/fashion/galaxy21u1.png"
-                                                    class="img-fluid bg-img blur-up lazyload" alt="">
-                                            </div>
-                                        </div>
-                                        <div class="col-6">
-                                            <div>
-                                                <img src="assets/images/fashion/galaxy21u2.png"
-                                                    class="img-fluid bg-img blur-up lazyload" alt="">
-                                            </div>
-                                        </div>
-                                        <div class="col-6">
-                                            <div>
-                                                <img src="assets/images/fashion/galaxy21u3.png"
-                                                    class="img-fluid bg-img blur-up lazyload" alt="">
-                                            </div>
-                                        </div>
-                                        <div class="col-6">
-                                            <div>
                                                 <img src="assets/images/fashion/galaxy21u4.png"
                                                     class="img-fluid bg-img blur-up lazyload" alt="">
                                             </div>
@@ -846,454 +828,263 @@
                         </nav>
 
                         <div class="tab-content" id="nav-tabContent">
-                            <div id="desc" class="tab-pane fade show active"><!-- 여기부터 admin 소스 -->
-                                <div class="p_description"><br>
-                                    <h3 class="h3-tit single">팬텀 컬러와 초고화질을 자랑하는, <br>
-                                        <span>Galaxy S21 Ultra 5G</span>
-                                    </h3>
-                                    <div class="img-section">
-                                        <img src="https://cdnw.shop.tworld.co.kr/pimg/plan_editor/202101/75058103878994230.jpg"
-                                            alt="">
-                                        <div class="hidden">
-                                            <p>CPU 종류 : Octa-Core | 디스플레이 크기 : 173.0 mm | 색상 : 팬텀 블랙, 팬텀 실버</p>
-                                            <ol>
-                                                <li>1억 8백만 초고화질과 100배 스페이스 줌</li>
-                                                <li>컨텐츠 맞춤 주사율 120 Hz 디스플레이</li>
-                                                <li>S 시리즈 최초 S펜 기능 지원</li>
-                                            </ol>
-                                        </div>
-                                    </div>
-
-                                    <h3 class="h3-tit">컨투어 컷 후면 카메라 디자인과 <br>신비로운 <span>팬텀 컬러</span></h3>
-                                    <p class="sub-description">눈길을 사로잡는 팬텀컬러로 완성된 갤럭시 S21 Ultra 5G를 만나보세요. <br>컨투어 컷 후면
-                                        카메라 디자인과 무광의 헤이즈 마감으로 고급스러움을 더했습니다.</p>
-                                    <div class="img-section">
-                                        <img src="https://cdnw.shop.tworld.co.kr/pimg/plan_editor/202101/75058106364874602.jpg"
-                                            alt="">
-                                    </div>
-                                    <p class="exclamation">해당 이미지는 연출된 이미지이며, 실제 제품과 차이가 있을 수 있습니다.</p>
-
-                                    <h3 class="h3-tit">너무 멀어서라는 핑계와 <span>멀어지세요</span></h3>
-                                    <p class="sub-description">갤럭시의 모든 줌을 능가하는 듀얼 줌 시스템. 100배 스페이스 줌으로 더 빠르고 부드럽게,
-                                        <br>무엇보다 또렷하게 확대해 줍니다. 새로워진 줌 락 기능으로 훨씬 안정적인 줌 촬영이 가능해졌습니다.</p>
-                                    <div class="img-section">
-                                        <img src="https://cdnw.shop.tworld.co.kr/pimg/plan_editor/202101/75058109018996969.jpg"
-                                            alt="">
-                                    </div>
-                                    <ul class="exclamation">
-                                        <li>100배 스페이스 줌은 10배 광학 줌을 포함하며 최대 100배 초해상도 줌까지 확장됩니다. <br>초고해상도 줌에는 디지털 줌이
-                                            포함되어 있어 이미지 품질이 다소 저하될 수 있습니다.</li>
-                                        <li>해당 기능은 후면 카메라에 한해 사용 가능합니다.</li>
-                                    </ul>
-
-                                    <h3 class="h3-tit">1억 800만 <span>초고화소 센서</span></h3>
-                                    <p class="sub-description">디테일한 능력을 가진 1억 800만 초고화소 카메라. 사진 속 아주 작은 부분을 크게 확대해도
-                                        <br>디테일과 색감까지 선명하게 표현할 수 있습니다.</p>
-                                    <div class="img-section">
-                                        <img src="https://cdnw.shop.tworld.co.kr/pimg/plan_editor/202101/75058111481556433.jpg"
-                                            alt="">
-                                    </div>
-                                    <h3 class="h3-tit">인물 모드로 찍는 <span>인생사진</span></h3>
-                                    <p class="sub-description">AI가 접목된 인물 모드는 스튜디오에서 촬영하듯, 조명을 이상적으로 조절해 줍니다. <br>이목구비는
-                                        물론 빛의 앵글과 방향까지 분석하고 피사계 심도를 측정할 수 있기에 가능한 기술입니다.</p>
-                                    <div class="img-section">
-                                        <img src="https://cdnw.shop.tworld.co.kr/pimg/plan_editor/202101/75058113741667181.jpg"
-                                            alt="">
-                                    </div>
-                                    <h3 class="h3-tit">어두운 밤에도 선명한 <span>야간 사진</span></h3>
-                                    <p class="sub-description">야간 모드로 저조도 촬영 기술의 놀라운 혁신을 경험할 수 있습니다. <br>밤의 어둠 속에서도 환하고
-                                        강렬한 색감을 포착하며, 짧은 촬영 시간에도 노이즈가 적은 <br>또렷한 사진을 남길 수 있습니다.</p>
-                                    <div class="img-section">
-                                        <img src="https://cdnw.shop.tworld.co.kr/pimg/plan_editor/202101/75058115979263209.jpg"
-                                            alt="">
-                                    </div>
-                                    <h3 class="h3-tit"><span>S펜으로</span> 손끝에 세밀한 능력을</h3>
-                                    <p class="sub-description">갤럭시 S시리즈 최초의 S펜입니다. 당신이 펜을 쓸 수 있게 됐다는 건, <br>갤럭시가 스마트폰의
-                                        한계를 다시 썼다는 뜻입니다.</p>
-                                    <div class="img-section">
-                                        <img src="https://cdnw.shop.tworld.co.kr/pimg/plan_editor/202101/75058118094347196.jpg"
-                                            alt="">
-                                    </div>
-                                    <ul class="exclamation">
-                                        <li>갤럭시 S21 Ultra 5G에만 해당됩니다.</li>
-                                        <li>S펜은 별도 판매이며, 앱에 따라 응답 속도가 다를 수 있습니다.</li>
-                                        <li>S펜은 블루투스를 지원하지 않으며, 무선 제어 기능이 지원되지 않습니다.</li>
-                                    </ul>
-
-                                    <h3 class="h3-tit">따로 또 같이 작게 크게 보는 <span>스크린</span></h3>
-                                    <p class="sub-description">구글 듀오를 활용한 빅 스크린 영상통화. 친구와 연인 사이에 안부를 전하는 놀랍도록 편리한 방법입니다.
-                                        <br>호환 또한 자유롭기에, 멀리 있지만 소중한 사람들과 언제 어디서나 가까워질 수 있습니다.</p>
-                                    <div class="img-section">
-                                        <img src="https://cdnw.shop.tworld.co.kr/pimg/plan_editor/202101/75058120186191901.jpg"
-                                            alt="">
-                                    </div>
-                                    <ul class="exclamation">
-                                        <li>이해를 돕기 위해 연출된 이미지입니다.</li>
-                                        <li>Google Duo 관련 표기는 Google LLC. 의 상표입니다.</li>
-                                        <li>구글 듀오 사용 시 구글 계정 가입이 필요할 수 있습니다.</li>
-                                    </ul>
-
-                                    <h3 class="h3-tit">어댑티브 <span>120Hz 디스플레이</span></h3>
-                                    <p class="sub-description">사용하는 콘텐츠에 따라 주사율을 자동으로 조절하여 부드러운 화면 전환이 가능합니다.</p>
-                                    <div class="img-section">
-                                        <img src="https://cdnw.shop.tworld.co.kr/pimg/plan_editor/202101/75058122074418364.jpg"
-                                            alt="">
-                                    </div>
-                                    <p class="exclamation">갤럭시 S21 Ultra 5G의 화면을 지각화해 측정한 크기는 173.0mm이며, 직각화 하지 않고 측정한
-                                        크기는 168.7mm입니다. <br>둥근 모서리와 전면 카메라 홀로 인해 실제 보이는 영역은 사이즈보다 작습니다.</p>
-
-                                    <h3 class="h3-tit">올 데이를 넘어서는 <span>올 데이 파워</span></h3>
-                                    <p class="sub-description">5G환경에서도 하루 종일, 아니 그 이상 사용할 수 있는 갤럭시 S21 Ultra 5G의 인텔리전트
-                                        배터리, 전력을 효율적으로 사용하는 디스플레이. 프로세서와 결합하여, 최대 5,000mAh 대용량의 파워를 24시간 이상 보여줍니다.</p>
-                                    <div class="img-section">
-                                        <img src="https://cdnw.shop.tworld.co.kr/pimg/plan_editor/202101/75058124748716133.jpg"
-                                            alt="">
-                                    </div>
-                                    <p class="exclamation">제3의 실험실 환경에서 측정한 배터리 용량입니다. 일반적인 수치는 IEC 61960 표준에 따라 테스트한
-                                        배터리 샘플들의 용량 편차를 고려해 추정한 평균 수치입니다. 정격(최소) 용량은 갤럭시 S21 Ultra 5G의 경우 4,855mAh입니다.
-                                        <br>실제 배터리 수명은 네트워크 환경, 사용 패턴 및 기타 요인에 따라 달라질 수 있습니다.</p>
-
-                                    <h3 class="h3-tit single">제품 사양</h3>
-                                    <table class="tbl_row">
-                                        <caption>제품 사양</caption>
-                                        <colgroup>
-                                            <col style="width:20%">
-                                            <col>
-                                        </colgroup>
-                                        <tbody>
-                                            <tr>
-                                                <th scope="row">제품명</th>
-                                                <td>Galaxy S21 Ultra 5G</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">디스플레이</th>
-                                                <td>6.8” Dynamic AMOLED 2X WQHD+ 엣지 디스플레이</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">CPU</th>
-                                                <td>Exynos 2100</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">OS</th>
-                                                <td>Android</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">메모리</th>
-                                                <td>RAM 12GB / ROM 256GB <br>RAM 16GB / ROM 512GB</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">외장 메모리</th>
-                                                <td>미지원</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">카메라</th>
-                                                <td>전면 4,000만(F2.2) <br>후면 1,000만(F2.4 망원1) + 1,000만(F4.9 망원2) +
-                                                    10,800만(F1.8 광각) <br>+ 1,200만(F2.2 초광각)</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">네트워크</th>
-                                                <td>5G</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">USIM</th>
-                                                <td>Nano 유심</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">크기</th>
-                                                <td>75.6 X 165.1 X 8.9mm</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">무게</th>
-                                                <td>227g</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">배터리</th>
-                                                <td>5,000mAh</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">특징</th>
-                                                <td>S펜</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">제조국</th>
-                                                <td>한국</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                               
+                            <div id="desc" class="tab-pane fade show active">
+									<div class="p_description">
+	                                    ${directVO.directContents}
+	                                </div>  
                             </div>
 
-                            <div class="tab-pane fade" id="question">
-                                <div class="accordion-group-header side-type mb-4">
-                                    
-                                    <h2 class="left title m-0">상품 문의 (3)</h2>
-                                    <div class="d-flex justify-content-end">
-                                        
-                                        <button class="btn btn-solid-default btn-sm fw-bold me-4" data-bs-toggle="modal"
-                                                            data-bs-target="#addPayment2">
-                                                            문의 작성</button>
+                            <!-- 상품 문의 nav tap -->
+							<div class="tab-pane fade" id="question">
+							    <div class="accordion-group-header side-type mb-4">
+							    <c:set var="qnaCount" value="${fn:length(qnaList)}" />
+							        <h2 class="left title m-0">상품 문의 (${qnaCount})</h2>
+							        <div class="d-flex justify-content-end">
+							        	<button class="btn btn-solid-default btn-sm fw-bold me-4" style="margin-top:-25px;" data-bs-toggle="modal"
+                                         data-bs-target="#addQna">문의 작성</button>
                                     </div>
                                 </div>
-                                <div class="container mb-5">
-                                    <div class="category-option">
-                                        <div class="accordion category-name" id="accordionExample">
-                                            <div class="accordion-item category-rating">
-                                                <h2 class="accordion-header"  id="headingThree" style="padding:0px;">
-                                                    <button class="accordion-button" style="background-color:#fff; padding:0px;" type="button" data-bs-toggle="collapse"
-                                                        data-bs-target="#collapseThree">
-                                                        <div class="d-flex col-10">
-                                                        <span class="col-2 mx-2 theme-color">
-                                                           <span>답변완료</span>
-                                                        </span>
-                                                        <h5 class="col-7 me-5">저희엄마폰 기기변경했는데 후기작성자체가 안됩니다</h5> 
-                                                        <span class="user col-1 me-5" style="font-weight:400;">이*정</span>
-                                                        <span class="date col-1" style="font-weight:400;">2023.05.14</span>
-                                                    </div>  
-                                                    </button>
-                                                    
-                                                </h2>
-                                                <div id="collapseThree" class="accordion-collapse collapse"
-                                                    aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-                                                    <div class="accordion-body">
-                                                        <div class="card"><!----><!---->
-                                                            <div class="card-body"><!----><!---->                                                            
-                                                                <span class="cate col-1">
-                                                                    <span class="fw-bold text-danger">Q</span>
-                                                                </span>
-                                                                <div>
-                                                                제거아이디 엄마꺼 아이디 다 접속해서 기기변경후기작성하려는데 상품구입후 하라고만 나와요ㅠㅠ어뜨케 작성해야합니까ㅜㄴ
-                                                                </div><hr>
+                                	<div class="container mb-5">
+                                	<c:forEach items="${qnaList}" var="qna">
+                                    	<div class="category-option" data-qna-num="${qna.num}" data-qna-member="${qna.memberNum}" data-qna-state="${qna.state}">
+                                        	<div class="accordion category-name" id="accordionExample">
+                                            	<div class="accordion-item category-rating">
+                                                	<h2 class="accordion-header"  id="headingThree" style="padding:0px;">
+                                                    	<button class="accordion-button" style="background-color:#fff; padding:0px;" type="button" data-bs-toggle="collapse"
+                                                       	 data-bs-target="#collapseThree">
+                                                        	<div class="d-flex col-10">
+																
+																<c:if test="${qna.state == 0}">
+																<div class="col-2 mx-2" style="color:gray;">
+                                                           			<span>답변대기</span>
+                                                           		</div>	
+                                                           		</c:if>	
+                                                           		<c:if test="${qna.state == 1}">
+                                                           		<div class="col-2 mx-2 theme-color">
+                                                           			<span>답변완료</span>
+                                                           		</div>
+                                                           		</c:if>	
+                                                        		
+                                                       			<h5 class="col-7 me-5 ellipsis">${qna.contents}</h5> 
+                                                       			<c:set var="username" value="${fn:substringBefore(qna.email, '@')}" /> 
+                                                       				<span class="user col-1 me-5 fw-bold" >${username}</span>
+                                                       				<fmt:formatDate value="${qna.regDate}" pattern="yyyy/MM/dd" var="formattedDate" />
+																	<span style="font-weight:400;">${formattedDate}</span>
+                                                    		</div>  
+                                                    	</button>
+                                                	</h2>
+                                                	
+                                                	<div id="collapseThree" class="accordion-collapse collapse"
+                                                    	aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                                                    	<div class="accordion-body">
+                                                        	<div class="card">
+                                                            	<div class="card-body"><!----><!---->                                                            
+	                                                                <span class="cate col-1">
+	                                                                    <span class="fw-bold text-danger">Q</span> 
+	                                                                </span>
+	                                                                <c:if test="${empty qna.reply && memberVO.memberNum eq qna.memberNum}">
+	                                                                <div class="member-update-delete d-flex justify-content-end">
+								                                        <a href="javascript:void(0)" class="me-3 qnaUpdate" data-bs-toggle="modal"
+				                                                            data-bs-target="#updateQna" id="qnaUpdate${qna.num}"
+				                                                            data-qna-num="${qna.num}">수정</a>
+								                                        <a href="javascript:void(0)" data-bs-toggle="modal"
+						                                                    data-bs-target="#qnadel" onclick="qnaDelete()" data-qna-num="${qna.num}" id="qnaDel">삭제</a>
+	                                    					</div>    
+	                                                                </c:if>
+                                                                <div id="qnaContentsQ" >
+                                                                ${qna.contents} 
+                                                                </div>
+                                                                <c:if test="${memberVO.adminCheck eq 0 && empty qna.reply}">
+                                                                <button type="button" class="btn" style="margin-left:-20px;" id="replyAdd" data-bs-toggle="modal"
+                                         							data-bs-target="#addReply" data-qna-num="${qna.num}"> 답변달기</button>
+                                                                </c:if>
+                                                                <c:if test="${not empty qna.reply}"> 
+                                                                <hr>
                                                                 <div class="reply-box">
                                                                     <span class="cate col-1">
-                                                                        <span class="fw-bold text-danger">A</span>
+                                                                        <span class="fw-bold text-danger"> A</span>
                                                                     </span>
-                                                                    <div>안녕하세요.
-                                                                        <br>일상에 즐거운 변화 유플러스닷컴 김혜란 입니다.<br>
-                                                                        <br>휴대폰 번호인증후 해당 기간내 구매해주신 단말기 후기를 작성해주셨다면
-                                                                        <br>사은품수령 가능하십니다 ^^ <br>
-                                                                        <br>홈페이지 또는 고객센터 앱에서 구매 후기 남겨 주시면 상품권 제공됩니다.<br>
-                                                                        <br>▶ 경로 : [전문가 리뷰/구매후기]탭 선택 → [구매후기 쓰기] → <br>[비회원신청/주문조회] → [휴대폰 본인인증]
-                                                                        후에 작성 <br>
-                                                                        <br>위경로로 작성이 어려우신경우 유플러스닷컴으로 연락주셔서 문의해주시길 부탁드립니다.<br>
-                                                                        <br>보다 정확한 안내를 희망하시면 유플러스 닷컴 1644-7009로 문의 부탁드립니다. <br>업무시간 (평일/공유일/주말)
-                                                                        : 24시간 운영<br><br>※챗봇은 365일 이용가능,채팅상담사 연결은 평일오전9시~오후6시까지 연결됩니다.
+                                                                    <div>
+                                                                    ${qna.reply}
                                                                     </div>
-                                                                    <span class="date">2023-05-15</span>
+                                                                    <fmt:formatDate value="${qna.replyDate}" pattern="yyyy/MM/dd" var="formattedDate2" />
+																	<span style="font-weight:400; float:right;" >답변작성일 : ${formattedDate2}</span>
                                                                 </div>
-                                                            </div><!----><!---->
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>   
-                                    </div>
-                                </div>  
-                             </div>
-
+                                                                </c:if>
+                                                            	</div><!----><!---->
+                                                        	</div>
+                                                    	</div>
+                                                	</div>
+                                            	</div>
+                                        	</div>   
+                                    	</div>
+                                    	</c:forEach>
+                                	</div>  
+                             	</div>
+                             	
+                             	<!-- 상품문의 끝 -->
+						<!-- 구매후기 시작 -->
                              <div class="tab-pane fade" id="review">
                                 <div class="row g-4 col-12">
                                     <div class="col-md-3" style="margin-top:-20px;">
                                         <div class="customer-rating mt-5 me-5" >
-                                            <h2>평점</h2>
-                                            <ul class="rating my-2 d-inline-block">
-                                                <li>
-                                                    <i class="fas fa-star theme-color"></i>
-                                                </li>
-                                                <li>
-                                                    <i class="fas fa-star theme-color"></i>
-                                                </li>
-                                                <li>
-                                                    <i class="fas fa-star theme-color"></i>
-                                                </li>
-                                                <li>
-                                                    <i class="fas fa-star"></i>
-                                                </li>
-                                                <li>
-                                                    <i class="fas fa-star"></i>
-                                                </li>
-                                            </ul>
+                                           
+			                                  		<div hidden>        
+								                       <c:set var="totalRating" value="0" />${totalRating}
+														<c:forEach items="${review}" var="review">
+					    									<c:set var="totalRating" value="${totalRating + review.rate}" /><p> 이거 뭐야  ${totalRating} </p>
+														</c:forEach>
+													</div>
+													<c:set var="averageRating" value="${totalRating / review.size()}" />
+													 <h2>평점 (<fmt:formatNumber value="${averageRating}" pattern="#.#" />)</h2>
 
-                                            <div class="global-rating">
-                                                <h5 class="font-light">82 건</h5>
-                                            </div>
-
-                                            <ul class="rating-progess">
-                                                <li>
-                                                    <h5 class="me-3">5 점</h5>
-                                                    <div class="progress">
-                                                        <div class="progress-bar" role="progressbar" style="width: 78%"
-                                                            aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
-                                                        </div>
-                                                    </div>
-                                                    <h5 class="ms-3">78%</h5>
-                                                </li>
-                                                <li>
-                                                    <h5 class="me-3">4 점</h5>
-                                                    <div class="progress">
-                                                        <div class="progress-bar" role="progressbar" style="width: 62%"
-                                                            aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
-                                                        </div>
-                                                    </div>
-                                                    <h5 class="ms-3">62%</h5>
-                                                </li>
-                                                <li>
-                                                    <h5 class="me-3">3 점</h5>
-                                                    <div class="progress">
-                                                        <div class="progress-bar" role="progressbar" style="width: 44%"
-                                                            aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
-                                                        </div>
-                                                    </div>
-                                                    <h5 class="ms-3">44%</h5>
-                                                </li>
-                                                <li>
-                                                    <h5 class="me-3">2 점</h5>
-                                                    <div class="progress">
-                                                        <div class="progress-bar" role="progressbar" style="width: 30%"
-                                                            aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
-                                                        </div>
-                                                    </div>
-                                                    <h5 class="ms-3">30%</h5>
-                                                </li>
-                                                <li>
-                                                    <h5 class="me-3">1 점</h5>
-                                                    <div class="progress">
-                                                        <div class="progress-bar" role="progressbar" style="width: 18%"
-                                                            aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
-                                                        </div>
-                                                    </div>
-                                                    <h5 class="ms-3">18%</h5>
-                                                </li>
-                                            </ul>
-                                        </div>
+				                                            <ul class="rating my-2 d-inline-block">
+																<li><i class="fas fa-star ${averageRating >= 0.5 ? 'theme-color' : ''}"></i></li>
+																<li><i class="fas fa-star ${averageRating >= 1.5 ? 'theme-color' : ''}"></i></li>
+																<li><i class="fas fa-star ${averageRating >= 2.5 ? 'theme-color' : ''}"></i></li>
+																<li><i class="fas fa-star ${averageRating >= 3.5 ? 'theme-color' : ''}"></i></li>
+																<li><i class="fas fa-star ${averageRating >= 4.5 ? 'theme-color' : ''}"></i></li>
+											        		</ul>  
+			                                            <div class="global-rating">
+			                                                <h5 class="font-light">${review.size()}건</h5>
+			                                            </div>
+															<ul class="rating-progess">
+																<li>
+																    <h5 class="me-3">5 점</h5>
+																  <c:set var="fiveStarCount" value="0" />
+																	<c:forEach items="${review}" var="r">
+																		<c:if test="${r.rate >= 4.5 && r.rate <= 5.0}">
+																			<c:set var="fiveStarCount" value="${fiveStarCount + 1}" />
+																		</c:if>
+																	</c:forEach>
+																	<div class="progress">
+																	    <c:set var="fiveStarPercentage" value="${(fiveStarCount / fn:length(review)) * 100}" />
+																			<div class="progress-bar" role="progressbar" style="width: ${fn:substringBefore(fiveStarPercentage, '.')}%;"
+																			aria-valuenow="${fn:substringBefore(fiveStarPercentage, '.')}%" aria-valuemin="0" aria-valuemax="100"></div>
+																	</div>
+																	<h5 class="ms-3">
+																    <c:set var="fiveStarPercentage" value="${(fiveStarCount / fn:length(review)) * 100}" />
+																	<c:out value="${fn:substringBefore(fiveStarPercentage, '.')}%" />
+																    </h5>
+																</li>
+																<li>
+																    <h5 class="me-3">4 점</h5>
+																    <c:set var="fourStarCount" value="0" />
+																		<c:forEach items="${review}" var="r">
+																			<c:if test="${r.rate >= 3.5 && r.rate < 4.5}">
+																				<c:set var="fourStarCount" value="${fourStarCount + 1}" />
+																			</c:if>
+																		</c:forEach>
+																	<div class="progress">
+																    	<c:set var="fourStarPercentage" value="${(fourStarCount / fn:length(review)) * 100}" />
+																	<div class="progress-bar" role="progressbar" style="width: ${fn:substringBefore(fourStarPercentage, '.')}%;"
+																	aria-valuenow="${fn:substringBefore(fourStarPercentage, '.')}%" aria-valuemin="0" aria-valuemax="100"></div>
+																	</div>
+																	<h5 class="ms-3">
+																    <c:set var="fourStarPercentage" value="${(fourStarCount / fn:length(review)) * 100}" />
+																	<c:out value="${fn:substringBefore(fourStarPercentage, '.')}%" />
+																    </h5>
+																</li>
+																<li>
+																    <h5 class="me-3">3 점</h5>
+															    	<c:set var="threeStarCount" value="0" />
+																		<c:forEach items="${review}" var="r">
+																			<c:if test="${r.rate >= 2.5 && r.rate < 3.5}">
+																				<c:set var="threeStarCount" value="${threeStarCount + 1}" />
+																			</c:if>
+																		</c:forEach>
+																	<div class="progress">
+																	    <c:set var="threeStarPercentage" value="${(threeStarCount / fn:length(review)) * 100}" />
+																	<div class="progress-bar" role="progressbar" style="width: ${fn:substringBefore(threeStarPercentage, '.')}%;"
+																	aria-valuenow="${fn:substringBefore(threeStarPercentage, '.')}%" aria-valuemin="0" aria-valuemax="100"></div>
+																	</div>
+																	<h5 class="ms-3">
+																    <c:set var="fourStarPercentage" value="${(threeStarCount / fn:length(review)) * 100}" />
+																	<c:out value="${fn:substringBefore(threeStarPercentage, '.')}%" />
+																    </h5>
+																</li>
+																<li>
+																    <h5 class="me-3">2 점</h5>
+																    <c:set var="twoStarCount" value="0" />
+																		<c:forEach items="${review}" var="r">
+																			<c:if test="${r.rate >= 1.5 && r.rate < 2.5}">
+																				<c:set var="twoStarCount" value="${twoStarCount + 1}" />
+																			</c:if>
+																		</c:forEach>
+																	<div class="progress">
+																    	<c:set var="twoStarPercentage" value="${(twoStarCount / fn:length(review)) * 100}" />
+																	<div class="progress-bar" role="progressbar" style="width: ${fn:substringBefore(twoStarPercentage, '.')}%;"
+																	aria-valuenow="${fn:substringBefore(twoStarPercentage, '.')}%" aria-valuemin="0" aria-valuemax="100"></div>
+																	</div>
+																	<h5 class="ms-3">
+																    <c:set var="twoStarPercentage" value="${(twoStarCount / fn:length(review)) * 100}" />
+																	<c:out value="${fn:substringBefore(twoStarPercentage, '.')}%" />
+																    </h5>
+																</li>
+																<li>
+																    <h5 class="me-3">1 점</h5>
+																    <c:set var="oneStarCount" value="0" />
+																		<c:forEach items="${review}" var="r">
+																			<c:if test="${r.rate >= 0.5 && r.rate < 1.5}">
+																				<c:set var="oneStarCount" value="${oneStarCount + 1}" />
+																			</c:if>
+																		</c:forEach>
+																	<div class="progress">
+																	    <c:set var="oneStarPercentage" value="${(oneStarCount / fn:length(review)) * 100}" />
+																	<div class="progress-bar" role="progressbar" style="width: ${fn:substringBefore(oneStarPercentage, '.')}%;"
+																	aria-valuenow="${fn:substringBefore(oneStarPercentage, '.')}%" aria-valuemin="0" aria-valuemax="100"></div>
+																	</div>
+																	<h5 class="ms-3">
+																	    <c:set var="oneStarPercentage" value="${(oneStarCount / fn:length(review)) * 100}" />
+																		<c:out value="${fn:substringBefore(oneStarPercentage, '.')}%" />
+																    </h5>
+																</li>
+															</ul>
+								<!-- 왼쪽 총 별점 퍼센테이지 및 평균 평점 -->
+                                       	 </div>
                                     </div>
 
-                                        <div class="customer-review-box col-md-9">
-                                             <div class="review-box d-flex justify-content-end">
-                                                    <div class="box-head">
-                                                        <button class="btn btn-solid-default btn-sm fw-bold" data-bs-toggle="modal"
-                                                            data-bs-target="#addPayment">
-                                                            후기 작성</button>
-                                                    </div>
-                                            </div>
+									<div class="customer-review-box col-md-9">
+   										<div class="review-box d-flex justify-content-end">
+											<div class="box-head">
+											    <button class="btn btn-solid-default btn-sm fw-bold writeReview" data-bs-toggle="modal"
+											        data-bs-target="#addReview">후기 작성</button>
+											</div>
+										</div>
                                             <h2 class="col-md-7" style="margin-top:-50px;">구매 후기</h2>
-
-                                            <div class="customer-section">
-                                                <div class="customer-details">
-                                                    <h5>김우희</h5>
+											<c:forEach items="${review}" var="review">
+	                                             <div class="customer-section" data-review="${review.num}" data-rate="${review.rate}">
+	                                                <div class="customer-details">
+	                                                    <c:set var="username" value="${fn:substringBefore(review.email, '@')}" />
+															<h5>${username}</h5>
+															<c:if test="${memberVO.memberNum eq review.memberNum }">
+															<div class="admin-update-delete d-flex justify-content-end">
+						                                        <a href="javascript:void(0)" class="me-3 reviewUpdate" data-bs-toggle="modal"
+		                                                            data-bs-target="#updateReview" id="reviewUpdate${review.num}"
+		                                                            data-review-num="${review.num}">수정</a>
+						                                        <a href="javascript:void(0)" data-bs-toggle="modal"
+						                                                    data-bs-target="#reviewdel" onclick="reviewDelete()" data-review-num="${review.num}" id="reviewDel">삭제</a>
+	                                    					</div>    
+	                                    					</c:if>
                                                     <ul class="rating my-2 d-inline-block">
-                                                        <li>
-                                                            <i class="fas fa-star theme-color"></i>
-                                                        </li>
-                                                        <li>
-                                                            <i class="fas fa-star theme-color"></i>
-                                                        </li>
-                                                        <li>
-                                                            <i class="fas fa-star theme-color"></i>
-                                                        </li>
-                                                        <li>
-                                                            <i class="fas fa-star"></i>
-                                                        </li>
-                                                        <li>
-                                                            <i class="fas fa-star"></i>
-                                                        </li>
-                                                    </ul>
-                                                    <p class="font-light">잘 쓰겠습니다.</p>
-
-                                                    <p class="date-custo font-light">- 2023/05/22 <span></span></p>
-                                                </div>
-                                            </div>
-
-                                            <div class="customer-section">
-                                                <div class="customer-details">
-                                                    <h5>Norwalker</h5>
-                                                    <ul class="rating my-2 d-inline-block">
-                                                        <li>
-                                                            <i class="fas fa-star theme-color"></i>
-                                                        </li>
-                                                        <li>
-                                                            <i class="fas fa-star theme-color"></i>
-                                                        </li>
-                                                        <li>
-                                                            <i class="fas fa-star theme-color"></i>
-                                                        </li>
-                                                        <li>
-                                                            <i class="fas fa-star"></i>
-                                                        </li>
-                                                        <li>
-                                                            <i class="fas fa-star"></i>
-                                                        </li>
-                                                    </ul>
-                                                    <p class="font-light">Pros: Nice large(9.7") screen. Bright colors.
-                                                        Easy
-                                                        to setup and get started. Arrived on time. Cons: a bit slow on
-                                                        response, but expected as tablet is 2 generations old. But works
-                                                        fine and good value for the money.</p>
-
-                                                    <p class="date-custo font-light">- Sep 08, 2021 <span></span></p>
-                                                </div>
-                                            </div>
-
-                                            <div class="customer-section">
-                                                <div class="customer-details">
-                                                    <h5>B. Perdue</h5>
-                                                    <ul class="rating my-2 d-inline-block">
-                                                        <li>
-                                                            <i class="fas fa-star theme-color"></i>
-                                                        </li>
-                                                        <li>
-                                                            <i class="fas fa-star theme-color"></i>
-                                                        </li>
-                                                        <li>
-                                                            <i class="fas fa-star theme-color"></i>
-                                                        </li>
-                                                        <li>
-                                                            <i class="fas fa-star"></i>
-                                                        </li>
-                                                        <li>
-                                                            <i class="fas fa-star"></i>
-                                                        </li>
-                                                    </ul>
-                                                    <p class="font-light">Love the processor speed and the sensitivity
-                                                        of
-                                                        the touch screen.</p>
-
-                                                    <p class="date-custo font-light">- Sep 08, 2021 <span></span></p>
-                                                </div>
-                                            </div>
-
-                                            <div class="customer-section">
-                                                <div class="customer-details">
-                                                    <h5>MSL</h5>
-                                                    <ul class="rating my-2 d-inline-block">
-                                                        <li>
-                                                            <i class="fas fa-star theme-color"></i>
-                                                        </li>
-                                                        <li>
-                                                            <i class="fas fa-star theme-color"></i>
-                                                        </li>
-                                                        <li>
-                                                            <i class="fas fa-star theme-color"></i>
-                                                        </li>
-                                                        <li>
-                                                            <i class="fas fa-star"></i>
-                                                        </li>
-                                                        <li>
-                                                            <i class="fas fa-star"></i>
-                                                        </li>
-                                                    </ul>
-                                                    <p class="font-light">I purchased the Tablet May 2017 and now April
-                                                        2019
-                                                        I have to charge it everyday. I don't watch movies on it..just
-                                                        play
-                                                        a game or two while on lunch. I guess now I need to power it
-                                                        down
-                                                        for future use.</p>
-
-                                                    <p class="date-custo font-light">- Sep 08, 2021 <span></span></p>
-                                                </div>
-                                            </div>
-                                            <nav class="page-section d-flex justify-content-end"
+							                          	<li> <i class="fas fa-star ${review.rate >= 0.5 ? 'theme-color' : ''}"></i></li>
+													    <li><i class="fas fa-star ${review.rate >= 1.5 ? 'theme-color' : ''}"></i></li>
+											            <li><i class="fas fa-star ${review.rate >= 2.5 ? 'theme-color' : ''}"></i></li>
+											            <li><i class="fas fa-star ${review.rate >= 3.5 ? 'theme-color' : ''}"></i></li>
+											            <li><i class="fas fa-star ${review.rate >= 4.5 ? 'theme-color' : ''}"></i></li>
+											        </ul>        
+														<input type="hidden" id="reviewNum" value="${review.num}" data-comment-num="${review.num}">
+	                                                    	<p class="font-light" name="contents">${review.contents}</p>
+	                                                    <input type="hidden" id="orderNum" name="orderNum" value="${review.orderNum}">
+														<input type="hidden" id="memberNum" name="memberNum" value="${review.memberNum}">
+														<input type="hidden" name="slicedCode" value="${param.slicedCode}">
+													<p class="date-custo font-light">
+														<fmt:formatDate value="${review.regDate}" pattern="yyyy/MM/dd" /><span></span></p>
+                                                	</div>
+                                               	</div>
+											</c:forEach>
+										
+                          <!-- paging --> <nav class="page-section d-flex justify-content-end"
                                                 style="position: relative;">
                                                 <ul class="pagination mx-auto">
                                                     <li class="page-item">
@@ -1321,17 +1112,16 @@
                                                         </a>
                                                     </li>
                                                 </ul>
-                                            </nav>
+                                            </nav> <!-- paging -->
                                         </div>
                                     </div>
-                                </div>
-                            </div>
+                            	</div>
+                            	<!-- 구매후기 end -->
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </section>
+		</div>
+	</div>
+</section>
     <!-- Shop Section end -->
 
 <!-- 장바구니 버튼 모달창 start -->
@@ -1477,3 +1267,4 @@
 </body>
 
 </html>
+ --%>

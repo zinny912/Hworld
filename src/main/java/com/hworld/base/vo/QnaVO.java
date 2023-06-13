@@ -11,33 +11,29 @@ import java.util.Date;
 @Getter
 @Setter
 public class QnaVO extends BoardVO{
-   
+	//주문번호 
 	private Integer orderNum;
 	
-	private String directCode;
+	private String slicedCode;
 	
 	private Integer serialNum;
 	
-    /**
-     * 답변
-     */
+    //답변 (관리자)
     private String reply;
 
-
-    /**
-     * 상태
-     */
+    //상태
     private Integer state;
 
-    /**
-     * 카테고리 코드
-     */
+    //카테고리 코드
     private String categoryCode;
 
-    /**
-     * 파일 경로
-     */
+    //답변작성일
+    private Date replyDate;
+    
+    //파일경로
     private String filePath;
+    
+    private String email;
 
     //private List<MemberVO> memberVOs;
 	private List<OrderVO> orderVOs;

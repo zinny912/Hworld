@@ -10,6 +10,14 @@
     <c:import url="../temp/style.jsp"></c:import>
     <title>Product 4 Image</title>
 <style>
+
+.ellipsis {
+        width: 30%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;  /* 말줄임 적용 */
+      }
+
 .rate {
   display: inline-block;
   font-size: 0;
@@ -369,50 +377,80 @@
 			<!-- 상품 문의 nav tap -->
 							<div class="tab-pane fade" id="question">
 							    <div class="accordion-group-header side-type mb-4">
-							        <h2 class="left title m-0">상품 문의 (문의Count)</h2>
+							    <c:set var="qnaCount" value="${fn:length(qnaList)}" />
+							        <h2 class="left title m-0">상품 문의 (${qnaCount})</h2>
 							        <div class="d-flex justify-content-end">
 							        	<button class="btn btn-solid-default btn-sm fw-bold me-4" style="margin-top:-25px;" data-bs-toggle="modal"
                                          data-bs-target="#addQna">문의 작성</button>
                                     </div>
                                 </div>
                                 	<div class="container mb-5">
-                                    	<div class="category-option">
+                                	<c:forEach items="${qnaList}" var="qna">
+                                    	<div class="category-option" data-qna-num="${qna.num}" data-qna-member="${qna.memberNum}" data-qna-state="${qna.state}">
                                         	<div class="accordion category-name" id="accordionExample">
                                             	<div class="accordion-item category-rating">
                                                 	<h2 class="accordion-header"  id="headingThree" style="padding:0px;">
                                                     	<button class="accordion-button" style="background-color:#fff; padding:0px;" type="button" data-bs-toggle="collapse"
                                                        	 data-bs-target="#collapseThree">
                                                         	<div class="d-flex col-10">
-																<div class="col-2 mx-2 theme-color">
+																
+																<c:if test="${qna.state == 0}">
+																<div class="col-2 mx-2" style="color:gray;">
+                                                           			<span>답변대기</span>
+                                                           		</div>	
+                                                           		</c:if>	
+                                                           		<c:if test="${qna.state == 1}">
+                                                           		<div class="col-2 mx-2 theme-color">
                                                            			<span>답변완료</span>
-                                                        		</div>
-                                                       			<h5 class="col-7 me-5">Qna 타이틀(작성내용 앞부분 잘라서 보여주기)</h5> 
-                                                       				<span class="user col-1 me-5" style="font-weight:400;">회원 ID @ 제외</span>
-                                                       				<span class="date col-1" style="font-weight:400;">작성일</span>
+                                                           		</div>
+                                                           		</c:if>	
+                                                        		
+                                                       			<h5 class="col-7 me-5 ellipsis">${qna.contents}</h5> 
+                                                       			<c:set var="username" value="${fn:substringBefore(qna.email, '@')}" /> 
+                                                       				<span class="user col-1 me-5 fw-bold" >${username}</span>
+                                                       				<fmt:formatDate value="${qna.regDate}" pattern="yyyy/MM/dd" var="formattedDate" />
+																	<span style="font-weight:400;">${formattedDate}</span>
                                                     		</div>  
                                                     	</button>
                                                 	</h2>
+                                                	
                                                 	<div id="collapseThree" class="accordion-collapse collapse"
                                                     	aria-labelledby="headingThree" data-bs-parent="#accordionExample">
                                                     	<div class="accordion-body">
                                                         	<div class="card">
                                                             	<div class="card-body"><!----><!---->                                                            
 	                                                                <span class="cate col-1">
-	                                                                    <span class="fw-bold text-danger">Q 회원 문의</span>
+	                                                                    <span class="fw-bold text-danger">Q</span> 
 	                                                                </span>
-                                                                <div>
-                                                                작성내용 
+	                                                                <c:if test="${empty qna.reply && memberVO.memberNum eq qna.memberNum}">
+	                                                                <div class="member-update-delete d-flex justify-content-end">
+								                                        <a href="javascript:void(0)" class="me-3 qnaUpdate" data-bs-toggle="modal"
+				                                                            data-bs-target="#updateQna" id="qnaUpdate${qna.num}"
+				                                                            data-qna-num="${qna.num}">수정</a>
+								                                        <a href="javascript:void(0)" data-bs-toggle="modal"
+						                                                    data-bs-target="#qnadel" onclick="qnaDelete()" data-qna-num="${qna.num}" id="qnaDel">삭제</a>
+	                                    					</div>    
+	                                                                </c:if>
+                                                                <div id="qnaContentsQ" >
+                                                                ${qna.contents} 
                                                                 </div>
+                                                                <c:if test="${memberVO.adminCheck eq 0 && empty qna.reply}">
+                                                                <button type="button" class="btn" style="margin-left:-20px;" id="replyAdd" data-bs-toggle="modal"
+                                         							data-bs-target="#addReply" data-qna-num="${qna.num}"> 답변달기</button>
+                                                                </c:if>
+                                                                <c:if test="${not empty qna.reply}"> 
                                                                 <hr>
                                                                 <div class="reply-box">
                                                                     <span class="cate col-1">
-                                                                        <span class="fw-bold text-danger"> A 관리자 답변</span>
+                                                                        <span class="fw-bold text-danger"> A</span>
                                                                     </span>
-                                                                    <div>안녕하세요.
-                                                                        관리자 답변 내용
+                                                                    <div>
+                                                                    ${qna.reply}
                                                                     </div>
-                                                                    	<span class="date">관리자 답변 작성일</span>
+                                                                    <fmt:formatDate value="${qna.replyDate}" pattern="yyyy/MM/dd" var="formattedDate2" />
+																	<span style="font-weight:400; float:right;" >답변작성일 : ${formattedDate2}</span>
                                                                 </div>
+                                                                </c:if>
                                                             	</div><!----><!---->
                                                         	</div>
                                                     	</div>
@@ -420,15 +458,17 @@
                                             	</div>
                                         	</div>   
                                     	</div>
+                                    	</c:forEach>
                                 	</div>  
                              	</div>
+                             	
                              	<!-- 상품문의 끝 -->
 						<!-- 구매후기 시작 -->
                              <div class="tab-pane fade" id="review">
                                 <div class="row g-4 col-12">
                                     <div class="col-md-3" style="margin-top:-20px;">
                                         <div class="customer-rating mt-5 me-5" >
-                                            <h2>평점</h2>
+                                           
 			                                  		<div hidden>        
 								                       <c:set var="totalRating" value="0" />${totalRating}
 														<c:forEach items="${review}" var="review">
@@ -436,7 +476,8 @@
 														</c:forEach>
 													</div>
 													<c:set var="averageRating" value="${totalRating / review.size()}" />
-														<h5 class="font-light" hidden>${averageRating}</h5>
+													 <h2>평점 (<fmt:formatNumber value="${averageRating}" pattern="#.#" />)</h2>
+
 				                                            <ul class="rating my-2 d-inline-block">
 																<li><i class="fas fa-star ${averageRating >= 0.5 ? 'theme-color' : ''}"></i></li>
 																<li><i class="fas fa-star ${averageRating >= 1.5 ? 'theme-color' : ''}"></i></li>
@@ -556,13 +597,15 @@
 	                                                <div class="customer-details">
 	                                                    <c:set var="username" value="${fn:substringBefore(review.email, '@')}" />
 															<h5>${username}</h5>
+															<c:if test="${memberVO.memberNum eq review.memberNum }">
 															<div class="admin-update-delete d-flex justify-content-end">
 						                                        <a href="javascript:void(0)" class="me-3 reviewUpdate" data-bs-toggle="modal"
 		                                                            data-bs-target="#updateReview" id="reviewUpdate${review.num}"
 		                                                            data-review-num="${review.num}">수정</a>
 						                                        <a href="javascript:void(0)" data-bs-toggle="modal"
-						                                                    data-bs-target="#reviewdel">삭제</a>
+						                                                    data-bs-target="#reviewdel" onclick="reviewDelete()" data-review-num="${review.num}" id="reviewDel">삭제</a>
 	                                    					</div>    
+	                                    					</c:if>
                                                     <ul class="rating my-2 d-inline-block">
 							                          	<li> <i class="fas fa-star ${review.rate >= 0.5 ? 'theme-color' : ''}"></i></li>
 													    <li><i class="fas fa-star ${review.rate >= 1.5 ? 'theme-color' : ''}"></i></li>
@@ -570,7 +613,7 @@
 											            <li><i class="fas fa-star ${review.rate >= 3.5 ? 'theme-color' : ''}"></i></li>
 											            <li><i class="fas fa-star ${review.rate >= 4.5 ? 'theme-color' : ''}"></i></li>
 											        </ul>        
-														<input id="reviewNum" value="${review.num}" data-comment-num="${review.num}">
+														<input type="hidden" id="reviewNum" value="${review.num}" data-comment-num="${review.num}">
 	                                                    	<p class="font-light" name="contents">${review.contents}</p>
 	                                                    <input type="hidden" id="orderNum" name="orderNum" value="${review.orderNum}">
 														<input type="hidden" id="memberNum" name="memberNum" value="${review.memberNum}">
@@ -931,10 +974,9 @@
                             <textarea class="form-control col-12"  placeholder="간단한 후기를 작성해주세요." id="contents" name="contents" value=""></textarea>
                         </div>
                     </div>
-                        <label for="orderNum" class="form-label" >주문번호</label>
-                        <input type="text" id="orderNum" name="orderNum">
-                        <label for="memberNum" class="form-label" >회원번호</label>
-                        <input type="text" id="memberNum" name="memberNum">
+                        
+                        <input type="hidden" id="orderNum" name="orderNum">
+                        <input type="hidden" id="memberNum" name="memberNum">
                         <input type="hidden" name="slicedCode" value="${param.slicedCode}">
                     <div class="modal-footer pt-0 text-end d-block">
                         <button type="button" class="btn btn-solid-default btn-sm" data-bs-dismiss="modal" onclick="form.submit()">작성</button>
@@ -958,7 +1000,7 @@
                             <li>
                                 <label class=""> 상품명</label>
                                 <span class="mx-3">|</span>
-                                <input class="fw-bold" id="modalRevName" name="productName" value="" readonly>
+                                <span id="modalRevName" class="fw-bold" id="modalRevName" name="productName" value="" ></span>
                                 
                             </li>
 						</ul>
@@ -981,10 +1023,10 @@
                             </textarea>
                         </div>   
                     </div>
-                    	<input type="text" id="modalRevRate" name="rate" value="">
-                    	<input type="text" id="modalRevNum" name="reviewNum" value="">
-                        <input type="text" id="modalRevOrderNum" name="orderNum" value="">
-                        <input type="text" id="modalRevMemberNum" name="memberNum" value="">
+                    	<input type="hidden" id="modalRevRate" name="rate" value="">
+                    	<input type="hidden" id="modalRevNum" name="reviewNum" value="">
+                        <input type="hidden" id="modalRevOrderNum" name="orderNum" value="">
+                        <input type="hidden" id="modalRevMemberNum" name="memberNum" value="">
                         <input type="hidden" id="modalRevSlicedCode" name="slicedCode" value="${param.slicedCode}">
                     <div class="modal-footer pt-0 text-end d-block">
                         <button type="button" class="btn btn-solid-default btn-sm" data-bs-dismiss="modal" onclick="updateReviewConfirm()" id="updateReviewConfirm">작성</button>
@@ -995,36 +1037,78 @@
     </div>
     <!-- 리뷰 수정 모달 end -->                 
     
-	<!-- 문의 작성 -->
-    				<div class="modal fade payment-modal" id="addPayment2">
+	<!-- 문의 작성 member -->
+    				<div class="modal fade payment-modal" id="addQna">
 				        <div class="modal-dialog modal-dialog-centered">
 							<div class="modal-content">
 								<div class="modal-header">
 									<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
 								</div>
 									<div class="modal-body">
-									<form>
+									<form action="./directQnaAdd" method="POST">
 										<div class="col-md-12 mt-1 mb-0">
 											<div class=""> 상품명
-												<ul>
-													<li><span class="mx-3">|</span></li>
-													<li><span class="fw-bold">Galaxy S21 Ultra 5G</span></li>
-												</ul>
+												<span class="mx-3">|</span>
+												<span class="fw-bold" id="directName3"></span>
 											</div>
 											<div class="mt-2 mb-3">
-												<label for="card" class="form-label">상품 문의</label>
-												<textarea class="form-control col-12"  placeholder="해당 상품과 관련하여 궁금한 점을 작성해주세요."></textarea>
+												<label for="contents" class="form-label">상품 문의</label>
+												<textarea class="form-control col-12"  placeholder="해당 상품과 관련하여 궁금한 점을 작성해주세요." id="qnaContents" name="contents"></textarea>
 											</div>
+											
+											<input type="text" name="memberNum" id="memberNumQ" value="${memberVO.memberNum}">
+											<input type="text" name="slicedCode" id="productNameQ" value="${param.slicedCode}">
+											
+										</div>
+									
+										<div class="modal-footer d-flex justify-content-end">
+											<button class="btn btn-solid-default btn-sm" data-bs-dismiss="modal" type="button" onclick="form.submit()">작성</button>
 										</div>
 									</form>
-										<div class="modal-footer d-flex justify-content-end">
-											<button class="btn btn-solid-default btn-sm" data-bs-dismiss="modal">작성</button>
-										</div>
 					        		</div>
 					    	</div>
 						</div>
 					</div>
     <!-- 문의작성 모달 End -->
+    
+    <!-- 문의작성 모달 admin -->
+    				<div class="modal fade payment-modal" id="addReply">
+				        <div class="modal-dialog modal-dialog-centered">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+								</div>
+									<div class="modal-body">
+									<form action="./directReplyAdd" method="POST">
+										<div class="col-md-12 mt-1 mb-0">
+											<div class=""> 상품명
+												<span class="mx-3">|</span>
+												<span class="fw-bold" id="directName4"></span>
+											</div>
+											<div class="mt-2 mb-3">
+												<label for="contents" class="form-label">문의내용</label>
+												<textarea class="form-control col-12" id="modelQnaContents" name="contents" readonly> </textarea>
+											</div>
+											<div class="mt-2 mb-3">
+												<label for="reply" class="form-label">답변작성</label>
+												<textarea class="form-control col-12" id="modelQnaReply" name="reply"></textarea>
+											</div>
+											
+											<input type="text" name="num" id="modalQnaNum" >
+											<input type="hidden" name="slicedCode" value="${param.slicedCode}">
+											
+										</div>
+									
+										<div class="modal-footer d-flex justify-content-end">
+											<button class="btn btn-solid-default btn-sm" data-bs-dismiss="modal" type="button" onclick="form.submit()">작성</button>
+										</div>
+									</form>
+					        		</div>
+					    	</div>
+						</div>
+					</div>
+    <!-- 문의작성 모달 End -->
+    
 
     <!-- sticky cart -->
     <div class="sticky-bottom-cart" style="background-color: #383838;">
@@ -1032,8 +1116,7 @@
             <div class="cart-content">
                 <div class="l-grid" style="margin-left: 102px; height: 90px; width: 1180px; margin: 0 auto;">            
                     <div id="paySummary" class="price-area" style="width: 680px; float: left; padding-top: 28px; line-height: normal;">
-                        <p class="exemption-title" id="stickyClubDc" style="display:none; padding-bottom: 25px; font-size: 18px; letter-spacing: -0.42px; color: #cdcdcd;">[클럽기변] 잔여 휴대폰 할부금 <strong class="price" style="color: #fff; font-weight: bolder;">- 0원</strong> 면제</p>
-                        <p class="exemption-title" id="stickyTodayRwd" style="display:none; padding-bottom: 25px; font-size: 18px; letter-spacing: -0.42px; color: #cdcdcd;">[바로보상] 신청하신 는 최고 등급일 경우 <strong class="price" style="color: #fff; font-weight: bolder;">0원</strong> 보상 가능합니다.</p>
+                        
                         <p class="price-opt" style="position: relative; padding-top: 28px; min-width: 113px; height: 38px; line-height: normal; display: inline-block; vertical-align: middle; margin: 0; padding: 0; margin-block-start: 1em; margin-block-end: 1em; margin-inline-start: 0px; margin-inline-end: 0px;">
                             <span class="title" style="position: absolute; bottom: 3px; left: 0; color: #cdcdcd; font-size: 14px; white-space: nowrap; line-height: normal;">휴대폰 월 할부금</span>
                             <em class="price" style="font-style: normal;">		
@@ -1041,7 +1124,8 @@
                                 <span class="unit" style="color: #fff; font-size: 16px;">원</span>	
                             </em>
                         </p>
-                        <span class="ico-plus" style="font-weight: bolder; font-size: 20px; color: white; width: 20px; height: 20px; background-position: -446px -546px; margin: 0 28px; display: inline-block; vertical-align: middle; overflow: hidden; display: inline-block; background-image: url(../img/spr_img_v3.png); background-repeat: no-repeat;">+</span>
+                        <span class="ico-plus" style="font-weight: bolder; font-size: 20px; color: white; width: 20px; height: 20px; background-position: -446px -546px; margin: -10px 28px 0 18px; display: inline-block; vertical-align: middle; overflow: hidden; display: inline-block; background-image: url(../img/spr_img_v3.png); background-repeat: no-repeat;">+</span>
+                        
                         <p class="price-opt" style="position: relative; padding-top: 28px; min-width: 113px; height: 38px; line-height: normal; display: inline-block; vertical-align: middle; margin: 0; padding: 0; margin-block-start: 1em; margin-block-end: 1em; margin-inline-start: 0px; margin-inline-end: 0px;">	
                             <span class="title" style="position: absolute; bottom: 3px; left: 0; color: #cdcdcd; font-size: 14px; white-space: nowrap;">월 통신요금</span>	
                             <em class="price" style="font-style: normal;">		
@@ -1049,7 +1133,7 @@
                                 <span class="unit" style="color: #fff; font-size: 16px;">원</span>	
                             </em>
                         </p>
-                        <span class="ico-equal" style="font-weight: bolder; font-size: 20px; color: white; width: 20px; height: 20px; background-position: -470px -546px; margin: 0 28px; display: inline-block; vertical-align: middle; overflow: hidden;  background-image: url(../img/spr_img_v3.png); background-repeat: no-repeat;">=</span>
+                        <span class="ico-equal" style="font-weight: bolder; font-size: 20px; color: white; width: 20px; height: 20px; background-position: -470px -546px; margin: -10px 28px 0 18px; display: inline-block; vertical-align: middle; overflow: hidden;  background-image: url(../img/spr_img_v3.png); background-repeat: no-repeat;">=</span>
                         <div class="price-sum" style="position: absolute; padding-top: 28px; min-width: 113px; height: 38px; line-height: normal; display: inline-block; vertical-align: middle; margin: 0; padding: 0; margin-block-start: 1em; margin-block-end: 1em; margin-inline-start: 0px; margin-inline-end: 0px;">	
                             <span class="title" style="position: absolute; bottom: 3px; left: 0; color: #cdcdcd; font-size: 14px; white-space: nowrap;">예상 월 납부 금액</span>	
                             <strong class="price" style="display: inline-block; font-weight: bolder;">		
@@ -1073,7 +1157,7 @@
     </div>    
  <!-- sticky cart end -->
  <!-- 상품 삭제 모달창 start -->
- <div class="modal fade payment-modal" id="productdel">
+ <div class="modal fade payment-modal" id="reviewdel">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
@@ -1083,11 +1167,13 @@
                 <form>
                     <div class="mb-4">
                      <h3>정말 삭제하시겠습니까? </h3> <h5>삭제 후에는 복구가 불가합니다.</h5>
+                     <input type="hidden" id="modalDelNum" name="num" value="">
                     </div>
                 </form>
             </div>
             <div class="modal-footer pt-0 text-end d-block">
-                <a href="#" ><button class="btn btn-solid-default rounded-1">확인</button></a>
+            	<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                <button type="button" class="btn btn-solid-default rounded-1" id="confirmDelete" onclick="confirmDelete()">삭제</button>
             </div>
         </div>
     </div>
@@ -1183,7 +1269,25 @@
     const directName = $('.directNameValue').data('direct-name'); // 해당 후기 작성 버튼에 연결된 제품의 directName 값을 가져옴
     $('#directName2').text(directName); // 모달 창 내에서 제품명을 표시하는 곳에 directName 값을 설정
   });
+  //문의 작성 버튼 클릭 시 모달 창이 열릴 때 실행되는 함수
+  $('#addQna').on('show.bs.modal', function (event) {
+	    const directName = $('.directNameValue').data('direct-name'); // 해당 후기 작성 버튼에 연결된 제품의 directName 값을 가져옴
+	    $('#directName3').text(directName); // 모달 창 내에서 제품명을 표시하는 곳에 directName 값을 설정
+	  });
+  
+  $('#addReply').on('show.bs.modal', function(event) {
+	  const button = $(event.relatedTarget); // 클릭한 버튼 요소
+	  const qnaNum = button.data('qna-num'); // data-qna-num 속성 값 가져오기
+	  const qnaContents = button.closest('.accordion-item').find('#qnaContentsQ').text().trim(); // 문의 내용 가져오기
+	  const directName = $('.directNameValue').data('direct-name'); // 해당 후기 작성 버튼에 연결된 제품의 directName 값을 가져옴
+	    $('#directName4').text(directName); // 모달 창 내에서 제품명을 표시하는 곳에 directName 값을 설정
+
+	  // 모달 내부 요소에 값 설정
+	  $(this).find('#modalQnaNum').val(qnaNum);
+	  $(this).find('#modelQnaContents').val(qnaContents);
+	});
 </script>
+
 <script type="text/javascript">
   // 모달창에서 값을 선택하고 확인 버튼을 클릭했을 때 호출되는 함수
   function onSelectConfirm() {

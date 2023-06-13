@@ -20,6 +20,7 @@ import com.hworld.base.util.FileManager;
 import com.hworld.base.util.Pager;
 import com.hworld.base.vo.DirectVO;
 import com.hworld.base.vo.PlanVO;
+import com.hworld.base.vo.QnaVO;
 import com.hworld.base.vo.ReviewVO;
 
 import lombok.extern.slf4j.Slf4j;
@@ -99,6 +100,20 @@ public class DirectService {
 	public int setReviewUpdate(ReviewVO reviewVO) throws Exception{
 		return directDAO.setReviewUpdate(reviewVO);
 	}
+	
+	//상품문의 가져오기 
+	public List<QnaVO> getDirectQna(QnaVO qnaVO) throws Exception{
+		return directDAO.getDirectQna(qnaVO);
+	}
+	//상품문의 작성
+	public int setQnaAdd(QnaVO qnaVO) throws Exception{
+		return directDAO.setQnaAdd(qnaVO);
+	}
+	//상품문의 답글작성
+	public int setReplyAdd(QnaVO qnaVO) throws Exception{
+		return directDAO.setReplyAdd(qnaVO);
+	}
+	
 	
 	//getExistPlanList
 	public List<PlanVO> getExistPlanList() throws Exception{

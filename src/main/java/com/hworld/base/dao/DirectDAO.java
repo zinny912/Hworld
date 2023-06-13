@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Mapper;
 import com.hworld.base.util.Pager;
 import com.hworld.base.vo.DirectVO;
 import com.hworld.base.vo.PlanVO;
+import com.hworld.base.vo.QnaVO;
 import com.hworld.base.vo.ReviewVO;
 
 
@@ -59,6 +60,15 @@ public interface DirectDAO {
 	
 	//리뷰삭제
 	public int setReviewDelete(ReviewVO reviewVO) throws Exception;
+	
+	//상품문의
+	public List<QnaVO> getDirectQna(QnaVO qnaVO) throws Exception;
+	
+	//상품문의 작성
+	public int setQnaAdd(QnaVO qnaVO) throws Exception;
+	
+	//상품문의 답글 작성
+	public int setReplyAdd(QnaVO qnaVO) throws Exception;
 	
 	//존재하는 plan 타입 가져오기
 	public List<PlanVO> getExistPlanList() throws Exception;

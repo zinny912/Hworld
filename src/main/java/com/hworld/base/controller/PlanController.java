@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -46,6 +47,24 @@ public class PlanController {
 		mv.setViewName("hworld/planList");
 		return mv;
 	}
+	
+	@GetMapping("planDetail")
+	public ModelAndView getDetail(PlanVO planVO) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		PlanVO plan = planService.getDetail(planVO);
+		mv.addObject("planVO", plan);
+		mv.setViewName("hworld/planDetail");
+		return mv;
+	}
+	
+	// 요금제 디테일 > 요금제 변경 확인
+		@GetMapping("planChange")
+		public ModelAndView e8() throws Exception{
+			ModelAndView modelAndView = new ModelAndView();
+			modelAndView.setViewName("hworld/planChange");
+			return modelAndView;
+		}
+		
 	
 	// 요금제&부가서비스 리스트
 	@GetMapping("planUpdate")
@@ -95,11 +114,5 @@ public class PlanController {
 		return modelAndView;
 	}
 	
-	// 요금제 디테일 > 요금제 변경 확인
-	@GetMapping("planChange")
-	public ModelAndView e8() throws Exception{
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("hworld/planChange");
-		return modelAndView;
-	}
+	
 }

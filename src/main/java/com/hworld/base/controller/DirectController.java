@@ -20,12 +20,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
+
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -33,6 +33,7 @@ import com.hworld.base.service.DirectService;
 import com.hworld.base.util.Pager;
 import com.hworld.base.vo.DirectVO;
 import com.hworld.base.vo.PlanVO;
+import com.hworld.base.vo.QnaVO;
 import com.hworld.base.vo.ReviewVO;
 
 import lombok.extern.slf4j.Slf4j;
@@ -67,16 +68,16 @@ public class DirectController {
 
 	// 휴대폰 상세 페이지
 	@GetMapping("phoneDetail")
-	public ModelAndView getDetail(String slicedCode) throws Exception{
+	public ModelAndView getDetail(String slicedCode, QnaVO qnaVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
 
 	    List<DirectVO> ar = directService.getDetail(slicedCode);
 	    List<ReviewVO> reviews = directService.getReview(slicedCode); //slicedCode로 페이징된 리뷰 목록 조회
 	    List<PlanVO> existPlanList = directService.getExistPlanList();
 	    List<PlanVO> planList = directService.getPlanList();
-	    for(PlanVO planVO : planList) {
-			
-		}
+	    List<QnaVO> qnaList = directService.getDirectQna(qnaVO); 
+	    
+	    log.error(qnaVO.getSlicedCode());
 	    
 	    List<PlanVO> gList = new ArrayList<>();
 		List<PlanVO> sList = new ArrayList<>();
@@ -101,6 +102,8 @@ public class DirectController {
 		        hList.add(plan);
 		    }
 		}
+	    
+		
 		
 		//
 		mv.addObject("existList", existPlanList);
@@ -110,6 +113,8 @@ public class DirectController {
 		mv.addObject("zList", zList);
 		mv.addObject("wList", wList);
 		mv.addObject("hList", hList);
+		
+		mv.addObject("qnaList", qnaList);
 		
 	    mv.addObject("list", ar);
 	    mv.addObject("review",reviews);
@@ -129,16 +134,6 @@ public class DirectController {
 //		return mv;
 //	}
 	
-	//리뷰 추가
-	@PostMapping("reviewAdd")
-	public ModelAndView setReviewAdd(ReviewVO reviewVO, ModelAndView mv) throws Exception {
-		int result = directService.setReviewAdd(reviewVO);
-		String slicedCode = reviewVO.getSlicedCode();  // reviewVO에서 slicedCode 값을 가져온다
-		String redirectUrl = "/direct/phoneDetail?slicedCode=" + slicedCode;  // 리다이렉트할 URL을 생성한다
-
-		mv.setViewName("redirect:" + redirectUrl);  // 리다이렉트할 URL을 설정한다
-		return mv;
-	}
 	
 	// 액세서리 리스트 페이지
 	@GetMapping("accessoryList")
@@ -236,16 +231,61 @@ public class DirectController {
 		modelAndView.setViewName("redirect:/direct/phoneDetail?slicedCode="+slicedCode);
 		return modelAndView;
 	}
+	
+	
+	//리뷰 추가
+	@PostMapping("reviewAdd")
+	public ModelAndView setReviewAdd(ReviewVO reviewVO, ModelAndView mv) throws Exception {
+		int result = directService.setReviewAdd(reviewVO);
+		String slicedCode = reviewVO.getSlicedCode();  // reviewVO에서 slicedCode 값을 가져온다
+		String redirectUrl = "/direct/phoneDetail?slicedCode=" + slicedCode;  // 리다이렉트할 URL을 생성한다
+
+		mv.setViewName("redirect:" + redirectUrl);  // 리다이렉트할 URL을 설정한다
+		return mv;
+	}
+		
 
 	// 리뷰 수정 처리
 	@PostMapping("reviewUpdate")
-	public ModelAndView postReviewUpdate(ReviewVO reviewVO) throws Exception {
+	public ModelAndView setReviewUpdate(ReviewVO reviewVO) throws Exception {
 	    ModelAndView mv = new ModelAndView();
 	    int result = directService.setReviewUpdate(reviewVO);
 	    String slicedCode = reviewVO.getSlicedCode();  // reviewVO에서 slicedCode 값을 가져옵니다.
 	    String redirectUrl = "/direct/phoneDetail?slicedCode=" + slicedCode;  // 리다이렉트할 URL을 생성합니다.
 	    mv.setViewName("redirect:" + redirectUrl);  // 리다이렉트할 URL을 설정합니다.
 	    return mv;
+	}
+	
+	//리뷰 삭제 
+	@PostMapping("reviewDelete")
+	public ModelAndView setReviewDelete(ReviewVO reviewVO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		int result = directService.setReviewDelete(reviewVO);
+		String slicedCode = reviewVO.getSlicedCode();  // reviewVO에서 slicedCode 값을 가져옵니다.
+	    String redirectUrl = "/direct/phoneDetail?slicedCode=" + slicedCode;  // 리다이렉트할 URL을 생성합니다.
+	    mv.setViewName("redirect:" + redirectUrl);  // 리다이렉트할 URL을 설정합니다.
+		return mv;
+	}
+	
+	//상품 문의 추가
+	@PostMapping("directQnaAdd")
+	public ModelAndView setQnaAdd(QnaVO qnaVO, ModelAndView mv) throws Exception {
+		int result = directService.setQnaAdd(qnaVO);
+		String slicedCode = qnaVO.getSlicedCode();  // reviewVO에서 slicedCode 값을 가져온다
+		String redirectUrl = "/direct/phoneDetail?slicedCode=" + slicedCode;  // 리다이렉트할 URL을 생성한다
+		mv.setViewName("redirect:" + redirectUrl);  // 리다이렉트할 URL을 설정한다
+		return mv;
+	}
+	//상품 답글 추가 (admin)
+	@PostMapping("directReplyAdd")
+	public ModelAndView setReplyAdd(QnaVO qnaVO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		int result = directService.setReplyAdd(qnaVO);
+		String slicedCode = qnaVO.getSlicedCode();  // reviewVO에서 slicedCode 값을 가져온다
+		String redirectUrl = "/direct/phoneDetail?slicedCode=" + slicedCode;  // 리다이렉트할 URL을 생성한다
+		mv.setViewName("redirect:" + redirectUrl);  // 리다이렉트할 URL을 설정한다
+		return mv;
+		
 	}
 	
 	// 상품 번호 이동 페이지

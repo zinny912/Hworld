@@ -10,8 +10,9 @@
         const orderNum = $reviewSection.find('#orderNum').val();
         const memberNum = $reviewSection.find('#memberNum').val();
         const rate = $reviewSection.data('rate');
-       	console.log(rate,'제발 나와줘');
-
+        const modalRevName = document.getElementById('modalRevName');
+		modalRevName.textContent = directName;
+       	
         // 값 입력
         $('#modalRevName').val(directName);
         $('#modalRevContents').text(contents);
@@ -20,8 +21,7 @@
         $('#modalRevNum').val(reviewNum);
         $('#modalRevRate').val(rate);
         
-        // 기존 별점 모양 초기화
-    $('.modalRate input').prop('checked', false);
+       
 
     // 기존 별점 모양에 선택된 별점 표시
     const starId = 'modalRevStar' + rate;
@@ -37,11 +37,11 @@
 // 수정된 데이터 전송
 $('#updateReviewConfirm').click(function() {
     // 리뷰 아이디 가져오기
-    let reviewId = $('#modalReviewNum').val();
+    let reviewId = $('#modalRevNum').val();
     
     // 수정된 데이터 가져오기
     let updatedRate = $('#modalRevRate').val();
-    let updatedContents = $('#contents').val();
+    let updatedContents = $('#modalRevContents').val();
     let updatedOrderNum = $('#modalRevOrderNum').val();
     let updatedMemberNum = $('#modalRevMemberNum').val();
     
@@ -62,7 +62,38 @@ $('#updateReviewConfirm').click(function() {
 	
    	 	console.log(response);
 		console.log('성공');
+		location.reload();
+		alert("수정이 완료되었습니다.^^*");
 	   
+        },
+        error: function(xhr, status, error) {
+            // 오류 처리
+            console.log(error);
+        }
+    });
+});
+
+// 삭제 버튼 클릭 이벤트 처리
+$('#reviewDel').click(function() {
+    const num = $(this).data('review-num');
+    $('#modalDelNum').val(num);
+});
+
+$('#confirmDelete').click(function() {
+    let reviewId = $('#modalDelNum').val();
+    alert(reviewId);
+    // POST 방식으로 수정된 데이터 전송
+    $.ajax({
+        url: "/direct/reviewDelete",
+        type: "POST",
+        data: {
+            num: reviewId
+        },
+        success: function(response) {
+            // 응답 데이터 확인
+          
+            location.reload();
+            alert("삭제가 완료되었습니다.^^*");
         },
         error: function(xhr, status, error) {
             // 오류 처리

@@ -99,23 +99,41 @@
 	</select> 
 	<!-- 리뷰 작성 -->
 	<insert id="setReviewAdd" parameterType="ReviewVO">
-	INSERT INTO REVIEW (MEMBERNUM, ORDERNUM, CONTENTS, RATE, REGDATE)
-	VALUES (#{memberNum}, #{orderNum}, #{contents}, #{rate}, now())
+		INSERT INTO REVIEW (MEMBERNUM, ORDERNUM, CONTENTS, RATE, REGDATE)
+		VALUES (#{memberNum}, #{orderNum}, #{contents}, #{rate}, now())
 	</insert> 
 	<!-- 리뷰 수정 -->
 	<update id="setReviewUpdate" parameterType="ReviewVO">
-	UPDATE REVIEW
-	SET CONTENTS=#{contents}, RATE=#{rate}
-	WHERE NUM=#{num}
+		UPDATE REVIEW
+		SET CONTENTS=#{contents}, RATE=#{rate}
+		WHERE NUM=#{num}
 	</update>
 	
 	<!-- 리뷰 삭제 -->
 	<delete id="setReviewDelete" parameterType="ReviewVO">
-	DELETE FROM REVIEW
-	WHERE NUM=#{num}
+		DELETE FROM REVIEW
+		WHERE NUM=#{num}
 	</delete>
 	
 	<!-- 상품문의 -->
+	<select id="getDirectQna" resultType="QnaVO" parameterType="QnaVO">
+		SELECT Q.*, M.EMAIL AS email FROM QNA Q
+		INNER JOIN MEMBER M ON M.MEMBERNUM =Q.MEMBERNUM 
+		WHERE SLICEDCODE =#{slicedCode}
+	</select>
+	
+	<!-- 상품문의 추가 -->
+	<insert id="setQnaAdd" parameterType="QnaVO">
+	INSERT INTO QNA (MEMBERNUM, SLICEDCODE, ORDERNUM, SERIALNUM, TITLE, CONTENTS, REPLY, REGDATE, STATE, CATEGORYCODE, FILEPATH, REPLYDATE)
+	VALUES(#{memberNum}, #{slicedCode} ,NULL, NULL, NULL, #{contents}, NULL, now(), 0, '03', NULL, NULL);
+	</insert>
+	
+	<!-- 상품문의 답글 업데이트 -->
+	<update id="setReplyAdd" parameterType="QnaVO">
+		UPDATE QNA
+		SET REPLY=#{reply}, REPLYDATE=now(), STATE=1
+		WHERE NUM=#{num}
+	</update>
 	
 	
 	<!-- Plan -->
