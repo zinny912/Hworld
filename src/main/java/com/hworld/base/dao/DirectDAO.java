@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import com.hworld.base.util.Pager;
@@ -19,8 +21,11 @@ public interface DirectDAO {
 	//상품 수
 	public Long getTotalCount(Pager pager) throws Exception;
 	
-	//상품 리스트 조회 
+	//휴대폰 상품 리스트 조회 
 	public List<DirectVO> getList(Pager pager) throws Exception;
+	
+	//악세사리 상품 리스트 조회 
+	public List<DirectVO> getAccList(Pager pager) throws Exception;
 	
 	//상품 하나 옵션 다수 조회
 	public List<DirectVO> getDetail(String slicedCode) throws Exception;

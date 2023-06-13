@@ -110,14 +110,14 @@
  
     <!-- Cart Section Start -->
     <section class="d-flex justify-content-center cart-section section-b-space" >
-        <div class="col-lg-6 " >
+        <div class="col-lg-10 " >
                 <div class="table-responsive ">
                     <table class="table">
                         <tbody>
                         <div class="cart-allCheck-wrap" style="margin-left:57px;">                            
                             <div class="qty-box d-flex">
                                 <div class="form-check custome-form-check">
-                                    <input class="checkbox_animated check-it" type="checkbox" id="flexCheckDefault">
+                                    <input class="checkbox_animated check-it" type="checkbox" id="flexCheckDefault" checked="checked">
                                 </div>
                             <div class="d-flex" style="margin-left:10px;">
                                 <a class="text-decoration-underline theme-color d-block text-capitalize mt-1">전체 선택</a>
@@ -227,7 +227,7 @@
                                 <td class="cart-totalPrice-wrap" colspan="7">
                                     <div class="d-flex justify-content-end">
                                         <h5 class="me-5  fw-bold">총 결제 예상금액</h5>
-                                        <h2 class="mx-5 fw-bold">19,800원</h2>
+                                        <h2 class="mx-5 fw-bold"></h2>
                                         <button class="btn btn-solid-default btn-spacing" type="button">총 ?건 주문하기</button>
                                     </div>
                                 </td>
@@ -294,7 +294,96 @@
 </div>
 <!-- 변경하기 모달창 end -->
 
+
+
     <script>
+    
+    
+ // 수량 버튼에 대한 이벤트 핸들러 등록
+    document.addEventListener('DOMContentLoaded', function() {
+      var quantityInputs = document.querySelectorAll('.input-number');
+      var priceElements = document.querySelectorAll('.td-color');
+
+      // 가격 업데이트 함수
+      function updatePrice() {
+        for (var i = 0; i < quantityInputs.length; i++) {
+          var quantityInput = quantityInputs[i];
+          var priceElement = priceElements[i];
+          var initialPrice = parseInt(priceElement.getAttribute('data-price'));
+          var currentQuantity = parseInt(quantityInput.value);
+          var newPrice = initialPrice * currentQuantity;
+          priceElement.innerText = newPrice.toLocaleString() + '원';
+        }
+      }
+
+      // 수량 감소 버튼 클릭 이벤트
+      var quantityMinusBtns = document.querySelectorAll('.quantity-left-minus');
+      quantityMinusBtns.forEach(function(quantityMinusBtn, index) {
+        quantityMinusBtn.addEventListener('click', function() {
+          var quantityInput = quantityInputs[index];
+          var currentQuantity = parseInt(quantityInput.value);
+
+          if (currentQuantity > 1) {
+            currentQuantity--;
+            quantityInput.value = currentQuantity;
+            updatePrice(); // 가격 업데이트
+            updateTotalPrice(); // 총 결제 예상금액 업데이트
+          }
+        });
+      });
+
+      // 수량 증가 버튼 클릭 이벤트
+      var quantityPlusBtns = document.querySelectorAll('.quantity-right-plus');
+      quantityPlusBtns.forEach(function(quantityPlusBtn, index) {
+        quantityPlusBtn.addEventListener('click', function() {
+          var quantityInput = quantityInputs[index];
+          var currentQuantity = parseInt(quantityInput.value);
+
+          currentQuantity++;
+          quantityInput.value = currentQuantity;
+          updatePrice(); // 가격 업데이트
+          updateTotalPrice(); // 총 결제 예상금액 업데이트
+        });
+      });
+
+      // 수량 변경시 이벤트
+      quantityInputs.forEach(function(quantityInput) {
+        quantityInput.addEventListener('change', function() {
+          var newQuantity = parseInt(this.value);
+          if (!isNaN(newQuantity) && newQuantity >= 1) {
+            this.value = newQuantity;
+          } else {
+            this.value = 1;
+          }
+          updatePrice(); // 가격 업데이트
+          updateTotalPrice(); // 총 결제 예상금액 업데이트
+        });
+      });
+
+      // 총 결제 예상금액 업데이트 함수
+      function updateTotalPrice() {
+        var totalPriceElement = document.querySelector('.cart-totalPrice-row h2');
+        var unitPriceElements = document.querySelectorAll('.td-color');
+        var quantityInputElements = document.querySelectorAll('.input-number');
+
+        var totalPrice = 0;
+
+        for (var i = 0; i < unitPriceElements.length; i++) {
+          var unitPrice = parseInt(unitPriceElements[i].innerText.replace(',', '').replace('원', ''));
+          var quantity = parseInt(quantityInputElements[i].value);
+          var itemPrice = unitPrice * quantity;
+          totalPrice += itemPrice;
+        }
+
+        totalPriceElement.innerText = totalPrice.toLocaleString() + '원';
+      }
+
+      // 페이지 로딩 시 초기 총 결제 예상금액 업데이트
+      updateTotalPrice();
+    });
+
+
+ /* 
         $(".quantity-wrapper .quantity-right-plus").on("click", function () {
             var $qty = $(this).siblings(".input-wrapper").find(".input-number");
             var currentVal = parseInt($qty.val(), 10);
@@ -309,7 +398,7 @@
             if (!isNaN(currentVal) && currentVal > 1) {
                 $qty.val(currentVal - 1);
             	}
-            });
+            }); */
     </script>
 <c:import url="../temp/footer.jsp"></c:import>    
 </body>

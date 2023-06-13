@@ -12,7 +12,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import javax.validation.Valid;
 
 import org.apache.catalina.util.URLEncoder;
@@ -58,6 +61,7 @@ public class DirectController {
 	        } else {
 	        	pager.setSortType("latest");
 	        }
+
 	        List<DirectVO> ar = directService.getList(pager); 
 	        log.error(ar.get(0).getDirectCode());
 	        
@@ -137,23 +141,46 @@ public class DirectController {
 	
 	// 액세서리 리스트 페이지
 	@GetMapping("accessoryList")
-	public ModelAndView d3() throws Exception{
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("hworld/accessoryList");
-		return modelAndView;
+	public ModelAndView getAccList(ModelAndView mv, Pager pager, @RequestParam(value = "sortType", defaultValue = "latest") String sortType, HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+	    // sortType에 따라 정렬 유형 설정
+	    if (sortType.equals("priceHigh")) {
+	        pager.setSortType("priceHigh");
+	    } else if (sortType.equals("priceLow")) {
+	        pager.setSortType("priceLow");
+	    } else {
+	        pager.setSortType("latest");
+	    }
+	    
+	    List<DirectVO> ar = directService.getAccList(pager);
+	    
+	    List<DirectVO> recentlyViewedProducts = directService.getSeenList(request);
+	    
+	    mv.addObject("recentlyViewedProducts", recentlyViewedProducts);
+	    mv.addObject("list", ar);
+	    mv.setViewName("hworld/accessoryList");
+	    
+	    return mv;
 	}
 	
-	// 액세서리 리스트 페이지
+
+	
+	// 액세서리 디테일 페이지
 	@GetMapping("accessoryDetail")
-	public ModelAndView d4() throws Exception{
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("hworld/accessoryDetail");
-		return modelAndView;
+	public ModelAndView getAccDetail(DirectVO directVO, String slicedCode, HttpServletRequest request, HttpServletResponse response) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		List<DirectVO> ar = directService.getDetail(slicedCode);
+
+	    directService.setSeenList(request, response, slicedCode);
+
+		mv.addObject("list", ar);		
+		mv.setViewName("hworld/accessoryDetail");
+		return mv;
 	}
 	
 	// 휴대폰 & 액세서리 상품 추가 페이지
 	@GetMapping("directAdd")
-	public ModelAndView d5() throws Exception{
+	public ModelAndView setInsert() throws Exception{
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("hworld/directAdd");
 		return modelAndView;
@@ -163,7 +190,6 @@ public class DirectController {
 			String[] colorCode, String[] saveCapacity, Integer[] directPrice, Integer[] directStock, String[] directCode, DirectVO directVO, MultipartFile[] multipartFiles) throws Exception{
 		ModelAndView modelAndView = new ModelAndView();
 		
-		System.out.println(multipartFiles);
 		
 		//반복문으로 directVO 하나 완성하기 + 완성될 때 서비스로 insert 메서드 호출
 		for(int i=0; i<directCode.length; i++) {
@@ -184,6 +210,42 @@ public class DirectController {
 		}
 		
 		modelAndView.setViewName("redirect:./phoneList");
+		return modelAndView;
+	}
+	
+	// 휴대폰 & 액세서리 상품 추가 페이지
+	@GetMapping("accessoryAdd")
+	public ModelAndView setAccInsert() throws Exception{
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("hworld/accessoryAdd");
+		return modelAndView;
+	}
+	
+	@PostMapping("accessoryAdd")
+	public ModelAndView setAccInsert(String categoryCode, String brandCode, String directName, String directContents,
+			String[] colorCode, String[] saveCapacity, Integer[] directPrice, Integer[] directStock, String[] directCode, DirectVO directVO, MultipartFile[] multipartFiles) throws Exception{
+		ModelAndView modelAndView = new ModelAndView();
+		
+		
+		//반복문으로 directVO 하나 완성하기 + 완성될 때 서비스로 insert 메서드 호출
+		for(int i=0; i<directCode.length; i++) {
+			DirectVO directVO2 = new DirectVO();
+			directVO2.setCategoryCode(categoryCode);
+			directVO2.setBrandCode(brandCode);
+			directVO2.setDirectName(directName);
+			directVO2.setDirectContents(directContents);
+			directVO2.setColorCode(colorCode[i]);
+			directVO2.setSaveCapacity(saveCapacity[i]);
+			directVO2.setDirectPrice(directPrice[i]);
+			directVO2.setDirectStock(directStock[i]);
+			directVO2.setDirectCode(directCode[i]);
+
+			
+			
+			directService.setInsert(directVO2, multipartFiles);
+		}
+		
+		modelAndView.setViewName("redirect:./accessoryList");
 		return modelAndView;
 	}
 
@@ -209,7 +271,6 @@ public class DirectController {
 		slicedCode = directVO.getDirectCode().substring(directVO.getDirectCode().length() - 5);
 		directService.setDelete(slicedCode);
 		
-		System.out.println(slicedCode);
 		
 		//반복문으로 directVO 하나 완성하기 + 완성될 때 서비스로 insert 메서드 호출
 		for(int i=0; i<directCode.length; i++) {
