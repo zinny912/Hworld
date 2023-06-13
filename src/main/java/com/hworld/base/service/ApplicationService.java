@@ -1,6 +1,8 @@
 package com.hworld.base.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -85,7 +87,19 @@ public class ApplicationService {
 		
 		//3-2a.회원번호가 있음
 		//3-2b.회원번호(신청서VO)로 회선VO 만들기
-		result = applicationDAO.setTelephoneInitAdd(applicationVO);
+		//result = applicationDAO.setTelephoneInitAdd(applicationVO);
+		//프로시저 호출해서 회선VO INSERT
+		Map<String, Integer> telephone = new HashMap<>();
+		telephone.put("appNum", applicationVO.getAppNum());
+		telephone.put("memberNum", applicationVO.getMemberNum());
+		log.info(" :::::::::::::::::::::::: {} ", telephone.get("appNum"));
+		log.info(" :::::::::::::::::::::::: {} ", telephone.get("memberNum"));
+		
+		//telephone.put("appNum", Integer.parseInt(applicationVO.getAppNum());
+		
+		result = applicationDAO.setTelephoneInitAdd(telephone);
+		
+		log.info(" :::::::::::::::::::::::: {} ", result);
 		
 		return result;
 	}
@@ -110,4 +124,20 @@ public class ApplicationService {
 		return applicationDAO.getSelectedDirectList(directVO);
 	}
 	
+	//getMonthlyPay
+	public Map<?, ?> getMonthlyPay(Map<String, Object> monthlyPay) throws Exception{
+		return applicationDAO.getMonthlyPay(monthlyPay);
+	}
+	
+	//isDuplicatePhoneNum
+	public boolean isDuplicatePhoneNum(String phoneNum) throws Exception{
+		boolean check = false;
+		
+		String result = applicationDAO.isDuplicatePhoneNum(phoneNum);
+		if(result != null) {
+			check = true;
+		}
+		log.info(" :::::::::::::::::::: service check value : {} ", check);
+		return check;
+	}
 }
