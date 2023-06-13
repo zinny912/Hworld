@@ -28,17 +28,27 @@
 	
 	<!-- 신청서VO 기반 회선에 정보 입력 -->
 	<!-- 파라미터가 다른 정보들은 이어서 update // serialNum이 제일 큰 telephone tuple에 업데이트 시행하면 될거같긴했는데.. -->
-	<insert id="setTelephoneInitAdd" parameterType="ApplicationVO">
+	<!-- <insert id="setTelephoneInitAdd" parameterType="ApplicationVO">
 		INSERT INTO TELEPHONE(SERIALNUM, PLANNUM, MEMBERNUM, APPNUM, PHONENUM, CONTRACTDATE, EXPIREDATE, DIRECTNAME, ENDDATE, KINGCHECK, PHONEORIPRICE, PHONESUBPRICE, PHONETOTALPRICE, PHONEBALANCE, STOPSTARTDATE, STOPENDDATE, DISKIND)
 		VALUES(NULL, #{planNum}, #{memberNum}, #{appNum}, #{phoneNum}, NULL, NULL, #{directName}, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, #{disKind})
+	</insert> -->
+	<!-- 프로시저 호출, memberNum, appNum만 입력해주면 계산해줌 -->
+	<!-- parameter 이름은 바꿔서 넣어도 됨, 단 순서는 지켜야한다. 1=directCode, 2=disKind, 3=planNum, 4=월기기가격, 5=월요금가격 -->
+	<insert id="setTelephoneInitAdd" statementType="CALLABLE" parameterType="HashMap">
+		{
+			CALL insert_telephone (
+				#{appNum, mode=IN, jdbcType=INTEGER, javaType=INTEGER},
+				#{memberNum, mode=IN, jdbcType=INTEGER, javaType=INTEGER}
+			)
+		}
 	</insert>
+	
 	
 	<!-- MEMBERNUM update -->
 	<!-- <update id="setTelephoneInitUpdate" parameterType="MemberVO">
 		UPDATE TELEPHONE SET MEMBERNUM=#{memberNum}
 		WHERE SERIALNUM=(SELECT MAX(SERIALNUM) FROM TELEPHONE))
 	</update> -->
-	
 	
 	<!-- Plan -->
 	<!-- existPlanList -->
@@ -72,6 +82,29 @@
 		SELECT DIRECTCODE, RIGHT(DIRECTCODE, 5) AS slicedCode, DIRECTPRICE, COLORCODE, SAVECAPACITY
 		FROM DIRECT
 		WHERE DIRECTCODE LIKE 'P01%' AND DIRECTSTOCK != 0 AND RIGHT(DIRECTCODE, 5) = #{slicedCode}
+	</select>
+	
+	
+	<!-- MonthlyCost -->
+	<!-- parameter 이름은 바꿔서 넣어도 됨, 단 순서는 지켜야한다. 1=directCode, 2=disKind, 3=planNum, 4=월기기가격, 5=월요금가격 -->
+	<select id="getMonthlyPay" statementType="CALLABLE" parameterType="hashMap" resultType="hashMap">
+		{
+			CALL calc_monthlyPay (
+				#{directCode, mode=IN, jdbcType=VARCHAR, javaType=STRING},
+				#{disKind, mode=IN, jdbcType=INTEGER, javaType=INTEGER},
+				#{planNum, mode=IN, jdbcType=VARCHAR, javaType=STRING},
+				#{out_phonePayPrice, mode=OUT, jdbcType=INTEGER, javaType=INTEGER},
+				#{out_planPrice, mode=OUT, jdbcType=INTEGER, javaType=INTEGER}   
+			)
+		}
+	</select>
+	
+		
+	<!-- isDuplicatePhoneNum -->
+	<!-- 전화번호 중복 체크 -->
+	<select id="isDuplicatePhoneNum" parameterType="String" resultType="String">
+		SELECT PHONENUM FROM TELEPHONE
+		WHERE PHONENUM=#{phoneNum}
 	</select>
 
 </mapper>

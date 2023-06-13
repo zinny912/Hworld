@@ -3,6 +3,7 @@ package com.hworld.base.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.validation.Valid;
 
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hworld.base.service.ApplicationService;
@@ -46,9 +48,6 @@ public class ApplicationController {
 		//나중에 고칠때 각각의 요금제 List들을 existList에 넣어서 jsp로 보내고 jsp 수정해보기.
 		List<PlanVO> existPlanList = applicationService.getExistPlanList();
 		List<PlanVO> planList = applicationService.getPlanList();
-		for(PlanVO planVO : planList) {
-			log.info(">>>>>>>>>>>>>>>>>>>>>>>>>> {} {} ", planVO.getPlanName(), planVO.getDisPercent());
-		}
 		
 		//상품 정보 호출
 		List<DirectVO> directList = applicationService.getDirectList();
@@ -111,7 +110,7 @@ public class ApplicationController {
 		//에러가 없는경우 insert 작업
 		int result = applicationService.setFormAdd(applicationVO);
 		log.info("=============> result : {} ", result);
-		mv.setViewName("hworld/applicationForm");
+		mv.setViewName("redirect:./application");
 		//성공하면 결과에 따라 alert띄우기 해도 될듯. 나중에 index 등으로 바꾸기
 		return mv;
 	}
@@ -132,7 +131,55 @@ public class ApplicationController {
 		
 		mv.addObject("selectedList", ar);
 		
-		mv.setViewName("hworld/ajaxDirectOption");
+		mv.setViewName("hworld/ajaxAppDirectOption");
 		return mv;
 	}
+	
+	
+	//영수증 부분 월계산요금 ajax 요청
+	//responseBody를 쓰면 modelandView를 쓰지않고 parameter에 바로 담아서 보내는 식으로 하면 된다.
+	//js에서 받을때는 dataType: 'JSON' 선언하고, success: function(response) 아래에 response.parameterName으로 불러옴.
+	@ResponseBody
+	@GetMapping("calMonthlyPay")
+	public Map<String, Object> getMonthlyPay(@RequestParam Map<String, Object> params) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		//String 타입의 disKind를 int로 바꿔줌
+		log.info(" :::::::::::::::::::: before: {} ",  params.get("disKind").getClass());
+		params.put("disKind", Integer.parseInt((String)params.get("disKind")));
+		log.info(" :::::::::::::::::::: after: {} ",  params.get("disKind").getClass());
+		
+		//Map은 heap영역 주소값 복사가 안됨 그냥 메서드 호출하고 매개변수로 받은 기존객체에 데이터를 리턴하는식으로 써야할거같음
+		applicationService.getMonthlyPay(params);
+		
+//		Map<?,?> map = new HashMap<>();
+//		map = applicationService.getMonthlyPay(params);
+//		log.info(" :::::::::::::::::::: {} ", map.get("directCode"));
+//		log.info(" :::::::::::::::::::: {} ", map.get("disKind"));
+//		log.info(" :::::::::::::::::::: {} ", map.get("planNum"));
+//		log.info(" :::::::::::::::::::: {} ", map.get("out_phonePayPrice"));
+//		log.info(" :::::::::::::::::::: {} ", map.get("out_planPrice"));
+//		log.info("----------------------------------");
+		
+		
+		log.info(" :::::::::::::::::::: {} ", params.get("directCode"));
+		log.info(" :::::::::::::::::::: {} ", params.get("disKind"));
+		log.info(" :::::::::::::::::::: {} ", params.get("planNum"));
+		log.info(" :::::::::::::::::::: {} ", params.get("out_phonePayPrice"));
+		log.info(" :::::::::::::::::::: {} ", params.get("out_planPrice"));
+		
+		//mv.addObject("calResult", params);
+		
+		return params;
+	}
+	
+	
+	//isDuplicatePhoneNum
+	@ResponseBody
+	@GetMapping("isDuplicatePhoneNum")
+	public boolean isDuplicatePhoneNum(String phoneNum) throws Exception{
+		return applicationService.isDuplicatePhoneNum(phoneNum);
+	}
+	
+	
 }

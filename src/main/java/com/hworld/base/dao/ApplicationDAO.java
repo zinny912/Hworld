@@ -2,6 +2,7 @@ package com.hworld.base.dao;
 
 import java.io.EOFException;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -27,7 +28,9 @@ public interface ApplicationDAO {
 	
 	//3-2a.일치하는 회원이 있으면 회원번호 받아오기
 	//3-2b.받아온 회원번호로 회선VO 만들기
-	public int setTelephoneInitAdd(ApplicationVO applicationVO) throws Exception;
+	//public int setTelephoneInitAdd(ApplicationVO applicationVO) throws Exception;
+	//회선 INSERT 프로시저 호출
+	public int setTelephoneInitAdd(Map<String, Integer> telephone) throws Exception;
 	
 	//존재하는 plan 타입 가져오기
 	public List<PlanVO> getExistPlanList() throws Exception;
@@ -38,8 +41,12 @@ public interface ApplicationDAO {
 	//direct list 가져오기
 	public List<DirectVO> getDirectList() throws Exception;
 	
-	//getSelectedDirectList
+	//getSelectedDirectList - ajax
 	public List<DirectVO> getSelectedDirectList(DirectVO directVO) throws Exception;
 	
+	//getMonthlyPay - ajax
+	public Map<?, ?> getMonthlyPay(Map<String, Object> monthlyPay) throws Exception;
 	
+	//isDuplicatePhoneNum - ajax
+	public String isDuplicatePhoneNum(String phoneNum) throws Exception;
 }

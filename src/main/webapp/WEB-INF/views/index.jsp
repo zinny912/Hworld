@@ -647,8 +647,6 @@
     });
 
     </script>
-
-
 <c:import url="./temp/commonJS.jsp"></c:import>
 </body>
 
