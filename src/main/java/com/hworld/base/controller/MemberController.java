@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -216,9 +215,7 @@ public class MemberController {
 	
 	///////////////////////////////////test login
 	//테스트용 관리자계정 로그인 버튼
-	@PostMapping("./testAdmin")
-	public ModelAndView testAdmin(HttpSession session, HttpServletRequest request, MemberVO memberVO, RedirectAttributes rttr) throws Exception {
-		ModelAndView mv = new ModelAndView();
+	
 		//MemberVO memberVO = new MemberVO();
 //		memberVO.setEmail("user01@gmail.com");
 //		memberVO.setPw("user01");
@@ -241,8 +238,15 @@ public class MemberController {
 //			mv.setViewName("/");
 //			return mv; // 로그인 페이지로 이동
 //		}
+	
+	
+	@ResponseBody
+	@PostMapping("./testAdmin")
+	public String testAdmin(HttpSession session, HttpServletRequest request, MemberVO memberVO, RedirectAttributes rttr) throws Exception {
 		
-		return mv;
+		String result = "success";
+		
+		return result;
 	}
 	
 }

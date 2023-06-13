@@ -662,8 +662,35 @@
 
     </script>
 <script>
-    $('#testAdmin').click(function{
+    $('#testAdmin').click(function(){
         console.log("admin");
+        const email = "user01@gmail.com";
+        const pw = "user01";
+
+        console.log(email);
+        console.log(pw);
+
+        $.ajax({
+            type: 'POST',
+            url: '/member/testAdmin',
+            dataType: 'JSON',
+            data: {
+                email: email,
+                pw: pw
+            },
+            success: function(response) {
+            // 응답 처리 로직 작성
+                console.log("성공", response);
+            },
+            error: function(error) {
+            // 에러 처리 로직 작성
+            console.log("실패", error);
+            }
+        });
+    })
+
+    $('#testMember').click(function(){
+        console.log("member");
     })
 
 </script>
