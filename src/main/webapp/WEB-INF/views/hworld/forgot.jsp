@@ -44,7 +44,7 @@
             <div class="box">
                 <!-- 홈 버튼 -->
                 <div class="d-flex justify-content-center">
-                    <a href="index.html">
+                    <a href="/">
                         <h2><img src="/assets/images/logos/2.png"></h2>
                     </a>
                 </div>
@@ -60,7 +60,7 @@
                     <div class="d-flex justify-content-center col-md-10 mt-4">
                         <div class="col-md-6">
                             <div class="d-flex justify-content-end button login btn m-1" style="padding-right: 10px;">
-                                <button onclick="location.href = 'forgot-ID.html';" type="submit">
+                                <button onclick="location.href = 'forgotId';" type="submit">
                                     <span>아이디 찾기</span>
                                     <i class="fa fa-check"></i>
                                 </button>
@@ -69,7 +69,7 @@
 
                         <div class="col-md-6">
                             <div class="d-flex justify-content-start button login btn m-1" style="padding-left: 10px;">
-                                <button onclick="location.href = 'forgot-PW.html';" type="submit">
+                                <button onclick="location.href = 'forgotPw';" type="submit">
                                     <span>비밀번호 찾기</span>
                                     <i class="fa fa-check"></i>
                                 </button>

@@ -34,7 +34,7 @@
 		                <!-- 정보 입력 영역 -->	                
 	                	<div class="mb-4 row">
 	                		<div class="col-9">	                		
-			                    <input class="form-control" type="email" name="email" id="email" placeholder="사용자 계정">		                    			                    
+			                    <input class="form-control" type="email" name="email" id="email" placeholder="사용자 계정(이메일)">		                    			                    
 							</div>			                    
 		                    <button class="col-3 row btn btn-solid-default btn-sm fw-bold" name="sendBtn" id="sendBtn" type="button" onclick="sendNumber()">
 								인증번호 전송
