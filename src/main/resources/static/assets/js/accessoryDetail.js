@@ -185,19 +185,34 @@ $(document).ready(function() {
          $(this).find('#modelQnaContents').val(qnaContents);
        });
    
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
+});
+
+/* 주문 페이지 이동 */	
+$(".order_btn").on("click", function(){
+	
+	let form_contents ='';
+	let orderNumber = 0;
+	
+	$(".cart_info_td").each(function(index, element){
+		
+		if($(element).find(".individual_cart_checkbox").is(":checked") === true){	//체크여부
+			
+			let bookId = $(element).find(".individual_bookId_input").val();
+			let bookCount = $(element).find(".individual_bookCount_input").val();
+			
+			let bookId_input = "<input name='orders[" + orderNumber + "].bookId' type='hidden' value='" + bookId + "'>";
+			form_contents += bookId_input;
+			
+			let bookCount_input = "<input name='orders[" + orderNumber + "].bookCount' type='hidden' value='" + bookCount + "'>";
+			form_contents += bookCount_input;
+			
+			orderNumber += 1;
+			
+		}
+	});	
+
+	$(".order_form").html(form_contents);
+	$(".order_form").submit();
+	
 });
 

@@ -9,15 +9,22 @@ import lombok.Setter;
 @Setter
 public class CartVO {
 
+	private Integer cartNum;
     //장바구니 수량
     private Integer cartAmount;
 
-	private String memberNum;
+	private Integer memberNum;
 	
 	private String directCode;
     
-	private List<MemberVO> memberVOs;
-    
-	private List<DirectVO> directVOs;
+	private String directName;
+	
+	private Integer directPrice;
+	
+	private Integer totalPrice;
+	
+	public void initTotal() {
+		this.totalPrice = this.directPrice*this.cartAmount;
+	}
 	
 }

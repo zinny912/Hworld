@@ -40,17 +40,16 @@ public class OrderService {
 	
 	public List<OrderPageDirectVO> getDirectDetail(List<OrderPageDirectVO> orderPageDirectVOs) throws Exception{
 		
-		List<OrderPageDirectVO> result = new ArrayList<>();
-		
+		List<OrderPageDirectVO> result = new ArrayList<OrderPageDirectVO>();
+		log.error(orderPageDirectVOs.get(0).getDirectCode());
 		for(OrderPageDirectVO opds : orderPageDirectVOs) {
-//			log.error(opds.getDirectCode().toString());
 			
-			OrderPageDirectVO getDirectDetail = orderDAO.getDirectDetail(opds.getDirectCode());
+			OrderPageDirectVO directDetail = orderDAO.getDirectDetail(opds.getDirectCode());
 			
-			getDirectDetail.setOrderAmount(opds.getOrderAmount());
-			getDirectDetail.initTotal();
+			directDetail.setOrderAmount(opds.getOrderAmount());
+			directDetail.initTotal();
 			
-			result.add(getDirectDetail);
+			result.add(directDetail);
 			
 		}
 		return result;
@@ -103,7 +102,7 @@ public class OrderService {
 		//장바구니 제거
 		for(OrderDirectVO odss : orderVO.getOrderDirectVOs()) {
 			CartVO cartVO = new CartVO();
-			cartVO.setMemberNum((String) session.getAttribute("memberNum"));
+			cartVO.setMemberNum((Integer) session.getAttribute("memberNum"));
 			cartVO.setDirectCode(odss.getDirectCode());
 			
 			cartDAO.setDelete(cartVO);
