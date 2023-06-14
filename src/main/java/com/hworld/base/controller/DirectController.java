@@ -181,7 +181,7 @@ public class DirectController {
 
 	// 액세서리 디테일 페이지
 	@GetMapping("accessoryDetail")
-	public ModelAndView getAccDetail(DirectVO directVO, String slicedCode, HttpServletRequest request, HttpServletResponse response, QnaVO qnaVO) throws Exception{
+	public ModelAndView getAccDetail(DirectVO directVO, String slicedCode, HttpServletRequest request, HttpServletResponse response, QnaVO qnaVO, HttpSession session) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		List<DirectVO> ar = directService.getAccDetail(slicedCode);
 		
