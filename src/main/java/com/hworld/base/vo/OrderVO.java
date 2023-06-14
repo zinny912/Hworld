@@ -10,7 +10,7 @@ import lombok.Setter;
 @Setter
 public class OrderVO {
     //주문 번호
-    private Integer orderNum;
+    private String orderNum;
 
     //주문 날짜
     private Date orderDate;
@@ -33,11 +33,17 @@ public class OrderVO {
     //주문 전화번호
     private String orderTelNum;
     
+    
+    // DB엔 없음 ---------
+    
+    //주문 상품
+    private List<OrderDirectVO> orderDirectVOs;
+    
+    //회원 번호 
     private Integer memberNum;
     
-    
-    
-    private List<OrderDirectVO> orderDirectVOs;
+    //최종 가격 
+    private int orderFinalPrice;
     
     
 }
