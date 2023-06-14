@@ -14,8 +14,8 @@ import com.hworld.base.vo.OrderVO;
 @Mapper
 public interface OrderDAO {
     
-
-    // 주문 정보 조회 
+//
+//     주문 정보 조회 
     public List<OrderPageDirectVO> getDirectDetail(List<OrderPageDirectVO> orderPageDirectVOs) throws Exception;
 
     //주문 

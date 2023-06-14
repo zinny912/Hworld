@@ -152,7 +152,7 @@
                                     </div>    
 								<div id="directList">
 									
-									<form class="order_form">
+									<form action="/order/${memberVO.memberNum}" method="POST" class="order_form">
 										<c:forEach items="${list}" var="direct" varStatus="status">
 											<div class="titlebox">
 												<div class="brand direct-item" style="font-size: 27px; color: gray;" id="productCode${status.index}"
@@ -170,14 +170,14 @@
 														<span class="price-detail theme-color fw-bold" id="renewPrice">${direct.directPrice}</span>
 														<span class="unit">원</span>
 														</p>
-													<input type="hidden" class="testDC" id="directCode" name="directCode" value="${direct.directCode}">
+													<input type="hidden" id="directCode" name="directCode" value="${direct.directCode}">
 													<input type="hidden" id="categoryCode" name="categoryCode" value="${direct.categoryCode}">
 													<input type="hidden" id="brandCode" name="brandCode" value="${direct.brandCode}">
 													<input type="hidden" id="slicedCode" name="slicedCode" value="${direct.slicedCode}">
 													<input type="text" id="directStock" name="directStock" value="${direct.directStock}" readonly>
 													<input type="hidden" id="directPrice" name="directPrice" value="${direct.directPrice}">
-													<input type="hidden" class="testTP" id="totalPrice" name="totalPrice" value="">
-													<input type="hidden" class="testOA" id="orderAmount" name="orderAmount" value="">
+													<input type="hidden" id="totalPrice" name="totalPrice" value="">
+													<input type="hidden" id="orderAmount" name="orderAmount" value="">
 													<input type="hidden" id="memberNum" name="memberNum" value="${memberVO.memberNum}">
 													
 											</div>
@@ -200,7 +200,7 @@
 										</div>
 										
 										
-									<div class="orderItems cart-content-wrap" >
+									<div class="cart-content-wrap" >
                                         <div class="col-md-10 d-flex ">
                                             <div class="col-md-3 mt-1" style="color: #7e7e7e;">
                                                 <p>선택한 옵션</p>
@@ -224,7 +224,8 @@
                                                     <i class="fas fa-times"></i>
                                                 </a>
 											</div>
- 
+                                            
+                                            
                                         </div>
                                     </div>
                                         <div class="product-option-item" style="position: relative; padding: 16px 0 30px 100px;">

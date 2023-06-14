@@ -41,7 +41,6 @@ public class OrderService {
 	public List<OrderPageDirectVO> getDirectDetail(List<OrderPageDirectVO> orderPageDirectVOs) throws Exception{
 		
 		List<OrderPageDirectVO> result = new ArrayList<>();
-		
 		for(OrderPageDirectVO opds : orderPageDirectVOs) {
 //			log.error(opds.getDirectCode().toString());
 			
