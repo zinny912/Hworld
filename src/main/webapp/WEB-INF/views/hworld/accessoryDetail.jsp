@@ -116,6 +116,8 @@
         background-color: #e22454; 
         color: #fff; 
     }
+    
+    
 </style>
 
 </head>
@@ -152,10 +154,10 @@
 									<div class="noStock" style="display:none;">
 										<h2 class="theme-color">선택하신 제품은 재고가 없습니다.</h2>
 									</div>
-									<form action="./accessoryOrder" method="GET">
+									<form action="./accessoryOrder" method="POST">
 										<c:forEach items="${list}" var="direct" varStatus="status">
-											<div class="titlebox" id="${direct.directCode}">
-												<div class="brand direct-item" style="font-size: 27px; color: gray;" id="productCode"
+											<div class="titlebox">
+												<div class="brand direct-item" style="font-size: 27px; color: gray;" id="productCode${status.index}"
 												data-direct-code="${direct.directCode}" data-direct-price="${direct.directPrice}"
 												data-direct-stock="${direct.directStock}">
 													${direct.value} ${direct.slicedCode} ${direct.directCode}
@@ -179,7 +181,7 @@
 													<input type="hidden" id="totalPrice" name="totalPrice" value="">
 													<input type="hidden" id="orderAmount" name="orderAmount" value="">
 											</div>
-										</c:forEach>
+											</c:forEach>
 										<div class="optionArea">
 											<div class="product-option-item color">
 										   		<div class="option-title-area">
@@ -197,67 +199,63 @@
 										<hr>
 										</div>
 										
-                                    <td class="cart-content-wrap" >
+										
+                                    <div class="cart-content-wrap" >
                                         <div class="col-md-10 d-flex ">
                                             <div class="col-md-3 mt-1" style="color: #7e7e7e;">
                                                 <p>선택한 옵션</p>
                                             </div>
-                                            <div class="col-md-7 mt-1" style="color: black;">
-                                                <input type="text" value="" id="colorName">
+                                            <div class="col-md-5" style="color: black;">
+                                                <input type="text" value="" id="colorName" style="border:0px; font-size:15px;"readonly>
                                             </div>                                            
                                 <!-- 수량 버튼 -->
-                                           <div class="d-flex quantity-wrapper" style="padding: 5px 0px; justify-content: center; margin-top: -10px; margin-left: -150px;">
+                                           <div class="d-flex quantity-wrapper" style="padding: 5px 0px; justify-content: center; margin-top: -8px; ">
 											  <button class="btn quantity-left-minus" style="height: 5px; width: 5px; padding: 10px; margin-top: -6px;">-</button>
 											  <span class="input-wrapper">
-											    <input type="text" class="input-number text-center" style="width: 35px; padding: 5px 5px; border: 1px solid #c7c7c5; border-radius: 5px;" value="1">
+											    <input type="text" class="input-number text-center" style="width: 35px; padding: 5px 5px; border: 1px solid #c7c7c5; border-radius: 3px;" value="0">
 											  </span>
 											  <button class="btn quantity-right-plus" style="height: 5px; margin-top: -6px; padding: 10px 5px;">+</button>
+											  
 											  <span id="totalQty" style="margin-left: 10px;" ></span>
 											</div>
-											<div>
-											  <p class="price theme-color2 fs-4 d-flex" id="subscriptionPrice" style="letter-spacing: -0.5px; color: #000; margin-left: 120px;">
-											    15,000 <span class="mt-1 mx-1" style="color: black; font-size: 15px; font-weight: 400;">원</span>
-											  </p>
+								<!-- 수량 버튼 end -->			
+											<div class="align-items-end ">
+											  <p class="price theme-color2 fs-4 d-flex mx-5" style="position: absolute; right: 0;"  id="subscriptionPrice" >
+											     <span class="mt-1 mx-1" style="color: black; font-size: 15px; font-weight: 400;">원</span> </p>
+											     <!-- x 버튼 표시 -->
+                                                <a href="javascript:void(0)" style="position:absolute; right:0;">
+                                                    <i class="fas fa-times"></i>
+                                                </a>
 											</div>
-                                            <div class="mx-5">
-                                                <td class="align-middle">
-                                                    <div>
-                                                        <a href="javascript:void(0)">
-                                                            <i class="fas fa-times"></i>
-                                                        </a>
-                                                    </div>
-                                                </td>
-                                            </div>
+                                            
+                                            
                                         </div>
-                                    </td>
+                                    </div>
                                         <div class="product-option-item" style="position: relative; padding: 16px 0 30px 100px; border-top: 1px solid #d3d3d3;">
-                                            <div class="option-title-area mt-3" style="position: absolute; top: 25px; left: 0;">
-                                                <div class="option-title" style="display: inline-block; color: #5a5a5a; font-size: 20px; font-weight: 400;">
+                                            <div class="option-title-area mt-3" style="position: absolute; top:15px; left: 0;">
+                                                <div class="option-title" style="display: inline-block; color: #5a5a5a; font-size: 20px; font-weight: 400; ">
                                                     총 결제금액
                                                 </div>
                                             </div>
                                             <div class="product-option-item compare mt-3" id="subscriptionInfo">
-                                                <div class="compare-inner" style="display: block; margin-block-start: 1em; margin-block-end: 1em; margin-inline-start: 0px; margin-inline-end: 0px; margin: 0; padding: 0;">
+                                                <div class="compare-inner" style="display: block;">
                                                     <div class="compare-title">
                                                         <div class="inner">
-	                                                            <div class="info">
-	                                                            <div class="data" style="position: absolute; top: 35px; right: 0; text-align: right;">
-	                                                                <h2 class="price theme-color" id="subscriptionPrice" style="letter-spacing: -0.2px; display: block; margin-top: 6px; color: #000; font-weight: 700;">
-	                                                                    15,000 <span style="color:black; font-size:20px;">원</span>
-	                                                                </h2>
-	                                                            </div>
-	                                                            </div>
+                                                            <div class="data" style="position: absolute; top: 35px; right: 0; text-align: right;">
+                                                                <h2 class="price theme-color" id="subscriptionPrice" style="display: block; font-weight: 700;">
+                                                                     <span style="color:black; font-size:20px;">원</span>
+                                                                </h2>
+                                                            </div>
                                                         </div>
                                                     </div>            
                                                 </div>  
-	                                                <div class="btn-area" style="position: relative; padding-top:70px; float: center;"> 
+	                                                <div class="btn-area" style="display:block; position: relative; padding-top:70px; float: center;"> 
 	                                                    <div class="product-buttons"> 
-	                                                        <a href="javascript:void(0)" data-bs-toggle="modal"
-	                                                    data-bs-target="#cartinto">
-	                                                        <button type="button" class="btn btn-outline-custom btn-spacing me-1" style="margin-left:-100px;">
+	                                                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#cartinto">
+	                                                        <button type="button" class="btn btn-outline-custom me-1 cart-icon" style="margin-left:-105px; display:inline-block;">
 	                                                            <svg xmlns="http://www.w3.org/2000/svg" width="34" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart pe-1"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
 	                                                        </button> </a>                    
-	                                                    <button type="submit" class="btn btn-solid" id="orderBtn" style= "width: 700px; height: 54px; font-size: 18px; display: inline-block; padding: 0 10px; text-align: center;">주문하기</button>
+	                                                    <button type="submit" class="btn btn-solid" id="orderBtn" style= "width: 700px; height: 52px; font-size: 18px; display: inline-block; padding: 0 10px; text-align: center;">주문하기</button>
 	                                                	</div> 
 	                                                </div>                                                      
                                             </div>

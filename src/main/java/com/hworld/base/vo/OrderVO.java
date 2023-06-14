@@ -35,6 +35,9 @@ public class OrderVO {
     
     private Integer memberNum;
     
+    private Integer totalPrice;
+    private Integer orderAmount;
+    
     
     private List<OrderDirectVO> orderDirectVOs;
     
