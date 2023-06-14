@@ -36,6 +36,7 @@ public class OrderVO {
     private Integer memberNum;
     
     
+    
     private List<OrderDirectVO> orderDirectVOs;
     
     

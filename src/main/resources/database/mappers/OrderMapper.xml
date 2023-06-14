@@ -16,26 +16,32 @@
     	FROM DIRECT D
 	    LEFT JOIN ORDERDIRECT OD ON SUBSTRING(D.directCode, -5) = SUBSTRING(OD.DIRECTCODE, -5)
 	</select>
-
-	<insert id="setInsert" parameterType="OrderVO" useGeneratedKeys="true" keyProperty="orderNum">
-		INSERT INTO ORDERS(ORDERNUM, MEMBERNUM, ORDERDATE, ORDERSTATE, ORDERRECEIVER, ORDERADDRESS1, ORDERADDRESS2, ORDERADDRESS3, ORDERTELNUM)
-		VALUES (#{orderNum}, #{memberNum}, now(), #{orderState}, #{orderReceiver}, #{orderAddress1}, #{orderAddress2}, #{orderAddress3}, #{orderTelNum})
-
+	
+	<insert id="setInsert" parameterType="OrderDirectVO">
+	  INSERT INTO ORDERDIRECT (DIRECTCODE, ORDERNUM, MEMBERNUM, ORDERAMOUNT)
+	  VALUES (#{directCode}, NULL, #{memberNum}, #{orderAmount});
+	
+	  <selectKey keyProperty="orderNum" order="AFTER" resultType="int">
+	    SELECT MAX(ORDERNUM) FROM ORDERDIRECT
+	  </selectKey>
+	
+	  INSERT INTO ORDERS (ORDERNUM, MEMBERNUM, ORDERDATE, ORDERSTATE, ORDERRECEIVER,
+	    ORDERADDRESS1, ORDERADDRESS2, ORDERADDRESS3, ORDERTELNUM)
+	  VALUES (#{orderNum}, #{memberNum}, NOW(), #{orderState}, #{orderReceiver},
+	    #{orderAddress1}, #{orderAddress2}, #{orderAddress3}, #{orderTelNum});
 	</insert>
-	 	
-<!--   	상품 삭제
-	<delete id="setDelete" parameterType="DirectVO">
-	  DELETE FROM DIRECT
-	  WHERE directCode LIKE CONCAT('%', #{slicedCode}, '%')
-	</delete>
 	
-	상품 수정
-	<update id="setUpdate" parameterType="DirectVO">
-		UPDATE DIRECT
-		SET DIRECTNAME = #{directName}, DIRECTCONTENTS = #{directContents}, DIRECTPRICE = #{directPrice}, DIRECTSTOCK = #{directStock}, CATEGORYCODE = #{categoryCode}, BRANDCODE = #{brandCode}, COLORCODE = #{colorCode}, SAVECAPACITY = #{saveCapacity}
-		WHERE RIGHT(DIRECTCODE, 5) = #{slicedCode}
-	</update> -->
+	<!-- 주문 테이블 등록 -->
+	<insert id="setInsert" parameterType="OrderVO">
+		INSERT INTO ORDERS (ORDERNUM, MEMBERNUM, ORDERDATE, ORDERSTATE, ORDERRECEIVER, ORDERADDRESS1, ORDERADDRESS2, ORDERADDRESS3, ORDERTELNUM)
+	  	VALUES (#{orderNum}, #{memberNum}, NOW(), #{orderState}, #{orderReceiver}, #{orderAddress1}, #{orderAddress2}, #{orderAddress3}, #{orderTelNum});	
+	</insert>	
 	
+	<!-- 주문 아이템 테이블 등록 -->
+	<insert id="setODInsert" parameterType="OrderDirectVO">
+		INSERT INTO ORDERDIRECT (DIRECTCODE, ORDERNUM, MEMBERNUM, ORDERAMOUNT)
+	  	VALUES (#{directCode}, NULL, #{memberNum}, #{orderAmount});
+	</insert>	
 	
 	
   </mapper>

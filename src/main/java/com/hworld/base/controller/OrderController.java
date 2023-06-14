@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hworld.base.service.OrderService;
+import com.hworld.base.vo.OrderDirectVO;
 import com.hworld.base.vo.OrderVO;
 
 
@@ -20,12 +21,13 @@ public class OrderController {
 	private OrderService orderService;
 	
 	@PostMapping("orderSuccess")
-	public ModelAndView o1(OrderVO orderVO) throws Exception{
+	public ModelAndView o1(OrderVO orderVO, OrderDirectVO orderDirectVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		
-		int result = orderService.setInsert(orderVO);
+		int result = orderService.setInsert(orderVO, orderDirectVO);
+//		orderVO = orderService.getDetail(orderVO, orderDirectVO);
 		
-		mv.addObject("orderVO", result);
+//		mv.addObject("orderVO", orderVO);
 		mv.setViewName("hworld/orderSuccess");
 		return mv;
 	}
