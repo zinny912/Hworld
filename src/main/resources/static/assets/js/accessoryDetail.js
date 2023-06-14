@@ -1,4 +1,5 @@
 $(document).ready(function() {
+	let price;
 	//가격에 1000단위로 , 표시
 	const commaPrice = function() {
      const prices = document.querySelectorAll('[id^="renewPrice"]');
@@ -66,7 +67,7 @@ $(document).ready(function() {
 	  }
 	
     }
-    e.stopPropagation();
+    
 
   // 일치하는 directCode를 가진 titlebox를 표시하고 나머지는 숨김
   function updateTitleBoxVisibility(directCode) {
@@ -77,14 +78,34 @@ $(document).ready(function() {
     const listItem = $(this);
     const listItemDirectCode = listItem.attr('data-direct-code');
 
+	
     if (listItemDirectCode === directCode) {
       listItem.closest('.titlebox').show();
       matchingItemFound = true;
-		const price = $(this).data('direct-price');
-      // 수량 버튼으로 orderAmount, totalPrice 값 만들기
-      $('.quantity-left-minus').click(function(e) {
-        e.preventDefault();
-        e.stopPropagation();
+		price = $(this).data('direct-price');
+      	
+    } else {
+      listItem.closest('.titlebox').hide();
+    }
+    
+  //loop end
+  
+  
+  if (!matchingItemFound) {
+	  
+    $('.noStock').show(); // 일치하는 제품이 없는 경우 재고없음을 나타내는 div를 보여줌
+  } else {
+    $('.noStock').hide(); // 일치하는 제품이 있는 경우 재고없음을 나타내는 div를 숨김
+  }  
+	return price;
+    console.log(price);
+
+  });
+ }
+ }); 
+  
+  // 수량 버튼으로 orderAmount, totalPrice 값 만들기
+      $('.quantity-left-minus').click(function() {
         const inputNumber = $(this).siblings('.input-wrapper').find('.input-number');
         console.log(inputNumber.val());
         let quantity = parseInt(inputNumber.val());
@@ -96,10 +117,9 @@ $(document).ready(function() {
         }
       });
 
+		
       // 수량 증가 버튼 클릭 시
       $('.quantity-right-plus').click(function(e) {
-        e.preventDefault();
-        e.stopPropagation();
         const inputNumber = $(this).siblings('.input-wrapper').find('.input-number');
         let quantity = parseInt(inputNumber.val());
 
@@ -112,8 +132,10 @@ $(document).ready(function() {
       $('.input-number').change(function() {
       calculateTotalPrice();
       });
-
-     function calculateTotalPrice() {
+		
+		getSelectedOptions();
+		
+     function calculateTotalPrice(e) {
       let initPrice=price;
         const quantity= $('.input-number').val();
         const totalPrice=initPrice*quantity;
@@ -121,25 +143,11 @@ $(document).ready(function() {
 		$('#totalQty').text(totalPrice);
 		$('#totalPrice').val(totalPrice);
 		$('#orderAmount').val(quantity);
-     }
-    } else {
-      listItem.closest('.titlebox').hide();
-    }
-    
-  //loop end
-  });
-  
-  if (!matchingItemFound) {
-	  
-    $('.noStock').show(); // 일치하는 제품이 없는 경우 재고없음을 나타내는 div를 보여줌
-  } else {
-    $('.noStock').hide(); // 일치하는 제품이 있는 경우 재고없음을 나타내는 div를 숨김
-  }  
 
-  }
+		}
   
-	function getSelectedOptions(e) {
-		
+	  
+	function getSelectedOptions() {
   	const options = {
   	  colorCode: null,
   	};
@@ -151,7 +159,7 @@ $(document).ready(function() {
   	return options;
 		}
 		
-	}); 
+ 
 	
     // 후기 작성 버튼 클릭 시 모달 창이 열릴 때 실행되는 함수
      $('#addReview').on('show.bs.modal', function (event) {

@@ -210,11 +210,11 @@
                                             </div>                                            
                                 <!-- 수량 버튼 -->
                                            <div class="d-flex quantity-wrapper" style="padding: 5px 0px; justify-content: center; margin-top: -8px; ">
-											  <button class="btn quantity-left-minus" style="height: 5px; width: 5px; padding: 10px; margin-top: -6px;">-</button>
+											  <button type="button" class="btn quantity-left-minus" style="height: 5px; width: 5px; padding: 10px; margin-top: -6px;">-</button>
 											  <span class="input-wrapper">
 											    <input type="text" class="input-number text-center" style="width: 35px; padding: 5px 5px; border: 1px solid #c7c7c5; border-radius: 3px;" value="0">
 											  </span>
-											  <button class="btn quantity-right-plus" style="height: 5px; margin-top: -6px; padding: 10px 5px;">+</button>
+											  <button type="button"  class="btn quantity-right-plus" style="height: 5px; margin-top: -6px; padding: 10px 5px;">+</button>
 											  
 											  <span id="totalQty" style="margin-left: 10px;" ></span>
 											</div>
@@ -583,7 +583,7 @@
                             	<!-- 구매후기 end -->
                         </div>
                     </div>
-		</div>
+		</div></div></div>
 	</div>
 </section>
     <!-- Shop Section end -->
@@ -803,8 +803,8 @@
 <!-- 상품 삭제 모달창 End -->   
 
     <div class="bg-overlay"></div>
-<script src="../assets/js/updateReview.js"></script>
-<script src="../assets/js/accessoryDetail.js"></script>
+<script src="/assets/js/updateReview.js"></script>
+<script src="/assets/js/accessoryDetail.js"></script>
 
 
 <c:import url="../temp/footer.jsp"></c:import>    
