@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.hworld.base.controller.DirectController;
 import com.hworld.base.dao.CartDAO;
 import com.hworld.base.dao.DirectDAO;
 import com.hworld.base.dao.MemberDAO;
@@ -22,6 +23,8 @@ import com.hworld.base.vo.OrderDirectVO;
 import com.hworld.base.vo.OrderPageDirectVO;
 import com.hworld.base.vo.OrderVO;
 
+import lombok.extern.slf4j.Slf4j;
+@Slf4j
 @Service
 public class OrderService {
 
@@ -40,6 +43,7 @@ public class OrderService {
 		List<OrderPageDirectVO> result = new ArrayList<>();
 		
 		for(OrderPageDirectVO opds : orderPageDirectVOs) {
+//			log.error(opds.getDirectCode().toString());
 			
 			OrderPageDirectVO getDirectDetail = orderDAO.getDirectDetail(opds.getDirectCode());
 			

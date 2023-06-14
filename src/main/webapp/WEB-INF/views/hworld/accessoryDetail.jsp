@@ -154,7 +154,7 @@
 									<div class="noStock" style="display:none;">
 										<h2 class="theme-color">선택하신 제품은 재고가 없습니다.</h2>
 									</div>
-									<form action="/order/${sessionScope.memberNum}" method="get" class="order_form">
+									<form action="/order/{memberVO.memberNum}" method="GET" class="order_form">
 										<c:forEach items="${list}" var="direct" varStatus="status">
 											<div class="titlebox">
 												<div class="brand direct-item" style="font-size: 27px; color: gray;" id="productCode${status.index}"
@@ -200,7 +200,7 @@
 										</div>
 										
 										
-									<div class="cart-content-wrap" style="display: none;">
+									<div class="cart-content-wrap" >
                                         <div class="col-md-10 d-flex ">
                                             <div class="col-md-3 mt-1" style="color: #7e7e7e;">
                                                 <p>선택한 옵션</p>
@@ -213,7 +213,7 @@
 											  <span class="input-wrapper">
 											    <input type="text" class="input-number text-center" style="width: 35px; padding: 5px 5px; border: 1px solid #c7c7c5; border-radius: 3px;" value="0">
 											  </span>
-											  <button type="button" class="btn quantity-right-plus" style="height: 5px; margin-top: -6px; padding: 10px 5px;">+</button>
+											  <button type="button"  class="btn quantity-right-plus" style="height: 5px; margin-top: -6px; padding: 10px 5px;">+</button>
 											  
 											  <span id="totalQty" style="margin-left: 10px;" ></span>
 											</div>
@@ -580,7 +580,7 @@
                             	<!-- 구매후기 end -->
                         </div>
                     </div>
-		</div>
+		</div></div></div>
 	</div>
 </section>
     <!-- Shop Section end -->

@@ -1181,8 +1181,8 @@
 <!-- 상품 삭제 모달창 End -->
 <c:import url="../temp/footer.jsp"></c:import>
 
-<script src="../assets/js/newDirectCode.js"></script>
-<script src="../assets/js/updateReview.js"></script>
+<script src="/assets/js/newDirectCode.js"></script>
+<script src="/assets/js/updateReview.js"></script>
     <!-- 버튼 select js -->
     <script>
         const capacity = document.getElementsByClassName('capacity');

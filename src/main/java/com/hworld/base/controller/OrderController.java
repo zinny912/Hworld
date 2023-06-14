@@ -33,7 +33,7 @@ public class OrderController {
 	private MemberService memberService;
 	
 	@GetMapping("/order/{memberNum}")
-	public ModelAndView setOrderInsert(@PathVariable("memberNum") Integer memberNum, OrderPageVO orderPageVO, HttpSession session) throws Exception{
+	public ModelAndView setOrderInsert(@PathVariable("memberNum") String memberNum, OrderPageVO orderPageVO, HttpSession session) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("orderList", orderService.getDirectDetail(orderPageVO.getOrders()));
 		Enumeration<String> attributeNames = session.getAttributeNames();
