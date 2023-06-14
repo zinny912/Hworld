@@ -26,7 +26,7 @@ public class ReviewVO {
     
     private Integer memberNum;
     
-    private Integer orderNum;
+    private String orderNum;
     
     private Long count;
     
