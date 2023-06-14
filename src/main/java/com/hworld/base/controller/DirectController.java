@@ -39,6 +39,7 @@ import com.hworld.base.service.OrderService;
 import com.hworld.base.util.Pager;
 import com.hworld.base.vo.DirectVO;
 import com.hworld.base.vo.OrderDirectVO;
+import com.hworld.base.vo.OrderVO;
 import com.hworld.base.vo.PlanVO;
 import com.hworld.base.vo.QnaVO;
 import com.hworld.base.vo.ReviewVO;
@@ -426,12 +427,12 @@ public class DirectController {
 	}
 	
 	// 액세서리 주문 페이지
-	@GetMapping("accessoryOrder")
-	public ModelAndView setInsert(OrderDirectVO orderDirectVO, HttpSession session) throws Exception {
+	@PostMapping("accessoryOrder")
+	public ModelAndView setInsert(OrderDirectVO orderDirectVO, OrderVO orderVO, HttpSession session) throws Exception {
 	    ModelAndView mv = new ModelAndView();
-	    log.error(orderDirectVO.getOrderAmount().toString());
-	    log.error(orderDirectVO.getTotalPrice().toString());
+
 		mv.addObject("orderDirectVO", orderDirectVO);
+		mv.addObject("orderVO", orderVO);
 	    mv.setViewName("hworld/accessoryOrder");
 	    return mv;
 	}
