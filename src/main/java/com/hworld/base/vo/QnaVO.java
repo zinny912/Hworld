@@ -12,7 +12,7 @@ import java.util.Date;
 @Setter
 public class QnaVO extends BoardVO{
 	//주문번호 
-	private Integer orderNum;
+	private String orderNum;
 	
 	private String slicedCode;
 	

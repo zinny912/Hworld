@@ -154,7 +154,7 @@
 									<div class="noStock" style="display:none;">
 										<h2 class="theme-color">선택하신 제품은 재고가 없습니다.</h2>
 									</div>
-									<form action="./accessoryOrder" method="POST">
+									<form action="/order/${sessionScope.memberNum}" method="get" class="order_form">
 										<c:forEach items="${list}" var="direct" varStatus="status">
 											<div class="titlebox">
 												<div class="brand direct-item" style="font-size: 27px; color: gray;" id="productCode${status.index}"
@@ -189,10 +189,10 @@
 										        </div>
 												<div class="color-types">
 													<ul class="color-variant mb-0">
-														<li class="bg-white border boder-1 selected" value="W" name="colorCode"></li>
-														<li class="bg-gray1" value="G" name="colorCode"></li>
-														<li class="bg-black1" value="B" name="colorCode"></li>
-														<li class="bg-blue border border-1 text-center align-center" value="0" name="colorCode">없음</li>
+														<li class="bg-white border boder-1" value="W" name="colorCode" onclick="selectColor(this)"></li>
+														<li class="bg-gray1" value="G" name="colorCode" onclick="selectColor(this)"></li>
+														<li class="bg-black1" value="B" name="colorCode" onclick="selectColor(this)"></li>
+														<li class="bg-blue border border-1 text-center align-center" value="0" name="colorCode" onclick="selectColor(this)">없음</li>
 													</ul>
         										</div>
 											</div>
@@ -200,7 +200,7 @@
 										</div>
 										
 										
-                                    <div class="cart-content-wrap" >
+									<div class="cart-content-wrap" style="display: none;">
                                         <div class="col-md-10 d-flex ">
                                             <div class="col-md-3 mt-1" style="color: #7e7e7e;">
                                                 <p>선택한 옵션</p>
@@ -208,7 +208,6 @@
                                             <div class="col-md-5" style="color: black;">
                                                 <input type="text" value="" id="colorName" style="border:0px; font-size:15px;"readonly>
                                             </div>                                            
-                                <!-- 수량 버튼 -->
                                            <div class="d-flex quantity-wrapper" style="padding: 5px 0px; justify-content: center; margin-top: -8px; ">
 											  <button type="button" class="btn quantity-left-minus" style="height: 5px; width: 5px; padding: 10px; margin-top: -6px;">-</button>
 											  <span class="input-wrapper">
@@ -218,11 +217,9 @@
 											  
 											  <span id="totalQty" style="margin-left: 10px;" ></span>
 											</div>
-								<!-- 수량 버튼 end -->			
 											<div class="align-items-end ">
 											  <p class="price theme-color2 fs-4 d-flex mx-5" style="position: absolute; right: 0;"  id="subscriptionPrice" >
 											     <span class="mt-1 mx-1" style="color: black; font-size: 15px; font-weight: 400;">원</span> </p>
-											     <!-- x 버튼 표시 -->
                                                 <a href="javascript:void(0)" style="position:absolute; right:0;">
                                                     <i class="fas fa-times"></i>
                                                 </a>
@@ -231,7 +228,7 @@
                                             
                                         </div>
                                     </div>
-                                        <div class="product-option-item" style="position: relative; padding: 16px 0 30px 100px; border-top: 1px solid #d3d3d3;">
+                                        <div class="product-option-item" style="position: relative; padding: 16px 0 30px 100px;">
                                             <div class="option-title-area mt-3" style="position: absolute; top:15px; left: 0;">
                                                 <div class="option-title" style="display: inline-block; color: #5a5a5a; font-size: 20px; font-weight: 400; ">
                                                     총 결제금액
