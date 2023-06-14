@@ -102,6 +102,7 @@ $(document).ready(function() {
 
   });
  }
+ 
  }); 
   
   // 수량 버튼으로 orderAmount, totalPrice 값 만들기
