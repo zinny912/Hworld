@@ -18,10 +18,10 @@ public interface OrderDAO {
     public List<OrderVO> getList() throws Exception;
 
     // 주문 하나 조회
-    public OrderVO getDetail(OrderDirectVO orderDirectVO) throws Exception;
+    public OrderVO getDetail(OrderVO orderVO, OrderDirectVO orderDirectVO) throws Exception;
 
     // 주문 등록
-    public int setInsert(OrderVO orderVO) throws Exception;
+    public int setInsert(OrderVO orderVO, OrderDirectVO orderDirectVO) throws Exception;
 
 
 

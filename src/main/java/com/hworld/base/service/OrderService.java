@@ -23,14 +23,14 @@ public class OrderService {
 	}
 	
 	//주문 하나 조회 
-	public OrderVO getDetail(OrderDirectVO orderDirectVO) throws Exception{
-		return orderDAO.getDetail(orderDirectVO);
+	public OrderVO getDetail(OrderVO orderVO, OrderDirectVO orderDirectVO) throws Exception{
+		return orderDAO.getDetail(orderVO, orderDirectVO);
 	}
 	
 	
 	//주문테이블 인서트  
-	public int setInsert(OrderVO orderVO) throws Exception {
-		return orderDAO.setInsert(orderVO);
+	public int setInsert(OrderVO orderVO, OrderDirectVO orderDirectVO) throws Exception {
+		return orderDAO.setInsert(orderVO, orderDirectVO);
 	}
 
 }
