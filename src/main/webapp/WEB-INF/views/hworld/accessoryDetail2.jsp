@@ -156,7 +156,7 @@
 									</div>
 									<form action="./accessoryOrder" method="POST">
 										<c:forEach items="${list}" var="direct" varStatus="status">
-											<div class="titlebox">
+											<div class="titlebox" id="${direct.directCode}">
 												<div class="brand direct-item" style="font-size: 27px; color: gray;" id="productCode${status.index}"
 												data-direct-code="${direct.directCode}" data-direct-price="${direct.directPrice}"
 												data-direct-stock="${direct.directStock}">
@@ -168,26 +168,21 @@
 													<div>
 														<h3 class="mt-3 ">출고가</h3>
 													</div>
-														<p>
-														<span class="price-detail theme-color fw-bold" id="renewPrice">${direct.directPrice}</span>
-														<span class="unit">원</span>
-														</p>
-													<input type="hidden" id="dc${direct.directCode}" name="directCode" value="${direct.directCode}">
-													<input type="hidden" id="categoryCode" name="categoryCode" value="${direct.categoryCode}">
-													<input type="hidden" id="brandCode" name="brandCode" value="${direct.brandCode}">
-													<input type="hidden" id="slicedCode" name="slicedCode" value="${direct.slicedCode}">
-													<input type="text" id="directStock" name="directStock" value="${direct.directStock}" readonly>
-													<input type="hidden" id="directPrice" name="directPrice" value="${direct.directPrice}">
-													<input type="hidden" id="totalPrice" name="totalPrice" value="">
-													<input type="hidden" id="orderAmount" name="orderAmount" value="">
+													<p>
+													<span class="price-detail theme-color fw-bold" id="renewPrice">${direct.directPrice}</span>
+													<span class="unit">원</span>
+													</p>
+												<div id="item_${direct.directCode}" data-direct-code="${direct.directCode}" data-category-code="${direct.directCode}" data-brand-code="${direct.categoryCode}" data-sliced-code="${direct.slicedCode}" data-direct-stock="${direct.directStock}" data-direct-price="${direct.directPrice}">
+												</div>
+												<!-- 원래 orderInfos가 있던 위치 -->
 											</div>
-											</c:forEach>
+										</c:forEach>
 										<div class="optionArea">
 											<div class="product-option-item color">
-										   		<div class="option-title-area">
-										      		<h3 class="option-title mb-2">색상</h3>
+												<div class="option-title-area">
+													<h3 class="option-title mb-2">색상</h3>
 										        </div>
-												<div class="color-types">
+												<div class="color-types" id="colorTypes">
 													<ul class="color-variant mb-0">
 														<li class="bg-white border boder-1 selected" value="W" name="colorCode"></li>
 														<li class="bg-gray1" value="G" name="colorCode"></li>
@@ -196,8 +191,8 @@
 													</ul>
         										</div>
 											</div>
-										<hr>
 										</div>
+									<hr>
 										
 										
                                     <div class="cart-content-wrap" >
@@ -209,20 +204,20 @@
                                                 <input type="text" value="" id="colorName" style="border:0px; font-size:15px;"readonly>
                                             </div>                                            
                                 <!-- 수량 버튼 -->
-                                           <div class="d-flex quantity-wrapper" style="padding: 5px 0px; justify-content: center; margin-top: -8px; ">
-											  <button type="button" class="btn quantity-left-minus" style="height: 5px; width: 5px; padding: 10px; margin-top: -6px;">-</button>
-											  <span class="input-wrapper">
-											    <input type="text" class="input-number text-center" style="width: 35px; padding: 5px 5px; border: 1px solid #c7c7c5; border-radius: 3px;" value="0">
-											  </span>
-											  <button type="button" class="btn quantity-right-plus" style="height: 5px; margin-top: -6px; padding: 10px 5px;">+</button>
-											  
-											  <span id="totalQty" style="margin-left: 10px;" ></span>
+											<div class="d-flex quantity-wrapper" style="padding: 5px 0px; justify-content: center; margin-top: -8px; ">
+												<button type="button" class="btn quantity-left-minus" style="height: 5px; width: 5px; padding: 10px; margin-top: -6px;">-</button>
+												<span class="input-wrapper">
+													<input type="text" class="input-number text-center" style="width: 35px; padding: 5px 5px; border: 1px solid #c7c7c5; border-radius: 3px;" value="0">
+												</span>
+												<button type="button" class="btn quantity-right-plus" style="height: 5px; margin-top: -6px; padding: 10px 5px;">+</button>
+												
+												<span id="totalQty" style="margin-left: 10px;" ></span>
 											</div>
 								<!-- 수량 버튼 end -->			
 											<div class="align-items-end ">
-											  <p class="price theme-color2 fs-4 d-flex mx-5" style="position: absolute; right: 0;"  id="subscriptionPrice" >
-											     <span class="mt-1 mx-1" style="color: black; font-size: 15px; font-weight: 400;">원</span> </p>
-											     <!-- x 버튼 표시 -->
+												<p class="price theme-color2 fs-4 d-flex mx-5" style="position: absolute; right: 0;"  id="subscriptionPrice" >
+													<span class="mt-1 mx-1" style="color: black; font-size: 15px; font-weight: 400;">원</span> </p>
+													<!-- x 버튼 표시 -->
                                                 <a href="javascript:void(0)" style="position:absolute; right:0;">
                                                     <i class="fas fa-times"></i>
                                                 </a>
@@ -243,32 +238,41 @@
                                                         <div class="inner">
                                                             <div class="data" style="position: absolute; top: 35px; right: 0; text-align: right;">
                                                                 <h2 class="price theme-color" id="subscriptionPrice" style="display: block; font-weight: 700;">
-                                                                     <span style="color:black; font-size:20px;">원</span>
+                                                                    <span style="color:black; font-size:20px;">원</span>
                                                                 </h2>
                                                             </div>
                                                         </div>
                                                     </div>            
                                                 </div>  
-	                                                <div class="btn-area" style="display:block; position: relative; padding-top:70px; float: center;"> 
-	                                                    <div class="product-buttons"> 
-	                                                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#cartinto">
-	                                                        <button type="button" class="btn btn-outline-custom me-1 cart-icon" style="margin-left:-105px; display:inline-block;">
-	                                                            <svg xmlns="http://www.w3.org/2000/svg" width="34" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart pe-1"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
-	                                                        </button> </a>                    
-	                                                    <button type="submit" class="btn btn-solid" id="orderBtn" style= "width: 700px; height: 52px; font-size: 18px; display: inline-block; padding: 0 10px; text-align: center;">주문하기</button>
-	                                                	</div> 
-	                                                </div>                                                      
+												<div class="btn-area" style="display:block; position: relative; padding-top:70px; float: center;"> 
+													<div class="product-buttons"> 
+														<a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#cartinto">
+														<button type="button" class="btn btn-outline-custom me-1 cart-icon" style="margin-left:-105px; display:inline-block;">
+															<svg xmlns="http://www.w3.org/2000/svg" width="34" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart pe-1"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+														</button> </a>
+														<button type="submit" class="btn btn-solid" id="orderBtn" style= "width: 700px; height: 52px; font-size: 18px; display: inline-block; padding: 0 10px; text-align: center;">주문하기</button>
+													</div>
+												</div>
+												<!-- order Informations -->
+												<div id="orderInfos">
+													<input type="hidden" id="dc${direct.directCode}" name="directCode" value="${direct.directCode}">
+													<input type="hidden" id="categoryCode" name="categoryCode" value="${direct.categoryCode}">
+													<input type="hidden" id="brandCode" name="brandCode" value="${direct.brandCode}">
+													<input type="hidden" id="slicedCode" name="slicedCode" value="${direct.slicedCode}">
+													<input type="text" id="directStock" name="directStock" value="${direct.directStock}" readonly>
+													<input type="hidden" id="directPrice" name="directPrice" value="${direct.directPrice}">
+													<input type="hidden" id="totalPrice" name="totalPrice" value="">
+													<input type="hidden" id="orderAmount" name="orderAmount" value="">
+												</div>
                                             </div>
                                         </div>
-                                        
-                                        </form>
-                                    </div>
-                                </div>
+									</form>
+								</div>
+							</div>
                         </div>
                     </div>
                 </div>
-            
-        
+
                 <div class="col-12">
                     <div class="cloth-review">
                         <nav>
@@ -804,7 +808,7 @@
 
     <div class="bg-overlay"></div>
 <script src="/assets/js/updateReview.js"></script>
-<script src="/assets/js/accessoryDetail.js"></script>
+<script src="/assets/js/accessoryDetail2.js"></script>
 
 
 <c:import url="../temp/footer.jsp"></c:import>    
