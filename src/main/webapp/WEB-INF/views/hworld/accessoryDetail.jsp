@@ -154,7 +154,7 @@
 									<div class="noStock" style="display:none;">
 										<h2 class="theme-color">선택하신 제품은 재고가 없습니다.</h2>
 									</div>
-									<form action="/order/${sessionScope.memberNum}" method="get" class="order_form">
+									<form action="/order/${sessionScope.memberNum}" method="post" class="order_form">
 										<c:forEach items="${list}" var="direct" varStatus="status">
 											<div class="titlebox">
 												<div class="brand direct-item" style="font-size: 27px; color: gray;" id="productCode${status.index}"

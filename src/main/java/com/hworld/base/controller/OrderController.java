@@ -32,7 +32,7 @@ public class OrderController {
 	@Autowired
 	private MemberService memberService;
 	
-	@GetMapping("/order/{memberNum}")
+	@PostMapping("/order/{memberNum}")
 	public ModelAndView setOrderInsert(@PathVariable("memberNum") Integer memberNum, OrderPageVO orderPageVO, HttpSession session) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("orderList", orderService.getDirectDetail(orderPageVO.getOrders()));
