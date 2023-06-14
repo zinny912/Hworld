@@ -25,7 +25,7 @@
                 </div>
 
                 <!-- 정보 입력 영역 -->
-                <form action="./signUpPrecheck" method="post">
+                <form action="./precheck" method="post">
                 <div class="mt-5">
                     <div class="mb-4 row">
                         <div class="col-12">

@@ -316,6 +316,7 @@ $('#completeForm').click(function(){
 //유효성 검사
 //전화번호 11자리, 숫자만 입력 + 중복검사까지 ajax로 실행
 $('#phoneNum').on("blur", function() {
+    //숫자만 입력되게 하는 정규식
     let checkValue = $(this).val().replace(/[^\d]/g, "");
     $(this).val(checkValue);
     

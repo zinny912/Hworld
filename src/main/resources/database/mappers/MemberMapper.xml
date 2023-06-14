@@ -20,6 +20,13 @@
 		WHERE RRNF=#{rrnf} AND RRNL=#{rrnl} AND NAME=#{name}
 	</select>
 	
+	<!-- 회원번호로 회원정보 조회 -->
+	<select id="getMemberDetail" parameterType="MemberVO" resultType="MemberVO">
+		SELECT *
+		FROM MEMBER
+		WHERE MEMBERNUM=#{memberNum}
+	</select>
+	
 	<!-- 회원가입 -->
 	<insert id="setMemberAdd" parameterType="MemberVO">
 		INSERT INTO MEMBER(MEMBERNUM, EMAIL, PW, NAME, ADDRESS1, ADDRESS2, ADDRESS3, RRNF, RRNL, JOINDATE, MEMBERSTATE, ADMINCHECK, PHONENUM, OWNCHECK)

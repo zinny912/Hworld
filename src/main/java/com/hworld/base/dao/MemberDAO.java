@@ -13,6 +13,7 @@ public interface MemberDAO {
 	
 	public MemberVO getIdentifybyName(MemberVO memberVO) throws Exception;
 	
+	public MemberVO getMemberDetail(MemberVO memberVO) throws Exception;
 	
 	public int setMemberAdd(MemberVO memberVO) throws Exception;
 	

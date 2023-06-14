@@ -26,7 +26,7 @@ public class MemberService {
 	private BCryptPasswordEncoder pwEncoder;
 	
 	//회원 확인
-	public Map<String, Object> getSignUpPrecheck(MemberVO memberVO) throws Exception{
+	public Map<String, Object> getPrecheck(MemberVO memberVO) throws Exception{
 		//회원 확인 로직 - 이름, 주민번호로 조회, 4가지 경우의 수 발생
 		//* 주민번호 또는 이름이 일치하지 않는 경우
 		//1. 주민번호가 일치하지 않음 : 신청서를 낸적 없는 회원. 회선 가입정보 없음. 홈페이지만 회원 가입하려는 회원
@@ -48,6 +48,8 @@ public class MemberService {
 		MemberVO checkRRN = memberDAO.getIdentifybyRRN(memberVO);
 		//주민번호와 이름이 일치하는 회원 가져오기
 		MemberVO checkName = memberDAO.getIdentifybyName(memberVO);
+		//주민번호와 이름이 일치하는 회원 정보의 memberNum으로 회원의 모든 정보 가져오기(checkName에 memberNum 포함)
+		MemberVO data = memberDAO.getMemberDetail(checkName);
 		
 		//로직
 		//주민번호 체크
@@ -57,12 +59,12 @@ public class MemberService {
 				//email(id),pw 체크
 				if(checkName.getEmail() == null || checkName.getPw() == null) { //id/pw가 null인 경우(state=3)
 					result.put("state", 3);
-					result.put("account", checkName);
+					result.put("account", data);
 					return result;
 					
 				}else { //id/pw가 null이 아닌 경우(state=4)
 					result.put("state", 4);
-					result.put("account", checkName);
+					result.put("account", data);
 					return result;
 				}
 			}else { //주민번호는 일치하지만 이름이 일치하지 않는 경우(state=2)

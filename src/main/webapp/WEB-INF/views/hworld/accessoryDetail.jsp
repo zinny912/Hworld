@@ -154,7 +154,7 @@
 									</div>
 									<form action="./accessoryOrder" method="GET">
 										<c:forEach items="${list}" var="direct" varStatus="status">
-											<div class="titlebox">
+											<div class="titlebox" id="${direct.directCode}">
 												<div class="brand direct-item" style="font-size: 27px; color: gray;" id="productCode"
 												data-direct-code="${direct.directCode}" data-direct-price="${direct.directPrice}"
 												data-direct-stock="${direct.directStock}">
@@ -170,7 +170,7 @@
 														<span class="price-detail theme-color fw-bold" id="renewPrice">${direct.directPrice}</span>
 														<span class="unit">원</span>
 														</p>
-													<input type="hidden" id="directCode" name="directCode" value="${direct.directCode}">
+													<input type="hidden" id="dc${direct.directCode}" name="directCode" value="${direct.directCode}">
 													<input type="hidden" id="categoryCode" name="categoryCode" value="${direct.categoryCode}">
 													<input type="hidden" id="brandCode" name="brandCode" value="${direct.brandCode}">
 													<input type="hidden" id="slicedCode" name="slicedCode" value="${direct.slicedCode}">

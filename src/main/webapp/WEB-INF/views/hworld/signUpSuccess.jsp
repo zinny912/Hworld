@@ -7,7 +7,6 @@
 <head>
 	<meta charset="UTF-8">
 	<c:import url="../temp/style.jsp"></c:import>    
-    <title>회원 가입</title>
 </head>
 
 <body class="signup-page theme-color2">
