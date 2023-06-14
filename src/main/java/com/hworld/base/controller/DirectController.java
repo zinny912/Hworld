@@ -425,17 +425,17 @@ public class DirectController {
 		modelAndView.setViewName("hworld/phoneOrder");
 		return modelAndView;
 	}
-	
-	// 액세서리 주문 페이지
-	@PostMapping("accessoryOrder")
-	public ModelAndView setInsert(OrderDirectVO orderDirectVO, OrderVO orderVO, HttpSession session) throws Exception {
-	    ModelAndView mv = new ModelAndView();
-
-		mv.addObject("orderDirectVO", orderDirectVO);
-		mv.addObject("orderVO", orderVO);
-	    mv.setViewName("hworld/accessoryOrder");
-	    return mv;
-	}
+//	
+//	// 액세서리 주문 페이지
+//	@PostMapping("accessoryOrder")
+//	public ModelAndView setInsert(OrderDirectVO orderDirectVO, OrderVO orderVO, HttpSession session) throws Exception {
+//	    ModelAndView mv = new ModelAndView();
+//
+//		mv.addObject("orderDirectVO", orderDirectVO);
+//		mv.addObject("orderVO", orderVO);
+//	    mv.setViewName("hworld/accessoryOrder");
+//	    return mv;
+//	}
 
 
 
