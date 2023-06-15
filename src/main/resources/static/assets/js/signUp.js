@@ -9,7 +9,7 @@ $(function(){
 //alert($frm);
 
 //전화번호 정규식 + 11자리 입력
-$('#phoneNum').on("blur", function() {
+$('#tel').on("blur", function() {
     //숫자만 입력되게 하는 정규식
     let checkValue = $(this).val().replace(/[^\d]/g, "");
     $(this).val(checkValue);
@@ -17,7 +17,7 @@ $('#phoneNum').on("blur", function() {
     let length = checkValue.length;
 
     if(length != 11) {
-        $('#phoneNum').val("");
+        $('#tel').val("");
         $('#validPN').empty();
         $('#validPN').append('<p class="theme-color">전화번호는 11자리여야 합니다.</p>');
         //유효성 검사에 쓸 인자 추가

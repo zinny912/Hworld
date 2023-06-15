@@ -81,7 +81,7 @@
 
                     <div class="mb-4 row">
                         <div class="col-12">
-                            <input class="form-control" type="tel" name="phoneNum" id="phoneNum" placeholder="연락처">
+                            <input class="form-control" type="tel" name="tel" id="tel" placeholder="연락처">
                         </div>
                         <div id="validPN">
                         </div>
