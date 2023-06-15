@@ -207,7 +207,7 @@ public class DirectController {
 		mv.addObject("list", ar);		
 		mv.addObject("qnaList", accQna);
 		mv.addObject("review",accReview);
-		mv.setViewName("hworld/accessoryDetail");
+		mv.setViewName("hworld/accessoryDetail2");
 		return mv;
 	}
 	

@@ -7,7 +7,6 @@
 <head>
 	<meta charset="UTF-8">
     <c:import url="../temp/style.jsp"></c:import>
-    <title>계정정보 찾기</title>
     <style>
         .login-section .materialContainer .button {
             margin-top: 20px;
@@ -32,12 +31,9 @@
         .login-section .materialContainer .button.login button span {
             padding: 0px; }
     </style>
-
 </head>
 
 <body class="theme-color2 light ltr">
-
-
     <!-- Sign Up Section Start -->
     <div class="login-section">
         <div class="materialContainer">

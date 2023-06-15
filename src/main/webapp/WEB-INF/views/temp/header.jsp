@@ -83,10 +83,10 @@
                                                 </li>
                 <!-- 관리자/회원 테스트용 로그인 버튼 시작, 테스트 후 필요없으면 삭제 -->
                 <li>
-                    <a class="d-block fw-bold fs-6 me-3" id="testAdmin">관리자</a>
+                    <a href="javascript:void(0)" class="d-block fw-bold fs-6 me-3" id="testAdmin">관리자</a>
                 </li>
                 <li>
-                    <a class="d-block fw-bold fs-6 me-3" id="testMember">일반회원</a>
+                    <a href="javascript:void(0)" class="d-block fw-bold fs-6 me-3" id="testMember">일반회원</a>
                 </li>
                 <!-- 관리자/회원 테스트용 로그인 버튼 끝, 테스트 후 필요없으면 삭제 -->
                                             </ul>
@@ -102,7 +102,7 @@
                                                     <a href="/member/login" class="d-block fw-bold fs-6 me-3">로그인</a>
                                                 </li>
                                                 <li>
-                                                    <a href="/member/signUpPrecheck" class="d-block fw-bold fs-6">회원 가입</a>
+                                                    <a href="/member/precheck" class="d-block fw-bold fs-6">회원 가입</a>
                                                 </li>
                                             </ul>
 											</c:if>
