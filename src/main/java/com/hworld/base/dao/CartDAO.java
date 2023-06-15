@@ -4,8 +4,8 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.hworld.base.vo.CartVO;
-import com.hworld.base.vo.DirectVO;
 import com.hworld.base.vo.MemberVO;
+
 
 @Mapper
 public interface CartDAO {
@@ -22,6 +22,6 @@ public interface CartDAO {
     public int setDelete(CartVO cartNum) throws Exception;
     
 	/* 카트 확인 */
-	public CartVO checkCart(CartVO cartVO);
+	public CartVO checkCart(CartVO cartVO) throws Exception;
 
 }

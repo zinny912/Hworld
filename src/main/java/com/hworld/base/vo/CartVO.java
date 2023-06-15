@@ -27,4 +27,8 @@ public class CartVO {
 		this.totalPrice = this.directPrice*this.cartAmount;
 	}
 	
+	private String brandCode;
+	
+	private String colorCode;
+	
 }

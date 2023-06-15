@@ -6,32 +6,33 @@
   <mapper namespace="com.hworld.base.dao.CartDAO">
   	<!-- 카트 추가 -->
 	<insert id="setInsert">
-		insert into cart(memberNum, directCode, cartAmount)
+		insert into CART(memberNum, directCode, cartAmount)
 		values(#{memberNum}, #{directCode}, #{cartAmount}) 
 	</insert>
 	
 	
 	<!-- 카트 삭제 -->
 	<delete id="setDelete">
-		delete from cart where cartNum = #{cartNum}
+		delete from CART where cartNum = #{cartNum}
 	</delete>
 	
 	<!-- 카트 수량 수정 -->
 	<update id="setUpdate">
-		update cart set cartAmount=#{cartAmount} where cartNum = #{cartNum}
+		update CART set cartAmount=#{cartAmount} where cartNum = #{cartNum}
 	</update>
 	
 	
 	<!-- 카트 목록 -->
 	<select id="getCartList" resultType="CartVO">
-		select a.cartNum, a.memberNum, a.directCode, a.cartAmount, b.directName, b.directPrice
-		from cart a left outer join direct b on a.directCode = b.directCode
+		select a.CARTNUM, a.memberNum, a.directCode, a.cartAmount, b.directName, b.directPrice, b.brandCode, b.colorCode
+		from CART a left outer join DIRECT b on a.directCode = b.directCode
 		where memberNum = #{memberNum}	
 	</select>
 	
+	
 	<!-- 카트 확인 -->
 	<select id="checkCart" resultType="CartVO">
-		select * from cart 
+		select * from CART
 		where memberNum = #{memberNum} and directCode = #{directCode}
 	</select>
 	
