@@ -6,7 +6,49 @@
 
 <head>
 	<meta charset="UTF-8">
-    <c:import url="adminStyle.jsp"></c:import>  
+    <c:import url="adminStyle.jsp"></c:import>
+    <style>
+    	.state-dormancy {
+    		background-color:#F5F6CE;
+    		color:#868A08;
+    		padding:5px;
+    		border-radius:5px;
+    		font-size:12px;
+    		font-weight:700;
+    		position:relative;
+    		width:80px;
+    	}
+    	.state-pause {
+    		background-color:#F6CECE;
+    		color:#e22454;
+    		padding:5px;
+    		border-radius:5px;
+    		font-size:12px;
+    		font-weight:700;
+    		position:relative;
+    		width:80px;
+    	}
+    	.state-normal {
+    		background-color:#E0F8E6;
+    		color:#088A08;
+    		padding:5px;
+    		border-radius:5px;
+    		font-size:12px;
+    		font-weight:700;
+    		position:relative;
+    		width:80px;
+    	}
+    	.state-withdrawal {
+    		background-color:#BDBDBD;
+    		color:#2E2E2E;
+    		padding:5px;
+    		border-radius:5px;
+    		font-size:12px;
+    		font-weight:700;
+    		position:relative;
+    		width:80px;
+    	}
+    </style>  
 </head>
 
 <body>
@@ -43,80 +85,53 @@
                                             <table class="table table-striped all-package">                                                
                                                 <thead>
                                                     <tr>
+                                                    	<th><b>회원번호</b> <i class="fa fa-fw fa-sort"></i></th>
                                                         <th><b>이메일</b> <i class="fa fa-fw fa-sort"></i></th>
                                                         <th><b>회선번호</b> <i class="fa fa-fw fa-sort"></i></th>
-                                                        <th>요금제</th>
-                                                        <th>기기명</th>
-                                                        <th><b>통신사</b> <i class="fa fa-fw fa-sort"></i></th>
+                                                        <th><b>요금제</b></th>
+                                                        <th><b>기기명</b></th>
+                                                        <!-- <th><b>통신사</b> <i class="fa fa-fw fa-sort"></i></th> -->
                                                         <th><b>개통날짜</b> <i class="fa fa-fw fa-sort"></i></th>
                                                         <th><b>해지날짜</b> <i class="fa fa-fw fa-sort"></i></th>
                                                         <th><b>상태</b> <i class="fa fa-fw fa-sort"></i></th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
-                                                    
-                                                        <td>EverettCGreen@rhyta.com</td>
-
-                                                        <td>010-1111-1111</td>
-
-                                                        <td></td>
-
-                                                        <td>아이폰 14</td>
-
-                                                        <td>타회사</td>
-
-                                                        <td>23/01/04</td>
-
-                                                        <td class="font-primary"></td>
-
-                                                        <td class="order-success">
-                                                            <span>정상</span>
-                                                        </td>
-                                                    </tr>
-
-                                                    <tr>
-                                                        
-                                                        <td>gasadgasd@gdfas.com</td>
-
-                                                        <td>010-2222-2222</td>
-
-                                                        <td>베이직</td>
-
-                                                        <td>갤럭시 s23</td>
-
-                                                        <td>자회사</td>
-
-                                                        <td>23/05/01</td>
-
-                                                        <td class="font-primary"></td>
-
-                                                        <td class="order-pending">
-                                                            <span>일시정지</span>
-                                                        </td>
-                                                    </tr>
-
-                                                    <tr>
-                                                       
-                                                        <td>gasadgasd@gdfas.com</td>
-
-                                                        <td>010-3333-3333</td>
-
-                                                        <td></td>
-
-                                                        <td></td>
-
-                                                        <td>자회사</td>
-
-                                                        <td>23/03/12</td>
-
-                                                        <td class="font-primary">23/02/07</td>
-
-                                                        <td class="order-cancle">
-                                                            <span>정지</span>
-                                                        </td>
-                                                    </tr>
-
+                                                	<c:forEach var="member" items="${phoneList}">
+														<c:forEach var="telephonVOs" items="${member.telephoneVOs}">
+	                                                    <tr>
+	                                                    	<td>${member.memberNum}</td>
+	                                                    	
+	                                                        <td>${member.email}</td>	                                                    	                                                
+	                                                        <td>${member.phoneNum}</td>
+	
+	                                                        <td>${telephonVOs.planNum}</td>
+	
+	                                                        <td>${telephonVOs.directName}</td>
+	
+	                                                        <!-- <td>타회사</td> -->
+	
+	                                                        <td>${telephonVOs.startDate}</td>
+																
+	                                                        <td class="font-primary">${telephonVOs.endDate}</td>
+	
+	                                                        <td>
+	                                                        	<c:if test="${member.memberState eq '-1'}">
+	                                                            	<span class="state-dormancy">휴면</span>	                                                            	
+	                                                           	</c:if>
+	                                                           	<c:if test="${member.memberState eq '0'}">	                                                            
+	                                                            	<span class="state-pause">일시정지</span>
+	                                                           	</c:if>
+	                                                           	<c:if test="${member.memberState eq '1'}">
+	                                                            	<span class="state-normal">정상</span>	                                                            	
+	                                                           	</c:if>
+	                                                           	<c:if test="${member.memberState eq '2'}">
+	                                                            	<span class="state-withdrawal">탈퇴</span>	                                                            	
+	                                                           	</c:if>
+	                                                        </td>
+	                                                    </tr>
+	                                                    </c:forEach>
+													</c:forEach>
                                                 </tbody>
                                             </table>
                                         </div>
@@ -127,7 +142,7 @@
                                     <nav class="ms-auto me-auto " aria-label="...">
 						                <ul class="pagination pagination-primary">
 						                    <li class="page-item ${pager.pre ? '' : 'disabled' }">
-						                        <a class="page-link" href="memberList?page=${pager.startNum-1}&search=${pager.search}" aria-label="Previous">
+						                        <a class="page-link" href="phoneList?page=${pager.startNum-1}&search=${pager.search}" aria-label="Previous">
 						                            <span aria-hidden="true">
 						                                <i class="fas fa-chevron-left"></i>
 						                            </span>
@@ -135,11 +150,11 @@
 						                    </li>
 						                    <c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
 						   	                    <li class="page-item">
-						                        	<a class="page-link" href="memberList?page=${i}&search=${pager.search}">${i}</a>
+						                        	<a class="page-link" href="phoneList?page=${i}&search=${pager.search}">${i}</a>
 						                    	</li>
 						                    </c:forEach>
 						                    <li class="page-item ${pager.next ? '' : 'disabled' }">
-						                        <a class="page-link" href="memberList?page=${pager.lastNum+1}&search=${pager.search}" aria-label="Next">
+						                        <a class="page-link" href="phoneList?page=${pager.lastNum+1}&search=${pager.search}" aria-label="Next">
 						                            <span aria-hidden="true">
 						                                <i class="fas fa-chevron-right"></i>
 						                            </span>

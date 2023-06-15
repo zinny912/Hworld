@@ -10,7 +10,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.hworld.base.service.AdminService;
 import com.hworld.base.util.Pager;
+import com.hworld.base.vo.ApplicationVO;
 import com.hworld.base.vo.MemberVO;
+import com.hworld.base.vo.TelephoneVO;
 
 @Controller
 @RequestMapping("/admin/*")
@@ -31,27 +33,21 @@ public class AdminController {
 	@GetMapping("memberList")
 	public ModelAndView memberList(Pager pager) throws Exception{
 		ModelAndView modelAndView = new ModelAndView();
-		List<MemberVO> list = adminService.memberList(pager);
-		modelAndView.addObject("list", list);
+		List<MemberVO> memberList = adminService.memberList(pager);
+		modelAndView.addObject("memberList", memberList);
 		modelAndView.setViewName("admin/memberList");
 		return modelAndView;
 	}
 	
 	// 회원 - 회선 목록
 	@GetMapping("phoneList")
-	public ModelAndView phoneList() throws Exception{
+	public ModelAndView phoneList(Pager pager) throws Exception{
 		ModelAndView modelAndView = new ModelAndView();
+		List<MemberVO> ar = adminService.phoneList(pager);
+		modelAndView.addObject("phoneList", ar);
 		modelAndView.setViewName("admin/phoneList");
 		return modelAndView;
-	}
-	
-	// 회원 - 회원 추가
-	@GetMapping("memberAdd")
-	public ModelAndView memberAdd() throws Exception{
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("admin/memberAdd");
-		return modelAndView;
-	}
+	}	
 	
 	// 주문 목록
 	@GetMapping("orderList")
@@ -133,11 +129,4 @@ public class AdminController {
 		return modelAndView;
 	}
 	
-	// 프로필 설정 페이지
-	@GetMapping("profileSetting")
-	public ModelAndView profileSetting() throws Exception{
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("admin/profileSetting");
-		return modelAndView;
-	}
 }
