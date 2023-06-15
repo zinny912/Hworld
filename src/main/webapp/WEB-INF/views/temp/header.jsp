@@ -81,10 +81,19 @@
                                                 <li class="">
                                                     <a href="/etc/findShop" class="nav-link menu-title fw-bold fs-6">매장찾기</a>
                                                 </li>
+                <!-- 관리자/회원 테스트용 로그인 버튼 시작, 테스트 후 필요없으면 삭제 -->
+                <li>
+                    <a class="d-block fw-bold fs-6 me-3" id="testAdmin">관리자</a>
+                </li>
+                <li>
+                    <a class="d-block fw-bold fs-6 me-3" id="testMember">일반회원</a>
+                </li>
+                <!-- 관리자/회원 테스트용 로그인 버튼 끝, 테스트 후 필요없으면 삭제 -->
                                             </ul>
                                         </div>
                                     </div>
                                 </nav>
+                                
                                     <div class="menu-right">
                                         <ul>
                                             <c:if test="${empty memberVO}">
@@ -193,3 +202,56 @@
                 </div>
             </header>
     <!-- header end -->
+
+<script>
+    //테스트용 자동로그인 스크립트. 테스트 끝나면 삭제하기
+    $('#testAdmin').click(function(){
+        console.log("admin");
+        const email = "xbigbang5@gmail.com";
+        const pw = "12345";
+
+        $.ajax({
+            type: 'POST',
+            url: '/member/testAdmin',
+            data: {
+                email: email,
+                pw: pw
+            },
+            success: function(response) {
+            // 응답 처리 로직 작성
+                console.log("성공", response);
+                location.reload();
+            },
+            error: function(error) {
+            // 에러 처리 로직 작성
+            console.log("실패", error);
+            location.reload();
+            }
+        });
+    })
+
+    $('#testMember').click(function(){
+        console.log("member");
+        const email = "zinnybot5@gmail.com";
+        const pw = "12345";
+
+        $.ajax({
+            type: 'POST',
+            url: '/member/testMember',
+            data: {
+                email: email,
+                pw: pw
+            },
+            success: function(response) {
+            // 응답 처리 로직 작성
+                console.log("성공", response);
+                location.reload();
+            },
+            error: function(error) {
+            // 에러 처리 로직 작성
+            console.log("실패", error);
+            location.reload();
+            }
+        });
+    })
+</script>

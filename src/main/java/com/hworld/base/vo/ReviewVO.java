@@ -26,11 +26,13 @@ public class ReviewVO {
     
     private Integer memberNum;
     
-    private Integer orderNum;
+    private String orderNum;
     
     private Long count;
     
     private String slicedCode;
+
+    private String categoryCode;
     //private List<MemberVO>memberVOs;
     private List<OrderVO> orderVOs;
     

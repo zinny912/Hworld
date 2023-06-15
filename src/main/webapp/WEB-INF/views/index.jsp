@@ -70,20 +70,6 @@
 
 <body class="theme-color2 light ltr">
 <c:import url="./temp/header.jsp"></c:import>
-<!-- 관리자/회원 테스트용 로그인 버튼 시작, 테스트 후 필요없으면 삭제 -->
-<div class="d-flex justify-content-end">
-	<!-- <form action="/member/testAdmin" method="post">
-		<input type="hidden" name="email" value="user01@gmail.com">
-		<input type="hidden" name="pw" value="user01">
-    </form> -->
-
-	<button type="button" class="d-block fw-bold fs-6 me-3" id="testAdmin">관리자</button>
-    <button type="button" class="d-block fw-bold fs-6 me-3" id="testMember">일반회원</button>
-	
-	<!-- <form action="/member/loginMember" method="post">
-	</form> -->
-</div>
-<!-- 관리자/회원 테스트용 로그인 버튼 시작, 테스트 후 필요없으면 삭제 -->
     <!-- mobile fix menu start -->
     <div class="mobile-menu d-sm-none">
         <ul>
@@ -661,60 +647,6 @@
     });
 
     </script>
-<script>
-    //테스트용 자동로그인
-    $('#testAdmin').click(function(){
-        console.log("admin");
-        const email = "xbigbang5@gmail.com";
-        const pw = "12345";
-
-        $.ajax({
-            type: 'POST',
-            url: '/member/testAdmin',
-            data: {
-                email: email,
-                pw: pw
-            },
-            success: function(response) {
-            // 응답 처리 로직 작성
-                console.log("성공", response);
-                location.reload();
-            },
-            error: function(error) {
-            // 에러 처리 로직 작성
-            console.log("실패", error);
-            location.reload();
-            }
-        });
-    })
-
-    $('#testMember').click(function(){
-        console.log("member");
-        const email = "zinnybot5@gmail.com";
-        const pw = "12345";
-
-        $.ajax({
-            type: 'POST',
-            url: '/member/testMember',
-            data: {
-                email: email,
-                pw: pw
-            },
-            success: function(response) {
-            // 응답 처리 로직 작성
-                console.log("성공", response);
-                location.reload();
-            },
-            error: function(error) {
-            // 에러 처리 로직 작성
-            console.log("실패", error);
-            location.reload();
-            }
-        });
-    })
-
-</script>
-
 <c:import url="./temp/commonJS.jsp"></c:import>
 </body>
 

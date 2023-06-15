@@ -8,15 +8,26 @@ import lombok.Setter;
 @Getter
 @Setter
 public class OrderDirectVO {
-    //주문 상품 번호
-    private Integer orderDirectNum;
-
-
+ 
     //주문 수량
     private Integer orderAmount;
 
-    private List<MemberVO> memberVOs;
-    private List<DirectVO> directVOs;
-    private List<OrderVO> orderVOs;
+    private String directCode;
+    
+    private String orderNum;
+    
+    // DB엔 없음 -------
+    
+    //상품 한개 가격 
+    private Integer onePrice;
+    
+    //총 가격 (가격 * 주문수량)
+    private Integer totalPrice;
+    
+    
+    public void initTotal() {
+		this.totalPrice = this.onePrice * this.orderAmount;
+	}
+    
     
 }
