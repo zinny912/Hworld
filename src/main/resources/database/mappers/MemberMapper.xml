@@ -5,6 +5,28 @@
   
 <mapper namespace="com.hworld.base.dao.MemberDAO">
 	
+	<!-- 회원 확인 -->
+	<!-- 주민번호만 일치 -->
+	<select id="getIdentifybyRRN" parameterType="MemberVO" resultType="MemberVO">
+		SELECT MEMBERNUM, EMAIL, PW, NAME, RRNF, RRNL
+		FROM MEMBER
+		WHERE RRNF=#{rrnf} AND RRNL=#{rrnl}
+	</select>
+	
+	<!-- 주민번호 + 이름 체크 -->
+	<select id="getIdentifybyName" parameterType="MemberVO" resultType="MemberVO">
+		SELECT MEMBERNUM, EMAIL, PW, NAME, RRNF, RRNL
+		FROM MEMBER
+		WHERE RRNF=#{rrnf} AND RRNL=#{rrnl} AND NAME=#{name}
+	</select>
+	
+	<!-- 회원번호로 회원정보 조회 -->
+	<select id="getMemberDetail" parameterType="MemberVO" resultType="MemberVO">
+		SELECT *
+		FROM MEMBER
+		WHERE MEMBERNUM=#{memberNum}
+	</select>
+	
 	<!-- 회원가입 -->
 	<insert id="setMemberAdd" parameterType="MemberVO">
 		INSERT INTO MEMBER(MEMBERNUM, EMAIL, PW, NAME, ADDRESS1, ADDRESS2, ADDRESS3, RRNF, RRNL, JOINDATE, MEMBERSTATE, ADMINCHECK, PHONENUM, OWNCHECK)

@@ -1,5 +1,7 @@
 package com.hworld.base.controller;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -36,6 +38,102 @@ public class MemberController {
 	
 	@Autowired
 	private BCryptPasswordEncoder pwEncoder;
+	
+	////회원가입 파트
+	//회원 확인 - 페이지 이동
+	@GetMapping("precheck")
+	public ModelAndView getPrecheck() throws Exception{
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("hworld/signUpPrecheck");
+		return mv;
+	}
+	
+	//회원 확인 - 결과 전송
+	@PostMapping("precheck")
+	public ModelAndView getPrecheck(MemberVO memberVO) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		Map<String, Object> result = memberService.getPrecheck(memberVO);
+		
+		Integer state = (Integer)result.get("state");
+		MemberVO account = (MemberVO)result.get("account");
+
+		//응답 구분
+		switch(state) {
+			case 1: //(state=1)주민번호 일치x
+				//신청서를 낸적 없는 회원. 회선 가입정보 없음. 홈페이지만 회원 가입하려는 회원 -> 회원가입(signUp) 페이지로
+				log.error("case 1");
+				log.error("========================== state: {} ", state);
+				break;
+			case 2: //(state=2)주민번호 일치o, 이름 일치x
+				//일치하는 회원정보가 없다고 표시
+				log.error("case 2");
+				log.error("========================== state: {} ", state);
+				log.error("========================== account's RRNF: {} ", account.getRrnf());
+				log.error("========================== account's RRNL: {} ", account.getRrnl());
+				break;
+			case 3: //(state=3)주민번호, 이름 일치o, id/pw == null
+				//신청서를 낸적 있는 회원. 회선 가입정보 있음. 기존에 입력된 정보 보여주고 id/pw 입력받기
+				log.error("case 3");
+				log.error("========================== state: {} ", state);
+				log.error("========================== account's RRNF: {} ", account.getRrnf());
+				log.error("========================== account's RRNL: {} ", account.getRrnl());
+				log.error("========================== account's NAME: {} ", account.getName());
+				log.error("========================== account's address: {} ", account.getAddress1());
+				break;
+			case 4: //(state=4)주민번호, 이름 일치o, id/pw != null
+				//홈페이지에 가입한적 있는 기존 회원. 가입된 회원정보가 있으니 로그인 페이지로 넘기기
+				log.error("case 4");
+				log.error("========================== state: {} ", state);
+				log.error("========================== account's RRNF: {} ", account.getRrnf());
+				log.error("========================== account's RRNL: {} ", account.getRrnl());
+				log.error("========================== account's NAME: {} ", account.getName());
+				log.error("========================== account's RRNF: {} ", account.getEmail());
+				log.error("========================== account's RRNF: {} ", account.getPw());
+				log.error("========================== account's address: {} ", account.getAddress1());
+				break;
+		}
+		
+		mv.addObject("result", result);
+		mv.setViewName("hworld/signUpPrecheckResult");
+		return mv;
+	}
+	
+	
+	//회원 가입 - 페이지 이동
+	@GetMapping("signUp")
+	public ModelAndView setMemberAdd(Integer state) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("state", state);
+		mv.setViewName("hworld/signUp");
+		return mv;
+	}
+	
+	//회원 가입 - 결과 전송
+	@PostMapping("signUp")
+	public ModelAndView setMemberAdd(MemberVO memberVO) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		String rawPw = ""; // 인코딩 전 비밀번호
+		String encodePw = ""; // 인코딩 후 비밀번호
+		
+		rawPw = memberVO.getPw(); // 비밀번호 데이터 얻음
+		encodePw = pwEncoder.encode(rawPw); // 비밀번호 인코딩 - 이렇게 인코딩된 번호는 찾을 수 없다.(같은 값을 넣어도 암호화된 시점에 따라 값이 일치하지 않는거같음)
+		memberVO.setPw(encodePw); // 인코딩 된 비밀번호 member 객체에 다시 저장	
+		
+		int result = memberService.setMemberAdd(memberVO);
+		
+		mv.setViewName("hworld/signUpSuccess");
+		
+		return mv;
+		
+	}
+	
+	
+	
+	
+	////로그인&아웃 파트
+	
 	
 	// 로그인 했을 때 대표 회선 정보가 없을 때 뜨는 페이지
 	@GetMapping("loginFirst")
@@ -136,34 +234,7 @@ public class MemberController {
 		return "/hworld/forgotResultPw";
 	}
 	
-	// 회원가입 페이지(Get)
-	@GetMapping("signUp") 
-	public ModelAndView setMemberAdd() throws Exception{
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("hworld/signUp");
-		return modelAndView;
-	}
 	
-	// 회원가입 페이지(Post)
-	@PostMapping("signUp")
-	public ModelAndView setMemberAdd(MemberVO memberVO) throws Exception {
-		
-		ModelAndView modelAndView = new ModelAndView();
-		
-		String rawPw = ""; // 인코딩 전 비밀번호
-		String encodePw = ""; // 인코딩 후 비밀번호
-		
-		rawPw = memberVO.getPw(); // 비밀번호 데이터 얻음
-		encodePw = pwEncoder.encode(rawPw); // 비밀번호 인코딩
-		memberVO.setPw(encodePw); // 인코딩 된 비밀번호 member 객체에 다시 저장	
-		
-		int result = memberService.setMemberAdd(memberVO);
-		
-		modelAndView.setViewName("hworld/signUpSuccess");
-		
-		return modelAndView;
-		
-	}
 	
 	// 이메일(아이디) 중복체크(Get)
 	@GetMapping("emailCheck")
@@ -227,21 +298,6 @@ public class MemberController {
 		return "redirect:/";
 	} 
 
-	// 회원가입 완료 페이지(Get)
-	@GetMapping("signUpPrecheck")
-	public ModelAndView signUpPrecheck() throws Exception{
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("hworld/signUpPrecheck");
-		return modelAndView;
-	}
-	
-	// 회선확인(명칭 확정 필요) 페이지(Post)
-	@PostMapping("signUpPrecheck")
-	public ModelAndView signUpPrecheck(ApplicationVO applicationVO) throws Exception {
-		ModelAndView modelAndView = new ModelAndView();
-		
-		return modelAndView;
-	}
 	
 	// 회원가입 완료 페이지(Get)
 	@GetMapping("signUpSuccess")
