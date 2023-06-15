@@ -154,106 +154,106 @@
 										<div class="noStock" style="display:none;">
 											<h2 class="theme-color">선택하신 제품은 재고가 없습니다.</h2>
 										</div>
-										<form action="./accessoryOrder" method="POST">
-											<c:forEach items="${list}" var="direct" varStatus="status">
-												<div class="titlebox" id="${direct.directCode}" data-selected="0">
-													<div class="brand" style="font-size: 27px; color: gray;" id="productCode${status.index}"
-													data-direct-code="${direct.directCode}" data-direct-price="${direct.directPrice}"
-													data-direct-stock="${direct.directStock}">
-														${direct.value} ${direct.slicedCode} ${direct.directCode}
+										<c:forEach items="${list}" var="direct" varStatus="status">
+										<div class="titlebox" id="${direct.directCode}" data-selected="0">
+												<div class="brand" style="font-size: 27px; color: gray;" id="productCode${status.index}"
+												data-direct-code="${direct.directCode}" data-direct-price="${direct.directPrice}"
+												data-direct-stock="${direct.directStock}">
+													${direct.value} ${direct.slicedCode} ${direct.directCode}
+												</div>
+													<div class="details-image-concept mt-0" style="font-size: 35px;" id="directName">
+														<span class="directNameValue" data-direct-name="${direct.directName}">${direct.directName}</span>
 													</div>
-														<div class="details-image-concept mt-0" style="font-size: 35px;" id="directName">
-															<span class="directNameValue" data-direct-name="${direct.directName}">${direct.directName}</span>
-														</div>
-														<div>
-															<h3 class="mt-3 ">출고가</h3>
-														</div>
-														<p>
-														<span class="price-detail theme-color fw-bold" id="renewPrice">${direct.directPrice}</span>
+													<div>
+														<h3 class="mt-3 ">출고가</h3>
+													</div>
+													<p>
+														<span class="price-detail theme-color fw-bold renewPrice">${direct.directPrice}</span>
 														<span class="unit">원</span>
-														</p>
-													<div class="direct-item" id="item_${direct.directCode}" data-direct-code="${direct.directCode}" data-category-code="${direct.categoryCode}" data-brand-code="${direct.brandCode}" data-sliced-code="${direct.slicedCode}" data-direct-stock="${direct.directStock}" data-direct-price="${direct.directPrice}">
-													</div>
-													<!-- 원래 orderInfos가 있던 위치 -->
+													</p>
+												<div class="direct-item" id="item_${direct.directCode}" data-direct-code="${direct.directCode}" data-category-code="${direct.categoryCode}" data-brand-code="${direct.brandCode}" data-sliced-code="${direct.slicedCode}" data-direct-stock="${direct.directStock}" data-direct-price="${direct.directPrice}">
 												</div>
-											</c:forEach>
-											<div class="optionArea">
-												<div class="product-option-item color">
-													<div class="option-title-area">
-														<h3 class="option-title mb-2">색상</h3>
+												<!-- 원래 orderInfos가 있던 위치 -->
+											</div>
+										</c:forEach>
+										<div class="optionArea">
+											<div class="product-option-item color">
+												<div class="option-title-area">
+													<h3 class="option-title mb-2">색상</h3>
+												</div>
+												<div class="color-types" id="colorTypes">
+													<ul class="color-variant mb-0">
+														<li class="bg-white border boder-1 selected" value="W" name="colorCode"></li>
+														<li class="bg-gray1" value="G" name="colorCode"></li>
+														<li class="bg-black1" value="B" name="colorCode"></li>
+														<li class="bg-blue border border-1 text-center align-center" value="0" name="colorCode">없음</li>
+													</ul>
+												</div>
+												<!-- 계산용 -->
+												<input type="hidden" id="optionPrice">
+												<input type="hidden" id="optionStock">
+											</div>
+										</div>
+										
+										<hr>
+
+										<!-- <div class="cart-content-wrap">
+											<div class="col-md-12 d-flex justify-content-around">
+												<div class="col-md-2 mt-1" style="color: #7e7e7e;">
+													<p>옵션</p>
+												</div>
+												<div class="col-md-2 mt-1" style="color: black;">
+													<input type="text" id="colorName" style="border:0px; font-size:15px;" readonly>
+												</div>
+												<div class="col-md-3 d-flex justify-content-end">
+													<span class="mt-1 mx-1" style="color: black; font-size: 15px; font-weight: 400;">원</span>
+												</div>
+												<div class="d-flex quantity-wrapper" style="padding: 5px 0px; justify-content: center; margin-top: -8px;">
+													<button type="button" id="minusBtn" class="btn quantity-left-minus" style="height: 5px; width: 5px; padding: 10px; margin-top: -6px;">-</button>
+													<span class="input-wrapper">
+														<input type="text" id="optionQuantity" class="input-number text-center" style="width: 35px; padding: 5px 5px; border: 1px solid #c7c7c5; border-radius: 3px;" value="0">
+													</span>
+													<button type="button" id="plusBtn" class="btn quantity-right-plus" style="height: 5px; margin-top: -6px; padding: 10px 5px;">+</button>
+													<span id="totalQty" style="margin-left: 10px;"></span>
+												</div>
+												
+												<div class="btn-area">
+													<div class="product-buttons justify-content-end">
+														<button type="button" class="btn btn-solid" id="optionAdd" style="width: 25%; height: 30px; text-align: center; font-size: 14px;">추가</button>
 													</div>
-													<div class="color-types" id="colorTypes">
-														<ul class="color-variant mb-0">
-															<li class="bg-white border boder-1 selected" value="W" name="colorCode"></li>
-															<li class="bg-gray1" value="G" name="colorCode"></li>
-															<li class="bg-black1" value="B" name="colorCode"></li>
-															<li class="bg-blue border border-1 text-center align-center" value="0" name="colorCode">없음</li>
-														</ul>
-													</div>
-													<!-- 계산용 -->
-													<input type="hidden" id="optionPrice">
-													<input type="hidden" id="optionStock">
 												</div>
 											</div>
-
-											<hr>
-
-											<!-- <div class="cart-content-wrap">
-												<div class="col-md-12 d-flex justify-content-around">
-													<div class="col-md-2 mt-1" style="color: #7e7e7e;">
-														<p>옵션</p>
-													</div>
-													<div class="col-md-2 mt-1" style="color: black;">
-														<input type="text" id="colorName" style="border:0px; font-size:15px;" readonly>
-													</div>
-													<div class="col-md-3 d-flex justify-content-end">
-														<span class="mt-1 mx-1" style="color: black; font-size: 15px; font-weight: 400;">원</span>
-													</div>
-													<div class="d-flex quantity-wrapper" style="padding: 5px 0px; justify-content: center; margin-top: -8px;">
-														<button type="button" id="minusBtn" class="btn quantity-left-minus" style="height: 5px; width: 5px; padding: 10px; margin-top: -6px;">-</button>
-														<span class="input-wrapper">
-															<input type="text" id="optionQuantity" class="input-number text-center" style="width: 35px; padding: 5px 5px; border: 1px solid #c7c7c5; border-radius: 3px;" value="0">
-														</span>
-														<button type="button" id="plusBtn" class="btn quantity-right-plus" style="height: 5px; margin-top: -6px; padding: 10px 5px;">+</button>
-														<span id="totalQty" style="margin-left: 10px;"></span>
-													</div>
-
-													<div class="btn-area">
-														<div class="product-buttons justify-content-end">
-															<button type="button" class="btn btn-solid" id="optionAdd" style="width: 25%; height: 30px; text-align: center; font-size: 14px;">추가</button>
-														</div>
+										</div> -->
+										
+										<!-- 옵션 1개 영역 -->
+										<div class="createOptionArea">
+											<div class="d-flex justify-content-between cart-content-wrap mb-2">
+												<div class="col-4 my-auto d-flex justify-content-between">
+													<span class="option-one" style="color: #7e7e7e;">옵션</span>
+												</div>
+												<div class="col-3 my-auto d-flex justify-content-end">
+													<input type="text" id="colorName" style="border:0px; font-size:15px;" readonly>
+												</div>
+												<!-- 수량 버튼 -->
+												<div class="d-flex quantity-wrapper my-auto">
+													<button type="button" id="minusBtn" class="btn quantity-left-minus" style="height: 5px; width: 5px; padding: 10px; margin-top: -6px;">-</button>
+													<span class="input-wrapper">
+														<input type="text" id="optionQuantity" class="input-number text-center" style="width: 35px; padding: 5px 5px; border: 1px solid #c7c7c5; border-radius: 3px;" value="0">
+													</span>
+													<button type="button" id="plusBtn" class="btn quantity-right-plus" style="height: 5px; margin-top: -6px; padding: 10px 5px;">+</button>
+													<span id="totalQty" style="margin-left: 10px;"></span>
+												</div>
+												<div class="btn-area">
+													<div class="product-buttons d-flex justify-content-end my-auto">
+														<button type="button" class="btn btn-solid" id="optionAdd" style="width: 50px; height: 30px; text-align: center; font-size: 14px;">추가</button>
 													</div>
 												</div>
-											</div> -->
+											</div>
+										</div>
+										<hr>
 											
-											<!-- 옵션 1개 영역 -->
-											<div class="createOptionArea">
-												<div class="d-flex justify-content-between cart-content-wrap mb-2">
-													<div class="col-4 my-auto d-flex justify-content-between">
-														<span class="option-one" style="color: #7e7e7e;">옵션</span>
-													</div>
-													<div class="col-3 my-auto d-flex justify-content-end">
-														<input type="text" id="colorName" style="border:0px; font-size:15px;" readonly>
-													</div>
-													<!-- 수량 버튼 -->
-													<div class="d-flex quantity-wrapper my-auto">
-														<button type="button" id="minusBtn" class="btn quantity-left-minus" style="height: 5px; width: 5px; padding: 10px; margin-top: -6px;">-</button>
-														<span class="input-wrapper">
-															<input type="text" id="optionQuantity" class="input-number text-center" style="width: 35px; padding: 5px 5px; border: 1px solid #c7c7c5; border-radius: 3px;" value="0">
-														</span>
-														<button type="button" id="plusBtn" class="btn quantity-right-plus" style="height: 5px; margin-top: -6px; padding: 10px 5px;">+</button>
-														<span id="totalQty" style="margin-left: 10px;"></span>
-													</div>
-													<div class="btn-area">
-														<div class="product-buttons d-flex justify-content-end my-auto">
-															<button type="button" class="btn btn-solid" id="optionAdd" style="width: 50px; height: 30px; text-align: center; font-size: 14px;">추가</button>
-														</div>
-													</div>
-												</div>
-											</div>
-											<hr>
-
 											<!-- 선택된 옵션 영역 -->
+									<form action="./accessoryOrder" method="POST">
 											<div id="selectedOptionList">
 												<!-- <div class="optionOne">
 													<div class="d-flex justify-content-between cart-content-wrap mb-2">

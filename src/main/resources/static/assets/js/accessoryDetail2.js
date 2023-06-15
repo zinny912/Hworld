@@ -1,10 +1,11 @@
 $(document).ready(function() {
   //가격에 1000단위로 , 표시
   function commaPrice(){
-  const prices = document.querySelectorAll('[id^="renewPrice"]');
-  for (var i = 0; i < prices.length; i++) {
-    const price = parseInt(prices[i].innerHTML);
-    const formattedPrice = price.toLocaleString();
+  //const prices = document.querySelectorAll('[id^="renewPrice"]');
+  let prices = document.getElementsByClassName("renewPrice");
+  for (let i = 0; i < prices.length; i++) {
+    let price = parseInt(prices[i].innerHTML);
+    let formattedPrice = price.toLocaleString();
     prices[i].innerHTML = formattedPrice;
     }
   };
@@ -42,7 +43,6 @@ for (let j=0; j < slicedCodes.length; j++) {
 
 //전역변수
 let idx=0;
-let arrPrice = [];
 
 
 //색상 옵션이 선택되었을 때 이벤트
@@ -50,7 +50,7 @@ $('#colorTypes').on('click', 'li[name="colorCode"]', function(e){
   e.preventDefault();
   console.log('컬러선택');
   //갯수 0개로 초기화
-  $('#optionQuantity').val('0');
+  $('#optionQuantity').val('1');
   
   //선택한 컬러값을 가진 directCode를 id로 쓰는 div 태그 선택하기
     //선택한 컬러코드 추출
@@ -100,68 +100,162 @@ $('#plusBtn').on('click', function() {
 
 
 //추가 버튼 클릭 시
+// $('#optionAdd').on('click', function() {
+//   console.log('옵션추가');
+//   let directCode = $('.titlebox[data-selected=1]').attr('id');
+//   let optionColor = $('#colorName').val();
+//   let optionPrice = $('#optionPrice').val();
+//   let optionAmount = $('#optionQuantity').val();
+//   let calPrice = optionPrice*optionAmount;
+  
+//   //값 존재여부 확인
+//   codeCheck = isEmpty(directCode);
+//   colorCheck = isEmpty(optionColor);
+//   priceCheck = isEmpty(optionPrice);
+//   amountCheck = isEmpty(optionAmount);
+
+  
+//   //값이 존재하는 경우, html을 추가.(옵션1개)
+//   if(optionColor != '' && priceCheck == true && amountCheck == true && optionAmount != 0){
+//     let setHtml = '<div id="optionOne'+idx+'">';
+//     setHtml = setHtml + '<div class="d-flex justify-content-between cart-content-wrap mb-2">';
+//     setHtml = setHtml + '<div class="col-4 my-auto d-flex justify-content-between">';
+//     setHtml = setHtml + '<span class="option-color" style="color: #7e7e7e;">색상</span>';
+//     setHtml = setHtml + '<span class="selected-color">'+optionColor+'</span>';
+//     setHtml = setHtml + '</div>';
+//     setHtml = setHtml + '<div class="col-3 my-auto d-flex justify-content-end">';
+//     setHtml = setHtml + '<span class="option-amount">'+optionAmount+'</span>';
+//     setHtml = setHtml + '<span>개</span>';
+//     setHtml = setHtml + '</div>';
+//     setHtml = setHtml + '<div class="col-3 my-auto d-flex justify-content-end">';
+//     setHtml = setHtml + '<span class="option-price">'+calPrice+'</span>';
+//     setHtml = setHtml + '<span>원</span>';
+//     setHtml = setHtml + '</div>';
+//     setHtml = setHtml + '<div class="col-2 mt-1 d-flex justify-content-end">';
+//     setHtml = setHtml + '<p class="theme-color2">';
+//     setHtml = setHtml + '<a href="javascript:void(0)"><i class="fas fa-times" data-idx="'+idx+'"></i></a>';
+//     setHtml = setHtml + '</p>';
+//     setHtml = setHtml + '</div>';
+//     setHtml = setHtml + '</div>';
+//     setHtml = setHtml + '<div class="orderInfos">';
+//     setHtml = setHtml + '<input type="hidden" name="directCode" value="'+directCode+'">';
+//     setHtml = setHtml + '<input type="hidden" name="orderAmount" value="'+optionAmount+'">';
+//     setHtml = setHtml + '<input type="hidden" name="calPrice" value="'+calPrice+'">';
+//     setHtml = setHtml + '</div>';
+//     setHtml = setHtml + '</div>';
+//     setHtml = setHtml + '</div>';
+
+//     //이건 그냥 태그 추가하기.
+//     $('#selectedOptionList').append(setHtml);
+
+//     //기존 optionOne에서 같은 directCode가 발견되는 경우, html을 추가하지 않고 해당 optionAmount와 calPrice를 기존값 + 새로 추가한값으로 하기.....?
+
+//     arrPrice[idx] = calPrice;
+//     idx++;
+
+//     //totalPrice 계산
+//     if(arrPrice.length !== 0){
+//       let totalPrice = 0;
+//       for(let i=0; i<arrPrice.length; i++){
+//         totalPrice = totalPrice + arrPrice[i];
+//       }
+//       $('#totalPriceSpan').text(totalPrice);
+//       $('#totalPrice').val(totalPrice);
+//     }
+
+//     //옵션 초기화
+//     $('#optionQuantity').val('0');
+//     $('#colorName').val('');
+//   }
+
+// });
+//추가 버튼 클릭 시 종료
+
+
+//추가 버튼 클릭시
 $('#optionAdd').on('click', function() {
   console.log('옵션추가');
   let directCode = $('.titlebox[data-selected=1]').attr('id');
   let optionColor = $('#colorName').val();
   let optionPrice = $('#optionPrice').val();
-  let optionAmount = $('#optionQuantity').val();
-  let calPrice = optionPrice*optionAmount;
-  
+  let optionAmount = parseInt($('#optionQuantity').val());
+  let calPrice = optionPrice * optionAmount;
+
   //값 존재여부 확인
   codeCheck = isEmpty(directCode);
   colorCheck = isEmpty(optionColor);
   priceCheck = isEmpty(optionPrice);
   amountCheck = isEmpty(optionAmount);
 
-  
-  //값이 존재하는 경우, html을 추가.(옵션1개)
-  if(priceCheck == true && amountCheck == true && optionAmount != 0){
-    let setHtml = '<div id="optionOne'+idx+'">';
-    setHtml = setHtml + '<div class="d-flex justify-content-between cart-content-wrap mb-2">';
-    setHtml = setHtml + '<div class="col-4 my-auto d-flex justify-content-between">';
-    setHtml = setHtml + '<span class="option-color" style="color: #7e7e7e;">색상</span>';
-    setHtml = setHtml + '<span class="selected-color">'+optionColor+'</span>';
-    setHtml = setHtml + '</div>';
-    setHtml = setHtml + '<div class="col-3 my-auto d-flex justify-content-end">';
-    setHtml = setHtml + '<span class="option-amount">'+optionAmount+'</span>';
-    setHtml = setHtml + '<span>개</span>';
-    setHtml = setHtml + '</div>';
-    setHtml = setHtml + '<div class="col-3 my-auto d-flex justify-content-end">';
-    setHtml = setHtml + '<span class="option-price">'+calPrice+'</span>';
-    setHtml = setHtml + '<span>원</span>';
-    setHtml = setHtml + '</div>';
-    setHtml = setHtml + '<div class="col-2 mt-1 d-flex justify-content-end">';
-    setHtml = setHtml + '<p class="theme-color2">';
-    setHtml = setHtml + '<a href="javascript:void(0)"><i class="fas fa-times" data-idx="'+idx+'"></i></a>';
-    setHtml = setHtml + '</p>';
-    setHtml = setHtml + '</div>';
-    setHtml = setHtml + '</div>';
-    setHtml = setHtml + '<div class="orderInfos">';
-    setHtml = setHtml + '<input type="hidden" name="directCode" value="'+directCode+'">';
-    setHtml = setHtml + '<input type="hidden" name="orderAmount" value="'+optionAmount+'">';
-    setHtml = setHtml + '<input type="hidden" name="calPrice" value="'+calPrice+'">';
-    setHtml = setHtml + '</div>';
-    setHtml = setHtml + '</div>';
-    setHtml = setHtml + '</div>';
-    $('#selectedOptionList').append(setHtml);
+  //값이 존재하는 경우, HTML을 추가하지 않고 기존 요소 업데이트
+  if (optionColor != '' && priceCheck == true && amountCheck == true && optionAmount != 0) {
+    // 기존 optionOne의 존재여부 체크
+    let existingOption = $('#selectedOptionList').find('div[id^="optionOne"]').filter(function() {
+      return $(this).find('input[name="directCode"]').val() === directCode;
+    });
 
-    arrPrice[idx] = calPrice;
-    idx++;
+    if (existingOption.length > 0) {
+      //기존 요소의 optionAmount와 calPrice 값을 업데이트
+      let existingOptionAmount = parseInt(existingOption.find('.option-amount').text());
+      let existingCalPrice = parseInt(existingOption.find('.option-price').text());
+      let updatedOptionAmount = existingOptionAmount + optionAmount;
+      let updatedCalPrice = existingCalPrice + calPrice;
+
+      //optionAmount와 calPrice 값을 업데이트
+      existingOption.find('.option-amount').text(updatedOptionAmount);
+      existingOption.find('.option-price').text(updatedCalPrice);
+      existingOption.find('input[name="orderAmount"]').val(updatedOptionAmount);
+      existingOption.find('input[name="calPrice"]').val(updatedCalPrice);
+    } else {
+      //값이 존재하지 않는 경우, HTML을 추가
+      let setHtml = '<div id="optionOne' + idx + '">';
+      setHtml += '<div class="d-flex justify-content-between cart-content-wrap mb-2">';
+      setHtml += '<div class="col-4 my-auto d-flex justify-content-between">';
+      setHtml += '<span class="option-color" style="color: #7e7e7e;">색상</span>';
+      setHtml += '<span class="selected-color">' + optionColor + '</span>';
+      setHtml += '</div>';
+      setHtml += '<div class="col-3 my-auto d-flex justify-content-end">';
+      setHtml += '<span class="option-amount">' + optionAmount + '</span>';
+      setHtml += '<span>개</span>';
+      setHtml += '</div>';
+      setHtml += '<div class="col-3 my-auto d-flex justify-content-end">';
+      setHtml += '<span class="option-price renewPrice">' + calPrice + '</span>';
+      setHtml += '<span>원</span>';
+      setHtml += '</div>';
+      setHtml += '<div class="col-2 mt-1 d-flex justify-content-end">';
+      setHtml += '<p class="theme-color2">';
+      setHtml += '<a href="javascript:void(0)"><i class="fas fa-times" data-idx="' + idx + '"></i></a>';
+      setHtml += '</p>';
+      setHtml += '</div>';
+      setHtml += '</div>';
+      setHtml += '<div class="orderInfos">';
+      setHtml += '<input type="hidden" name="directCode" value="' + directCode + '">';
+      setHtml += '<input type="hidden" name="orderAmount" value="' + optionAmount + '">';
+      setHtml += '<input type="hidden" name="calPrice" value="' + calPrice + '">';
+      setHtml += '</div>';
+      setHtml += '</div>';
+
+      //태그 추가
+      $('#selectedOptionList').append(setHtml);
+      idx++;
+    }
 
     //totalPrice 계산
-    if(arrPrice.length !== 0){
-      let totalPrice = 0;
-      for(let i=0; i<arrPrice.length; i++){
-        totalPrice = totalPrice + arrPrice[i];
-      }
+    let totalPrice = 0;
+    $('.option-price').each(function() {
+      let price = $(this).text();
+      let priceValue = parseInt(price);
+      totalPrice += priceValue;
+      //계산 결과 세팅
       $('#totalPriceSpan').text(totalPrice);
       $('#totalPrice').val(totalPrice);
-    }
-  }
+    });
 
+    //옵션 초기화
+    $('#optionQuantity').val('0');
+    $('#colorName').val('');
+  }
 });
-//추가 버튼 클릭 시 종료
 
 
 //x 버튼 클릭 시 옵션 삭제
@@ -170,19 +264,16 @@ $(document).on('click', '.fa-times', function() {
   let idx = $(this).attr('data-idx');
   $('#optionOne'+idx).remove();
 
-  //totalPrice 계산을 위한 배열 호출, 배열의 해당 idx값에 0 입력
-  let ar = arrPrice;
-  ar[idx] = 0;
-
   //totalPrice 계산
-  if(arrPrice.length !== 0){
-    let totalPrice = 0;
-    for(let i=0; i<arrPrice.length; i++){
-      totalPrice = totalPrice + arrPrice[i];
-    }
+  let totalPrice = 0;
+  $('.option-price').each(function() {
+    let price = $(this).text();
+    let priceValue = parseInt(price);
+    totalPrice += priceValue;
+    //계산 결과 세팅
     $('#totalPriceSpan').text(totalPrice);
     $('#totalPrice').val(totalPrice);
-  }
+  });
 });
 
 
