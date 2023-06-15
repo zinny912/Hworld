@@ -12,9 +12,15 @@ import com.hworld.base.vo.TelephoneVO;
 @Mapper
 public interface AdminDAO {
 	
-	public Long getTotalCount(Pager pager) throws Exception;
+	// 회원 목록
+	public Long getTotalMember(Pager pager) throws Exception;
 	
 	public List<MemberVO> memberList(Pager pager) throws Exception;
 	
-	public List<MemberVO> phoneList(Pager pager) throws Exception; 
+	// 회선 목록
+	public Long getTotalTelephone(Pager pager) throws Exception;
+	
+	public List<MemberVO> phoneList(Pager pager) throws Exception;
+	
+	
 }

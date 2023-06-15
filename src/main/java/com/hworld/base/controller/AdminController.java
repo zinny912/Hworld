@@ -43,8 +43,8 @@ public class AdminController {
 	@GetMapping("phoneList")
 	public ModelAndView phoneList(Pager pager) throws Exception{
 		ModelAndView modelAndView = new ModelAndView();
-		List<MemberVO> ar = adminService.phoneList(pager);
-		modelAndView.addObject("phoneList", ar);
+		List<MemberVO> phoneList = adminService.phoneList(pager);
+		modelAndView.addObject("phoneList", phoneList);
 		modelAndView.setViewName("admin/phoneList");
 		return modelAndView;
 	}	

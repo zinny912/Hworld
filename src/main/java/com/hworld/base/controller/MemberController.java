@@ -185,12 +185,12 @@ public class MemberController {
 	
 	// 이메일 찾기 조회결과 페이지(Post)
 	@PostMapping("forgotResultEmail")
-	public String forgotResultEmail(HttpServletRequest request, Model model, @RequestParam(required = true, value = "name") String name, @RequestParam(required = true, value = "phoneNum") String phoneNum, MemberVO memberVO) throws Exception{
+	public String forgotResultEmail(HttpServletRequest request, Model model, @RequestParam(required = true, value = "name") String name, @RequestParam(required = true, value = "tel") String tel, MemberVO memberVO) throws Exception{
 		
 		try {
 		    
 		    memberVO.setName(name);
-		    memberVO.setPhoneNum(phoneNum);
+		    memberVO.setTel(tel);
 		    MemberVO memberSearch = memberService.emailSearch(memberVO);
 		    
 		    model.addAttribute("memberVO", memberSearch);

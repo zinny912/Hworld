@@ -21,7 +21,7 @@ public class AdminService {
 	
 	// 회원 목록
 	public List<MemberVO> memberList(Pager pager) throws Exception {
-		Long totalCount = adminDAO.getTotalCount(pager);
+		Long totalCount = adminDAO.getTotalMember(pager);
 		pager.makeNum(totalCount);
 		pager.makeStartRow();		
 		return adminDAO.memberList(pager);
@@ -29,7 +29,7 @@ public class AdminService {
 	
 	// 회선 목록
 	public List<MemberVO> phoneList(Pager pager) throws Exception { 
-		Long totalCount = adminDAO.getTotalCount(pager); 
+		Long totalCount = adminDAO.getTotalTelephone(pager); 
 		pager.makeNum(totalCount);
 		pager.makeStartRow(); 
 		return adminDAO.phoneList(pager);
