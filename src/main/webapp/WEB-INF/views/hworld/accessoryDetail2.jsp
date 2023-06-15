@@ -168,7 +168,7 @@
 														<h3 class="mt-3 ">출고가</h3>
 													</div>
 													<p>
-														<span class="price-detail theme-color fw-bold renewPrice">${direct.directPrice}</span>
+														<span class="price-detail theme-color fw-bold" id="renewPrice">${direct.directPrice}</span>
 														<span class="unit">원</span>
 													</p>
 												<div class="direct-item" id="item_${direct.directCode}" data-direct-code="${direct.directCode}" data-category-code="${direct.categoryCode}" data-brand-code="${direct.brandCode}" data-sliced-code="${direct.slicedCode}" data-direct-stock="${direct.directStock}" data-direct-price="${direct.directPrice}">
@@ -225,7 +225,7 @@
 										<hr>
 											
 											<!-- 선택된 옵션 영역 -->
-									<form action="./accessoryOrder" method="POST">
+									<form action="./accessoryOrder" method="POST"> 
 											<div id="selectedOptionList">
 											</div>
 
@@ -368,7 +368,7 @@
 																	<span style="font-weight:400; float:right;" >답변작성일 : ${formattedDate2}</span>
                                                                 </div>
                                                                 </c:if>
-                                                            	</div><!----><!---->
+                                                            	</div>
                                                         	</div>
                                                     	</div>
                                                 	</div>

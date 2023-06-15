@@ -29,8 +29,8 @@
 	
 	<!-- 회원가입 -->
 	<insert id="setMemberAdd" parameterType="MemberVO">
-		INSERT INTO MEMBER(MEMBERNUM, EMAIL, PW, NAME, ADDRESS1, ADDRESS2, ADDRESS3, RRNF, RRNL, JOINDATE, MEMBERSTATE, ADMINCHECK, PHONENUM, OWNCHECK)
-		VALUES(#{memberNum}, #{email}, #{pw}, #{name}, #{address1}, #{address2}, #{address3}, #{rrnf}, #{rrnl}, now(), 1, 1, #{phoneNum}, 1)
+		INSERT INTO MEMBER(MEMBERNUM, EMAIL, PW, NAME, ADDRESS1, ADDRESS2, ADDRESS3, RRNF, RRNL, JOINDATE, MEMBERSTATE, ADMINCHECK, TEL, OWNCHECK)
+		VALUES(#{memberNum}, #{email}, #{pw}, #{name}, #{address1}, #{address2}, #{address3}, #{rrnf}, #{rrnl}, now(), 1, 1, #{tel}, 1)
 	</insert>
 	
 	<!-- 아이디 중복검사 -->
@@ -48,7 +48,7 @@
 	<select id="emailSearch" parameterType="MemberVO" resultType="MemberVO">
 		<![CDATA[
 		    SELECT * FROM MEMBER
-		    WHERE NAME = #{name} AND PHONENUM = #{phoneNum}
+		    WHERE NAME = #{name} AND TEL = #{tel}
 		]]>    
 	</select>
 	
