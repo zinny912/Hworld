@@ -114,6 +114,11 @@
                                                 </div>
                                                 <div class="onhover-div profile-dropdown">
                                                     <ul>
+	                                                    <c:if test="${memberVO.adminCheck == 0}">
+			                                            	<li>												
+																<a href="/admin/home" class="d-block">관리자 페이지</a>
+															</li>												
+														</c:if>
                                                         <li>
                                                             <a href="/myPage" class="d-block">마이페이지</a>
                                                         </li>
@@ -186,7 +191,7 @@
                                                     </div>
                                                 </div>
                                             </li>
-                                            </c:if>
+                                            </c:if>                                            
                                         <!-- 장바구니 아이콘 드랍다운 end -->
                                         </ul>
                                     </div>

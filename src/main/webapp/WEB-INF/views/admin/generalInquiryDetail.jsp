@@ -6,157 +6,13 @@
 
 <head>
 	<meta charset="UTF-8">
-   <c:import url="adminStyle.jsp"></c:import>  
-
+    <c:import url="adminStyle.jsp"></c:import>  
 </head>
 
-
 <body>
-   <c:import url="adminHeader.jsp"></c:import>  
+<c:import url="adminHeader.jsp"></c:import>  
 
-        <!-- Page Body Start-->
-        <div class="page-body-wrapper">
-            <!-- Page Sidebar Start-->
-            <div class="sidebar-wrapper">
-                <div>
-                    <div class="logo-wrapper logo-wrapper-center">
-                        <a href="index.html" data-bs-original-title="" title="">
-                            <img class="img-fluid for-dark" src="/admin/images/logo/logo-white.png" alt="">
-                        </a>
-                        <div class="back-btn">
-                            <i class="fa fa-angle-left"></i>
-                        </div>
-                        <div class="toggle-sidebar">
-                            <i class="status_toggle middle sidebar-toggle" data-feather="grid"></i>
-                        </div>
-                    </div>
-                    <div class="logo-icon-wrapper">
-                        <a href="index.html">
-                            <img class="img-fluid main-logo" src="/admin/images/logo/logo.png" alt="logo">
-                        </a>
-                    </div>
-                    <nav class="sidebar-main">
-                        <div class="left-arrow" id="left-arrow">
-                            <i data-feather="arrow-left"></i>
-                        </div>
-
-                        <div id="sidebar-menu">
-                            <ul class="sidebar-links" id="simple-bar">
-                                <li class="back-btn"></li>
-
-
-                                <li class="sidebar-list">
-                                    <a class="sidebar-link sidebar-title link-nav" href="adminHome">
-                                        <i data-feather="home"></i>
-                                        <span>홈</span>
-                                    </a>
-                                </li>
-
-                                <li class="sidebar-list">
-                                    <a class="sidebar-link sidebar-title" href="javascript:void(0)">
-                                        <i data-feather="users"></i>
-                                        <span>회원</span>
-                                    </a>
-                                    <ul class="sidebar-submenu">
-                                        <li>
-                                            <a href="memberList">회원 목록</a>
-                                        </li>
-                                        <li>
-                                            <a href="phoneList">회선 목록</a>
-                                        </li>
-                                        <li>
-                                            <a href="memberAdd">회원 추가</a>
-                                        </li>
-                                    </ul>
-                                </li>
-
-
-                                <li class="sidebar-list">
-                                    <a class="sidebar-link sidebar-title link-nav" href="orderList">
-                                        <i data-feather="archive"></i>
-                                        <span>주문</span>
-                                    </a>
-                                    <!-- <ul class="sidebar-submenu">
-                                        <li>
-                                            <a href="">Order List</a>
-                                        </li>
-                                        <li>
-                                            <a href="order-detail.html">Order Detail</a>
-                                        </li>
-                                        <li>
-                                            <a href="order-tracking.html">Order Tracking</a>
-                                        </li>
-                                    </ul> -->
-                                </li>
-
-                                <li class="sidebar-list">
-                                    <a class="linear-icon-link sidebar-link sidebar-title" href="javascript:void(0)">
-                                        <i data-feather="box"></i>
-                                        <span>상품</span>
-                                    </a>
-                                    <ul class="sidebar-submenu">
-                                        <li>
-                                            <a href="productList">상품 목록</a>
-                                        </li>
-
-                                        <li>
-                                            <a href="productReview">상품 리뷰</a>
-                                        </li>
-                                    </ul>
-                                </li>
-
-                                <li class="sidebar-list">
-                                    <a class="linear-icon-link sidebar-link sidebar-title" href="javascript:void(0)">
-                                        <i data-feather="phone"></i>
-                                        <span>문의</span>
-                                    </a>
-                                    <ul class="sidebar-submenu">
-                                        <li>
-                                            <a href="productInquiry">상품 문의</a>
-                                        </li>
-                                        <li>
-                                            <a href="generalInquiry">일반 문의</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                        
-                                <li class="sidebar-list">
-                                    <a class="linear-icon-link sidebar-link sidebar-title" href="javascript:void(0)">
-                                        <i data-feather="archive"></i>
-                                        <span>납부</span>
-                                    </a>
-                                    <ul class="sidebar-submenu">
-                                        <li>
-                                            <a href="paymentList">납부 목록</a>
-                                        </li>
-                                        <li>
-                                            <a href="unpaidList">미납 목록</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                
-
-
-
-                                <li class="sidebar-list">
-                                    <a class="linear-icon-link sidebar-link sidebar-title" href="javascript:void(0)">
-                                        <i data-feather="settings"></i>
-                                        <span>설정</span>
-                                    </a>
-                                    <ul class="sidebar-submenu">
-                                        <li>
-                                            <a href="profileSetting">프로필 설정</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="right-arrow" id="right-arrow">
-                            <i data-feather="arrow-right"></i>
-                        </div>
-                    </nav>
-                </div>
-            </div>
+        
             <!-- Page Sidebar Ends-->
 
 
@@ -232,7 +88,7 @@
                         </div>
                     </div>
                     <!-- footer start -->
-                   <c:import url="adminHeader.jsp"></c:import>  
+                     
                 </div>
                 <!-- New User End -->
 
