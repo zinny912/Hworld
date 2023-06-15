@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.hworld.base.dao.AdminDAO">
+	
+	<sql id="search1">
+		WHERE MEMBERNUM LIKE CONCAT('%', #{search}, '%') OR NAME LIKE CONCAT('%', #{search}, '%')
+	</sql>
+
+	<select id="getTotalCount" parameterType="Pager" resultType="Long">
+		SELECT COUNT(*) FROM MEMBER
+		<include refid="search1"></include>
+	</select>
+	
+	<!-- 회원가입 -->
+	<select id="memberList" parameterType="Pager" resultType="MemberVO">
+		SELECT MEMBERNUM, NAME, PHONENUM, EMAIL, RRNF, ADDRESS1, ADDRESS2, ADDRESS3, JOINDATE, MEMBERSTATE FROM MEMBER
+		<include refid="search1"></include>
+		ORDER BY MEMBERNUM DESC
+		LIMIT #{startRow}, #{perPage}
+	</select>	
+	
+</mapper>

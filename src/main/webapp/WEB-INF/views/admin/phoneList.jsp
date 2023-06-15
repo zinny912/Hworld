@@ -6,32 +6,32 @@
 
 <head>
 	<meta charset="UTF-8">
-     <c:import url="adminStyle.jsp"></c:import>  
+    <c:import url="adminStyle.jsp"></c:import>  
 </head>
 
 <body>
-    <c:import url="adminHeader.jsp"></c:import>  
-
-
-            <!-- Container-fluid starts-->
-            <div class="page-body">
-                <div class="title-header title-header-1">
-                    
-                    <h5>회선 목록</h5>
-                    <div class="col-lg-6 col-md-8 mx-6">
+<c:import url="adminHeader.jsp"></c:import>  
+        <!-- Container-fluid starts-->
+        <section class="section-b-space">
+	        <div class="page-body">
+	            <div class="title-header title-header-1">
+	                
+	                <h5>회선 목록</h5>
+	                <div class="col-lg-6 col-md-8 mx-6 d-flex justify-content-end">
                         <div class="search-bar">
-                            <div class="input-group search-bar w-100">
-                                <input type="search" class="form-control" placeholder="Search">
-                                <button class="input-group-text" id="basic-addon3">
-                                    <i class="fas fa-search"></i>
-                                </button>
+                            <div class="input-group search-bar w-100">                            	
+       	                        <form action="./phoneList" method="get">
+	                           		<div class="d-inline-flex input-group search-bar" style="width: 750px">
+		                                <input type="search" name="search" value="${pager.search}" class="form-control" placeholder="Search">
+		                                <button class="input-group-text" id="basic-addon3" type="submit">
+		                                    <i class="fas fa-search"></i>
+		                                </button>
+	                                </div>
+                                </form>
                             </div>
                         </div>
                     </div>
-                </div>
-
-                
-                
+	            </div>                               
                 <!-- All User Table Start -->
                 <div class="container-fluid">
                     <div class="row">
@@ -39,10 +39,8 @@
                             <div class="card">
                                 <div class="card-body">
                                     <div>
-                                        <div class="table-responsive table-desi">
-                                            
-                                            <table class="table table-striped all-package">
-                                                
+                                        <div class="table-responsive table-desi">                                           
+                                            <table class="table table-striped all-package">                                                
                                                 <thead>
                                                     <tr>
                                                         <th><b>이메일</b> <i class="fa fa-fw fa-sort"></i></th>
@@ -124,68 +122,71 @@
                                         </div>
                                     </div>
                                 </div>
-
+								<!-- Pagination Box Start -->
                                 <div class="pagination-box">
                                     <nav class="ms-auto me-auto " aria-label="...">
-                                        <ul class="pagination pagination-primary">
-                                            <li class="page-item disabled">
-                                                <a class="page-link" href="javascript:void(0)">Previous</a>
-                                            </li>
-                                            <li class="page-item active">
-                                                <a class="page-link" href="javascript:void(0)">1 </a>
-                                            </li>
-                                            <li class="page-item">
-                                                <a class="page-link" href="javascript:void(0)">2</a>
-                                            </li>
-                                            <li class="page-item">
-                                                <a class="page-link" href="javascript:void(0)">3</a>
-                                            </li>
-                                            <li class="page-item">
-                                                <a class="page-link" href="javascript:void(0)">Next</a>
-                                            </li>
-                                        </ul>
-                                    </nav>
-                                </div>
+						                <ul class="pagination pagination-primary">
+						                    <li class="page-item ${pager.pre ? '' : 'disabled' }">
+						                        <a class="page-link" href="memberList?page=${pager.startNum-1}&search=${pager.search}" aria-label="Previous">
+						                            <span aria-hidden="true">
+						                                <i class="fas fa-chevron-left"></i>
+						                            </span>
+						                        </a>
+						                    </li>
+						                    <c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
+						   	                    <li class="page-item">
+						                        	<a class="page-link" href="memberList?page=${i}&search=${pager.search}">${i}</a>
+						                    	</li>
+						                    </c:forEach>
+						                    <li class="page-item ${pager.next ? '' : 'disabled' }">
+						                        <a class="page-link" href="memberList?page=${pager.lastNum+1}&search=${pager.search}" aria-label="Next">
+						                            <span aria-hidden="true">
+						                                <i class="fas fa-chevron-right"></i>
+						                            </span>
+						                        </a>
+						                    </li>
+						                </ul>                
+					            	</nav>
+					            </div>
+					            <!-- Pagination Box End -->
                             </div>
                         </div>
                     </div>
                 </div>
                 <!-- All User Table Ends-->
 
-                <c:import url="adminFooter.jsp"></c:import>  
             </div>
-            <!-- Container-fluid end -->
-        </div>
-        <!-- Page Body End -->
+        </section>
+        <!-- Container-fluid end -->
+        
 
-    </div>
+<c:import url="adminFooter.jsp"></c:import>
+<!-- latest js -->
+<script src="/admin/js/jquery-3.6.0.min.js"></script>
 
-    <!-- latest js -->
-    <script src="/admin/js/jquery-3.6.0.min.js"></script>
+<!-- Bootstrap js -->
+<script src="/admin/js/bootstrap/bootstrap.bundle.min.js"></script>
 
-    <!-- Bootstrap js -->
-    <script src="/admin/js/bootstrap/bootstrap.bundle.min.js"></script>
+<!-- feather icon js -->
+<script src="/admin/js/icons/feather-icon/feather.min.js"></script>
+<script src="/admin/js/icons/feather-icon/feather-icon.js"></script>
 
-    <!-- feather icon js -->
-    <script src="/admin/js/icons/feather-icon/feather.min.js"></script>
-    <script src="/admin/js/icons/feather-icon/feather-icon.js"></script>
+<!-- scrollbar simplebar js -->
+<script src="/admin/js/scrollbar/simplebar.js"></script>
+<script src="/admin/js/scrollbar/custom.js"></script>
 
-    <!-- scrollbar simplebar js -->
-    <script src="/admin/js/scrollbar/simplebar.js"></script>
-    <script src="/admin/js/scrollbar/custom.js"></script>
+<!-- Sidebar js -->
+<script src="/admin/js/config.js"></script>
 
-    <!-- Sidebar js -->
-    <script src="/admin/js/config.js"></script>
-
-    <!-- Plugins JS -->
-    <script src="/admin/js/sidebar-menu.js"></script>
+<!-- Plugins JS -->
+<script src="/admin/js/sidebar-menu.js"></script>
 
 
-    <!-- all checkbox select js -->
-    <script src="/admin/js/checkbox-all-check.js"></script>
+<!-- all checkbox select js -->
+<script src="/admin/js/checkbox-all-check.js"></script>
 
-    <!-- Theme js -->
-    <script src="/admin/js/script.js"></script>
+<!-- Theme js -->
+<script src="/admin/js/script.js"></script>
 </body>
 
 </html>
