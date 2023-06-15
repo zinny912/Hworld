@@ -56,6 +56,23 @@
 		<include refid="searchTelephoneList"></include>
 	</select>
 	
+	<!-- 주문 목록 -->
+	<select id="orderList" parameterType="Pager" resultType="OrderVO">
+		SELECT ORDERNUM, ORDERDATE, ORDERSTATE
+		FROM ORDERS	
+		<include refid="searchOrderList"></include>
+		ORDER BY ORDERNUM DESC
+		LIMIT #{startRow}, #{perPage}
+	</select>
+	
+	<sql id="searchOrderList">
+		WHERE ORDERNUM LIKE CONCAT('%', #{search}, '%') OR ORDERDATE LIKE CONCAT('%', #{search}, '%')
+	</sql>
+	
+	<select id="getTotalOrder" parameterType="Pager" resultType="Long">
+		SELECT COUNT(*) FROM ORDERS
+		<include refid="searchOrderList"></include>
+	</select>
 	
 	
 </mapper>
