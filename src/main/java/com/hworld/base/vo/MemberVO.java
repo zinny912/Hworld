@@ -28,7 +28,7 @@ public class MemberVO {
 	private Date numberChangeDate;
 	private Integer memberState;
 	private Integer adminCheck;
-	private String phoneNum;
+	private String tel;
 	private Integer ownCheck;
 	private List<TelephoneVO> telephoneVOs;
 	
