@@ -12,7 +12,7 @@
 	<select id="getTotalCount" parameterType="Pager" resultType="Long">
 		SELECT COUNT(*) FROM MEMBER
 		<include refid="search"></include>
-		<include refid="search1"></include>
+		<!-- <include refid="search1"></include> -->
 	</select>
 	
 	<!-- 회원목록 -->
@@ -23,19 +23,30 @@
 		LIMIT #{startRow}, #{perPage}
 	</select>
 	
-	<sql id="search1">
+<!-- 	<sql id="search1">
 		<where>
 			<if test="kind=='memberNum'">
-				TITLE LIKE CONCAT('%', #{search}, '%')
+				MEMBERNUM LIKE CONCAT('%', #{search}, '%')
 			</if>
 			<if test="kind=='phoneNum'">
-				WRITER LIKE CONCAT('%', #{search}, '%')
+				PHONENUM LIKE CONCAT('%', #{search}, '%')
 			</if>
 			<if test="kind=='email'">
-				CONTENTS LIKE CONCAT('%', #{search}, '%')
+				EMAIL LIKE CONCAT('%', #{search}, '%')
 			</if>
 		</where>
 		
+	</sql> -->
+	
+		<sql id="search1">
+	
+		
+				WHERE MEMBERNUM LIKE CONCAT('%', #{search}, '%')
+				OR
+		
+				T.PHONENUM LIKE CONCAT('%', #{search}, '%')
+				OR
+				EMAIL LIKE CONCAT('%', #{search}, '%')		
 	</sql>
 	
 	<!-- 회선목록 -->
