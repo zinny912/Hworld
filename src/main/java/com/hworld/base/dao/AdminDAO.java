@@ -28,8 +28,8 @@ public interface AdminDAO {
 	
 	public List<OrderVO> orderList(Pager pager) throws Exception;
 	
-//	// 주문 상세
-//	public List<> orderDetail() throws Exception;
+	// 주문 상세
+	public List<OrderVO> orderDetail(MemberVO memberVO) throws Exception;
 //	
 //	// 상품 목록
 //	public Long getTotalProduct(Pager pager) throws Exception;

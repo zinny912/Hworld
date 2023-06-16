@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
@@ -67,9 +68,10 @@
                                                 <thead>
                                                     <tr>
                                                         <th><b>주문번호</b> <i class="fa fa-fw fa-sort"></i></th>
+                                                        <th><b>회원번호</b> <i class="fa fa-fw fa-sort"></i></th>
+                                                        <th><b>주문자</b> <i class="fa fa-fw fa-sort"></i></th>
                                                         <th><b>주문날짜</b> <i class="fa fa-fw fa-sort"></i></th>
                                                         <th><b>상태</b> <i class="fa fa-fw fa-sort"></i></th>
-                                                        <th><b>총 가격</b> <i class="fa fa-fw fa-sort"></i></th>
                                                     </tr>
                                                 </thead>
 
@@ -77,10 +79,17 @@
                                                 	<c:forEach var="orderVO" items="${orderList}">
 	                                                    <tr>	
 	                                                        <td>
-	                                                            <a href="orderDetail">${orderVO.orderNum}</a>
+	                                                            <a href="orderDetail?orderNum=${orderVO.orderNum}">${orderVO.orderNum}</a>
 	                                                        </td>
 	                                                        
-	                                                        <td class="date">${orderVO.orderDate}</td>
+	                                                        <td>${orderVO.memberNum}</td>
+	                                                        
+	                                                        <td>${orderVO.name}</td>
+	                                                        
+	                                                        <td>
+	                                                        <fmt:formatDate value="${orderVO.orderDate}" pattern="yyyy/MM/dd" var="formattedDate" />
+	                                                        <span style="font-weight:400;">${formattedDate}</span>
+	                                                        </td>	                                                        
 															
 															<td>
 	                                                        	<c:if test="${orderVO.orderState eq '0'}">
@@ -91,7 +100,6 @@
 	                                                           	</c:if>
 															</td>
 															
-	                                                        <td>${orderVO.orderFinalPrice}</td>
 	                                                    </tr>
 	
 	                                                    <!-- <tr>

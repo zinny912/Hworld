@@ -59,7 +59,7 @@
 	<!-- 주문 목록 -->
 	<select id="orderList" parameterType="Pager" resultType="OrderVO">
 		SELECT ORDERNUM, ORDERDATE, ORDERSTATE
-		FROM ORDERS	
+		FROM ORDERS
 		<include refid="searchOrderList"></include>
 		ORDER BY ORDERNUM DESC
 		LIMIT #{startRow}, #{perPage}
@@ -74,5 +74,9 @@
 		<include refid="searchOrderList"></include>
 	</select>
 	
+	<!-- 주문 상세 페이지 -->
+	<select id="orderDetail" parameterType="OrderVO" resultType="OrderVO">
+		SELECT * FROM ORDERS
+	</select>
 	
 </mapper>

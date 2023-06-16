@@ -59,15 +59,17 @@ public class AdminController {
 		modelAndView.setViewName("admin/orderList");
 		return modelAndView;
 	}
-//	
-//	// 주문 상세 페이지
-//	@GetMapping("orderDetail")
-//	public ModelAndView orderDetail() throws Exception{
-//		ModelAndView modelAndView = new ModelAndView();
-//		modelAndView.setViewName("admin/orderDetail");
-//		return modelAndView;
-//	}
-//	
+	
+	// 주문 상세 페이지
+	@GetMapping("orderDetail")
+	public ModelAndView orderDetail(MemberVO memberVO) throws Exception{
+		ModelAndView modelAndView = new ModelAndView();
+		List<OrderVO> orderDetail = adminService.orderDetail(memberVO);
+		modelAndView.addObject("orderDetail", orderDetail);
+		modelAndView.setViewName("admin/orderDetail");
+		return modelAndView;
+	}
+	
 //	// 상품 - 상품 목록
 //	@GetMapping("productList")
 //	public ModelAndView productList(Pager pager) throws Exception{

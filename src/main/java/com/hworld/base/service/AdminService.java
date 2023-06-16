@@ -44,12 +44,11 @@ public class AdminService {
 		return adminDAO.orderList(pager);
 	}
 	
-//	// 주문 상세
-//	public List<> orderDetail() throws Exception { 
-//		 
-//		return adminDAO.orderDetail();
-//	}
-//	
+	// 주문 상세
+	public List<OrderVO> orderDetail(MemberVO memberVO) throws Exception { 		 
+		return adminDAO.orderDetail(memberVO);
+	}
+	
 //	// 상품 목록
 //	public List<> productList(Pager pager) throws Exception { 
 //		Long totalCount = adminDAO.getTotalProduct(pager); 
