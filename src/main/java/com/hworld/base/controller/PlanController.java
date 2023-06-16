@@ -79,9 +79,11 @@ public class PlanController {
 	}
 	
 	@PostMapping("planAdd")
-	public ModelAndView setPlanAdd(PlanVO planVO) throws Exception{
+	public ModelAndView setPlanAdd(PlanVO planVO, BaseVO baseVO) throws Exception{
 		ModelAndView mv= new ModelAndView();
+		int common = planService.setCommonCode(baseVO);
 		int result = planService.setInsert(planVO);
+		
 		mv.setViewName("redirect:./planList");
 		return mv;
 	}

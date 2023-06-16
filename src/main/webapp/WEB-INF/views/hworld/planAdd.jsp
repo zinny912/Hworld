@@ -97,6 +97,12 @@
                                 
                                 </tbody>
                                 </table> 
+                                
+                              	<input type="text" id="note" name="note" value="" placeholder="노트">
+                              	<input type="text" id="type" name="type" value="" placeholder="타입">
+                              	<input type="text" id="code" name="code" value="" placeholder="코드">
+                              	<input type="text" id="value" name="value" value="" placeholder="밸류">
+                              	
                             <div class="col-md-6">
                                 <label for="validationCustom04" class="form-label" >종류</label>
                                 
@@ -112,49 +118,53 @@
                                 </div>
                                
                               <input type="hidden" id="planNum" name="planNum" value=""> 
+                              <input type="hidden" id="categoryCode" name="categoryCode" value="">
+                              <input type="hidden" id="planExplainM" name="planExplainM" value="">
+                              
+                              
                             </div>
                              <!-- 월요금 -->
                              <div class="col-md-6">
                                 <label for="planPrice" class="form-label">월 가격</label>
-                                <input type="text" class="form-control" id="planPrice" placeholder="월 요금제">
+                                <input type="text" class="form-control" id="planPrice" name="planPrice" placeholder="월 요금제">
                             </div>
                             <div class="col-md-6">
                                 <label for="planName" class="form-label">이름</label>
-                                <input type="text" class="form-control" id="planName" placeholder="요금제명">
+                                <input type="text" class="form-control" id="planName" name="planName" placeholder="요금제명">
                             </div>
                             <div class="col-md-6">
                                 <label for="planExplainS" class="form-label">부가설명</label>
-                                <input type="text" class="form-control" id="planExplainS" placeholder="간략소개">
+                                <input type="text" class="form-control" id="planExplainS" name="planExplainS" placeholder="간략소개">
                             </div>
                             <!-- 한 줄 -->
                             <div class="col-md-12">
                                 <label for="planExplain" class="form-label">한 줄 설명</label>
-                                <input type="text" class="form-control" id="planExplain" >
+                                <input type="text" class="form-control" id="planExplain" name="planExplain">
                             </div>
                             <!-- 데이터량 -->
                             
                             <div class="col-md-4">
                                 <label for="dataCapacity" class="form-label">데이터량</label>
-                                <input type="text" class="form-control" id="dataCapacity" value="GB">
+                                <input type="text" class="form-control" id="dataCapacity" name="dataCapacity" value="">
                             </div>
                             <div class="col-md-4">
-                                <label for="" class="form-label">통화량</label>
-                                <input type="text" class="form-control disabled" id="" value="기본제공" >
+                                <label for="tel" class="form-label">통화량</label>
+                                <input type="text" class="form-control disabled" id="tel" value="기본제공" >
                             </div>
                             <div class="col-md-4">
-                                <label for="lnum" class="form-label">문자량</label>
-                                <input type="text" class="form-control" id="fnum" value="기본제공">
+                                <label for="sms" class="form-label">문자량</label>
+                                <input type="text" class="form-control" id="sms" value="기본제공">
                             </div>
                           
                             <!-- 상세정보 서머노트하자 -->
                             <div class="col-md-12">
-                                <label for="fnum" class="form-label">상세정보</label>
-                                <textarea class="form-control col-md-12" name="" id="" cols="100" rows="10" readonly> 서머노트로 상세정보 입력할예정</textarea>
+                                <label for="planExplain" class="form-label">상세정보</label>
+                                <textarea class="form-control col-md-12" name="planExplain" id="planExplain" cols="100" rows="10" readonly> 서머노트로 상세정보 입력할예정</textarea>
                             </div>
 
                             <!-- 확인버튼 -->
                             <div class="col-12 d-flex justify-content-center">
-                                <button class="btn btn-solid-default mx-auto" id="btn2">등록하기</button>
+                                <button type="submit" class="btn btn-solid-default mx-auto" id="btn2">등록하기</button>
                             </div>     
                         </div>
                         </form>
@@ -197,6 +207,7 @@ function displayCommonCode(commonCodeList) {
   const tableBody = $("#commonCodeTable tbody");
   tableBody.empty();
   let lastCode = "";
+  let lastNote = "";
   for (let i = 0; i < commonCodeList.length; i++) {
     const type = commonCodeList[i].type;
     const code = commonCodeList[i].code;
@@ -212,6 +223,8 @@ function displayCommonCode(commonCodeList) {
     
     // 마지막 코드 값 갱신
     lastCode = code;
+    lastNote = note;
+    $('#note').val(lastNote);
   }
   
   // 생성한 planNum을 hidden 필드에 설정
@@ -223,23 +236,24 @@ function generatePlanNum(lastCode) {
 	  let nextCode = parseInt(lastCode) + 1; // 마지막 코드 값의 다음 값 계산
 	  let selectedType = $("#validationCustom04").val(); // 선택한 타입 값 가져오기
 	  let planNum = selectedType + ("0" + nextCode).slice(-2); // 새로운 planNum 생성
-
+		let zeroCode = ("0" + nextCode).slice(-2);
 	  $("#planNum").val(planNum); // 생성한 planNum을 hidden 필드에 설정
+	  $('#code').val(zeroCode);
+	  $('#categoryCode').val(zeroCode);
+	  $('#type').val(selectedType);
+	  
 	}	
+	
+
+
+
+$('#planName').blur(function(){
+	$('#value').val($('#planName').val());
+})
 </script>
-<!-- <script>
-function generatePlanNum() {
-	  var type = document.getElementById("validationCustom04").value; // 선택한 타입 값 가져오기
-	  var codes = document.getElementById("codeOptions").options; // 코드 셀렉트 박스 옵션들 가져오기
-	  var lastCode = codeOptions[codeOptions.length - 1].value; // 마지막 코드 값 가져오기
-	  var nextCode = parseInt(lastCode) + 1; // 마지막 코드 값의 다음 값 계산
 
-	  var planNum = type + ("0" + nextCode).slice(-2); // 새로운 planNum 생성
-		console.log(planNum);
-	  document.getElementById("planNum").value = planNum; // 생성한 planNum을 hidden 필드에 설정
-	}
 
-</script> -->
+
 </body>
 
 </html>

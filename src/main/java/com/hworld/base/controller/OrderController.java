@@ -1,6 +1,5 @@
 package com.hworld.base.controller;
 
-import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 
@@ -9,15 +8,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hworld.base.service.MemberService;
@@ -62,29 +57,9 @@ public class OrderController {
 //		    mv.addObject(attributeName, attributeValue);
 //		}
 
-		List<OrderPageDirectVO> orderList = new ArrayList<>();
-		for (OrderPageDirectVO orderItem : orderItems) {
-		    if (orderItem.getOrderAmount() > 0) {
-		        System.out.println("directCode: " + orderItem.getDirectCode());
-		        System.out.println("orderAmount: " + orderItem.getOrderAmount());
-		        System.out.println("totalPrice: " + orderItem.getTotalPrice());
-		        orderList.add(orderItem);
-		    }
-		}
-		session.setAttribute("orderItems", orderList);
 		
-//		 List<OrderPageDirectVO> storedOrderItems = (List<OrderPageDirectVO>) session.getAttribute("orderItems");
-//		    if (storedOrderItems != null) {
-//		        for (OrderPageDirectVO orderItem : storedOrderItems) {
-//		            System.out.println("directCode: " + orderItem.getDirectCode());
-//		            System.out.println("orderAmount: " + orderItem.getOrderAmount());
-//		            System.out.println("totalPrice: " + orderItem.getTotalPrice());
-//		        }
-//		    } else {
-//		        System.out.println("orderItems 데이터가 세션에 존재하지 않습니다.");
-//		    }
-	    // 생성된 데이터를 응답으로 전송
-	    return ResponseEntity.ok(orderList);
+		mv.setViewName("/order");
+		return mv;
 	}
 	
 //	@GetMapping("/order/{memberNum}")

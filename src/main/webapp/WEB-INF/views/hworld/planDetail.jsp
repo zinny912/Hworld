@@ -226,7 +226,7 @@
 	                                                                <c:when test="${memberVO.ownCheck == 0 }">
 	                                                              
 	                                                                <a href="javascript:void(0)" data-bs-toggle="modal"
-	                                                                    data-bs-target="#quick-view" class="btn btn-solid hover-solid btn-animation rounded-3" >
+	                                                                    data-bs-target="#quick-view" class="btn btn-solid hover-solid btn-animation rounded-3" disabled>
 	                                                                    <span>요금제 변경</span> 
 	                                                                </a>
 	                                                               

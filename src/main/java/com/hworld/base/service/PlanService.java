@@ -54,10 +54,15 @@ public class PlanService {
 	public PlanVO getNoteName(PlanVO planVO) throws Exception{
 		return planDAO.getNoteName(planVO);
 	}
-	
+	// 선택된 타입의 공통코드 정보 가져오기 
 	public List<BaseVO> getCommonCode(BaseVO baseVO) throws Exception{
 		return planDAO.getCommonCode(baseVO);
 	}
+	// 새로운 공통코드 인서트 
+	public int setCommonCode(BaseVO baseVO) throws Exception{
+		return planDAO.setCommonCode(baseVO);
+	}
+	
 	//요금제 등록 
 	public int setInsert(PlanVO planVO)throws Exception{
 		return planDAO.setInsert(planVO);

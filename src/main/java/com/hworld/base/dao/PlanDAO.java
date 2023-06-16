@@ -29,9 +29,9 @@ public interface PlanDAO {
     
     public PlanVO getNoteName(PlanVO planVO) throws Exception;
     
-    //public BaseVO getCommonCode(BaseVO baseVO) throws Exception;
-    
+    // 공통코드 정보 가져오고 insert 
     public List<BaseVO> getCommonCode(BaseVO baseVO) throws Exception;
+    public int setCommonCode(BaseVO baseVO) throws Exception;
 	
 	// 요금제 등록
     public int setInsert(PlanVO planVO) throws Exception;
