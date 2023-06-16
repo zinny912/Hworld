@@ -17,7 +17,7 @@ public interface OrderDAO {
     public int orderPayment(OrderVO orderVO) throws Exception;
     
     // 주문 상품 정보(주문 페이지)
-    public OrderDirectVO getDirectDetail(String directCode);
+    public DirectVO getDirectDetail(DirectVO directCode);
     
     //주문 상품 정보(주문 처리)
     public OrderDirectVO getOrderInfo(String directCode);

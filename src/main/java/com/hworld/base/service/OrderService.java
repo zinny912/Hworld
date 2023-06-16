@@ -8,6 +8,7 @@ import java.util.List;
 import javax.mail.Session;
 import javax.servlet.http.HttpSession;
 
+import org.hibernate.validator.constraints.Length;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -49,35 +50,31 @@ public class OrderService {
 		//Controller에서 받아온 orderPageVO에 적힌 내용을 ','로 parsing한 후, list에 하나씩 담아주는 작업이 필요
 		String[] directCode = orderDirectVO.getDirectCode().split(",");
 		String[] orderAmount = orderDirectVO.getOrderAmount().split(",");
+		String[] calPrice = orderDirectVO.getCalPrice().split(",");
 		
-		for(String str : directCode) {
-			log.error(" >>>>>>>>>>>>>>>>>>>>>> {} ", str);
-		}
-		
-		
+
+	    for (int i = 0; i < directCode.length; i++) {
+	        OrderDirectVO vo = new OrderDirectVO();
+	        DirectVO vo2 = new DirectVO();
+	        
+			vo2.setDirectCode(directCode[i]);
+			vo2 = orderDAO.getDirectDetail(vo2);
+			vo.setDirectVO(vo2); 
+			
+			vo.setDirectCode(directCode[i]);
+			vo.setOrderAmount(orderAmount[i]);
+			vo.setCalPrice(calPrice[i]);
+			ar.add(vo);
+			
+	    }
+	    
+	    
 		return ar;
-		
-		
-		
-//		List<OrderPageDirectVO> result = new ArrayList<>();
-//		
-//		for(OrderPageDirectVO opds : orderPageDirectVOs) {
-////			log.error(opds.getDirectCode().toString());
-//			
-//			OrderPageDirectVO getDirectDetail = orderDAO.getDirectDetail(opds.getDirectCode());
-//			
-//			getDirectDetail.setOrderAmount(opds.getOrderAmount());
-//			
-//			result.add(getDirectDetail);
-//			
-//		}
-//		return result;
 	}
 	
+	
 	//주문한 정보를 db에 넣는거
-	public void order(OrderVO orderVO, HttpSession session)throws Exception{
-		//회원 정보 
-		Object member = session.getAttribute("memberNum");
+	public void order(OrderVO orderVO, MemberVO memberVO)throws Exception{
 		//주문 정보
 		List<OrderDirectVO> ods = new ArrayList<>();
 		for(OrderDirectVO odss : orderVO.getOrderDirectVOs()) {
@@ -95,7 +92,7 @@ public class OrderService {
 		// orderNum 만들기 및 OrderDTO객체 orderNum에 저장
 		Date date = new Date();
 		SimpleDateFormat format = new SimpleDateFormat("_yyyyMMddHHmmss");
-		String orderNum = session.getAttribute("memberNum")+format.format(date);
+		String orderNum = memberVO.getMemberNum()+format.format(date);
 		orderVO.setOrderNum(orderNum);
 		
 		//DB넣기

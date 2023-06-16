@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.hworld.base.dao.DirectDAO;
+import com.hworld.base.service.DirectService;
 import com.hworld.base.service.MemberService;
 import com.hworld.base.service.OrderService;
 import com.hworld.base.vo.MemberVO;
@@ -32,63 +34,36 @@ public class OrderController {
 	private OrderService orderService;
 	@Autowired
 	private MemberService memberService;
+	@Autowired
+	private DirectService directService;
+	
 	
 	@GetMapping("/order")
 	public ModelAndView getOrderInfo(OrderDirectVO orderDirectVO, HttpSession session) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		
-		//
-//		for(OrderPageVO orderPageVO2: orderPageVO) {
-//		}
-		log.error("==========================> {} ", orderDirectVO.getClass());
-		log.error("==========================> {} ", orderDirectVO.getDirectCode());
-		log.error("==========================> {} ", orderDirectVO.getOrderAmount());
-		log.error("==========================> {} ", orderDirectVO.getCalPrice());
-		log.error("==========================> {} ", orderDirectVO.getCalPrice());
-		
-		orderService.getOrderInfo(orderDirectVO);
-		
-		
-//		mv.addObject("orderList", orderService.getDirectDetail(orderPageVO.getOrders()));
-//		Enumeration<String> attributeNames = session.getAttributeNames();
-//		while (attributeNames.hasMoreElements()) {
-//		    String attributeName = attributeNames.nextElement();
-//		    Object attributeValue = session.getAttribute(attributeName);
-//		    mv.addObject(attributeName, attributeValue);
-//		}
+		List<OrderDirectVO> ar = orderService.getOrderInfo(orderDirectVO);
 
+		MemberVO memberVO = (MemberVO) session.getAttribute("memberVO");
 		
-		mv.setViewName("/order");
+		mv.setViewName("hworld/accessoryOrder");
+		mv.addObject("memberVO", memberVO);
+		mv.addObject("orderList", ar);
+		return mv;
+	}
+
+	
+	@PostMapping("/order")
+	public ModelAndView getOrderInfo(OrderVO orderVO, HttpSession session)throws Exception{
+		ModelAndView mv = new ModelAndView();
+		MemberVO memberVO = (MemberVO) session.getAttribute("memberVO");
+
+		orderService.order(orderVO, memberVO);
+		
+		mv.setViewName("/orderSuccess");
 		return mv;
 	}
 	
-//	@GetMapping("/order/{memberNum}")
-//	public ModelAndView setOrderInsert(@PathVariable("memberNum") String memberNum, OrderPageVO orderPageVO, HttpSession session) throws Exception{
-//		ModelAndView mv = new ModelAndView();
-//		mv.addObject("orderList", orderService.getDirectDetail(orderPageVO.getOrders()));
-//		Enumeration<String> attributeNames = session.getAttributeNames();
-//		while (attributeNames.hasMoreElements()) {
-//		    String attributeName = attributeNames.nextElement();
-//		    Object attributeValue = session.getAttribute(attributeName);
-//		    mv.addObject(attributeName, attributeValue);
-//		}
-//
-//		
-//		mv.setViewName("/order");
-//		return mv;
-//	}
-	//
-	
-//	@PostMapping("/order")
-//	public ModelAndView getOrderInfo(OrderVO orderVO, HttpSession session)throws Exception{
-//		ModelAndView mv = new ModelAndView();
-//		
-//		orderService.order(orderVO, session);
-//		
-//		mv.setViewName("/orderSuccess");
-//		return mv;
-//	}
-//	
 //	
 //	
 //	
