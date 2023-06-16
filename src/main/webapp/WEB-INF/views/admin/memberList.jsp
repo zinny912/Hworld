@@ -103,7 +103,7 @@
 	
 	                                                        <td>${memberVO.name}</td>
 	
-	                                                        <td>${memberVO.phoneNum}</td>
+	                                                        <td>${memberVO.tel}</td>
 	
 	                                                        <td>${memberVO.email}</td>
 	
