@@ -27,11 +27,11 @@ public class MailService {
     
     private static int number;
     
+    //static을 왜 썼을까?
     private static String newPw;
     
     public static void createNumber(){
-        number = (int)(Math.random() * (90000)) + 100000;// (int) Math.random() * (최댓값-최소값+1) + 최소값
-        
+        number = (int)(Math.random() * (90000)) + 100000;// (int) Math.random() * (최댓값-최소값+1) + 최소값  
      }
     
 //    public static void createPssword() {
@@ -67,35 +67,34 @@ public class MailService {
          return number;
      }
      
-     public MimeMessage CreateMailPw(String email) throws Exception{
-//    	 createPssword();
-    	 MimeMessage message = javaMailSender.createMimeMessage();	    	        	   
-
-	     try {
-	         message.setFrom(senderEmail);
-	         message.setRecipients(MimeMessage.RecipientType.TO, email);
-	         message.setSubject("비밀번호 재발급");
-	         String body = "";
-	         body += "<h3>" + "재발급 된 비밀번호입니다." + "</h3>";
-	         body += "<h1>" + newPw + "</h1>";
-	         body += "<h3>" + "감사합니다." + "</h3>";
-	         message.setText(body,"UTF-8", "html");
-	     } catch (MessagingException e) {
-	         e.printStackTrace();
-	     }
-	
-	     return message;
-	 }
-
-     public String sendMailPw(String email){
-
-         MimeMessage message = CreateMail(email);
-
-         javaMailSender.send(message);
-
-         return newPw;
-     }
      
-     
+//미완성작업 
+	public MimeMessage CreateMailPw(String email) throws Exception{
+		
+		MimeMessage message = javaMailSender.createMimeMessage();	    	        	   
+		
+		try {
+			message.setFrom(senderEmail);
+			message.setRecipients(MimeMessage.RecipientType.TO, email);
+			message.setSubject("비밀번호 재발급");
+			String body = "";
+			body += "<h3>" + "재발급 된 비밀번호입니다." + "</h3>";
+			body += "<h1>" + newPw + "</h1>";
+			body += "<h3>" + "감사합니다." + "</h3>";
+			message.setText(body,"UTF-8", "html");
+		} catch (MessagingException e) {
+			e.printStackTrace();
+		}
+		
+		return message;
+	}
 	
+	public String sendMailPw(String email){
+		MimeMessage message = CreateMail(email);
+		
+		javaMailSender.send(message);
+		
+		return newPw;
+	}
+	 
 }

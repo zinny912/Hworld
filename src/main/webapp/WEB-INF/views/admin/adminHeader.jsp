@@ -63,33 +63,25 @@
                             </a>
                         </li>
                         <li class="profile-nav onhover-dropdown pe-0 me-0">
-                            <div class="media profile-media">
-                                <img class="user-profile rounded-circle" src="/admin/images/users/4.jpg" alt="">
+                            <div class="media profile-media">                                
                                 <div class="user-name-hide media-body">
-                                    <span>Emay Walter</span>
-                                    <p class="mb-0 font-roboto">Admin<i class="middle fa fa-angle-down"></i></p>
+                                    <span>${memberVO.name}</span>님
+                                    <p class="mb-0 font-roboto">관리자<i class="middle fa fa-angle-down"></i></p>
                                 </div>
                             </div>
                             <ul class="profile-dropdown onhover-show-div">
                                 <li>
-                                    <a href="all-users.html">
+                                    <a href="memberList">
                                         <i data-feather="users"></i>
-                                        <span>회원</span>
+                                        <span>회원 관리</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="order-list.html">
+                                    <a href="orderList">
                                         <i data-feather="archive"></i>
-                                        <span>주문</span>
+                                        <span>주문 관리</span>
                                     </a>
-                                </li>
-
-                                <li>
-                                    <a href="profile-setting.html">
-                                        <i data-feather="settings"></i>
-                                        <span>설정</span>
-                                    </a>
-                                </li>
+                                </li>                                
                                 <li>
                                     <a data-bs-toggle="modal" data-bs-target="#staticBackdrop"
                                         href="javascript:void(0)">
@@ -111,8 +103,8 @@
             <div class="sidebar-wrapper">
                 <div>
                     <div class="logo-wrapper logo-wrapper-center">
-                        <a href="index.html" data-bs-original-title="" title="">
-                            <img class="img-fluid for-dark" src="/admin/images/logo/logo-white.png" alt="">
+                        <a href="/" data-bs-original-title="" title="">
+                            <h3>Hworld Home</h3>
                         </a>
                         <div class="back-btn">
                             <i class="fa fa-angle-left"></i>
@@ -152,10 +144,7 @@
                                         </li>
                                         <li>
                                             <a href="phoneList">회선 목록</a>
-                                        </li>
-                                        <li>
-                                            <a href="memberAdd">회원 추가</a>
-                                        </li>
+                                        </li>                                        
                                     </ul>
                                 </li>
 
@@ -222,22 +211,7 @@
                                             <a href="unpaidList">미납 목록</a>
                                         </li>
                                     </ul>
-                                </li>
-                                
-
-
-
-                                <li class="sidebar-list">
-                                    <a class="linear-icon-link sidebar-link sidebar-title" href="javascript:void(0)">
-                                        <i data-feather="settings"></i>
-                                        <span>설정</span>
-                                    </a>
-                                    <ul class="sidebar-submenu">
-                                        <li>
-                                            <a href="profileSetting">프로필 설정</a>
-                                        </li>
-                                    </ul>
-                                </li>
+                                </li>                                
                             </ul>
                         </div>
                         <div class="right-arrow" id="right-arrow">
@@ -247,4 +221,5 @@
                 </div>
             </div>
             <!-- Page Sidebar Ends-->
-    
+            
+</html>    

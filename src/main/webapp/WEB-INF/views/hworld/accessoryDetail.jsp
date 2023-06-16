@@ -153,8 +153,9 @@
                                     </div>    
                                     </c:if>
 								<div id="directList">
-									
-									<form class="order_form">
+									<div class="noStock" style="display:none;">
+										<h2 class="theme-color">선택하신 제품은 재고가 없습니다.</h2>
+									</div>
 										<c:forEach items="${list}" var="direct" varStatus="status">
 											<div class="titlebox">
 												<div class="brand direct-item" style="font-size: 27px; color: gray;" id="productCode${status.index}"
@@ -172,7 +173,7 @@
 														<span class="price-detail theme-color fw-bold" id="renewPrice">${direct.directPrice}</span>
 														<span class="unit">원</span>
 														</p>
-													<input type="hidden" class="testDC" id="directCode" name="directCode" value="${direct.directCode}">
+													<input type="hidden" id="dc${direct.directCode}" name="directCode" value="${direct.directCode}">
 													<input type="hidden" id="categoryCode" name="categoryCode" value="${direct.categoryCode}">
 													<input type="hidden" id="brandCode" name="brandCode" value="${direct.brandCode}">
 													<input type="hidden" id="slicedCode" name="slicedCode" value="${direct.slicedCode}">
@@ -253,11 +254,12 @@
 	                                                        <button type="button" class="btn btn-outline-custom me-1 cart-icon" style="margin-left:-105px; display:inline-block;">
 	                                                            <svg xmlns="http://www.w3.org/2000/svg" width="34" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart pe-1"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
 	                                                        </button> </a>                    
-	                                                    <button type="submit" class="btn btn-solid" id="orderBtn" style= "width: 700px; height: 52px; font-size: 18px; display: inline-block; padding: 0 10px; text-align: center;">주문하기</button>
+	                                                    <button class="btn btn-solid order_btn" id="orderBtn" style= "width: 700px; height: 52px; font-size: 18px; display: inline-block; padding: 0 10px; text-align: center;">주문하기</button>
 	                                                	</div> 
 	                                                </div>                                                      
                                             </div>
                                         </div>
+										<form action="/getOrder" method="GET" class="order_form">
                                         
                                         </form>
                                     </div>
@@ -846,6 +848,17 @@
 
 
 <c:import url="../temp/footer.jsp"></c:import>    
+
+<script type="text/javascript">
+/* 주문 페이지 이동 */	
+$(".order_btn").on("click", function(){
+	let form_contents ='';
+
+});
+
+
+
+</script>
 
 
 </body>

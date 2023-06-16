@@ -64,7 +64,7 @@
                                                         </td>
 
                                                         <td >
-                                                            <div class="mx-5 col-lg-5">
+                                                            <div class="mx-auto col-lg-3">
                                                                 <input class="form-control" type="number" value="1">
                                                             </div>
                                                         </td>
@@ -94,7 +94,7 @@
                                                         </td>
 
                                                         <td >
-                                                            <div class="mx-5 col-lg-5">
+                                                            <div class="mx-auto col-lg-3">
                                                                 <input class="form-control" type="number" value="2">
                                                             </div>
                                                         </td>
@@ -123,7 +123,7 @@
                                                         </td>
 
                                                         <td >
-                                                            <div class="mx-5 col-lg-5">
+                                                            <div class="mx-auto col-lg-3">
                                                                 <input class="form-control" type="number" value="1">
                                                             </div>
                                                         </td>
@@ -145,34 +145,33 @@
                                     </div>
                                 </div>
 
+                                <!-- Pagination Box Start -->
                                 <div class="pagination-box">
                                     <nav class="ms-auto me-auto " aria-label="...">
-                                        <ul class="pagination pagination-primary">
-                                            <li class="page-item disabled">
-                                                <a class="page-link" href="javascript:void(0)"
-                                                    tabindex="-1">Previous</a>
-                                            </li>
-
-                                            <li class="page-item active">
-                                                <a class="page-link" href="javascript:void(0)">1</a>
-                                            </li>
-
-                                            <li class="page-item">
-                                                <a class="page-link" href="javascript:void(0)">2 <span
-                                                        class="sr-only">(current)</span>
-                                                </a>
-                                            </li>
-
-                                            <li class="page-item">
-                                                <a class="page-link" href="javascript:void(0)">3</a>
-                                            </li>
-
-                                            <li class="page-item">
-                                                <a class="page-link" href="javascript:void(0)">Next</a>
-                                            </li>
-                                        </ul>
-                                    </nav>
-                                </div>
+						                <ul class="pagination pagination-primary">
+						                    <li class="page-item ${pager.pre ? '' : 'disabled' }">
+						                        <a class="page-link" href="memberList?page=${pager.startNum-1}&search=${pager.search}" aria-label="Previous">
+						                            <span aria-hidden="true">
+						                                <i class="fas fa-chevron-left"></i>
+						                            </span>
+						                        </a>
+						                    </li>
+						                    <c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
+						   	                    <li class="page-item">
+						                        	<a class="page-link" href="memberList?page=${i}&search=${pager.search}">${i}</a>
+						                    	</li>
+						                    </c:forEach>
+						                    <li class="page-item ${pager.next ? '' : 'disabled' }">
+						                        <a class="page-link" href="memberList?page=${pager.lastNum+1}&search=${pager.search}" aria-label="Next">
+						                            <span aria-hidden="true">
+						                                <i class="fas fa-chevron-right"></i>
+						                            </span>
+						                        </a>
+						                    </li>
+						                </ul>                
+					            	</nav>
+					            </div>
+					            <!-- Pagination Box End -->
                             </div>
                         </div>
                     </div>

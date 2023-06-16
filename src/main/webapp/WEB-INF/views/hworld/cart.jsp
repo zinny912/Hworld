@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+    
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -121,7 +123,7 @@
                             </div>  
                         	</td>
                         	<td>
-                                <a class="text-decoration-underline theme-color d-flex" style="margin-left: -20%">선택 삭제</a>
+                                <a class="text-decoration-underline theme-color d-flex" style="margin-left: -15%">선택 삭제</a>
                         	</td>
                         	<td>
                         	</td>
@@ -129,6 +131,7 @@
                         	</td>
                         	
                         	</tr>
+                    <c:forEach items="${cartInfo}" var="cart">
                             <tr>
                                 <td class="cart-check-wrap">
                                         <div class="qty-box d-flex" >
@@ -140,17 +143,32 @@
                                 </td>
                                 <td class="cart-content-wrap">
                                         <div class="col-md-2">
-                                            <h6 class="pt-1 pb-1">애플</h6>
+											<h6 class="pt-1 pb-1">
+											    <c:choose>
+											        <c:when test="${cart.brandCode == 'S'}">
+											            삼성
+											        </c:when>
+											        <c:when test="${cart.brandCode == 'A'}">
+											            애플
+											        </c:when>
+											        <c:when test="${cart.brandCode == '0'}">
+											            기타
+											        </c:when>
+											        <c:otherwise>
+											            기타
+											        </c:otherwise>
+											    </c:choose>
+											</h6>
                                         </div>
                                         <div class="mt-3 mb-3">
-                                            <h2 class="fw-bold"><a href="product-left-sidebar.html">Yellow 케이스</a></h2> 
+                                            <h2 class="fw-bold"><a href="product-left-sidebar.html">${cart.directName}</a></h2> 
                                         </div>
                                         <div class="d-flex">
                                             <div class="" style="color: #7e7e7e;">
                                                 <p>선택한 옵션</p>
                                             </div>
                                             <div class="" style="color: black;">
-                                                <h5>스톰 블루</h5>
+                                                <h5>${cart.colorCode}</h5>
                                             </div>                                            
                                         </div>
                                 </td>
@@ -160,59 +178,20 @@
                                         <div class=" d-flex quantity-wrapper " style="padding:5px 0px; justify-content: start;">
                                             <button class="btn quantity-left-minus" style="height:5px; width:5px; padding:10px; margin-top:-6px; ">-</button>
                                             <span class="input-wrapper">
-                                                <input type="text" class="input-number text-center" style="width: 35px; padding:5px 5px; border:1px solid #c7c7c5; border-radius: 5px;"  value="1">
+                                                <input type="text" class="input-number text-center" style="width: 35px; padding:5px 5px; border:1px solid #c7c7c5; border-radius: 5px;"  value="${cart.cartAmount}">
                                             </span>
                                             <button class="btn quantity-right-plus" style="height:5px; margin-top:-6px; padding:10px 5px; ">+</button>
                                         </div>
                                     </div> 
                                 </td>
                                 <td>
-                                    <h2 class="td-color fw-bold">12,000원</h2>
+									<h2 class="td-color fw-bold">
+									    <fmt:formatNumber value="${cart.directPrice}" pattern="#,### 원"/>
+									</h2>
                                 </td>
                                 
                             </tr>
-                             <tr>
-                                <td class="cart-check-wrap">
-                                        <div class="qty-box d-flex" >
-                                            <div class="form-check custome-form-check">
-                                                <input class="checkbox_animated check-it" type="checkbox"
-                                                    id="flexCheckDefault10">
-                                            </div>
-                                        </div>
-                                </td>
-                                <td class="cart-content-wrap" >
-                                        <div class="col-md-2">
-                                            <h6 class="pt-1 pb-1">애플</h6>
-                                        </div>
-                                        <div class="mt-3 mb-3">
-                                            <h2 class="fw-bold"><a href="product-left-sidebar.html">Yellow 케이스</a></h2> 
-                                        </div>
-                                        <div class="d-flex">
-                                            <div class="" style="color: #7e7e7e;">
-                                                <p>선택한 옵션</p>
-                                            </div>
-                                            <div class="" style="color: black;">
-                                                <h5>스톰 블루</h5>
-                                            </div>                                            
-                                        </div>
-                                </td>
-                                <td class="pt-3">
-                                    <!-- 수량 버튼 만들어봄 -->
-                                    <div  >
-                                        <div class=" d-flex quantity-wrapper " style="padding:5px 0px; justify-content: start;">
-                                            <button class="btn quantity-left-minus" style="height:5px; width:5px; padding:10px; margin-top:-6px; ">-</button>
-                                            <span class="input-wrapper">
-                                                <input type="text" class="input-number text-center" style="width: 35px; padding:5px 5px; border:1px solid #c7c7c5; border-radius: 5px;"  value="1">
-                                            </span>
-                                            <button class="btn quantity-right-plus" style="height:5px; margin-top:-6px; padding:10px 5px; ">+</button>
-                                        </div>
-                                    </div> 
-                                </td>
-                                <td>
-                                    <h2 class="td-color fw-bold">12,000원</h2>
-                                </td>
-                                
-                            </tr>
+                        </c:forEach>
                             
                         </tbody>
                         <tbody >
@@ -220,7 +199,7 @@
                                 <td class="cart-totalPrice-wrap" colspan="7">
                                     <div class="d-flex justify-content-end">
                                         <h5 class="fw-bold">총 결제 금액</h5>
-                                        <h2 class="mx-5 fw-bold"></h2>
+                                        <h2 class="mx-5 fw-bold">${cart.directPrice * cart.cartAmount }</h2>
                                         <button class="btn btn-solid-default btn-spacing" type="button">주문하기</button>
                                     </div>
                                 </td>
@@ -240,7 +219,9 @@
     document.addEventListener('DOMContentLoaded', function() {
       var quantityInputs = document.querySelectorAll('.input-number');
       var priceElements = document.querySelectorAll('.td-color');
-
+		
+      updateTotalPrice();
+    }
       // 가격 업데이트 함수
       function updatePrice() {
         for (var i = 0; i < quantityInputs.length; i++) {
@@ -249,9 +230,10 @@
           var initialPrice = parseInt(priceElement.getAttribute('data-price'));
           var currentQuantity = parseInt(quantityInput.value);
           var newPrice = initialPrice * currentQuantity;
-          priceElement.innerText = newPrice.toLocaleString() + '원';
+          priceElement.innerText = formatPrice(newPrice) + '원';
         }
-      }
+        updateTotalPrice(); // 총 결제 예상금액 업데이트
+    }
 
       // 수량 감소 버튼 클릭 이벤트
       var quantityMinusBtns = document.querySelectorAll('.quantity-left-minus');
@@ -264,7 +246,6 @@
             currentQuantity--;
             quantityInput.value = currentQuantity;
             updatePrice(); // 가격 업데이트
-            updateTotalPrice(); // 총 결제 예상금액 업데이트
           }
         });
       });
@@ -279,7 +260,6 @@
           currentQuantity++;
           quantityInput.value = currentQuantity;
           updatePrice(); // 가격 업데이트
-          updateTotalPrice(); // 총 결제 예상금액 업데이트
         });
       });
 
@@ -289,11 +269,10 @@
           var newQuantity = parseInt(this.value);
           if (!isNaN(newQuantity) && newQuantity >= 1) {
             this.value = newQuantity;
+            updatePrice(); // 가격 업데이트
           } else {
             this.value = 1;
           }
-          updatePrice(); // 가격 업데이트
-          updateTotalPrice(); // 총 결제 예상금액 업데이트
         });
       });
 
@@ -306,13 +285,18 @@
         var totalPrice = 0;
 
         for (var i = 0; i < unitPriceElements.length; i++) {
-          var unitPrice = parseInt(unitPriceElements[i].innerText.replace(',', '').replace('원', ''));
+          var unitPrice = parseInt(unitPriceElements[i].innerText.replace(/,/g, '').replace('원', ''));
           var quantity = parseInt(quantityInputElements[i].value);
           var itemPrice = unitPrice * quantity;
           totalPrice += itemPrice;
         }
 
-        totalPriceElement.innerText = totalPrice.toLocaleString() + '원';
+        totalPriceElement.innerText = formatPrice(totalPrice) + '원';
+      }
+
+      // 가격 포맷팅 함수
+      function formatPrice(price) {
+        return price.toLocaleString('ko-KR');
       }
 
       // 페이지 로딩 시 초기 총 결제 예상금액 업데이트
@@ -320,22 +304,6 @@
     });
 
 
- /* 
-        $(".quantity-wrapper .quantity-right-plus").on("click", function () {
-            var $qty = $(this).siblings(".input-wrapper").find(".input-number");
-            var currentVal = parseInt($qty.val(), 10);
-            if (!isNaN(currentVal)) {
-                $qty.val(currentVal + 1);
-            	}
-            });
-
-            $(".quantity-wrapper .quantity-left-minus").on("click", function () {
-            var $qty = $(this).siblings(".input-wrapper").find(".input-number");
-            var currentVal = parseInt($qty.val(), 10);
-            if (!isNaN(currentVal) && currentVal > 1) {
-                $qty.val(currentVal - 1);
-            	}
-            }); */
     </script>
 <c:import url="../temp/footer.jsp"></c:import>    
 </body>
