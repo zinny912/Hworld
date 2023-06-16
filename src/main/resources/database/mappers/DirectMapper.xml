@@ -102,7 +102,7 @@
   	<!-- 상품 삭제 -->
 	<delete id="setDelete" parameterType="DirectVO">
 	  DELETE FROM DIRECT
-	  WHERE directCode LIKE CONCAT('%', #{slicedCode}, '%')
+	  WHERE SUBSTRING(DIRECTCODE,-5) = #{slicedCode}
 	</delete>
 	
 	<!-- 상품 수정 -->
@@ -183,7 +183,7 @@
 	
 	<!-- planList + disPercent -->
 	<select id="getPlanList" resultType="PlanVO">
-		SELECT P.PLANNUM, P.PLANNAME, P.PLANPRICE, P.DATACAPACITY, P.CATEGORYCODE, P.PLANEXPLAIN, P.PLANEXPLAINSM, D.DISPERCENT 
+		SELECT P.PLANNUM, P.PLANNAME, P.PLANPRICE, P.DATACAPACITY, P.CATEGORYCODE, P.PLANEXPLAIN, P.PLANEXPLAINS, D.DISPERCENT 
 		FROM PLAN P
 		LEFT JOIN DISCODE D
 		ON(P.DISCODE=D.DISCODE)

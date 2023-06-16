@@ -168,8 +168,9 @@
 														<h3 class="mt-3 ">출고가</h3>
 													</div>
 													<p>
-														<span class="price-detail theme-color fw-bold" id="renewPrice">${direct.directPrice}</span>
-														<span class="unit">원</span>
+													
+														<span class="price-detail theme-color fw-bold" id="renewPrice"><fmt:formatNumber value="${direct.directPrice}" pattern="#,###"/></span>
+														<span class="unit theme-color fw-bold fs-5">원</span>
 													</p>
 												<div class="direct-item" id="item_${direct.directCode}" data-direct-code="${direct.directCode}" data-category-code="${direct.categoryCode}" data-brand-code="${direct.brandCode}" data-sliced-code="${direct.slicedCode}" data-direct-stock="${direct.directStock}" data-direct-price="${direct.directPrice}">
 												</div>
@@ -252,7 +253,7 @@
 												<div class="btn-area" style="display:block; position: relative; padding-top:70px; float: center;"> 
 													<div class="product-buttons"> 
 														<a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#cartinto">
-														<button type="button" class="btn btn-outline-custom me-1 cart-icon" style="margin-left:-105px; display:inline-block;">
+														<button type="button" class="btn btn-outline-custom me-1 cart-icon" id="cartBtn" style="margin-left:-105px; display:inline-block;">
 															<svg xmlns="http://www.w3.org/2000/svg" width="34" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart pe-1"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
 														</button> </a>
 														<button type="button" class="btn btn-solid" id="orderBtn" style= "width: 700px; height: 52px; font-size: 18px; display: inline-block; padding: 0 10px; text-align: center;">주문하기</button>
@@ -604,7 +605,7 @@
                 </form>
             </div>
             <div class="modal-footer pt-0 text-end d-block">
-                <a href="#" ><button class="btn btn-solid-default rounded-1">확인</button></a>
+                <a href="../cart/cartInfo" ><button class="btn btn-solid-default rounded-1">확인</button></a>
             </div>
         </div>
     </div>
