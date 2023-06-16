@@ -46,19 +46,35 @@ public class CartService {
 
 	
 	//장바구니 정보 리스트
-	public List<CartVO> getList(MemberVO memberVO) throws Exception{
+	public List<CartVO> getCartList(Integer memberNum) throws Exception{
+		List<CartVO> cartVOs = cartDAO.getCartList(memberNum);
+		log.error("{}", memberNum);
 		
-		return cartDAO.getList(memberVO);
+//		for(CartVO cartVO : cartVOs) {
+//			cartVO.initTotal();
+//		}
+		
+		return cartVOs;
 	}
 	
 
 		
 	//장바구니에 상품 추가 
-	public int setInsert(CartVO cartVO, MultipartFile[] multipartFiles)throws Exception{
+	public int setInsert(CartVO cartVO)throws Exception{
+		CartVO checkCart = cartDAO.checkCart(cartVO);
 		
-		int result = cartDAO.setInsert(cartVO);
+		//장바구니에 있는 데이터인지 먼저 확인 
+		if(checkCart != null) {
+			return 2;
+		}
 		
-		return result;
+		//장바구니 등록 / 에러시 0 반환
+		try {
+			return cartDAO.setInsert(cartVO);
+		} catch (Exception e) {
+			return 0;
+		}
+       		
 	}
 
 

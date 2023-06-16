@@ -182,7 +182,7 @@
                                                             <div class="cart-btn">
                                                                 <h6 class="cart-total"><span class="font-light">Total:</span> $
                                                                     542.00</h6>
-                                                                <button onclick="location.href = '/cart';" type="button"
+                                                                <button onclick="location.href = '/cart/cartInfo';" type="button"
                                                                     class="btn btn-solid-default btn-block">
                                                                     구매하기
                                                                 </button>

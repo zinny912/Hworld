@@ -5,7 +5,7 @@
   
   <mapper namespace="com.hworld.base.dao.OrderDAO">
   
-	<select id="getDirectDetail" resultType="OrderPageDirectVO">
+	<select id="getDirectDetail" resultType="OrderDirectVO">
     	SELECT DIRECTCODE, DIRECTNAME, DIRECTPRICE
     	FROM DIRECT
 		WHERE DIRECTCODE = #{directCode}
