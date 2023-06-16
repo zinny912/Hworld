@@ -750,7 +750,7 @@
                                           	<c:forEach items="${gList}" var="i" varStatus="status">
                                           	<div class="mt-1" style="border-box:0px; box-shadow:1px 1px 2px 0px gray;  width:97%;">
                                            	<div class="form-check custome-radio-box mt-1">
-                                         				<input type="radio" name="planNum" class="form-check-input my-2" id="${i.planNum}" value="${i.planNum}"data-gb-value="${i.dataCapacity}"  data-plan-price="${i.planPrice}" data-dp="${i.disPercent}"/>
+                                         				<input type="radio" name="planNum" class="form-check-input my-2" id="${i.planNum}" value="${i.planNum}"data-gb-value="${i.dataCapacity}"  data-plan-price="${i.planPrice}" data-dp="${i.disCode}"/>
                                          				<label class="form-check-label fs-5" for="${i.planNum}">${i.planName}</label>
                                                   </div>
                                                   <div class="d-flex justify-content-between mb-1">
@@ -784,7 +784,7 @@
                                           	<c:forEach items="${sList}" var="i" varStatus="status">
                                           		<div class="mt-1" style="border-box:0px; box-shadow:1px 1px 2px 0px gray;  width:97%;">
                                            	<div class="form-check custome-radio-box mt-1">
-                                         				<input type="radio" name="planNum" class="form-check-input my-2" id="${i.planNum}" value="${i.planNum}" data-plan-price="${i.planPrice}" data-dp="${i.disPercent}"/>
+                                         				<input type="radio" name="planNum" class="form-check-input my-2" id="${i.planNum}" value="${i.planNum}" data-plan-price="${i.planPrice}" data-dp="${i.disCode}"/>
                                          				<label class="form-check-label fs-5" for="${i.planNum}">${i.planName}</label>
                                                   </div>
                                                   <div class="d-flex justify-content-between mb-1">
@@ -817,7 +817,7 @@
                                           	<c:forEach items="${tList}" var="i" varStatus="status">
                                            	<div class="mt-1" style="border-box:0px; box-shadow:1px 1px 2px 0px gray;  width:97%;">
                                            	<div class="form-check custome-radio-box mt-1">
-                                         				<input type="radio" name="planNum" class="form-check-input my-2" id="${i.planNum}" value="${i.planNum}" data-plan-price="${i.planPrice}" data-dp="${i.disPercent}"/>
+                                         				<input type="radio" name="planNum" class="form-check-input my-2" id="${i.planNum}" value="${i.planNum}" data-plan-price="${i.planPrice}" data-dp="${i.disCode}"/>
                                          				<label class="form-check-label fs-5" for="${i.planNum}">${i.planName}</label>
                                                   </div>
                                                   <div class="d-flex justify-content-between mb-1">
@@ -851,7 +851,7 @@
                                           	<c:forEach items="${zList}" var="i" varStatus="status">
                                            	<div class="mt-1" style="border-box:0px; box-shadow:1px 1px 2px 0px gray;  width:97%;">
                                            	<div class="form-check custome-radio-box mt-1">
-                                         				<input type="radio" name="planNum" class="form-check-input my-2" id="${i.planNum}" value="${i.planNum}" data-plan-price="${i.planPrice}" data-dp="${i.disPercent}"/>
+                                         				<input type="radio" name="planNum" class="form-check-input my-2" id="${i.planNum}" value="${i.planNum}" data-plan-price="${i.planPrice}" data-dp="${i.disCode}"/>
                                          				<label class="form-check-label fs-5" for="${i.planNum}">${i.planName}</label>
                                                   </div>
                                                   <div class="d-flex justify-content-between mb-1">
@@ -884,7 +884,7 @@
                                           	<c:forEach items="${wList}" var="i" varStatus="status">
                                            	<div class="mt-1" style="border-box:0px; box-shadow:1px 1px 2px 0px gray;  width:97%;">
                                            	<div class="form-check custome-radio-box mt-1">
-                                         				<input type="radio" name="planNum" class="form-check-input my-2" id="${i.planNum}" value="${i.planNum}" data-plan-price="${i.planPrice}" data-dp="${i.disPercent}"/>
+                                         				<input type="radio" name="planNum" class="form-check-input my-2" id="${i.planNum}" value="${i.planNum}" data-plan-price="${i.planPrice}" data-dp="${i.disCode}"/>
                                          				<label class="form-check-label fs-5" for="${i.planNum}">${i.planName}</label>
                                                   </div>
                                                   <div class="d-flex justify-content-between mb-1">
@@ -917,7 +917,7 @@
                                           	<c:forEach items="${hList}" var="i" varStatus="status">
                                            	<div class="mt-1" style="border-box:0px; box-shadow:1px 1px 2px 0px gray;  width:97%;">
                                            	<div class="form-check custome-radio-box mt-1">
-                                         				<input type="radio" name="planNum" class="form-check-input my-2" id="${i.planNum}" value="${i.planNum}" data-plan-price="${i.planPrice}" data-dp="${i.disPercent}"/>
+                                         				<input type="radio" name="planNum" class="form-check-input my-2" id="${i.planNum}" value="${i.planNum}" data-plan-price="${i.planPrice}" data-dp="${i.disCode}"/>
                                          				<label class="form-check-label fs-5" for="${i.planNum}">${i.planName}</label>
                                                   </div>
                                                   <div class="d-flex justify-content-between mb-1">
