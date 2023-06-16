@@ -103,7 +103,8 @@
 	                                                    	<td>${member.memberNum}</td>
 	                                                    	
 	                                                        <td>${member.email}</td>	                                                    	                                                
-	                                                        <td>${member.phoneNum}</td>
+	                                                        
+	                                                        <td>${telephonVOs.phoneNum}</td>
 	
 	                                                        <td>${telephonVOs.planNum}</td>
 	

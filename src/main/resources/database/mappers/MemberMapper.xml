@@ -33,6 +33,13 @@
 		VALUES(#{memberNum}, #{email}, #{pw}, #{name}, #{address1}, #{address2}, #{address3}, #{rrnf}, #{rrnl}, now(), 1, 1, #{tel}, 1)
 	</insert>
 	
+	<!-- 회선이 있는 회원의 id/pw 업데이트 -->
+	<update id="setMemberInitUpdate" parameterType="MemberVO">
+		UPDATE MEMBER SET EMAIL=#{email}, PW=#{pw}
+		WHERE MEMBERNUM=#{memberNum}
+	</update>
+	
+	
 	<!-- 아이디 중복검사 -->
   	<select id="emailCheck" parameterType="MemberVO" resultType="MemberVO">
   		SELECT EMAIL FROM MEMBER WHERE EMAIL = #{email}  		  	

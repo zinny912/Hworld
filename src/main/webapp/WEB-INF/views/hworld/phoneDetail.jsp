@@ -184,10 +184,12 @@
                        <!-- 상품 사진 이미지 div 태그 end -->
                             <div class="col-md-6">
                                 <div class="cloth-details-size ">
+                                <c:if test="${memberVO.adminCheck == 0 }">
                                     <div class="admin-update-delete d-flex justify-content-end">
                                         <a href="./directUpdate?slicedCode=${param.slicedCode}" class="me-3">수정</a>
-                                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#productdel">삭제</a>
+                                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#productdel" >삭제</a>
                                     </div>    
+                                </c:if>
 								<div id="directList">
 									<div class="noStock" style="display:none;">
 										<h2 class="theme-color">선택하신 제품은 재고가 없습니다.</h2>
@@ -196,7 +198,7 @@
 											<div class="titlebox">
 												<div class="brand direct-item" style="font-size: 27px; color: gray;" id="productCode"
 												data-direct-code="${direct.directCode}" data-direct-price="${direct.directPrice}"
-												data-direct-stock="${direct.directStock}">
+												data-direct-stock="${direct.directStock}" data-sliced-code="${direct.slicedCode}">
 													${direct.value} ${direct.slicedCode} ${direct.directCode}
 												</div>
 													<div class="details-image-concept mt-0" style="font-size: 35px;" id="directName">
@@ -206,7 +208,7 @@
 														<h3 class="mt-3 ">출고가</h3>
 													</div>
 														<p>
-														<span class="price-detail theme-color fw-bold" id="renewPrice" >${direct.directPrice}</span>
+														<span class="price-detail theme-color fw-bold data-comma" id="renewPrice" >${direct.directPrice}</span>
 														<span class="unit">원</span>
 														</p>
 													<input type="hidden" id="directCode" name="directCode" value="${direct.directCode}">
@@ -475,8 +477,10 @@
 					    									<c:set var="totalRating" value="${totalRating + review.rate}" /><p> 이거 뭐야  ${totalRating} </p>
 														</c:forEach>
 													</div>
-													<c:set var="averageRating" value="${totalRating / review.size()}" />
-													 <h2>평점 (<fmt:formatNumber value="${averageRating}" pattern="#.#" />)</h2>
+													<c:set var="averageRating" value="${empty review ? 0 : totalRating / review.size()}" />
+														<c:if test="${not empty averageRating && averageRating != null}">
+														    <h2>평점 (<fmt:formatNumber value="${averageRating}" pattern="#.#" />)</h2>
+														</c:if>
 
 				                                            <ul class="rating my-2 d-inline-block">
 																<li><i class="fas fa-star ${averageRating >= 0.5 ? 'theme-color' : ''}"></i></li>
@@ -586,19 +590,37 @@
 
 									<div class="customer-review-box col-md-9">
    										<div class="review-box d-flex justify-content-end">
+   										<%-- 오더 완성되면 사용할 예정<c:set var="hasPurchase" value="false" />
+
+										<c:forEach var="order" items="${orderList}">
+										    <c:if test="${order.directCode eq '해당 제품 코드' && not empty order.orderNum && order.memberNum eq '구매한 멤버 번호'}">
+										        <c:set var="hasPurchase" value="true" />
+										        <c:break />
+										    </c:if>
+										</c:forEach>
+										
+										<c:if test="${hasPurchase eq 'true'}">
+										    <button type="button" class="btn btn-primary">버튼</button>
+										</c:if> --%>
+										
 											<div class="box-head">
 											    <button class="btn btn-solid-default btn-sm fw-bold writeReview" data-bs-toggle="modal"
 											        data-bs-target="#addReview">후기 작성</button>
 											</div>
 										</div>
                                             <h2 class="col-md-7" style="margin-top:-50px;">구매 후기</h2>
+											<c:choose>
+											    <c:when test="${empty review}">
+											        <p>작성된 리뷰가 없습니다.</p>
+											    </c:when>
+											    <c:otherwise>
 											<c:forEach items="${review}" var="review">
 	                                             <div class="customer-section" data-review="${review.num}" data-rate="${review.rate}">
 	                                                <div class="customer-details">
 	                                                    <c:set var="username" value="${fn:substringBefore(review.email, '@')}" />
 															<h5>${username}</h5>
 															<c:if test="${memberVO.memberNum eq review.memberNum }">
-															<div class="update-delete d-flex justify-content-end">
+															<div class="admin-update-delete d-flex justify-content-end">
 						                                        <a href="javascript:void(0)" class="me-3 reviewUpdate" data-bs-toggle="modal"
 		                                                            data-bs-target="#updateReview" id="reviewUpdate${review.num}"
 		                                                            data-review-num="${review.num}">수정</a>
@@ -623,7 +645,8 @@
                                                 	</div>
                                                	</div>
 											</c:forEach>
-										
+											</c:otherwise>
+											</c:choose>
                           <!-- paging --> <nav class="page-section d-flex justify-content-end"
                                                 style="position: relative;">
                                                 <ul class="pagination mx-auto">
@@ -732,7 +755,7 @@
                                                   </div>
                                                   <div class="d-flex justify-content-between mb-1">
                                                   	<label class="form-check-label ellipsis fs-6 mx-3" style="color:gray;">
-                                                  		${i.planExplainSM}
+                                                  		${i.planExplainS}
                                                   	</label>
                                                   	<label class="form-check-label me-3 "> <span class="fs-6">데이터 </span>
                                                   	
@@ -766,7 +789,7 @@
                                                   </div>
                                                   <div class="d-flex justify-content-between mb-1">
                                                   	<label class="form-check-label ellipsis fs-6 mx-3" style="color:gray;">
-                                                  		${i.planExplainSM}
+                                                  		${i.planExplainS}
                                                   	</label>
                                                   	<label class="form-check-label me-3 "> <span class="fs-6">데이터 </span>
                                                   	
@@ -799,7 +822,7 @@
                                                   </div>
                                                   <div class="d-flex justify-content-between mb-1">
                                                   	<label class="form-check-label ellipsis fs-6 mx-3" style="color:gray;">
-                                                  		${i.planExplainSM}
+                                                  		${i.planExplainS}
                                                   	</label>
                                                   	<label class="form-check-label me-3 "> <span class="fs-6">데이터 </span>
                                                   	
@@ -833,7 +856,7 @@
                                                   </div>
                                                   <div class="d-flex justify-content-between mb-1">
                                                   	<label class="form-check-label ellipsis fs-6 mx-3" style="color:gray;">
-                                                  		${i.planExplainSM}
+                                                  		${i.planExplainS}
                                                   	</label>
                                                   	<label class="form-check-label me-3 "> <span class="fs-6">데이터 </span>
                                                   	
@@ -866,7 +889,7 @@
                                                   </div>
                                                   <div class="d-flex justify-content-between mb-1">
                                                   	<label class="form-check-label ellipsis fs-6 mx-3" style="color:gray;">
-                                                  		${i.planExplainSM}
+                                                  		${i.planExplainS}
                                                   	</label>
                                                   	<label class="form-check-label me-3 "> <span class="fs-6">데이터 </span>
                                                   	
@@ -899,7 +922,7 @@
                                                   </div>
                                                   <div class="d-flex justify-content-between mb-1">
                                                   	<label class="form-check-label ellipsis fs-6 mx-3" style="color:gray;">
-                                                  		${i.planExplainSM}
+                                                  		${i.planExplainS}
                                                   	</label>
                                                   	<label class="form-check-label me-3 "> <span class="fs-6">데이터 </span>
                                                   	
@@ -975,8 +998,8 @@
                         </div>
                     </div>
                         
-                        <input type="hidden" id="orderNum" name="orderNum">
-                        <input type="hidden" id="memberNum" name="memberNum">
+                        <input type="text" id="orderNum" name="orderNum">
+                        <input type="text" id="memberNum" name="memberNum">
                         <input type="hidden" name="slicedCode" value="${param.slicedCode}">
                     <div class="modal-footer pt-0 text-end d-block">
                         <button type="button" class="btn btn-solid-default btn-sm" data-bs-dismiss="modal" onclick="form.submit()">작성</button>
@@ -1156,7 +1179,7 @@
         </div>
     </div>    
  <!-- sticky cart end -->
- <!-- 상품 삭제 모달창 start -->
+ <!-- 리뷰 삭제 모달창 start -->
  <div class="modal fade payment-modal" id="reviewdel">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -1164,12 +1187,10 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
-                <form>
                     <div class="mb-4">
                      <h3>정말 삭제하시겠습니까? </h3> <h5>삭제 후에는 복구가 불가합니다.</h5>
                      <input type="hidden" id="modalDelNum" name="num" value="">
                     </div>
-                </form>
             </div>
             <div class="modal-footer pt-0 text-end d-block">
             	<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
@@ -1178,7 +1199,32 @@
         </div>
     </div>
 </div>
+<!-- 리뷰 삭제 모달창 End -->
+
+<!-- 상품 삭제 모달창 start -->
+ <div class="modal fade payment-modal" id="productdel">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+               
+                    <div class="mb-4">
+                     <h3>정말 삭제하시겠습니까? </h3> <h5>삭제 후에는 복구가 불가합니다.</h5>
+                     <input type="hidden" id="modalDelId" name="directCode" value="">
+                     <input type="hidden" name="slicedCode" value="${param.slicedCode}">
+                    </div>
+            </div>
+            <div class="modal-footer pt-0 text-end d-block">
+            	<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                <button type="button" class="btn btn-solid-default rounded-1" id="productDelete" onclick="productDelete()">삭제</button>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- 상품 삭제 모달창 End -->
+
 <c:import url="../temp/footer.jsp"></c:import>
 
 <script src="/assets/js/newDirectCode.js"></script>

@@ -1,15 +1,15 @@
 $(document).ready(function() {
   //가격에 1000단위로 , 표시
-  function commaPrice(){
-  const prices = document.querySelectorAll('[id^="renewPrice"]');
-  //let prices = document.getElementsByClassName("renewPrice");
-  for (let i = 0; i < prices.length; i++) {
-    let price = parseInt(prices[i].innerHTML);
-    let formattedPrice = price.toLocaleString();
-    prices[i].innerHTML = formattedPrice;
-    }
-  };
-  commaPrice();
+  // function commaPrice(){
+  // const prices = document.querySelectorAll('[id^="renewPrice"]');
+  // //let prices = document.getElementsByClassName("renewPrice");
+  // for (let i = 0; i < prices.length; i++) {
+  //   let price = parseInt(prices[i].innerHTML);
+  //   let formattedPrice = price.toLocaleString();
+  //   prices[i].innerHTML = formattedPrice;
+  //   }
+  // };
+  // commaPrice();
 
 
 // 리스트 요소 중 첫번째 보여주기 (가격이 제일 저렴한 상품)

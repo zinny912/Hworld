@@ -1,12 +1,35 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
 <head>
 	<meta charset="UTF-8">
-    <c:import url="adminStyle.jsp"></c:import>  
+    <c:import url="adminStyle.jsp"></c:import>
+    <style>
+    	.state-cancel {
+    		background-color:#F6CECE;
+    		color:#e22454;
+    		padding:5px;
+    		border-radius:5px;
+    		font-size:12px;
+    		font-weight:700;
+    		position:relative;
+    		width:80px;
+    	}
+    	.state-success {
+    		background-color:#E0F8E6;
+    		color:#088A08;
+    		padding:5px;
+    		border-radius:5px;
+    		font-size:12px;
+    		font-weight:700;
+    		position:relative;
+    		width:80px;
+    	}
+    </style>  
 </head>
 
 <body>
@@ -17,13 +40,17 @@
                 <div class="title-header title-header-1">
                     
                     <h5>주문 목록</h5>
-                    <div class="col-lg-6 col-md-8 mx-6">
+                    <div class="col-lg-6 col-md-8 mx-6 d-flex justify-content-end">
                         <div class="search-bar">
-                            <div class="input-group search-bar w-100">
-                                <input type="search" class="form-control" placeholder="Search">
-                                <button class="input-group-text" id="basic-addon3">
-                                    <i class="fas fa-search"></i>
-                                </button>
+                            <div class="input-group search-bar w-100">                            	
+       	                        <form action="./orderList" method="get">
+	                           		<div class="d-inline-flex input-group search-bar" style="width: 750px">
+		                                <input type="search" name="search" value="${pager.search}" class="form-control" placeholder="Search">
+		                                <button class="input-group-text" id="basic-addon3" type="submit">
+		                                    <i class="fas fa-search"></i>
+		                                </button>
+	                                </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -41,81 +68,94 @@
                                                 <thead>
                                                     <tr>
                                                         <th><b>주문번호</b> <i class="fa fa-fw fa-sort"></i></th>
+                                                        <th><b>회원번호</b> <i class="fa fa-fw fa-sort"></i></th>
+                                                        <th><b>주문자</b> <i class="fa fa-fw fa-sort"></i></th>
                                                         <th><b>주문날짜</b> <i class="fa fa-fw fa-sort"></i></th>
                                                         <th><b>상태</b> <i class="fa fa-fw fa-sort"></i></th>
-                                                        <th><b>총 가격</b> <i class="fa fa-fw fa-sort"></i></th>
                                                     </tr>
                                                 </thead>
 
                                                 <tbody>
-                                                    <tr>
- 
-                                                        <td>
-                                                            <a href="orderDetail">+ 456-1245789 (누르면 디테일 페이지)</a>
-                                                        </td>
-                                                        <td>2023/10/04</td>
-
-                                                        <td class="order-success">
-                                                            <span>Success</span>
-                                                        </td>
-
-                                                        <td>$15</td>
-
-                                                    </tr>
-
-                                                    <tr>
-                                                        
-                                                        <td>+ 573-685572</td>
-
-                                                        <td>2023/10/04</td>
-
-                                                        <td class="order-success">
-                                                            <span>Success</span>
-                                                        </td>
-                                                        <td>$15</td>
-
-                                                    </tr>
-
-                                        
-
-                                                    <tr>
-
-                                                        <td>
-                                                            <a href="order-detail.html">+ 456-1245789</a>
-                                                        </td>
-                                                        <td>2023/10/04</td>
-
-
-                                                        <td class="order-success">
-                                                            <span>Success</span>
-                                                        </td>
-
-                                                        <td>$15</td>
-
-                                                    </tr>
-
-                                                    <tr>
-                                                        <td>
-                                                            <a href="order-detail.html">+ 456-1245789</a>
-                                                        </td>
-                                                        <td>2023/10/04</td>
-                                                        <td class="order-cancle">
-                                                            <span>Cancel</span>
-                                                        </td>
-
-                                                        <td>$15</td>
-
-                                                        
-                                                    </tr>
-                                                    <tr>
-                                                        <td>+ 057-3657895</td>
-                                                        <td>2023/10/04</td>
-                                                        <td class="order-cancle">
-                                                            <span>Cancel</span>
-                                                        </td>
-                                                        <td>$15</td>
-                                                        
-                                                    </tr>
+                                                	<c:forEach var="orderVO" items="${orderList}">
+	                                                    <tr>	
+	                                                        <td>
+	                                                            <a href="orderDetail?orderNum=${orderVO.orderNum}">${orderVO.orderNum}</a>
+	                                                        </td>
+	                                                        
+	                                                        <td>${orderVO.memberNum}</td>
+	                                                        
+	                                                        <td>${orderVO.name}</td>
+	                                                        
+	                                                        <td>
+	                                                        <fmt:formatDate value="${orderVO.orderDate}" pattern="yyyy/MM/dd" var="formattedDate" />
+	                                                        <span style="font-weight:400;">${formattedDate}</span>
+	                                                        </td>	                                                        
+															
+															<td>
+	                                                        	<c:if test="${orderVO.orderState eq '0'}">
+	                                                            	<span class="state-success">완료</span>	                                                            	
+	                                                           	</c:if>
+	                                                           	<c:if test="${orderVO.orderState eq '1'}">	                                                            
+	                                                            	<span class="state-cancel">환불</span>
+	                                                           	</c:if>
+															</td>
+															
+	                                                    </tr>
+	
+	                                                    <!-- <tr>
+	                                                        
+	                                                        <td>+ 573-685572</td>
+	
+	                                                        <td>2023/10/04</td>
+	
+	                                                        <td class="order-success">
+	                                                            <span>Success</span>
+	                                                        </td>
+	                                                        <td>$15</td>
+	
+	                                                    </tr>
+	
+	                                        
+	
+	                                                    <tr>
+	
+	                                                        <td>
+	                                                            <a href="order-detail.html">+ 456-1245789</a>
+	                                                        </td>
+	                                                        <td>2023/10/04</td>
+	
+	
+	                                                        <td class="order-success">
+	                                                            <span>Success</span>
+	                                                        </td>
+	
+	                                                        <td>$15</td>
+	
+	                                                    </tr>
+	
+	                                                    <tr>
+	                                                        <td>
+	                                                            <a href="order-detail.html">+ 456-1245789</a>
+	                                                        </td>
+	                                                        <td>2023/10/04</td>
+	                                                        <td class="order-cancle">
+	                                                            <span>Cancel</span>
+	                                                        </td>
+	
+	                                                        <td>$15</td>
+	
+	                                                        
+	                                                    </tr>
+	                                                    <tr>
+	                                                        <td>+ 057-3657895</td>
+	                                                        <td>2023/10/04</td>
+	                                                        <td class="order-cancle">
+	                                                            <span>Cancel</span>
+	                                                        </td>
+	                                                        <td>$15</td>
+	                                                        
+	                                                    </tr> -->
+	                                                </c:forEach>    
                                                 </tbody>
                                             </table>
                                         </div>
@@ -127,7 +167,7 @@
                                     <nav class="ms-auto me-auto " aria-label="...">
 						                <ul class="pagination pagination-primary">
 						                    <li class="page-item ${pager.pre ? '' : 'disabled' }">
-						                        <a class="page-link" href="memberList?page=${pager.startNum-1}&search=${pager.search}" aria-label="Previous">
+						                        <a class="page-link" href="orderList?page=${pager.startNum-1}&search=${pager.search}" aria-label="Previous">
 						                            <span aria-hidden="true">
 						                                <i class="fas fa-chevron-left"></i>
 						                            </span>
@@ -135,11 +175,11 @@
 						                    </li>
 						                    <c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
 						   	                    <li class="page-item">
-						                        	<a class="page-link" href="memberList?page=${i}&search=${pager.search}">${i}</a>
+						                        	<a class="page-link" href="orderList?page=${i}&search=${pager.search}">${i}</a>
 						                    	</li>
 						                    </c:forEach>
 						                    <li class="page-item ${pager.next ? '' : 'disabled' }">
-						                        <a class="page-link" href="memberList?page=${pager.lastNum+1}&search=${pager.search}" aria-label="Next">
+						                        <a class="page-link" href="orderList?page=${pager.lastNum+1}&search=${pager.search}" aria-label="Next">
 						                            <span aria-hidden="true">
 						                                <i class="fas fa-chevron-right"></i>
 						                            </span>

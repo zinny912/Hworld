@@ -168,8 +168,9 @@
 														<h3 class="mt-3 ">출고가</h3>
 													</div>
 													<p>
-														<span class="price-detail theme-color fw-bold" id="renewPrice">${direct.directPrice}</span>
-														<span class="unit">원</span>
+													
+														<span class="price-detail theme-color fw-bold" id="renewPrice"><fmt:formatNumber value="${direct.directPrice}" pattern="#,###"/></span>
+														<span class="unit theme-color fw-bold fs-5">원</span>
 													</p>
 												<div class="direct-item" id="item_${direct.directCode}" data-direct-code="${direct.directCode}" data-category-code="${direct.categoryCode}" data-brand-code="${direct.brandCode}" data-sliced-code="${direct.slicedCode}" data-direct-stock="${direct.directStock}" data-direct-price="${direct.directPrice}">
 												</div>

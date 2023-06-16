@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.hworld.base.util.Pager;
+import com.hworld.base.vo.BaseVO;
 import com.hworld.base.vo.EPlanVO;
 import com.hworld.base.vo.PlanVO;
 
@@ -25,6 +26,12 @@ public interface PlanDAO {
 	
 	// 요금제 하나 조회
     public PlanVO getDetail(PlanVO planVO) throws Exception;
+    
+    public PlanVO getNoteName(PlanVO planVO) throws Exception;
+    
+    // 공통코드 정보 가져오고 insert 
+    public List<BaseVO> getCommonCode(BaseVO baseVO) throws Exception;
+    public int setCommonCode(BaseVO baseVO) throws Exception;
 	
 	// 요금제 등록
     public int setInsert(PlanVO planVO) throws Exception;

@@ -85,8 +85,8 @@ public class OrderService {
 			
 		}
 		//OrderVO 세팅
-		orderVO.setOrderDirectVOs(ods);
-		orderVO.getOrderFinalPrice();
+//		orderVO.setOrderDirectVOs(ods);
+//		orderVO.getOrderFinalPrice();
 		
 		/* DB 주문, 주문상품(배송정보) 넣기 */
 		// orderNum 만들기 및 OrderDTO객체 orderNum에 저장

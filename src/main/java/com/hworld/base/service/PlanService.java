@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.hworld.base.dao.DirectDAO;
 import com.hworld.base.dao.PlanDAO;
 import com.hworld.base.util.Pager;
+import com.hworld.base.vo.BaseVO;
 import com.hworld.base.vo.DirectVO;
 import com.hworld.base.vo.PlanVO;
 
@@ -49,6 +50,19 @@ public class PlanService {
 	public PlanVO getDetail(PlanVO planVO)throws Exception{
 		return planDAO.getDetail(planVO);
 	}
+	
+	public PlanVO getNoteName(PlanVO planVO) throws Exception{
+		return planDAO.getNoteName(planVO);
+	}
+	// 선택된 타입의 공통코드 정보 가져오기 
+	public List<BaseVO> getCommonCode(BaseVO baseVO) throws Exception{
+		return planDAO.getCommonCode(baseVO);
+	}
+	// 새로운 공통코드 인서트 
+	public int setCommonCode(BaseVO baseVO) throws Exception{
+		return planDAO.setCommonCode(baseVO);
+	}
+	
 	//요금제 등록 
 	public int setInsert(PlanVO planVO)throws Exception{
 		return planDAO.setInsert(planVO);

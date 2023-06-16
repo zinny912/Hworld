@@ -12,6 +12,7 @@ import com.hworld.base.service.AdminService;
 import com.hworld.base.util.Pager;
 import com.hworld.base.vo.ApplicationVO;
 import com.hworld.base.vo.MemberVO;
+import com.hworld.base.vo.OrderVO;
 import com.hworld.base.vo.TelephoneVO;
 
 @Controller
@@ -43,90 +44,106 @@ public class AdminController {
 	@GetMapping("phoneList")
 	public ModelAndView phoneList(Pager pager) throws Exception{
 		ModelAndView modelAndView = new ModelAndView();
-		List<MemberVO> ar = adminService.phoneList(pager);
-		modelAndView.addObject("phoneList", ar);
+		List<MemberVO> phoneList = adminService.phoneList(pager);
+		modelAndView.addObject("phoneList", phoneList);
 		modelAndView.setViewName("admin/phoneList");
 		return modelAndView;
 	}	
 	
 	// 주문 목록
 	@GetMapping("orderList")
-	public ModelAndView orderList() throws Exception{
+	public ModelAndView orderList(Pager pager) throws Exception{
 		ModelAndView modelAndView = new ModelAndView();
+		List<OrderVO> orderList = adminService.orderList(pager);
+		modelAndView.addObject("orderList", orderList);
 		modelAndView.setViewName("admin/orderList");
 		return modelAndView;
 	}
 	
 	// 주문 상세 페이지
 	@GetMapping("orderDetail")
-	public ModelAndView orderDetail() throws Exception{
+	public ModelAndView orderDetail(MemberVO memberVO) throws Exception{
 		ModelAndView modelAndView = new ModelAndView();
+		List<OrderVO> orderDetail = adminService.orderDetail(memberVO);
+		modelAndView.addObject("orderDetail", orderDetail);
 		modelAndView.setViewName("admin/orderDetail");
 		return modelAndView;
 	}
 	
-	// 상품 - 상품 목록
-	@GetMapping("productList")
-	public ModelAndView productList() throws Exception{
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("admin/productList");
-		return modelAndView;
-	}
-	
-	// 상품 - 상품 리뷰
-	@GetMapping("productReview")
-	public ModelAndView productReview() throws Exception{
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("admin/productReview");
-		return modelAndView;
-	}
-	
-	// 문의 - 상품 문의
-	@GetMapping("productInquiry")
-	public ModelAndView productInquiry() throws Exception{
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("admin/productInquiry");
-		return modelAndView;
-	}
-	
-	// 문의 - 일반 문의
-	@GetMapping("generalInquiry")
-	public ModelAndView generalInquiry() throws Exception{
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("admin/generalInquiry");
-		return modelAndView;
-	}
-	
-	// 문의 - 일반 문의 상세 페이지
-	@GetMapping("generalInquiryDetail")
-	public ModelAndView generalInquiryDetail() throws Exception{
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("admin/generalInquiryDetail");
-		return modelAndView;
-	}
-	
-	// 납부 - 납부 목록
-	@GetMapping("paymentList")
-	public ModelAndView paymentList() throws Exception{
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("admin/paymentList");
-		return modelAndView;
-	}
-	
-	// 납부 - 납부 상세 페이지
-	@GetMapping("paymentDetail")
-	public ModelAndView paymentDetail() throws Exception{
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("admin/paymentDetail");
-		return modelAndView;
-	}
-	
-	// 납부 - 미납 목록
-	@GetMapping("unpaidList")
-	public ModelAndView unpaidList() throws Exception{
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("admin/unpaidList");
-		return modelAndView;
-	}
+//	// 상품 - 상품 목록
+//	@GetMapping("productList")
+//	public ModelAndView productList(Pager pager) throws Exception{
+//		ModelAndView modelAndView = new ModelAndView();
+//		List<> productList = adminService.productList(pager);
+//		modelAndView.addObject("productList", productList);
+//		modelAndView.setViewName("admin/productList");
+//		return modelAndView;
+//	}
+//	
+//	// 상품 - 상품 리뷰
+//	@GetMapping("productReview")
+//	public ModelAndView productReview(Pager pager) throws Exception{
+//		ModelAndView modelAndView = new ModelAndView();
+//		List<> productReview = adminService.productReview(pager);
+//		modelAndView.addObject("productReview", productReview);
+//		modelAndView.setViewName("admin/productReview");
+//		return modelAndView;
+//	}
+//	
+//	// 문의 - 상품 문의
+//	@GetMapping("productInquiry")
+//	public ModelAndView productInquiry(Pager pager) throws Exception{
+//		ModelAndView modelAndView = new ModelAndView();
+//		List<> productInquiry = adminService.productInquiry(pager);
+//		modelAndView.addObject("productInquiry", productInquiry);
+//		modelAndView.setViewName("admin/productInquiry");
+//		return modelAndView;
+//	}
+//	
+//	// 문의 - 일반 문의
+//	@GetMapping("generalInquiry")
+//	public ModelAndView generalInquiry(Pager pager) throws Exception{
+//		ModelAndView modelAndView = new ModelAndView();
+//		List<> generalInquiry = adminService.generalInquiry(pager);
+//		modelAndView.addObject("generalInquiry", generalInquiry);
+//		modelAndView.setViewName("admin/generalInquiry");
+//		return modelAndView;
+//	}
+//	
+//	// 문의 - 일반 문의 상세 페이지
+//	@GetMapping("generalInquiryDetail")
+//	public ModelAndView generalInquiryDetail() throws Exception{
+//		ModelAndView modelAndView = new ModelAndView();
+//		modelAndView.setViewName("admin/generalInquiryDetail");
+//		return modelAndView;
+//	}
+//	
+//	// 납부 - 납부 목록
+//	@GetMapping("paymentList")
+//	public ModelAndView paymentList(Pager pager) throws Exception{
+//		ModelAndView modelAndView = new ModelAndView();
+//		List<> paymentList = adminService.paymentList(pager);
+//		modelAndView.addObject("paymentList", paymentList);
+//		modelAndView.setViewName("admin/paymentList");
+//		return modelAndView;
+//	}
+//	
+//	// 납부 - 납부 상세 페이지
+//	@GetMapping("paymentDetail")
+//	public ModelAndView paymentDetail() throws Exception{
+//		ModelAndView modelAndView = new ModelAndView();
+//		modelAndView.setViewName("admin/paymentDetail");
+//		return modelAndView;
+//	}
+//	
+//	// 납부 - 미납 목록
+//	@GetMapping("unpaidList")
+//	public ModelAndView unpaidList(Pager pager) throws Exception{
+//		ModelAndView modelAndView = new ModelAndView();
+//		List<> unpaidList = adminService.unpaidList(pager);
+//		modelAndView.addObject("unpaidList", unpaidList);
+//		modelAndView.setViewName("admin/unpaidList");
+//		return modelAndView;
+//	}
 	
 }

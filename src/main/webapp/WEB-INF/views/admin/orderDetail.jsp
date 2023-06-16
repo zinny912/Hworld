@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
@@ -11,17 +12,21 @@
 
 <body>
    <c:import url="adminHeader.jsp"></c:import>  
-
+		<c:forEach var="orderVO" items="${orderDetail}">
             <!-- tracking section start -->
             <div class="page-body">
                 <div class="title-header title-header-block package-card">
                     <div>
-                        <h5>주문번호 #36648</h5>
+                        <h5>주문번호 #${orderVO.orderNum}</h5>
                     </div>
                     <div class="card-order-section">
                         <ul>
-                            <li>2023/10/04 9:08 pm</li>
-                            <li>총 가격 500,000원</li>
+                        	<li>
+                                <fmt:formatDate value="${orderVO.orderDate}" pattern="yyyy/MM/dd" var="formattedDate" />
+                                <span style="font-weight:400;">${formattedDate}</span>
+                            </li>
+	                                                 
+                            <li>총 가격 ${orderVO.orderFinalPrice}</li>
                         </ul>
                     </div>
                 </div>
@@ -177,39 +182,37 @@
                     </div>
                 </div>
                 <!-- tracking table end -->
-
-                 <c:import url="adminFooter.jsp"></c:import>  
             </div>
+        </c:forEach>
             <!-- tracking section End -->
-        </div>
-    </div>
-    <!-- page-wrapper End -->
+            
 
   
+<c:import url="adminFooter.jsp"></c:import>  
 
-    <!-- latest js -->
-    <script src="/admin/js/jquery-3.6.0.min.js"></script>
+<!-- latest js -->
+<script src="/admin/js/jquery-3.6.0.min.js"></script>
 
-    <!-- Bootstrap js -->
-    <script src="/admin/js/bootstrap/bootstrap.bundle.min.js"></script>
+<!-- Bootstrap js -->
+<script src="/admin/js/bootstrap/bootstrap.bundle.min.js"></script>
 
-    <!-- feather icon js -->
-    <script src="/admin/js/icons/feather-icon/feather.min.js"></script>
-    <script src="/admin/js/icons/feather-icon/feather-icon.js"></script>
+<!-- feather icon js -->
+<script src="/admin/js/icons/feather-icon/feather.min.js"></script>
+<script src="/admin/js/icons/feather-icon/feather-icon.js"></script>
 
-    <!-- scrollbar simplebar js -->
-    <script src="/admin/js/scrollbar/simplebar.js"></script>
-    <script src="/admin/js/scrollbar/custom.js"></script>
+<!-- scrollbar simplebar js -->
+<script src="/admin/js/scrollbar/simplebar.js"></script>
+<script src="/admin/js/scrollbar/custom.js"></script>
 
-    <!-- Sidebar js -->
-    <script src="/admin/js/config.js"></script>
+<!-- Sidebar js -->
+<script src="/admin/js/config.js"></script>
 
-    <!-- Plugins js -->
-    <script src="/admin/js/sidebar-menu.js"></script>
+<!-- Plugins js -->
+<script src="/admin/js/sidebar-menu.js"></script>
 
 
-    <!-- Theme js -->
-    <script src="/admin/js/script.js"></script>
+<!-- Theme js -->
+<script src="/admin/js/script.js"></script>
 </body>
 
 </html>
