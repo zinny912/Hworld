@@ -1,6 +1,7 @@
 package com.hworld.base.vo;
 
 import java.sql.Date;
+import java.util.List;
 
 import javax.validation.constraints.NotBlank;
 
@@ -27,7 +28,8 @@ public class MemberVO {
 	private Date numberChangeDate;
 	private Integer memberState;
 	private Integer adminCheck;
-	private String phoneNum;
+	private String tel;
 	private Integer ownCheck;
+	private List<TelephoneVO> telephoneVOs;
 	
 }

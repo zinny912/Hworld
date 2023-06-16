@@ -15,6 +15,7 @@ public class TelephoneVO {
 	private String phoneNum;
 	private Date contractDate;
 	private Date expireDate;
+	private Date startDate;
 	private Date endDate;
 	private Integer kingCheck;
 	private String directName;

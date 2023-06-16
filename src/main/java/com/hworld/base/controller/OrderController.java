@@ -22,8 +22,10 @@ import com.hworld.base.vo.OrderDirectVO;
 import com.hworld.base.vo.OrderPageVO;
 import com.hworld.base.vo.OrderVO;
 
+import lombok.extern.slf4j.Slf4j;
 
 
+@Slf4j
 @Controller
 public class OrderController {
 	
@@ -32,48 +34,78 @@ public class OrderController {
 	@Autowired
 	private MemberService memberService;
 	
-	@GetMapping("/getOrder")
-	public ModelAndView setOrderInsert(OrderPageVO orderPageVO, HttpSession session) throws Exception{
+	@GetMapping("/order")
+	public ModelAndView getOrderInfo(OrderPageVO orderPageVO, HttpSession session) throws Exception{
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("orderList", orderService.getDirectDetail(orderPageVO.getOrders()));
-		Enumeration<String> attributeNames = session.getAttributeNames();
-		while (attributeNames.hasMoreElements()) {
-		    String attributeName = attributeNames.nextElement();
-		    Object attributeValue = session.getAttribute(attributeName);
-		    mv.addObject(attributeName, attributeValue);
-		}
+		
+		//
+//		for(OrderPageVO orderPageVO2: orderPageVO) {
+//		}
+		log.error("==========================> {} ", orderPageVO.getClass());
+		log.error("==========================> {} ", orderPageVO.getDirectCode());
+		log.error("==========================> {} ", orderPageVO.getOrderAmount());
+		log.error("==========================> {} ", orderPageVO.getCalPrice());
+		log.error("==========================> {} ", orderPageVO.getTotalPrice());
+		
+		orderService.getOrderInfo(orderPageVO);
+		
+		
+//		mv.addObject("orderList", orderService.getDirectDetail(orderPageVO.getOrders()));
+//		Enumeration<String> attributeNames = session.getAttributeNames();
+//		while (attributeNames.hasMoreElements()) {
+//		    String attributeName = attributeNames.nextElement();
+//		    Object attributeValue = session.getAttribute(attributeName);
+//		    mv.addObject(attributeName, attributeValue);
+//		}
 
 		
 		mv.setViewName("/order");
 		return mv;
 	}
 	
-	@PostMapping("/order")
-	public ModelAndView setOrderInsert(OrderVO orderVO, HttpSession session)throws Exception{
-		ModelAndView mv = new ModelAndView();
-		
-		orderService.order(orderVO, session);
-		
-		mv.setViewName("/orderSuccess");
-		return mv;
-	}
+//	@GetMapping("/order/{memberNum}")
+//	public ModelAndView setOrderInsert(@PathVariable("memberNum") String memberNum, OrderPageVO orderPageVO, HttpSession session) throws Exception{
+//		ModelAndView mv = new ModelAndView();
+//		mv.addObject("orderList", orderService.getDirectDetail(orderPageVO.getOrders()));
+//		Enumeration<String> attributeNames = session.getAttributeNames();
+//		while (attributeNames.hasMoreElements()) {
+//		    String attributeName = attributeNames.nextElement();
+//		    Object attributeValue = session.getAttribute(attributeName);
+//		    mv.addObject(attributeName, attributeValue);
+//		}
+//
+//		
+//		mv.setViewName("/order");
+//		return mv;
+//	}
+	//
 	
-	
-	
-	
-	@GetMapping("/order/orderSuccess")
-	public ModelAndView getOrderDetail(OrderVO orderVO, OrderDirectVO orderDirectVO) throws Exception{
-		ModelAndView mv = new ModelAndView();
-		
-		mv.setViewName("hworld/orderSuccess");
-		return mv;
-	}
-
-	
-	@GetMapping("refund")
-	public ModelAndView o2() throws Exception{
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("hworld/refund");
-		return modelAndView;
-	}
+//	@PostMapping("/order")
+//	public ModelAndView getOrderInfo(OrderVO orderVO, HttpSession session)throws Exception{
+//		ModelAndView mv = new ModelAndView();
+//		
+//		orderService.order(orderVO, session);
+//		
+//		mv.setViewName("/orderSuccess");
+//		return mv;
+//	}
+//	
+//	
+//	
+//	
+//	@GetMapping("/order/orderSuccess")
+//	public ModelAndView getOrderDetail(OrderVO orderVO, OrderDirectVO orderDirectVO) throws Exception{
+//		ModelAndView mv = new ModelAndView();
+//		
+//		mv.setViewName("hworld/orderSuccess");
+//		return mv;
+//	}
+//
+//	
+//	@GetMapping("refund")
+//	public ModelAndView o2() throws Exception{
+//		ModelAndView modelAndView = new ModelAndView();
+//		modelAndView.setViewName("hworld/refund");
+//		return modelAndView;
+//	}
 }
