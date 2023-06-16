@@ -178,7 +178,7 @@
                                         <div class=" d-flex quantity-wrapper " style="padding:5px 0px; justify-content: start;">
                                             <button class="btn quantity-left-minus" style="height:5px; width:5px; padding:10px; margin-top:-6px; ">-</button>
                                             <span class="input-wrapper">
-                                                <input type="text" class="input-number text-center" style="width: 35px; padding:5px 5px; border:1px solid #c7c7c5; border-radius: 5px;"  value="1">
+                                                <input type="text" class="input-number text-center" style="width: 35px; padding:5px 5px; border:1px solid #c7c7c5; border-radius: 5px;"  value="${cart.cartAmount}">
                                             </span>
                                             <button class="btn quantity-right-plus" style="height:5px; margin-top:-6px; padding:10px 5px; ">+</button>
                                         </div>
@@ -219,7 +219,9 @@
     document.addEventListener('DOMContentLoaded', function() {
       var quantityInputs = document.querySelectorAll('.input-number');
       var priceElements = document.querySelectorAll('.td-color');
-
+		
+      updateTotalPrice();
+    }
       // 가격 업데이트 함수
       function updatePrice() {
         for (var i = 0; i < quantityInputs.length; i++) {
@@ -231,7 +233,7 @@
           priceElement.innerText = formatPrice(newPrice) + '원';
         }
         updateTotalPrice(); // 총 결제 예상금액 업데이트
-      }
+    }
 
       // 수량 감소 버튼 클릭 이벤트
       var quantityMinusBtns = document.querySelectorAll('.quantity-left-minus');

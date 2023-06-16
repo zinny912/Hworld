@@ -20,8 +20,6 @@ import com.hworld.base.vo.CartVO;
 import com.hworld.base.vo.DirectVO;
 import com.hworld.base.vo.MemberVO;
 import com.hworld.base.vo.OrderDirectVO;
-import com.hworld.base.vo.OrderPageDirectVO;
-import com.hworld.base.vo.OrderPageVO;
 import com.hworld.base.vo.OrderVO;
 
 import lombok.extern.slf4j.Slf4j;
@@ -44,13 +42,13 @@ public class OrderService {
 	//** orderPageVO는 안쓰는걸로....
 	
 	//OrderPageVO로 작업
-	public List<OrderPageVO> getOrderInfo(OrderPageVO orderPageVO) throws Exception{
+	public List<OrderDirectVO> getOrderInfo(OrderDirectVO orderDirectVO) throws Exception{
 		
-		List<OrderPageVO> ar = new ArrayList<>();
+		List<OrderDirectVO> ar = new ArrayList<>();
 		
 		//Controller에서 받아온 orderPageVO에 적힌 내용을 ','로 parsing한 후, list에 하나씩 담아주는 작업이 필요
-		String[] directCode = orderPageVO.getDirectCode().split(",");
-		String[] orderAmount = orderPageVO.getOrderAmount().split(",");
+		String[] directCode = orderDirectVO.getDirectCode().split(",");
+		String[] orderAmount = orderDirectVO.getOrderAmount().split(",");
 		
 		for(String str : directCode) {
 			log.error(" >>>>>>>>>>>>>>>>>>>>>> {} ", str);
@@ -107,28 +105,28 @@ public class OrderService {
 			orderDAO.setODInsert(odss);
 			
 		}
-		
-		/* 재고 변동 적용 */
-		for(OrderDirectVO odss : orderVO.getOrderDirectVOs()) {
-			//변경 재고 값 구하기
-			List<DirectVO> directVOList = directDAO.getDetail(odss.getDirectCode());
-			for(DirectVO directVO : directVOList) {
-				directVO.setDirectStock(directVO.getDirectStock()-odss.getOrderAmount());
-				//변동 값 DB적용
-				orderDAO.deductStock(directVO);
-			}
-			
-		}
-		
-		//장바구니 제거
-		for(OrderDirectVO odss : orderVO.getOrderDirectVOs()) {
-			CartVO cartVO = new CartVO();
-			cartVO.setMemberNum((Integer) session.getAttribute("memberNum"));
-			cartVO.setDirectCode(odss.getDirectCode());
-			
-			cartDAO.setDelete(cartVO);
-		}
-		
+//		
+//		/* 재고 변동 적용 */
+//		for(OrderDirectVO odss : orderVO.getOrderDirectVOs()) {
+//			//변경 재고 값 구하기
+//			List<DirectVO> directVOList = directDAO.getDetail(odss.getDirectCode());
+//			for(DirectVO directVO : directVOList) {
+//				directVO.setDirectStock(directVO.getDirectStock()-odss.getOrderAmount());
+//				//변동 값 DB적용
+//				orderDAO.deductStock(directVO);
+//			}
+//			
+//		}
+//		
+//		//장바구니 제거
+//		for(OrderDirectVO odss : orderVO.getOrderDirectVOs()) {
+//			CartVO cartVO = new CartVO();
+//			cartVO.setMemberNum((Integer) session.getAttribute("memberNum"));
+//			cartVO.setDirectCode(odss.getDirectCode());
+//			
+//			cartDAO.setDelete(cartVO);
+//		}
+//		
 		
 	}
 	

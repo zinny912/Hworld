@@ -19,7 +19,6 @@ import com.hworld.base.service.MemberService;
 import com.hworld.base.service.OrderService;
 import com.hworld.base.vo.MemberVO;
 import com.hworld.base.vo.OrderDirectVO;
-import com.hworld.base.vo.OrderPageVO;
 import com.hworld.base.vo.OrderVO;
 
 import lombok.extern.slf4j.Slf4j;
@@ -35,19 +34,19 @@ public class OrderController {
 	private MemberService memberService;
 	
 	@GetMapping("/order")
-	public ModelAndView getOrderInfo(OrderPageVO orderPageVO, HttpSession session) throws Exception{
+	public ModelAndView getOrderInfo(OrderDirectVO orderDirectVO, HttpSession session) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		
 		//
 //		for(OrderPageVO orderPageVO2: orderPageVO) {
 //		}
-		log.error("==========================> {} ", orderPageVO.getClass());
-		log.error("==========================> {} ", orderPageVO.getDirectCode());
-		log.error("==========================> {} ", orderPageVO.getOrderAmount());
-		log.error("==========================> {} ", orderPageVO.getCalPrice());
-		log.error("==========================> {} ", orderPageVO.getTotalPrice());
+		log.error("==========================> {} ", orderDirectVO.getClass());
+		log.error("==========================> {} ", orderDirectVO.getDirectCode());
+		log.error("==========================> {} ", orderDirectVO.getOrderAmount());
+		log.error("==========================> {} ", orderDirectVO.getCalPrice());
+		log.error("==========================> {} ", orderDirectVO.getCalPrice());
 		
-		orderService.getOrderInfo(orderPageVO);
+		orderService.getOrderInfo(orderDirectVO);
 		
 		
 //		mv.addObject("orderList", orderService.getDirectDetail(orderPageVO.getOrders()));
