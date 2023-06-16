@@ -201,6 +201,262 @@
                                     </div>
                                 </div>
                             </div>
+                  <!-- 청소년 요금제 -->
+                        <div class="accordion category-name" id="accordionExample">
+                            <div class="accordion-item category-rating show">
+                                <h2 class="accordion-header"  id="headingThree">
+                                    <button class="accordion-button" style="background-color:#fff;" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseThree1">
+                                       <c:if test="${not empty planList}">
+										    <c:set var="tPlan" value="${null}" />
+										    <c:forEach items="${planList}" var="plan">
+										        <c:if test="${plan.type == 'T'}">
+										            <c:set var="tPlan" value="${plan}" />
+										        </c:if>
+										    </c:forEach>
+										    <c:if test="${not empty tPlan}">
+										        <h3 class="fs-4 fw-bolder">${tPlan.note}</h3>
+										        <span style="color:#7E7E7E; margin-left:10%; font-weight: 400; font-size:16px">실속있게 쓰자! 5G 청소년 요금제!</span>
+										    </c:if>
+										</c:if>
+                                     </button>
+                                </h2>
+                                <div id="collapseThree" class="accordion-collapse collapse show"
+                                    aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                                    <div class="accordion-body ">
+                                        <ul class="category-list">
+                                        <li>
+	                                       <table class="table cart-table">
+	                                        <thead>
+	                                            <tr class="table-head ">
+	                                                <th scope="col" style="color:#7E7E7E;"><strong class="fs-5">요금제</strong></th>
+	                                                <th scope="col" style="color:#7E7E7E;"><strong class="fs-5">데이터</strong></th>
+	                                                <th scope="col" style="color:#7E7E7E;"><strong class="fs-5">문자</strong></th>
+	                                                <th scope="col" style="color:#7E7E7E;"><strong class="fs-5">통화</strong></th>
+	                                                <th scope="col" style="color:#7E7E7E;"><strong class="fs-5">월정액</strong></th>
+	                                            </tr>
+	                                        </thead>
+                                       	 	<tbody> 
+                                        	<c:forEach items="${planList}"  var="plan">
+                                        	<c:if test="${plan.type == 'T'}">
+                                            <tr>
+                                                <td> <a href="./planDetail?planNum=${plan.planNum}">
+                                                        <strong class="text-left fs-4 m-0 ">${plan.planName }</strong></a></td>
+                                                <td> 
+                                                	<p class="fs-5 m-0">
+                                                	<c:choose>
+												      <c:when test="${plan.dataCapacity eq '무제한'}">
+												        무제한
+												      </c:when>
+												      <c:otherwise>
+												        ${plan.dataCapacity} GB
+												      </c:otherwise>
+												    </c:choose></td>
+                                                <td><p class="fs-5 m-0">기본제공</p></td>
+                                                <td> <p class="fs-5 m-0">기본제공</p></td>
+                                                <td><strong class="fs-4 m-0 theme-color" id="commaPrice${plan.planNum}">${plan.planPrice}</strong><span class="fs-6">원</span></td>
+                                            </tr>
+                                            </c:if>
+                                            </c:forEach>
+                                        	</tbody>
+                                           </table>
+	                                   	</li>
+	                                	</ul>
+	                            	</div>
+	                        	</div>
+	                    	</div>
+	                	</div>
+                	<!-- 5G요금제 리스트 끝  -->
+                	<!-- 시니어 요금제 리스트 시작 -->
+                    <div class="accordion category-name"  id="accordionExample1">
+                            <div class="accordion-item category-rating">
+                                <h2 class="accordion-header" id="headingThree1">
+                                    <button class="accordion-button" style="background-color:#fff;" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseThree1">
+                                       <c:if test="${not empty planList}">
+										    <c:set var="hPlan" value="${null}" />
+										    <c:forEach items="${planList}" var="plan">
+										        <c:if test="${plan.type == 'S'}">
+										            <c:set var="sPlan" value="${plan}" />
+										        </c:if>
+										    </c:forEach>
+										    <c:if test="${not empty sPlan}">
+										        <h3 class="fs-4 fw-bolder">${sPlan.note}</h3>
+										        <span style="color:#7E7E7E; margin-left:10%; font-weight: 400; font-size:16px">65세 이상의 중장년을 위한 H world의 요금제</span>
+										    </c:if>
+										</c:if>
+                                     </button>
+                                </h2>
+                                <div id="collapseThree1" class="accordion-collapse collapse"
+                                    aria-labelledby="headingThree" data-bs-parent="#accordionExample1">
+                                    <div class="accordion-body">
+                                        <ul class="category-list">
+                                            <li>
+                                                <table class="table cart-table">
+                                                <thead>
+                                                    <tr class="table-head ">
+                                                        <th scope="col" style="color:#7E7E7E;"><strong class="fs-5">요금제</strong></th>
+                                                        <th scope="col" style="color:#7E7E7E;"><strong class="fs-5">데이터</strong></th>
+                                                        <th scope="col" style="color:#7E7E7E;"><strong class="fs-5">문자</strong></th>
+                                                        <th scope="col" style="color:#7E7E7E;"><strong class="fs-5">통화</strong></th>
+                                                        <th scope="col" style="color:#7E7E7E;"><strong class="fs-5">월정액</strong></th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody> 
+                                                    <c:forEach items="${planList}"  var="plan">
+                                                    <c:if test="${plan.type == 'S'}">
+                                                        <tr>
+                                                            <td> <a href="./planDetail?planNum=${plan.planNum}">
+                                                                    <strong class="text-left fs-4 m-0 ">${plan.planName}</strong></a>   
+                                                            </td>
+                                                            <td> <p class="fs-5 m-0">
+			                                                	<c:choose>
+															      <c:when test="${plan.dataCapacity eq '무제한'}">
+															        무제한
+															      </c:when>
+															      <c:otherwise>
+															        ${plan.dataCapacity} GB
+															      </c:otherwise>
+															    </c:choose></td>
+                                                            <td><p class="fs-5 m-0">기본제공</p></td>
+                                                            <td> <p class="fs-5 m-0">기본제공</p></td>
+                                                            <td><strong class="fs-4 m-0 theme-color" id="commaPrice${plan.planNum}">${plan.planPrice}</strong>
+                                                        </tr>
+                                                        </c:if>
+                                                        </c:forEach>
+                                                        </tbody>
+                                                    </table>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                                      <!-- 5G 요금제 리스트 generalList -->
+                        <div class="accordion category-name" id="accordionExample">
+                            <div class="accordion-item category-rating show">
+                                <h2 class="accordion-header"  id="headingThree">
+                                    <button class="accordion-button" style="background-color:#fff;" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseThree">
+						            <c:choose>
+							            <c:when test="${not empty planList && planList[0].type == 'G'}">
+							                <h3 class="fs-4 fw-bolder">${planList[0].note}</h3>
+							                <span style="color:#7E7E7E; margin-left:10%; font-weight: 400; font-size:16px">세상 빠른 속도의 H world의 5G</span>
+							            </c:when>
+						        	</c:choose>
+                                    </button>
+                                </h2>
+                                <div id="collapseThree" class="accordion-collapse collapse show"
+                                    aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                                    <div class="accordion-body ">
+                                        <ul class="category-list">
+                                        <li>
+	                                       <table class="table cart-table">
+	                                        <thead>
+	                                            <tr class="table-head ">
+	                                                <th scope="col" style="color:#7E7E7E;"><strong class="fs-5">요금제</strong></th>
+	                                                <th scope="col" style="color:#7E7E7E;"><strong class="fs-5">데이터</strong></th>
+	                                                <th scope="col" style="color:#7E7E7E;"><strong class="fs-5">문자</strong></th>
+	                                                <th scope="col" style="color:#7E7E7E;"><strong class="fs-5">통화</strong></th>
+	                                                <th scope="col" style="color:#7E7E7E;"><strong class="fs-5">월정액</strong></th>
+	                                            </tr>
+	                                        </thead>
+                                       	 	<tbody> 
+                                        	<c:forEach items="${planList}"  var="plan">
+                                        	<c:if test="${plan.type == 'G'}">
+                                            <tr>
+                                                <td> <a href="./planDetail?planNum=${plan.planNum}">
+                                                        <strong class="text-left fs-4 m-0 ">${plan.planName }</strong></a></td>
+                                                <td> 
+                                                	<p class="fs-5 m-0">
+                                                	<c:choose>
+												      <c:when test="${plan.dataCapacity eq '무제한'}">
+												        무제한
+												      </c:when>
+												      <c:otherwise>
+												        ${plan.dataCapacity} GB
+												      </c:otherwise>
+												    </c:choose></td>
+                                                <td><p class="fs-5 m-0">기본제공</p></td>
+                                                <td> <p class="fs-5 m-0">기본제공</p></td>
+                                                <td><strong class="fs-4 m-0 theme-color" id="commaPrice${plan.planNum}">${plan.planPrice}</strong><span class="fs-6">원</span></td>
+                                            </tr>
+                                            </c:if>
+                                            </c:forEach>
+                                        	</tbody>
+                                           </table>
+	                                   	</li>
+	                                	</ul>
+	                            	</div>
+	                        	</div>
+	                    	</div>
+	                	</div>
+                	<!-- 5G요금제 리스트 끝  -->
+                	<!-- 시니어 요금제 리스트 시작 -->
+                    <div class="accordion category-name"  id="accordionExample1">
+                            <div class="accordion-item category-rating">
+                                <h2 class="accordion-header" id="headingThree1">
+                                    <button class="accordion-button" style="background-color:#fff;" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseThree1">
+                                       <c:if test="${not empty planList}">
+										    <c:set var="sPlan" value="${null}" />
+										    <c:forEach items="${planList}" var="plan">
+										        <c:if test="${plan.type == 'S'}">
+										            <c:set var="sPlan" value="${plan}" />
+										        </c:if>
+										    </c:forEach>
+										    <c:if test="${not empty sPlan}">
+										        <h3 class="fs-4 fw-bolder">${sPlan.note}</h3>
+										        <span style="color:#7E7E7E; margin-left:10%; font-weight: 400; font-size:16px">65세 이상의 중장년을 위한 H world의 요금제</span>
+										    </c:if>
+										</c:if>
+                                     </button>
+                                </h2>
+                                <div id="collapseThree1" class="accordion-collapse collapse"
+                                    aria-labelledby="headingThree" data-bs-parent="#accordionExample1">
+                                    <div class="accordion-body">
+                                        <ul class="category-list">
+                                            <li>
+                                                <table class="table cart-table">
+                                                <thead>
+                                                    <tr class="table-head ">
+                                                        <th scope="col" style="color:#7E7E7E;"><strong class="fs-5">요금제</strong></th>
+                                                        <th scope="col" style="color:#7E7E7E;"><strong class="fs-5">데이터</strong></th>
+                                                        <th scope="col" style="color:#7E7E7E;"><strong class="fs-5">문자</strong></th>
+                                                        <th scope="col" style="color:#7E7E7E;"><strong class="fs-5">통화</strong></th>
+                                                        <th scope="col" style="color:#7E7E7E;"><strong class="fs-5">월정액</strong></th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody> 
+                                                    <c:forEach items="${planList}"  var="plan">
+                                                    <c:if test="${plan.type == 'S'}">
+                                                        <tr>
+                                                            <td> <a href="./planDetail?planNum=${plan.planNum}">
+                                                                    <strong class="text-left fs-4 m-0 ">${plan.planName}</strong></a>   
+                                                            </td>
+                                                            <td> <p class="fs-5 m-0">
+			                                                	<c:choose>
+															      <c:when test="${plan.dataCapacity eq '무제한'}">
+															        무제한
+															      </c:when>
+															      <c:otherwise>
+															        ${plan.dataCapacity} GB
+															      </c:otherwise>
+															    </c:choose></td>
+                                                            <td><p class="fs-5 m-0">기본제공</p></td>
+                                                            <td> <p class="fs-5 m-0">기본제공</p></td>
+                                                            <td><strong class="fs-4 m-0 theme-color" id="commaPrice${plan.planNum}">${plan.planPrice}</strong>
+                                                        </tr>
+                                                        </c:if>
+                                                        </c:forEach>
+                                                        </tbody>
+                                                    </table>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                          </div>
                       </div>  
 				</section>
