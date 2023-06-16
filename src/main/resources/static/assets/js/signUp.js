@@ -9,7 +9,7 @@ $(function(){
 //alert($frm);
 
 //전화번호 정규식 + 11자리 입력
-$('#phoneNum').on("blur", function() {
+$('#tel').on("blur", function() {
     //숫자만 입력되게 하는 정규식
     let checkValue = $(this).val().replace(/[^\d]/g, "");
     $(this).val(checkValue);
@@ -17,7 +17,7 @@ $('#phoneNum').on("blur", function() {
     let length = checkValue.length;
 
     if(length != 11) {
-        $('#phoneNum').val("");
+        $('#tel').val("");
         $('#validPN').empty();
         $('#validPN').append('<p class="theme-color">전화번호는 11자리여야 합니다.</p>');
         //유효성 검사에 쓸 인자 추가
@@ -56,15 +56,22 @@ function confirmNumber(){
     let number1 = $("#emailCheck").val();
     let number2 = $("#Confirm").val();
 
-    //빈값인지 검증
-    let chkNum1 = isEmpty(number1);
-    let chkNum2 = isEmpty(number2);
-
-    if(number1 == number2 && chkNum1 == true && chkNum2 == true){
+    if(number1 == number2){
         alert("인증되었습니다.");
     }else{
         alert("인증번호가 일치하지 않습니다.");
     }
+
+    //나중에 쓸 것
+    // //빈값인지 검증
+    // let chkNum1 = isEmpty(number1);
+    // let chkNum2 = isEmpty(number2);
+
+    // if(number1 == number2 && chkNum1 == true && chkNum2 == true){
+    //     alert("인증되었습니다.");
+    // }else{
+    //     alert("인증번호가 일치하지 않습니다.");
+    // }
 }
 
 //다음 주소 연동 API

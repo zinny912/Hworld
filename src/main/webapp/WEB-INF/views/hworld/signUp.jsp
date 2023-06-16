@@ -32,84 +32,114 @@
                     </div>
 
                     <!-- 선택 데이터 영역 -->
-
-                    <div class="mb-4 row">
-                        <div class="col-9">	                		
-                            <input class="form-control" type="email" name="email" id="email" placeholder="사용자 계정(이메일)">		                    			                    
-                        </div>			                    
-                        <button class="col-3 row btn btn-solid-default btn-sm fw-bold" name="sendBtn" id="sendBtn" type="button" onclick="sendNumber()">
-                            인증번호 전송
-                        </button>
-                    </div> 
-                                                                                        
-                    <div class="mb-4 row" id="emailNumber" name="emailNumber" style="display: none;">
-                        <div class="col-9">
-                            <input class="form-control" type="text" name="emailCheck" id="emailCheck" placeholder="인증번호 입력">		                    			                    
-                        </div>                    
-                        <button class="col-3 row btn btn-solid-default btn-sm fw-bold" name="confirmBtn" id="confirmBtn" type="button" onclick="confirmNumber()">
-                            확인
-                        </button>
-                    </div>
-                    <input type="text" id="Confirm" name="Confirm" style="display: none" value="">
-
-                    <div class="mb-4 row">
-                        <div class="col-12">
-                            <input class="form-control" type="password" name="pw" id="pw" placeholder="비밀번호">
-                        </div>
-                    </div>		                			                    		                                                                
-                    <div class="mb-4 row">
-                        <div class="col-12">
-                            <input class="form-control" type="password" name="pwCheck" id="pwCheck" placeholder="비밀번호 확인">                            
-                        </div>                            
-                    </div>
-                            
-                    <div class="mb-4 row">
-                        <div class="col-12">
-                            <input class="form-control" type="text" name="name" id="name" placeholder="이름">				                   
-                        </div>                   		                    
-                    </div>	                		
+                    <c:choose>
+                    	<c:when test="${state eq 3}">
+                    		<div class="mb-4 row">
+		                        <div class="col-9">
+		                            <input class="form-control" type="email" name="email" id="email" placeholder="사용자 계정(이메일)">
+		                        </div>
+		                        <button class="col-3 row btn btn-solid-default btn-sm fw-bold" name="sendBtn" id="sendBtn" type="button" onclick="sendNumber()">
+		                            인증번호 전송
+		                        </button>
+		                    </div>
+		                    <div class="mb-4 row" id="emailNumber" name="emailNumber" style="display: none;">
+		                        <div class="col-9">
+		                            <input class="form-control" type="text" name="emailCheck" id="emailCheck" placeholder="인증번호 입력">
+		                        </div>
+		                        <button class="col-3 row btn btn-solid-default btn-sm fw-bold" name="confirmBtn" id="confirmBtn" type="button" onclick="confirmNumber()">
+		                            확인
+		                        </button>
+		                    </div>
+		                    <input type="text" id="Confirm" name="Confirm" style="display: none" value="">
+		                    <div class="mb-4 row">
+		                        <div class="col-12">
+		                            <input class="form-control" type="password" name="pw" id="pw" placeholder="비밀번호">
+		                        </div>
+		                    </div>
+		                    <div class="mb-4 row">
+		                        <div class="col-12">
+		                            <input class="form-control" type="password" name="pwCheck" id="pwCheck" placeholder="비밀번호 확인">
+		                        </div>
+		                    </div>
+                    	</c:when>
+                    	<c:otherwise>
+	                    	<div class="mb-4 row">
+		                        <div class="col-9">
+		                            <input class="form-control" type="email" name="email" id="email" placeholder="사용자 계정(이메일)">
+		                        </div>
+		                        <button class="col-3 row btn btn-solid-default btn-sm fw-bold" name="sendBtn" id="sendBtn" type="button" onclick="sendNumber()">
+		                            인증번호 전송
+		                        </button>
+		                    </div>
+		                    <div class="mb-4 row" id="emailNumber" name="emailNumber" style="display: none;">
+		                        <div class="col-9">
+		                            <input class="form-control" type="text" name="emailCheck" id="emailCheck" placeholder="인증번호 입력">
+		                        </div>
+		                        <button class="col-3 row btn btn-solid-default btn-sm fw-bold" name="confirmBtn" id="confirmBtn" type="button" onclick="confirmNumber()">
+		                            확인
+		                        </button>
+		                    </div>
+		                    <input type="text" id="Confirm" name="Confirm" style="display: none" value="">
+		                    <div class="mb-4 row">
+		                        <div class="col-12">
+		                            <input class="form-control" type="password" name="pw" id="pw" placeholder="비밀번호">
+		                        </div>
+		                    </div>
+		                    <div class="mb-4 row">
+		                        <div class="col-12">
+		                            <input class="form-control" type="password" name="pwCheck" id="pwCheck" placeholder="비밀번호 확인">
+		                        </div>
+		                    </div>
+		                            
+		                    <div class="mb-4 row">
+		                        <div class="col-12">
+		                            <input class="form-control" type="text" name="name" id="name" placeholder="이름">	
+		                        </div>
+		                    </div>
+		                    
+		                    <div class="mb-4 row">
+		                        <div class="col-6" style="padding-right: 6px">
+		                            <input class="form-control" type="text" name="rrnf" id="rrnf" placeholder="주민등록번호 앞자리">
+		                        </div>
+		
+		                        <div class="col-6" style="padding-left: 6px">
+		                            <input class="form-control" type="password" name="rrnl" id="rrnl" placeholder="주민등록번호 뒷자리">
+		                        </div>
+		                    </div>
+		
+		                    <div class="mb-4 row">
+		                        <div class="col-12">
+		                            <input class="form-control" type="tel" name="tel" id="tel" placeholder="연락처">
+		                        </div>
+		                        <div id="validPN">
+		                        </div>
+		                    </div>
+		
+		                    <div class="mb-4 row">
+		                        <div class="col-9">
+		                            <input class="form-control address_input_1" name="address1" readonly="readonly" placeholder="우편번호">
+		                        </div>
+		                        
+		                        <button class="col-3 row btn btn-solid-default btn-sm fw-bold" type="button" onclick="execution_daum_address()">
+		                            <span>주소 찾기</span>
+		                        </button>
+		                    </div>
+		
+		                    <div class="mb-4 row">
+		                        <div class="col-12">
+		                            <input class="form-control address_input_2" name="address2" readonly="readonly" placeholder="도로명 주소">
+		                        </div>
+		                    </div>
+		
+		                    <div class="mb-4 row">
+		                        <div class="col-12">
+		                            <input class="form-control address_input_3" name="address3" readonly="readonly" placeholder="상세 주소">
+		                        </div>
+		                    </div>
+                    	</c:otherwise>
+                    </c:choose>
                     
-                    <div class="mb-4 row">
-                        <div class="col-6" style="padding-right: 6px">		                                                   
-                            <input class="form-control" type="text" name="rrnf" id="rrnf" placeholder="주민등록번호 앞자리">		                            
-                        </div>
-
-                        <div class="col-6" style="padding-left: 6px">
-                            <input class="form-control" type="password" name="rrnl" id="rrnl" placeholder="주민등록번호 뒷자리">		                            
-                        </div>
-                    </div>
-
-                    <div class="mb-4 row">
-                        <div class="col-12">
-                            <input class="form-control" type="tel" name="phoneNum" id="phoneNum" placeholder="연락처">
-                        </div>
-                        <div id="validPN">
-                        </div>
-                    </div>
-
-                    <div class="mb-4 row">
-                        <div class="col-9">
-                            <input class="form-control address_input_1" name="address1" readonly="readonly" placeholder="우편번호">
-                        </div>
-                        
-                        <button class="col-3 row btn btn-solid-default btn-sm fw-bold" type="button" onclick="execution_daum_address()">
-                            <span>주소 찾기</span>
-                        </button>
-                    </div>
-
-                    <div class="mb-4 row">
-                        <div class="col-12">
-                            <input class="form-control address_input_2" name="address2" readonly="readonly" placeholder="도로명 주소">
-                        </div>
-                    </div>
-
-                    <div class="mb-4 row">
-                        <div class="col-12">
-                            <input class="form-control address_input_3" name="address3" readonly="readonly" placeholder="상세 주소">						
-                        </div>
-                    </div>														               
-
-                    <div class="button login" >
+                    <div class="button login">
                         <button type="submit">
                             <span>가입하기</span>
                             <i class="fa fa-check"></i>

@@ -185,19 +185,5 @@ $(document).ready(function() {
          $(this).find('#modelQnaContents').val(qnaContents);
        });
    
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
 });
 

@@ -168,7 +168,7 @@
 														<h3 class="mt-3 ">출고가</h3>
 													</div>
 													<p>
-														<span class="price-detail theme-color fw-bold renewPrice">${direct.directPrice}</span>
+														<span class="price-detail theme-color fw-bold" id="renewPrice">${direct.directPrice}</span>
 														<span class="unit">원</span>
 													</p>
 												<div class="direct-item" id="item_${direct.directCode}" data-direct-code="${direct.directCode}" data-category-code="${direct.categoryCode}" data-brand-code="${direct.brandCode}" data-sliced-code="${direct.slicedCode}" data-direct-stock="${direct.directStock}" data-direct-price="${direct.directPrice}">
@@ -196,34 +196,6 @@
 										</div>
 										
 										<hr>
-
-										<!-- <div class="cart-content-wrap">
-											<div class="col-md-12 d-flex justify-content-around">
-												<div class="col-md-2 mt-1" style="color: #7e7e7e;">
-													<p>옵션</p>
-												</div>
-												<div class="col-md-2 mt-1" style="color: black;">
-													<input type="text" id="colorName" style="border:0px; font-size:15px;" readonly>
-												</div>
-												<div class="col-md-3 d-flex justify-content-end">
-													<span class="mt-1 mx-1" style="color: black; font-size: 15px; font-weight: 400;">원</span>
-												</div>
-												<div class="d-flex quantity-wrapper" style="padding: 5px 0px; justify-content: center; margin-top: -8px;">
-													<button type="button" id="minusBtn" class="btn quantity-left-minus" style="height: 5px; width: 5px; padding: 10px; margin-top: -6px;">-</button>
-													<span class="input-wrapper">
-														<input type="text" id="optionQuantity" class="input-number text-center" style="width: 35px; padding: 5px 5px; border: 1px solid #c7c7c5; border-radius: 3px;" value="0">
-													</span>
-													<button type="button" id="plusBtn" class="btn quantity-right-plus" style="height: 5px; margin-top: -6px; padding: 10px 5px;">+</button>
-													<span id="totalQty" style="margin-left: 10px;"></span>
-												</div>
-												
-												<div class="btn-area">
-													<div class="product-buttons justify-content-end">
-														<button type="button" class="btn btn-solid" id="optionAdd" style="width: 25%; height: 30px; text-align: center; font-size: 14px;">추가</button>
-													</div>
-												</div>
-											</div>
-										</div> -->
 										
 										<!-- 옵션 1개 영역 -->
 										<div class="createOptionArea">
@@ -253,34 +225,8 @@
 										<hr>
 											
 											<!-- 선택된 옵션 영역 -->
-									<form action="./accessoryOrder" method="POST">
+									<form action="/order" method="GET" id="orderForm"> 
 											<div id="selectedOptionList">
-												<!-- <div class="optionOne">
-													<div class="d-flex justify-content-between cart-content-wrap mb-2">
-														<div class="col-4 my-auto d-flex justify-content-between">
-															<span class="option-color" style="color: #7e7e7e;">색상</span>
-															<span class="selected-color">[선택 옵션 색상 변수값]</span>
-														</div>
-														<div class="col-3 my-auto d-flex justify-content-end">
-															<span class="option-amount">2</span>
-															<span>개</span>
-														</div>
-														<div class="col-3 my-auto d-flex justify-content-end">
-															<span class="option-price">10000</span>
-															<span>원</span>
-														</div>
-														<div class="col-2 mt-1 d-flex justify-content-end">
-															<p class="theme-color2">
-																<a href="javascript:void(0)" ><i class="fas fa-times" data-idx="idx"></i></a>
-															</p>
-														</div>
-													</div>
-													<div class="orderInfos">
-														<input type="hidden" name="directCode">
-														<input type="hidden" name="orderAmount">
-														<input type="hidden" name="calculatingPrice">
-													</div>
-												</div> -->
 											</div>
 
 										<!-- 총 결제금액 표시 영역 -->
@@ -296,7 +242,7 @@
 														<div class="inner">
 															<div class="data" style="position: absolute; top: 35px; right: 0; text-align: right;">
 																<h2 class="price theme-color" id="subscriptionPrice" style="display: block; font-weight: 700;">
-																	<span id="totalPriceSpan">100000</span>
+																	<span id="totalPriceSpan"></span>
 																	<span style="color:black; font-size:20px;">원</span>
 																</h2>
 															</div>
@@ -309,7 +255,7 @@
 														<button type="button" class="btn btn-outline-custom me-1 cart-icon" style="margin-left:-105px; display:inline-block;">
 															<svg xmlns="http://www.w3.org/2000/svg" width="34" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart pe-1"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
 														</button> </a>
-														<button type="submit" class="btn btn-solid" id="orderBtn" style= "width: 700px; height: 52px; font-size: 18px; display: inline-block; padding: 0 10px; text-align: center;">주문하기</button>
+														<button type="button" class="btn btn-solid" id="orderBtn" style= "width: 700px; height: 52px; font-size: 18px; display: inline-block; padding: 0 10px; text-align: center;">주문하기</button>
 													</div>
 												</div>
 												<!-- order Informations -->
@@ -422,7 +368,7 @@
 																	<span style="font-weight:400; float:right;" >답변작성일 : ${formattedDate2}</span>
                                                                 </div>
                                                                 </c:if>
-                                                            	</div><!----><!---->
+                                                            	</div>
                                                         	</div>
                                                     	</div>
                                                 	</div>

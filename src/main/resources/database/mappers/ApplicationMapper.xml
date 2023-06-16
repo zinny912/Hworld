@@ -22,8 +22,8 @@
 	<!-- 신청서VO 기반 회원에 정보 입력 -->
 	<!-- MEMBERSTATE -1:휴면, 0:일시정지, 1:정상, 2:탈퇴 / ADMINCHECK 0:ADMIN, 1:MEMBER -->
 	<insert id="setMemberInitAdd" parameterType="ApplicationVO" useGeneratedKeys="true" keyProperty="memberNum">
-		INSERT INTO MEMBER(MEMBERNUM, EMAIL, PW, NAME, ADDRESS1, ADDRESS2, ADDRESS3, RRNF, RRNL, JOINDATE, NUMBERCHANGEDATE, MEMBERSTATE, ADMINCHECK, PHONENUM, OWNCHECK)
-		VALUES(#{memberNum}, NULL, NULL, #{name}, #{address1}, #{address2}, #{address3}, #{rrnf}, #{rrnl}, NOW(), NULL, '1', '1', #{phoneNum}, '1')
+		INSERT INTO MEMBER(MEMBERNUM, EMAIL, PW, NAME, ADDRESS1, ADDRESS2, ADDRESS3, RRNF, RRNL, JOINDATE, NUMBERCHANGEDATE, MEMBERSTATE, ADMINCHECK, TEL, OWNCHECK)
+		VALUES(#{memberNum}, NULL, NULL, #{name}, #{address1}, #{address2}, #{address3}, #{rrnf}, #{rrnl}, NOW(), NULL, '1', '1', #{tel}, '1')
 	</insert>
 	
 	<!-- 신청서VO 기반 회선에 정보 입력 -->
@@ -60,7 +60,7 @@
 	
 	<!-- planList + disPercent -->
 	<select id="getPlanList" resultType="PlanVO">
-		SELECT P.PLANNUM, P.PLANNAME, P.PLANPRICE, P.DATACAPACITY, P.CATEGORYCODE, P.PLANEXPLAIN, P.PLANEXPLAINSM, D.DISPERCENT 
+		SELECT P.PLANNUM, P.PLANNAME, P.PLANPRICE, P.DATACAPACITY, P.CATEGORYCODE, P.PLANEXPLAIN, P.PLANEXPLAINS, D.DISPERCENT 
 		FROM PLAN P
 		LEFT JOIN DISCODE D
 		ON(P.DISCODE=D.DISCODE)

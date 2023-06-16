@@ -19,11 +19,12 @@ import com.hworld.base.service.MemberService;
 import com.hworld.base.service.OrderService;
 import com.hworld.base.vo.MemberVO;
 import com.hworld.base.vo.OrderDirectVO;
-import com.hworld.base.vo.OrderPageVO;
 import com.hworld.base.vo.OrderVO;
 
+import lombok.extern.slf4j.Slf4j;
 
 
+@Slf4j
 @Controller
 public class OrderController {
 	
@@ -32,48 +33,78 @@ public class OrderController {
 	@Autowired
 	private MemberService memberService;
 	
-	@GetMapping("/order/{memberNum}")
-	public ModelAndView setOrderInsert(@PathVariable("memberNum") String memberNum, OrderPageVO orderPageVO, HttpSession session) throws Exception{
+	@GetMapping("/order")
+	public ModelAndView getOrderInfo(OrderDirectVO orderDirectVO, HttpSession session) throws Exception{
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("orderList", orderService.getDirectDetail(orderPageVO.getOrders()));
-		Enumeration<String> attributeNames = session.getAttributeNames();
-		while (attributeNames.hasMoreElements()) {
-		    String attributeName = attributeNames.nextElement();
-		    Object attributeValue = session.getAttribute(attributeName);
-		    mv.addObject(attributeName, attributeValue);
-		}
+		
+		//
+//		for(OrderPageVO orderPageVO2: orderPageVO) {
+//		}
+		log.error("==========================> {} ", orderDirectVO.getClass());
+		log.error("==========================> {} ", orderDirectVO.getDirectCode());
+		log.error("==========================> {} ", orderDirectVO.getOrderAmount());
+		log.error("==========================> {} ", orderDirectVO.getCalPrice());
+		log.error("==========================> {} ", orderDirectVO.getCalPrice());
+		
+		orderService.getOrderInfo(orderDirectVO);
+		
+		
+//		mv.addObject("orderList", orderService.getDirectDetail(orderPageVO.getOrders()));
+//		Enumeration<String> attributeNames = session.getAttributeNames();
+//		while (attributeNames.hasMoreElements()) {
+//		    String attributeName = attributeNames.nextElement();
+//		    Object attributeValue = session.getAttribute(attributeName);
+//		    mv.addObject(attributeName, attributeValue);
+//		}
 
 		
 		mv.setViewName("/order");
 		return mv;
 	}
 	
-	@PostMapping("/order")
-	public ModelAndView setOrderInsert(OrderVO orderVO, HttpSession session)throws Exception{
-		ModelAndView mv = new ModelAndView();
-		
-		orderService.order(orderVO, session);
-		
-		mv.setViewName("/orderSuccess");
-		return mv;
-	}
+//	@GetMapping("/order/{memberNum}")
+//	public ModelAndView setOrderInsert(@PathVariable("memberNum") String memberNum, OrderPageVO orderPageVO, HttpSession session) throws Exception{
+//		ModelAndView mv = new ModelAndView();
+//		mv.addObject("orderList", orderService.getDirectDetail(orderPageVO.getOrders()));
+//		Enumeration<String> attributeNames = session.getAttributeNames();
+//		while (attributeNames.hasMoreElements()) {
+//		    String attributeName = attributeNames.nextElement();
+//		    Object attributeValue = session.getAttribute(attributeName);
+//		    mv.addObject(attributeName, attributeValue);
+//		}
+//
+//		
+//		mv.setViewName("/order");
+//		return mv;
+//	}
+	//
 	
-	
-	
-	
-	@GetMapping("/order/orderSuccess")
-	public ModelAndView getOrderDetail(OrderVO orderVO, OrderDirectVO orderDirectVO) throws Exception{
-		ModelAndView mv = new ModelAndView();
-		
-		mv.setViewName("hworld/orderSuccess");
-		return mv;
-	}
-
-	
-	@GetMapping("refund")
-	public ModelAndView o2() throws Exception{
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("hworld/refund");
-		return modelAndView;
-	}
+//	@PostMapping("/order")
+//	public ModelAndView getOrderInfo(OrderVO orderVO, HttpSession session)throws Exception{
+//		ModelAndView mv = new ModelAndView();
+//		
+//		orderService.order(orderVO, session);
+//		
+//		mv.setViewName("/orderSuccess");
+//		return mv;
+//	}
+//	
+//	
+//	
+//	
+//	@GetMapping("/order/orderSuccess")
+//	public ModelAndView getOrderDetail(OrderVO orderVO, OrderDirectVO orderDirectVO) throws Exception{
+//		ModelAndView mv = new ModelAndView();
+//		
+//		mv.setViewName("hworld/orderSuccess");
+//		return mv;
+//	}
+//
+//	
+//	@GetMapping("refund")
+//	public ModelAndView o2() throws Exception{
+//		ModelAndView modelAndView = new ModelAndView();
+//		modelAndView.setViewName("hworld/refund");
+//		return modelAndView;
+//	}
 }

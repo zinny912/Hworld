@@ -269,7 +269,7 @@
                                                   </div>
                                                   <div class="d-flex justify-content-between mb-1">
                                                   	<label class="form-check-label ellipsis mx-4" style="color:gray; font-size:14px;">
-                                                  		${i.planexplainS}
+                                                  		${i.planExplainS}
                                                   	</label>
                                                   	<label class="form-check-label me-3 "> <span style="font-size:14px;">데이터 </span>
                                                   	
@@ -302,7 +302,7 @@
                                                   </div>
                                                   <div class="d-flex justify-content-between mb-1">
                                                   	<label class="form-check-label ellipsis mx-4" style="color:gray; font-size:14px;">
-                                                  		${i.planexplainS}
+                                                  		${i.planExplainS}
                                                   	</label>
                                                   	<label class="form-check-label me-3 "> <span style="font-size:14px;">데이터 </span>
                                                   	
@@ -335,7 +335,7 @@
                                                   </div>
                                                   <div class="d-flex justify-content-between mb-1">
                                                   	<label class="form-check-label ellipsis mx-4" style="color:gray; font-size:14px;">
-                                                  		${i.planexplainS}
+                                                  		${i.planExplainS}
                                                   	</label>
                                                   	<label class="form-check-label me-3 "> <span style="font-size:14px;">데이터 </span>
                                                   	
@@ -368,7 +368,7 @@
                                                   </div>
                                                   <div class="d-flex justify-content-between mb-1">
                                                   	<label class="form-check-label ellipsis mx-4" style="color:gray; font-size:14px;">
-                                                  		${i.planexplainS}
+                                                  		${i.planExplainS}
                                                   	</label>
                                                   	<label class="form-check-label me-3 "> <span style="font-size:14px;">데이터 </span>
                                                   	
@@ -401,7 +401,7 @@
                                                   </div>
                                                   <div class="d-flex justify-content-between mb-1">
                                                   	<label class="form-check-label ellipsis mx-4" style="color:gray; font-size:14px;">
-                                                  		${i.planexplainS}
+                                                  		${i.planExplainS}
                                                   	</label>
                                                   	<label class="form-check-label me-3 "> <span style="font-size:14px;">데이터 </span>
                                                   	
@@ -434,7 +434,7 @@
                                                   </div>
                                                   <div class="d-flex justify-content-between mb-1">
                                                   	<label class="form-check-label ellipsis mx-4" style="color:gray; font-size:14px;">
-                                                  		${i.planexplainS}
+                                                  		${i.planExplainS}
                                                   	</label>
                                                   	<label class="form-check-label me-3 "> <span style="font-size:14px;">데이터 </span>
                                                   	

@@ -8,26 +8,29 @@ import lombok.Setter;
 @Getter
 @Setter
 public class OrderDirectVO {
+	//db에 저장할 때 쓰는 용도
+	//slicedCode 느낌(기본 물건정보)
  
-    //주문 수량
-    private Integer orderAmount;
-
-    private String directCode;
+	private String directCode;
+	
+	private String orderNum;
+	
+	private Integer memberNum;
+	
+    private String orderAmount;
     
-    private String orderNum;
     
     // DB엔 없음 -------
     
-    //상품 한개 가격 
-    private Integer onePrice;
+    //옵션가격*옵션수량
+    private String calPrice;
     
-    //총 가격 (가격 * 주문수량)
-    private Integer totalPrice;
+    private DirectVO directVO;
     
     
-    public void initTotal() {
-		this.totalPrice = this.onePrice * this.orderAmount;
-	}
+//    public void initTotal() {
+//		this.totalPrice = this.onePrice * this.orderAmount;
+//	}
     
     
 }
