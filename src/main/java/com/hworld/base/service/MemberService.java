@@ -79,13 +79,38 @@ public class MemberService {
 		
 	}
 	
-	public int setMemberAdd(MemberVO memberVO) throws Exception {
-		//rrnl을 RRN 전체로 암호화
-		String RRN = memberVO.getRrnf()+"-"+memberVO.getRrnl();
-	    memberVO.setRrnl(SHA256Util.encryptMD5(RRN));
+	public int setMemberAdd(MemberVO memberVO, Integer opt1, Integer opt2) throws Exception {
+		//pw 암호화
+		String rawPw = ""; // 인코딩 전 비밀번호
+		String encodePw = ""; // 인코딩 후 비밀번호
 		
-		return memberDAO.setMemberAdd(memberVO);
-	}		
+		rawPw = memberVO.getPw(); // 비밀번호 데이터 얻음
+		encodePw = pwEncoder.encode(rawPw); // 비밀번호 인코딩 - 이렇게 인코딩된 번호는 찾을 수 없다.(같은 값을 넣어도 암호화된 시점에 따라 값이 일치하지 않는거같음)
+		memberVO.setPw(encodePw); // 인코딩 된 비밀번호 member 객체에 다시 저장
+		
+		
+	    int result = 0;
+	    
+	  //opt2 = memberNum값
+	    if(opt1 == 3 && opt2 != null) {
+	    	//회선X - 기존정보에 업데이트
+	    	memberVO.setMemberNum(opt2);
+	    	result = memberDAO.setMemberInitUpdate(memberVO);
+	    }else {
+	    	//회선O - 신규가입
+	    	//rrnl을 RRN 전체로 암호화
+	    	String RRN = memberVO.getRrnf()+"-"+memberVO.getRrnl();
+	    	memberVO.setRrnl(SHA256Util.encryptMD5(RRN));
+	    	
+			result = memberDAO.setMemberAdd(memberVO);
+	    }
+		
+		return result;
+	}
+	
+	public int setMemberInitUpdate(MemberVO memberVO) throws Exception{
+		return memberDAO.setMemberInitUpdate(memberVO);
+	}
 	
 	public MemberVO emailCheck(MemberVO memberVO) throws Exception {
 		return memberDAO.emailCheck(memberVO);

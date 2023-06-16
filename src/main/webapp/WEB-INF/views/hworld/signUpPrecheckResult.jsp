@@ -38,7 +38,8 @@
 
 <body class="theme-color2 light ltr">
 	<form:form action="" id="precheckForm" method="get">
-		<input type="hidden" name="state" value="${result.state}">
+		<input type="hidden" name="opt1" value="${result.state}">
+		<input type="hidden" name="opt2" value="${result.account.memberNum}">
 		<!-- Sign Up Section Start -->
 		<div class="login-section">
 			<div class="materialContainer">

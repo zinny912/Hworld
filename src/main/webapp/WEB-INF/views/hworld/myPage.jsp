@@ -847,7 +847,7 @@
                                             <h6 class="font-light">번호</h6>
                                         </div>
                                         <div class="right">
-                                            <h6>${memberVO.phoneNum}</h6>
+                                            <h6>${memberVO.tel}</h6>
                                         </div>
                                     </li>
 
@@ -967,15 +967,15 @@
                             <input type="email" class="form-control" id="email" name="email" readonly="readonly" value="${memberVO.email}">
                         </div>
                         <div class="mb-3">
-                            <label for="phoneNum" class="form-label font-light">번호</label>
-                            <input type="text" class="form-control" id="phoneNum" name="phoneNum" readonly="readonly" placeholder="회선 관리에서 바꿔주시길 바랍니다." value="${memberVO.phoneNum}">
+                            <label for="tel" class="form-label font-light">번호</label>
+                            <input type="text" class="form-control" id="tel" name="tel" readonly="readonly" placeholder="회선 관리에서 바꿔주시길 바랍니다." value="${memberVO.tel}">
                         </div>
                         <div class="mb-3">
                             <label for="rrnf" class="form-label font-light">생년월일</label>
                             <input type="text" class="form-control" id="rrnf" name="rrnf" readonly="readonly" value="${memberVO.rrnf}">
                         </div>
                         <div class="mb-3 row">
-	                            <label for="address1" class="form-label font-light">우편번호</label>
+	                        <label for="address1" class="form-label font-light">우편번호</label>
 	                        <div class="col-9">
 	                            <input type="text" class="form-control address_input_1" id="address1" name="address1" readonly="readonly" value="${memberVO.address1}">
 	                        </div>

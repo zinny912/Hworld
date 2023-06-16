@@ -153,7 +153,7 @@
 
                             <!-- 3. 상세주소   -->
                             <div class="col-md-12 mt-3">
-                                <input type="text" class="form-control" id="address2" name="address3">
+                                <input type="text" class="form-control" id="address3" name="address3">
                             </div>
 
                             <!-- 절차 끝 구분선 -->
