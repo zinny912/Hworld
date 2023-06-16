@@ -21,6 +21,7 @@ import com.hworld.base.vo.DirectVO;
 import com.hworld.base.vo.MemberVO;
 import com.hworld.base.vo.OrderDirectVO;
 import com.hworld.base.vo.OrderPageDirectVO;
+import com.hworld.base.vo.OrderPageVO;
 import com.hworld.base.vo.OrderVO;
 
 import lombok.extern.slf4j.Slf4j;
@@ -37,26 +38,45 @@ public class OrderService {
 	@Autowired
 	private CartDAO cartDAO;
 	
+	//주문이 들어옴
+	//order를 insert 해서 orderNum을 발생시키고 이 orderNum을 받아옴(전체 다)
+	//주문 들어온 directCode를 기반으로 orderDirectVO를 만들어줌(directCode의 갯수만큼)
+	//** orderPageVO는 안쓰는걸로....
 	
-	public List<OrderPageDirectVO> getDirectDetail(List<OrderPageDirectVO> orderPageDirectVOs) throws Exception{
+	//OrderPageVO로 작업
+	public List<OrderPageVO> getOrderInfo(OrderPageVO orderPageVO) throws Exception{
 		
-		List<OrderPageDirectVO> result = new ArrayList<>();
+		List<OrderPageVO> ar = new ArrayList<>();
 		
-		for(OrderPageDirectVO opds : orderPageDirectVOs) {
-//			log.error(opds.getDirectCode().toString());
-			
-			OrderPageDirectVO getDirectDetail = orderDAO.getDirectDetail(opds.getDirectCode());
-			
-			getDirectDetail.setOrderAmount(opds.getOrderAmount());
-			getDirectDetail.initTotal();
-			
-			result.add(getDirectDetail);
-			
+		//Controller에서 받아온 orderPageVO에 적힌 내용을 ','로 parsing한 후, list에 하나씩 담아주는 작업이 필요
+		String[] directCode = orderPageVO.getDirectCode().split(",");
+		String[] orderAmount = orderPageVO.getOrderAmount().split(",");
+		
+		for(String str : directCode) {
+			log.error(" >>>>>>>>>>>>>>>>>>>>>> {} ", str);
 		}
-		return result;
+		
+		
+		return ar;
+		
+		
+		
+//		List<OrderPageDirectVO> result = new ArrayList<>();
+//		
+//		for(OrderPageDirectVO opds : orderPageDirectVOs) {
+////			log.error(opds.getDirectCode().toString());
+//			
+//			OrderPageDirectVO getDirectDetail = orderDAO.getDirectDetail(opds.getDirectCode());
+//			
+//			getDirectDetail.setOrderAmount(opds.getOrderAmount());
+//			
+//			result.add(getDirectDetail);
+//			
+//		}
+//		return result;
 	}
 	
-	
+	//주문한 정보를 db에 넣는거
 	public void order(OrderVO orderVO, HttpSession session)throws Exception{
 		//회원 정보 
 		Object member = session.getAttribute("memberNum");
@@ -65,7 +85,7 @@ public class OrderService {
 		for(OrderDirectVO odss : orderVO.getOrderDirectVOs()) {
 			OrderDirectVO orderDirectVO = orderDAO.getOrderInfo(odss.getDirectCode());
 			orderDirectVO.setOrderAmount(odss.getOrderAmount());
-			orderDirectVO.initTotal();
+			//orderDirectVO.initTotal();
 			ods.add(orderDirectVO);
 			
 		}

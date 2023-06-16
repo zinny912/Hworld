@@ -225,7 +225,7 @@
 										<hr>
 											
 											<!-- 선택된 옵션 영역 -->
-									<form action="./accessoryOrder" method="POST"> 
+									<form action="/order" method="GET" id="orderForm"> 
 											<div id="selectedOptionList">
 											</div>
 
@@ -242,7 +242,7 @@
 														<div class="inner">
 															<div class="data" style="position: absolute; top: 35px; right: 0; text-align: right;">
 																<h2 class="price theme-color" id="subscriptionPrice" style="display: block; font-weight: 700;">
-																	<span id="totalPriceSpan">100000</span>
+																	<span id="totalPriceSpan"></span>
 																	<span style="color:black; font-size:20px;">원</span>
 																</h2>
 															</div>
@@ -255,7 +255,7 @@
 														<button type="button" class="btn btn-outline-custom me-1 cart-icon" style="margin-left:-105px; display:inline-block;">
 															<svg xmlns="http://www.w3.org/2000/svg" width="34" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart pe-1"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
 														</button> </a>
-														<button type="submit" class="btn btn-solid" id="orderBtn" style= "width: 700px; height: 52px; font-size: 18px; display: inline-block; padding: 0 10px; text-align: center;">주문하기</button>
+														<button type="button" class="btn btn-solid" id="orderBtn" style= "width: 700px; height: 52px; font-size: 18px; display: inline-block; padding: 0 10px; text-align: center;">주문하기</button>
 													</div>
 												</div>
 												<!-- order Informations -->

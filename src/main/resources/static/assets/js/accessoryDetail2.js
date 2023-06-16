@@ -204,6 +204,16 @@ $(document).on('click', '.fa-times', function() {
 });
 
 
+//주문하기 버튼
+$('#orderBtn').click(function(){
+  //위에 필요한 검증
+  //console.log('주문하기 버튼');
+
+  //폼 넘기기
+  $('#orderForm').submit();
+})
+
+
 //필요한 값이 입력되어있는지 확인하는 함수
 function isEmpty(value){
   if(typeof value == "undefined" || value == null || value == '')
