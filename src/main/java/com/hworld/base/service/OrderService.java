@@ -42,7 +42,7 @@ public class OrderService {
 		
 		List<OrderPageDirectVO> result = new ArrayList<>();
 		for(OrderPageDirectVO opds : orderPageDirectVOs) {
-//			log.error(opds.getDirectCode().toString());
+			log.error(opds.getDirectCode().toString());
 			
 			OrderPageDirectVO getDirectDetail = orderDAO.getDirectDetail(opds.getDirectCode());
 			
@@ -59,18 +59,22 @@ public class OrderService {
 	public void order(OrderVO orderVO, HttpSession session)throws Exception{
 		//회원 정보 
 		Object member = session.getAttribute("memberNum");
+		System.out.println(member);
+		
 		//주문 정보
-		List<OrderDirectVO> ods = new ArrayList<>();
-		for(OrderDirectVO odss : orderVO.getOrderDirectVOs()) {
-			OrderDirectVO orderDirectVO = orderDAO.getOrderInfo(odss.getDirectCode());
-			orderDirectVO.setOrderAmount(odss.getOrderAmount());
-			orderDirectVO.initTotal();
-			ods.add(orderDirectVO);
-			
-		}
+		List<OrderPageDirectVO> storedOrderItems = (List<OrderPageDirectVO>) session.getAttribute("orderItems");
+	    if (storedOrderItems != null) {
+	        for (OrderPageDirectVO orderItem : storedOrderItems) {
+	            System.out.println("directCode: " + orderItem.getDirectCode());
+	            System.out.println("orderAmount: " + orderItem.getOrderAmount());
+	            System.out.println("totalPrice: " + orderItem.getTotalPrice());
+	        }
+	    } else {
+	        System.out.println("orderItems 데이터가 세션에 존재하지 않습니다.");
+	    }
 		//OrderVO 세팅
-		orderVO.setOrderDirectVOs(ods);
-		orderVO.getOrderFinalPrice();
+//		orderVO.setOrderDirectVOs(ods);
+//		orderVO.getOrderFinalPrice();
 		
 		/* DB 주문, 주문상품(배송정보) 넣기 */
 		// orderNum 만들기 및 OrderDTO객체 orderNum에 저장

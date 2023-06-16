@@ -98,25 +98,25 @@
             <div class="row g-4">
                 <div class="col-lg-7">
                     <h3 class="mb-3 fw-bold">주문서</h3>
-                    <form action="../order/${memberNum}" method="get" class="needs-validation" id="form">
+                    <form action="" method="POST" class="needs-validation" id="form">
                         <div class="row g-4">
 
                             <!-- 가입자 정보 -->
 
                             <div class="col-md-12">
                                 <label for="fname" class="form-label">받으시는 분</label>
-                                <input type="text" class="form-control" id="name" name="orderReceiver" value="${memberName}">
+                                <input type="text" class="form-control" id="name" name="orderReceiver" value="${memberVO.memberName}">
                             </div>
 
 
                             <!-- 기기변경 폰 번호 -->
                             <div class="col-md-12">
                                 <label for="fname" class="form-label">연락 가능 번호</label>
-                                <input type="text" class="form-control" id="orderTelNum" name="orderTelNum" value="${phoneNum}">
+                                <input type="text" class="form-control" id="orderTelNum" name="orderTelNum" value="${memberVO.phoneNum}">
                             </div>
                             
                                	<input type="text" class="form-control" id="orderState" name="orderState" value="1" >
-                               	<input type="text" class="form-control" id="memberNum" name="memberNum" value="${memberNum}">
+                               	<input type="text" class="form-control" id="memberNum" name="memberNum" value="${memberVO.memberNum}">
                                	
 
                             <!-- <div class="row mt-3">

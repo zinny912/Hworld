@@ -146,10 +146,12 @@
 
                             <div class="col-md-6">
                                 <div class="cloth-details-size ">
+                                 <c:if test="${memberVO.adminCheck == 0 }">
                                     <div class="admin-update-delete d-flex justify-content-end">
                                         <a href="./accessoryUpdate?slicedCode=${directVO.slicedCode}" class="me-3">수정</a>
                                         <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#productdel">삭제</a>
                                     </div>    
+                                    </c:if>
 								<div id="directList">
 									
 									<form class="order_form">
@@ -189,10 +191,10 @@
 										        </div>
 												<div class="color-types">
 													<ul class="color-variant mb-0">
-														<li class="bg-white border boder-1" value="W" name="colorCode" onclick="selectColor(this)"></li>
-														<li class="bg-gray1" value="G" name="colorCode" onclick="selectColor(this)"></li>
-														<li class="bg-black1" value="B" name="colorCode" onclick="selectColor(this)"></li>
-														<li class="bg-blue border border-1 text-center align-center" value="0" name="colorCode" onclick="selectColor(this)">없음</li>
+														<li class="bg-white border boder-1 selected" value="W" name="colorCode"></li>
+														<li class="bg-gray1" value="G" name="colorCode"></li>
+														<li class="bg-black1" value="B" name="colorCode"></li>
+														<li class="bg-blue border border-1 text-center align-center" value="0" name="colorCode">없음</li>
 													</ul>
         										</div>
 											</div>
@@ -388,9 +390,12 @@
 					    									<c:set var="totalRating" value="${totalRating + review.rate}" /><p> 이거 뭐야  ${totalRating} </p>
 														</c:forEach>
 													</div>
-													<c:set var="averageRating" value="${totalRating / review.size()}" />
-													 <h2>평점 (<fmt:formatNumber value="${averageRating}" pattern="#.#" />)</h2>
-
+													
+													<c:set var="averageRating" value="${empty review ? 0 : totalRating / review.size()}" />
+														<c:if test="${not empty averageRating && averageRating != null}">
+														    <h2>평점 (<fmt:formatNumber value="${averageRating}" pattern="#.#" />)</h2>
+														</c:if>
+													
 				                                            <ul class="rating my-2 d-inline-block">
 																<li><i class="fas fa-star ${averageRating >= 0.5 ? 'theme-color' : ''}"></i></li>
 																<li><i class="fas fa-star ${averageRating >= 1.5 ? 'theme-color' : ''}"></i></li>
@@ -499,11 +504,25 @@
 
 									<div class="customer-review-box col-md-9">
    										<div class="review-box d-flex justify-content-end">
+   										<%-- 오더 완성되면 사용할 예정<c:set var="hasPurchase" value="false" />
+
+										<c:forEach var="order" items="${orderList}">
+										    <c:if test="${order.directCode eq '해당 제품 코드' && not empty order.orderNum && order.memberNum eq '구매한 멤버 번호'}">
+										        <c:set var="hasPurchase" value="true" />
+										        <c:break />
+										    </c:if>
+										</c:forEach>
+										
+										<c:if test="${hasPurchase eq 'true'}">
+										    <button type="button" class="btn btn-primary">버튼</button>
+										</c:if> --%>
+										
 											<div class="box-head">
 											    <button class="btn btn-solid-default btn-sm fw-bold writeReview" data-bs-toggle="modal"
 											        data-bs-target="#addReview">후기 작성</button>
 											</div>
 										</div>
+										
                                             <h2 class="col-md-7" style="margin-top:-50px;">구매 후기</h2>
                                             <c:choose>
 											    <c:when test="${empty review}">
@@ -774,7 +793,7 @@
 						</div>
 					</div>
     <!-- 문의작성 모달 End -->
- <!-- 상품 삭제 모달창 start -->
+ <!-- 리뷰 삭제 모달창 start -->
  <div class="modal fade payment-modal" id="reviewdel">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -796,7 +815,30 @@
         </div>
     </div>
 </div>
-<!-- 상품 삭제 모달창 End -->   
+<!-- 리뷰 삭제 모달창 End -->   
+<!-- 상품 삭제 모달창 start -->
+ <div class="modal fade payment-modal" id="productdel">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+               
+                    <div class="mb-4">
+                     <h3>정말 삭제하시겠습니까? </h3> <h5>삭제 후에는 복구가 불가합니다.</h5>
+                     <input type="hidden" id="modalDelId" name="directCode" value="">
+                     <input type="hidden" name="slicedCode" value="${param.slicedCode}">
+                    </div>
+            </div>
+            <div class="modal-footer pt-0 text-end d-block">
+            	<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                <button type="button" class="btn btn-solid-default rounded-1" id="productDelete" onclick="productDelete()">삭제</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 상품 삭제 모달창 End -->
 
     <div class="bg-overlay"></div>
 <script src="/assets/js/updateReview.js"></script>

@@ -13,7 +13,8 @@ public class PlanVO {
     private String dataCapacity;
     private String categoryCode;
     private String planExplain;
-    private String planExplainSM;
+    private String planExplainS;
+    private String planExplainM;
     
     //할인요금 계산을 위한 disPercent 추가
     private Double disPercent;

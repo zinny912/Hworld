@@ -7,7 +7,7 @@
  
  <select id="getPlanList" resultType="PlanVO">
  	SELECT P.*, CC.NOTE AS note, CC.TYPE AS type
-	FROM PLAN2 P
+	FROM PLAN P
 	INNER JOIN COMMONCODE CC ON (P.CATEGORYCODE = CC.CODE)
 	WHERE (P.PLANNUM LIKE CONCAT(CC.TYPE, '%'))
  </select>
@@ -17,14 +17,27 @@
  	WHERE PLANNUM=#{planNum}
  </select>
  
+ <select id="getCommonCode" resultType="BaseVO">
+ 	SELECT * FROM COMMONCODE
+ 	WHERE TYPE = #{type} 
+ </select>
+ 
+ <select id="getNoteName" resultType="PlanVO">
+ 	SELECT DISTINCT CC.NOTE AS note
+ 	FROM PLAN P
+ 	LEFT JOIN COMMONCODE CC ON (P.CATEGORYCODE = CC.CODE) AND (CC.TYPE = SUBSTRING(#{planNum},1,1))
+ 	WHERE P.PLANNUM = #{planNum}
+ 
+ </select>
+ 
  <insert id="setPlanAdd" parameterType="PlanVO">
- 	INSERT INTO PLAN (PLANNUM, DISCODE, PLANNAME, PLANPRICE, DATACAPACITY, CATEGORYCODE, PLANEXPLAIN, PLANEXPLAINSM)
- 	VALUES(#{planNum},#{disCode}, #{planName}, #{planPrice}, #{dataCapacity}, #{categoryCode}, #{planExplain}, #{planExplainSM})
+ 	INSERT INTO PLAN (PLANNUM, DISCODE, PLANNAME, PLANPRICE, DATACAPACITY, CATEGORYCODE, PLANEXPLAIN, PLANEXPLAINS, PLANEXPLAINM)
+ 	VALUES(#{planNum},#{disCode}, #{planName}, #{planPrice}, #{dataCapacity}, #{categoryCode}, #{planExplain}, #{planExplainS}, #{PlanExplainM})
  </insert>
  
  <update id="setPlanUpdate" parameterType="PlanVO">
  	UPDATE PLAN 
- 	SET DISCODE=#{disCode}, PLANNAME=#{planName}, PLANPRICE=#{planPrice}, DATACAPACITY=#{dataCapacity},CATEGORYCODE=#{categoryCode}, PLANEXPLAIN=#{planExplain}, PLANEXPLAINSM=#{planExplainSM})
+ 	SET DISCODE=#{disCode}, PLANNAME=#{planName}, PLANPRICE=#{planPrice}, DATACAPACITY=#{dataCapacity},CATEGORYCODE=#{categoryCode}, PLANEXPLAIN=#{planExplain}, PLANEXPLAINS=#{planExplainS},PLANEXPLAINM=#{planExplainM})
  </update>
  
  <delete id="setPlanDelete" parameterType="PlanVO">

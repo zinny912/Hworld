@@ -1,5 +1,6 @@
 package com.hworld.base.controller;
 
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,26 +40,62 @@ public class OrderController {
 	@Autowired
 	private MemberService memberService;
 	
-	
-	@PostMapping("/order/{memberNum}")
-	public ResponseEntity<String> orderItems(@PathVariable String memberNum, @RequestBody List<OrderPageDirectVO> orderItems) {
+	//상세페이지에서 주문정보 전송 
+	@PostMapping("/accessoryOrder")
+	public ResponseEntity<List<OrderPageDirectVO>> orderItems( @RequestBody List<OrderPageDirectVO> orderItems, HttpSession session) {
 	  // memberNum과 orderItems를 활용하여 필요한 처리 수행
-	  // orderItems는 선택된 상품들의 정보를 담고 있는 JSON 타입 배열입니다.
-	  // 각 항목에 접근하여 필요한 작업을 수행하면 됩니다.
+	  // orderItems는 선택된 상품들의 정보를 담고 있는 JSON 타입 배열
 
-	  // 예시: orderItems의 각 항목을 출력하는 예제
-	  for (OrderPageDirectVO orderItem : orderItems) {
-	    System.out.println("directCode: " + orderItem.getDirectCode());
-	    System.out.println("orderAmount: " + orderItem.getOrderAmount());
-	    System.out.println("totalPrice: " + orderItem.getTotalPrice());
-	  }
-
-	  // 처리 결과에 따라 적절한 응답을 반환
-	  return ResponseEntity.ok("주문이 완료되었습니다.");
+		List<OrderPageDirectVO> orderList = new ArrayList<>();
+		for (OrderPageDirectVO orderItem : orderItems) {
+		    if (orderItem.getOrderAmount() > 0) {
+		        System.out.println("directCode: " + orderItem.getDirectCode());
+		        System.out.println("orderAmount: " + orderItem.getOrderAmount());
+		        System.out.println("totalPrice: " + orderItem.getTotalPrice());
+		        orderList.add(orderItem);
+		    }
+		}
+		session.setAttribute("orderItems", orderList);
+		
+//		 List<OrderPageDirectVO> storedOrderItems = (List<OrderPageDirectVO>) session.getAttribute("orderItems");
+//		    if (storedOrderItems != null) {
+//		        for (OrderPageDirectVO orderItem : storedOrderItems) {
+//		            System.out.println("directCode: " + orderItem.getDirectCode());
+//		            System.out.println("orderAmount: " + orderItem.getOrderAmount());
+//		            System.out.println("totalPrice: " + orderItem.getTotalPrice());
+//		        }
+//		    } else {
+//		        System.out.println("orderItems 데이터가 세션에 존재하지 않습니다.");
+//		    }
+	    // 생성된 데이터를 응답으로 전송
+	    return ResponseEntity.ok(orderList);
 	}
-
-
 	
+	
+	
+
+//	@PostMapping("/getOrder")
+//	public ModelAndView orderItems(@RequestBody List<OrderPageDirectVO> orderItems, HttpSession session) {
+//	  // orderItems를 활용하여 필요한 처리 수행
+//	  // ...
+//		List<OrderPageDirectVO> orderList = new ArrayList<>();
+//		for (OrderPageDirectVO orderItem : orderItems) {
+//		    if (orderItem.getOrderAmount() > 0) {
+//		        System.out.println("directCode: " + orderItem.getDirectCode());
+//		        System.out.println("orderAmount: " + orderItem.getOrderAmount());
+//		        System.out.println("totalPrice: " + orderItem.getTotalPrice());
+//		        orderList.add(orderItem);
+//		    }
+//		}	
+//		
+//
+//	  ModelAndView mv = new ModelAndView();
+//	  mv.addObject("orderItems", orderItems); // 데이터를 "orderItems"라는 이름으로 전달
+//	  mv.setViewName("redirect:/accessoryOrder"); // 다음 페이지의 URL 설정
+//
+//	  return mv;
+//	}
+
 	
 	
 	
@@ -78,6 +116,9 @@ public class OrderController {
 //		mv.setViewName("/order");
 //		return mv;
 //	}
+	
+	
+	
 	
 	@PostMapping("/order")
 	public ModelAndView setOrderInsert(OrderVO orderVO, HttpSession session)throws Exception{

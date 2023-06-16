@@ -144,7 +144,8 @@ $(document).ready(function() {
 		$('#totalQty').text(totalPrice);
 		$('#totalPrice').val(totalPrice);
 		$('#orderAmount').val(quantity);
-
+		console.log(quantity,'주문수량');
+		console.log(totalPrice,'주문금액');
 		}
   
 	  
@@ -185,17 +186,66 @@ $(document).ready(function() {
          $(this).find('#modelQnaContents').val(qnaContents);
        });
    
-   
+   $('.order_form').submit(function(e) {
+  e.preventDefault(); // 기본적인 form submit 동작을 막음
 
-   
-   
-   
-   
-   
-   
-   
-   
-   
+  const postDataArray = []; // 전송할 데이터 배열 생성
+
+  // 주문한 상품 정보를 객체 형태로 생성하여 배열에 추가
+  const selectedDirectCodes = $('.testDC');
+  const selectedOrderAmounts = $('.testOA');
+  const selectedTotalPrices = $('.testTP');
+  
+  for (let i = 0; i < selectedDirectCodes.length; i++) {
+    const directCode = selectedDirectCodes[i].value;
+    let orderAmount = 0;
+    if (selectedOrderAmounts[i].value !== '') {
+      orderAmount = selectedOrderAmounts[i].value;
+    }
+    const totalPrice = selectedTotalPrices[i].value;
+
+    const postData = {
+      directCode: directCode,
+      orderAmount: orderAmount,
+      totalPrice: totalPrice
+    };
+    postDataArray.push(postData);
+  }
+
+  const memberNum = $('#memberNum').val();
+
+  // POST 요청 보내기
+  $.ajax({
+    url: '/accessoryOrder',
+    method: 'POST',
+    data: JSON.stringify(postDataArray), // 데이터를 JSON 문자열로 변환하여 전송
+    contentType: 'application/json', // 데이터 타입을 JSON으로 설정
+    success: function(response) {
+		// 응답 데이터 추출
+    const responseData = response; // 전달된 응답 데이터
+    // 추출한 데이터를 원하는 방식으로 활용
+     console.log(responseData);
+  
+  // 응답 데이터를 원하는 방식으로 활용
+  for (let i = 0; i < responseData.length; i++) {
+    const orderItem = responseData[i];
+    console.log("directCode: " + orderItem.directCode);
+    console.log("orderAmount: " + orderItem.orderAmount);
+    console.log("totalPrice: " + orderItem.totalPrice);
+  }
+  
+      alert('전송 성공!');
+     
+     
+  },
+    error: function(xhr, status, error) {
+      // 오류 발생 시 처리할 코드 작성
+      alert('전송 실패!');
+    }
+  });
+});
+
+
    
    
 });
