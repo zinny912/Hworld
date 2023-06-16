@@ -17,6 +17,8 @@
     <!-- testValue -->
     ${state}
     <form:form action="./signUp" id="signUpForm" method="post" modelAttribute="memberVO">
+		<input type="hidden" name="opt1" value="${map.opt1}">
+		<input type="hidden" name="opt2" value="${map.opt2}">
         <!-- Sign Up Section Start -->
         <div class="login-section">
             <div class="materialContainer">
@@ -33,7 +35,7 @@
 
                     <!-- 선택 데이터 영역 -->
                     <c:choose>
-                    	<c:when test="${state eq 3}">
+                    	<c:when test="${map.opt1 eq 3}">
                     		<div class="mb-4 row">
 		                        <div class="col-9">
 		                            <input class="form-control" type="email" name="email" id="email" placeholder="사용자 계정(이메일)">

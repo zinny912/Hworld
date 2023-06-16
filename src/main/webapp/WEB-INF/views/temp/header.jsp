@@ -208,7 +208,7 @@
     $('#testAdmin').click(function(){
         console.log("admin");
         const email = "xbigbang5@gmail.com";
-        const pw = "12345";
+        const pw = "ayxyhSiL4U";
 
         $.ajax({
             type: 'POST',

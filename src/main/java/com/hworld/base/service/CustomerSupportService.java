@@ -46,13 +46,15 @@ public class CustomerSupportService {
 	
 	public List<TelephoneVO> setQnaInsert(HttpSession session) throws Exception {
 		TelephoneVO telephoneVO = new TelephoneVO();
-		telephoneVO.setMemberNum(1);
+		//telephoneVO.setMemberNum(1);
+		MemberVO memberVO = (MemberVO)session.getAttribute("memberVO");
+		telephoneVO.setMemberNum(memberVO.getMemberNum());
 
 		return qnaDAO.getTelephoneList(telephoneVO); 
 	}
 	
 	public int setQnaInsert(QnaVO qnaVO, HttpSession session, MultipartFile multipartFile) throws Exception {
-		qnaVO.setMemberNum(1);
+		//qnaVO.setMemberNum(1);
 		return qnaDAO.setInsert(qnaVO);
 	}
 	

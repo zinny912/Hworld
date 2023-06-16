@@ -102,26 +102,27 @@ public class MemberController {
 	
 	//회원 가입 - 페이지 이동
 	@GetMapping("signUp")
-	public ModelAndView setMemberAdd(Integer state) throws Exception{
+	//requestParam : 요청 들어온 파라미터를 맵핑해줌
+	public ModelAndView setMemberAdd(@RequestParam Map<String, Object> map) throws Exception{
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("state", state);
+		
+		//opt1 = state값, opt2 = memberNum값
+		log.error(" ::::::::::::::::::::::::::::::::::::::::: {} ", map.toString());
+		log.error(" ::::::::::::::::::::::::::::::::::::::::: {} ", map.get("opt1"));
+		log.error(" ::::::::::::::::::::::::::::::::::::::::: {} ", map.get("opt2"));
+
+		
+		mv.addObject("map", map);
 		mv.setViewName("hworld/signUp");
 		return mv;
 	}
 	
 	//회원 가입 - 결과 전송
 	@PostMapping("signUp")
-	public ModelAndView setMemberAdd(MemberVO memberVO) throws Exception {
+	public ModelAndView setMemberAdd(MemberVO memberVO, Integer opt1, Integer opt2) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
-		String rawPw = ""; // 인코딩 전 비밀번호
-		String encodePw = ""; // 인코딩 후 비밀번호
-		
-		rawPw = memberVO.getPw(); // 비밀번호 데이터 얻음
-		encodePw = pwEncoder.encode(rawPw); // 비밀번호 인코딩 - 이렇게 인코딩된 번호는 찾을 수 없다.(같은 값을 넣어도 암호화된 시점에 따라 값이 일치하지 않는거같음)
-		memberVO.setPw(encodePw); // 인코딩 된 비밀번호 member 객체에 다시 저장	
-		
-		int result = memberService.setMemberAdd(memberVO);
+		int result = memberService.setMemberAdd(memberVO, opt1, opt2);
 		
 		mv.setViewName("hworld/signUpSuccess");
 		
