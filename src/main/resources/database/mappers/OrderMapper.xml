@@ -5,8 +5,8 @@
   
   <mapper namespace="com.hworld.base.dao.OrderDAO">
   
-	<select id="getDirectDetail" resultType="OrderDirectVO">
-    	SELECT DIRECTCODE, DIRECTNAME, DIRECTPRICE
+	<select id="getDirectDetail" resultType="DirectVO" parameterType="DirectVO">
+    	SELECT DIRECTCODE, DIRECTNAME, DIRECTPRICE, COLORCODE
     	FROM DIRECT
 		WHERE DIRECTCODE = #{directCode}
 	</select>

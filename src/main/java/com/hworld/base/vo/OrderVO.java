@@ -43,9 +43,7 @@ public class OrderVO {
     private Integer memberNum;
     
     //최종 가격 
-    private int orderFinalPrice;
-
-    private String directCode;
+    private Integer orderFinalPrice;
     
 	}
     
