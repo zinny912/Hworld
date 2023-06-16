@@ -35,34 +35,34 @@ public class MyPageController {
 		return modelAndView;
 	}
 	
-//	// 가입 정보 변경(Post)
-//	@PostMapping("/myPage")
-//	public ModelAndView memberUpdate(MemberVO memberVO) throws Exception {
-//		
-//		ModelAndView modelAndView = new ModelAndView();
-//				
-//		int result = myPageService.memberUpdate(memberVO);		
-//		
-//		modelAndView.setViewName("hworld/myPage");
-//				
-//		return modelAndView;
-//	}
-	
+	// 가입 정보 변경(Post)
 	@PostMapping("/myPage")
-	public String pwUpdate(HttpServletRequest request, RedirectAttributes redirectAttributes,Model model,HttpSession session,
-	        MemberVO memberVO) {
-	    
-	    try {
-	        myPageService.pwUpdate(memberVO);
-	        redirectAttributes.addFlashAttribute("msg", "수정하였습니다.");
-	        
-	    } catch (Exception e) {
-	        System.out.println(e.toString());
-	        redirectAttributes.addFlashAttribute("msg", "오류가 발생되었습니다.");
-	    }
-	    
-	    return "redirect:/myPage";
+	public ModelAndView memberUpdate(MemberVO memberVO) throws Exception {
+		
+		ModelAndView modelAndView = new ModelAndView();
+				
+		int result = myPageService.memberUpdate(memberVO);		
+		
+		modelAndView.setViewName("hworld/myPage");
+				
+		return modelAndView;
 	}
+	
+//	@PostMapping("/myPage")
+//	public String pwUpdate(HttpServletRequest request, RedirectAttributes redirectAttributes,Model model,HttpSession session,
+//	        MemberVO memberVO) {
+//	    
+//	    try {
+//	        myPageService.pwUpdate(memberVO);
+//	        redirectAttributes.addFlashAttribute("msg", "수정하였습니다.");
+//	        
+//	    } catch (Exception e) {
+//	        System.out.println(e.toString());
+//	        redirectAttributes.addFlashAttribute("msg", "오류가 발생되었습니다.");
+//	    }
+//	    
+//	    return "redirect:/myPage";
+//	}
 	
 //	@PostMapping("/myPage")
 //	public ModelAndView pwUpdate(MemberVO memberVO) throws Exception {

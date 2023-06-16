@@ -732,7 +732,7 @@
                                                   </div>
                                                   <div class="d-flex justify-content-between mb-1">
                                                   	<label class="form-check-label ellipsis fs-6 mx-3" style="color:gray;">
-                                                  		${i.planExplainSM}
+                                                  		${i.planExplainS}
                                                   	</label>
                                                   	<label class="form-check-label me-3 "> <span class="fs-6">데이터 </span>
                                                   	
@@ -766,7 +766,7 @@
                                                   </div>
                                                   <div class="d-flex justify-content-between mb-1">
                                                   	<label class="form-check-label ellipsis fs-6 mx-3" style="color:gray;">
-                                                  		${i.planExplainSM}
+                                                  		${i.planExplainS}
                                                   	</label>
                                                   	<label class="form-check-label me-3 "> <span class="fs-6">데이터 </span>
                                                   	
@@ -799,7 +799,7 @@
                                                   </div>
                                                   <div class="d-flex justify-content-between mb-1">
                                                   	<label class="form-check-label ellipsis fs-6 mx-3" style="color:gray;">
-                                                  		${i.planExplainSM}
+                                                  		${i.planExplainS}
                                                   	</label>
                                                   	<label class="form-check-label me-3 "> <span class="fs-6">데이터 </span>
                                                   	
@@ -833,7 +833,7 @@
                                                   </div>
                                                   <div class="d-flex justify-content-between mb-1">
                                                   	<label class="form-check-label ellipsis fs-6 mx-3" style="color:gray;">
-                                                  		${i.planExplainSM}
+                                                  		${i.planExplainS}
                                                   	</label>
                                                   	<label class="form-check-label me-3 "> <span class="fs-6">데이터 </span>
                                                   	
@@ -866,7 +866,7 @@
                                                   </div>
                                                   <div class="d-flex justify-content-between mb-1">
                                                   	<label class="form-check-label ellipsis fs-6 mx-3" style="color:gray;">
-                                                  		${i.planExplainSM}
+                                                  		${i.planExplainS}
                                                   	</label>
                                                   	<label class="form-check-label me-3 "> <span class="fs-6">데이터 </span>
                                                   	
@@ -899,7 +899,7 @@
                                                   </div>
                                                   <div class="d-flex justify-content-between mb-1">
                                                   	<label class="form-check-label ellipsis fs-6 mx-3" style="color:gray;">
-                                                  		${i.planExplainSM}
+                                                  		${i.planExplainS}
                                                   	</label>
                                                   	<label class="form-check-label me-3 "> <span class="fs-6">데이터 </span>
                                                   	

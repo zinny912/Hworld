@@ -18,13 +18,13 @@
  </select>
  
  <insert id="setPlanAdd" parameterType="PlanVO">
- 	INSERT INTO PLAN (PLANNUM, DISCODE, PLANNAME, PLANPRICE, DATACAPACITY, CATEGORYCODE, PLANEXPLAIN, PLANEXPLAINSM)
- 	VALUES(#{planNum},#{disCode}, #{planName}, #{planPrice}, #{dataCapacity}, #{categoryCode}, #{planExplain}, #{planExplainSM})
+ 	INSERT INTO PLAN (PLANNUM, DISCODE, PLANNAME, PLANPRICE, DATACAPACITY, CATEGORYCODE, PLANEXPLAIN, PLANEXPLAINS)
+ 	VALUES(#{planNum},#{disCode}, #{planName}, #{planPrice}, #{dataCapacity}, #{categoryCode}, #{planExplain}, #{planExplainS})
  </insert>
  
  <update id="setPlanUpdate" parameterType="PlanVO">
  	UPDATE PLAN 
- 	SET DISCODE=#{disCode}, PLANNAME=#{planName}, PLANPRICE=#{planPrice}, DATACAPACITY=#{dataCapacity},CATEGORYCODE=#{categoryCode}, PLANEXPLAIN=#{planExplain}, PLANEXPLAINSM=#{planExplainSM})
+ 	SET DISCODE=#{disCode}, PLANNAME=#{planName}, PLANPRICE=#{planPrice}, DATACAPACITY=#{dataCapacity},CATEGORYCODE=#{categoryCode}, PLANEXPLAIN=#{planExplain}, PLANEXPLAINS=#{planExplainS})
  </update>
  
  <delete id="setPlanDelete" parameterType="PlanVO">
