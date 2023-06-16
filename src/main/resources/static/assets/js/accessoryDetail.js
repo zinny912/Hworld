@@ -144,7 +144,8 @@ $(document).ready(function() {
 		$('#totalQty').text(totalPrice);
 		$('#totalPrice').val(totalPrice);
 		$('#orderAmount').val(quantity);
-
+		console.log(quantity,'주문수량');
+		console.log(totalPrice,'주문금액');
 		}
   
 	  

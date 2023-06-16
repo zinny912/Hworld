@@ -102,7 +102,7 @@
   	<!-- 상품 삭제 -->
 	<delete id="setDelete" parameterType="DirectVO">
 	  DELETE FROM DIRECT
-	  WHERE directCode LIKE CONCAT('%', #{slicedCode}, '%')
+	  WHERE SUBSTRING(DIRECTCODE,-5) = #{slicedCode}
 	</delete>
 	
 	<!-- 상품 수정 -->

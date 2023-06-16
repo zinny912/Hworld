@@ -86,5 +86,7 @@ public interface DirectDAO {
 	
 	//plan 선택된거 가져오기
 	public PlanVO getSelectedPlan(PlanVO planVO) throws Exception;
+
+	
 	
 }

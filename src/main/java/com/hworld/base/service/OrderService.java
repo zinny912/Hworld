@@ -78,6 +78,8 @@ public class OrderService {
 	public void order(OrderVO orderVO, HttpSession session)throws Exception{
 		//회원 정보 
 		Object member = session.getAttribute("memberNum");
+		System.out.println(member);
+		
 		//주문 정보
 		List<OrderDirectVO> ods = new ArrayList<>();
 		for(OrderDirectVO odss : orderVO.getOrderDirectVOs()) {
@@ -88,8 +90,8 @@ public class OrderService {
 			
 		}
 		//OrderVO 세팅
-		orderVO.setOrderDirectVOs(ods);
-		orderVO.getOrderFinalPrice();
+//		orderVO.setOrderDirectVOs(ods);
+//		orderVO.getOrderFinalPrice();
 		
 		/* DB 주문, 주문상품(배송정보) 넣기 */
 		// orderNum 만들기 및 OrderDTO객체 orderNum에 저장
