@@ -56,15 +56,22 @@ function confirmNumber(){
     let number1 = $("#emailCheck").val();
     let number2 = $("#Confirm").val();
 
-    //빈값인지 검증
-    let chkNum1 = isEmpty(number1);
-    let chkNum2 = isEmpty(number2);
-
-    if(number1 == number2 && chkNum1 == true && chkNum2 == true){
+    if(number1 == number2){
         alert("인증되었습니다.");
     }else{
         alert("인증번호가 일치하지 않습니다.");
     }
+
+    //나중에 쓸 것
+    // //빈값인지 검증
+    // let chkNum1 = isEmpty(number1);
+    // let chkNum2 = isEmpty(number2);
+
+    // if(number1 == number2 && chkNum1 == true && chkNum2 == true){
+    //     alert("인증되었습니다.");
+    // }else{
+    //     alert("인증번호가 일치하지 않습니다.");
+    // }
 }
 
 //다음 주소 연동 API
