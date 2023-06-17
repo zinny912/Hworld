@@ -68,9 +68,9 @@ public class AdminController {
 	
 	// 주문 상세 페이지
 	@GetMapping("orderDetail")
-	public ModelAndView orderDetail(MemberVO memberVO) throws Exception{
+	public ModelAndView orderDetail(OrderVO orderVO) throws Exception{
 		ModelAndView modelAndView = new ModelAndView();
-		List<OrderVO> orderDetail = adminService.orderDetail(memberVO);
+		List<OrderVO> orderDetail = adminService.orderDetail(orderVO);
 		modelAndView.addObject("orderDetail", orderDetail);
 		modelAndView.setViewName("admin/orderDetail");
 		return modelAndView;

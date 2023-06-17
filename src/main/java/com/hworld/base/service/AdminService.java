@@ -45,8 +45,8 @@ public class AdminService {
 	}
 	
 	// 주문 상세
-	public List<OrderVO> orderDetail(MemberVO memberVO) throws Exception { 		 
-		return adminDAO.orderDetail(memberVO);
+	public List<OrderVO> orderDetail(OrderVO orderVO) throws Exception { 		 
+		return adminDAO.orderDetail(orderVO);
 	}
 	
 //	// 상품 목록

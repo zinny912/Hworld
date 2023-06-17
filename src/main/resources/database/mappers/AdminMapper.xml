@@ -57,26 +57,40 @@
 	</select>
 	
 	<!-- 주문 목록 -->
-	<select id="orderList" parameterType="Pager" resultType="OrderVO">
-		SELECT ORDERNUM, ORDERDATE, ORDERSTATE
-		FROM ORDERS
+	<select id="orderList" parameterType="Pager" resultMap="OrderListResult">
+		SELECT O.ORDERNUM , M.MEMBERNUM , M.NAME , O.ORDERDATE , O.ORDERSTATE
+		FROM ORDERS O
+		INNER JOIN MEMBER M
+ 		ON(O.MEMBERNUM = M.MEMBERNUM)
 		<include refid="searchOrderList"></include>
-		ORDER BY ORDERNUM DESC
+		ORDER BY M.MEMBERNUM DESC
 		LIMIT #{startRow}, #{perPage}
 	</select>
+	<resultMap type="OrderVO" id="OrderListResult">
+		<id column="ORDERNUM" property="orderNum"/>
+		<result column="ORDERDATE" property="orderDate"/>
+		<result column="ORDERSTATE" property="orderState"/>
+		<collection property="memberVOs" javaType="List" ofType="MemberVO">
+  			<id column="MEMBERNUM" property="memberNum"/>
+  			<result column="NAME" property="name"/>					
+  		</collection>
+	</resultMap>
 	
 	<sql id="searchOrderList">
-		WHERE ORDERNUM LIKE CONCAT('%', #{search}, '%') OR ORDERDATE LIKE CONCAT('%', #{search}, '%')
+		WHERE O.ORDERNUM LIKE CONCAT('%', #{search}, '%') OR O.ORDERDATE LIKE CONCAT('%', #{search}, '%') OR M.MEMBERNUM LIKE CONCAT('%', #{search}, '%') OR M.NAME LIKE CONCAT('%', #{search}, '%')
 	</sql>
 	
 	<select id="getTotalOrder" parameterType="Pager" resultType="Long">
-		SELECT COUNT(*) FROM ORDERS
+		SELECT COUNT(*) FROM ORDERS O
+		INNER JOIN MEMBER M
+		ON(O.MEMBERNUM = M.MEMBERNUM)
 		<include refid="searchOrderList"></include>
 	</select>
 	
 	<!-- 주문 상세 페이지 -->
 	<select id="orderDetail" parameterType="OrderVO" resultType="OrderVO">
 		SELECT * FROM ORDERS
+		WHERE ORDERNUM = #{orderNum}
 	</select>
 	
 </mapper>

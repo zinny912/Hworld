@@ -76,85 +76,33 @@
                                                 </thead>
 
                                                 <tbody>
-                                                	<c:forEach var="orderVO" items="${orderList}">
+                                                	<c:forEach var="order" items="${orderList}">
+                                                	<c:forEach var="memberVOs" items="${order.memberVOs}">
 	                                                    <tr>	
 	                                                        <td>
-	                                                            <a href="orderDetail?orderNum=${orderVO.orderNum}">${orderVO.orderNum}</a>
+	                                                            <a href="orderDetail?orderNum=${order.orderNum}">${order.orderNum}</a>
 	                                                        </td>
 	                                                        
-	                                                        <td>${orderVO.memberNum}</td>
+	                                                        <td>${memberVOs.memberNum}</td>
 	                                                        
-	                                                        <td>${orderVO.name}</td>
+	                                                        <td>${memberVOs.name}</td>
 	                                                        
 	                                                        <td>
-	                                                        <fmt:formatDate value="${orderVO.orderDate}" pattern="yyyy/MM/dd" var="formattedDate" />
+	                                                        <fmt:formatDate value="${order.orderDate}" pattern="yyyy/MM/dd" var="formattedDate" />
 	                                                        <span style="font-weight:400;">${formattedDate}</span>
 	                                                        </td>	                                                        
 															
 															<td>
-	                                                        	<c:if test="${orderVO.orderState eq '0'}">
+	                                                        	<c:if test="${order.orderState eq '0'}">
 	                                                            	<span class="state-success">완료</span>	                                                            	
 	                                                           	</c:if>
-	                                                           	<c:if test="${orderVO.orderState eq '1'}">	                                                            
+	                                                           	<c:if test="${order.orderState eq '1'}">	                                                            
 	                                                            	<span class="state-cancel">환불</span>
 	                                                           	</c:if>
 															</td>
 															
-	                                                    </tr>
-	
-	                                                    <!-- <tr>
-	                                                        
-	                                                        <td>+ 573-685572</td>
-	
-	                                                        <td>2023/10/04</td>
-	
-	                                                        <td class="order-success">
-	                                                            <span>Success</span>
-	                                                        </td>
-	                                                        <td>$15</td>
-	
-	                                                    </tr>
-	
-	                                        
-	
-	                                                    <tr>
-	
-	                                                        <td>
-	                                                            <a href="order-detail.html">+ 456-1245789</a>
-	                                                        </td>
-	                                                        <td>2023/10/04</td>
-	
-	
-	                                                        <td class="order-success">
-	                                                            <span>Success</span>
-	                                                        </td>
-	
-	                                                        <td>$15</td>
-	
-	                                                    </tr>
-	
-	                                                    <tr>
-	                                                        <td>
-	                                                            <a href="order-detail.html">+ 456-1245789</a>
-	                                                        </td>
-	                                                        <td>2023/10/04</td>
-	                                                        <td class="order-cancle">
-	                                                            <span>Cancel</span>
-	                                                        </td>
-	
-	                                                        <td>$15</td>
-	
-	                                                        
-	                                                    </tr>
-	                                                    <tr>
-	                                                        <td>+ 057-3657895</td>
-	                                                        <td>2023/10/04</td>
-	                                                        <td class="order-cancle">
-	                                                            <span>Cancel</span>
-	                                                        </td>
-	                                                        <td>$15</td>
-	                                                        
-	                                                    </tr> -->
+	                                                    </tr>		                                                 
+	                                                </c:forEach>
 	                                                </c:forEach>    
                                                 </tbody>
                                             </table>

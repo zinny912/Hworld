@@ -153,16 +153,19 @@
                                                     <div class="row g-4">
                                                         <h4>주문 내역</h4>
                                                         <ul class="order-details">
-                                                            <li>주문 번호: 5563853658932</li>
-                                                            <li>주문 날짜: 2023/10/04</li>
-                                                            <li>주문 가격: $907.28</li>
+                                                            <li>주문 번호: ${orderVO.orderNum}</li>
+                                                            <li>
+								                                <fmt:formatDate value="${orderVO.orderDate}" pattern="yyyy/MM/dd" var="formattedDate" />
+								                                <span style="font-weight:400;">주문 날짜: ${formattedDate}</span>
+								                            </li>
+                                                            <li>주문 가격: ${orderVO.orderFinalPrice}</li>
                                                         </ul>
 
                                                         <h4>배송지</h4>
                                                         <ul class="order-details">
-                                                            <li>Gerg Harvell</li>
-                                                            <li>568, Suite Ave.</li>
-                                                            <li>Austrlia, 235153 Contact No. 48465465465</li>
+                                                            <li>(${orderVO.orderAddress1})</li>
+                                                            <li>${orderVO.orderAddress2}</li>
+                                                            <li>${orderVO.orderAddress3}</li>
                                                         </ul>
 
                                                         <div class="delivery-sec">
