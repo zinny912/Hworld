@@ -27,26 +27,43 @@ public class MyPageController {
 	private MyPageService myPageService;
 	
 	
-	// 마이페이지 home (요금청구/납부)
-	@GetMapping("/myPage")
+	//마이 페이지 홈
+	//필요한 정보들을 미리 다 뿌려둬야 jsp에서 사용가능할듯 함
+	@GetMapping("myPage")
 	public ModelAndView myPage() throws Exception{
 		ModelAndView modelAndView = new ModelAndView();
+		
+		//기능
+		//요금 청구/납부 - 
+		
+		//가입 정보
+		
+		//회선 관리
+		
+		//주문 내역
+		
+		//문의 내역
+		
+		//구매 후기
+		
+		//회원 탈퇴
+		
 		modelAndView.setViewName("hworld/myPage");
 		return modelAndView;
 	}
 	
 	// 가입 정보 변경(Post)
-	@PostMapping("/myPage")
-	public ModelAndView memberUpdate(MemberVO memberVO) throws Exception {
-		
-		ModelAndView modelAndView = new ModelAndView();
-				
-		int result = myPageService.memberUpdate(memberVO);		
-		
-		modelAndView.setViewName("hworld/myPage");
-				
-		return modelAndView;
-	}
+//	@PostMapping("myPage")
+//	public ModelAndView memberUpdate(MemberVO memberVO) throws Exception {
+//		
+//		ModelAndView modelAndView = new ModelAndView();
+//				
+//		int result = myPageService.memberUpdate(memberVO);		
+//		
+//		modelAndView.setViewName("hworld/myPage");
+//				
+//		return modelAndView;
+//	}
 	
 //	@PostMapping("/myPage")
 //	public String pwUpdate(HttpServletRequest request, RedirectAttributes redirectAttributes,Model model,HttpSession session,
