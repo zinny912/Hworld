@@ -5,21 +5,79 @@
   
 <mapper namespace="com.hworld.base.dao.MemberDAO">
 	
+	<!-- 회원 확인 -->
+	<!-- 주민번호만 일치 -->
+	<select id="getIdentifybyRRN" parameterType="MemberVO" resultType="MemberVO">
+		SELECT MEMBERNUM, EMAIL, PW, NAME, RRNF, RRNL
+		FROM MEMBER
+		WHERE RRNF=#{rrnf} AND RRNL=#{rrnl}
+	</select>
+	
+	<!-- 주민번호 + 이름 체크 -->
+	<select id="getIdentifybyName" parameterType="MemberVO" resultType="MemberVO">
+		SELECT MEMBERNUM, EMAIL, PW, NAME, RRNF, RRNL
+		FROM MEMBER
+		WHERE RRNF=#{rrnf} AND RRNL=#{rrnl} AND NAME=#{name}
+	</select>
+	
+	<!-- 회원번호로 회원정보 조회 -->
+	<select id="getMemberDetail" parameterType="MemberVO" resultType="MemberVO">
+		SELECT *
+		FROM MEMBER
+		WHERE MEMBERNUM=#{memberNum}
+	</select>
+	
+	<!-- 회원가입 -->
 	<insert id="setMemberAdd" parameterType="MemberVO">
-		INSERT INTO MEMBER(MEMBERNUM, EMAIL, PW, NAME, ADDRESS1, ADDRESS2, ADDRESS3, RRNF, RRNL, JOINDATE, MEMBERSTATE, ADMINCHECK, PHONENUM, OWNCHECK)
-		VALUES(#{memberNum}, #{email}, #{pw}, #{name}, #{address1}, #{address2}, #{address3}, #{rrnf}, #{rrnl}, now(), 1, 1, #{phoneNum}, 1)
+		INSERT INTO MEMBER(MEMBERNUM, EMAIL, PW, NAME, ADDRESS1, ADDRESS2, ADDRESS3, RRNF, RRNL, JOINDATE, MEMBERSTATE, ADMINCHECK, TEL, OWNCHECK)
+		VALUES(#{memberNum}, #{email}, #{pw}, #{name}, #{address1}, #{address2}, #{address3}, #{rrnf}, #{rrnl}, now(), 1, 1, #{tel}, 1)
 	</insert>
+	
+	<!-- 회선이 있는 회원의 id/pw 업데이트 -->
+	<update id="setMemberInitUpdate" parameterType="MemberVO">
+		UPDATE MEMBER SET EMAIL=#{email}, PW=#{pw}
+		WHERE MEMBERNUM=#{memberNum}
+	</update>
+	
 	
 	<!-- 아이디 중복검사 -->
   	<select id="emailCheck" parameterType="MemberVO" resultType="MemberVO">
   		SELECT EMAIL FROM MEMBER WHERE EMAIL = #{email}  		  	
   	</select>
   	
+  	<!-- 로그인 -->
   	<select id="getMemberLogin" parameterType="MemberVO" resultType="MemberVO">
 		SELECT * FROM MEMBER
-		WHERE EMAIL = #{email}		
+		WHERE EMAIL = #{email}
 	</select>
 	
+	<!-- 이메일 찾기 -->
+	<select id="emailSearch" parameterType="MemberVO" resultType="MemberVO">
+		<![CDATA[
+		    SELECT * FROM MEMBER
+		    WHERE NAME = #{name} AND TEL = #{tel}
+		]]>    
+	</select>
+	
+	<!-- 비밀번호 찾기 -->
+	<select id="memberPwCheck" parameterType="MemberVO" resultType="java.lang.Integer">
+		<![CDATA[
+		    SELECT COUNT(*) FROM MEMBER
+		    WHERE NAME = #{name} AND EMAIL = #{email}
+		]]>    
+	</select>
+	
+	<!-- 비밀번호 찾기시 DB 업데이트 -->
+	<update id="passwordUpdate" parameterType="MemberVO" >
+	    UPDATE MEMBER SET PW =#{pw}
+	    WHERE NAME = #{name} AND EMAIL = #{email}
+	</update>
+	
+	<!-- 비밀번호 변경 -->
+	<update id="pwUpdate" parameterType="MemberVO">
+		UPDATE MEMBER SET PW=#{pw}
+		WHERE EMAIL=#{email}
+	</update>
 	
 	
 </mapper>

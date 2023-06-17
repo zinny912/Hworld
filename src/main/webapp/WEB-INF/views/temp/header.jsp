@@ -49,13 +49,7 @@
                                                             <a href="/direct/phoneList">휴대폰</a>
                                                         </li>
                                                         <li>
-                                                            <a href="/direct/accessoryList">액세서리</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#">음향기기</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#">기타</a>
+                                                            <a href="/direct/accessoryList">음향기기/악세사리</a>
                                                         </li>
                                                     </ul>
                                                 </li>
@@ -87,10 +81,19 @@
                                                 <li class="">
                                                     <a href="/etc/findShop" class="nav-link menu-title fw-bold fs-6">매장찾기</a>
                                                 </li>
+                <!-- 관리자/회원 테스트용 로그인 버튼 시작, 테스트 후 필요없으면 삭제 -->
+                <li>
+                    <a href="javascript:void(0)" class="d-block fw-bold fs-6 me-3" id="testAdmin">관리자</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)" class="d-block fw-bold fs-6 me-3" id="testMember">일반회원</a>
+                </li>
+                <!-- 관리자/회원 테스트용 로그인 버튼 끝, 테스트 후 필요없으면 삭제 -->
                                             </ul>
                                         </div>
                                     </div>
                                 </nav>
+                                
                                     <div class="menu-right">
                                         <ul>
                                             <c:if test="${empty memberVO}">
@@ -99,7 +102,7 @@
                                                     <a href="/member/login" class="d-block fw-bold fs-6 me-3">로그인</a>
                                                 </li>
                                                 <li>
-                                                    <a href="/member/signUpPrecheck" class="d-block fw-bold fs-6">회원 가입</a>
+                                                    <a href="/member/precheck" class="d-block fw-bold fs-6">회원 가입</a>
                                                 </li>
                                             </ul>
 											</c:if>
@@ -111,6 +114,11 @@
                                                 </div>
                                                 <div class="onhover-div profile-dropdown">
                                                     <ul>
+	                                                    <c:if test="${memberVO.adminCheck == 0}">
+			                                            	<li>												
+																<a href="/admin/home" class="d-block">관리자 페이지</a>
+															</li>												
+														</c:if>
                                                         <li>
                                                             <a href="/myPage" class="d-block">마이페이지</a>
                                                         </li>
@@ -174,7 +182,7 @@
                                                             <div class="cart-btn">
                                                                 <h6 class="cart-total"><span class="font-light">Total:</span> $
                                                                     542.00</h6>
-                                                                <button onclick="location.href = '/cart';" type="button"
+                                                                <button onclick="location.href = '/cart/cartInfo';" type="button"
                                                                     class="btn btn-solid-default btn-block">
                                                                     구매하기
                                                                 </button>
@@ -183,7 +191,7 @@
                                                     </div>
                                                 </div>
                                             </li>
-                                            </c:if>
+                                            </c:if>                                            
                                         <!-- 장바구니 아이콘 드랍다운 end -->
                                         </ul>
                                     </div>
@@ -194,3 +202,56 @@
                 </div>
             </header>
     <!-- header end -->
+
+<script>
+    //테스트용 자동로그인 스크립트. 테스트 끝나면 삭제하기
+    $('#testAdmin').click(function(){
+        console.log("admin");
+        const email = "xbigbang5@gmail.com";
+        const pw = "ayxyhSiL4U";
+
+        $.ajax({
+            type: 'POST',
+            url: '/member/testAdmin',
+            data: {
+                email: email,
+                pw: pw
+            },
+            success: function(response) {
+            // 응답 처리 로직 작성
+                console.log("성공", response);
+                location.reload();
+            },
+            error: function(error) {
+            // 에러 처리 로직 작성
+            console.log("실패", error);
+            location.reload();
+            }
+        });
+    })
+
+    $('#testMember').click(function(){
+        console.log("member");
+        const email = "zinnybot5@gmail.com";
+        const pw = "12345";
+
+        $.ajax({
+            type: 'POST',
+            url: '/member/testMember',
+            data: {
+                email: email,
+                pw: pw
+            },
+            success: function(response) {
+            // 응답 처리 로직 작성
+                console.log("성공", response);
+                location.reload();
+            },
+            error: function(error) {
+            // 에러 처리 로직 작성
+            console.log("실패", error);
+            location.reload();
+            }
+        });
+    })
+</script>

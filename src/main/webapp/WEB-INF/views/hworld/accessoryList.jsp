@@ -11,43 +11,7 @@
 
 <body class="theme-color2 light ltr">
 <c:import url="../temp/header.jsp"></c:import>
-    <!-- mobile fix menu start -->
-    <div class="mobile-menu d-sm-none">
-        <ul>
-            <li>
-                <a href="index.html">
-                    <i data-feather="home"></i>
-                    <span>Home</span>
-                </a>
-            </li>
-            <li>
-                <a href="javascript:void(0)" class="toggle-category">
-                    <i data-feather="align-justify"></i>
-                    <span>Category</span>
-                </a>
-            </li>
-            <li>
-                <a href="cart.html">
-                    <i data-feather="shopping-bag"></i>
-                    <span>Cart</span>
-                </a>
-            </li>
-            <li>
-                <a href="wishlist.html">
-                    <i data-feather="heart"></i>
-                    <span>Wishlist</span>
-                </a>
-            </li>
-            <li>
-                <a href="user-dashboard.html">
-                    <i data-feather="user"></i>
-                    <span>Account</span>
-                </a>
-            </li>
-        </ul>
-    </div>
-    <!-- mobile fix menu end -->
-
+    
     <!-- Breadcrumb section start -->
     <section class="breadcrumb-section section-b-space">
         <ul class="circles">
@@ -88,12 +52,7 @@
             <div class="row">
                 <div class="col-lg-9 col-12 ratio_30">
                     <div class="row g-4">
-                        <!-- filter button -->
-                        <div class="filter-button">
-                            <button class="danger-button danger-center btn btn-sm filter-btn"><i
-                                    data-feather="align-left"></i> Filter</button>
-                        </div>
-                        <!-- filter button -->
+                        
                         <div class="col-12">
                             <div class="filter-options">
                                 <div class="select-options">
@@ -105,13 +64,13 @@
                                             </button>
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                                 <li>
-                                                    <a class="dropdown-item" href="javascript:void(0)">최신순</a>
+                                                    <a class="dropdown-item" href="accessoryList">최신순</a>
                                                 </li>
                                                 <li>
-                                                    <a class="dropdown-item" href="javascript:void(0)">가격 높은 순</a>
+                                                    <a class="dropdown-item" href="accessoryList?sortType=priceLow">가격 낮은 순</a>
                                                 </li>
                                                 <li>
-                                                    <a class="dropdown-item" href="javascript:void(0)">가격 낮은 순</a>
+                                                    <a class="dropdown-item" href="accessoryList?sortType=priceHigh">가격 높은 순</a>
                                                 </li>
                                                 
                                             </ul>
@@ -149,701 +108,53 @@
                     <!-- Prodcut setion -->
                     <div
                         class="row g-sm-4 g-3 row-cols-lg-4 row-cols-md-3 row-cols-2 mt-1 custom-gy-5 product-style-2 ratio_asos product-list-section">
+ 	                   <c:forEach items="${list}" var="direct">
                         <div>
                             <div class="product-box">
                                 <div class="img-wrapper">
                                     <div class="front">
-                                        <a href="product-left-sidebar.html">
-                                            <img src="/assets/images/fashion/product/front/1.jpg"
-                                                class="bg-img blur-up lazyload" alt="">
+                                        <a href="./accessoryDetail?slicedCode=${direct.slicedCode}">
+                                            <img src="/assets/images/fashion/product/${direct.slicedCode}thumb"
+                                                class="bg-img lazyload" alt="">
                                         </a>
                                     </div>
-                                    <div class="back">
-                                        <a href="product-left-sidebar.html">
-                                            <img src="/assets/images/fashion/product/back/1.jpg"
-                                                class="bg-img blur-up lazyload" alt="">
-                                        </a>
-                                    </div>
-                                    
+                                
                                 </div>
                                 <div class="product-details">
                                     <div class="rating-details">
-                                        <span class="font-light grid-content">B&Y Jacket</span>
+                                        <span class="font-light grid-content">${direct.slicedCode}</span>
                                         <ul class="rating mt-0">
-                                            <li>
-                                                <i class="fas fa-star theme-color"></i>
-                                            </li>
-                                            <li>
-                                                <i class="fas fa-star theme-color"></i>
-                                            </li>
-                                            <li>
-                                                <i class="fas fa-star"></i>
-                                            </li>
-                                            <li>
-                                                <i class="fas fa-star"></i>
-                                            </li>
-                                            <li>
-                                                <i class="fas fa-star"></i>
-                                            </li>
-                                        </ul>
+			                          	<li>
+							                <i class="fas fa-star ${direct.rate >= 0.5 ? 'theme-color' : ''}"></i>
+									    </li>
+									    <li>
+							                <i class="fas fa-star ${direct.rate >= 1.5 ? 'theme-color' : ''}"></i>
+							            </li>
+							            <li>
+							                <i class="fas fa-star ${direct.rate >= 2.5 ? 'theme-color' : ''}"></i>
+							            </li>
+							            <li>
+							                <i class="fas fa-star ${direct.rate >= 3.5 ? 'theme-color' : ''}"></i>
+							            </li>
+							            <li>
+							                <i class="fas fa-star ${direct.rate >= 4.5 ? 'theme-color' : ''}"></i>
+							            </li>
+							        	</ul>  
                                     </div>
                                     <div class="main-price">
-                                        <a href="product-left-sidebar.html" class="font-default">
-                                            <h5 class="ms-0">Slim Fit Plastic Coat</h5>
-                                        </a>
-                                        <div class="listing-content">
-                                            <span class="font-light">Regular Fit</span>
-                                            <p class="font-light">Lorem ipsum, dolor sit amet consectetur adipisicing
-                                                elit. Sit, deserunt? Asperiores aliquam voluptatum culpa aliquid ab
-                                                ducimus eaque illum, quibusdam reiciendis id ad consectetur quis, animi
-                                                qui, minus quidem eveniet! Dolorum magnam numquam, asperiores
-                                                accusantium architecto placeat quam officia, tempore repellendus.</p>
-                                        </div>
-                                        <h3 class="theme-color">$78.00</h3>
-                                        <button onclick="location.href = 'cart.html';" class="btn listing-content">Add
-                                            To Cart</button>
-                                    </div>
+		                               <h5 class="ms-0"> <a href="./accessoryDetail?slicedCode=${direct.slicedCode}" class="font-default">
+		                                    ${direct.directName}
+		                                </a></h5>
+		                               
+		                                <h3 class="theme-color d-flex" id="renewPrice${direct.slicedCode}">
+						                    ${direct.initPrice}
+						                    
+						                </h3>
+		                            </div>
                                 </div>
                             </div>
                         </div>
-
-                        <div>
-                            <div class="product-box">
-                                <div class="img-wrapper">
-                                    <div class="front">
-                                        <a href="product-left-sidebar.html">
-                                            <img src="/assets/images/fashion/product/front/2.jpg"
-                                                class="bg-img blur-up lazyload" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="back">
-                                        <a href="product-left-sidebar.html">
-                                            <img src="/assets/images/fashion/product/back/2.jpg"
-                                                class="bg-img blur-up lazyload" alt="">
-                                        </a>
-                                    </div>
-                                    
-                                </div>
-                                <div class="product-details">
-                                    <div class="rating-details">
-                                        <span class="font-light grid-content">Jacket</span>
-                                        <ul class="rating mt-0">
-                                            <li>
-                                                <i class="fas fa-star theme-color"></i>
-                                            </li>
-                                            <li>
-                                                <i class="fas fa-star theme-color"></i>
-                                            </li>
-                                            <li>
-                                                <i class="fas fa-star theme-color"></i>
-                                            </li>
-                                            <li>
-                                                <i class="fas fa-star theme-color"></i>
-                                            </li>
-                                            <li>
-                                                <i class="fas fa-star"></i>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="main-price">
-                                        <a href="product-left-sidebar.html" class="font-default">
-                                            <h5 class="ms-0">Blue Leather Jacket</h5>
-                                        </a>
-                                        <div class="listing-content">
-                                            <span class="font-light">Jacket</span>
-                                            <p class="font-light">Lorem ipsum, dolor sit amet consectetur adipisicing
-                                                elit. Sit, deserunt? Asperiores aliquam voluptatum culpa aliquid ab
-                                                ducimus eaque illum, quibusdam reiciendis id ad consectetur quis, animi
-                                                qui, minus quidem eveniet! Dolorum magnam numquam, asperiores
-                                                accusantium architecto placeat quam officia, tempore repellendus.</p>
-                                        </div>
-                                        <h3 class="theme-color">$60.00</h3>
-                                        <button onclick="location.href = 'cart.html';" class="btn listing-content">Add
-                                            To Cart</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div>
-                            <div class="product-box">
-                                <div class="img-wrapper">
-                                    <div class="front">
-                                        <a href="product-left-sidebar.html">
-                                            <img src="/assets/images/fashion/product/front/2.jpg"
-                                                class="bg-img blur-up lazyload" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="back">
-                                        <a href="product-left-sidebar.html">
-                                            <img src="/assets/images/fashion/product/back/2.jpg"
-                                                class="bg-img blur-up lazyload" alt="">
-                                        </a>
-                                    </div>
-                                    
-                                </div>
-                                <div class="product-details">
-                                    <div class="rating-details">
-                                        <span class="font-light grid-content">Jacket</span>
-                                        <ul class="rating mt-0">
-                                            <li>
-                                                <i class="fas fa-star theme-color"></i>
-                                            </li>
-                                            <li>
-                                                <i class="fas fa-star theme-color"></i>
-                                            </li>
-                                            <li>
-                                                <i class="fas fa-star theme-color"></i>
-                                            </li>
-                                            <li>
-                                                <i class="fas fa-star theme-color"></i>
-                                            </li>
-                                            <li>
-                                                <i class="fas fa-star"></i>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="main-price">
-                                        <a href="product-left-sidebar.html" class="font-default">
-                                            <h5 class="ms-0">Blue Leather Jacket</h5>
-                                        </a>
-                                        <div class="listing-content">
-                                            <span class="font-light">Jacket</span>
-                                            <p class="font-light">Lorem ipsum, dolor sit amet consectetur adipisicing
-                                                elit. Sit, deserunt? Asperiores aliquam voluptatum culpa aliquid ab
-                                                ducimus eaque illum, quibusdam reiciendis id ad consectetur quis, animi
-                                                qui, minus quidem eveniet! Dolorum magnam numquam, asperiores
-                                                accusantium architecto placeat quam officia, tempore repellendus.</p>
-                                        </div>
-                                        <h3 class="theme-color">$60.00</h3>
-                                        <button onclick="location.href = 'cart.html';" class="btn listing-content">Add
-                                            To Cart</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div>
-                            <div class="product-box">
-                                <div class="img-wrapper">
-                                    <div class="front">
-                                        <a href="product-left-sidebar.html">
-                                            <img src="/assets/images/fashion/product/front/4.jpg"
-                                                class="bg-img blur-up lazyload" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="back">
-                                        <a href="product-left-sidebar.html">
-                                            <img src="/assets/images/fashion/product/back/4.jpg"
-                                                class="bg-img blur-up lazyload" alt="">
-                                        </a>
-                                    </div>
-                                    
-                                </div>
-                                <div class="product-details">
-                                    <div class="rating-details">
-                                        <span class="font-light grid-content">Jacket</span>
-                                        <ul class="rating mt-0">
-                                            <li>
-                                                <i class="fas fa-star theme-color"></i>
-                                            </li>
-                                            <li>
-                                                <i class="fas fa-star theme-color"></i>
-                                            </li>
-                                            <li>
-                                                <i class="fas fa-star theme-color"></i>
-                                            </li>
-                                            <li>
-                                                <i class="fas fa-star theme-color"></i>
-                                            </li>
-                                            <li>
-                                                <i class="fas fa-star theme-color"></i>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="main-price">
-                                        <a href="product-left-sidebar.html" class="font-default">
-                                            <h5 class="ms-0">Slim Fit Plastic Coat</h5>
-                                        </a>
-                                        <div class="listing-content">
-                                            <span class="font-light">Jacket</span>
-                                            <p class="font-light">Lorem ipsum, dolor sit amet consectetur adipisicing
-                                                elit. Sit, deserunt? Asperiores aliquam voluptatum culpa aliquid ab
-                                                ducimus eaque illum, quibusdam reiciendis id ad consectetur quis, animi
-                                                qui, minus quidem eveniet! Dolorum magnam numquam, asperiores
-                                                accusantium architecto placeat quam officia, tempore repellendus.</p>
-                                        </div>
-                                        <h3 class="theme-color">$69.00</h3>
-                                        <button onclick="location.href = 'cart.html';" class="btn listing-content">Add
-                                            To Cart</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div>
-                            <div class="product-box">
-                                <div class="img-wrapper">
-                                    <div class="front">
-                                        <a href="product-left-sidebar.html">
-                                            <img src="/assets/images/fashion/product/front/5.jpg"
-                                                class="bg-img blur-up lazyload" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="back">
-                                        <a href="product-left-sidebar.html">
-                                            <img src="/assets/images/fashion/product/back/5.jpg"
-                                                class="bg-img blur-up lazyload" alt="">
-                                        </a>
-                                    </div>
-                                    
-                                </div>
-                                <div class="product-details">
-                                    <div class="rating-details">
-                                        <span class="font-light grid-content">Full Jacket</span>
-                                        <ul class="rating mt-0">
-                                            <li>
-                                                <i class="fas fa-star theme-color"></i>
-                                            </li>
-                                            <li>
-                                                <i class="fas fa-star theme-color"></i>
-                                            </li>
-                                            <li>
-                                                <i class="fas fa-star"></i>
-                                            </li>
-                                            <li>
-                                                <i class="fas fa-star"></i>
-                                            </li>
-                                            <li>
-                                                <i class="fas fa-star"></i>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="main-price">
-                                        <a href="product-left-sidebar.html" class="font-default">
-                                            <h5 class="ms-0">Full Jacket Ladies</h5>
-                                        </a>
-                                        <div class="listing-content">
-                                            <span class="font-light">Full Jacket</span>
-                                            <p class="font-light">Lorem ipsum, dolor sit amet consectetur adipisicing
-                                                elit. Sit, deserunt? Asperiores aliquam voluptatum culpa aliquid ab
-                                                ducimus eaque illum, quibusdam reiciendis id ad consectetur quis, animi
-                                                qui, minus quidem eveniet! Dolorum magnam numquam, asperiores
-                                                accusantium architecto placeat quam officia, tempore repellendus.</p>
-                                        </div>
-                                        <h3 class="theme-color">$40.00</h3>
-                                        <button onclick="location.href = 'cart.html';" class="btn listing-content">Add
-                                            To Cart</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div>
-                            <div class="product-box">
-                                <div class="img-wrapper">
-                                    <div class="front">
-                                        <a href="product-left-sidebar.html">
-                                            <img src="/assets/images/fashion/product/front/6.jpg"
-                                                class="bg-img blur-up lazyload" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="back">
-                                        <a href="product-left-sidebar.html">
-                                            <img src="/assets/images/fashion/product/back/6.jpg"
-                                                class="bg-img blur-up lazyload" alt="">
-                                        </a>
-                                    </div>
-                                    
-                                </div>
-                                <div class="product-details">
-                                    <div class="rating-details">
-                                        <span class="font-light grid-content">T-Shirt</span>
-                                        <ul class="rating mt-0">
-                                            <li>
-                                                <i class="fas fa-star theme-color"></i>
-                                            </li>
-                                            <li>
-                                                <i class="fas fa-star theme-color"></i>
-                                            </li>
-                                            <li>
-                                                <i class="fas fa-star theme-color"></i>
-                                            </li>
-                                            <li>
-                                                <i class="fas fa-star theme-color"></i>
-                                            </li>
-                                            <li>
-                                                <i class="fas fa-star theme-color"></i>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="main-price">
-                                        <a href="product-left-sidebar.html" class="font-default">
-                                            <h5 class="ms-0">Full Slive Black T-Shirt</h5>
-                                        </a>
-                                        <div class="listing-content">
-                                            <span class="font-light">T-Shirt</span>
-                                            <p class="font-light">Lorem ipsum, dolor sit amet consectetur adipisicing
-                                                elit. Sit, deserunt? Asperiores aliquam voluptatum culpa aliquid ab
-                                                ducimus eaque illum, quibusdam reiciendis id ad consectetur quis, animi
-                                                qui, minus quidem eveniet! Dolorum magnam numquam, asperiores
-                                                accusantium architecto placeat quam officia, tempore repellendus.</p>
-                                        </div>
-                                        <h3 class="theme-color">$69.00</h3>
-                                        <button onclick="location.href = 'cart.html';" class="btn listing-content">Add
-                                            To Cart</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div>
-                            <div class="product-box">
-                                <div class="img-wrapper">
-                                    <div class="front">
-                                        <a href="product-left-sidebar.html">
-                                            <img src="/assets/images/fashion/product/front/7.jpg"
-                                                class="bg-img blur-up lazyload" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="back">
-                                        <a href="product-left-sidebar.html">
-                                            <img src="/assets/images/fashion/product/back/7.jpg"
-                                                class="bg-img blur-up lazyload" alt="">
-                                        </a>
-                                    </div>
-                                    
-                                </div>
-                                <div class="product-details">
-                                    <div class="rating-details">
-                                        <span class="font-light grid-content">Fashion</span>
-                                        <ul class="rating mt-0">
-                                            <li>
-                                                <i class="fas fa-star theme-color"></i>
-                                            </li>
-                                            <li>
-                                                <i class="fas fa-star theme-color"></i>
-                                            </li>
-                                            <li>
-                                                <i class="fas fa-star"></i>
-                                            </li>
-                                            <li>
-                                                <i class="fas fa-star"></i>
-                                            </li>
-                                            <li>
-                                                <i class="fas fa-star"></i>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="main-price">
-                                        <a href="product-left-sidebar.html" class="font-default">
-                                            <h5 class="ms-0">Latest Fashion Cloth</h5>
-                                        </a>
-                                        <div class="listing-content">
-                                            <span class="font-light">Fashion</span>
-                                            <p class="font-light">Lorem ipsum, dolor sit amet consectetur adipisicing
-                                                elit. Sit, deserunt? Asperiores aliquam voluptatum culpa aliquid ab
-                                                ducimus eaque illum, quibusdam reiciendis id ad consectetur quis, animi
-                                                qui, minus quidem eveniet! Dolorum magnam numquam, asperiores
-                                                accusantium architecto placeat quam officia, tempore repellendus.</p>
-                                        </div>
-                                        <h3 class="theme-color">$54.00</h3>
-                                        <button onclick="location.href = 'cart.html';" class="btn listing-content">Add
-                                            To Cart</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div>
-                            <div class="product-box">
-                                <div class="img-wrapper">
-                                    <div class="front">
-                                        <a href="product-left-sidebar.html">
-                                            <img src="/assets/images/fashion/product/front/8.jpg"
-                                                class="bg-img blur-up lazyload" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="back">
-                                        <a href="product-left-sidebar.html">
-                                            <img src="/assets/images/fashion/product/back/8.jpg"
-                                                class="bg-img blur-up lazyload" alt="">
-                                        </a>
-                                    </div>
-                                    
-                                </div>
-                                <div class="product-details">
-                                    <div class="rating-details">
-                                        <span class="font-light grid-content">Jacket</span>
-                                        <ul class="rating mt-0">
-                                            <li>
-                                                <i class="fas fa-star theme-color"></i>
-                                            </li>
-                                            <li>
-                                                <i class="fas fa-star theme-color"></i>
-                                            </li>
-                                            <li>
-                                                <i class="fas fa-star theme-color"></i>
-                                            </li>
-                                            <li>
-                                                <i class="fas fa-star"></i>
-                                            </li>
-                                            <li>
-                                                <i class="fas fa-star"></i>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="main-price">
-                                        <a href="product-left-sidebar.html" class="font-default">
-                                            <h5 class="ms-0">Full Black Slive Jacket</h5>
-                                        </a>
-                                        <div class="listing-content">
-                                            <span class="font-light">Jacket</span>
-                                            <p class="font-light">Lorem ipsum, dolor sit amet consectetur adipisicing
-                                                elit. Sit, deserunt? Asperiores aliquam voluptatum culpa aliquid ab
-                                                ducimus eaque illum, quibusdam reiciendis id ad consectetur quis, animi
-                                                qui, minus quidem eveniet! Dolorum magnam numquam, asperiores
-                                                accusantium architecto placeat quam officia, tempore repellendus.</p>
-                                        </div>
-                                        <h3 class="theme-color">$99.00</h3>
-                                        <button onclick="location.href = 'cart.html';" class="btn listing-content">Add
-                                            To Cart</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div>
-                            <div class="product-box">
-                                <div class="img-wrapper">
-                                    <div class="front">
-                                        <a href="product-left-sidebar.html">
-                                            <img src="/assets/images/fashion/product/front/1.jpg"
-                                                class="bg-img blur-up lazyload" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="back">
-                                        <a href="product-left-sidebar.html">
-                                            <img src="/assets/images/fashion/product/back/1.jpg"
-                                                class="bg-img blur-up lazyload" alt="">
-                                        </a>
-                                    </div>
-                                    
-                                </div>
-                                <div class="product-details">
-                                    <div class="rating-details">
-                                        <span class="font-light grid-content">B&Y Jacket</span>
-                                        <ul class="rating mt-0">
-                                            <li>
-                                                <i class="fas fa-star theme-color"></i>
-                                            </li>
-                                            <li>
-                                                <i class="fas fa-star theme-color"></i>
-                                            </li>
-                                            <li>
-                                                <i class="fas fa-star"></i>
-                                            </li>
-                                            <li>
-                                                <i class="fas fa-star"></i>
-                                            </li>
-                                            <li>
-                                                <i class="fas fa-star"></i>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="main-price">
-                                        <a href="product-left-sidebar.html" class="font-default">
-                                            <h5 class="ms-0">Slim Fit Plastic Coat</h5>
-                                        </a>
-                                        <div class="listing-content">
-                                            <span class="font-light">Regular Fit</span>
-                                            <p class="font-light">Lorem ipsum, dolor sit amet consectetur adipisicing
-                                                elit. Sit, deserunt? Asperiores aliquam voluptatum culpa aliquid ab
-                                                ducimus eaque illum, quibusdam reiciendis id ad consectetur quis, animi
-                                                qui, minus quidem eveniet! Dolorum magnam numquam, asperiores
-                                                accusantium architecto placeat quam officia, tempore repellendus.</p>
-                                        </div>
-                                        <h3 class="theme-color">$78.00</h3>
-                                        <button onclick="location.href = 'cart.html';" class="btn listing-content">Add
-                                            To Cart</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div>
-                            <div class="product-box">
-                                <div class="img-wrapper">
-                                    <div class="front">
-                                        <a href="product-left-sidebar.html">
-                                            <img src="/assets/images/fashion/product/front/2.jpg"
-                                                class="bg-img blur-up lazyload" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="back">
-                                        <a href="product-left-sidebar.html">
-                                            <img src="/assets/images/fashion/product/back/2.jpg"
-                                                class="bg-img blur-up lazyload" alt="">
-                                        </a>
-                                    </div>
-                                    
-                                </div>
-                                <div class="product-details">
-                                    <div class="rating-details">
-                                        <span class="font-light grid-content">Jacket</span>
-                                        <ul class="rating mt-0">
-                                            <li>
-                                                <i class="fas fa-star theme-color"></i>
-                                            </li>
-                                            <li>
-                                                <i class="fas fa-star theme-color"></i>
-                                            </li>
-                                            <li>
-                                                <i class="fas fa-star theme-color"></i>
-                                            </li>
-                                            <li>
-                                                <i class="fas fa-star theme-color"></i>
-                                            </li>
-                                            <li>
-                                                <i class="fas fa-star"></i>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="main-price">
-                                        <a href="product-left-sidebar.html" class="font-default">
-                                            <h5 class="ms-0">Blue Leather Jacket</h5>
-                                        </a>
-                                        <div class="listing-content">
-                                            <span class="font-light">Jacket</span>
-                                            <p class="font-light">Lorem ipsum, dolor sit amet consectetur adipisicing
-                                                elit. Sit, deserunt? Asperiores aliquam voluptatum culpa aliquid ab
-                                                ducimus eaque illum, quibusdam reiciendis id ad consectetur quis, animi
-                                                qui, minus quidem eveniet! Dolorum magnam numquam, asperiores
-                                                accusantium architecto placeat quam officia, tempore repellendus.</p>
-                                        </div>
-                                        <h3 class="theme-color">$60.00</h3>
-                                        <button onclick="location.href = 'cart.html';" class="btn listing-content">Add
-                                            To Cart</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div>
-                            <div class="product-box">
-                                <div class="img-wrapper">
-                                    <div class="front">
-                                        <a href="product-left-sidebar.html">
-                                            <img src="/assets/images/fashion/product/front/3.jpg"
-                                                class="bg-img blur-up lazyload" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="back">
-                                        <a href="product-left-sidebar.html">
-                                            <img src="/assets/images/fashion/product/back/3.jpg"
-                                                class="bg-img blur-up lazyload" alt="">
-                                        </a>
-                                    </div>
-                                    
-                                </div>
-                                <div class="product-details">
-                                    <div class="rating-details">
-                                        <span class="font-light grid-content">Coat</span>
-                                        <ul class="rating mt-0">
-                                            <li>
-                                                <i class="fas fa-star theme-color"></i>
-                                            </li>
-                                            <li>
-                                                <i class="fas fa-star theme-color"></i>
-                                            </li>
-                                            <li>
-                                                <i class="fas fa-star"></i>
-                                            </li>
-                                            <li>
-                                                <i class="fas fa-star"></i>
-                                            </li>
-                                            <li>
-                                                <i class="fas fa-star"></i>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="main-price">
-                                        <a href="product-left-sidebar.html" class="font-default">
-                                            <h5 class="ms-0">Military Ball Night Dress</h5>
-                                        </a>
-                                        <div class="listing-content">
-                                            <span class="font-light">Coat</span>
-                                            <p class="font-light">Lorem ipsum, dolor sit amet consectetur adipisicing
-                                                elit. Sit, deserunt? Asperiores aliquam voluptatum culpa aliquid ab
-                                                ducimus eaque illum, quibusdam reiciendis id ad consectetur quis, animi
-                                                qui, minus quidem eveniet! Dolorum magnam numquam, asperiores
-                                                accusantium architecto placeat quam officia, tempore repellendus.</p>
-                                        </div>
-                                        <h3 class="theme-color">$85.00</h3>
-                                        <button onclick="location.href = 'cart.html';" class="btn listing-content">Add
-                                            To Cart</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div>
-                            <div class="product-box">
-                                <div class="img-wrapper">
-                                    <div class="front">
-                                        <a href="product-left-sidebar.html">
-                                            <img src="/assets/images/fashion/product/front/4.jpg"
-                                                class="bg-img blur-up lazyload" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="back">
-                                        <a href="product-left-sidebar.html">
-                                            <img src="/assets/images/fashion/product/back/4.jpg"
-                                                class="bg-img blur-up lazyload" alt="">
-                                        </a>
-                                    </div>
-                                   
-                                </div>
-                                <div class="product-details">
-                                    <div class="rating-details">
-                                        <span class="font-light grid-content">Jacket</span>
-                                        <ul class="rating mt-0">
-                                            <li>
-                                                <i class="fas fa-star theme-color"></i>
-                                            </li>
-                                            <li>
-                                                <i class="fas fa-star theme-color"></i>
-                                            </li>
-                                            <li>
-                                                <i class="fas fa-star theme-color"></i>
-                                            </li>
-                                            <li>
-                                                <i class="fas fa-star theme-color"></i>
-                                            </li>
-                                            <li>
-                                                <i class="fas fa-star theme-color"></i>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="main-price">
-                                        <a href="product-left-sidebar.html" class="font-default">
-                                            <h5 class="ms-0">Slim Fit Plastic Coat</h5>
-                                        </a>
-                                        <div class="listing-content">
-                                            <span class="font-light">Jacket</span>
-                                            <p class="font-light">Lorem ipsum, dolor sit amet consectetur adipisicing
-                                                elit. Sit, deserunt? Asperiores aliquam voluptatum culpa aliquid ab
-                                                ducimus eaque illum, quibusdam reiciendis id ad consectetur quis, animi
-                                                qui, minus quidem eveniet! Dolorum magnam numquam, asperiores
-                                                accusantium architecto placeat quam officia, tempore repellendus.</p>
-                                        </div>
-                                        <h3 class="theme-color">$69.00</h3>
-                                        <button onclick="location.href = 'cart.html';" class="btn listing-content">Add
-                                            To Cart</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                       	</c:forEach>
                         <!-- Prodcut setion -->
                     </div>
 
@@ -873,7 +184,7 @@
                                 </a>
                             </li>
                         </ul>
-                        <a href="directAdd" class="btn btn-solid-default m-1" style="position: absolute">상품 등록</a>
+                        <a href="accessoryAdd" class="btn btn-solid-default m-1" style="position: absolute">상품 등록</a>
                     </nav>
                 </div>
 
@@ -887,59 +198,27 @@
 
                     <div>
                         <div class="row g-3">
+                        <c:forEach items="${recentlyViewedProducts}" var="direct">
+                        
                             <div class="col-12">
                                 <div class="product-image">
-                                    <a href="javascript:void(0)">
-                                        <img src="/assets/images/fashion/product/front/1.jpg"
-                                            class="blur-up lazyload" alt="">
+	                                <a href="./accessoryDetail?slicedCode=${direct.slicedCode}">
+                                        <img src="/assets/images/fashion/product/${direct.slicedCode}thumb"
+                                            class="lazyload" alt="">
                                     </a>
                                     <div class="product-details">
-                                        <h6 class="font-light">Regular Fit</h6>
-                                        <a href="javascript:void(0)" class="">
-                                            <h3>Slim Fit Plastic Coat</h3>
+                                        <h6 class="font-light">${direct.slicedCode}</h6>
+                                        <a href="./accessoryDetail?slicedCode=${direct.slicedCode}" class="">
+                                            <h3>${direct.directName}</h3>
                                         </a>
-                                        <h4 class="font-light mt-1"><del>$49.00</del> <span
-                                                class="theme-color">$35.50</span>
+                                        <h4> <span
+                                                class="theme-color" id="renewPrice">${direct.directPrice}</span>
                                         </h4>
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="col-12">
-                                <div class="product-image">
-                                    <a href="javascript:void(0)">
-                                        <img src="/assets/images/fashion/product/front/2.jpg"
-                                            class="blur-up lazyload" alt="">
-                                    </a>
-                                    <div class="product-details">
-                                        <h6 class="font-light">Regular Fit</h6>
-                                        <a href="javascript:void(0)" class="">
-                                            <h3>Slim Fit Plastic Coat</h3>
-                                        </a>
-                                        <h4 class="font-light mt-1"><del>$49.00</del> <span
-                                                class="theme-color">$35.50</span>
-                                        </h4>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-12">
-                                <div class="product-image">
-                                    <a href="javascript:void(0)">
-                                        <img src="/assets/images/fashion/product/front/3.jpg"
-                                            class="blur-up lazyload" alt="">
-                                    </a>
-                                    <div class="product-details">
-                                        <h6 class="font-light">Regular Fit</h6>
-                                        <a href="javascript:void(0)" class="">
-                                            <h3>Slim Fit Plastic Coat</h3>
-                                        </a>
-                                        <h4 class="font-light mt-1"><del>$49.00</del> <span
-                                                class="theme-color">$35.50</span>
-                                        </h4>
-                                    </div>
-                                </div>
-                            </div>
+						</c:forEach>
+                           
                         </div>
                     </div>
                 </div>
@@ -955,123 +234,6 @@
     </section>
     <!-- Shop Section end -->
 
-    <!-- Quick view modal start -->
-    <div class="modal fade quick-view-modal" id="quick-view">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-            <div class="modal-content">
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                <div class="modal-body">
-                    <div class="row gy-4">
-                        <div class="col-lg-6">
-                            <div class="quick-view-image">
-                                <div class="quick-view-slider">
-                                    <div>
-                                        <img src="/assets/images/fashion/product/front/4.jpg"
-                                            class="img-fluid blur-up lazyload" alt="product">
-                                    </div>
-                                    <div>
-                                        <img src="/assets/images/fashion/product/front/5.jpg"
-                                            class="img-fluid blur-up lazyload" alt="product">
-                                    </div>
-                                    <div>
-                                        <img src="/assets/images/fashion/product/front/6.jpg"
-                                            class="img-fluid blur-up lazyload" alt="product">
-                                    </div>
-                                    <div>
-                                        <img src="/assets/images/fashion/product/front/7.jpg"
-                                            class="img-fluid blur-up lazyload" alt="product">
-                                    </div>
-                                </div>
-                                <div class="quick-nav">
-                                    <div>
-                                        <img src="/assets/images/fashion/product/front/4.jpg"
-                                            class="img-fluid blur-up lazyload" alt="product">
-                                    </div>
-                                    <div>
-                                        <img src="/assets/images/fashion/product/front/5.jpg"
-                                            class="img-fluid blur-up lazyload" alt="product">
-                                    </div>
-                                    <div>
-                                        <img src="/assets/images/fashion/product/front/6.jpg"
-                                            class="img-fluid blur-up lazyload" alt="product">
-                                    </div>
-                                    <div>
-                                        <img src="/assets/images/fashion/product/front/7.jpg"
-                                            class="img-fluid blur-up lazyload" alt="product">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="product-right">
-                                <h2 class="mb-2">Men's Hoodie t-shirt</h2>
-                                <ul class="rating mt-1">
-                                    <li>
-                                        <i class="fas fa-star theme-color"></i>
-                                    </li>
-                                    <li>
-                                        <i class="fas fa-star theme-color"></i>
-                                    </li>
-                                    <li>
-                                        <i class="fas fa-star theme-color"></i>
-                                    </li>
-                                    <li>
-                                        <i class="fas fa-star"></i>
-                                    </li>
-                                    <li>
-                                        <i class="fas fa-star"></i>
-                                    </li>
-                                    <li class="font-light">(In stock)</li>
-                                </ul>
-                                <div class="price mt-3">
-                                    <h3>$20.00</h3>
-                                </div>
-                                <div class="color-types">
-                                    <h4>colors</h4>
-                                    <ul class="color-variant mb-0">
-                                        <li class="bg-half-light selected"></li>
-                                        <li class="bg-light1"></li>
-                                        <li class="bg-blue1"></li>
-                                        <li class="bg-black1"></li>
-                                    </ul>
-                                </div>
-                                <div class="size-detail">
-                                    <h4>size</h4>
-                                    <ul class="">
-                                        <li class="selected">S</li>
-                                        <li>M</li>
-                                        <li>L</li>
-                                        <li>XL</li>
-                                    </ul>
-                                </div>
-                                <div class="product-details">
-                                    <h4>product details</h4>
-                                    <ul>
-                                        <li>
-                                            <span class="font-light">Style :</span> Hoodie
-                                        </li>
-                                        <li>
-                                            <span class="font-light">Catgory :</span> T-shirt
-                                        </li>
-                                        <li>
-                                            <span class="font-light">Tags:</span> summer, organic
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="product-btns">
-                                    <button type="button" class="btn btn-solid-default btn-sm"
-                                        data-bs-dismiss="modal">Add to cart</button>
-                                    <button type="button" class="btn btn-solid-default btn-sm"
-                                        data-bs-dismiss="modal">View details</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Quick view modal end -->
 
     <!-- Cart Successful Start -->
     <div class="modal fade cart-modal" id="addtocart" tabindex="-1" role="dialog" aria-label="myModalLabel"
@@ -1213,6 +375,37 @@
     </div>
     <!-- Cart Successful End -->
 <c:import url="../temp/footer.jsp"></c:import>
+
+
+ <!-- Add To Home js -->
+    <script src="/assets/js/pwa.js"></script>
+
+    <!-- Price Filter js -->
+    <script src="/assets/js/price-filter.js"></script>
+
+    <!--Plugin JavaScript file-->
+    <script src="/assets/js/ion.rangeSlider.min.js"></script> 
+
+    <!-- Filter Hide and show Js -->
+    <script src="/assets/js/filter.js"></script>
+
+    <!-- Notify js-->
+    <script src="/assets/js/bootstrap/bootstrap-notify.min.js"></script>
+
+  
+    
+<script>
+$(document).ready(function() {
+    const prices = document.querySelectorAll('[id^="renewPrice"]');
+    for (var i = 0; i < prices.length; i++) {
+        const price = parseInt(prices[i].innerHTML);
+        const renewPrice = price.toLocaleString();
+        prices[i].innerHTML =renewPrice + '<span class="price-unit" style="text-decoration:none; color:black;">원</span>';
+       	
+    }
+});
+</script>
+ 
 </body>
 
 </html>

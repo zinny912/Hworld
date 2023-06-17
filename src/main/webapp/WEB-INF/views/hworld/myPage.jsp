@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -833,23 +834,20 @@
                                         </div>
                                     </li>
 
-                                    <%-- <li>
+                                    <!-- <li>
                                     <div class="left">
                                         <h6 class="font-light">Password</h6>
-                                    </div>
-                                    <div class="right">
-                                        <h6>${member.pw}</h6>
-                                    </div>
+                                    </div>                                    
                                     <a href="javascript:void(0)" data-bs-toggle="modal"
                                         data-bs-target="#resetPassword">수정</a>
-                                    </li> --%>
+                                    </li> -->
 
                                     <li>
                                         <div class="left">
                                             <h6 class="font-light">번호</h6>
                                         </div>
                                         <div class="right">
-                                            <h6>${memberVO.phoneNum}</h6>
+                                            <h6>${memberVO.tel}</h6>
                                         </div>
                                     </li>
 
@@ -871,7 +869,14 @@
                                             <h6>(${memberVO.address1}) ${memberVO.address2}, ${memberVO.address3}</h6>
                                         </div>
                                         
-                                        <a href="javascript:void(0)" data-bs-target="#resetEmail" onclick="execution_daum_address()">수정</a>
+                                        <!-- <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#resetInfo">수정</a> -->
+                                    </li>
+                                    
+                                    <li class="justify-content-center mt-5">                                    
+                                    	<button class="btn btn-solid-default btn-sm fw-bold ms-auto" data-bs-toggle="modal" data-bs-target="#resetPassword" style="margin-right: 5px">비밀번호 변경</button>
+	                                    <button class="btn btn-solid-default btn-sm fw-bold" data-bs-toggle="modal" data-bs-target="#resetInfo">가입 정보 변경</button>
+	                                    <!-- <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#resetPassword">비밀번호 변경</a>
+	                                    <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#resetInfo">가입 정보 변경</a> -->
                                     </li>
                                 </ul>
                             </div>
@@ -885,21 +890,21 @@
                             <div class="security-details">
                                 <h5 class="font-light mt-3">안녕하세요 <span> ${memberVO.name}님 </span>
                                 </h5>
-                                <p class="font-light mt-1">계정 삭제를 원하신다면 아래 항목을 확인 해주세요.
+                                <p class="font-light mt-1">회원 탈퇴를 원하신다면 아래 항목을 확인 해주세요.
                                 </p>
                             </div>
                             <div class="security-details-1 mb-0">
                                 <div class="page-title">
                                     <h4 class="fw-bold">주의 사항</h4>
                                 </div>
-                                <p class="font-light">계정을 삭제하면 프로필, 개인 설정 및 기타 모든 관련 정보가 영구적으로 제거됩니다. 계정이 삭제되면 로그아웃되며 다시 로그인할 수 없습니다.</p>
+                                <p class="font-light">회원을 탈퇴하면 개인 설정 및 기타 모든 관련 정보가 영구적으로 제거됩니다. 회원 탈퇴를 하게 되면 로그아웃되며 다시 로그인할 수 없습니다.</p>
 
-                                <p class="font-light mb-4">위의 내용을 이해하고 동의하며 여전히 계정을 삭제하려면 아래를 클릭하십시오.
+                                <p class="font-light mb-4">위의 내용을 이해하고 동의하며 여전히 회원 탈퇴를 원하시면 아래를 클릭하십시오.
 
                                 </p>
 
                                 <button class="btn btn-solid-default btn-sm fw-bold rounded" data-bs-toggle="modal"
-                                    data-bs-target="#deleteModal">계정 삭제</button>
+                                    data-bs-target="#deleteModal">회원 탈퇴</button>
                             </div>
                         </div>
                         <!-- 회원탈퇴 end -->
@@ -910,35 +915,7 @@
             </div>
         </div>
     </section>
-    <!-- user dashboard section end -->    
-
-    <!-- 주소 수정 Modal Start -->
-    <div class="modal fade reset-email-modal" id="resetEmail">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h3 class="modal-title" id="exampleModalLabel">주소 수정</h3>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body pt-3">
-                    <form>
-                        <div class="mb-3">
-                            <label for="email" class="form-label font-light">주소</label>
-                            <input type="email" class="form-control" id="email">
-                        </div>
-                        <div class="mb-3">
-                            <label for="comfirmEmail" class="form-label font-light">상세 주소</label>
-                            <input type="email" class="form-control" id="comfirmEmail">
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer pt-0">
-                    <button class="btn btn-solid-default rounded-1" data-bs-dismiss="modal">수정</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- 주소 수정 Modal End -->
+    <!-- user dashboard section end -->
 
     <!-- 비밀번호 수정 Modal Start -->
     <div class="modal fade add-address-modal" id="resetPassword">
@@ -948,24 +925,77 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form:form action="./myPage" id="pwUpdate" method="post" modelAttribute="memberVO">
+                        <!-- <div class="mb-3">
+                            <label for="pw" class="form-label font-light">현재 비밀번호</label>
+                            <input type="password" class="form-control" id="">
+                        </div> -->
                         <div class="mb-3">
-                            <label for="name" class="form-label font-light">현재 비밀번호</label>
-                            <input type="password" class="form-control" id="name">
-                        </div>
-                        <div class="mb-3">
-                            <label for="address" class="form-label font-light">변경할 비밀번호</label>
-                            <input type="password" class="form-control" id="address">
+                            <label for="pw" class="form-label font-light">변경할 비밀번호</label>
+                            <input type="password" class="form-control" id="npw">
                         </div>
                         <div>
-                            <label for="number" class="form-label font-light">변경할 비밀번호 확인</label>
-                            <input type="password" class="form-control" id="number" >
+                            <label for="pwCheck" class="form-label font-light">변경할 비밀번호 확인</label>
+                            <input type="password" class="form-control" id="pwCheck" >
                         </div>
-                    </form>
+		                <div class="modal-footer pt-0 text-end d-block">		                    
+		                    <button class="update_pw btn btn-solid-default rounded-1" type="submit" onclick="fnSubmit(); return false;">수정</button>
+		                </div>
+                    </form:form>
                 </div>
-                <div class="modal-footer pt-0 text-end d-block">
-                    
-                    <button class="btn btn-solid-default rounded-1" data-bs-dismiss="modal">수정</button>
+            </div>
+        </div>
+    </div>
+    <!-- 비밀번호 수정 Modal End -->
+    
+    
+    <!-- 가입 정보 수정 Modal Start -->
+    <div class="modal fade add-info-modal" id="resetInfo">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="submit" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                	<form:form action="./myPage" id="update_info" method="post" modelAttribute="memberVO">                    
+                        <div class="mb-3">
+                            <label for="name" class="form-label font-light">이름</label>
+                            <input type="text" class="form-control" id="name" name="name" value="${memberVO.name}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label font-light">이메일(아이디)</label>
+                            <input type="email" class="form-control" id="email" name="email" readonly="readonly" value="${memberVO.email}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="tel" class="form-label font-light">번호</label>
+                            <input type="text" class="form-control" id="tel" name="tel" readonly="readonly" placeholder="회선 관리에서 바꿔주시길 바랍니다." value="${memberVO.tel}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="rrnf" class="form-label font-light">생년월일</label>
+                            <input type="text" class="form-control" id="rrnf" name="rrnf" readonly="readonly" value="${memberVO.rrnf}">
+                        </div>
+                        <div class="mb-3 row">
+	                        <label for="address1" class="form-label font-light">우편번호</label>
+	                        <div class="col-9">
+	                            <input type="text" class="form-control address_input_1" id="address1" name="address1" readonly="readonly" value="${memberVO.address1}">
+	                        </div>
+	                        <button class="col-3 row btn btn-solid-default btn-sm fw-bold" type="button" onclick="execution_daum_address()">
+								<span>주소 찾기</span>
+							</button>
+						</div>
+						
+                        <div class="mb-3">
+                            <label for="address2" class="form-label font-light">도로명주소</label>
+                            <input type="text" class="form-control address_input_2" id="address2" name="address2" readonly="readonly" value="${memberVO.address2}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="address3" class="form-label font-light">상세주소</label>
+                            <input type="text" class="form-control address_input_3" id="address3" name="address3" value="${memberVO.address3}">
+                        </div>
+		                <div class="modal-footer pt-0 text-end d-block">
+		                    <button class="update_info btn btn-solid-default rounded-1" type="submit">수정</button>
+		                </div>
+                    </form:form>
                 </div>
             </div>
         </div>
@@ -1126,11 +1156,11 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body pb-3 text-center mt-4">
-                    <h4>정말로 계정을 삭제하시겠습니까?</h4>
+                    <h4>정말로 회원을 탈퇴하시겠습니까?</h4>
                 </div>
                 <div class="modal-footer d-block text-center mb-4">
                     <button class="btn btn-solid-default btn-sm fw-bold rounded" data-bs-target="#doneModal"
-                        data-bs-toggle="modal" data-bs-dismiss="modal">삭제</button>
+                        data-bs-toggle="modal" data-bs-dismiss="modal">탈퇴</button>
                 </div>
             </div>
         </div>
@@ -1209,6 +1239,48 @@
     <!-- Comfirm stop Modal End -->
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
+var path = "${pageContext.request.contextPath }";
+
+$(document).ready(function() {
+	var msg = "${msg}";
+	if(msg != ""){
+	alert(msg);    
+	}
+});
+ 
+ 
+function fnSubmit() {
+ 
+	if ($("#npw").val() != "" && $("#pwCheck").val() == "") {
+		alert("비밀번호 확인을 입력해주세요.");
+		$("#npw").focus();
+		 
+		return false;
+	}
+ 
+	if ($("#npw").val() == "" && $("#pwCheck").val() != "") {
+		alert("비밀번호를 입력해주세요.");
+		$("#pwCheck").focus();
+		 
+		return false;
+	}
+ 
+	if ($("#npw").val() != $("#pwCheck").val()) {
+		alert("비밀번호가 일치하지 않습니다.");
+		$("#pwCheck").focus();
+		
+		return false;
+	}
+ 
+	if (confirm("수정하시겠습니까??")) {
+	 
+		$("#pwUpdate").submit();
+		 
+		return false;
+	}
+}
+
+
 /* 다음 주소 연동 */
 function execution_daum_address(){
 	

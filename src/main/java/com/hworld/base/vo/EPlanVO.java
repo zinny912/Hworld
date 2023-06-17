@@ -11,5 +11,5 @@ public class EPlanVO {
     private String ePlanName;
     private Integer ePlanPrice;
     private String ePlanExplain;
-    private String ePlanExplainSM;
+    private String ePlanExplainS;
 }

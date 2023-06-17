@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.hworld.base.dao.AdminDAO">
+	
+	<!-- 회원목록 -->
+	<select id="memberList" parameterType="Pager" resultType="MemberVO">
+		SELECT MEMBERNUM, NAME, TEL, EMAIL, RRNF, ADDRESS1, ADDRESS2, ADDRESS3, JOINDATE, MEMBERSTATE FROM MEMBER
+		<include refid="searchMemberList"></include>
+		ORDER BY MEMBERNUM DESC
+		LIMIT #{startRow}, #{perPage}
+	</select>
+	
+	<sql id="searchMemberList">
+		WHERE MEMBERNUM LIKE CONCAT('%', #{search}, '%') OR NAME LIKE CONCAT('%', #{search}, '%') OR EMAIL LIKE CONCAT('%', #{search}, '%')
+	</sql>
+
+	<select id="getTotalMember" parameterType="Pager" resultType="Long">
+		SELECT COUNT(*) FROM MEMBER
+		<include refid="searchMemberList"></include>
+	</select>
+	
+	<!-- 회선목록 -->
+	<select id="phoneList" parameterType="Pager" resultMap="TelephoneListResult">
+		SELECT M.MEMBERNUM, M.EMAIL, T.PHONENUM, T.PLANNUM, T.DIRECTNAME, T.STARTDATE, T.ENDDATE, M.MEMBERSTATE 
+		FROM MEMBER M
+		INNER JOIN TELEPHONE T
+ 		ON(M.MEMBERNUM = T.MEMBERNUM)
+		<include refid="searchTelephoneList"></include>
+		ORDER BY MEMBERNUM DESC
+		LIMIT #{startRow}, #{perPage}
+	</select>
+	<resultMap type="MemberVO" id="TelephoneListResult">
+		<id column="memberNum" property="memberNum"/>
+		<result column="EMAIL" property="email"/>
+		<result column="MEMBERSTATE" property="memberState"/>
+		<collection property="telephoneVOs" javaType="List" ofType="TelephoneVO">
+  			<id column="PHONENUM" property="phoneNum"/>  			
+  			<result column="PLANNUM" property="planNum"/>
+			<result column="DIRECTNAME" property="directName"/>
+			<result column="STARTDATE" property="startDate"/>
+			<result column="ENDDATE" property="endDate"/>  			
+  		</collection>
+	</resultMap>
+	
+	<sql id="searchTelephoneList">
+		WHERE M.MEMBERNUM LIKE CONCAT('%', #{search}, '%') OR M.EMAIL LIKE CONCAT('%', #{search}, '%') OR T.PHONENUM LIKE CONCAT('%', #{search}, '%')
+	</sql>
+	
+	<select id="getTotalTelephone" parameterType="Pager" resultType="Long">
+		SELECT COUNT(*) FROM MEMBER M
+		INNER JOIN TELEPHONE T
+		ON(M.MEMBERNUM = T.MEMBERNUM)		
+		<include refid="searchTelephoneList"></include>
+	</select>
+	
+	<!-- 주문 목록 -->
+	<select id="orderList" parameterType="Pager" resultType="OrderVO">
+		SELECT ORDERNUM, ORDERDATE, ORDERSTATE
+		FROM ORDERS
+		<include refid="searchOrderList"></include>
+		ORDER BY ORDERNUM DESC
+		LIMIT #{startRow}, #{perPage}
+	</select>
+	
+	<sql id="searchOrderList">
+		WHERE ORDERNUM LIKE CONCAT('%', #{search}, '%') OR ORDERDATE LIKE CONCAT('%', #{search}, '%')
+	</sql>
+	
+	<select id="getTotalOrder" parameterType="Pager" resultType="Long">
+		SELECT COUNT(*) FROM ORDERS
+		<include refid="searchOrderList"></include>
+	</select>
+	
+	<!-- 주문 상세 페이지 -->
+	<select id="orderDetail" parameterType="OrderVO" resultType="OrderVO">
+		SELECT * FROM ORDERS
+	</select>
+	
+</mapper>

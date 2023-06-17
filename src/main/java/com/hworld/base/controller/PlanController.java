@@ -4,17 +4,23 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hworld.base.dao.PlanDAO;
 import com.hworld.base.service.PlanService;
 import com.hworld.base.util.Pager;
+import com.hworld.base.vo.BaseVO;
 import com.hworld.base.vo.PlanVO;
 
+import lombok.extern.slf4j.Slf4j;
 
 
+@Slf4j
 @Controller
 @RequestMapping("/plan/*")
 public class PlanController {
@@ -46,6 +52,50 @@ public class PlanController {
 		mv.setViewName("hworld/planList");
 		return mv;
 	}
+	
+	@GetMapping("planDetail")
+	public ModelAndView getDetail(PlanVO planVO) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		PlanVO plan = planService.getDetail(planVO);
+		PlanVO note = planService.getNoteName(planVO);		
+		mv.addObject("planNote",note);
+		mv.addObject("planVO", plan);
+		mv.setViewName("hworld/planDetail");
+		return mv;
+	}
+	@ResponseBody
+	@PostMapping("getCommonCode")
+	public List<BaseVO> getCommonCode(String type) throws Exception {
+	    BaseVO baseVO = new BaseVO();
+	    baseVO.setType(type);
+	    return planService.getCommonCode(baseVO);
+	  }
+	
+	@GetMapping("planAdd")
+	public ModelAndView setPlanAdd(PlanVO planVO, BaseVO baseVO, ModelAndView mv) throws Exception{
+	
+		mv.setViewName("hworld/planAdd");
+		return mv;
+	}
+	
+	@PostMapping("planAdd")
+	public ModelAndView setPlanAdd(PlanVO planVO, BaseVO baseVO) throws Exception{
+		ModelAndView mv= new ModelAndView();
+		int common = planService.setCommonCode(baseVO);
+		int result = planService.setInsert(planVO);
+		
+		mv.setViewName("redirect:./planList");
+		return mv;
+	}
+	
+	// 요금제 디테일 > 요금제 변경 확인
+		@GetMapping("planChange")
+		public ModelAndView e8() throws Exception{
+			ModelAndView modelAndView = new ModelAndView();
+			modelAndView.setViewName("hworld/planChange");
+			return modelAndView;
+		}
+		
 	
 	// 요금제&부가서비스 리스트
 	@GetMapping("planUpdate")
@@ -95,11 +145,5 @@ public class PlanController {
 		return modelAndView;
 	}
 	
-	// 요금제 디테일 > 요금제 변경 확인
-	@GetMapping("planChange")
-	public ModelAndView e8() throws Exception{
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("hworld/planChange");
-		return modelAndView;
-	}
+	
 }

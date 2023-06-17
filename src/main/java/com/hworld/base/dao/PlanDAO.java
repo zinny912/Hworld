@@ -5,6 +5,8 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.hworld.base.util.Pager;
+import com.hworld.base.vo.BaseVO;
+import com.hworld.base.vo.EPlanVO;
 import com.hworld.base.vo.PlanVO;
 
 @Mapper
@@ -24,6 +26,12 @@ public interface PlanDAO {
 	
 	// 요금제 하나 조회
     public PlanVO getDetail(PlanVO planVO) throws Exception;
+    
+    public PlanVO getNoteName(PlanVO planVO) throws Exception;
+    
+    // 공통코드 정보 가져오고 insert 
+    public List<BaseVO> getCommonCode(BaseVO baseVO) throws Exception;
+    public int setCommonCode(BaseVO baseVO) throws Exception;
 	
 	// 요금제 등록
     public int setInsert(PlanVO planVO) throws Exception;
@@ -33,4 +41,22 @@ public interface PlanDAO {
 	
 	// 요금제 삭제
     public int setDelete(PlanVO planVO) throws Exception;
+    
+	// 부가서비스 갯수
+	public Long getTotalCount(Pager pager) throws Exception;
+	
+	// 부가서비스 리스트 조회
+	public List<EPlanVO> getList(Pager pager) throws Exception;
+	
+	// 부가서비스 하나 조회
+	public EPlanVO getDetail(EPlanVO ePlanVO) throws Exception;
+
+	// 부가서비스 추가
+	public int setInsert(EPlanVO ePlanVO) throws Exception;
+	
+	// 부가서비스 수정
+	public int setUpdate(EPlanVO ePlanVO) throws Exception;
+	
+	// 부가서비스 삭제
+	public int setDelete(EPlanVO ePlanVO) throws Exception;
 }

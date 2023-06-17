@@ -7,13 +7,64 @@
  
  <select id="getPlanList" resultType="PlanVO">
  	SELECT P.*, CC.NOTE AS note, CC.TYPE AS type
-	FROM PLAN2 P
+	FROM PLAN P
 	INNER JOIN COMMONCODE CC ON (P.CATEGORYCODE = CC.CODE)
 	WHERE (P.PLANNUM LIKE CONCAT(CC.TYPE, '%'))
  </select>
  
+ <select id="getDetail" resultType="PlanVO" parameterType="PlanVO">
+ 	SELECT * FROM PLAN
+ 	WHERE PLANNUM=#{planNum}
+ </select>
+
+ <select id="getNoteName" resultType="PlanVO">
+ 	SELECT DISTINCT CC.NOTE AS note
+ 	FROM PLAN P
+ 	LEFT JOIN COMMONCODE CC ON (P.CATEGORYCODE = CC.CODE) AND (CC.TYPE = SUBSTRING(#{planNum},1,1))
+ 	WHERE P.PLANNUM = #{planNum}
+ 
+ </select>
+ 
+  <!-- 요금제 추가하면 공통코드 테이블에도 insert 되어야해서 공통코드 테이블 값 가져오는 메서드 필요 -->
+ <select id="getCommonCode" resultType="BaseVO">
+ 	SELECT * FROM COMMONCODE
+ 	WHERE TYPE = #{type} 
+ </select>
+ <insert id="setCommonCode" parameterType="BaseVO">
+ 	INSERT INTO COMMONCODE (TYPE, CODE, VALUE, NOTE)
+ 	VALUES(#{type}, #{code}, #{value}, #{note})
+ </insert>
+ 
+ <insert id="setInsert" parameterType="PlanVO">
+ 	INSERT INTO PLAN (PLANNUM, DISCODE, PLANNAME, PLANPRICE, DATACAPACITY, CATEGORYCODE, PLANEXPLAIN, PLANEXPLAINS, PLANEXPLAINM)
+ 	VALUES(#{planNum},#{disCode}, #{planName}, #{planPrice}, #{dataCapacity}, #{categoryCode}, #{planExplain}, #{planExplainS}, #{planExplainM})
+ </insert>
+ 
+ <update id="setPlanUpdate" parameterType="PlanVO">
+ 	UPDATE PLAN 
+ 	SET DISCODE=#{disCode}, PLANNAME=#{planName}, PLANPRICE=#{planPrice}, DATACAPACITY=#{dataCapacity},CATEGORYCODE=#{categoryCode}, PLANEXPLAIN=#{planExplain}, PLANEXPLAINS=#{planExplainS},PLANEXPLAINM=#{planExplainM})
+ </update>
+ 
+ <delete id="setPlanDelete" parameterType="PlanVO">
+ 	DELETE FROM PLAN WHERE PLANNUM=#{planNum}
+ </delete>
  
  
+ <select id="getEPlanList" resultType="EPlanVO">
+ 	SELECT * FROM EPLAN;
+ </select>
+ 
+ <select id="getEPlanDetail" resultType="EPlanVO" parameterType="EPlanVO">
+ 	SELECT * FROM EPLAN
+ 	WHERE EPLANNUM=#{ePlanNum}
+ 
+ </select>
+ 
+ <!-- <insert id="setEPlanAdd" parameterType="EPlanVO">
+ 	INSERT INTO EPLAN
+ 	VALUES()
+ </insert>
+  -->
   <!--  5G요금제 -->
  <!--<select id="getGeneralList" resultType="PlanVO" >
  	SELECT P.*, CC.NOTE AS note, CC.TYPE AS type

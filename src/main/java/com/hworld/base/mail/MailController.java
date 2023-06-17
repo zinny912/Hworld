@@ -23,5 +23,16 @@ public class MailController {
 
        return num;
     }
+    
+    @ResponseBody
+    @PostMapping("/mailPw")
+    public String MailSendPw(String mail){
+
+       String newPw = mailService.sendMailPw(mail);
+
+       String newPwd = "" + newPw;
+
+       return newPw;
+    }
 
 }

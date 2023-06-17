@@ -8,12 +8,21 @@ $(function(){
         let age = calculateAge(rrnValue);
         console.log('나이:', age);
     });
+    
 })
 
 
 //폼 넘길때 데이터가 잘 넘어가는지 확인하고자 할 때 쓰는 것
 //let $frm = $('#appForm').serialize();
 //alert($frm);
+
+//영수증 가격 : 계산에 필요한 값이 빈값인지 확인하는 함수
+function isEmpty(value){
+    if(typeof value == "undefined" || value == null || value == '')
+        return false;
+    else
+        return true;
+}
 
 //나이 계산 함수
 function calculateAge(figure) {
@@ -35,8 +44,6 @@ function calculateAge(figure) {
 
     return age;
 }
-
-
 
 //가입유형 확인
 //신규가입 버튼
@@ -81,7 +88,9 @@ $('#joinType3').click(function(){
 //제품명의 셀렉트값 변동 이벤트
 $('#slicedCode').change(function(){
     let slicedCode = $(this).val();
+    let selectedOption = $('#slicedCode option:selected').text();
     console.log('선택된 옵션: ' + slicedCode);
+    $('#directName').val(selectedOption);
 
     //ajax로 select box를 만들 정보 요청
     //ajax 확인할 때는 alert창으로
@@ -100,7 +109,12 @@ $('#slicedCode').change(function(){
 		//  $('#directCode').append('<option value=\"'+directCode+'\">'+directCode+'</option>');
 		// }
         $('#directCode').empty();
+        $('#billDirectName').empty();
+
         $('#directCode').html(response);
+        $('#billDirectName').text(selectedOption);
+
+        $('#directCode option:first').prop('selected', true).trigger('change');
         },
         error: function(error) {
         // 에러 처리 로직 작성
@@ -112,7 +126,32 @@ $('#slicedCode').change(function(){
 
 
 //제품코드의 셀렉트값 변동 이벤트
+$('#directCode').change(function(){
+    const directCode = $('#directCode').val();
+    const colorCode = directCode.substring(5, 7);
+    const volumeCode = directCode.substring(7, 11);
 
+    // 컬러와 볼륨에 해당하는 값 정의
+    const colorValues = {
+    CB: 'BLACK',
+    CW: 'WHITE',
+    CG: 'GRAY'
+    };
+
+    const volumeValues = {
+    V128: '128GB',
+    V256: '256GB',
+    V512: '512GB'
+    };
+
+    // 컬러와 볼륨 판별
+    const selectedColor = colorValues[colorCode] || 'Unknown Color';
+    const selectedVolume = volumeValues[volumeCode] || 'Unknown Volume';
+
+    // 결과 나타내기
+    const option = selectedColor+ ' | ' +selectedVolume;
+    $('#billOptionName').text(option);
+})
 
 
 //요금제 선택 확인
@@ -147,10 +186,6 @@ $('#planArea input[type="radio"]').on('change', function() {
     if (planCode === 'T01') {
         maximumAge = 18;
     }
-
-    // console.log("age: "+age);
-    // console.log("minimumAge: "+minimumAge);
-    // console.log("maximumAge: "+maximumAge);
 
     if (age < minimumAge && minimumAge != 0) {
         alert(minimumAge + '세 이하는 해당 요금제를 사용할 수 없습니다.');
@@ -221,15 +256,49 @@ $('input[name="planNum"], select[name="directCode"]').change(function() {
         $('#dis0').text(nPrice0);
         $('#dis1').text(nPrice1);
         $('#dis2').text(nPrice2);
-        // $('#dis0').text(formatPrice(disPrice));
     }
 
 });
 
-  // 가격 포맷을 위한 함수
-//   function formatPrice(price) {
-//     return price.toLocaleString('en-US');
-//   }
+//월 요금계산 준비
+$('#directCode, input[name=planNum], input[name=disKind]').change(function() {
+    //영수증 가격 출력
+    const directCode = $('#directCode option:selected').val(); // 기기코드
+    const planNum = $('input[name=planNum]:checked').val(); // 요금제번호
+    const disKind = $('input[name=disKind]:checked').val(); // 할인유형
+
+    directCheck = isEmpty(directCode);
+    planCheck = isEmpty(planNum);
+    disKindCheck = isEmpty(disKind);
+
+    if(directCheck == true && planCheck == true && disKindCheck == true){
+        //모든 값이 다 들어왔을 때 ajax 요청
+        //responseBody에 담겨져 응답 돌아옴
+        $.ajax({
+            type: 'GET',
+            url: './calMonthlyPay',
+            dataType: 'JSON',
+            data: {
+                directCode: directCode,
+                disKind: disKind,
+                planNum: planNum
+            },
+            success: function(response) {
+                $('#out_phonePayPrice').text('');
+                $('#out_planPrice').text('');
+                $('#totalPrice').text('');
+                $('#out_phonePayPrice').text(response.out_phonePayPrice);
+                $('#out_planPrice').text(response.out_planPrice);
+                $('#totalPrice').text(response.out_phonePayPrice*1 + response.out_planPrice*1);
+            },
+            error: function(error) {
+                // 에러 처리 로직 작성
+                console.log(error);
+            }
+        });
+        
+    }
+  });
 
 
 //가입하기 버튼 눌렀을 때
@@ -238,33 +307,54 @@ $('#completeForm').click(function(){
     //let $frm = $('#appForm').serialize();
     //alert($frm);
 
-
-
-    //전화번호 길이 체크
-    let length = $('#phoneNum').val().length;
-
-
     //가입폼 전송
-    //$('#appForm').submit();
+    $('#appForm').submit();
 })
 
 
 
 //유효성 검사
-//전화번호 11자리, 숫자만 입력
+//전화번호 11자리, 숫자만 입력 + 중복검사까지 ajax로 실행
 $('#phoneNum').on("blur", function() {
+    //숫자만 입력되게 하는 정규식
     let checkValue = $(this).val().replace(/[^\d]/g, "");
     $(this).val(checkValue);
-
-    console.log('checkValue====>'+checkValue);
-    console.log('checkValue.length=====>'+checkValue.length);
     
     let length = checkValue.length;
 
     if(length != 11) {
         //this.setCustomValidity("전화번호는 11자리여야 합니다.");
-        alert("전화번호는 11자리여야 합니다.");
+        //alert("전화번호는 11자리여야 합니다.");
         $('#phoneNum').val("");
+        $('#duplicateResult').empty();
+        $('#duplicateResult').append('<p class="theme-color">전화번호는 11자리여야 합니다.</p>');
+    }else{
+        //11자리인 경우 번호 중복체크
+        //responseBody에 담겨져 응답 돌아옴
+        $.ajax({
+            type: 'GET',
+            url: './isDuplicatePhoneNum',
+            dataType: 'JSON',
+            data: {
+                phoneNum: checkValue
+            },
+            success: function(response) {
+                console.log('요청 성공');
+                console.log(response);
+                if(response == true){
+                    $('#duplicateResult').empty();
+                    $('#duplicateResult').append('<p class="theme-color">사용 불가능한 번호입니다</p>');
+                }else if(response == false){
+                    $('#duplicateResult').empty();
+                    $('#duplicateResult').append('<p>사용 가능한 번호입니다</p>');
+                }else{
+                    $('#duplicateResult').empty();
+                }
+            },
+            error: function(error) {
+                console.log('요청 실패');
+            }
+        });
     }
 
 })

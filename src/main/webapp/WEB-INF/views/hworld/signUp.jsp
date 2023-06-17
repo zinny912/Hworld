@@ -11,148 +11,157 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
 	<c:import url="../temp/style.jsp"></c:import>    
-    <title>회원 가입</title>
 </head>
 
 <body class="signup-page theme-color2">
+    <!-- testValue -->
+    ${state}
+    <form:form action="./signUp" id="signUpForm" method="post" modelAttribute="memberVO">
+		<input type="hidden" name="opt1" value="${map.opt1}">
+		<input type="hidden" name="opt2" value="${map.opt2}">
+        <!-- Sign Up Section Start -->
+        <div class="login-section">
+            <div class="materialContainer">
+                <div class="box">
+                    <!-- 홈 버튼 -->
+                    <div class="d-flex justify-content-center">
+                        <a href="/">
+                            <h2><img src="/assets/images/logos/2.png"></h2>
+                        </a>
+                    </div>
+                    <div class="login-title mb-5">
+                        <h2 style="margin-top: 15px;">회원 가입</h2>
+                    </div>
 
-    <!-- Sign Up Section Start -->
-    <div class="login-section">
-        <div class="materialContainer">
-            <div class="box">
-                <!-- 홈 버튼 -->
-                <div class="d-flex justify-content-center">
-                    <a href="/">
-                        <h2><img src="/assets/images/logos/2.png"></h2>
-                    </a>
-                </div>
-                <div class="login-title mb-5">
-                    <h2 style="margin-top: 15px;">회원 가입</h2>
-                </div>                
-				<form:form action="./signUp" id="signUpForm" method="post" modelAttribute="memberVO">
-					
-		                <!-- 정보 입력 영역 -->	                
-	                	<div class="mb-4 row">
-	                		<div class="col-9">	                		
-			                    <input class="form-control" type="email" name="email" id="email" placeholder="사용자 계정">		                    			                    
-							</div>			                    
-		                    <button class="col-3 row btn btn-solid-default btn-sm fw-bold" name="sendBtn" id="sendBtn" type="button" onclick="sendNumber()">
-								인증번호 전송
-							</button>
-	                    </div> 
-		                			                		                		                
-	                	<div class="mb-4 row" id="emailNumber" name="emailNumber" style="display: none;">
-	                		<div class="col-9">
-			                    <input class="form-control" type="text" name="emailCheck" id="emailCheck" placeholder="인증번호 입력">		                    			                    
-		                    </div>                    
-		                    <button class="col-3 row btn btn-solid-default btn-sm fw-bold" name="confirmBtn" id="confirmBtn" type="button" onclick="confirmNumber()">
-								확인
-							</button>
-	                    </div>
-	                    <input type="text" id="Confirm" name="Confirm" style="display: none" value="">
-		
-	                	<div class="mb-4 row">
-	                		<div class="col-12">
-			                	<input class="form-control" type="password" name="pw" id="pw" placeholder="비밀번호">
-                            </div>
-                        </div>		                			                    		                                                                               
-                        
-                        <div class="mb-4 row">
-                        	<div class="col-12">
-                        		<input class="form-control" type="password" name="pwCheck" id="pwCheck" placeholder="비밀번호 확인">                            
-                        	</div>                            
-		                </div>
-				                
-	                	<div class="mb-4 row">
-	                		<div class="col-12">
-		                		<input class="form-control" type="text" name="name" id="name" placeholder="이름">				                   
-	                		</div>                   		                    
-		                </div>	                		
-		                
-	                	<div class="mb-4 row">
-		                    <div class="col-6" style="padding-right: 6px">		                                                   
-	                            <input class="form-control" type="text" name="rrnf" id="rrnf" placeholder="주민등록번호 앞자리">		                            
+                    <!-- 선택 데이터 영역 -->
+                    <c:choose>
+                    	<c:when test="${map.opt1 eq 3}">
+                    		<div class="mb-4 row">
+		                        <div class="col-9">
+		                            <input class="form-control" type="email" name="email" id="email" placeholder="사용자 계정(이메일)">
+		                        </div>
+		                        <button class="col-3 row btn btn-solid-default btn-sm fw-bold" name="sendBtn" id="sendBtn" type="button" onclick="sendNumber()">
+		                            인증번호 전송
+		                        </button>
 		                    </div>
-	
-		                    <div class="col-6" style="padding-left: 6px">
-	                            <input class="form-control" type="password" name="rrnl" id="rrnl" placeholder="주민등록번호 뒷자리">		                            
+		                    <div class="mb-4 row" id="emailNumber" name="emailNumber" style="display: none;">
+		                        <div class="col-9">
+		                            <input class="form-control" type="text" name="emailCheck" id="emailCheck" placeholder="인증번호 입력">
+		                        </div>
+		                        <button class="col-3 row btn btn-solid-default btn-sm fw-bold" name="confirmBtn" id="confirmBtn" type="button" onclick="confirmNumber()">
+		                            확인
+		                        </button>
 		                    </div>
-		                </div>
-		                																									           								                
-	                	<div class="mb-4 row">
-	                		<div class="col-12">
-		                		<input class="form-control" type="tel" name="phoneNum" id="phoneNum" placeholder="연락처( '-' 빼고 입력해주세요 )">
-	                		</div>		                		
-	                	</div>
+		                    <input type="text" id="Confirm" name="Confirm" style="display: none" value="">
+		                    <div class="mb-4 row">
+		                        <div class="col-12">
+		                            <input class="form-control" type="password" name="pw" id="pw" placeholder="비밀번호">
+		                        </div>
+		                    </div>
+		                    <div class="mb-4 row">
+		                        <div class="col-12">
+		                            <input class="form-control" type="password" name="pwCheck" id="pwCheck" placeholder="비밀번호 확인">
+		                        </div>
+		                    </div>
+                    	</c:when>
+                    	<c:otherwise>
+	                    	<div class="mb-4 row">
+		                        <div class="col-9">
+		                            <input class="form-control" type="email" name="email" id="email" placeholder="사용자 계정(이메일)">
+		                        </div>
+		                        <button class="col-3 row btn btn-solid-default btn-sm fw-bold" name="sendBtn" id="sendBtn" type="button" onclick="sendNumber()">
+		                            인증번호 전송
+		                        </button>
+		                    </div>
+		                    <div class="mb-4 row" id="emailNumber" name="emailNumber" style="display: none;">
+		                        <div class="col-9">
+		                            <input class="form-control" type="text" name="emailCheck" id="emailCheck" placeholder="인증번호 입력">
+		                        </div>
+		                        <button class="col-3 row btn btn-solid-default btn-sm fw-bold" name="confirmBtn" id="confirmBtn" type="button" onclick="confirmNumber()">
+		                            확인
+		                        </button>
+		                    </div>
+		                    <input type="text" id="Confirm" name="Confirm" style="display: none" value="">
+		                    <div class="mb-4 row">
+		                        <div class="col-12">
+		                            <input class="form-control" type="password" name="pw" id="pw" placeholder="비밀번호">
+		                        </div>
+		                    </div>
+		                    <div class="mb-4 row">
+		                        <div class="col-12">
+		                            <input class="form-control" type="password" name="pwCheck" id="pwCheck" placeholder="비밀번호 확인">
+		                        </div>
+		                    </div>
+		                            
+		                    <div class="mb-4 row">
+		                        <div class="col-12">
+		                            <input class="form-control" type="text" name="name" id="name" placeholder="이름">	
+		                        </div>
+		                    </div>
 		                    
-		                
-													
-						<div class="mb-4 row">
-							<div class="col-9">
-								<input class="form-control address_input_1" name="address1" readonly="readonly" placeholder="우편번호">
-							</div>
-							
-							<button class="col-3 row btn btn-solid-default btn-sm fw-bold" type="button" onclick="execution_daum_address()">
-								<span>주소 찾기</span>
-							</button>
-						</div>
-						<div class="mb-4 row">
-							<div class="col-12">
-								<input class="form-control address_input_2" name="address2" readonly="readonly" placeholder="도로명 주소">
-							</div>
-						</div>
-						<div class="mb-4 row">
-							<div class="col-12">
-								<input class="form-control address_input_3" name="address3" readonly="readonly" placeholder="상세 주소">						
-							</div>
-						</div>														               
+		                    <div class="mb-4 row">
+		                        <div class="col-6" style="padding-right: 6px">
+		                            <input class="form-control" type="text" name="rrnf" id="rrnf" placeholder="주민등록번호 앞자리">
+		                        </div>
 		
-		                <div class="button login" >
-		                    <button type="submit">
-		                        <span>가입하기</span>
-		                        <i class="fa fa-check"></i>
-		                    </button>
-		                </div>
-		        </form:form>
-
-                <p><a href="/member/login" class="theme-color">이미 계정이 있으신가요?</a></p>
+		                        <div class="col-6" style="padding-left: 6px">
+		                            <input class="form-control" type="password" name="rrnl" id="rrnl" placeholder="주민등록번호 뒷자리">
+		                        </div>
+		                    </div>
+		
+		                    <div class="mb-4 row">
+		                        <div class="col-12">
+		                            <input class="form-control" type="tel" name="tel" id="tel" placeholder="연락처">
+		                        </div>
+		                        <div id="validPN">
+		                        </div>
+		                    </div>
+		
+		                    <div class="mb-4 row">
+		                        <div class="col-9">
+		                            <input class="form-control address_input_1" name="address1" readonly="readonly" placeholder="우편번호">
+		                        </div>
+		                        
+		                        <button class="col-3 row btn btn-solid-default btn-sm fw-bold" type="button" onclick="execution_daum_address()">
+		                            <span>주소 찾기</span>
+		                        </button>
+		                    </div>
+		
+		                    <div class="mb-4 row">
+		                        <div class="col-12">
+		                            <input class="form-control address_input_2" name="address2" readonly="readonly" placeholder="도로명 주소">
+		                        </div>
+		                    </div>
+		
+		                    <div class="mb-4 row">
+		                        <div class="col-12">
+		                            <input class="form-control address_input_3" name="address3" readonly="readonly" placeholder="상세 주소">
+		                        </div>
+		                    </div>
+                    	</c:otherwise>
+                    </c:choose>
+                    
+                    <div class="button login">
+                        <button type="submit">
+                            <span>가입하기</span>
+                            <i class="fa fa-check"></i>
+                        </button>
+                    </div>
+                    
+                    <p><a href="/member/login" class="theme-color">이미 계정이 있으신가요?</a></p>
+                </div>
             </div>
         </div>
-    </div>
-    <!-- Sign Up Section End -->
+        <!-- Sign Up Section End -->
+        <div class="bg-overlay"></div>
+    </form:form>
 
     <div class="bg-overlay"></div>
+
+<script src="/assets/js/signUp.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
-function sendNumber(){
-    $("#emailNumber").css("display","flex");
-    $.ajax({
-        url:"/mail",
-        type:"post",
-        dataType:"json",
-        data:{"mail" : $("#email").val()},
-        success: function(data){
-            alert("인증번호 발송");
-            $("#Confirm").attr("value",data);
-        }
-    });
-}
-
-function confirmNumber(){
-    var number1 = $("#emailCheck").val();
-    var number2 = $("#Confirm").val();
-
-    if(number1 == number2){
-        alert("인증되었습니다.");
-    }else{
-        alert("인증번호가 일치하지 않습니다.");
-    }
-}
-
-
-
-
 /* var timer = null;
 var isRunning = false;
 
@@ -184,67 +193,17 @@ function startTimer(count, display) {
 
     // 타이머 끝
     if (--count < 0) {
-      clearInterval(timer);
-      alert("시간초과");
-      display.html("시간초과");
+    clearInterval(timer);
+    alert("시간초과");
+    display.html("시간초과");
 //      $("button").attr("disabled", true);
-      isRunning = false;
-    }
-  }, 1000);
-  isRunning = true;
+    isRunning = false;
+}
+}, 1000);
+isRunning = true;
 }
  */
-/* 다음 주소 연동 */
-function execution_daum_address(){
-	
-    new daum.Postcode({
-        oncomplete: function(data) {
-            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
-            
-            // 각 주소의 노출 규칙에 따라 주소를 조합한다.
-            // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-            var addr = ''; // 주소 변수
-            var extraAddr = ''; // 참고항목 변수
-            //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
-            if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
-                addr = data.roadAddress;
-            } else { // 사용자가 지번 주소를 선택했을 경우(J)
-                addr = data.jibunAddress;
-            }
-            // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
-            if(data.userSelectedType === 'R'){
-                // 법정동명이 있을 경우 추가한다. (법정리는 제외)
-                // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
-                if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
-                    extraAddr += data.bname;
-                }
-                // 건물명이 있고, 공동주택일 경우 추가한다.
-                if(data.buildingName !== '' && data.apartment === 'Y'){
-                    extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-                }
-                // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
-                if(extraAddr !== ''){
-                    extraAddr = ' (' + extraAddr + ')';
-                }
-                // 주소변수 문자열과 참고항목 문자열 합치기
-      			addr += extraAddr;
-            
-            } else {
-                addr += ' ';
-            }
-            // 우편번호와 주소 정보를 해당 필드에 넣는다.
-            $(".address_input_1").val(data.zonecode);
-            //$("[name=memberAddr1]").val(data.zonecode);	// 대체가능
-            $(".address_input_2").val(addr);
-            //$("[name=memberAddr2]").val(addr);			// 대체가능
-            // 상세주소 입력란 disabled 속성 변경 및 커서를 상세주소 필드로 이동한다.
-            $(".address_input_3").attr("readonly",false);
-            $(".address_input_3").focus();
-            
-        }
-    }).open();   
-    
-}
+
 </script>
 </body>
 

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.hworld.base.dao.OrderDAO">
+  
+	<select id="getDirectDetail" resultType="DirectVO" parameterType="DirectVO">
+    	SELECT DIRECTCODE, DIRECTNAME, DIRECTPRICE, COLORCODE
+    	FROM DIRECT
+		WHERE DIRECTCODE = #{directCode}
+	</select>
+	
+	<select id="getOrderInfo" resultType="OrderDirectVO">
+		SELECT DIRECTCODE, DIRECTPRICE
+		FROM DIRECT
+		WHERE DIRECTCODE = #{directCode}
+	</select>
+	
+	<!-- 주문 테이블 등록 -->
+	<insert id="setInsert" parameterType="OrderVO">
+		INSERT INTO ORDERS (ORDERNUM, MEMBERNUM, ORDERDATE, ORDERSTATE, ORDERRECEIVER, ORDERADDRESS1, ORDERADDRESS2, ORDERADDRESS3, ORDERTELNUM)
+	  	VALUES (#{orderNum}, #{memberNum}, NOW(), #{orderState}, #{orderReceiver}, #{orderAddress1}, #{orderAddress2}, #{orderAddress3}, #{orderTelNum});	
+	</insert>	
+	
+	<!-- 주문 아이템 테이블 등록 -->
+	<insert id="setODInsert" parameterType="OrderDirectVO">
+		INSERT INTO ORDERDIRECT (DIRECTCODE, ORDERNUM, MEMBERNUM, ORDERAMOUNT)
+	  	VALUES (#{directCode}, #{orderNum}, #{memberNum}, #{orderAmount});
+	</insert>	
+
+	<!-- 주문 재고 차감 -->	
+	<update id="deductStock" parameterType="DirectVO">
+		UPDATE DIRECT SET DIRECTSTOCK = #{directStock}
+		WHERE DIRECTCODE = #{directCode}
+	</update>
+
+	<!-- Payment 주문 결제 -->	
+	<update id="orderPayment" parameterType="OrderVO">
+		UPDATE ORDERS
+		SET ORDERADDRESS1 =#{orderAddress1}, ORDERADDRESS2 =#{orderAddress2}, ORDERADDRESS3 =#{orderAddress3}, ORDERSTATE =#{orderState}, ORDERRECEIVER =#{orderReceiver}
+	</update>
+	
+  </mapper>

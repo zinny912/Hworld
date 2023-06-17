@@ -12,9 +12,6 @@ public class ReviewVO {
     //리뷰 번호
     private Integer num;
 
-    //제목
-    private String title;
-
     //내용
     private String contents;
 
@@ -24,7 +21,23 @@ public class ReviewVO {
     //등록 일자
     private Date regDate;
 
+    //member 이름
+    private String email;
+    
+    private Integer memberNum;
+    
+    private String orderNum;
+    
+    private Long count;
+    
+    private String slicedCode;
+
+    private String categoryCode;
     //private List<MemberVO>memberVOs;
     private List<OrderVO> orderVOs;
+    
+    
+    
+	
     
 }

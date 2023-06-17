@@ -80,8 +80,8 @@
                                         </div>
                                     </th>
                                 </tr>
-
-                                <tr class="table-order">
+<%-- 							<c:if test="${orderVO.directCode.startsWith('P01')}">
+ --%>                                <tr class="table-order">
                                     <th>
                                         <div class="row">
                                             <h5 class="fw-bold" style="color: #7e7e7e;">월 납부금액</h5>
@@ -98,7 +98,8 @@
                                         </div>
                                     </th>
                                 </tr>
-                        </table>
+<%--                                 </c:if>
+ --%>                        </table>
                     </div>
                 </div>
                 <div class="col-md-6">

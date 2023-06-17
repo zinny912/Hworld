@@ -34,7 +34,7 @@
                                 <li>
                                     <span>
                                         <b>이메일:</b>
-                                        <span class="font-light"> wkdgkdud1005@gmail.com</span>
+                                        <span class="font-light"> Hworld55555@gmail.com</span>
                                     </span>
 
                                 </li>
