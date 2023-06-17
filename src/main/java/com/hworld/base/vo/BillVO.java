@@ -7,7 +7,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class billVO {
+public class BillVO {
 	//청구내역(PAYMENTDETAILS) - 청구서
 	//미납 내역 : 청구1, 납부0, 납부기한 < now(WHERE PAYMAXDATE < NOW();) 인 것을 조건으로
 	
