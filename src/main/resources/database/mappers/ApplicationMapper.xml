@@ -43,13 +43,6 @@
 		}
 	</insert>
 	
-	
-	<!-- MEMBERNUM update -->
-	<!-- <update id="setTelephoneInitUpdate" parameterType="MemberVO">
-		UPDATE TELEPHONE SET MEMBERNUM=#{memberNum}
-		WHERE SERIALNUM=(SELECT MAX(SERIALNUM) FROM TELEPHONE))
-	</update> -->
-	
 	<!-- Plan -->
 	<!-- existPlanList -->
 	<select id="getExistPlanList" resultType="PlanVO">
