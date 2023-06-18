@@ -107,11 +107,6 @@ public class MemberController {
 		ModelAndView mv = new ModelAndView();
 		
 		//opt1 = state값, opt2 = memberNum값
-		log.error(" ::::::::::::::::::::::::::::::::::::::::: {} ", map.toString());
-		log.error(" ::::::::::::::::::::::::::::::::::::::::: {} ", map.get("opt1"));
-		log.error(" ::::::::::::::::::::::::::::::::::::::::: {} ", map.get("opt2"));
-
-		
 		mv.addObject("map", map);
 		mv.setViewName("hworld/signUp");
 		return mv;
