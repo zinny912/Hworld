@@ -47,10 +47,6 @@
 	WHERE NAME=#{name} AND RRNF=#{rrnf} AND RRNL=#{rrnl}
 </select>
 
-<insert id="setPlanChange" statementType="CALLABLE" parameterType="BillVO">
-		
-	</insert>
-
   <!-- 요금제 추가하면 공통코드 테이블에도 insert 되어야해서 공통코드 테이블 값 가져오는 메서드 필요 -->
  <select id="getCommonCode" resultType="BaseVO">
  	SELECT * FROM COMMONCODE
