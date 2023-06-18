@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+     <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 
 <html lang="en">
@@ -10,74 +11,90 @@
     <c:import url="../temp/style.jsp"></c:import>    
     <title>요금 상세페이지</title>
  <style>
-    .boxone {
-    	width:70%;
-    	padding-right: 5%;
-    	display:absolute;
-    }
-    
-    .boxtwo {   
-    	width:30%;
-    	display:absolute;
-    }
+.zcustom-box {
+    width: 100%;
+    max-width: 80%;
+    border-radius: 10px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    border: 1px solid darkgray;
+    padding: 5% 3%;
+    margin: 5% auto;
+    background-color: fff;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap; /* 수정 */
+    justify-content: space-between; /* 추가 */
+    align-items: center; /* 추가 */
+}
+
+.boxone {
+    width: 70%;
+    padding-right: 5%;
+}
+
+.boxtwo {
+    width: 30%;
+}
+
+@media (max-width: 900px) {
+  .zcustom-box {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .boxone,
+  .boxtwo {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}
 
     .login-section {
         background-color: #fff;
+      
     }
 
     .box{
         border:1px solid black;  
     }
     
-    .zcustom-box {
-        width: 100%;
-        max-width: 1000px;
-        border-radius: 10px;
-        box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-        border:1px solid darkgray;
-        padding:50px 30px;
-        margin:5% auto;
-        background-color: fff;
-        position:relative;
-        display: flex;
-  		flex-wrap: wrap;
- 
-    }
     .zcustom-box h3 {
         color:black;
         text-align:center;
-        margin-top:20px;
+        padding-right:30%;
+        margin-top:15%;
         display:block;
     }
     .zcustom-box li{
-        margin-right:10px;
+        margin-right:-1%;
   
     }
     .zcustom-box img {
-        max-width:90px;
+    	width:90%;
+        max-width:70%;
         position:relative;   
     }
     
     .zbox{
 	    width:100%;
-	    max-width:100%;
+	    max-width:90%;
 	    white-space: nowrap;
-	    margin-left:-50px;
-	    margin-top:15px;
+	    margin-left:-15%;
+	    margin-top:5%;
 	   	box-sizing: border-box;
     }
     
     .hbox {
         border-right: 2px lightgray solid;
-        margin-left :30px;
-        margin-right :20px;  
-        padding-right:30px;
+        margin-left :5%; 
+        margin-right :5%;  
+       
         white-space: nowrap;
         display:inline-block; 
     }
     .hbox1 {
         border-right: 0px lightgray solid;
-        margin-left :30px;
+        margin-left :5%;
         display:inline-block;
         white-space: nowrap;
     }
@@ -86,6 +103,12 @@
         width: 60%;
         margin-left:15%;
     }
+    .btn-disabled {
+        pointer-events: none;
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+    
     
     
      /* 통신사 선택 페이지 버튼 */
@@ -168,6 +191,7 @@
     <!-- Shop Section start -->
     <section>
         <div class="container">
+        <input type="hidden" value="${param.planNum}" name="planNum">
             <div class="material-details">
                 <div class="title title1 title-effect title-left">
                     <h2>${planNote.note}</h2>
@@ -186,72 +210,90 @@
                                     </div>
                                 </c:if>    
                                     <div class="details-image-concept" >
-                                        <span class="text-start" style="font-size:30px; font-weight: 700;">${planVO.planName}  </span>
+                                        <span class="text-start fs-3" style="font-weight: 700;">${planVO.planName}  </span>
                                         <c:if test="${planVO.dataCapacity eq '무제한'}">
-                                        <span style="font-size:30px; font-weight: 500;"> (데이터 + 통화 + 문자 무제한)</span>
+                                        <span class="fs-3" style="font-weight: 500;"> (데이터 + 통화 + 문자 무제한)</span>
                                         </c:if>
                                         <c:if test="${planVO.dataCapacity ne '무제한'}">
-                                        <span style="font-size:30px; font-weight: 500;"> (데이터 ${planVO.dataCapacity}GB + 통화 & 문자 무제한)</span>
+                                        <span class="fs-3" style="font-weight: 500;"> (데이터 ${planVO.dataCapacity}GB + 통화 & 문자 무제한)</span>
                                         </c:if>
                                     </div>
                                     <h3 class="text-start" style="color:gray;"> ${planVO.planExplain} </h3>
                                         <div class="container ">
                                         	<div class="zcustom-box">
-		                                    	<div class="boxone">
-		                                            <ul>
-		                                                <li class="hbox">
-		                                                    <img src="/assets/images/cloud.png" >
-		                                                    <h3> ${planVO.dataCapacity} </h3>
-		                                                </li>
-		                                                <li class="hbox">
-		                                                    <img src="/assets/images/phone-call.png">
-		                                                    <h3> 기본제공 </h3>
-		                                                </li>
-		                                                <li class="hbox1">
-		                                                    <img src="/assets/images/sms.png">
-		                                                    <h3> 기본제공 </h3>
-		                                                </li>
-		                                            </ul>  
-		                                        </div>
-	                                            <div class="boxtow">
-	                                               <div class="container text-center zbox " style="margin-right:-150px;">
-	                                               		<div class="col" style="margin-left:-50px;">
-	                                                    <span class="theme-color fs-4 fw-bold ">월 </span><span class="theme-color fs-3 fw-bold data-comma" style="margin:0px 8px;" >${planVO.planPrice}</span><span class="theme-color fs-5 fw-bold">원 </span>
-	                                                        <span class="label-text">(부가세 포함)</span>
-	                                                        </div>
-	                                                            <div class="" style="margin-top:30px;">
-	                                                            <div class="product-buttons justify-content-center">
-	                                                                <!-- 가입자 본인인증 모달 버튼 요금제변경 start -->
-	                                                                <c:choose>
-	                                                                <c:when test="${memberVO.ownCheck == 0 }">
-	                                                              
-	                                                                <a href="javascript:void(0)" data-bs-toggle="modal"
-	                                                                    data-bs-target="#quick-view" class="btn btn-solid hover-solid btn-animation rounded-3" disabled>
-	                                                                    <span>요금제 변경</span> 
-	                                                                </a>
-	                                                               
-	                                                                <a href="javascript:void(0)" data-bs-toggle="modal" id="changeTelecoms" data-bs-target="#changeTelecom"
-	                                                                    class="btn btn-solid hover-solid btn-animation rounded-3 "> 
-	                                                                <span>번호이동</span>
-	                                                                </a>
-	                                                                </c:when>
-	                                                                <c:otherwise>
-	                                                                <a href="javascript:void(0)" data-bs-toggle="modal"
-	                                                                    data-bs-target="#quick-view" class="btn btn-solid hover-solid btn-animation rounded-3">
-	                                                                    <span>요금제 변경</span> 
-	                                                                </a>
-	                                                                <a href="javascript:void(0)" data-bs-toggle="modal" id="changeTelecoms" data-bs-target="#changeTelecom"
-	                                                                    class="btn btn-solid hover-solid btn-animation rounded-3 " disabled> 
-	                                                                <span>번호이동</span>
-	                                                                </a>
-	                                                                </c:otherwise>
-	                                                                </c:choose>
-	                                                            </div>
-		                                                        <div class="btn product-buttons justify-content-center" disabled>
-		                                                                    <span>이미 사용중인 요금제입니다.</span> 
-		                                                        </div>
-	                                                     		</div>
-	                                             	</div>
+											    <div class="boxone">
+											        <ul>
+											            <li class="hbox">
+											                <img src="/assets/images/cloud.png">
+											                <c:if test="${planVO.dataCapacity eq '무제한'}">
+											                    <h3>무제한</h3>
+											                </c:if>
+											                <c:if test="${planVO.dataCapacity ne '무제한'}">
+											                    <h3 style="font-weight:400;">${planVO.dataCapacity} GB</h3>
+											                </c:if>
+											            </li>
+											            <li class="hbox">
+											                <img src="/assets/images/phone-call.png">
+											                <h3>기본제공</h3>
+											            </li>
+											            <li class="hbox1">
+											                <img src="/assets/images/sms.png">
+											                <h3>기본제공</h3>
+											            </li>
+											        </ul>
+											    </div>
+											    <div class="boxtwo">
+											        <div class="container text-center zbox">
+											            <div class="col">
+											                <span class="theme-color fs-4 fw-bold">월 </span>
+											                <span class="theme-color fs-3 fw-bold data-comma" style="margin:0px 3%;">
+											                    <fmt:formatNumber value="${planVO.planPrice}" pattern="#,###" />
+											                </span>
+											                <span class="theme-color fs-5 fw-bold">원 </span>
+											                <span class="label-text">(부가세 포함)</span>
+											            </div>
+											            <div style="margin-top:5%;">
+											                <div class="product-buttons justify-content-center">
+											                    <!-- 가입자 본인인증 모달 버튼 요금제변경 start -->
+											                    <c:choose>
+											                        <c:when test="${kingNum.planNum eq planVO.planNum}">
+											                            <a type="button" class="btn btn-solid hover-solid btn-animation rounded-3 btn-disabled">
+											                                <span>이미 사용중인 요금제입니다.</span>
+											                            </a>
+											                        </c:when>
+											                        <c:otherwise>
+											                            <c:choose>
+											                                <c:when test="${memberVO.ownCheck == 0}">
+											                                    <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view"
+											                                        class="btn btn-solid hover-solid btn-animation rounded-3 btn-disabled">
+											                                        <span>요금제 변경</span>
+											                                    </a>
+											                                    <a href="javascript:void(0)" data-bs-toggle="modal" id="changeTelecoms"
+											                                        data-bs-target="#changeTelecom"
+											                                        class="btn btn-solid hover-solid btn-animation rounded-3">
+											                                        <span>번호이동</span>
+											                                    </a>
+											                                </c:when>
+											                                <c:otherwise>
+											                                    <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view"
+											                                        class="btn btn-solid hover-solid btn-animation rounded-3">
+											                                        <span>요금제 변경</span>
+											                                    </a>
+											                                    <a href="javascript:void(0)" data-bs-toggle="modal" id="changeTelecoms"
+											                                        data-bs-target="#changeTelecom"
+											                                        class="btn btn-solid hover-solid btn-animation rounded-3 btn-disabled">
+											                                        <span>번호이동</span>
+											                                    </a>
+											                                </c:otherwise>
+											                            </c:choose>
+											                        </c:otherwise>
+											                    </c:choose>
+											                </div>
+											            </div>
+											        </div>
+											    </div>
+											</div>
+
                                                	</div>  
                                         	</div>
                                 		</div>
@@ -299,6 +341,7 @@
                 <div class="modal-body">
                     <div class="row gy-4"> 
                             <!-- 가입자본인인증 Start -->
+                            <form action="./identify" method="POST">
                             <div class="login-section">
                                 <div class="materialContainer">
                                             <div class="login-title">
@@ -310,33 +353,26 @@
                                                 <span class="spin"></span>
                                             </div>
                                         <div class="row">
-                                            <div class="boxone">
-                                                <div class="input">
-                                                    <label for="resident1">주민등록번호 앞 6자리</label>
-                                                    <input type="text" name="resident1" id="resident1">
-                                                    <span class="spin"></span>
-                                                </div>
-                                            </div>
-                                            <div class="boxtwo">
-                                                <div class="input">
-                                                    <label for="resident2">주민등록번호 뒤 7자리</label>
-                                                    <!-- 유효성 넣고 주민번호 뒤에자리 2******걸어줘야함 -->
-                                                    <input type="text" name="resident2" id="resident2">
-                                                    <span class="spin"></span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                            <div class="input mb-5">
-                                                <label for="pass">비밀번호</label>
-                                                <input type="password" name="pass" id="pass">
-                                                <span class="spin"></span>
-                                            </div>
+										    <div class="col-md-6 d-flex">
+										        <div class="input col-md-3">
+										            <label for="rrnf">주민등록번호 앞 6자리</label>
+										            <input type="text" name="rrnf" id="rrnf">
+										            <span class="spin"></span>
+										        </div>
+										        <div class="input col-md-3">
+										            <label for="rrnl">주민등록번호 뒤 7자리</label>
+										            <!-- 유효성 넣고 주민번호 뒤에자리 2******걸어줘야함 -->
+										            <input type="text" name="rrnl" id="rrnl">
+										            <span class="spin"></span>
+										        </div>
+										    </div>
+										</div>
+                                           <input type="hidden" value="${param.planNum}" name="planNum">
                                         <!-- 약관동의 드랍다운 start -->
                                                 <div class="text-center">
-                                                    <h3 class="mb-3 "for="compass">약관동의 및 안내사항</h3>
-                                                    <section style="margin-top:-65px;">
-                                                        <div class="container">
-                                                            <div class="row gx-4 gy-5">
+                                                    <section style="margin-top:-50%;">
+                                                        <div class="container-fluid">
+                                                            <div class="row ">
                                                                 <div class="category-option">
                                                                     <div class="accordion category-name" id="accordionExample">
                                                                         <div class="accordion-item category-rating">
@@ -346,7 +382,7 @@
                                                                                     유의사항
                                                                                 </button>
                                                                             </h2>
-                                                                            <div id="collapseThree" class="accordion-collapse collapse show"
+                                                                            <div id="collapseThree" class="accordion-collapse collapse "
                                                                                 aria-labelledby="headingThree" data-bs-parent="#accordionExample">
                                                                                 <div class="accordion-body category-scroll">
                                                                                     <ul class="category-list">
@@ -388,13 +424,14 @@
                                                         </div>
                                                         <div class="col-md-5 mx-auto">   
                                                             <div class="button login">
-                                                                <button onclick="location.href='zyogeumje_modify.html';">
+                                                                <button type="submit">
                                                                     <span>확인</span>
                                                                 </button>
                                                             </div>     
                                                         </div>
                                                 </div>     
                                             </div>
+                                            </form>
                                     </div>
                                 </div>
                             </div>
@@ -547,6 +584,25 @@
 </div>
 <!-- Add number Modal End -->
 
+<div class="modal fade" id="resultModal" tabindex="-1" role="dialog" aria-labelledby="resultModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="resultModalLabel"></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p id="resultMessage"></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">확인</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- Recommend product 1 -->
 <section class="left-sidebar-section masonary-blog-section">
     <div class="container">
@@ -677,7 +733,38 @@
 	    }).open();   
 	}
 	</script>
-	<script>
+<!-- 	<script>
+	$(document).ready(function() {
+		/*  const result = ${result};
+		    const modal = $('#resultModal');
+		    const modalTitle = $('#resultModalLabel');
+		    const modalMessage = $('#resultMessage');
+		    
+		    if (result === 1) {
+		        modalTitle.text('확인');
+		        modalMessage.text('확인이 완료되었습니다.');
+		    } else {
+		        modalTitle.text('오류');
+		        modalMessage.text('일치하는 정보를 찾을 수 없습니다. 확인하고 다시 입력해주세요.');
+		    }
+		    
+		    modal.modal('show');
+		 */});
+		
+		
+	    const result = ${result};
+	    if (result === 1) {
+	        alert("확인이 완료되었습니다.");
+	        location.href="./planChange";
+	    } else {
+	        alert("일치하는 정보를 찾을 수 없습니다. 확인하고 다시 입력해주세요.");
+	        location.href="./planDetail";
+	    }
+	}); -->
+	
+	
+	
+	
 // 모달이 열릴 때 실행되는 함수
   function handleModalShown() {
     const planPrice = 55000;
@@ -699,6 +786,7 @@
     // 모달을 열기 전에 필요한 동작을 수행할 수 있습니다
   });
 </script>
+
 </body>
 
 </html>

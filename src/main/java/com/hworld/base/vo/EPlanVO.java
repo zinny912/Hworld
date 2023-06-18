@@ -12,4 +12,6 @@ public class EPlanVO {
     private Integer ePlanPrice;
     private String ePlanExplain;
     private String ePlanExplainS;
+    private String ePlanExplainM;
+    private String categoryCode;
 }
