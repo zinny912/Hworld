@@ -132,7 +132,7 @@
                                                 </div>
                                                 <div class="col-md-2">
                                                         <div class="d-flex justify-content-end">
-                                                        <button type="button" id="insPayment" class="btn btn-solid-default btn-sm fw-bold ms-auto">즉시 납부</button>
+                                                        <button type="button" id="insPayment" class="btn btn-solid-default btn-sm fw-bold ms-auto" onclick="location.href = './instantPay';">즉시 납부</button>
                                                         <!-- onclick="location.href = '../invoice/invoice-3-baro.html';" -->
                                                     </div>
                                                 </div>
