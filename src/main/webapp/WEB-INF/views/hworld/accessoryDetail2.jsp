@@ -226,7 +226,7 @@
 										<hr>
 											
 											<!-- 선택된 옵션 영역 -->
-									<form action="/order" method="GET" id="orderForm"> 
+									<form action="" method="Post" id="orderForm"> 
 											<div id="selectedOptionList">
 											</div>
 
@@ -605,7 +605,7 @@
                 </form>
             </div>
             <div class="modal-footer pt-0 text-end d-block">
-                <a href="../cart/cartInfo" ><button class="btn btn-solid-default rounded-1">확인</button></a>
+                <button class="btn btn-solid-default rounded-1 btn_cart">확인</button>
             </div>
         </div>
     </div>
