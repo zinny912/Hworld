@@ -232,7 +232,7 @@
 
     $('#testMember').click(function(){
         console.log("member");
-        const email = "zinnybot5@gmail.com";
+        const email = "zinny@gmail.com";
         const pw = "12345";
 
         $.ajax({
