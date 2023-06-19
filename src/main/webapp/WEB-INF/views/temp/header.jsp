@@ -122,7 +122,7 @@
 															</li>												
 														</c:if>
                                                         <li>
-                                                            <a href="/myPage" class="d-block">마이페이지</a>
+                                                            <a href="/myPage/home" class="d-block">마이페이지</a>
                                                         </li>
                                                         <li>
                                                             <a href="/member/logout" class="d-block">로그아웃</a>

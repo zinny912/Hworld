@@ -6,25 +6,47 @@
  <mapper namespace="com.hworld.base.dao.PlanDAO">
  
  <select id="getPlanList" resultType="PlanVO">
- 	SELECT P.*, CC.NOTE AS note, CC.TYPE AS type
-	FROM PLAN P
-	INNER JOIN COMMONCODE CC ON (P.CATEGORYCODE = CC.CODE)
-	WHERE (P.PLANNUM LIKE CONCAT(CC.TYPE, '%'))
- </select>
+		SELECT P.PLANNUM, P.PLANNAME, P.PLANPRICE, P.DATACAPACITY, P.CATEGORYCODE, P.PLANEXPLAIN, P.PLANEXPLAINS, D.DISPERCENT 
+		FROM PLAN P
+		LEFT JOIN DISCODE D
+		ON(P.DISCODE=D.DISCODE)
+		WHERE PLANNUM LIKE 'G%' OR PLANNUM LIKE 'S%' OR PLANNUM LIKE 'T%' OR PLANNUM LIKE 'Z%' OR PLANNUM LIKE 'W%' OR PLANNUM LIKE 'H%'
+	</select>
+ 
+ <select id="getExistPlanList" resultType="PlanVO">
+		SELECT DISTINCT C.NOTE
+		FROM PLAN P
+		INNER JOIN COMMONCODE C ON SUBSTRING(P.PLANNUM, 1, 1) = C.TYPE
+</select>
  
  <select id="getDetail" resultType="PlanVO" parameterType="PlanVO">
  	SELECT * FROM PLAN
  	WHERE PLANNUM=#{planNum}
  </select>
+<!-- 요금제 대표회선인지 확인 -->
+<select id="getKingPlanNum" resultType="PlanVO" parameterType="Integer">
+	SELECT T.kingCheck, P.planNum
+	FROM TELEPHONE T
+	LEFT OUTER JOIN PLAN P on T.planNum=P.planNum
+	WHERE T.kingCheck = 1 
+	AND T.planNum=P.planNum
+	AND T.memberNum = #{memberNum};
+</select>
 
+<!-- 요금제 이름 가져오기 -->
  <select id="getNoteName" resultType="PlanVO">
  	SELECT DISTINCT CC.NOTE AS note
  	FROM PLAN P
  	LEFT JOIN COMMONCODE CC ON (P.CATEGORYCODE = CC.CODE) AND (CC.TYPE = SUBSTRING(#{planNum},1,1))
  	WHERE P.PLANNUM = #{planNum}
- 
  </select>
  
+<!-- 로그인 후 가입자 본인인증 (요금제 변경) -->
+<select id="getMemberInput" parameterType="MemberVO" resultType="MemberVO">
+	SELECT MEMBERNUM FROM MEMBER
+	WHERE NAME=#{name} AND RRNF=#{rrnf} AND RRNL=#{rrnl}
+</select>
+
   <!-- 요금제 추가하면 공통코드 테이블에도 insert 되어야해서 공통코드 테이블 값 가져오는 메서드 필요 -->
  <select id="getCommonCode" resultType="BaseVO">
  	SELECT * FROM COMMONCODE
@@ -36,77 +58,51 @@
  </insert>
  
  <insert id="setInsert" parameterType="PlanVO">
- 	INSERT INTO PLAN (PLANNUM, DISCODE, PLANNAME, PLANPRICE, DATACAPACITY, CATEGORYCODE, PLANEXPLAIN, PLANEXPLAINS, PLANEXPLAINM)
- 	VALUES(#{planNum},#{disCode}, #{planName}, #{planPrice}, #{dataCapacity}, #{categoryCode}, #{planExplain}, #{planExplainS}, #{planExplainM})
+ 	INSERT INTO PLAN (PLANNUM, DISCODE, PLANNAME, PLANPRICE, DATACAPACITY, CATEGORYCODE, PLANEXPLAIN, PLANEXPLAINS)
+ 	VALUES(#{planNum},#{disCode}, #{planName}, #{planPrice}, #{dataCapacity}, #{categoryCode}, #{planExplain}, #{planExplainS})
  </insert>
  
- <update id="setPlanUpdate" parameterType="PlanVO">
+<update id="setPlanUpdate" parameterType="PlanVO">
  	UPDATE PLAN 
- 	SET DISCODE=#{disCode}, PLANNAME=#{planName}, PLANPRICE=#{planPrice}, DATACAPACITY=#{dataCapacity},CATEGORYCODE=#{categoryCode}, PLANEXPLAIN=#{planExplain}, PLANEXPLAINS=#{planExplainS},PLANEXPLAINM=#{planExplainM})
+ 	SET DISCODE=#{disCode}, PLANNAME=#{planName}, PLANPRICE=#{planPrice}, DATACAPACITY=#{dataCapacity},CATEGORYCODE=#{categoryCode}, PLANEXPLAIN=#{planExplain}, PLANEXPLAINS=#{planExplainS}
  </update>
  
  <delete id="setPlanDelete" parameterType="PlanVO">
  	DELETE FROM PLAN WHERE PLANNUM=#{planNum}
  </delete>
  
+ <!-- 부가서비스 -->
  
  <select id="getEPlanList" resultType="EPlanVO">
- 	SELECT * FROM EPLAN;
- </select>
+    SELECT DISTINCT C.NOTE
+    FROM EPLAN EP
+    INNER JOIN COMMONCODE C ON SUBSTRING(EP.EPLANNUM, 1, 1) = C.TYPE
+</select>
  
- <select id="getEPlanDetail" resultType="EPlanVO" parameterType="EPlanVO">
- 	SELECT * FROM EPLAN
- 	WHERE EPLANNUM=#{ePlanNum}
- 
- </select>
- 
- <!-- <insert id="setEPlanAdd" parameterType="EPlanVO">
- 	INSERT INTO EPLAN
- 	VALUES()
- </insert>
-  -->
-  <!--  5G요금제 -->
- <!--<select id="getGeneralList" resultType="PlanVO" >
- 	SELECT P.*, CC.NOTE AS note, CC.TYPE AS type
-	FROM PLAN2 P
-	INNER JOIN COMMONCODE CC ON (P.CATEGORYCODE = CC.CODE)
-	WHERE P.PLANNUM LIKE 'G%' AND CC.TYPE = 'G'
- </select>
-  시니어 요금제
- <select id="getSeniorList" resultType="PlanVO">
- 	SELECT P.*, CC.NOTE AS note, CC.TYPE AS type
-	FROM PLAN2 P
-	INNER JOIN COMMONCODE CC ON (P.CATEGORYCODE = CC.CODE)
-	WHERE P.PLANNUM LIKE 'S%' AND CC.TYPE = 'S'
- </select>
- 
- Teen 요금제
- <select id="getTeenList" resultType="PlanVO">
- 	SELECT P.*, CC.NOTE AS note, CC.TYPE AS type
-	FROM PLAN2 P
-	INNER JOIN COMMONCODE CC ON (P.CATEGORYCODE = CC.CODE)
-	WHERE P.PLANNUM LIKE 'T%' AND CC.TYPE = 'T'
- </select>
-  	 ZEM 요금제
- <select id="getZemList" resultType="PlanVO">
- 	SELECT P.*, CC.NOTE AS note, CC.TYPE AS type
-	FROM PLAN2 P
-	INNER JOIN COMMONCODE CC ON (P.CATEGORYCODE = CC.CODE)
-	WHERE P.PLANNUM LIKE 'Z%' AND CC.TYPE = 'Z'
- </select>
-  	 복지 요금제
-  <select id="getWelfareList" resultType="PlanVO">
- 	SELECT P.*, CC.NOTE AS note, CC.TYPE AS type
-	FROM PLAN2 P
-	INNER JOIN COMMONCODE CC ON (P.CATEGORYCODE = CC.CODE)
-	WHERE P.PLANNUM LIKE 'W%' AND CC.TYPE = 'W'
- </select>
-  	군인요금제
- <select id="getHeroList" resultType="PlanVO">
- 	SELECT P.*, CC.NOTE AS note, CC.TYPE AS type
-	FROM PLAN2 P
-	INNER JOIN COMMONCODE CC ON (P.CATEGORYCODE = CC.CODE)
-	WHERE P.PLANNUM LIKE 'H%' AND CC.TYPE = 'H'
- </select> -->
+<select id="getDetailEPlan" resultType="EPlanVO" parameterType="EPlanVO">
+    SELECT * FROM EPLAN
+    WHERE EPLANNUM=#{ePlanNum}
+</select>
+
+<select id="getNoteNameEPlan" resultType="EPlanVO">
+    SELECT DISTINCT CC.NOTE AS note
+    FROM EPLAN EP
+    LEFT JOIN COMMONCODE CC ON (EP.CATEGORYCODE = CC.CODE) AND (CC.TYPE = SUBSTRING(#{ePlanNum},1,1))
+    WHERE EP.EPLANNUM = #{ePlanNum}
+</select>
+
+<insert id="setEPlanInsert" parameterType="EPlanVO">
+    INSERT INTO EPLAN (EPLANNUM, NAME, PRICE, EPLANEXPLAIN, EPLANEXPLAINS, EPLANEXPLAINM, CATEGORYCODE)
+    VALUES(#{ePlanNum}, #{name}, #{price}, #{categoryCode}, #{ePlanExplain}, #{ePlanExplainS}, #{ePlanExplainM}, #{categoryCode})
+</insert>
+
+<update id="setEPlanUpdate" parameterType="EPlanVO">
+    UPDATE EPLAN 
+    SET NAME=#{name}, PRICE=#{price}, CATEGORYCODE=#{categoryCode}, EPLANEXPLAIN=#{ePlanExplain}, EPLANEXPLAINS=#{ePlanExplainS}, EPLANEXPLAINM=#{ePlanExplainM}
+</update>
+
+<delete id="setEPlanDelete" parameterType="EPlanVO">
+    DELETE FROM EPLAN WHERE EPLANNUM=#{ePlanNum}
+</delete>
 
 </mapper>

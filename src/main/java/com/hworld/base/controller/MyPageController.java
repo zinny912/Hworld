@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -21,6 +22,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @Slf4j
+@RequestMapping("/myPage/*")
 public class MyPageController {
 	
 	@Autowired
@@ -29,12 +31,13 @@ public class MyPageController {
 	
 	//마이 페이지 홈
 	//필요한 정보들을 미리 다 뿌려둬야 jsp에서 사용가능할듯 함
-	@GetMapping("myPage")
+	@GetMapping("home")
 	public ModelAndView myPage() throws Exception{
 		ModelAndView modelAndView = new ModelAndView();
 		
 		//기능
-		//요금 청구/납부 - 
+		//요금 청구/납부 - 납부내역, 미납내역, 대표회선정보를 나타내야함
+		
 		
 		//가입 정보
 		
@@ -51,6 +54,20 @@ public class MyPageController {
 		modelAndView.setViewName("hworld/myPage");
 		return modelAndView;
 	}
+	
+	
+	//요금 청구/납부 - 즉시 납부 페이지(납부 영수증 표시)
+	@GetMapping("instantPay")
+	public ModelAndView setPaymentAdd(HttpSession session) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		mv.setViewName("hworld/invoiceInstantly");
+		return mv;
+	}
+	
+	
+	
+	
 	
 	// 가입 정보 변경(Post)
 //	@PostMapping("myPage")
