@@ -168,6 +168,7 @@ $('#optionAdd').on('click', function() {
       setHtml += '<div class="orderInfos">';
       setHtml += '<input type="hidden" name="directCode" value="' + directCode + '">';
       setHtml += '<input type="hidden" name="orderAmount" value="' + optionAmount + '">';
+      setHtml += '<input type="hidden" name="cartAmount" value="' + optionAmount + '">';
       setHtml += '<input type="hidden" name="calPrice" value="' + calPrice + '">';
       setHtml += '</div>';
       setHtml += '</div>';
@@ -230,6 +231,17 @@ $('#orderBtn').click(function(){
   // 폼 넘기기
   $('#orderForm').submit();
 });
+
+$('.btn_cart').click(function(){
+  // 필요한 검증 및 처리 로직
+
+  // 폼의 action 속성 변경
+  $('#orderForm').attr('action', '/cart/add');
+
+  // 폼 넘기기
+  $('#orderForm').submit();
+});
+
 
 
 //필요한 값이 입력되어있는지 확인하는 함수
