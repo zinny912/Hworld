@@ -44,6 +44,7 @@ public class MyPageController {
 		////요금 청구/납부 - 납부내역, 미납내역, 대표회선정보를 나타내야함
 		//납부/미납 리스트
 		List<BillVO> billList = myPageService.getPMDList(pager, session);
+		
 		//대표회선 정보
 		Map<String, Object> kingNumInfo = myPageService.getKingDetail(session);
 		
@@ -83,22 +84,21 @@ public class MyPageController {
 	public ModelAndView setPasswordUpdate(MemberVO memberVO, HttpSession session) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		
-		log.error("비밀번호 바꾸는 페이지");
+		int result = myPageService.setPasswordUpdate(memberVO, session);
 		
-		mv.setViewName("hworld/myPage");
+		mv.setViewName("redirect:./home");
 		return mv;
 	}
+		
 	
-	
-	
-	//정보 본경 - db 입력
+	//정보 변경 - db 입력
 	@PostMapping("updateInfo")
-	public ModelAndView setMemberUpdate() throws Exception{
+	public ModelAndView setMemberUpdate(MemberVO memberVO, HttpSession session) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		
-		log.error("정보 바꾸는 페이지");
-		
-		mv.setViewName("hworld/myPage");
+		int result = myPageService.setMemberUpdate(memberVO, session);
+
+		mv.setViewName("redirect:./home");
 		return mv;
 	}
 	

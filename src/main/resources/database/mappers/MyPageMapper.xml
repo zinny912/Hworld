@@ -40,6 +40,7 @@
 		<result property="payMonth" column="payMonth"/>
 		<result property="bfPlanPrice" column="bfPlanPrice"/>
 		<result property="planChangeDate" column="planChangeDate"/>
+		<result property="paidDate" column="paidDate"/>
 		<result property="cancelPrice" column="cancelPrice"/>
 		
 		<association property="telephoneVO" javaType="TelephoneVO">
@@ -98,15 +99,17 @@
 		WHERE MEMBERNUM=#{memberNum}
 	</update>
 	
-	<!-- 가입 정보 변경 -->
-  	<update id="memberUpdate" parameterType="MemberVO">
-  		UPDATE MEMBER SET NAME=#{name}, ADDRESS1=#{address1}, ADDRESS2=#{address2}, ADDRESS3=#{address3}, PW=#{pw}
-  		WHERE EMAIL=#{email}
-  	</update>
-	
-	<!-- 비밀번호 변경 -->
-	<update id="pwUpdate" parameterType="MemberVO">
-		UPDATE MEMBER SET PW=#{npw}
-		WHERE EMAIL=#{email}
+	<!-- 회원 정보 변경 -->
+	<update id="setMemberUpdate" parameterType="MemberVO">
+		UPDATE MEMBER SET TEL=#{tel}, ADDRESS1=#{address1}, ADDRESS2=#{address2}, ADDRESS3=#{address3}
+		WHERE MEMBERNUM=#{memberNum}
 	</update>
+	
+	<!-- 새로 업데이트 된 정보로 세션 만들기 -->
+	<select id="getNewSession" parameterType="MemberVO" resultType="MemberVO">
+		SELECT * FROM MEMBER
+		WHERE MEMBERNUM=#{memberNum}
+	</select>
+
+
 </mapper>

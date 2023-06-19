@@ -266,7 +266,7 @@ $('#directCode, input[name=planNum], input[name=disKind]').change(function() {
     const directCode = $('#directCode option:selected').val(); // 기기코드
     const planNum = $('input[name=planNum]:checked').val(); // 요금제번호
     const disKind = $('input[name=disKind]:checked').val(); // 할인유형
-
+    
     directCheck = isEmpty(directCode);
     planCheck = isEmpty(planNum);
     disKindCheck = isEmpty(disKind);
@@ -360,4 +360,4 @@ $('#phoneNum').on("blur", function() {
         });
     }
 
-})
+});

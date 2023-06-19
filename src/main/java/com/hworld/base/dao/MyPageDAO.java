@@ -24,7 +24,9 @@ public interface MyPageDAO {
 	//회원의 비밀번호 업데이트
 	public int setPasswordUpdate(MemberVO memberVO) throws Exception;
 	
-	public int memberUpdate(MemberVO memberVO) throws Exception;
+	//회원의 정보 업데이트
+	public int setMemberUpdate(MemberVO memberVO) throws Exception;
 	
-	public void pwUpdate(MemberVO memberVO) throws Exception;
+	//세션 업데이트
+	public MemberVO getNewSession(MemberVO memberVO) throws Exception;
 }

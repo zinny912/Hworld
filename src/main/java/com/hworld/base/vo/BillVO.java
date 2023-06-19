@@ -27,6 +27,7 @@ public class BillVO {
 	private String payMonth; //청구 년/월
 	private String bfPlanPrice; //요금제 변경 전 총 요금
 	private Date planChangeDate; //요금제 변경 날짜
+	private Date paidDate; //납부일
 	private Integer cancelPrice; //위약금 내용
 	
 	//청구내역은 하나의 회선에 대한 청구정보
