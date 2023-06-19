@@ -35,8 +35,7 @@ public class MemberController {
 	
 	@Autowired
 	private MemberService memberService;
-	
-	@Autowired
+		@Autowired
 	private BCryptPasswordEncoder pwEncoder;
 	
 	////회원가입 파트

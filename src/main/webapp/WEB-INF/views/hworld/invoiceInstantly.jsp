@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-
+<html>
 <head>
     <meta charset="UTF-8">
-    <c:import url="../temp/style.jsp"></c:import>
+    <!-- <c:import url="../temp/style.jsp"></c:import> -->
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -47,11 +47,11 @@
                     <div class="invoice-wrapper">
                         <div class="invoice-header">
                             <div class="upper-icon">
-                                <img src="assets/images/invoice.svg" class="img-fluid" alt="">
+                                <img src="/assets/images/invoice.svg" class="img-fluid" alt="">
                             </div>
                             <div class="row header-content">
                                 <div class="col-md-6">
-                                    <img src="assets/images/logo.png" class="img-fluid" alt="">
+                                    <img src="/assets/images/logo.png" class="img-fluid" alt="">
                                 </div>
                                 <div class="col-md-6 text-md-end">
                                     <h4 class="mb-3">

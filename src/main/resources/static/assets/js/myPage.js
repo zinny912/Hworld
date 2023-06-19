@@ -1,5 +1,6 @@
 $(document).ready(function() {
 
+    console.log('myPage js 실행');
 
 
 
@@ -15,17 +16,51 @@ $('#insPayment').click(function(){
 })
 
 
+//비밀번호 변경 버튼을 누르고, 확인을 누른 경우
+$('#updatePwBtn').click(function(){
+    console.log('비밀번호 변경 클릭');
+
+    let pw = $('#pw').val();
+    let pwCheck = $('#pwCheck').val();
+
+    chkPw = isEmpty(pw);
+    chkPwCheck = isEmpty(pwCheck);
+
+    if(pw && pwCheck && pw == pwCheck){
+
+        //폼 전송
+        $('#updatePwForm').submit();
+    }else{
+        alert("값을 확인해주세요");
+        $('#pw').val('');
+        $('#pwCheck').val('');
+    }
+
+})
 
 
 
+//정보 변경 버튼을 누르고, 확인을 누른 경우
+$('#updateInfoBtn').click(function(){
+    console.log('정보 변경 클릭');
 
-
-
-
+    //폼 전송
+    $('#updateInfoForm').submit();
+})
 
 
 
 //////함수부
+
+
+//빈값 체크
+function isEmpty(value){
+    if(typeof value == "undefined" || value == null || value == '')
+        return false;
+    else
+        return true;
+}
+
 
 //비밀번호?
 function fnSubmit() {
@@ -108,4 +143,3 @@ function execution_daum_address(){
 }
 
 
-console.log('myPage js 실행');

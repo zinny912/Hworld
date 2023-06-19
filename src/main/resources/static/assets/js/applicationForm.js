@@ -245,9 +245,9 @@ $('input[name="planNum"], select[name="directCode"]').change(function() {
         disPlan12 = Math.floor(disPlan12 / 10) * 10;
         disPlan24 = Math.floor(disPlan24 / 10) * 10;
 
-        let nPrice0 = "-"+disPrice;
-        let nPrice1 = "-"+disPlan12;
-        let nPrice2 = "-"+disPlan24;
+        let nPrice0 = "-"+disPrice.toLocaleString();
+        let nPrice1 = "-"+disPlan12.toLocaleString();
+        let nPrice2 = "-"+disPlan24.toLocaleString();
 
         //할인 가격을 표시
         $('#dis0').empty();
@@ -284,12 +284,15 @@ $('#directCode, input[name=planNum], input[name=disKind]').change(function() {
                 planNum: planNum
             },
             success: function(response) {
+                let out_phonePayPrice = response.out_phonePayPrice;
+                let out_planPrice = response.out_planPrice;
+                let totalPrice = (response.out_phonePayPrice*1 + response.out_planPrice*1);
                 $('#out_phonePayPrice').text('');
                 $('#out_planPrice').text('');
                 $('#totalPrice').text('');
-                $('#out_phonePayPrice').text(response.out_phonePayPrice);
-                $('#out_planPrice').text(response.out_planPrice);
-                $('#totalPrice').text(response.out_phonePayPrice*1 + response.out_planPrice*1);
+                $('#out_phonePayPrice').text(out_phonePayPrice.toLocaleString());
+                $('#out_planPrice').text(out_planPrice.toLocaleString());
+                $('#totalPrice').text(totalPrice.toLocaleString());
             },
             error: function(error) {
                 // 에러 처리 로직 작성
