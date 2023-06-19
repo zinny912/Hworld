@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+    
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -76,12 +78,50 @@
                                     </th>
                                     <th colspan="3">
                                         <div class="align-middle">
-                                            <h5>15313515313</h5>
+                                            <h5>${orderVO.orderNum}</h5>
+                                        </div>
+                                    </th>
+                                  	</tr>
+                              <%--  <tr class="table-order">
+                                    <th> 
+                                        <div class="row">
+                                            <h5 class="fw-bold" style="color: #7e7e7e;">주문 날짜</h5>
+                                        </div>
+                                    </th>
+                                    <th colspan="3">
+                                        <div class="align-middle">
+                                            <h5>
+                                            	<fmt:formatDate value="${payVO.payDate}" pattern="yyyy년 MM월 dd일 a hh:mm" />
+                                            </h5>
+                                        </div>
+                                    </th>
+                                </tr> --%>
+                                <tr class="table-order">
+                                    <th> 
+                                        <div class="row">
+                                            <h5 class="fw-bold" style="color: #7e7e7e;">받는이</h5>
+                                        </div>
+                                    </th>
+                                    <th colspan="3">
+                                        <div class="align-middle">
+                                            <h5>${orderVO.orderReceiver}</h5>
                                         </div>
                                     </th>
                                 </tr>
-<%-- 							<c:if test="${orderVO.directCode.startsWith('P01')}">
- --%>                                <tr class="table-order">
+                                <tr class="table-order">
+                                    <th> 
+                                        <div class="row">
+                                            <h5 class="fw-bold" style="color: #7e7e7e;">배송지</h5>
+                                        </div>
+                                    </th>
+                                    <th colspan="3">
+                                        <div class="align-middle">
+                                            <h5>${orderVO.orderAddress1} ${orderVO.orderAddress2} ${orderVO.orderAddress3}</h5>
+                                        </div>
+                                    </th>
+                                </tr>
+ 							<c:if test="${ar.directCode.startsWith('P01')}">
+                                 <tr class="table-order">
                                     <th>
                                         <div class="row">
                                             <h5 class="fw-bold" style="color: #7e7e7e;">월 납부금액</h5>
@@ -98,8 +138,8 @@
                                         </div>
                                     </th>
                                 </tr>
-<%--                                 </c:if>
- --%>                        </table>
+                                </c:if>
+                       </table>
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -112,15 +152,43 @@
                                             <h5 class="fw-bold" style="color: #7e7e7e;">상품 정보</h5>
                                         </div>
                                     </th>
+                                    
                                     <th colspan="3">
-                                        <div class="align-middle">
-                                            <h5>153,160원</h5>
+                                 <c:forEach items="${orderList}" var="ol" >
+                                        <div class="align-middle" >
+                                            <h5>${ol.directVO.directName}</h5>
+                                            <h6>
+                                             <c:choose>
+											    <c:when test="${ol.directVO.colorCode eq 'B'}">
+											      블랙
+											    </c:when>
+											    <c:when test="${ol.directVO.colorCode eq 'W'}">
+											      화이트
+											    </c:when>
+											    <c:when test="${ol.directVO.colorCode eq 'G'}">
+											      그레이
+											    </c:when>
+											  </c:choose>
+											  / ${ol.directVO.directCode}
+                                            </h6>
                                         </div>
-                                        <div class="row mt-2">
-                                            <h5>i Phone XR</h5>
-                                            <h6>블루 128G</h6>
+                                        <div class="row my-3" style="border-bottom: 1px solid #ddd;">
+                                        <h5 class=" mb-3">
+ 											<fmt:formatNumber value="${ol.calPrice}" pattern="#,### 원"/>
+                                        </h5>
                                         </div>
+                                        
+                              	</c:forEach>
+                              	<c:set var="orderFinalPrice" value="0" />
+									<c:forEach items="${orderList}" var="ol">
+									  <c:set var="orderFinalPrice" value="${orderFinalPrice + ol.calPrice}" />
+									  <input type="hidden" name="orderFinalPrice" value="${orderFinalPrice + ol.calPrice}">
+									</c:forEach>
+                                        <h2 class="my-4">
+                                     <fmt:formatNumber value="${orderFinalPrice}" pattern="#,### 원"/>
+                                        </h2>
                                     </th>
+                                    
                                 </tr>
                             </tbody>    
                         </table>
@@ -128,7 +196,7 @@
                 </div>
             </div>
             <div class="mt-5 d-flex justify-content-center">
-                <a href="index.html"><button class="btn btn-solid-default">홈으로 </button></a>
+                <a href="/"><button class="btn btn-solid-default">홈으로 </button></a>
             </div>
         </div>
     </section>

@@ -1,5 +1,6 @@
 package com.hworld.base.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,8 +23,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.hworld.base.dao.CartDAO;
+import com.hworld.base.service.CartService;
 import com.hworld.base.service.MemberService;
 import com.hworld.base.vo.ApplicationVO;
+import com.hworld.base.vo.CartVO;
 import com.hworld.base.vo.MemberVO;
 
 import lombok.extern.slf4j.Slf4j;
@@ -37,6 +41,9 @@ public class MemberController {
 	private MemberService memberService;
 		@Autowired
 	private BCryptPasswordEncoder pwEncoder;
+	
+	@Autowired
+	private CartService cartService;
 	
 	////회원가입 파트
 	//회원 확인 - 페이지 이동
@@ -270,6 +277,9 @@ public class MemberController {
 			if(true == pwEncoder.matches(rawPw, encodePw)) { // 비밀번호 일치여부 판단				
 				membercheck.setPw(""); // 인코딩된 비밀번호 정보 지움				
 				session.setAttribute("memberVO", membercheck); // session에 사용자의 정보 저장
+				MemberVO memVo = (MemberVO) session.getAttribute("memberVO");
+				List<CartVO> ar = cartService.getCartList(memVo.getMemberNum());
+				session.setAttribute("cartInfo", ar);
 				return "redirect:/"; // 메인페이지로 이동
 			} else {
 				rttr.addFlashAttribute("result", 0);
@@ -320,6 +330,10 @@ public class MemberController {
 		if(true == pwEncoder.matches(rawPw, encodePw)) { // 비밀번호 일치여부 판단				
 			membercheck.setPw(""); // 인코딩된 비밀번호 정보 지움				
 			session.setAttribute("memberVO", membercheck); // session에 사용자의 정보 저장
+			MemberVO memVo = (MemberVO) session.getAttribute("memberVO");
+			System.out.println(memVo.getMemberNum());
+			List<CartVO> ar = cartService.getCartList(memVo.getMemberNum());
+			session.setAttribute("cartInfo", ar);
 		} else {
 			rttr.addFlashAttribute("result", 0);
 			result="failure";
@@ -338,9 +352,14 @@ public class MemberController {
 		String rawPw = memberVO.getPw(); // 사용자가 제출한 비밀번호
 		String encodePw = membercheck.getPw(); // DB에 저장한 인코딩된 비밀번호
 		
+		
 		if(true == pwEncoder.matches(rawPw, encodePw)) { // 비밀번호 일치여부 판단				
 			membercheck.setPw(""); // 인코딩된 비밀번호 정보 지움				
 			session.setAttribute("memberVO", membercheck); // session에 사용자의 정보 저장
+			MemberVO memVo = (MemberVO) session.getAttribute("memberVO");
+			System.out.println(memVo.getMemberNum());
+			List<CartVO> ar = cartService.getCartList(memVo.getMemberNum());
+			session.setAttribute("cartInfo", ar);
 		} else {
 			rttr.addFlashAttribute("result", 0);
 			result="failure";

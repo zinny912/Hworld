@@ -131,7 +131,7 @@
                         	</td>
                         	
                         	</tr>
-                <form action="../order" method="get" id="cartForm">
+                <form action="../orderInfo" method="post" id="cartForm">
                     <c:forEach items="${cartInfo}" var="cart">
                             <tr>
                                 <td class="cart-check-wrap">
@@ -141,11 +141,12 @@
                                                     id="flexCheckDefault10">
                                             </div>
                                         </div>
-                                        <input type="text" class="cartAmount" name="orderAmount" value="" hidden="">
-                                        <input type="text" class="directCode" name="directCode" value="" hidden="">
-                                        <input type="text" class="directName" name="directName" value="" hidden="">
-                                        <input type="text" class="directPrice" name="directPrice" value="" hidden="">
-                                        <input type="text" class="calPrice" name="calPrice" value="" hidden="">
+										<input type="text" class="cartAmount" name="orderAmount" value="${cart.cartAmount}" hidden="">
+										<input type="text" class="directCode" name="directCode" value="${cart.directCode}" hidden="">
+										<input type="text" class="directName" name="directName" value="${cart.directName}" hidden="">
+										<input type="text" class="directPrice" name="directPrice" value="${cart.directPrice}" hidden="">
+										<input type="text" class="calPrice" name="calPrice" value="${cart.directPrice * cart.cartAmount}" hidden="">
+
                                         
                                 
                                 </td>
@@ -262,6 +263,7 @@
       }
 
 
+
       // 수량 감소 버튼 클릭 이벤트
       var quantityMinusBtns = document.querySelectorAll('.quantity-left-minus');
       quantityMinusBtns.forEach(function(quantityMinusBtn, index) {
@@ -274,6 +276,7 @@
             quantityInput.value = currentQuantity;
             updatePrice(); // 가격 업데이트
             updateTotalPrice(); // 총 결제 예상금액 업데이트
+            updateCartAmount(quantityInput, currentQuantity); // cartAmount 업데이트
           }
         });
       });
@@ -289,6 +292,7 @@
           quantityInput.value = currentQuantity;
           updatePrice(); // 가격 업데이트
           updateTotalPrice(); // 총 결제 예상금액 업데이트
+          updateCartAmount(quantityInput, currentQuantity); // cartAmount 업데이트
         });
       });
 
@@ -298,45 +302,61 @@
           var newQuantity = parseInt(this.value);
           if (!isNaN(newQuantity) && newQuantity >= 1) {
             this.value = newQuantity;
+            updatePrice(); // 가격 업데이트
+            updateTotalPrice(); // 총 결제 예상금액 업데이트
+            updateCartAmount(quantityInput, newQuantity); // cartAmount 업데이트
           } else {
             this.value = 1;
+            updatePrice(); // 가격 업데이트
+            updateTotalPrice(); // 총 결제 예상금액 업데이트
+            updateCartAmount(quantityInput, 1); // cartAmount 업데이트
           }
-          updatePrice(); // 가격 업데이트
-          updateTotalPrice(); // 총 결제 예상금액 업데이트
         });
       });
 
       
+      function updateCartAmount(quantityInput, newQuantity) {
+    	  var cartAmountInput = quantityInput.closest('.cart-info-row').querySelector('.cartAmount');
+    	  cartAmountInput.value = newQuantity;
+    	}
+
   
  
-  // 주문하기 버튼 클릭 이벤트 핸들러
-  var orderBtn = document.querySelector('#orderBtn');
-  orderBtn.addEventListener('click', function() {
-    for (var i = 0; i < quantityInputs.length; i++) {
-      var quantityInput = quantityInputs[i];
-      var cartAmount = parseInt(quantityInput.value);
-      var priceElement = priceElements[i];
-      var directCode = priceElement.getAttribute('data-direct-code');
-      var directName = priceElement.getAttribute('data-direct-name');
-      var directPrice = parseInt(priceElement.getAttribute('data-direct-price'));
-      var calPrice = cartAmount * directPrice;
+   // 주문하기 버튼 클릭 이벤트 핸들러
+      var orderBtn = document.querySelector('#orderBtn');
+      orderBtn.addEventListener('click', function() {
+        // 수량과 가격 요소 가져오기
+        var quantityInputs = document.querySelectorAll('.input-number');
+        var priceElements = document.querySelectorAll('.td-color');
 
-      var cartAmountInput = document.querySelector('.cartAmount[data-direct-code="' + directCode + '"]');
-      var directCodeInput = document.querySelector('.directCode[data-direct-code="' + directCode + '"]');
-      var directNameInput = document.querySelector('.directName[data-direct-code="' + directCode + '"]');
-      var directPriceInput = document.querySelector('.directPrice[data-direct-code="' + directCode + '"]');
-      var calPriceInput = document.querySelector('.calPrice[data-direct-code="' + directCode + '"]');
+        // Loop through each cart item
+        document.querySelectorAll('.cart-info-row').forEach(function(cartItem, index) {
+          var cartAmountInput = cartItem.querySelector('.cartAmount');
+          var directCodeInput = cartItem.querySelector('.directCode');
+          var directNameInput = cartItem.querySelector('.directName');
+          var directPriceInput = cartItem.querySelector('.directPrice');
+          var calPriceInput = cartItem.querySelector('.calPrice');
 
-      cartAmountInput.value = cartAmount;
-      directCodeInput.value = directCode;
-      directNameInput.value = directName;
-      directPriceInput.value = directPrice;
-      calPriceInput.value = calPrice;
-    }
+          var quantityInput = quantityInputs[index];
+          var currentQuantity = parseInt(quantityInput.value);
+          var priceElement = priceElements[index];
+          var directCode = priceElement.getAttribute('data-direct-code');
+          var directName = priceElement.getAttribute('data-direct-name');
+          var directPrice = parseInt(priceElement.getAttribute('data-direct-price'));
+          var calPrice = currentQuantity * directPrice;
 
-    var form = document.querySelector('#yourFormId');
-    form.submit();
-  });
+          cartAmountInput.value = currentQuantity;
+          directCodeInput.value = directCode;
+          directNameInput.value = directName;
+          directPriceInput.value = directPrice;
+          calPriceInput.value = calPrice;
+        });
+
+        var form = document.querySelector('#cartForm');
+        form.submit();
+      });
+
+
 
       // 페이지 로딩 시 초기 총 결제 예상금액 업데이트
       updateTotalPrice();
