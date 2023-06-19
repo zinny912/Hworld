@@ -1,15 +1,15 @@
 $(document).ready(function() {
   //가격에 1000단위로 , 표시
-  // function commaPrice(){
-  // const prices = document.querySelectorAll('[id^="renewPrice"]');
-  // //let prices = document.getElementsByClassName("renewPrice");
-  // for (let i = 0; i < prices.length; i++) {
-  //   let price = parseInt(prices[i].innerHTML);
-  //   let formattedPrice = price.toLocaleString();
-  //   prices[i].innerHTML = formattedPrice;
-  //   }
-  // };
-  // commaPrice();
+  function commaPrice(){
+  //const prices = document.querySelectorAll('[id^="renewPrice"]');
+  let prices = document.getElementsByClassName("renewPrice");
+  for (let i = 0; i < prices.length; i++) {
+    let price = parseInt(prices[i].innerHTML);
+    let formattedPrice = price.toLocaleString();
+    prices[i].innerHTML = formattedPrice;
+    }
+  };
+  commaPrice();
 
 
 // 리스트 요소 중 첫번째 보여주기 (가격이 제일 저렴한 상품)
@@ -132,6 +132,7 @@ $('#optionAdd').on('click', function() {
       existingOption.find('.option-amount').text(updatedOptionAmount);
       existingOption.find('.option-price').text(updatedCalPrice);
       existingOption.find('input[name="orderAmount"]').val(updatedOptionAmount);
+      existingOption.find('input[name="cartAmount"]').val(updatedOptionAmount);
       existingOption.find('input[name="calPrice"]').val(updatedCalPrice);
     } else {
       //값이 존재하지 않는 경우, HTML을 추가
@@ -158,6 +159,7 @@ $('#optionAdd').on('click', function() {
       setHtml += '<div class="orderInfos">';
       setHtml += '<input type="hidden" name="directCode" value="' + directCode + '">';
       setHtml += '<input type="hidden" name="orderAmount" value="' + optionAmount + '">';
+      setHtml += '<input type="hidden" name="cartAmount" value="' + optionAmount + '">';
       setHtml += '<input type="hidden" name="calPrice" value="' + calPrice + '">';
       setHtml += '</div>';
       setHtml += '</div>';
@@ -204,14 +206,25 @@ $(document).on('click', '.fa-times', function() {
 });
 
 
-//주문하기 버튼
 $('#orderBtn').click(function(){
-  //위에 필요한 검증
-  //console.log('주문하기 버튼');
+  // 필요한 검증 및 처리 로직
 
-  //폼 넘기기
+  // 폼의 action 속성 변경
+  $('#orderForm').attr('action', '/orderInfo');
+
+  // 폼 넘기기
   $('#orderForm').submit();
-})
+});
+
+$('.btn_cart').click(function(){
+  // 필요한 검증 및 처리 로직
+
+  // 폼의 action 속성 변경
+  $('#orderForm').attr('action', '/cart/add');
+
+  // 폼 넘기기
+  $('#orderForm').submit();
+});
 
 
 //필요한 값이 입력되어있는지 확인하는 함수
