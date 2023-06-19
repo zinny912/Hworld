@@ -14,8 +14,10 @@ import org.springframework.web.servlet.ModelAndView;
 import com.hworld.base.service.AdminService;
 import com.hworld.base.util.Pager;
 import com.hworld.base.vo.ApplicationVO;
+import com.hworld.base.vo.DirectVO;
 import com.hworld.base.vo.MemberVO;
 import com.hworld.base.vo.OrderVO;
+import com.hworld.base.vo.ReviewVO;
 import com.hworld.base.vo.TelephoneVO;
 
 import lombok.extern.slf4j.Slf4j;
@@ -80,8 +82,8 @@ public class AdminController {
 	@GetMapping("productList")
 	public ModelAndView productList(Pager pager) throws Exception{
 		ModelAndView modelAndView = new ModelAndView();
-//		List<> productList = adminService.productList(pager);
-//		modelAndView.addObject("productList", productList);
+		List<DirectVO> productList = adminService.productList(pager);
+		modelAndView.addObject("productList", productList);
 		modelAndView.setViewName("admin/productList");
 		return modelAndView;
 	}
@@ -90,8 +92,8 @@ public class AdminController {
 	@GetMapping("productReview")
 	public ModelAndView productReview(Pager pager) throws Exception{
 		ModelAndView modelAndView = new ModelAndView();
-//		List<> productReview = adminService.productReview(pager);
-//		modelAndView.addObject("productReview", productReview);
+		List<ReviewVO> productReview = adminService.productReview(pager);
+		modelAndView.addObject("productReview", productReview);
 		modelAndView.setViewName("admin/productReview");
 		return modelAndView;
 	}

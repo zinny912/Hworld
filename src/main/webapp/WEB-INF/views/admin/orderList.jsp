@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
@@ -45,7 +45,7 @@
                             <div class="input-group search-bar w-100">                            	
        	                        <form action="./orderList" method="get">
 	                           		<div class="d-inline-flex input-group search-bar" style="width: 750px">
-		                                <input type="search" name="search" value="${pager.search}" class="form-control" placeholder="Search">
+		                                <input type="search" name="search" value="${pager.search}" class="form-control" placeholder="Search : 주문번호, 회원번호, 주문자">
 		                                <button class="input-group-text" id="basic-addon3" type="submit">
 		                                    <i class="fas fa-search"></i>
 		                                </button>

@@ -40,10 +40,10 @@
                                                 <thead>
                                                     <tr>
                                                         <th><b>No.</b> <i class="fa fa-fw fa-sort"></i></th>
-                                                        <th><b>고객번호</b> <i class="fa fa-fw fa-sort"></i></th>
-                                                        <th><b>납부날짜</b> <i class="fa fa-fw fa-sort"></i></th>
-                                                        <th><b>납부금액</b> <i class="fa fa-fw fa-sort"></i></th>
-                                                        <th><b>납부유무</b> <i class="fa fa-fw fa-sort"></i></th>
+                                                        <th><b>고객 번호</b> <i class="fa fa-fw fa-sort"></i></th>
+                                                        <th><b>납부 날짜</b> <i class="fa fa-fw fa-sort"></i></th>
+                                                        <th><b>납부 금액</b> <i class="fa fa-fw fa-sort"></i></th>
+                                                        <th><b>납부 유무</b> <i class="fa fa-fw fa-sort"></i></th>
                                                     </tr>
                                                 </thead>
 

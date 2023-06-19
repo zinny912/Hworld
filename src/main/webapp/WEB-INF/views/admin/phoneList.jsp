@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="ko" dir="ltr">
 
@@ -64,7 +65,7 @@
                             <div class="input-group search-bar w-100">                            	
        	                        <form action="./phoneList" method="get">
 	                           		<div class="d-inline-flex input-group search-bar" style="width: 750px">
-		                                <input type="search" name="search" value="${pager.search}" class="form-control" placeholder="Search">
+		                                <input type="search" name="search" value="${pager.search}" class="form-control" placeholder="Search : 회원번호, 이메일, 회선번호">
 		                                <button class="input-group-text" id="basic-addon3" type="submit">
 		                                    <i class="fas fa-search"></i>
 		                                </button>
@@ -112,9 +113,15 @@
 	
 	                                                        <!-- <td>타회사</td> -->
 	
-	                                                        <td>${telephonVOs.startDate}</td>
+	                                                        <td>
+	                                                        	<fmt:formatDate value="${telephonVOs.startDate}" pattern="yyyy/MM/dd" var="formattedDate" />
+		                                                        <span style="font-weight:400;">${formattedDate}</span>	                                                        
+	                                                        </td>
 																
-	                                                        <td class="font-primary">${telephonVOs.endDate}</td>
+	                                                        <td class="font-primary">
+	                                                        	<fmt:formatDate value="${telephonVOs.endDate}" pattern="yyyy/MM/dd" var="formattedDate" />
+		                                                        <span style="font-weight:400;">${formattedDate}</span>
+	                                                        </td>
 	
 	                                                        <td>
 	                                                        	<c:if test="${member.memberState eq '-1'}">

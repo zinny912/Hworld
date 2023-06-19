@@ -93,4 +93,52 @@
 		WHERE ORDERNUM = #{orderNum}
 	</select>
 	
+	<!-- 상품 목록 -->
+	<select id="productList" parameterType="Pager" resultType="DirectVO">
+		SELECT DIRECTCODE, DIRECTNAME, SAVECAPACITY, COLORCODE, BRANDCODE, DIRECTSTOCK, DIRECTPRICE
+		FROM DIRECT
+		<include refid="searchProductList"></include>
+		ORDER BY DIRECTCODE DESC
+		LIMIT #{startRow}, #{perPage}
+	</select>
+	
+	<sql id="searchProductList">
+		WHERE DIRECTCODE LIKE CONCAT('%', #{search}, '%') OR DIRECTNAME LIKE CONCAT('%', #{search}, '%') OR SAVECAPACITY LIKE CONCAT('%', #{search}, '%') OR COLORCODE LIKE CONCAT('%', #{search}, '%') OR BRANDCODE LIKE CONCAT('%', #{search}, '%') OR DIRECTPRICE LIKE CONCAT('%', #{search}, '%')
+	</sql>
+	
+	<select id="getTotalProduct" parameterType="Pager" resultType="Long">
+		SELECT COUNT(*) FROM DIRECT
+		<include refid="searchProductList"></include>
+	</select>
+	
+	<!-- 상품 리뷰 -->
+	<select id="productReview" parameterType="Pager" resultMap="productReviewResult">
+		SELECT R.NUM, M.EMAIL, R.RATE, R.CONTENTS
+		FROM REVIEW R
+		INNER JOIN MEMBER M
+		ON(R.MEMBERNUM = M.MEMBERNUM)
+		<!-- JOIN DIRECT D -->		
+		ORDER BY R.NUM DESC
+		LIMIT #{startRow}, #{perPage}
+	</select>
+	<resultMap type="ReviewVO" id="productReviewResult">
+		<id column="NUM" property="num"/>
+		<result column="RATE" property="rate"/>
+		<result column="CONTENTS" property="contents"/>
+		<collection property="memberVOs" javaType="List" ofType="MemberVO">
+  			<id column="MEMBERNUM" property="memberNum"/>
+  			<result column="EMAIL" property="email"/>
+  		</collection>
+  		<collection property="directVOs" javaType="List" ofType="DirectVO">
+  			<id column="DIRECTNAME" property="directName"/>
+  		</collection>
+	</resultMap>
+	
+	<select id="getTotalReview" parameterType="Pager" resultType="Long">
+		SELECT COUNT(*) FROM REVIEW R
+		INNER JOIN MEMBER M
+		ON(R.MEMBERNUM = M.MEMBERNUM)
+		<!-- JOIN DIRECT D -->
+	</select>
+	
 </mapper>

@@ -6,8 +6,10 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.hworld.base.util.Pager;
 import com.hworld.base.vo.ApplicationVO;
+import com.hworld.base.vo.DirectVO;
 import com.hworld.base.vo.MemberVO;
 import com.hworld.base.vo.OrderVO;
+import com.hworld.base.vo.ReviewVO;
 import com.hworld.base.vo.TelephoneVO;
 
 @Mapper
@@ -30,17 +32,17 @@ public interface AdminDAO {
 	
 	// 주문 상세
 	public List<OrderVO> orderDetail(OrderVO orderVO) throws Exception;
-//	
-//	// 상품 목록
-//	public Long getTotalProduct(Pager pager) throws Exception;
-//	
-//	public List<> productList(Pager pager) throws Exception;
-//	
-//	// 상품 리뷰
-//	public Long getTotalReview(Pager pager) throws Exception;
-//	
-//	public List<> productReview(Pager pager) throws Exception;
-//	
+	
+	// 상품 목록
+	public Long getTotalProduct(Pager pager) throws Exception;
+	
+	public List<DirectVO> productList(Pager pager) throws Exception;
+	
+	// 상품 리뷰
+	public Long getTotalReview(Pager pager) throws Exception;
+	
+	public List<ReviewVO> productReview(Pager pager) throws Exception;
+	
 //	// 상품 문의
 //	public Long getTotalPI(Pager pager) throws Exception;
 //	

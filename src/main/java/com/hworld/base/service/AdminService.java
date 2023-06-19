@@ -9,8 +9,10 @@ import org.springframework.transaction.annotation.Transactional;
 import com.hworld.base.dao.AdminDAO;
 import com.hworld.base.util.Pager;
 import com.hworld.base.vo.ApplicationVO;
+import com.hworld.base.vo.DirectVO;
 import com.hworld.base.vo.MemberVO;
 import com.hworld.base.vo.OrderVO;
+import com.hworld.base.vo.ReviewVO;
 import com.hworld.base.vo.TelephoneVO;
 
 @Service
@@ -49,22 +51,22 @@ public class AdminService {
 		return adminDAO.orderDetail(orderVO);
 	}
 	
-//	// 상품 목록
-//	public List<> productList(Pager pager) throws Exception { 
-//		Long totalCount = adminDAO.getTotalProduct(pager); 
-//		pager.makeNum(totalCount);
-//		pager.makeStartRow(); 
-//		return adminDAO.productList(pager);
-//	}
-//	
-//	// 상품 리뷰
-//	public List<> productReview(Pager pager) throws Exception { 
-//		Long totalCount = adminDAO.getTotalReview(pager); 
-//		pager.makeNum(totalCount);
-//		pager.makeStartRow(); 
-//		return adminDAO.productReview(pager);
-//	}
-//	
+	// 상품 목록
+	public List<DirectVO> productList(Pager pager) throws Exception { 
+		Long totalCount = adminDAO.getTotalProduct(pager); 
+		pager.makeNum(totalCount);
+		pager.makeStartRow(); 
+		return adminDAO.productList(pager);
+	}
+	
+	// 상품 리뷰
+	public List<ReviewVO> productReview(Pager pager) throws Exception { 
+		Long totalCount = adminDAO.getTotalReview(pager); 
+		pager.makeNum(totalCount);
+		pager.makeStartRow(); 
+		return adminDAO.productReview(pager);
+	}
+	
 //	// 상품 문의
 //	public List<> productInquiry(Pager pager) throws Exception { 
 //		Long totalCount = adminDAO.getTotalPI(pager); 
