@@ -138,6 +138,7 @@ $('#optionAdd').on('click', function() {
       existingOption.find('.option-amount').text(updatedOptionAmount);
       existingOption.find('.option-price').text(updatedCalPrice);
       existingOption.find('input[name="orderAmount"]').val(updatedOptionAmount);
+      existingOption.find('input[name="cartAmount"]').val(updatedOptionAmount);
       existingOption.find('input[name="calPrice"]').val(updatedCalPrice);
        
 	
@@ -221,10 +222,12 @@ $('.option-price').each(function() {
 
 
 
-//주문하기 버튼
 $('#orderBtn').click(function(){
 
-  //폼 넘기기
+  // 폼의 action 속성 변경
+  $('#orderForm').attr('action', '/orderInfo');
+
+  // 폼 넘기기
   $('#orderForm').submit();
 });
 

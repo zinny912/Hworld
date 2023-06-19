@@ -217,6 +217,7 @@ public class DirectController {
 	    		accReview.add(review);
 	    	}
 	    }
+	    
 
 		mv.addObject("list", ar);		
 		mv.addObject("qnaList", accQna);
