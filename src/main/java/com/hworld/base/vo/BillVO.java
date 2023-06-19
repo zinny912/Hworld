@@ -32,5 +32,10 @@ public class BillVO {
 	//billVO에 포함된 serialNum 으로 telephoneVO detail을 조회해서 billVO에 넣어두면 쉽게사용할 수 있을거같음
 	private TelephoneVO telephoneVO;
 	
+	//요금제 변경시 사용할 
+	private String nowDate;
+	
+	//요금제 변경일자 30일 체크
+	private Integer result;
 	
 }

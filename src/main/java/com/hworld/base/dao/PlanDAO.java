@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.hworld.base.util.Pager;
 import com.hworld.base.vo.BaseVO;
+import com.hworld.base.vo.BillVO;
 import com.hworld.base.vo.EPlanVO;
 import com.hworld.base.vo.MemberVO;
 import com.hworld.base.vo.PlanVO;
@@ -29,15 +30,23 @@ public interface PlanDAO {
 	
 	// 요금제 하나 조회
     public PlanVO getDetail(PlanVO planVO) throws Exception;
+    // 추천상품 
+    public List<PlanVO> recommendPlan(PlanVO planVO);
     
     public PlanVO getNoteName(PlanVO planVO) throws Exception;
     
     //대표회선 요금제 조회
     public PlanVO getKingPlanNum(Integer memberNum) throws Exception;
  
-    //로그인 후 본인인증 절차
-    public MemberVO getMemberSession(Integer memberNum) throws Exception;
+    //로그인 후 본인인증 절차 (요금제 변경)
     public MemberVO getMemberInput(MemberVO memberVO) throws Exception;
+    
+    //요금제 변경 페이지에서 이전 요금제 정보 불러오기
+    public PlanVO getBeforePlan(Integer memberNum) throws Exception;
+    
+    //요금제 변경 후 청구내역 변경되는 프로시저 호출
+    public int setPlanChange(BillVO billVO) throws Exception;
+    
     
     
     // 공통코드 정보 가져오고 insert 
@@ -74,4 +83,6 @@ public interface PlanDAO {
 	
 	// 부가서비스 삭제
 	public int setEPlanDelete(EPlanVO ePlanVO) throws Exception;
+
+	
 }

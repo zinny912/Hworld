@@ -119,7 +119,7 @@
                                
                               <input type="hidden" id="planNum" name="planNum" value=""> 
                               <input type="hidden" id="categoryCode" name="categoryCode" value="">
-                              <input type="hidden" id="planExplainM" name="planExplainM" value="">
+                              
                               
                               
                             </div>
@@ -127,6 +127,7 @@
                              <div class="col-md-6">
                                 <label for="planPrice" class="form-label">월 가격</label>
                                 <input type="text" class="form-control" id="planPrice" name="planPrice" placeholder="월 요금제">
+                                <input type="hidden" name="disCode" value="">
                             </div>
                             <div class="col-md-6">
                                 <label for="planName" class="form-label">이름</label>
@@ -243,7 +244,21 @@ function generatePlanNum(lastCode) {
 	  $('#type').val(selectedType);
 	  
 	}	
-	
+
+$('#planPrice').on('input', function() {
+    const planPrice = Number($(this).val()); // 입력된 값에서 쉼표(,)를 제거하고 숫자로 변환
+    const disCodeElement = $('input[name="disCode"]');
+    
+    if (planPrice >= 77000) {
+      disCodeElement.val('3');
+    } else if (planPrice>=55000 && planPrice <77000){
+      disCodeElement.val('2');
+    } else if (planPrice>=33000 && planPrice <55000){
+    	disCodeElement.val('1');
+    } else {
+    	disCodeElement.val('0');
+    }
+  });
 
 
 
