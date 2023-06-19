@@ -43,10 +43,10 @@
                                                 <thead>
                                                     <tr>
                                                         <th>상품 코드</th>
-                                                        <th><b>이름/용량/색상</b> <i class="fa fa-fw fa-sort"></i></th>
-                                                        <th><b>브랜드</b> <i class="fa fa-fw fa-sort"></i></th>
-                                                        <th><b>재고</b> <i class="fa fa-fw fa-sort"></i></th>
-                                                        <th><b>가격</b> <i class="fa fa-fw fa-sort"></i></th>
+                                                        <th><b>이름/용량/색상</b> <!-- <i class="fa fa-fw fa-sort"></i> --></th>
+                                                        <th><b>브랜드</b> <!-- <i class="fa fa-fw fa-sort"></i> --></th>
+                                                        <th><b>재고</b> <!-- <i class="fa fa-fw fa-sort"></i> --></th>
+                                                        <th><b>가격</b> <!-- <i class="fa fa-fw fa-sort"></i> --></th>
                                                         
                                                     </tr>
                                                 </thead>
@@ -55,7 +55,7 @@
                                                 	<c:forEach var="directVO" items="${productList}">
 	                                                    <tr>
 	                                                        <td>
-	                                                             <%-- <a href="/direct/phoneDetail?slicedCode=${direct }"></a> --%>${directVO.directCode}
+	                                                             <%-- <a href="/direct/phoneDetail?slicedCode=${direct }"></a> --%><b>${directVO.directCode}</b>
 	                                                        </td>
 	
 	                                                        <td>

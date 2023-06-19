@@ -38,6 +38,8 @@ public class ReviewVO {
     
     private List<OrderVO> orderVOs;
     
+    private List<OrderDirectVO> orderDirectVOs;
+    
     private List<DirectVO> directVOs;
     
     

@@ -86,22 +86,22 @@
                                             <table class="table table-striped all-package">                                                
                                                 <thead>
                                                     <tr>
-                                                    	<th><b>회원번호</b> <i class="fa fa-fw fa-sort"></i></th>
-                                                        <th><b>이메일</b> <i class="fa fa-fw fa-sort"></i></th>
-                                                        <th><b>회선번호</b> <i class="fa fa-fw fa-sort"></i></th>
+                                                    	<th><b>회원번호</b> <!-- <i class="fa fa-fw fa-sort"></i> --></th>
+                                                        <th><b>이메일</b> <!-- <i class="fa fa-fw fa-sort"></i> --></th>
+                                                        <th><b>회선번호</b> <!-- <i class="fa fa-fw fa-sort"></i> --></th>
                                                         <th><b>요금제</b></th>
                                                         <th><b>기기명</b></th>
                                                         <!-- <th><b>통신사</b> <i class="fa fa-fw fa-sort"></i></th> -->
-                                                        <th><b>개통날짜</b> <i class="fa fa-fw fa-sort"></i></th>
-                                                        <th><b>해지날짜</b> <i class="fa fa-fw fa-sort"></i></th>
-                                                        <th><b>상태</b> <i class="fa fa-fw fa-sort"></i></th>
+                                                        <th><b>개통날짜</b> <!-- <i class="fa fa-fw fa-sort"></i> --></th>
+                                                        <th><b>해지날짜</b> <!-- <i class="fa fa-fw fa-sort"></i> --></th>
+                                                        <th><b>상태</b> <!-- <i class="fa fa-fw fa-sort"></i> --></th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                 	<c:forEach var="member" items="${phoneList}">
 														<c:forEach var="telephonVOs" items="${member.telephoneVOs}">
 	                                                    <tr>
-	                                                    	<td>${member.memberNum}</td>
+	                                                    	<td><b>${member.memberNum}</b></td>
 	                                                    	
 	                                                        <td>${member.email}</td>	                                                    	                                                
 	                                                        

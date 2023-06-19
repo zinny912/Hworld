@@ -40,17 +40,17 @@
                                             <table class="user-table ticket-table review-table table table-striped">
                                                 <thead>
                                                     <tr>
-                                                        <th><b>No.</b> <i class="fa fa-fw fa-sort"></i></th>
-                                                        <th><b>작성자</b> <i class="fa fa-fw fa-sort"></i></th>
-                                                        <th><b>상품명</b> <i class="fa fa-fw fa-sort"></i></th>
-                                                        <th><b>작성날짜</b> <i class="fa fa-fw fa-sort"></i></th>
+                                                        <th><b>문의번호</b> <!-- <i class="fa fa-fw fa-sort"></i> --></th>
+                                                        <th><b>작성자</b> <!-- <i class="fa fa-fw fa-sort"></i> --></th>
+                                                        <th><b>상품명</b> <!-- <i class="fa fa-fw fa-sort"></i> --></th>
+                                                        <th><b>작성날짜</b> <!-- <i class="fa fa-fw fa-sort"></i> --></th>
                                                         <th>제목</th>
-                                                        <th><b>답변</b> <i class="fa fa-fw fa-sort"></i></th>
+                                                        <th><b>답변</b> <!-- <i class="fa fa-fw fa-sort"></i> --></th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     <tr>
-                                                        <td>01</td>
+                                                        <td><b>01</b></td>
                                                         <td>Maureen Biologist@gmail.com</td>
                                                         <td>Outwear & Coats</td>
                                                         <td>2023/10/05</td>
@@ -61,125 +61,6 @@
                                                             <span class="lnr lnr-checkmark-circle"></span>
                                                         </td>
                                                     </tr>
-
-                                                    <tr>
-                                                        <td>02</td>
-                                                        <td>Caroline Harris@gmail.com</td>
-                                                        <td>Slim Fit Plastic Coat</td>
-                                                        <td>2023/10/05</td>
-
-                                                        <td>
-                                                            <a href="">상품 문의합니다</a>
-                                                        </td>                                                        <td class="td-check">
-                                                            <span class="lnr lnr-checkmark-circle"></span>
-                                                        </td>
-                                                    </tr>
-
-                                                    <tr>
-                                                        <td>03</td>
-                                                        <td>Lucy Morile@gmail.com</td>
-                                                        <td>Men's Sweatshirt</td>
-                                                        <td>2023/10/05</td>
-
-                                                        <td>
-                                                            <a href="">상품 문의합니다</a>
-                                                        </td>                                                        <td class="td-check">
-                                                            <span class="lnr lnr-checkmark-circle"></span>
-                                                        </td>
-                                                    </tr>
-
-                                                    <tr>
-                                                        <td>04</td>
-                                                        <td>Jennifer Straight@gmail.com</td>
-                                                        <td>Men's Hoodie t-shirt</td>
-                                                        <td>2023/10/05</td>
-
-                                                        <td>
-                                                            <a href="">상품 문의합니다</a>
-                                                        </td>                                                        <td class="td-cross">
-                                                            <span class="lnr lnr-cross-circle"></span>
-                                                        </td>
-                                                    </tr>
-
-                                                    <tr>
-                                                        <td>05</td>
-                                                        <td>Kevin Millett@gmail.com</td>
-                                                        <td>Outwear & Coats</td>
-                                                        <td>2023/10/05</td>
-
-                                                        <td>
-                                                            <a href="">상품 문의합니다</a>
-                                                        </td>                                                        <td class="td-check">
-                                                            <span class="lnr lnr-checkmark-circle"></span>
-                                                        </td>
-                                                    </tr>
-
-                                                    <tr>
-                                                        <td>06</td>
-                                                        <td>czxc@gmail.com</td>
-                                                        <td>Slim Fit Plastic Coat</td>
-                                                        <td>2023/10/05</td>
-
-                                                        <td>
-                                                            <a href="">상품 문의합니다</a>
-                                                        </td>                                                        <td class="td-cross">
-                                                            <span class="lnr lnr-cross-circle"></span>
-                                                        </td>
-                                                    </tr>
-
-                                                    <tr>
-                                                        <td>07</td>
-                                                        <td>Kevin Millett@gmail.com</td>
-                                                        <td>Men's Sweatshirt</td>
-                                                        <td>2023/10/05</td>
-
-                                                        <td>
-                                                            <a href="">상품 문의합니다</a>
-                                                        </td>                                                        <td class="td-cross">
-                                                            <span class="lnr lnr-cross-circle"></span>
-                                                        </td>
-                                                    </tr>
-
-                                                    <tr>
-                                                        <td>08</td>
-                                                        <td>Dillon Bradshaw@gmail.com</td>
-                                                        <td>Men's Hoodie t-shirt</td>
-                                                        <td>2023/10/05</td>
-
-                                                        <td>
-                                                            <a href="">상품 문의합니다</a>
-                                                        </td>                                                        <td class="td-check">
-                                                            <span class="lnr lnr-checkmark-circle"></span>
-                                                        </td>
-                                                    </tr>
-
-                                                    <tr>
-                                                        <td>09</td>
-                                                        <td>Lorna Bonner@gmail.com</td>
-                                                        <td>Outwear & Coats</td>
-                                                        <td>2023/10/05</td>
-
-                                                        <td>
-                                                            <a href="">상품 문의합니다</a>
-                                                        </td>                                                        <td class="td-cross">
-                                                            <span class="lnr lnr-cross-circle"></span>
-                                                        </td>
-                                                    </tr>
-
-                                                    <tr>
-                                                        <td>10</td>
-                                                        <td>Richard Johnson@gmail.com</td>
-                                                        <td>Slim Fit Plastic Coat </td>
-                                                        <td>2023/10/05</td>
-
-                                                        <td>
-                                                            <a href="">상품 문의합니다</a>
-                                                        </td>                                                        <td class="td-check">
-                                                            <span class="lnr lnr-checkmark-circle"></span>
-                                                        </td>
-                                                    </tr>
-
-                                                   
                                                 </tbody>
                                             </table>
                                         </div>

@@ -12,6 +12,7 @@ import com.hworld.base.vo.ApplicationVO;
 import com.hworld.base.vo.DirectVO;
 import com.hworld.base.vo.MemberVO;
 import com.hworld.base.vo.OrderVO;
+import com.hworld.base.vo.QnaVO;
 import com.hworld.base.vo.ReviewVO;
 import com.hworld.base.vo.TelephoneVO;
 
@@ -74,15 +75,20 @@ public class AdminService {
 //		pager.makeStartRow();
 //		return adminDAO.productInquiry(pager);
 //	}
-//	
-//	// 일반 문의
-//	public List<> generalInquiry(Pager pager) throws Exception { 
-//		Long totalCount = adminDAO.getTotalGI(pager); 
-//		pager.makeNum(totalCount);
-//		pager.makeStartRow(); 
-//		return adminDAO.generalInquiry(pager);
-//	}
-//	
+	
+	// 일반 문의
+	public List<QnaVO> generalInquiry(Pager pager) throws Exception { 
+		Long totalCount = adminDAO.getTotalGI(pager); 
+		pager.makeNum(totalCount);
+		pager.makeStartRow(); 
+		return adminDAO.generalInquiry(pager);
+	}
+	
+	// 일반 문의 상세
+	public List<QnaVO> generalInquiryDetail(QnaVO qnaVO) throws Exception { 		 
+		return adminDAO.generalInquiryDetail(qnaVO);
+	}
+	
 //	// 납부 목록
 //	public List<> paymentList(Pager pager) throws Exception { 
 //		Long totalCount = adminDAO.getTotalPL(pager); 

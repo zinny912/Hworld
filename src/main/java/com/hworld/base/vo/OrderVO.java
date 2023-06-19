@@ -47,5 +47,7 @@ public class OrderVO {
     
     private List<MemberVO> memberVOs;
     
+    private List<DirectVO> directVOs;
+    
 	}
     

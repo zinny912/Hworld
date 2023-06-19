@@ -9,6 +9,7 @@ import com.hworld.base.vo.ApplicationVO;
 import com.hworld.base.vo.DirectVO;
 import com.hworld.base.vo.MemberVO;
 import com.hworld.base.vo.OrderVO;
+import com.hworld.base.vo.QnaVO;
 import com.hworld.base.vo.ReviewVO;
 import com.hworld.base.vo.TelephoneVO;
 
@@ -48,11 +49,14 @@ public interface AdminDAO {
 //	
 //	public List<> productInquiry(Pager pager) throws Exception;
 //	
-//	// 일반 문의
-//	public Long getTotalGI(Pager pager) throws Exception;
-//	
-//	public List<> generalInquiry(Pager pager) throws Exception;
-//	
+	// 일반 문의
+	public Long getTotalGI(Pager pager) throws Exception;
+	
+	public List<QnaVO> generalInquiry(Pager pager) throws Exception;
+	
+	// 일반 문의 상세 
+	public List<QnaVO> generalInquiryDetail(QnaVO qnaVO) throws Exception;
+	
 //	// 납부 목록
 //	public Long getTotalPL(Pager pager) throws Exception;
 //	

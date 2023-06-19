@@ -80,7 +80,7 @@
                                             <table class="table table-striped all-package">
                                                 <thead>
                                                     <tr>
-                                                        <th><b>고객번호</b> <!-- <i class="fa fa-fw fa-sort"></i> --></th>
+                                                        <th><b>회원번호</b> <!-- <i class="fa fa-fw fa-sort"></i> --></th>
                                                         <th><b>이름</b> <!-- <i class="fa fa-fw fa-sort"></i> --></th>
                                                         <th><b>대표회선</b> <!-- <i class="fa fa-fw fa-sort"></i> --></th>
                                                         <th><b>이메일</b> <!-- <i class="fa fa-fw fa-sort"></i> --></th>
@@ -94,7 +94,7 @@
                                                 <tbody>
 	                                                <c:forEach var="memberVO" items="${memberList}">
 	                                                    <tr>
-	                                                        <td>${memberVO.memberNum}</td>
+	                                                        <td><b>${memberVO.memberNum}</b></td>
 	
 	                                                        <td>${memberVO.name}</td>
 

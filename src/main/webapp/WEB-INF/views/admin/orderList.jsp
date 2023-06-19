@@ -67,11 +67,10 @@
                                             <table class="table table-striped all-package">
                                                 <thead>
                                                     <tr>
-                                                        <th><b>주문번호</b> <i class="fa fa-fw fa-sort"></i></th>
-                                                        <th><b>회원번호</b> <i class="fa fa-fw fa-sort"></i></th>
-                                                        <th><b>주문자</b> <i class="fa fa-fw fa-sort"></i></th>
-                                                        <th><b>주문날짜</b> <i class="fa fa-fw fa-sort"></i></th>
-                                                        <th><b>상태</b> <i class="fa fa-fw fa-sort"></i></th>
+                                                        <th><b>주문번호</b> <!-- <i class="fa fa-fw fa-sort"></i> --></th>                                                        
+                                                        <th><b>주문자</b> <!-- <i class="fa fa-fw fa-sort"></i> --></th>
+                                                        <th><b>주문날짜</b> <!-- <i class="fa fa-fw fa-sort"></i> --></th>
+                                                        <th><b>상태</b> <!-- <i class="fa fa-fw fa-sort"></i> --></th>
                                                     </tr>
                                                 </thead>
 
@@ -80,27 +79,24 @@
                                                 	<c:forEach var="memberVOs" items="${order.memberVOs}">
 	                                                    <tr>	
 	                                                        <td>
-	                                                            <a href="orderDetail?orderNum=${order.orderNum}">${order.orderNum}</a>
+	                                                            <b><a href="orderDetail?orderNum=${order.orderNum}">${order.orderNum}</a></b>
 	                                                        </td>
-	                                                        
-	                                                        <td>${memberVOs.memberNum}</td>
-	                                                        
+
 	                                                        <td>${memberVOs.name}</td>
 	                                                        
 	                                                        <td>
-	                                                        <fmt:formatDate value="${order.orderDate}" pattern="yyyy/MM/dd" var="formattedDate" />
-	                                                        <span style="font-weight:400;">${formattedDate}</span>
+		                                                        <fmt:formatDate value="${order.orderDate}" pattern="yyyy/MM/dd" var="formattedDate" />
+		                                                        <span style="font-weight:400;">${formattedDate}</span>
 	                                                        </td>	                                                        
 															
 															<td>
 	                                                        	<c:if test="${order.orderState eq '0'}">
-	                                                            	<span class="state-success">완료</span>	                                                            	
+	                                                            	<span class="state-success">배송완료</span>	                                                            	
 	                                                           	</c:if>
 	                                                           	<c:if test="${order.orderState eq '1'}">	                                                            
 	                                                            	<span class="state-cancel">환불</span>
 	                                                           	</c:if>
-															</td>
-															
+															</td>															
 	                                                    </tr>		                                                 
 	                                                </c:forEach>
 	                                                </c:forEach>    

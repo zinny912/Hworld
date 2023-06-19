@@ -17,6 +17,7 @@ import com.hworld.base.vo.ApplicationVO;
 import com.hworld.base.vo.DirectVO;
 import com.hworld.base.vo.MemberVO;
 import com.hworld.base.vo.OrderVO;
+import com.hworld.base.vo.QnaVO;
 import com.hworld.base.vo.ReviewVO;
 import com.hworld.base.vo.TelephoneVO;
 
@@ -112,16 +113,18 @@ public class AdminController {
 	@GetMapping("generalInquiry")
 	public ModelAndView generalInquiry(Pager pager) throws Exception{
 		ModelAndView modelAndView = new ModelAndView();
-//		List<> generalInquiry = adminService.generalInquiry(pager);
-//		modelAndView.addObject("generalInquiry", generalInquiry);
+		List<QnaVO> generalInquiry = adminService.generalInquiry(pager);
+		modelAndView.addObject("generalInquiry", generalInquiry);
 		modelAndView.setViewName("admin/generalInquiry");
 		return modelAndView;
 	}
 	
 	// 문의 - 일반 문의 상세 페이지
 	@GetMapping("generalInquiryDetail")
-	public ModelAndView generalInquiryDetail() throws Exception{
+	public ModelAndView generalInquiryDetail(QnaVO qnaVO) throws Exception{
 		ModelAndView modelAndView = new ModelAndView();
+		List<QnaVO> generalInquiryDetail = adminService.generalInquiryDetail(qnaVO);
+		modelAndView.addObject("generalInquiryDetail", generalInquiryDetail);
 		modelAndView.setViewName("admin/generalInquiryDetail");
 		return modelAndView;
 	}

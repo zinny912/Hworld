@@ -31,21 +31,21 @@
                                             <table class="user-table ticket-table review-table table table-striped">
                                                 <thead>
                                                     <tr>
-                                                        <th><b>No.</b> <i class="fa fa-fw fa-sort"></i></th>
-                                                        <th><b>이메일</b> <i class="fa fa-fw fa-sort"></i></th>
-                                                        <th><b>상품명</b> <i class="fa fa-fw fa-sort"></i></th>
-                                                        <th><b>별점</b> <i class="fa fa-fw fa-sort"></i></th>
+                                                        <th><b>후기번호</b><!--  <i class="fa fa-fw fa-sort"></i> --></th>
+                                                        <th><b>작성자</b> <!-- <i class="fa fa-fw fa-sort"></i> --></th>
+                                                        <th><b>상품명</b> <!-- <i class="fa fa-fw fa-sort"></i> --></th>
+                                                        <th><b>별점</b> <!-- <i class="fa fa-fw fa-sort"></i> --></th>
                                                         <th>내용</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                 	<c:forEach var="review" items="${productReview}">
                                                 	<c:forEach var="memberVOs" items="${review.memberVOs}">
-                                                	<%-- <c:forEach var="directVOs" items="${review.directVOs}"> --%>
+                                                	<c:forEach var="directVOs" items="${review.directVOs}">
 	                                                    <tr>
-	                                                        <td>${review.num}</td>
+	                                                        <td><b>${review.num}</b></td>
 	                                                        <td>${memberVOs.email}</td>
-	                                                        <td><%-- ${directVOs.directName} --%></td>
+	                                                        <td>${directVOs.directName}</td>
 	                                                        <td>
 	                                                            <ul class="rating">
 	                                                                <li>
@@ -68,7 +68,7 @@
 	                                                        </td>
 	                                                        <td>${review.contents}</td>
 	                                                    </tr>
-	                                                <%-- </c:forEach> --%>
+	                                                </c:forEach>
 													</c:forEach>
 													</c:forEach>                                                    
                                                 </tbody>
