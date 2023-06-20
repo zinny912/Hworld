@@ -57,6 +57,7 @@
 	                                                            <label class="col-lg-2 col-md-3 col-form-label form-label-title">답변</label>
 	                                                            <div class="col-md-9 col-lg-9">
 	                                                                <textarea class="row" rows="14" style = "width: 100%;" id="reply" name="reply"></textarea>
+	                                                                <input id=num name=num type="hidden" value="${gid.num}">
 	                                                            </div>
 	                                                        </div>                                                        
 	                                                    </div>
