@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
@@ -45,7 +45,7 @@
                             <div class="input-group search-bar w-100">                            	
        	                        <form action="./orderList" method="get">
 	                           		<div class="d-inline-flex input-group search-bar" style="width: 750px">
-		                                <input type="search" name="search" value="${pager.search}" class="form-control" placeholder="Search">
+		                                <input type="search" name="search" value="${pager.search}" class="form-control" placeholder="Search : 주문번호, 회원번호, 주문자">
 		                                <button class="input-group-text" id="basic-addon3" type="submit">
 		                                    <i class="fas fa-search"></i>
 		                                </button>
@@ -67,94 +67,38 @@
                                             <table class="table table-striped all-package">
                                                 <thead>
                                                     <tr>
-                                                        <th><b>주문번호</b> <i class="fa fa-fw fa-sort"></i></th>
-                                                        <th><b>회원번호</b> <i class="fa fa-fw fa-sort"></i></th>
-                                                        <th><b>주문자</b> <i class="fa fa-fw fa-sort"></i></th>
-                                                        <th><b>주문날짜</b> <i class="fa fa-fw fa-sort"></i></th>
-                                                        <th><b>상태</b> <i class="fa fa-fw fa-sort"></i></th>
+                                                        <th><b>주문번호</b> <!-- <i class="fa fa-fw fa-sort"></i> --></th>                                                        
+                                                        <th><b>주문자</b> <!-- <i class="fa fa-fw fa-sort"></i> --></th>
+                                                        <th><b>주문날짜</b> <!-- <i class="fa fa-fw fa-sort"></i> --></th>
+                                                        <th><b>상태</b> <!-- <i class="fa fa-fw fa-sort"></i> --></th>
                                                     </tr>
                                                 </thead>
 
                                                 <tbody>
-                                                	<c:forEach var="orderVO" items="${orderList}">
+                                                	<c:forEach var="order" items="${orderList}">
+                                                	<c:forEach var="memberVOs" items="${order.memberVOs}">
 	                                                    <tr>	
 	                                                        <td>
-	                                                            <a href="orderDetail?orderNum=${orderVO.orderNum}">${orderVO.orderNum}</a>
+	                                                            <b><a href="orderDetail?orderNum=${order.orderNum}">${order.orderNum}</a></b>
 	                                                        </td>
-	                                                        
-	                                                        <td>${orderVO.memberNum}</td>
-	                                                        
-	                                                        <td>${orderVO.name}</td>
+
+	                                                        <td>${memberVOs.name}</td>
 	                                                        
 	                                                        <td>
-	                                                        <fmt:formatDate value="${orderVO.orderDate}" pattern="yyyy/MM/dd" var="formattedDate" />
-	                                                        <span style="font-weight:400;">${formattedDate}</span>
+		                                                        <fmt:formatDate value="${order.orderDate}" pattern="yyyy/MM/dd" var="formattedDate" />
+		                                                        <span style="font-weight:400;">${formattedDate}</span>
 	                                                        </td>	                                                        
 															
 															<td>
-	                                                        	<c:if test="${orderVO.orderState eq '0'}">
-	                                                            	<span class="state-success">완료</span>	                                                            	
+	                                                        	<c:if test="${order.orderState eq '0'}">
+	                                                            	<span class="state-success">배송완료</span>	                                                            	
 	                                                           	</c:if>
-	                                                           	<c:if test="${orderVO.orderState eq '1'}">	                                                            
+	                                                           	<c:if test="${order.orderState eq '1'}">	                                                            
 	                                                            	<span class="state-cancel">환불</span>
 	                                                           	</c:if>
-															</td>
-															
-	                                                    </tr>
-	
-	                                                    <!-- <tr>
-	                                                        
-	                                                        <td>+ 573-685572</td>
-	
-	                                                        <td>2023/10/04</td>
-	
-	                                                        <td class="order-success">
-	                                                            <span>Success</span>
-	                                                        </td>
-	                                                        <td>$15</td>
-	
-	                                                    </tr>
-	
-	                                        
-	
-	                                                    <tr>
-	
-	                                                        <td>
-	                                                            <a href="order-detail.html">+ 456-1245789</a>
-	                                                        </td>
-	                                                        <td>2023/10/04</td>
-	
-	
-	                                                        <td class="order-success">
-	                                                            <span>Success</span>
-	                                                        </td>
-	
-	                                                        <td>$15</td>
-	
-	                                                    </tr>
-	
-	                                                    <tr>
-	                                                        <td>
-	                                                            <a href="order-detail.html">+ 456-1245789</a>
-	                                                        </td>
-	                                                        <td>2023/10/04</td>
-	                                                        <td class="order-cancle">
-	                                                            <span>Cancel</span>
-	                                                        </td>
-	
-	                                                        <td>$15</td>
-	
-	                                                        
-	                                                    </tr>
-	                                                    <tr>
-	                                                        <td>+ 057-3657895</td>
-	                                                        <td>2023/10/04</td>
-	                                                        <td class="order-cancle">
-	                                                            <span>Cancel</span>
-	                                                        </td>
-	                                                        <td>$15</td>
-	                                                        
-	                                                    </tr> -->
+															</td>															
+	                                                    </tr>		                                                 
+	                                                </c:forEach>
 	                                                </c:forEach>    
                                                 </tbody>
                                             </table>

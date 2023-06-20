@@ -57,26 +57,301 @@
 	</select>
 	
 	<!-- 주문 목록 -->
-	<select id="orderList" parameterType="Pager" resultType="OrderVO">
-		SELECT ORDERNUM, ORDERDATE, ORDERSTATE
-		FROM ORDERS
+	<select id="orderList" parameterType="Pager" resultMap="OrderListResult">
+		SELECT O.ORDERNUM , M.MEMBERNUM , M.NAME , O.ORDERDATE , O.ORDERSTATE
+		FROM ORDERS O
+		INNER JOIN MEMBER M
+ 		ON(O.MEMBERNUM = M.MEMBERNUM)
 		<include refid="searchOrderList"></include>
-		ORDER BY ORDERNUM DESC
+		ORDER BY O.ORDERDATE DESC
 		LIMIT #{startRow}, #{perPage}
 	</select>
+	<resultMap type="OrderVO" id="OrderListResult">
+		<id column="ORDERNUM" property="orderNum"/>
+		<result column="ORDERDATE" property="orderDate"/>
+		<result column="ORDERSTATE" property="orderState"/>
+		<collection property="memberVOs" javaType="List" ofType="MemberVO">
+  			<id column="MEMBERNUM" property="memberNum"/>
+  			<result column="NAME" property="name"/>					
+  		</collection>
+	</resultMap>
 	
 	<sql id="searchOrderList">
-		WHERE ORDERNUM LIKE CONCAT('%', #{search}, '%') OR ORDERDATE LIKE CONCAT('%', #{search}, '%')
+		WHERE O.ORDERNUM LIKE CONCAT('%', #{search}, '%') OR O.ORDERDATE LIKE CONCAT('%', #{search}, '%') OR M.MEMBERNUM LIKE CONCAT('%', #{search}, '%') OR M.NAME LIKE CONCAT('%', #{search}, '%')
 	</sql>
 	
 	<select id="getTotalOrder" parameterType="Pager" resultType="Long">
-		SELECT COUNT(*) FROM ORDERS
+		SELECT COUNT(*) FROM ORDERS O
+		INNER JOIN MEMBER M
+		ON(O.MEMBERNUM = M.MEMBERNUM)
 		<include refid="searchOrderList"></include>
 	</select>
 	
 	<!-- 주문 상세 페이지 -->
-	<select id="orderDetail" parameterType="OrderVO" resultType="OrderVO">
-		SELECT * FROM ORDERS
+	<select id="orderDetail" parameterType="OrderVO" resultMap="orderDetailResult">
+		SELECT O.ORDERNUM, O.ORDERDATE, O.ORDERADDRESS1, O.ORDERADDRESS2, O.ORDERADDRESS3, O.ORDERRECEIVER, O.ORDERTELNUM, D.DIRECTNAME, O2.ORDERAMOUNT, D.DIRECTPRICE 
+		FROM ORDERS O
+		INNER JOIN ORDERDIRECT O2
+		ON(O.ORDERNUM = O2.ORDERNUM)
+		INNER JOIN DIRECT D
+		ON(O2.DIRECTCODE = D.DIRECTCODE)
+		WHERE O.ORDERNUM = #{orderNum}
+	</select>
+	<resultMap type="OrderVO" id="orderDetailResult">
+		<id column="ORDERNUM" property="orderNum"/>
+		<result column="ORDERDATE" property="orderDate"/>
+		<result column="ORDERADDRESS1" property="orderAddress1"/>
+		<result column="ORDERADDRESS2" property="orderAddress2"/>
+		<result column="ORDERADDRESS3" property="orderAddress3"/>
+		<result column="ORDERRECEIVER" property="orderReceiver"/>
+		<result column="ORDERTELNUM" property="orderTelNum"/>
+		<collection property="orderDirectVOs" javaType="List" ofType="OrderDirectVO">
+  			<id column="ORDERNUM" property="orderNum"/>
+  			<result column="ORDERAMOUNT" property="orderAmount"/>
+  		</collection>  		
+  		<collection property="directVOs" javaType="List" ofType="DirectVO">
+  			<id column="DIRECTCODE" property="directCode"/>
+  			<result column="DIRECTNAME" property="directName"/>
+  			<result column="DIRECTPRICE" property="directPrice"/>
+  		</collection>
+	</resultMap>
+	
+	<!-- 상품 목록 -->
+	<select id="productList" parameterType="Pager" resultType="DirectVO">
+		SELECT DIRECTCODE, DIRECTNAME, SAVECAPACITY, COLORCODE, BRANDCODE, DIRECTSTOCK, DIRECTPRICE
+		FROM DIRECT
+		<include refid="searchProductList"></include>
+		ORDER BY DIRECTCODE DESC
+		LIMIT #{startRow}, #{perPage}
 	</select>
 	
+	<sql id="searchProductList">
+		WHERE DIRECTCODE LIKE CONCAT('%', #{search}, '%') OR DIRECTNAME LIKE CONCAT('%', #{search}, '%') OR SAVECAPACITY LIKE CONCAT('%', #{search}, '%') OR COLORCODE LIKE CONCAT('%', #{search}, '%') OR BRANDCODE LIKE CONCAT('%', #{search}, '%') OR DIRECTPRICE LIKE CONCAT('%', #{search}, '%')
+	</sql>
+	
+	<select id="getTotalProduct" parameterType="Pager" resultType="Long">
+		SELECT COUNT(*) FROM DIRECT
+		<include refid="searchProductList"></include>
+	</select>
+	
+	<!-- 상품 리뷰 -->
+	<select id="productReview" parameterType="Pager" resultMap="productReviewResult">
+		SELECT DISTINCT R.NUM, M.EMAIL, R.RATE, R.CONTENTS, D.DIRECTNAME 
+		FROM REVIEW R
+		LEFT JOIN ORDERS O
+		ON(R.ORDERNUM = O.ORDERNUM)
+		LEFT JOIN ORDERDIRECT O2
+		ON(O.ORDERNUM = O2.ORDERNUM)
+		LEFT JOIN DIRECT D
+		ON(O2.DIRECTCODE = D.DIRECTCODE)
+		LEFT JOIN MEMBER M
+		ON(R.MEMBERNUM = M.MEMBERNUM)
+		ORDER BY R.NUM DESC
+		LIMIT #{startRow}, #{perPage}
+	</select>
+	<resultMap type="ReviewVO" id="productReviewResult">
+		<id column="NUM" property="num"/>
+		<result column="RATE" property="rate"/>
+		<result column="CONTENTS" property="contents"/>
+		<collection property="orderVOs" javaType="List" ofType="OrderVO">
+  			<id column="ORDERNUM" property="orderNum"/>  			
+  		</collection>
+  		<collection property="orderDirectVOs" javaType="List" ofType="OrderDirectVO">
+  			<id column="ORDERNUM" property="orderNum"/>  			
+  		</collection>
+  		<collection property="directVOs" javaType="List" ofType="DirectVO">
+  			<id column="DIRECTNAME" property="directName"/>
+  		</collection>
+  		<collection property="memberVOs" javaType="List" ofType="MemberVO">
+  			<id column="MEMBERNUM" property="memberNum"/>
+  			<result column="EMAIL" property="email"/>
+  		</collection>  		
+	</resultMap>
+	
+	<select id="getTotalReview" parameterType="Pager" resultType="Long">
+		SELECT DISTINCT COUNT(*) FROM REVIEW R
+		LEFT JOIN ORDERS O
+		ON(R.ORDERNUM = O.ORDERNUM)
+		LEFT JOIN ORDERDIRECT O2
+		ON(O.ORDERNUM = O2.ORDERNUM)
+		LEFT JOIN DIRECT D
+		ON(O2.DIRECTCODE = D.DIRECTCODE)
+		LEFT JOIN MEMBER M
+		ON(R.MEMBERNUM = M.MEMBERNUM)
+	</select>
+	
+	<!-- 상품 문의 -->
+	<select id="productInquiry" parameterType="Pager" resultMap="productInquiryResult">
+		SELECT DISTINCT Q.NUM, M.EMAIL, D.DIRECTNAME ,Q.REGDATE, Q.CONTENTS, Q.STATE, Q.CATEGORYCODE  
+	    FROM QNA Q
+	    LEFT JOIN DIRECT D 
+	    ON (D.DIRECTCODE LIKE CONCAT('%', Q.SLICEDCODE, '%'))
+	    JOIN MEMBER M 
+	    ON (Q.MEMBERNUM = M.MEMBERNUM )
+	    WHERE Q.SLICEDCODE IS NOT NULL
+	    AND (Q.NUM LIKE CONCAT('%', #{search}, '%') OR M.EMAIL LIKE CONCAT('%', #{search}, '%') OR D.DIRECTNAME LIKE CONCAT('%', #{search}, '%') OR Q.CONTENTS LIKE CONCAT('%', #{search}, '%'))
+	    ORDER BY Q.NUM DESC
+		<!-- <include refid="searchProductInquiry"></include> -->				    
+		LIMIT #{startRow}, #{perPage}
+	</select>
+	<resultMap type="QnaVO" id="productInquiryResult">
+		<id column="NUM" property="num"/>
+		<result column="REGDATE" property="regDate"/>
+		<result column="CONTENTS" property="contents"/>
+		<result column="STATE" property="state"/>
+		<result column="CATEGORYCODE" property="categoryCode"/>
+		<result column="SLICEDCODE" property="slicedcode"/>
+  		<collection property="directVOs" javaType="List" ofType="DirectVO">
+  			<id column="DIRECTCODE" property="directCode"/>
+  			<result column="DIRECTNAME" property="directName"/>
+  		</collection>
+  		<collection property="memberVOs" javaType="List" ofType="MemberVO">
+  			<id column="MEMBERNUM" property="memberNum"/>
+  			<result column="EMAIL" property="email"/>
+  		</collection>  		
+	</resultMap>
+	
+	<sql id="searchProductInquiry">
+		WHERE Q.NUM LIKE CONCAT('%', #{search}, '%') OR M.EMAIL LIKE CONCAT('%', #{search}, '%') OR D.DIRECTNAME LIKE CONCAT('%', #{search}, '%') OR Q.CONTENTS LIKE CONCAT('%', #{search}, '%')
+	</sql>
+	
+	<select id="getTotalPI" parameterType="Pager" resultType="Long">
+		SELECT COUNT(DISTINCT NUM) 
+		FROM QNA Q
+		LEFT JOIN DIRECT D 
+	    ON (D.DIRECTCODE LIKE CONCAT('%', Q.SLICEDCODE, '%'))
+	    JOIN MEMBER M 
+	    ON (Q.MEMBERNUM = M.MEMBERNUM )
+	    WHERE Q.SLICEDCODE IS NOT NULL
+	    AND (Q.NUM LIKE CONCAT('%', #{search}, '%') OR M.EMAIL LIKE CONCAT('%', #{search}, '%') OR D.DIRECTNAME LIKE CONCAT('%', #{search}, '%') OR Q.CONTENTS LIKE CONCAT('%', #{search}, '%'))
+		<!-- <include refid="searchProductInquiry"></include> -->
+	</select>	
+	
+	<!-- 상품 문의 상세-->
+	<select id="productInquiryDetail" parameterType="QnaVO" resultMap="productInquiryDetailResult">
+		SELECT Q.NUM, M.EMAIL, Q.REGDATE, Q.CONTENTS
+		FROM QNA Q
+		INNER JOIN MEMBER M
+		ON(Q.MEMBERNUM = M.MEMBERNUM)
+		WHERE Q.NUM = #{num}
+	</select>
+	<resultMap type="QnaVO" id="productInquiryDetailResult">
+		<id column="NUM" property="num"/>		
+		<result column="REGDATE" property="regDate"/>		
+		<result column="CONTENTS" property="contents"/>
+		<collection property="memberVOs" javaType="List" ofType="MemberVO">
+  			<id column="MEMBERNUM" property="memberNum"/>
+  			<result column="EMAIL" property="email"/>
+  		</collection>  		
+	</resultMap>
+	
+	<update id="productInquiryReply" parameterType="QnaVO">
+		UPDATE QNA SET REPLY = #{reply}, STATE = 1, REPLYDATE = now()
+		WHERE NUM = #{num}
+	</update>
+	
+	<!-- 일반 문의 -->
+	<select id="generalInquiry" parameterType="Pager" resultMap="generalInquiryResult">
+		SELECT Q.NUM, Q.CATEGORYCODE, M.EMAIL, Q.REGDATE, Q.CONTENTS, Q.STATE
+		FROM QNA Q
+		INNER JOIN MEMBER M
+		ON(Q.MEMBERNUM = M.MEMBERNUM)
+		WHERE Q.SLICEDCODE IS NULL 
+		AND (M.EMAIL LIKE CONCAT('%', #{search}, '%') OR Q.CONTENTS LIKE CONCAT('%', #{search}, '%'))
+		ORDER BY Q.NUM DESC
+		LIMIT #{startRow}, #{perPage}
+	</select>
+	<resultMap type="QnaVO" id="generalInquiryResult">
+		<id column="NUM" property="num"/>
+		<result column="CATEGORYCODE" property="categoryCode"/>
+		<result column="REGDATE" property="regDate"/>
+		<result column="CONTENTS" property="contents"/>
+		<result column="STATE" property="state"/>
+		<collection property="memberVOs" javaType="List" ofType="MemberVO">
+  			<id column="MEMBERNUM" property="memberNum"/>
+  			<result column="EMAIL" property="email"/>
+  		</collection>  		
+	</resultMap>
+	
+	<sql id="searchGeneralInquiry">
+		WHERE M.EMAIL LIKE CONCAT('%', #{search}, '%') OR Q.CONTENTS LIKE CONCAT('%', #{search}, '%')
+	</sql>
+	
+	<select id="getTotalGI" parameterType="Pager" resultType="Long">
+		SELECT COUNT(*) FROM QNA Q
+		INNER JOIN MEMBER M
+		ON(Q.MEMBERNUM = M.MEMBERNUM)
+		WHERE Q.SLICEDCODE IS NULL
+		AND (M.EMAIL LIKE CONCAT('%', #{search}, '%') OR Q.CONTENTS LIKE CONCAT('%', #{search}, '%'))
+		<!-- <include refid="searchGeneralInquiry"></include> -->
+	</select>
+	
+	<!-- 일반 문의 상세-->
+	<select id="generalInquiryDetail" parameterType="QnaVO" resultMap="generalInquiryDetailResult">
+		SELECT Q.NUM, M.EMAIL, Q.REGDATE, Q.TITLE, Q.CONTENTS
+		FROM QNA Q
+		INNER JOIN MEMBER M
+		ON(Q.MEMBERNUM = M.MEMBERNUM)
+		WHERE Q.NUM = #{num}
+	</select>
+	<resultMap type="QnaVO" id="generalInquiryDetailResult">
+		<id column="NUM" property="num"/>		
+		<result column="REGDATE" property="regDate"/>
+		<result column="TITLE" property="title"/>
+		<result column="CONTENTS" property="contents"/>
+		<collection property="memberVOs" javaType="List" ofType="MemberVO">
+  			<id column="MEMBERNUM" property="memberNum"/>
+  			<result column="EMAIL" property="email"/>
+  		</collection>  		
+	</resultMap>
+	
+	<update id="generalInquiryReply" parameterType="QnaVO">
+		UPDATE QNA SET REPLY = #{reply}, STATE = 1, REPLYDATE = now()
+		WHERE NUM = #{num}
+	</update>
+	
+	<!-- 납부 목록 -->
+	<select id="paymentList" parameterType="BillVO">
+		SELECT P.BILLNUM, T.MEMBERNUM, P.paidDate, P.totalPrice, P.paidCheck
+	    FROM PAYMENTDETAILS P
+	    LEFT JOIN TELEPHONE T
+	    ON (P.serialNum  = T.SERIALNUM)
+	    <include refid="paymentListSearch"></include>
+	    ORDER BY P.BILLNUM DESC	    
+	</select>
+	
+	<sql id="paymentListSearch">
+		WHERE P.BILLNUM LIKE CONCAT('%', #{search}, '%') OR T.MEMBERNUM LIKE CONCAT('%', #{search}, '%')
+	</sql>
+	
+	<select id="getTotalPL" parameterType="Pager" resultType="Long">
+		SELECT COUNT(*) FROM PAYMENTDETAILS P
+		LEFT JOIN TELEPHONE T
+	    ON (P.serialNum  = T.SERIALNUM)	    
+		<include refid="paymentListSearch"></include>
+	</select>
+	
+	<!-- 납부 목록 상세 페이지 -->
+	
+	
+	<!-- 미납 목록 -->
+	<!-- <select id="unpaidList" parameterType="BillVO">
+		SELECT P.BILLNUM, T.MEMBERNUM, P.paidDate, P.totalPrice, P.paidCheck
+	    FROM PAYMENTDETAILS P
+	    LEFT JOIN TELEPHONE T
+	    ON (P.serialNum  = T.SERIALNUM)
+	    <include refid="unpaidListSearch"></include>
+	    ORDER BY P.BILLNUM DESC	    
+	</select>
+	
+	<sql id="unpaidListSearch">
+		WHERE P.BILLNUM LIKE CONCAT('%', #{search}, '%') OR T.MEMBERNUM LIKE CONCAT('%', #{search}, '%')
+	</sql>
+	
+	<select id="getTotalUL" parameterType="Pager" resultType="Long">
+		SELECT COUNT(*) FROM PAYMENTDETAILS P
+		LEFT JOIN TELEPHONE T
+	    ON (P.serialNum  = T.SERIALNUM)	    
+		<include refid="unpaidListSearch"></include>
+	</select> -->
 </mapper>
