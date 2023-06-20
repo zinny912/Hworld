@@ -9,6 +9,7 @@ import com.hworld.base.vo.BaseVO;
 import com.hworld.base.vo.BillVO;
 import com.hworld.base.vo.EPlanVO;
 import com.hworld.base.vo.MemberVO;
+import com.hworld.base.vo.OtherTelecomVO;
 import com.hworld.base.vo.PlanVO;
 
 @Mapper
@@ -47,6 +48,9 @@ public interface PlanDAO {
     //요금제 변경 후 청구내역 변경되는 프로시저 호출
     public int setPlanChange(BillVO billVO) throws Exception;
     
+    
+    //타통신사 조회 
+    public String isOtherTelecom(String taPhoneNum, String telecomName) throws Exception;
     
     
     // 공통코드 정보 가져오고 insert 

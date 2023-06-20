@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +22,7 @@ import com.hworld.base.util.Pager;
 import com.hworld.base.vo.BaseVO;
 import com.hworld.base.vo.BillVO;
 import com.hworld.base.vo.MemberVO;
+import com.hworld.base.vo.OtherTelecomVO;
 import com.hworld.base.vo.PlanVO;
 import com.hworld.base.vo.TelephoneVO;
 
@@ -197,7 +199,15 @@ public class PlanController {
 
 		return mv;
 	}
-		
+	
+	@ResponseBody
+	@PostMapping("otherTelecom")
+	public boolean isOtherTelecom(String taPhoneNum, String telecomName) throws Exception{
+		log.error(telecomName);
+		log.error(taPhoneNum);
+		log.error("{}<=======",planService.isOtherTelecom(taPhoneNum, telecomName));
+		return planService.isOtherTelecom(taPhoneNum, telecomName);
+	}
 	
 	// 요금제 수정
 	@GetMapping("planUpdate")

@@ -19,6 +19,7 @@ import com.hworld.base.vo.BaseVO;
 import com.hworld.base.vo.BillVO;
 import com.hworld.base.vo.DirectVO;
 import com.hworld.base.vo.MemberVO;
+import com.hworld.base.vo.OtherTelecomVO;
 import com.hworld.base.vo.PlanVO;
 
 import lombok.extern.slf4j.Slf4j;
@@ -84,6 +85,17 @@ public class PlanService {
 		return planDAO.getBeforePlan(memberNum);
 	}
 	
+	//번호이동 타통신사 DB 조회
+	public boolean isOtherTelecom(String taPhoneNum, String telecomName) throws Exception{
+		boolean check = false;
+		
+		String result = planDAO.isOtherTelecom(taPhoneNum, telecomName);
+		if(result != null) {
+			check = true;
+		}
+		log.info(" :::::::::::::::::::: service check value : {} ", check);
+		return check;
+	}
 	
 	
 	// 선택된 타입의 공통코드 정보 가져오기 

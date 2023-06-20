@@ -7,8 +7,11 @@
 <html lang="en">
 
 <head>
+
+
 	<meta charset="UTF-8">
-    <c:import url="../temp/style.jsp"></c:import>    
+    <c:import url="../temp/style.jsp"></c:import>  
+
     <title>요금 상세페이지</title>
  <style>
 .zcustom-box {
@@ -156,7 +159,7 @@
 	    display: -ms-flexbox;
 	    display: flex; }
     .quick-view-modal .product-right .size-detail ul li {
-      	width: 130px;
+      	width: 100px;
       	height: 40px;
       	text-align: center;
       	border: 1px solid #ced4da;
@@ -181,6 +184,38 @@
         border-radius: 0;
         margin: -1px 0px 3px 0px;
     }
+    
+    .radio-select {
+    list-style: none;
+    padding: 0;
+}
+
+.radio-select li {
+    position: relative;
+    padding-left: 30px;
+    cursor: pointer;
+}
+
+.radio-select li label {
+    position: absolute;
+    left: 0;
+    margin-top:15px;
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+}
+
+.radio-select li input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* 선택된 라벨에 대한 스타일링 */
+.radio-select li input[type="radio"]:checked + label {
+    font-weight: bold;
+    color: #e22454; /* 선택된 라벨의 색상 설정 */
+}
 
 </style>
 </head>
@@ -456,21 +491,29 @@
                                 <h2 class="mb-3 fw-bolder">이전 통신사 정보</h2>
 										<ul class="radio-select">
 										  <li>
-										    <input type="radio" id="skt" name="skt" value="SKT" checked hidden> 
+										    <input type="radio" id="skt" name="telecomName" value="0" hidden> 
 										    <label for="skt">SKT</label>
 										  </li>
 										  <li>
-										    <input type="radio" id="kt" name="kt" value="KT" hidden>
+										    <input type="radio" id="kt" name="telecomName" value="1" hidden>
 										    <label for="kt">KT</label>
 										  </li>
 										  <li>
-										    <input type="radio" id="lgu" name="previousCarrier" value="LGU+" hidden>
+										    <input type="radio" id="lgu" name="telecomName" value="2" hidden>
 										    <label for="lgu">LGU+</label>
+										  </li>
+										  <li>
+										    <input type="radio" id="etc" name="telecomName" value="3" hidden>
+										    <label for="etc">알뜰폰</label>
 										  </li>
 										</ul>
                                 </div>
-                                <div class="col-md-12">
-                                    <input type="text" class="form-control mb-3" id="phoneNum" name="phoneNum" placeholder="휴대폰 번호 '-'없이 숫자만 입력" value="">
+                                <div class="d-flex">
+                                <div class="col-md-10">
+                                    <input type="text" class="form-control mb-3" id="taPhoneNum" name="taPhoneNum" placeholder="휴대폰 번호 '-'없이 숫자만 입력" value="">
+                                   
+                                </div>
+                                <button type="button" class="btn btn-solid-default btn-sm mt-1" id="btnQuery" style="height:50%; width:100%;"> 조회 </button>
                                 </div>
                                 <div class="size-detail">
                                     <h2 class="mb-3 fw-bolder">가입자 정보</h2>
@@ -682,6 +725,7 @@
   const dis2Element = document.getElementById('dis2');
   dis1Element.textContent = dis1.toLocaleString();
   dis2Element.textContent = dis2.toLocaleString();
+
 }
 
   // 모달의 "shown.bs.modal" 이벤트에 이벤트 리스너 추가
@@ -693,6 +737,94 @@
   changeTelecomBtn.addEventListener('click', () => {
     // 모달을 열기 전에 필요한 동작을 수행할 수 있습니다
   });
+</script>
+
+<script>
+
+$(document).ready(function() {
+    // 통신사 버튼 변경 시 이벤트 처리
+    
+   $('.radio-select label').click(function() {
+        // 클릭한 라벨의 연결된 라디오 버튼 선택
+        $(this).prev('input[type="radio"]').prop('checked', true);
+   
+    $('input[name="telecomName"]').change(function() {
+        // 선택된 통신사
+        let telecomName = $('input[name="telecomName"]:checked').val();
+
+        
+    });
+    });
+    // 조회 버튼 클릭 시 AJAX 요청 전송
+    $('#btnQuery').click(function() {
+        // 선택된 통신사
+        let telecomName = $('input[name="telecomName"]:checked').val();
+
+        
+        if (telecomName == 0) {
+            telecomName="SKT";
+        } else if (telecomName == 1) {
+        	telecomName="KT";
+        } else if (telecomName == 2) {
+        	telecomName="LGU+";
+        } else {
+        	telecomName="알뜰폰";
+        }
+
+        // 입력한 휴대폰 번호
+        let phoneNum = $('#taPhoneNum').val();
+        console.log(phoneNum);
+
+        // AJAX 요청 설정
+        $.ajax({
+            url: '/plan/otherTelecom',
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                telecomName: telecomName,
+                taPhoneNum: phoneNum
+            },
+            success: function(response) {
+                // 응답 값에 따라 로직 처리
+                if (response==true) {
+                    // 성공적인 처리 로직
+                    alert("조회 성공! 가입자 정보 확인 및 할인유형을 선택해주세요");
+                    $('#taPhoneNum').prop('readonly', true);
+                } else {
+                    // 실패한 처리 로직
+                    console.log('조회 실패');
+                    alert("일치하는 정보가 없습니다. 통신사 및 휴대폰번호 확인 후 다시 시도해주세요.");
+                }
+            },
+            error: function(xhr, status, error) {
+                // 오류 처리
+                console.log('AJAX 오류:', error);
+            }
+        });
+    });
+    
+    
+ // 체크박스 변경 이벤트 리스너 추가
+    var radioButtons = document.getElementsByName('disKind');
+    for (var i = 0; i < radioButtons.length; i++) {
+      radioButtons[i].addEventListener('change', disKindChange);
+    }
+
+    // 체크박스 변경 이벤트 핸들러
+    function disKindChange(event) {
+      var selectedValue = event.target.value;
+      
+      // 선택한 값에 따라 동작 수행
+      if (selectedValue === '1') {
+        // 12개월 할인 선택 시 수행할 동작
+        console.log('12개월 할인 선택');
+      } else if (selectedValue === '2') {
+        // 24개월 할인 선택 시 수행할 동작
+        console.log('24개월 할인 선택');
+      }
+    }
+});
+
 </script>
 
 </body>
