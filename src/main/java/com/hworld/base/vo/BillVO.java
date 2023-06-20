@@ -28,10 +28,13 @@ public class BillVO {
 	private String payMonth; //청구 년/월
 	private String bfPlanPrice; //요금제 변경 전 총 요금
 	private Date planChangeDate; //요금제 변경 날짜
+	private Date paidDate; //납부일
+	private Integer cancelPrice; //위약금 내용
 	
 	//청구내역은 하나의 회선에 대한 청구정보
 	//billVO에 포함된 serialNum 으로 telephoneVO detail을 조회해서 billVO에 넣어두면 쉽게사용할 수 있을거같음
 	private TelephoneVO telephoneVO;
+	private MemberVO memberVO;
 	
 	//요금제 변경시 사용할 
 	private String nowDate;
