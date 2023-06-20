@@ -151,9 +151,7 @@
                                         <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#productdel">삭제</a>
                                     </div>    
 									<div id="directList">
-										<div class="noStock" style="display:none;">
-											<h2 class="theme-color">선택하신 제품은 재고가 없습니다.</h2>
-										</div>
+										
 										<c:forEach items="${list}" var="direct" varStatus="status">
 										<div class="titlebox" id="${direct.directCode}" data-selected="0">
 												<div class="brand" style="font-size: 27px; color: gray;" id="productCode${status.index}"
@@ -206,6 +204,7 @@
 												</div>
 												<div class="col-3 my-auto d-flex justify-content-end">
 													<input type="text" id="colorName" style="border:0px; font-size:15px;" readonly>
+													<input type="hidden" id="optionStock2" style="border:0px; font-size:15px;" readonly>
 												</div>
 												<!-- 수량 버튼 -->
 												<div class="d-flex quantity-wrapper my-auto">
@@ -226,7 +225,7 @@
 										<hr>
 											
 											<!-- 선택된 옵션 영역 -->
-									<form action="/order" method="GET" id="orderForm"> 
+									<form action="" method="Post" id="orderForm"> 
 											<div id="selectedOptionList">
 											</div>
 
@@ -253,7 +252,7 @@
 												<div class="btn-area" style="display:block; position: relative; padding-top:70px; float: center;"> 
 													<div class="product-buttons"> 
 														<a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#cartinto">
-														<button type="button" class="btn btn-outline-custom me-1 cart-icon" style="margin-left:-105px; display:inline-block;">
+														<button type="button" class="btn btn-outline-custom me-1 cart-icon" id="cartBtn" style="margin-left:-105px; display:inline-block;">
 															<svg xmlns="http://www.w3.org/2000/svg" width="34" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart pe-1"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
 														</button> </a>
 														<button type="button" class="btn btn-solid" id="orderBtn" style= "width: 700px; height: 52px; font-size: 18px; display: inline-block; padding: 0 10px; text-align: center;">주문하기</button>
@@ -605,7 +604,7 @@
                 </form>
             </div>
             <div class="modal-footer pt-0 text-end d-block">
-                <a href="#" ><button class="btn btn-solid-default rounded-1">확인</button></a>
+                <button class="btn btn-solid-default rounded-1 btn_cart">확인</button>
             </div>
         </div>
     </div>

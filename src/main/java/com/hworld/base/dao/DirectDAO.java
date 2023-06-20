@@ -30,6 +30,10 @@ public interface DirectDAO {
 	//상품 하나 옵션 다수 조회
 	public List<DirectVO> getDetail(String slicedCode) throws Exception;
 	
+	//getMonthlyPay - ajax 상품 예상 월 요금 프로시저 
+	public Map<?, ?> getMonthlyPay(Map<String, Object> monthlyPay) throws Exception;
+	
+	
 	//악세사리 상품 하나 옵션 다수 조회
 	public List<DirectVO> getAccDetail(String slicedCode) throws Exception;
 
@@ -86,5 +90,7 @@ public interface DirectDAO {
 	
 	//plan 선택된거 가져오기
 	public PlanVO getSelectedPlan(PlanVO planVO) throws Exception;
+
+	
 	
 }

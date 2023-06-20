@@ -5,13 +5,13 @@
   
   <mapper namespace="com.hworld.base.dao.OrderDAO">
   
-	<select id="getDirectDetail" resultType="OrderDirectVO">
-    	SELECT DIRECTCODE, DIRECTNAME, DIRECTPRICE
+	<select id="getDirectDetail" resultType="DirectVO" parameterType="DirectVO">
+    	SELECT DIRECTCODE, DIRECTNAME, DIRECTPRICE, COLORCODE, DIRECTSTOCK
     	FROM DIRECT
 		WHERE DIRECTCODE = #{directCode}
 	</select>
 	
-	<select id="getOrderInfo" resultType="OrderDirectVO">
+	<select id="getOrderInfo" resultType="OrderVO">
 		SELECT DIRECTCODE, DIRECTPRICE
 		FROM DIRECT
 		WHERE DIRECTCODE = #{directCode}
@@ -36,9 +36,9 @@
 	</update>
 
 	<!-- Payment 주문 결제 -->	
-	<update id="orderPayment" parameterType="OrderVO">
-		UPDATE ORDERS
-		SET ORDERADDRESS1 =#{orderAddress1}, ORDERADDRESS2 =#{orderAddress2}, ORDERADDRESS3 =#{orderAddress3}, ORDERSTATE =#{orderState}, ORDERRECEIVER =#{orderReceiver}
-	</update>
+	<insert id="orderPayment" parameterType="PayVO">
+		INSERT INTO PAY (ORDERNUM, MEMBERNUM, ORDERFINALPRICE, PAYDATE)
+		VALUES (#{orderNum}, #{memberNum}, #{orderFinalPrice}, NOW())
+	</insert>
 	
   </mapper>

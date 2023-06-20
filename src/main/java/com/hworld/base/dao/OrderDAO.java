@@ -9,15 +9,16 @@ import com.hworld.base.vo.DirectVO;
 import com.hworld.base.vo.MemberVO;
 import com.hworld.base.vo.OrderDirectVO;
 import com.hworld.base.vo.OrderVO;
+import com.hworld.base.vo.PayVO;
 
 @Mapper
 public interface OrderDAO {
     
     // 주문 결제
-    public int orderPayment(OrderVO orderVO) throws Exception;
+    public int orderPayment(PayVO payVO) throws Exception;
     
     // 주문 상품 정보(주문 페이지)
-    public OrderDirectVO getDirectDetail(String directCode);
+    public DirectVO getDirectDetail(DirectVO directCode);
     
     //주문 상품 정보(주문 처리)
     public OrderDirectVO getOrderInfo(String directCode);

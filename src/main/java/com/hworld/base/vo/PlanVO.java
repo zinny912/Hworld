@@ -14,11 +14,20 @@ public class PlanVO {
     private String categoryCode;
     private String planExplain;
     private String planExplainS;
+    private String planExplainM;
     
     //할인요금 계산을 위한 disPercent 추가
+    private Integer disCode;
     private Double disPercent;
+    
+    //대표회선의 요금제 일치확인
+    private Integer count;
+    private Integer memberNum;
+    private String phoneNum;
+    private Integer serialNum;
     
     //commonCode 사용
     private String note;
     private String type;
+    
 }

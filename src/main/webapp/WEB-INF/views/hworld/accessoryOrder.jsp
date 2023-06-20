@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+    
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,7 +18,7 @@
     
      <!-- 다음주소 -->
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-
+<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
 </head>
 
 <body class="theme-color2 light ltr">
@@ -94,29 +96,28 @@
 
     <!-- Cart Section Start -->
     <section class="section-b-space">
+       <form action="./order" method="post" class="needs-validation" id="form">
         <div class="container" style="padding: 0px 130px;">
             <div class="row g-4">
                 <div class="col-lg-7">
                     <h3 class="mb-3 fw-bold">주문서</h3>
-                    <form action="../order/${memberNum}" method="get" class="needs-validation" id="form">
                         <div class="row g-4">
 
                             <!-- 가입자 정보 -->
 
                             <div class="col-md-12">
                                 <label for="fname" class="form-label">받으시는 분</label>
-                                <input type="text" class="form-control" id="name" name="orderReceiver" value="${memberName}">
+                                <input type="text" class="form-control" id="name" name="orderReceiver" value="${memberVO.name}">
                             </div>
 
 
                             <!-- 기기변경 폰 번호 -->
                             <div class="col-md-12">
                                 <label for="fname" class="form-label">연락 가능 번호</label>
-                                <input type="text" class="form-control" id="orderTelNum" name="orderTelNum" value="${phoneNum}">
+                                <input type="text" class="form-control" id="orderTelNum" name="orderTelNum" value="${memberVO.tel}">
                             </div>
                             
-                               	<input type="text" class="form-control" id="orderState" name="orderState" value="1" >
-                               	<input type="text" class="form-control" id="memberNum" name="memberNum" value="${memberNum}">
+                               	<input type="text" class="form-control" id="memberNum" name="memberNum" value="${memberVO.memberNum}" hidden="">
                                	
 
                             <!-- <div class="row mt-3">
@@ -138,22 +139,22 @@
                             <!-- 1. 우편번호  -->
                             <div class="col-md-9">
                                 <label for="address1" class="form-label">배송 주소</label>
-                                <input type="text" class="form-control" id="address1" name="address1">
+                                <input type="text" class="form-control" id="address1" name="orderAddress1">
                             </div>
 
                             <div class="col-md-3" style="padding-left: 0px;">
                                 <label for="btn2" class="form-label">&nbsp;&nbsp;&nbsp;</label>
-                                <button class="btn btn-solid-default btn-full" onclick="execution_daum_address()" id="btn2" style="padding-left: 4px; padding-right: 4px; height: 61%; font-size: calc(12px + (13 - 12) * ((100vw - 320px) / (1920 - 320)));">주소 찾기</button>
+                                <button type="button" class="btn btn-solid-default btn-full" onclick="execution_daum_address()" style="padding-left: 4px; padding-right: 4px; height: 61%; font-size: calc(12px + (13 - 12) * ((100vw - 320px) / (1920 - 320)));">주소 찾기</button>
                             </div>
 
                             <!-- 2. 도로명주소/지번  -->
                             <div class="col-md-12 mt-3">
-                                <input type="text" class="form-control" id="address2" name="address2">
+                                <input type="text" class="form-control" id="address2" name="orderAddress2">
                             </div>
 
                             <!-- 3. 상세주소   -->
                             <div class="col-md-12 mt-3">
-                                <input type="text" class="form-control" id="address3" name="address3">
+                                <input type="text" class="form-control" id="address3" name="orderAddress3">
                             </div>
 
                             <!-- 절차 끝 구분선 -->
@@ -414,14 +415,13 @@
 								</div>
 								
 								<div class="my-3 mx-auto col-6 row">
-								  <button class="btn btn-solid-default w-75 mx-auto" id="btn2" style="padding-left: 4px; padding-right: 4px; height: 61%; font-size: calc(12px + (13 - 12) * ((100vw - 320px) / (1920 - 320)));">
+								  <button class="btn btn-solid-default w-75 mx-auto" id="payConfirm" style="padding-left: 4px; padding-right: 4px; height: 61%; font-size: calc(12px + (13 - 12) * ((100vw - 320px) / (1920 - 320)));">
 								    결제하기
 								  </button>
 								</div>
 
                         </div>
                     </div>
-              		</form>
                 </div>
 
 
@@ -431,29 +431,57 @@
                         <c:forEach items="${orderList}" var="ol">
                         
                             <li class="list-group-item lh-condensed active " style="background-color: #4f4f4f;">
-                                <h3 class="mt-3 mb-1 text-capitalize">${ol.directCode} ${ol.directName}</h3>
-                                <h4 class="my-1" style="color: #fff;">총 ${ol.orderAmount}개</h4>
+                                <h3 class="mt-3 mb-1 text-capitalize">${ol.directVO.directName}</h3>
+								<h6 class="my-1" style="color: #fff;">
+								  <c:choose>
+								    <c:when test="${ol.directVO.colorCode eq 'B'}">
+								      블랙
+								    </c:when>
+								    <c:when test="${ol.directVO.colorCode eq 'W'}">
+								      화이트
+								    </c:when>
+								    <c:when test="${ol.directVO.colorCode eq 'G'}">
+								      그레이
+								    </c:when>
+								  </c:choose>
+                                ${ol.orderAmount}개
+								</h6>
                                     
  								<span class="d-flex my-2">
-                                	<h6 id="renewPrice" class="d-flex" style="color: #fff;">${ol.directPrice}</h6>
-                                	<h6 style="color: #fff;">원</h6>
+                                	<h5 style="color: #fff;">
+ 									<fmt:formatNumber value="${ol.calPrice}" pattern="#,### 원"/>
+                                	</h5>
                                 </span>
                             </li>
+                        <input type="hidden" name="directCode" value="${ol.directVO.directCode}">
+                          <input type="hidden" name="directName" value="${ol.directVO.directName}">
+						  <input type="hidden" name="colorCode" value="${ol.directVO.colorCode}">
+						  <input type="hidden" name="orderAmount" value="${ol.orderAmount}">
+						  <input type="hidden" name="calPrice" value="${ol.calPrice}">
+						  
                            </c:forEach>
-                            
-                            <li class="list-group-item d-flex lh-condensed justify-content-between active" style="padding: 20px 20px 15px;">
-                                     <span class="fw-bold" >주문금액 합계</span>
-                                     <h3 class="fw-bold " style="color: #7e7e7e;">153,123원 </h3>
-                            </li>
-                            <li class="list-group-item d-flex lh-condensed justify-content-between active" style="padding: 20px 20px 15px;">
-                                <span class="fw-bold">총 결제 금액</span>
-                                <h2 class="title title1" style="color: var(--theme-color); margin-bottom: 0;">153,123원</h2>
-                            </li>
-        
+							 <c:set var="orderFinalPrice" value="0" />
+							<c:forEach items="${orderList}" var="ol">
+							  <c:set var="orderFinalPrice" value="${orderFinalPrice + ol.calPrice}" />
+							  <input type="hidden" name="orderFinalPrice" value="${orderFinalPrice + ol.calPrice}">
+							</c:forEach>
+							
+							<li class="list-group-item d-flex lh-condensed justify-content-between active" style="padding: 20px 20px 15px;">
+							  <span class="fw-bold">주문금액 합계</span>
+							  <h3 class="fw-bold" style="color: #7e7e7e;"><fmt:formatNumber value="${orderFinalPrice}" pattern="#,### 원"/></h3>
+							</li>
+							
+							<li class="list-group-item d-flex lh-condensed justify-content-between active" style="padding: 20px 20px 15px;">
+							  <span class="fw-bold">총 결제 금액</span>
+							  <h2 class="title title1" style="color: var(--theme-color); margin-bottom: 0;">
+							    <fmt:formatNumber value="${orderFinalPrice}" pattern="#,### 원"/>
+							  </h2>
+							</li>
                         </ul>
                     </div>
                     </div>
                 </div>
+              		</form>
     </section>
     <!-- Cart Section End -->
 
@@ -492,14 +520,7 @@
 
 
 <script>
-$(document).ready(function() {
-    const prices = document.querySelectorAll('[id^="renewPrice"]');
-    for (var i = 0; i < prices.length; i++) {
-        const price = parseInt(prices[i].innerHTML);
-        const renewPrice = price.toLocaleString();
-        prices[i].innerHTML = renewPrice;
-    }
-});
+
 
 /* 다음 주소 연동 */
 function execution_daum_address(){
@@ -545,11 +566,11 @@ function execution_daum_address(){
  
              	// 제거해야할 코드
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                $(".address1").val(data.zonecode);
-                $(".address2").val(addr);				
+                $("#address1").val(data.zonecode);
+                $("#address2").val(addr);				
                 // 커서를 상세주소 필드로 이동한다.
-                $(".address3").attr("readonly", false);
-                $(".address3").focus();	 
+                $("#address3").attr("readonly", false);
+                $("#address3").focus();	 
 	            
 	            
 	        }

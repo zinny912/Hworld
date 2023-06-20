@@ -28,6 +28,7 @@ public class OrderDirectVO {
     private DirectVO directVO;
     
     
+    
 //    public void initTotal() {
 //		this.totalPrice = this.onePrice * this.orderAmount;
 //	}

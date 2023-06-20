@@ -8,6 +8,7 @@ import java.util.List;
 import javax.mail.Session;
 import javax.servlet.http.HttpSession;
 
+import org.hibernate.validator.constraints.Length;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +22,7 @@ import com.hworld.base.vo.DirectVO;
 import com.hworld.base.vo.MemberVO;
 import com.hworld.base.vo.OrderDirectVO;
 import com.hworld.base.vo.OrderVO;
+import com.hworld.base.vo.PayVO;
 
 import lombok.extern.slf4j.Slf4j;
 @Slf4j
@@ -49,86 +51,105 @@ public class OrderService {
 		//Controller에서 받아온 orderPageVO에 적힌 내용을 ','로 parsing한 후, list에 하나씩 담아주는 작업이 필요
 		String[] directCode = orderDirectVO.getDirectCode().split(",");
 		String[] orderAmount = orderDirectVO.getOrderAmount().split(",");
+		String[] calPrice = orderDirectVO.getCalPrice().split(",");
 		
-		for(String str : directCode) {
-			log.error(" >>>>>>>>>>>>>>>>>>>>>> {} ", str);
-		}
-		
-		
+
+	    for (int i = 0; i < directCode.length; i++) {
+	        OrderDirectVO vo = new OrderDirectVO();
+	        DirectVO vo2 = new DirectVO();
+	        
+			vo2.setDirectCode(directCode[i]);
+			vo2 = orderDAO.getDirectDetail(vo2);
+			vo.setDirectVO(vo2); 
+			
+			vo.setDirectCode(directCode[i]);
+			vo.setOrderAmount(orderAmount[i]);
+			vo.setCalPrice(calPrice[i]);
+			ar.add(vo);
+			
+	    }
+	    
+	    
 		return ar;
-		
-		
-		
-//		List<OrderPageDirectVO> result = new ArrayList<>();
-//		
-//		for(OrderPageDirectVO opds : orderPageDirectVOs) {
-////			log.error(opds.getDirectCode().toString());
-//			
-//			OrderPageDirectVO getDirectDetail = orderDAO.getDirectDetail(opds.getDirectCode());
-//			
-//			getDirectDetail.setOrderAmount(opds.getOrderAmount());
-//			
-//			result.add(getDirectDetail);
-//			
-//		}
-//		return result;
 	}
 	
-	//주문한 정보를 db에 넣는거
-	public void order(OrderVO orderVO, HttpSession session)throws Exception{
-		//회원 정보 
-		Object member = session.getAttribute("memberNum");
-		//주문 정보
-		List<OrderDirectVO> ods = new ArrayList<>();
-		for(OrderDirectVO odss : orderVO.getOrderDirectVOs()) {
-			OrderDirectVO orderDirectVO = orderDAO.getOrderInfo(odss.getDirectCode());
-			orderDirectVO.setOrderAmount(odss.getOrderAmount());
-			//orderDirectVO.initTotal();
-			ods.add(orderDirectVO);
-			
-		}
-		//OrderVO 세팅
-		orderVO.setOrderDirectVOs(ods);
-		orderVO.getOrderFinalPrice();
-		
+
+	
+	public void order(OrderDirectVO orderDirectVO, MemberVO memberVO, OrderVO orderVO)throws Exception{
 		/* DB 주문, 주문상품(배송정보) 넣기 */
 		// orderNum 만들기 및 OrderDTO객체 orderNum에 저장
 		Date date = new Date();
 		SimpleDateFormat format = new SimpleDateFormat("_yyyyMMddHHmmss");
-		String orderNum = session.getAttribute("memberNum")+format.format(date);
-		orderVO.setOrderNum(orderNum);
+		String orderNum = memberVO.getMemberNum()+format.format(date);
 		
-		//DB넣기
+		orderDirectVO.setOrderNum(orderNum);
+		orderVO.setOrderNum(orderNum);		
+		orderVO.setOrderAddress1(orderVO.getOrderAddress1());
+		orderVO.setOrderAddress2(orderVO.getOrderAddress2());
+		orderVO.setOrderAddress3(orderVO.getOrderAddress3());
+		orderVO.setOrderTelNum(orderVO.getOrderTelNum());
+		orderVO.setOrderDate(date);
+		orderVO.setOrderState(0);
+		
+		orderVO.setMemberNum(memberVO.getMemberNum());
+		//orderVO.setOrderFinalPrice(orderVO.getOrderFinalPrice());
+		
+		
 		orderDAO.setInsert(orderVO); //주문 테이블 등록 
-		for (OrderDirectVO odss : orderVO.getOrderDirectVOs()) { //주문 아이템테이블 등록
-			odss.setOrderNum(orderNum);
-			orderDAO.setODInsert(odss);
+
+		
+		//주문 정보
+		List<OrderDirectVO> ar = new ArrayList<>();
+		
+		//Controller에서 받아온 orderPageVO에 적힌 내용을 ','로 parsing한 후, list에 하나씩 담아주는 작업이 필요
+		String[] directCode = orderDirectVO.getDirectCode().split(",");
+		String[] orderAmount = orderDirectVO.getOrderAmount().split(",");
+		String[] calPrice = orderDirectVO.getCalPrice().split(",");
+		
+	    for (int i = 0; i < directCode.length; i++) {
+	        OrderDirectVO vo = new OrderDirectVO();
+	        DirectVO directVO = new DirectVO();
+			vo.setDirectCode(directCode[i]);
+			vo.setOrderAmount(orderAmount[i]);
+			vo.setMemberNum(memberVO.getMemberNum());
+			vo.setOrderNum(orderNum);
+			ar.add(vo);
+			orderDAO.setODInsert(vo);
 			
-		}
-//		
-//		/* 재고 변동 적용 */
-//		for(OrderDirectVO odss : orderVO.getOrderDirectVOs()) {
-//			//변경 재고 값 구하기
-//			List<DirectVO> directVOList = directDAO.getDetail(odss.getDirectCode());
-//			for(DirectVO directVO : directVOList) {
-//				directVO.setDirectStock(directVO.getDirectStock()-odss.getOrderAmount());
-//				//변동 값 DB적용
-//				orderDAO.deductStock(directVO);
-//			}
-//			
-//		}
-//		
-//		//장바구니 제거
-//		for(OrderDirectVO odss : orderVO.getOrderDirectVOs()) {
-//			CartVO cartVO = new CartVO();
-//			cartVO.setMemberNum((Integer) session.getAttribute("memberNum"));
-//			cartVO.setDirectCode(odss.getDirectCode());
-//			
-//			cartDAO.setDelete(cartVO);
-//		}
-//		
+			
+			//재고 변동 
+			directVO.setDirectCode(directCode[i]);
+			directVO = orderDAO.getDirectDetail(directVO);
+			int directStockInt = directVO.getDirectStock();
+			int orderAmountInt = Integer.parseInt(orderAmount[i]);
+			System.out.println(directStockInt);
+			System.out.println(orderAmountInt);
+			int Stock = directStockInt-orderAmountInt;
+			directVO.setDirectStock(Stock);
+			
+			orderDAO.deductStock(directVO);
+			
+			//장바구니 제거 
+			CartVO cartVO = new CartVO();
+			cartVO.setMemberNum(memberVO.getMemberNum());
+			cartVO.setDirectCode(directCode[i]);
+			cartDAO.setDelete(cartVO);
+			
+	    }
+
+	}
+	
+	
+	
+	public int setOrderPayment(PayVO payVO)throws Exception{
+		
+		orderDAO.orderPayment(payVO);
+		
+		return 0;
 		
 	}
+	
+	
 	
 	
 }

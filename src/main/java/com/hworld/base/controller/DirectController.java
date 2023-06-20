@@ -143,16 +143,30 @@ public class DirectController {
 		return mv;
 	}
 
-//	@PostMapping("selectedPlan")
-//	public ModelAndView getSelectedPlan(@RequestParam("slicedCode") String slicedCode,PlanVO planVO) throws Exception{
-//		ModelAndView mv = new ModelAndView();
-//		PlanVO selectedPlan = directService.getSelectedPlan(planVO);
-//		log.error(slicedCode);
-//		log.error("{}<========= 선택된 데이터",selectedPlan);
-//		 mv.addObject("result", selectedPlan);
-//		 mv.setViewName("redirect:/direct/phoneDetail?slicedCode=" + slicedCode); // 결과를 보여줄 JSP 페이지의 이름
-//		return mv;
-//	}
+	@ResponseBody
+	@GetMapping("calMonthlyPay")
+	public Map<String, Object> getMonthlyPay(@RequestParam Map<String, Object> params) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		//String 타입의 disKind를 int로 바꿔줌
+		log.info(" :::::::::::::::::::: before: {} ",  params.get("disKind").getClass());
+		params.put("disKind", Integer.parseInt((String)params.get("disKind")));
+		log.info(" :::::::::::::::::::: after: {} ",  params.get("disKind").getClass());
+		
+		//Map은 heap영역 주소값 복사가 안됨 그냥 메서드 호출하고 매개변수로 받은 기존객체에 데이터를 리턴하는식으로 써야할거같음
+		directService.getMonthlyPay(params);
+
+		log.info(" :::::::::::::::::::: {} ", params.get("directCode"));
+		log.info(" :::::::::::::::::::: {} ", params.get("disKind"));
+		log.info(" :::::::::::::::::::: {} ", params.get("planNum"));
+		log.info(" :::::::::::::::::::: {} ", params.get("out_phonePayPrice"));
+		log.info(" :::::::::::::::::::: {} ", params.get("out_planPrice"));
+		
+		//mv.addObject("calResult", params);
+		
+		return params;
+	}
+	
 	
 	
 	// 액세서리 리스트 페이지
@@ -203,6 +217,7 @@ public class DirectController {
 	    		accReview.add(review);
 	    	}
 	    }
+	    
 
 		mv.addObject("list", ar);		
 		mv.addObject("qnaList", accQna);
@@ -316,6 +331,17 @@ public class DirectController {
 		modelAndView.setViewName("redirect:/direct/phoneDetail?slicedCode="+slicedCode);
 		return modelAndView;
 	}
+	
+	@PostMapping("directDelete")
+	public ModelAndView setDelete(ModelAndView mv, @RequestParam("slicedCode") String slicedCode) throws Exception {
+
+		int result = directService.setDelete(slicedCode);
+		
+		mv.setViewName("redirect:./phoneList");
+		return mv;
+	}
+	
+	
 	@GetMapping("accessoryUpdate")
 	public ModelAndView setUpdate(ModelAndView mv,DirectVO directVO, String slicedCode) throws Exception{
 		List<DirectVO> ar = directService.getAccDetail(slicedCode);
@@ -425,17 +451,8 @@ public class DirectController {
 		modelAndView.setViewName("hworld/phoneOrder");
 		return modelAndView;
 	}
-//	
-//	// 액세서리 주문 페이지
-//	@PostMapping("accessoryOrder")
-//	public ModelAndView setInsert(OrderDirectVO orderDirectVO, OrderVO orderVO, HttpSession session) throws Exception {
-//	    ModelAndView mv = new ModelAndView();
-//
-//		mv.addObject("orderDirectVO", orderDirectVO);
-//		mv.addObject("orderVO", orderVO);
-//	    mv.setViewName("hworld/accessoryOrder");
-//	    return mv;
-//	}
+	
+	
 
 
 
