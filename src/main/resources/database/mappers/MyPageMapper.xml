@@ -13,6 +13,19 @@
 		WHERE C.MEMBERNUM =#{memberNum}
 	</select>
 	
+	<!-- 회선 기준 납부/미납 내역 불러오기 -->
+	<select id="getPMDListbyTP" parameterType="pager" resultMap="getTPResult">
+		SELECT A.*, B.*, C.*, D.*, F.* FROM TELEPHONE A
+			LEFT OUTER JOIN MEMBER B ON A.MEMBERNUM = B.MEMBERNUM
+			LEFT OUTER JOIN PLAN C ON A.PLANNUM = C.PLANNUM
+			LEFT OUTER JOIN PAYMENTDETAILS D ON A.SERIALNUM = D.SERIALNUM
+			LEFT OUTER JOIN TELEPHONE_EPLAN E ON A.SERIALNUM = E.SERIALNUM
+			LEFT OUTER JOIN EPLAN F ON E.EPLANNUM = F.EPLANNUM
+		WHERE B.MEMBERNUM = #{memberNum}
+		LIMIT LIMIT #{startRow}, #{perPage}
+	</select>
+	
+	
 	<!-- 요금 납부/미납 내역 불러오기 -->
 	<select id="getPMDList" parameterType="pager" resultMap="getBillResult">
 		<!-- SELECT B.name, A.memberNum, A.phoneNum, A.serialNum, A.planNum, C.billNum, C.billCheck, C.paidCheck -->

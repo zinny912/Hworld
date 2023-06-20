@@ -479,7 +479,9 @@
 	                        <div class="tab-content" id="nav-tabContent">
 	                            <div id="desc" class="tab-pane fade show active">
 	                                <div class="p_description">
-	                                    ${directVO.directContents}
+										<c:forEach items="${list}" var="direct" varStatus="i">
+		                                    ${direct.directContents}
+										</c:forEach>
 	                                </div>
 	                            </div>
 	                           
