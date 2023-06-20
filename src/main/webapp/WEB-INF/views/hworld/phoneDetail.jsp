@@ -296,8 +296,8 @@
 								<div id="directList">
 									
 										<c:forEach items="${list}" var="direct" varStatus="status">
-											<div class="titlebox">
-												<div class="brand direct-item" style="font-size: 27px; color: gray;" id="productCode"
+											<div class="titlebox" id="${direct.directCode}" data-selected="0">
+												<div class="brand" style="font-size: 27px; color: gray;" id="productCode"
 												data-direct-code="${direct.directCode}" data-direct-price="${direct.directPrice}" data-brand-code="${direct.brandCode}"
 												data-direct-stock="${direct.directStock}" data-sliced-code="${direct.slicedCode}" data-category-code="${direct.categoryCode}" data-brand-Code="${direct.brandCode}">
 													${direct.value} ${direct.slicedCode} ${direct.directCode}
@@ -312,13 +312,16 @@
 														<span class="price-detail theme-color fw-bold data-comma" id="renewPrice" >${direct.directPrice}</span>
 														<span class="unit">원</span>
 														</p>
+													<div class="direct-item" id="item_${direct.directCode}" data-direct-code="${direct.directCode}" data-category-code="${direct.categoryCode}" data-brand-code="${direct.brandCode}" data-sliced-code="${direct.slicedCode}" data-direct-stock="${direct.directStock}" data-direct-price="${direct.directPrice}"></div>
 											</div>
 										</c:forEach>
-													<input type="text" id="directCode" name="directCode" value="">
-													<input type="hidden" id="categoryCode" name="categoryCode" value="${direct.categoryCode}">
-													<input type="hidden" id="brandCode" name="brandCode" value="${direct.brandCode}">
-													<input type="hidden" id="slicedCode" name="slicedCode" value="${direct.slicedCode}">
-													<input type="text" id="directStock" name="directStock" readonly>
+											<input type="text" id="colorCode">
+											<input type="text" id="saveCapacity">
+											<input type="text" id="directCode" name="directCode">
+											<input type="text" id="directStock" name="directStock" readonly>
+											<!-- <input type="hidden" id="categoryCode" name="categoryCode" value="${direct.categoryCode}">
+											<input type="hidden" id="brandCode" name="brandCode" value="${direct.brandCode}">
+											<input type="hidden" id="slicedCode" name="slicedCode" value="${direct.slicedCode}"> -->
 										<div class="optionArea">
 											<div class="product-option-item color">
 										   		<div class="option-title-area">
@@ -326,7 +329,7 @@
 										        </div>
 												<div class="color-types">
 													<ul class="color-variant mb-0">
-														<li class="bg-white border boder-1 selected" value="W" name="colorCode"></li>
+														<li class="bg-white border border-1" value="W" name="colorCode"></li>
 														<li class="bg-gray1" value="G" name="colorCode"></li>
 														<li class="bg-black1" value="B" name="colorCode"></li>
 													</ul>
@@ -424,16 +427,19 @@
 									<div class="compare-title">
 										<div class="info">
 											<div class="tit">
+												<!-- 선택된 요금제 이름 span의 text에 삽입 -->
 												<span class="sub-tit" id="selectedPlanName" style="overflow: hidden; font-size: 22px; font-weight: 700; letter-spacing: -0.5px; 
-												text-overflow: ellipsis;" data-plan-name="" value="">선택된 요금제 이름</span>
+												text-overflow: ellipsis;" data-plan-name="" value=""></span>
+												<!-- 체크용 planNum -->
 												<input type="text" id="planNum" name="planNum" value="" >
 												<br>
 												<h2 class="main-tit" id="dataDefaultQty" style="margin: 3px 0 3px; font-size: 16px; font-weight: 400; letter-spacing: -0.56px; 
 												padding-right: 100px;"> 데이터 <span id="dataGB"></span> </h2>                                                            
 											</div>
 											<div class="data" style="position: absolute; top: 35px; right: 0; text-align: right;">
+												<!-- 선택된 요금제 금액 h2의 text에 삽입 -->
 												<h2 class="price theme-color" id="planPrice" style="letter-spacing: -0.2px; display: block; margin-top: 4px; margin-right:50px; 
-												color: #000; font-weight: 700;" data-plan-price="" data-dp="">선택된 요금제 금액</h2> 
+												color: #000; font-weight: 700;" data-plan-price="" data-dp=""></h2> 
 												<p style="color:black; font-size:15px; margin-top:-20px;" class="fw-bold">원/월</p>
 											</div> 
 											<div class="d-flex justify-content-end">

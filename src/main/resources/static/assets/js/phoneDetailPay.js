@@ -40,14 +40,17 @@ function isEmpty(value){
 
 
 //월 요금계산 준비
-$('#directCode, input[name=disKind], input[name=planNum]').change(function() {
+//$('input[name=saveCapacity], input[name=disKind], input[name=planNum]').change(function() {
+$('#directCode, input[name=disKind], input[name=planNum]').on('change input', function() {
     //영수증 가격 출력
-    const directCode = $('#directCode').val(); // 기기코드
-    const planNum = $('input[name=planNum]:checked').val(); // 요금제번호
-    const disKind = $('input[name=disKind]:checked').val(); // 할인유형
-    console.log(directCode);
-    console.log(planNum);
-    console.log(disKind);
+    let directCode = $('#directCode').val(); // 기기코드
+    let saveCapacity = $('input[name=saveCapacity]:checked').val();
+    let planNum = $('input[name=planNum]:checked').val(); // 요금제번호
+    let disKind = $('input[name=disKind]:checked').val(); // 할인유형
+    console.log("directCode: ", directCode);
+    console.log("saveCapacity: ", saveCapacity)
+    console.log("planNum: ", planNum);
+    console.log("disKind: ", disKind);
 
     directCheck = isEmpty(directCode);
     planCheck = isEmpty(planNum);
