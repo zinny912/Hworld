@@ -36,8 +36,9 @@ public class QnaVO extends BoardVO{
     private String email;
     private String newCode;
 
-    //private List<MemberVO> memberVOs;
+    private List<MemberVO> memberVOs;
 	private List<OrderVO> orderVOs;
 	private List<DirectVO> directVOs;
+	private List<OrderDirectVO> orderDirectVOs;
 	
 }
