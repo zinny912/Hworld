@@ -6,104 +6,6 @@ $(document).ready(function() {
   $('.titlebox:not(:first)').hide();
 
 
-//초기값 준비
-// const selectedOptions = getSelectedOptions();
-// let initialColorCode = selectedOptions.colorCode;
-// console.log("initialColorCode: ", initialColorCode);
-
-// if (initialColorCode != null) {
-//   updateCapacityOptions(initialColorCode); // 초기 선택한 색상에 대한 용량 옵션 업데이트
-// }
-
-
-// 일치하는 directCode를 가진 titlebox를 표시하고 나머지는 숨김
-// function updateTitleBoxVisibility(directCode) {
-//   const directListItems = $('#directList').find('.direct-item');
-//   let matchingItemFound = false;
-//   directListItems.each(function() {
-//     const listItem = $(this);
-//     const listItemDirectCode = listItem.attr('data-direct-code');
-
-//     if (listItemDirectCode === directCode) {
-//       listItem.closest('.titlebox').show(); 
-//       matchingItemFound = true;  
-//     } else {
-//       listItem.closest('.titlebox').hide();
-//     }
-    
-//   });
-
-// }
-
-
-
-
-
-
-const capacity = document.getElementsByClassName('capacity');
-for(let capacity2 of capacity){
-    capacity2.addEventListener('click', function(){
-        if(capacity2.classList.contains('btn-outline-custom')){
-            for(let capacity3 of capacity){
-                if(capacity3.classList.contains('btn-solid-after')){
-                    capacity3.classList.remove('btn-solid-after');
-                    capacity3.classList.add('btn-outline-custom');
-                }
-            }
-            capacity2.classList.remove('btn-outline-custom');
-            capacity2.classList.add('btn-solid-after');
-        }
-        else{
-            capacity2.classList.remove('btn-solid-after');
-            capacity2.classList.add('btn-outline-custom');
-        }
-    })
-}
-
-const joinType = document.getElementsByClassName('joinType');
-for(let joinType2 of joinType){
-    joinType2.addEventListener('click', function(){
-        if(joinType2.classList.contains('btn-outline-custom')){
-            for(let joinType3 of joinType){
-                if(joinType3.classList.contains('btn-solid-after')){
-                    joinType3.classList.remove('btn-solid-after');
-                    joinType3.classList.add('btn-outline-custom');
-                }
-            }
-
-            joinType2.classList.remove('btn-outline-custom');
-            joinType2.classList.add('btn-solid-after');
-        }
-        else{
-            joinType2.classList.remove('btn-solid-after');
-            joinType2.classList.add('btn-outline-custom');
-        }
-    })
-}
-
-const payType = document.getElementsByClassName('payType');
-for(let payType2 of payType){
-    payType2.addEventListener('click', function(){
-        if(payType2.classList.contains('btn-outline-custom')){
-            for(let payType3 of payType){
-                if(payType3.classList.contains('btn-solid-after')){
-                    payType3.classList.remove('btn-solid-after');
-                    payType3.classList.add('btn-outline-custom');
-                }
-            }
-
-            payType2.classList.remove('btn-outline-custom');
-            payType2.classList.add('btn-solid-after');
-        }
-        else{
-            payType2.classList.remove('btn-solid-after');
-            payType2.classList.add('btn-outline-custom');
-        }
-    })
-}
-
-
-
 }); 
 
 
@@ -115,6 +17,14 @@ $('.optionArea').on('click', 'li[name="colorCode"], label.capacity', function() 
     // li[name="colorCode"]를 클릭한 경우 처리 - 여기서 directCode를 만들어서 내보내기
     let colorCode = $(this).attr('value');
     $('#colorCode').val(colorCode);
+    $('#saveCapacity').val('');
+    $('#directCode').val('');
+    $('#directStock').val('');
+    $('#out_phonePayPrice').text('');
+    $('#out_planPrice').text('');
+    $('#totalPrice').text('');
+    $('input[name=saveCapacity]').prop('checked', false);
+    $('input[name=saveCapacity]').next('label').removeClass('btn-solid-after').addClass('btn-outline-custom');
   } else if ($(this).is('label.capacity')) {
     // label.capacity를 클릭한 경우 처리 - 여기서 directCode를 만들어서 내보내기
     let saveCapacity = $(this).prev('input[name="saveCapacity"]').val();
@@ -130,7 +40,7 @@ $('.optionArea').on('click', 'li[name="colorCode"], label.capacity', function() 
 
   //색상이 선택된 경우, 용량의 존재여부를 체크해서 버튼 disabled
   if (selColor != null) {
-      updateCapacityOptions(selColor);
+    updateCapacityOptions(selColor);
   }
 
   //색상, 용량이 빈값이 아니면 다이렉트 코드 조합.
@@ -141,24 +51,20 @@ $('.optionArea').on('click', 'li[name="colorCode"], label.capacity', function() 
     let slicedCode = firstDiv.substring(11);
     let madeCode = category+brand+"C"+selColor+"V"+selCapacity+slicedCode;
 
-    //반복문으로 조합된 directCode와 id값이 일치하는 .titlebox 찾기 및 data-selected 값 설정
-    $('.titlebox').each(function(){
-    let directCode = $(this).attr('id');
-    console.log("directCode: ", directCode);
-      
-    //재고 체크
-    let directStock = $('#item_'+directCode).attr('data-direct-stock');
-    chkStock = isEmpty(directStock);
-    console.log(chkStock);
-    console.log("directStock: ", directStock);
-
     //값 초기화
     $('#directStock').val('');
     $('#directCode').val('');
 
-      if(directCode === madeCode){
-        //일치
-        console.log("madeCode: ", madeCode);
+    //반복문으로 조합된 directCode와 id값이 일치하는 .titlebox 찾기 및 data-selected 값 설정
+    $('.titlebox').each(function(){
+    let directCode = $(this).attr('id');
+      
+    //선택한 물건과 다이렉트 코드가 일치하는 것을 찾기, 찾으면 반복 멈춤
+    if(directCode === madeCode){
+        //재고 체크
+        let directStock = $('#item_'+directCode).attr('data-direct-stock');
+        chkStock = isEmpty(directStock);
+
         //일치하는 directCode를 찾았으므로, 여기서 div 태그의 data-selected 속성을 바꿔준다.
         $('.titlebox').attr("data-selected", 0);
         $(this).attr("data-selected", 1);
@@ -168,35 +74,138 @@ $('.optionArea').on('click', 'li[name="colorCode"], label.capacity', function() 
 
         if(directStock != 0){
           //재고 있으면 directCode, directStock 값 넣어주기
+          $('#saveCapacity').val(selCapacity);
           $('#directStock').val(directStock);
           $('#directCode').val(directCode); // directCode 값을 설정
         }else{
-          //재고 없으면 용량선택 옵션 해제 및 인접 label tag의 css 해제
+          //재고 없으면 용량선택 옵션 해제 및 인접 label tag의 css 해제 + saveCapaicty 값 해제
           $('input[name=saveCapacity]').prop('checked', false);
           $('input[name=saveCapacity]').next('label').removeClass('btn-solid-after').addClass('btn-outline-custom');
-          //값 초기화
-          //$('#directStock').val('');
-          //$('#directCode').val('');
+          $('#saveCapacity').val('');
         }
 
         return false;
       }else{
-        //일치하지 않는 경우, 
+        //일치하는 코드가 없는 경우
         $('#directStock').val('');
         $('#directCode').val('');
-        // $('input[name=saveCapacity]').prop('checked', false);
-        // $('input[name=saveCapacity]').next('label').removeClass('btn-solid-after').addClass('btn-outline-custom');
+        $('#saveCapacity').val('');
       }
 
-      // if(chkStock){
-      //   console.log('재고 있어여!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
-      // }
-
-
     })
+    //titlebox directCode와 madeCode가 일치하는 것 찾는 반복문 종료
+
+    //월 요금계산 이벤트 강제 실행
+    $('#directCode').trigger('change');
   }
 });
 //색상옵션을 선택하거나, 용량옵션을 선택한 경우 이벤트 끝
+
+
+//월 요금계산 준비
+$('#directCode, input[name="disKind"], input[name="planNum"]').on('change', function() {
+  
+  //영수증 가격 출력
+  let directCode = $('#directCode').val(); // 기기코드
+  let saveCapacity = $('#saveCapacity').val();
+  let planNum = $('input[name=planNum]:checked').val(); // 요금제번호
+  let disKind = $('input[name=disKind]:checked').val(); // 할인유형
+
+  directCheck = isEmpty(directCode);
+  planCheck = isEmpty(planNum);
+  disKindCheck = isEmpty(disKind);
+  
+  $('#out_phonePayPrice').text('');
+  $('#out_planPrice').text('');
+  $('#totalPrice').text('');
+
+  if(directCheck == true && planCheck == true && disKindCheck == true){
+      //모든 값이 다 들어왔을 때 ajax 요청
+      //responseBody에 담겨져 응답 돌아옴
+      $.ajax({
+          type: 'GET',
+          url: './calMonthlyPay',
+          dataType: 'JSON',
+          data: {
+              directCode: directCode,
+              disKind: disKind,
+              planNum: planNum
+          },
+          success: function(response) {
+      let out_phonePayPrice = response.out_phonePayPrice;
+              let out_planPrice = response.out_planPrice;
+              let totalPrice = (response.out_phonePayPrice*1 + response.out_planPrice*1);
+              $('#out_phonePayPrice').text('');
+              $('#out_planPrice').text('');
+              $('#totalPrice').text('');
+              $('#out_phonePayPrice').text(out_phonePayPrice.toLocaleString());
+              $('#out_planPrice').text(out_planPrice.toLocaleString());
+              $('#totalPrice').text(totalPrice.toLocaleString());
+              
+          },
+          error: function(error) {
+              // 에러 처리 로직 작성
+              console.log(error);
+          }
+      });
+      
+  }
+});
+
+
+
+
+  
+//가입하기 버튼 눌렀을 때
+$('#completeForm').click(function(){
+  console.log('가입하기 버튼');
+  //let $frm = $('#appForm').serialize();
+  //alert($frm);
+
+  //가입폼 전송
+  $('#appForm').submit();
+})
+
+
+//계산에 필요한 값이 빈값인지 확인하는 함수
+function isEmpty(value){
+  if(typeof value == "undefined" || value == null || value == '')
+      return false;
+  else
+      return true;
+}
+
+
+// 모달창에서 값을 선택하고 확인 버튼을 클릭했을 때 호출되는 함수
+function onSelectConfirm() {
+  // 선택한 값을 가져오기
+  const selectedValue = document.querySelector('input[name="planNum"]:checked');
+  const planNameLabel = document.querySelector('label[for="' + selectedValue.id + '"]');
+  const planName = planNameLabel.innerText;
+  const planPrice = selectedValue.getAttribute('data-plan-price');
+  const dataGB = selectedValue.getAttribute('data-gb-value');
+  const planNum = selectedValue.getAttribute('value');
+  
+  // 가져온 값을 입력하기
+  setSelectedPlan(planName, planPrice, dataGB, planNum);
+}
+
+
+//모달창에서 선택한 값을 입력하는 함수
+function setSelectedPlan(planName, planPrice, dataGB, planNum) {
+  // 선택한 요금제, 가격, 데이터 정보 가져오기
+  document.getElementById('selectedPlanName').textContent = planName;
+  document.getElementById('planPrice').textContent = planPrice;
+  document.getElementById('planNum').value = planNum;
+  
+  // 데이터 정보 처리
+  const dataGBElement = document.getElementById('dataGB');
+  if (dataGB === '무제한') {
+    dataGBElement.innerText = dataGB + '& 음성통화/문자 기본제공';
+  } else {
+    dataGBElement.innerText = dataGB + 'GB & 음성통화/문자 기본제공';
+  }
+}
 
 
 //색상별 용량 옵션 존재 여부 체크

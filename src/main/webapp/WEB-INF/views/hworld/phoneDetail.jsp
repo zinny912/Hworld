@@ -315,10 +315,10 @@
 													<div class="direct-item" id="item_${direct.directCode}" data-direct-code="${direct.directCode}" data-category-code="${direct.categoryCode}" data-brand-code="${direct.brandCode}" data-sliced-code="${direct.slicedCode}" data-direct-stock="${direct.directStock}" data-direct-price="${direct.directPrice}"></div>
 											</div>
 										</c:forEach>
-											<input type="text" id="colorCode">
-											<input type="text" id="saveCapacity">
-											<input type="text" id="directCode" name="directCode">
-											<input type="text" id="directStock" name="directStock" readonly>
+											<input type="hidden" id="colorCode">
+											<input type="hidden" id="saveCapacity">
+											<input type="hidden" id="directCode" name="directCode">
+											<input type="hidden" id="directStock" name="directStock" readonly>
 											<!-- <input type="hidden" id="categoryCode" name="categoryCode" value="${direct.categoryCode}">
 											<input type="hidden" id="brandCode" name="brandCode" value="${direct.brandCode}">
 											<input type="hidden" id="slicedCode" name="slicedCode" value="${direct.slicedCode}"> -->
@@ -339,7 +339,7 @@
 												<div>
 													<h3 class="option-title mt-3 mb-2">용량</h3>
 												</div>
-											<div>
+											<div id="capacities">
 												<span>
 												  <input type="radio" hidden name="saveCapacity" id="caOption1" value="128">
 												  <label for="saveCapacity" class="btn btn-outline-custom m-1 capacity">
@@ -431,7 +431,7 @@
 												<span class="sub-tit" id="selectedPlanName" style="overflow: hidden; font-size: 22px; font-weight: 700; letter-spacing: -0.5px; 
 												text-overflow: ellipsis;" data-plan-name="" value=""></span>
 												<!-- 체크용 planNum -->
-												<input type="text" id="planNum" name="planNum" value="" >
+												<input type="hidden" id="planNum" name="planNum" value="">
 												<br>
 												<h2 class="main-tit" id="dataDefaultQty" style="margin: 3px 0 3px; font-size: 16px; font-weight: 400; letter-spacing: -0.56px; 
 												padding-right: 100px;"> 데이터 <span id="dataGB"></span> </h2>                                                            
@@ -1336,7 +1336,6 @@
 
 <script src="/assets/js/newDirectCode.js"></script>
 <script src="/assets/js/updateReview.js"></script>
-<script src="/assets/js/phoneDetailPay.js"></script>
     <!-- 버튼 select js -->
         
 <!--  하단 금액 바 고정하는 JS -->
@@ -1352,7 +1351,7 @@
   }
 });
 </script>
- <script>
+<script>
   // 후기 작성 버튼 클릭 시 모달 창이 열릴 때 실행되는 함수
   $('#addReview').on('show.bs.modal', function (event) {
     const directName = $('.directNameValue').data('direct-name'); // 해당 후기 작성 버튼에 연결된 제품의 directName 값을 가져옴
@@ -1375,6 +1374,69 @@
 	  $(this).find('#modalQnaNum').val(qnaNum);
 	  $(this).find('#modelQnaContents').val(qnaContents);
 	});
+</script>
+<script>
+const capacity = document.getElementsByClassName('capacity');
+for(let capacity2 of capacity){
+    capacity2.addEventListener('click', function(){
+        if(capacity2.classList.contains('btn-outline-custom')){
+            for(let capacity3 of capacity){
+                if(capacity3.classList.contains('btn-solid-after')){
+                    capacity3.classList.remove('btn-solid-after');
+                    capacity3.classList.add('btn-outline-custom');
+                }
+            }
+            capacity2.classList.remove('btn-outline-custom');
+            capacity2.classList.add('btn-solid-after');
+        }
+        else{
+            capacity2.classList.remove('btn-solid-after');
+            capacity2.classList.add('btn-outline-custom');
+        }
+    })
+}
+
+const joinType = document.getElementsByClassName('joinType');
+for(let joinType2 of joinType){
+    joinType2.addEventListener('click', function(){
+        if(joinType2.classList.contains('btn-outline-custom')){
+            for(let joinType3 of joinType){
+                if(joinType3.classList.contains('btn-solid-after')){
+                    joinType3.classList.remove('btn-solid-after');
+                    joinType3.classList.add('btn-outline-custom');
+                }
+            }
+
+            joinType2.classList.remove('btn-outline-custom');
+            joinType2.classList.add('btn-solid-after');
+        }
+        else{
+            joinType2.classList.remove('btn-solid-after');
+            joinType2.classList.add('btn-outline-custom');
+        }
+    })
+}
+
+const payType = document.getElementsByClassName('payType');
+for(let payType2 of payType){
+    payType2.addEventListener('click', function(){
+        if(payType2.classList.contains('btn-outline-custom')){
+            for(let payType3 of payType){
+                if(payType3.classList.contains('btn-solid-after')){
+                    payType3.classList.remove('btn-solid-after');
+                    payType3.classList.add('btn-outline-custom');
+                }
+            }
+
+            payType2.classList.remove('btn-outline-custom');
+            payType2.classList.add('btn-solid-after');
+        }
+        else{
+            payType2.classList.remove('btn-solid-after');
+            payType2.classList.add('btn-outline-custom');
+        }
+    })
+}
 </script>
 
 
