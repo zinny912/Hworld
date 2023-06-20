@@ -292,7 +292,7 @@
 											                <div class="product-buttons justify-content-center">
 											                    <!-- 가입자 본인인증 모달 버튼 요금제변경 start -->
 											                    <c:choose>
-											                        <c:when test="${kingNum.planNum eq planVO.planNum}">
+											                        <c:when test="${bfPlan.planNum eq planVO.planNum}">
 											                            <a type="button" class="btn btn-solid hover-solid btn-animation rounded-3 btn-disabled">
 											                                <span>이미 사용중인 요금제입니다.</span>
 											                            </a>
@@ -300,17 +300,22 @@
 											                        <c:otherwise>
 											                            <c:choose>
 											                                <c:when test="${memberVO.ownCheck == 0}">
-											                                    <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view"
-											                                        class="btn btn-solid hover-solid btn-animation rounded-3 btn-disabled">
-											                                        <span>요금제 변경</span>
-											                                    </a>
-											                                    <a href="javascript:void(0)" data-bs-toggle="modal" id="changeTelecoms"
-											                                        data-bs-target="#changeTelecom"
-											                                        class="btn btn-solid hover-solid btn-animation rounded-3">
-											                                        <span>번호이동</span>
-											                                    </a>
-											                                </c:when>
+																                <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view"
+																                    class="btn btn-solid hover-solid btn-animation rounded-3 btn-disabled">
+																                    <span>요금제 변경</span>
+																                </a>
+																                <a href="javascript:void(0)" data-bs-toggle="modal" id="changeTelecoms"
+																                    data-bs-target="#changeTelecom"
+																                    class="btn btn-solid hover-solid btn-animation rounded-3">
+																                    <span>번호이동</span>
+																                </a>
+																            </c:when>
 											                                <c:otherwise>
+											                                	<c:if test="${ok == 0}">
+											                                	<a class="btn btn-outline-danger rounded-3 theme-color btn-disabled">
+																                    <span >요금제 변경일 1개월 이내에는 요금제 변경이 불가합니다.</span></a>
+																                </c:if>
+																                <c:if test="${ok == 1}">
 											                                    <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view"
 											                                        class="btn btn-solid hover-solid btn-animation rounded-3">
 											                                        <span>요금제 변경</span>
@@ -320,7 +325,9 @@
 											                                        class="btn btn-solid hover-solid btn-animation rounded-3 btn-disabled">
 											                                        <span>번호이동</span>
 											                                    </a>
+											                                    </c:if>
 											                                </c:otherwise>
+											                               
 											                            </c:choose>
 											                        </c:otherwise>
 											                    </c:choose>
@@ -554,12 +561,12 @@
                                                     <div class="row" >
                                                         <div class="form-check custome-radio-box">
                                                             <input class="form-check-input mx-2" type="radio" name="disKind" id="discount2" value="2">
-                                                            <label class="form-check-label d-flex" for="paypal">24개월 할인  
+                                                            <label class="form-check-label d-flex" for="discount2">24개월 할인  
                                                                 <span class="justify-content-end" style="margin-left:150px;">총</span>- <span class="fs-4" id="dis2" style="margin-top:-10px;"></span> <span>원</span> </label>
                                                         </div> 
                                                         <div class="form-check custome-radio-box">
                                                             <input class="form-check-input mx-2" type="radio" name="disKind" id="discount1" value="1">
-                                                            <label class="form-check-label d-flex" for="paypal">12개월 할인 
+                                                            <label class="form-check-label d-flex" for="discount1">12개월 할인 
                                                                 <span class="justify-content-end " style="margin-left:153px;">총</span>- <span class="fs-4" id="dis1" style="margin-top:-10px; "></span> <span>원</span> </label> 
                                                         </div> 
                                                     </div>   

@@ -1,6 +1,7 @@
 package com.hworld.base.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -44,6 +45,9 @@ public interface PlanDAO {
     
     //요금제 변경 페이지에서 이전 요금제 정보 불러오기
     public PlanVO getBeforePlan(Integer memberNum) throws Exception;
+    
+    //요금제 변경 페이지에서 요금제 변경일 체크 
+    public BillVO getCheckPlanChange(BillVO billVO) throws Exception;
     
     //요금제 변경 후 청구내역 변경되는 프로시저 호출
     public int setPlanChange(BillVO billVO) throws Exception;

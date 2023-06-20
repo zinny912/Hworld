@@ -81,30 +81,37 @@ public class PlanController {
 	}
 	//요금제 상세페이지
 	@GetMapping("planDetail")
-	public ModelAndView getDetail(PlanVO planVO, HttpSession session) throws Exception {
+	public ModelAndView getDetail(PlanVO planVO, HttpSession session, BillVO billVO) throws Exception {
 		ModelAndView mv = new ModelAndView();
-		PlanVO plan = planService.getDetail(planVO);
-		PlanVO note = planService.getNoteName(planVO);
-		List<PlanVO> recommend = planService.recommendPlan(planVO);
+		PlanVO plan = planService.getDetail(planVO); //페이지에 필요한 요금제 정보
+		PlanVO note = planService.getNoteName(planVO);// 페이지 요금제 공통코드에 있는 NOTE 명 
+		
+		List<PlanVO> recommend = planService.recommendPlan(planVO); // 추천상품 
 		MemberVO memberVO = (MemberVO) session.getAttribute("memberVO");
-
 		Integer memberNum = memberVO.getMemberNum();
+		log.error("{}<=======",memberNum);
 		
 		
-		PlanVO kingNum = planService.getKingPlanNum(memberNum);
-		if(kingNum==null) {
-			mv.addObject("planNote", note);
-	        mv.addObject("planVO", plan);
-	        mv.addObject("recommend", recommend);
-	        mv.setViewName("hworld/planDetail");
-		} else {
-			mv.addObject("kingNum", kingNum);
-	        mv.addObject("planNote", note);
-	        mv.addObject("planVO", plan);
-	        mv.addObject("recommend", recommend);
-	        mv.setViewName("hworld/planDetail");
-	    }
+		PlanVO bfPlan = planService.getBeforePlan(memberNum);
+		//log.error("{}<========",bfPlan.getSerialNum());
+		if(bfPlan!=null && bfPlan.getSerialNum()!=null) {
+		billVO.setSerialNum(bfPlan.getSerialNum());
+		planService.getCheckPlanChange(billVO);
 		
+		log.error("{}<===========",billVO.getResult());
+		int changeOk=billVO.getResult();
+		
+		mv.addObject("ok", changeOk);
+		
+		}
+		
+		mv.addObject("bfPlan", bfPlan);
+		
+		mv.addObject("planNote", note);
+        mv.addObject("planVO", plan);
+        mv.addObject("recommend", recommend);
+        
+        mv.setViewName("hworld/planDetail");
 		return mv;
 	}
 	//요금제 추가 및 수정 시 필요한 공통코드 테이블 데이터 
@@ -145,6 +152,8 @@ public class PlanController {
 		planVO.setPlanNum(planNum);		
 		planVO=planService.getDetail(planVO);
 		
+		
+		
 		if(result==1) {
 			String message="확인이 완료되었습니다.";
 			mv.addObject("url","./planChange");
@@ -184,11 +193,9 @@ public class PlanController {
 
 		MemberVO sessionMember = (MemberVO)session.getAttribute("memberVO");
 		memberNum = sessionMember.getMemberNum();
-		
-		int changePossible=billVO.getResult();
-		
+
 		PlanVO phoneNum = planService.getBeforePlan(memberNum);
-		mv.addObject("days", changePossible);
+		
 		mv.addObject("phoneNum", phoneNum);
 		mv.setViewName("hworld/planResult");
 		

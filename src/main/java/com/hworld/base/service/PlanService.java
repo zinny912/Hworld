@@ -76,6 +76,12 @@ public class PlanService {
             return 0;
         }
     }
+	//요금제 변경 > 요금제 변경일 체크 프로시저 호출
+	public BillVO getCheckPlanChange(BillVO billVO) throws Exception{
+		return planDAO.getCheckPlanChange(billVO);
+	}
+	
+	
 	//요금제 변경 > 청구내역 업데이트 프로시저 호출
 	public int setPlanChange(BillVO billVO) throws Exception{
 		return planDAO.setPlanChange(billVO);
