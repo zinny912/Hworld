@@ -30,6 +30,8 @@ public class MemberVO {
 	private Integer adminCheck;
 	private String tel;
 	private Integer ownCheck;
+	
+	//
 	private List<TelephoneVO> telephoneVOs;
 	
 }

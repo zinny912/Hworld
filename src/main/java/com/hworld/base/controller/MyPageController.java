@@ -1,6 +1,9 @@
 package com.hworld.base.controller;
 
 
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -14,6 +17,8 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hworld.base.service.MyPageService;
+import com.hworld.base.util.Pager;
+import com.hworld.base.vo.BillVO;
 import com.hworld.base.vo.MemberVO;
 
 import lombok.extern.slf4j.Slf4j;
@@ -32,27 +37,35 @@ public class MyPageController {
 	//마이 페이지 홈
 	//필요한 정보들을 미리 다 뿌려둬야 jsp에서 사용가능할듯 함
 	@GetMapping("home")
-	public ModelAndView myPage() throws Exception{
-		ModelAndView modelAndView = new ModelAndView();
+	public ModelAndView myPage(Pager pager, HttpSession session) throws Exception{
+		ModelAndView mv = new ModelAndView();
 		
 		//기능
-		//요금 청구/납부 - 납부내역, 미납내역, 대표회선정보를 나타내야함
+		////요금 청구/납부 - 납부내역, 미납내역, 대표회선정보를 나타내야함
+		//납부/미납 리스트
+		List<BillVO> billList = myPageService.getPMDList(pager, session);
 		
+		//대표회선 정보
+		Map<String, Object> kingNumInfo = myPageService.getKingDetail(session);
 		
-		//가입 정보
+		////가입 정보
 		
-		//회선 관리
+		////회선 관리
 		
-		//주문 내역
+		////주문 내역
 		
-		//문의 내역
+		////문의 내역
 		
-		//구매 후기
+		////구매 후기
 		
-		//회원 탈퇴
+		////회원 탈퇴
 		
-		modelAndView.setViewName("hworld/myPage");
-		return modelAndView;
+		//정보 담기
+		mv.addObject("billList", billList);
+		mv.addObject("kingVO", kingNumInfo);
+		
+		mv.setViewName("hworld/myPage");
+		return mv;
 	}
 	
 	
@@ -66,6 +79,28 @@ public class MyPageController {
 	}
 	
 	
+	//비밀번호 변경 - db 입력
+	@PostMapping("updatePw")
+	public ModelAndView setPasswordUpdate(MemberVO memberVO, HttpSession session) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		int result = myPageService.setPasswordUpdate(memberVO, session);
+		
+		mv.setViewName("redirect:./home");
+		return mv;
+	}
+		
+	
+	//정보 변경 - db 입력
+	@PostMapping("updateInfo")
+	public ModelAndView setMemberUpdate(MemberVO memberVO, HttpSession session) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		int result = myPageService.setMemberUpdate(memberVO, session);
+
+		mv.setViewName("redirect:./home");
+		return mv;
+	}
 	
 	
 	
