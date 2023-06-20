@@ -79,6 +79,18 @@ public class MyPageController {
 	}
 	
 	
+	//납부 전체 보기 페이지
+	@PostMapping("instantPay")
+	public ModelAndView setPaymentAdd2(HttpSession session) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		
+		return mv;
+	}
+	
+	
+	
+	
 	//비밀번호 변경 - db 입력
 	@PostMapping("updatePw")
 	public ModelAndView setPasswordUpdate(MemberVO memberVO, HttpSession session) throws Exception{
@@ -103,63 +115,7 @@ public class MyPageController {
 	}
 	
 	
+
 	
-	// 가입 정보 변경(Post)
-//	@PostMapping("myPage")
-//	public ModelAndView memberUpdate(MemberVO memberVO) throws Exception {
-//		
-//		ModelAndView modelAndView = new ModelAndView();
-//				
-//		int result = myPageService.memberUpdate(memberVO);		
-//		
-//		modelAndView.setViewName("hworld/myPage");
-//				
-//		return modelAndView;
-//	}
-	
-//	@PostMapping("/myPage")
-//	public String pwUpdate(HttpServletRequest request, RedirectAttributes redirectAttributes,Model model,HttpSession session,
-//	        MemberVO memberVO) {
-//	    
-//	    try {
-//	        myPageService.pwUpdate(memberVO);
-//	        redirectAttributes.addFlashAttribute("msg", "수정하였습니다.");
-//	        
-//	    } catch (Exception e) {
-//	        System.out.println(e.toString());
-//	        redirectAttributes.addFlashAttribute("msg", "오류가 발생되었습니다.");
-//	    }
-//	    
-//	    return "redirect:/myPage";
-//	}
-	
-//	@PostMapping("/myPage")
-//	public ModelAndView pwUpdate(MemberVO memberVO) throws Exception {
-//		
-//		ModelAndView modelAndView = new ModelAndView();
-//		
-//		String newPw = ""; // 인코딩 전 비밀번호
-//		String encodePw = ""; // 인코딩 후 비밀번호
-//		
-//		newPw = memberVO.getPw(); // 비밀번호 데이터 얻음
-//		encodePw = pwEncoder.encode(newPw); // 비밀번호 인코딩
-//		memberVO.setPw(encodePw); // 인코딩 된 비밀번호 member 객체에 다시 저장	
-//		
-//		int result = myPageService.pwUpdate(memberVO);
-//		
-//		
-//		
-//		return modelAndView;
-//		
-//	}
-	
-//	@PostMapping("/myPage")
-//	public String pwUpdate(MemberVO memberVO){
-//		int result = myPageService.pwUpdate(memberVO);
-//		if(result==1) {
-//			return "redirect:/myPage";
-//		}
-//		return "redirect:/myPage";
-//	}
 	
 }
