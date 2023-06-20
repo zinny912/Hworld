@@ -33,8 +33,14 @@ public class ReviewVO {
     private String slicedCode;
 
     private String categoryCode;
-    //private List<MemberVO>memberVOs;
+    
+    private List<MemberVO> memberVOs;
+    
     private List<OrderVO> orderVOs;
+    
+    private List<OrderDirectVO> orderDirectVOs;
+    
+    private List<DirectVO> directVOs;
     
     
     

@@ -39,33 +39,23 @@
                                             <table class="table table-striped all-package">
                                                 <thead>
                                                     <tr>
-                                                        <th><b>No.</b> <i class="fa fa-fw fa-sort"></i></th>
-                                                        <th><b>고객번호</b> <i class="fa fa-fw fa-sort"></i></th>
-                                                        <th><b>미납 월</b> <i class="fa fa-fw fa-sort"></i></th>
-                                                        <th><b>미납 금액</b> <i class="fa fa-fw fa-sort"></i></th>
-                                                        <th><b>납부 유무</b> <i class="fa fa-fw fa-sort"></i></th>
+                                                        <th><b>미납번호</b> <!-- <i class="fa fa-fw fa-sort"></i> --></th>
+                                                        <th><b>회원번호</b> <!-- <i class="fa fa-fw fa-sort"></i> --></th>
+                                                        <th><b>미납 월</b> <!-- <i class="fa fa-fw fa-sort"></i> --></th>
+                                                        <th><b>미납금액</b> <!-- <i class="fa fa-fw fa-sort"></i> --></th>
+                                                        <th><b>납부유무</b> <!-- <i class="fa fa-fw fa-sort"></i> --></th>
 
                                                     </tr>
                                                 </thead>
 
                                                 <tbody>
                                                     <tr>
-                                                        <td>1</td>
+                                                        <td><b>1</b></td>
                                                         <td>13213</td>
                                                         <td>2023/05</td>
                                                         <td>302,000원</td>
                                                         <td class="td-cross">
                                                             <span class="lnr lnr-cross-circle"></span>
-                                                        </td>
-                                                    </tr>
-
-                                                    <tr>
-                                                        <td>2</td>
-                                                        <td>13214</td>
-                                                        <td>2023/03</td>
-                                                        <td>120,000원</td>
-                                                        <td class="td-check">
-                                                            <span class="lnr lnr-checkmark-circle"></span>
                                                         </td>
                                                     </tr>
                                                 </tbody>

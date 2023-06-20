@@ -13,6 +13,8 @@
 <body>
    <c:import url="adminHeader.jsp"></c:import>  
 		<c:forEach var="orderVO" items="${orderDetail}">
+		<c:forEach var="orderDirectVOs" items="${orderVO.orderDirectVOs}">
+        <c:forEach var="directVOs" items="${orderVO.directVOs}">
             <!-- tracking section start -->
             <div class="page-body">
                 <div class="title-header title-header-block package-card">
@@ -45,7 +47,7 @@
                                                         <thead>
                                                             <tr>
                                                                 <th colspan="2">상품</th>
-                                                                <th class="text-end" colspan="2">
+                                                                <th class="text-end" colspan="3">
 
                                                                 </th>
                                                             </tr>
@@ -54,66 +56,26 @@
                                                         <tbody>
                                                             <tr class="table-order">
                                                                 <td>
-                                                                    <a href="javascript:void(0)">
+                                                                    <!-- <a href="javascript:void(0)">
                                                                         <img src="/admin/images/profile/1.jpg"
                                                                             class="img-fluid blur-up lazyload" alt="">
-                                                                    </a>
+                                                                    </a> -->
                                                                 </td>
                                                                 <td>
                                                                     <p>제품명</p>
-                                                                    <h5>Outwear & Coats</h5>
+                                                                    <h5>${directVOs.directName}</h5>
                                                                 </td>
                                                                 <td>
                                                                     <p>수량</p>
-                                                                    <h5>1</h5>
+                                                                    <h5>${orderDirectVOs.orderAmount}</h5>
                                                                 </td>
                                                                 <td>
                                                                     <p>가격</p>
-                                                                    <h5>$63.54</h5>
-                                                                </td>
-                                                            </tr>
-
-                                                            <tr class="table-order">
-                                                                <td>
-                                                                    <a href="javascript:void(0)">
-                                                                        <img src="/admin/images/profile/2.jpg"
-                                                                            class="img-fluid blur-up lazyload" alt="">
-                                                                    </a>
+                                                                    <h5>${directVOs.directPrice}</h5>
                                                                 </td>
                                                                 <td>
-                                                                    <p>제품명</p>
-                                                                    <h5>Slim Fit Plastic Coat</h5>
                                                                 </td>
-                                                                <td>
-                                                                    <p>수량</p>
-                                                                    <h5>5</h5>
-                                                                </td>
-                                                                <td>
-                                                                    <p>가격</p>
-                                                                    <h5>$63.54</h5>
-                                                                </td>
-                                                            </tr>
-
-                                                            <tr class="table-order">
-                                                                <td>
-                                                                    <a href="javascript:void(0)">
-                                                                        <img src="/admin/images/profile/3.jpg"
-                                                                            class="img-fluid blur-up lazyload" alt="">
-                                                                    </a>
-                                                                </td>
-                                                                <td>
-                                                                    <p>제품명</p>
-                                                                    <h5>Men's Sweatshirt</h5>
-                                                                </td>
-                                                                <td>
-                                                                    <p>수량</p>
-                                                                    <h5>1</h5>
-                                                                </td>
-                                                                <td>
-                                                                    <p>가격</p>
-                                                                    <h5>$63.54</h5>
-                                                                </td>
-                                                            </tr>
+                                                            </tr>                                                            
                                                         </tbody>
 
                                                         <tfoot>
@@ -153,23 +115,27 @@
                                                     <div class="row g-4">
                                                         <h4>주문 내역</h4>
                                                         <ul class="order-details">
-                                                            <li>주문 번호: 5563853658932</li>
-                                                            <li>주문 날짜: 2023/10/04</li>
-                                                            <li>주문 가격: $907.28</li>
+                                                            <li>주문 번호: ${orderVO.orderNum}</li>
+                                                            <li>
+								                                <fmt:formatDate value="${orderVO.orderDate}" pattern="yyyy/MM/dd" var="formattedDate" />
+								                                <span style="font-weight:400;">주문 날짜: ${formattedDate}</span>
+								                            </li>
+                                                            <li>주문 가격: ${orderVO.orderFinalPrice}</li>
                                                         </ul>
 
                                                         <h4>배송지</h4>
                                                         <ul class="order-details">
-                                                            <li>Gerg Harvell</li>
-                                                            <li>568, Suite Ave.</li>
-                                                            <li>Austrlia, 235153 Contact No. 48465465465</li>
+                                                            <li>(${orderVO.orderAddress1})</li>
+                                                            <li>${orderVO.orderAddress2}</li>
+                                                            <li>${orderVO.orderAddress3}</li>
                                                         </ul>
 
-                                                        <div class="delivery-sec">
-                                                            <h3>예상 배송 날짜<span>2023/10/05</span>
-                                                            </h3>
-                                                            <!-- <a href="order-tracking.html">track order</a> -->
-                                                        </div>
+                                                        <h4>받는이 【연락처】</h4>
+                                                        <ul class="order-details">
+                                                        	<li>${orderVO.orderReceiver} 【 ${orderVO.orderTelNum} 】</li>
+                                                        </ul>
+                                                        
+                                                        
                                                     </div>
                                                 </div>
                                             </div>
@@ -183,6 +149,8 @@
                 </div>
                 <!-- tracking table end -->
             </div>
+        </c:forEach>
+        </c:forEach>
         </c:forEach>
             <!-- tracking section End -->
             

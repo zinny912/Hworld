@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="ko" dir="ltr">
 
@@ -64,7 +65,7 @@
                             <div class="input-group search-bar w-100">                            	
        	                        <form action="./phoneList" method="get">
 	                           		<div class="d-inline-flex input-group search-bar" style="width: 750px">
-		                                <input type="search" name="search" value="${pager.search}" class="form-control" placeholder="Search">
+		                                <input type="search" name="search" value="${pager.search}" class="form-control" placeholder="Search : 회원번호, 이메일, 회선번호">
 		                                <button class="input-group-text" id="basic-addon3" type="submit">
 		                                    <i class="fas fa-search"></i>
 		                                </button>
@@ -85,22 +86,22 @@
                                             <table class="table table-striped all-package">                                                
                                                 <thead>
                                                     <tr>
-                                                    	<th><b>회원번호</b> <i class="fa fa-fw fa-sort"></i></th>
-                                                        <th><b>이메일</b> <i class="fa fa-fw fa-sort"></i></th>
-                                                        <th><b>회선번호</b> <i class="fa fa-fw fa-sort"></i></th>
+                                                    	<th><b>회원번호</b> <!-- <i class="fa fa-fw fa-sort"></i> --></th>
+                                                        <th><b>이메일</b> <!-- <i class="fa fa-fw fa-sort"></i> --></th>
+                                                        <th><b>회선번호</b> <!-- <i class="fa fa-fw fa-sort"></i> --></th>
                                                         <th><b>요금제</b></th>
                                                         <th><b>기기명</b></th>
                                                         <!-- <th><b>통신사</b> <i class="fa fa-fw fa-sort"></i></th> -->
-                                                        <th><b>개통날짜</b> <i class="fa fa-fw fa-sort"></i></th>
-                                                        <th><b>해지날짜</b> <i class="fa fa-fw fa-sort"></i></th>
-                                                        <th><b>상태</b> <i class="fa fa-fw fa-sort"></i></th>
+                                                        <th><b>개통날짜</b> <!-- <i class="fa fa-fw fa-sort"></i> --></th>
+                                                        <th><b>해지날짜</b> <!-- <i class="fa fa-fw fa-sort"></i> --></th>
+                                                        <th><b>상태</b> <!-- <i class="fa fa-fw fa-sort"></i> --></th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                 	<c:forEach var="member" items="${phoneList}">
 														<c:forEach var="telephonVOs" items="${member.telephoneVOs}">
 	                                                    <tr>
-	                                                    	<td>${member.memberNum}</td>
+	                                                    	<td><b>${member.memberNum}</b></td>
 	                                                    	
 	                                                        <td>${member.email}</td>	                                                    	                                                
 	                                                        
@@ -112,9 +113,15 @@
 	
 	                                                        <!-- <td>타회사</td> -->
 	
-	                                                        <td>${telephonVOs.startDate}</td>
+	                                                        <td>
+	                                                        	<fmt:formatDate value="${telephonVOs.startDate}" pattern="yyyy/MM/dd" var="formattedDate" />
+		                                                        <span style="font-weight:400;">${formattedDate}</span>	                                                        
+	                                                        </td>
 																
-	                                                        <td class="font-primary">${telephonVOs.endDate}</td>
+	                                                        <td class="font-primary">
+	                                                        	<fmt:formatDate value="${telephonVOs.endDate}" pattern="yyyy/MM/dd" var="formattedDate" />
+		                                                        <span style="font-weight:400;">${formattedDate}</span>
+	                                                        </td>
 	
 	                                                        <td>
 	                                                        	<c:if test="${member.memberState eq '-1'}">
