@@ -95,18 +95,21 @@
 	                                                        <td><b>${gi.num}</b></td>
 	                                                        
 	                                                        <td>
-	                                                        	<c:if test="${gi.categoryCode eq '01'}">
+	                                                        
+	                                                        	<c:if test="${gi.categoryCode eq '02'}">
 	                                                            	계정문의
 	                                                           	</c:if>	                                                           	
-	                                                           	<c:if test="${gi.categoryCode eq '02'}">
+	                                                           	<c:if test="${gi.categoryCode eq '03'}">
 	                                                            	요금(청구/납부/조회/요금제문의)
 	                                                           	</c:if>
-	                                                           	<c:if test="${gi.categoryCode eq '03'}">
+	                                                           	<c:if test="${gi.categoryCode eq '04'}">
 	                                                            	상품(배송/환불/취소/기타)
 	                                                           	</c:if>
-	                                                           	<c:if test="${gi.categoryCode eq '04'}">
+	                                                           	<c:if test="${gi.categoryCode eq '05'}">
 	                                                            	기타(서류/기타/불만접수)
 	                                                           	</c:if>
+	                                                           	
+	                                                        
 	                                                        </td>
 	                                                        <td>	                                                        
 	                                                            <a href="generalInquiryDetail?num=${gi.num}">${gi.contents}</a>

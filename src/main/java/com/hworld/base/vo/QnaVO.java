@@ -39,5 +39,6 @@ public class QnaVO extends BoardVO{
     private List<MemberVO> memberVOs;
 	private List<OrderVO> orderVOs;
 	private List<DirectVO> directVOs;
+	private List<OrderDirectVO> orderDirectVOs;
 	
 }

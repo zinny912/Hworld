@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.hworld.base.dao.AdminDAO;
 import com.hworld.base.util.Pager;
 import com.hworld.base.vo.ApplicationVO;
+import com.hworld.base.vo.BillVO;
 import com.hworld.base.vo.DirectVO;
 import com.hworld.base.vo.MemberVO;
 import com.hworld.base.vo.OrderVO;
@@ -19,8 +20,11 @@ import com.hworld.base.vo.QnaVO;
 import com.hworld.base.vo.ReviewVO;
 import com.hworld.base.vo.TelephoneVO;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Service
 @Transactional(rollbackFor = Exception.class)
+@Slf4j
 public class AdminService {
 	
 	@Autowired
@@ -71,13 +75,24 @@ public class AdminService {
 		return adminDAO.productReview(pager);
 	}
 	
-//	// 상품 문의
-//	public List<> productInquiry(Pager pager) throws Exception { 
-//		Long totalCount = adminDAO.getTotalPI(pager); 
-//		pager.makeNum(totalCount);
-//		pager.makeStartRow();
-//		return adminDAO.productInquiry(pager);
-//	}
+	// 상품 문의
+	public List<QnaVO> productInquiry(Pager pager) throws Exception { 
+		Long totalCount = adminDAO.getTotalPI(pager); 
+		log.error("====================== TOTAL COUNT : {}", totalCount);
+		pager.makeNum(totalCount);
+		pager.makeStartRow();
+		return adminDAO.productInquiry(pager);
+	}
+	
+	// 상품 문의 상세
+	public List<QnaVO> productInquiryDetail(QnaVO qnaVO) throws Exception { 		 
+		return adminDAO.productInquiryDetail(qnaVO);
+	}
+	
+	// 상품 문의 상세 페이지 - 답변 Update
+	public int productInquiryReply(QnaVO qnaVO) throws Exception {
+		return adminDAO.productInquiryReply(qnaVO);
+	}
 	
 	// 일반 문의
 	public List<QnaVO> generalInquiry(Pager pager) throws Exception { 
@@ -97,27 +112,27 @@ public class AdminService {
 		return adminDAO.generalInquiryReply(qnaVO);
 	}
 	
-//	// 납부 목록
-//	public List<> paymentList(Pager pager) throws Exception { 
-//		Long totalCount = adminDAO.getTotalPL(pager); 
-//		pager.makeNum(totalCount);
-//		pager.makeStartRow(); 
-//		return adminDAO.paymentList(pager);
-//	}
-//	
-//	// 납부 상세 내역
+	// 납부 목록
+	public List<BillVO> paymentList(Pager pager) throws Exception { 
+		Long totalCount = adminDAO.getTotalPL(pager); 
+		pager.makeNum(totalCount);
+		pager.makeStartRow(); 
+		return adminDAO.paymentList(pager);
+	}
+	
+	// 납부 상세 내역
 //	public List<> paymentDetail() throws Exception { 
 //		
 //		return adminDAO.paymentDetail();
 //	}
-//	
-//	// 미납 목록
-//	public List<> unpaidList(Pager pager) throws Exception { 
-//		Long totalCount = adminDAO.getTotalUL(pager); 
-//		pager.makeNum(totalCount);
-//		pager.makeStartRow(); 
-//		return adminDAO.unpaidList(pager);
-//	}
+	
+	// 미납 목록
+	public List<BillVO> unpaidList(Pager pager) throws Exception { 
+		Long totalCount = adminDAO.getTotalUL(pager); 
+		pager.makeNum(totalCount);
+		pager.makeStartRow(); 
+		return adminDAO.unpaidList(pager);
+	}
 	 
 	
 }

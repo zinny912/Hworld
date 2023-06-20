@@ -25,14 +25,14 @@
                                 <div class="col-sm-12">
                                     <div class="card">
                                         <div class="card-body">
-                                        	<form:form cssClass="theme-form theme-form-2 mega-form radio-section" action="./generalInquiry" id="update_btn" method="post" modelAttribute="qnaVO">											
+                                        	<form:form cssClass="theme-form theme-form-2 mega-form radio-section" action="./productInquiry" id="update_btn" method="post" modelAttribute="qnaVO">											
 	                                            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
 	                                                <li class="nav-item" role="presentation">
 	                                                    <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button">문의 내용</button>
 	                                                </li>
 	                                            </ul>
-												<c:forEach var="gid" items="${generalInquiryDetail}">	
-	                                            <c:forEach var="memberVOs" items="${gid.memberVOs}">
+												<c:forEach var="pid" items="${productInquiryDetail}">	
+	                                            <c:forEach var="memberVOs" items="${pid.memberVOs}">
 		                                            <div class="tab-content" id="pills-tabContent">		                                               
 	                                                    <div class="row">
 	                                                        <div class="mb-4 row align-items-center">
@@ -41,23 +41,19 @@
 	                                                        </div>
 	                                                        <div class="mb-4 row align-items-center">
 	                                                            <label class="form-label-title col-lg-2 col-md-3 mb-0">작성날짜</label>
-	                                                            ${gid.regDate}
-	                                                        </div>
-	                                                        <div class="mb-4 row align-items-center">
-	                                                            <label class="form-label-title col-lg-2 col-md-3 mb-0">제목</label>
-	                                                            ${gid.title}
-	                                                        </div>
+	                                                            ${pid.regDate}
+	                                                        </div>	                                                        
 	
 	                                                        <div class="mb-4 row align-items-center">
 	                                                            <label class="col-lg-2 col-md-3 col-form-label form-label-title">내용</label>
-	                                                            ${gid.contents}
+	                                                            ${pid.contents}
 	                                                        </div>
 	
 	                                                        <div class="mb-4 row align-items-center">
 	                                                            <label class="col-lg-2 col-md-3 col-form-label form-label-title">답변</label>
 	                                                            <div class="col-md-9 col-lg-9">
 	                                                                <textarea class="row" rows="14" style = "width: 100%;" id="reply" name="reply"></textarea>
-	                                                                <input id=num name=num type="hidden" value="${gid.num}">
+	                                                                <input id=num name=num type="hidden" value="${pid.num}">
 	                                                            </div>
 	                                                        </div>                                                        
 	                                                    </div>

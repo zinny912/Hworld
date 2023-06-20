@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.hworld.base.service.AdminService;
 import com.hworld.base.util.Pager;
 import com.hworld.base.vo.ApplicationVO;
+import com.hworld.base.vo.BillVO;
 import com.hworld.base.vo.DirectVO;
 import com.hworld.base.vo.MemberVO;
 import com.hworld.base.vo.OrderVO;
@@ -104,9 +105,32 @@ public class AdminController {
 	@GetMapping("productInquiry")
 	public ModelAndView productInquiry(Pager pager) throws Exception{
 		ModelAndView modelAndView = new ModelAndView();
-//		List<> productInquiry = adminService.productInquiry(pager);
-//		modelAndView.addObject("productInquiry", productInquiry);
+		List<QnaVO> productInquiry = adminService.productInquiry(pager);
+		modelAndView.addObject("productInquiry", productInquiry);
 		modelAndView.setViewName("admin/productInquiry");
+		return modelAndView;
+	}
+	
+	// 문의 - 상품 문의 상세 페이지
+	@GetMapping("productInquiryDetail")
+	public ModelAndView productInquiryDetail(QnaVO qnaVO) throws Exception{
+		ModelAndView modelAndView = new ModelAndView();
+		List<QnaVO> productInquiryDetail = adminService.productInquiryDetail(qnaVO);
+		modelAndView.addObject("productInquiryDetail", productInquiryDetail);
+		modelAndView.setViewName("admin/productInquiryDetail");
+		return modelAndView;
+	}
+	
+	// 일반 문의 상세 페이지 - 답변 Update
+	@PostMapping("productInquiry")
+	public ModelAndView productInquiryReply(QnaVO qnaVO) throws Exception {
+		
+		ModelAndView modelAndView = new ModelAndView();
+		
+		int result = adminService.productInquiryReply(qnaVO);		
+		
+		modelAndView.setViewName("redirect:./productInquiry");
+				
 		return modelAndView;
 	}
 	
@@ -131,14 +155,14 @@ public class AdminController {
 	}
 	
 	// 일반 문의 상세 페이지 - 답변 Update
-	@PostMapping("generalInquiryDetail")
+	@PostMapping("generalInquiry")
 	public ModelAndView generalInquiryReply(QnaVO qnaVO) throws Exception {
 		
 		ModelAndView modelAndView = new ModelAndView();
 		
 		int result = adminService.generalInquiryReply(qnaVO);		
 		
-		modelAndView.setViewName("admin/generalInquiry");
+		modelAndView.setViewName("redirect:./generalInquiry");
 				
 		return modelAndView;
 	}
@@ -147,8 +171,8 @@ public class AdminController {
 	@GetMapping("paymentList")
 	public ModelAndView paymentList(Pager pager) throws Exception{
 		ModelAndView modelAndView = new ModelAndView();
-//		List<> paymentList = adminService.paymentList(pager);
-//		modelAndView.addObject("paymentList", paymentList);
+		List<BillVO> paymentList = adminService.paymentList(pager);
+		modelAndView.addObject("paymentList", paymentList);
 		modelAndView.setViewName("admin/paymentList");
 		return modelAndView;
 	}
@@ -165,7 +189,7 @@ public class AdminController {
 	@GetMapping("unpaidList")
 	public ModelAndView unpaidList(Pager pager) throws Exception{
 		ModelAndView modelAndView = new ModelAndView();
-//		List<> unpaidList = adminService.unpaidList(pager);
+//		List<BillVO> unpaidList = adminService.unpaidList(pager);
 //		modelAndView.addObject("unpaidList", unpaidList);
 		modelAndView.setViewName("admin/unpaidList");
 		return modelAndView;

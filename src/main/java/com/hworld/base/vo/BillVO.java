@@ -1,6 +1,7 @@
 package com.hworld.base.vo;
 
 import java.sql.Date;
+import java.util.List;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -38,4 +39,5 @@ public class BillVO {
 	//요금제 변경일자 30일 체크
 	private Integer result;
 	
+	private List<TelephoneVO> telephoneVOs;
 }
