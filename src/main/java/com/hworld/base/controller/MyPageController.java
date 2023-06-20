@@ -81,7 +81,7 @@ public class MyPageController {
 	
 	//납부 전체 보기 페이지
 	@PostMapping("instantPay")
-	public ModelAndView setPaymentAdd(HttpSession session) throws Exception{
+	public ModelAndView setPaymentAdd2(HttpSession session) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		
 		
