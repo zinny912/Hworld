@@ -152,7 +152,7 @@
 										<input type="text" class="directCode" name="directCode" value="${cart.directCode}" hidden="">
 										<input type="text" class="directName" name="directName" value="${cart.directName}" hidden="">
 										<input type="text" class="directPrice" name="directPrice" value="${cart.directPrice}" hidden="">
-										<input type="text" class="calPrice" name="calPrice"value="${cart.directPrice}" hidden="">
+										<input type="text" class="calPrice" name="calPrice"value="${cart.directPrice * cart.cartAmount}" hidden="">
 
                                         
                                 
