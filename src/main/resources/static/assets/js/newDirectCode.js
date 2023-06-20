@@ -7,12 +7,13 @@ $(document).ready(function() {
 
 
 //초기값 준비
-const selectedOptions = getSelectedOptions();
-let initialColorCode = selectedOptions.colorCode;
+// const selectedOptions = getSelectedOptions();
+// let initialColorCode = selectedOptions.colorCode;
+// console.log("initialColorCode: ", initialColorCode);
 
-if (initialColorCode != null) {
-  updateCapacityOptions(initialColorCode); // 초기 선택한 색상에 대한 용량 옵션 업데이트
-}
+// if (initialColorCode != null) {
+//   updateCapacityOptions(initialColorCode); // 초기 선택한 색상에 대한 용량 옵션 업데이트
+// }
 
 
 // 일치하는 directCode를 가진 titlebox를 표시하고 나머지는 숨김
@@ -151,6 +152,10 @@ $('.optionArea').on('click', 'li[name="colorCode"], label.capacity', function() 
     console.log(chkStock);
     console.log("directStock: ", directStock);
 
+    //값 초기화
+    $('#directStock').val('');
+    $('#directCode').val('');
+
       if(directCode === madeCode){
         //일치
         console.log("madeCode: ", madeCode);
@@ -161,7 +166,6 @@ $('.optionArea').on('click', 'li[name="colorCode"], label.capacity', function() 
         $('.titlebox[data-selected=0]').hide();
         $('.titlebox[data-selected=1]').show();
 
-
         if(directStock != 0){
           //재고 있으면 directCode, directStock 값 넣어주기
           $('#directStock').val(directStock);
@@ -171,22 +175,22 @@ $('.optionArea').on('click', 'li[name="colorCode"], label.capacity', function() 
           $('input[name=saveCapacity]').prop('checked', false);
           $('input[name=saveCapacity]').next('label').removeClass('btn-solid-after').addClass('btn-outline-custom');
           //값 초기화
-          $('#directStock').val('');
-          $('#directCode').val('');
+          //$('#directStock').val('');
+          //$('#directCode').val('');
         }
 
         return false;
       }else{
         //일치하지 않는 경우, 
-        // $('#directStock').val('');
-        // $('#directCode').val('');
+        $('#directStock').val('');
+        $('#directCode').val('');
         // $('input[name=saveCapacity]').prop('checked', false);
         // $('input[name=saveCapacity]').next('label').removeClass('btn-solid-after').addClass('btn-outline-custom');
       }
 
-      if(chkStock){
-        console.log('재고 있어여!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
-      }
+      // if(chkStock){
+      //   console.log('재고 있어여!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+      // }
 
 
     })
