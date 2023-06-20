@@ -20,16 +20,13 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.hworld.base.vo.DirectVO" alias="DirectVO"/>
 		<typeAlias type="com.hworld.base.vo.PlanVO" alias="PlanVO"/>
 		<typeAlias type="com.hworld.base.vo.EPlanVO" alias="EPlanVO"/>
+		
 		<typeAlias type="com.hworld.base.vo.ReviewVO" alias="ReviewVO"/>
 		<typeAlias type="com.hworld.base.vo.OrderVO" alias="OrderVO"/>
 		<typeAlias type="com.hworld.base.vo.OrderDirectVO" alias="OrderDirectVO"/>
 		<typeAlias type="com.hworld.base.vo.CartVO" alias="CartVO"/>
 		<typeAlias type="com.hworld.base.vo.BaseVO" alias="BaseVO"/>
-		
-		<!-- 
-		<typeAlias type="com.hworld.base.vo.CartVO" alias="CartVO"/>
-		<typeAlias type="com.hworld.base.vo.OrderVO " alias="OrderVO"/>
-		<typeAlias type="com.hworld.base.vo.OrderDirectVO" alias="OrderDirectVO"/>-->
+		<typeAlias type="com.hworld.base.vo.PayVO" alias="PayVO"/>
 		
 		<!-- Telephone -->
 		<typeAlias type="com.hworld.base.vo.TelephoneVO" alias="TelephoneVO"/>
@@ -38,6 +35,9 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.hworld.base.vo.BoardVO" alias="BoardVO"/>
 		<typeAlias type="com.hworld.base.vo.NoticeVO" alias="NoticeVO"/>
 		<typeAlias type="com.hworld.base.vo.QnaVO" alias="QnaVO"/>
+		
+		<!-- Payment -->
+		<typeAlias type="com.hworld.base.vo.BillVO" alias="BillVO"/>
 		
 	</typeAliases>
 </configuration>

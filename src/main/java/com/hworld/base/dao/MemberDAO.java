@@ -19,6 +19,7 @@ public interface MemberDAO {
 	
 	public int setMemberInitUpdate(MemberVO memberVO) throws Exception;
 	
+	//
 	public MemberVO emailCheck(MemberVO memberVO) throws Exception;
 	
 	public int memberPwCheck(MemberVO memberVO) throws Exception;

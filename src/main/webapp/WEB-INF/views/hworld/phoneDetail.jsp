@@ -92,6 +92,11 @@
   color: #ffa202;
 }
 
+.btn-disabled {
+        pointer-events: none;
+        opacity: 0.3;
+        cursor: not-allowed;
+    }
 
 
      .btn-solid-after {
@@ -115,6 +120,104 @@
         background-color: #e22454; 
         color: #fff; 
     }
+    
+.price-opt {
+	position: relative; 
+	padding-top: 28px; 
+	min-width: 113px; 
+	height: 38px; 
+	line-height: normal; 
+	display: inline-block; 
+	vertical-align: middle; 
+	margin: 0; 
+	padding: 0; 
+	margin-block-start: 1em; 
+	margin-block-end: 1em; 
+	margin-inline-start: 0px; 
+	margin-inline-end: 0px;
+}    
+ .price-opt .title{
+ 	position: absolute; 
+ 	bottom: 3px; 
+ 	left: 0; 
+ 	color: #cdcdcd; 
+ 	font-size: 14px; 
+ 	white-space: nowrap;
+ }
+   
+  .price-opt .num{
+  	font-family: TgothicBlack, Roboto, sans-serif; 
+  	letter-spacing: 0; 
+  	font-size: 26px; 
+  	letter-spacing: -1px; 
+  	color: #fff; 
+  	font-weight: 700;
+  
+  } 
+ .price-opt .unit{
+ 	color: #fff; 
+ 	font-size: 16px;
+ }	
+
+ .ico-plus{
+	 font-weight: bolder; 
+	 font-size: 20px; 
+	 color: white; 
+	 width: 20px; 
+	 height: 20px; 
+	 background-position: -446px -546px; 
+	 margin: -10px 28px 0 18px; 
+	 display: inline-block; 
+	 vertical-align: middle; 
+	 overflow: hidden; 
+	 display: inline-block; 
+	 background-image: url(../img/spr_img_v3.png); 
+	 background-repeat: no-repeat;
+ }
+                              
+.ico-equal{
+	font-weight: bolder; 
+	font-size: 20px; 
+	color: white; 
+	width: 20px; 
+	height: 20px; 
+	background-position: -470px -546px; 
+	margin: -10px 28px 0 18px; 
+	display: inline-block; 
+	vertical-align: middle; overflow: hidden;  background-image: url(../img/spr_img_v3.png); 
+	background-repeat: no-repeat;"
+}   
+
+.btn-text{
+	color: #3b98e6; 
+	cursor: pointer; 
+	-webkit-appearance: button; 
+	padding: 0; 
+	border: 0; 
+	background-color: transparent; 
+	text-transform: none; 
+	overflow: visible; 
+	font: inherit; 
+	margin: 0; 
+	writing-mode: horizontal-tb !important; 
+	letter-spacing: normal; 
+	word-spacing: normal; 
+	text-indent: 0px; 
+	text-shadow: none; 
+	display: inline-block; 
+	text-align: center; 
+	box-sizing: border-box;
+}
+
+#orderBtn{
+	width: 200px; 
+	height: 54px; 
+	font-size: 18px; 
+	display: inline-block; 
+	padding: 0 10px; 
+	text-align: center; 
+}
+   
     
  /* 요금제 변경 모달 버튼 */
  .quick-view-modal .product-right .size-detail {
@@ -191,14 +294,12 @@
                                     </div>    
                                 </c:if>
 								<div id="directList">
-									<div class="noStock" style="display:none;">
-										<h2 class="theme-color">선택하신 제품은 재고가 없습니다.</h2>
-									</div>
+									
 										<c:forEach items="${list}" var="direct" varStatus="status">
 											<div class="titlebox">
 												<div class="brand direct-item" style="font-size: 27px; color: gray;" id="productCode"
-												data-direct-code="${direct.directCode}" data-direct-price="${direct.directPrice}"
-												data-direct-stock="${direct.directStock}" data-sliced-code="${direct.slicedCode}">
+												data-direct-code="${direct.directCode}" data-direct-price="${direct.directPrice}" data-brand-code="${direct.brandCode}"
+												data-direct-stock="${direct.directStock}" data-sliced-code="${direct.slicedCode}" data-category-code="${direct.categoryCode}" data-brand-Code="${direct.brandCode}">
 													${direct.value} ${direct.slicedCode} ${direct.directCode}
 												</div>
 													<div class="details-image-concept mt-0" style="font-size: 35px;" id="directName">
@@ -211,13 +312,13 @@
 														<span class="price-detail theme-color fw-bold data-comma" id="renewPrice" >${direct.directPrice}</span>
 														<span class="unit">원</span>
 														</p>
-													<input type="hidden" id="directCode" name="directCode" value="${direct.directCode}">
+											</div>
+										</c:forEach>
+													<input type="text" id="directCode" name="directCode" value="">
 													<input type="hidden" id="categoryCode" name="categoryCode" value="${direct.categoryCode}">
 													<input type="hidden" id="brandCode" name="brandCode" value="${direct.brandCode}">
 													<input type="hidden" id="slicedCode" name="slicedCode" value="${direct.slicedCode}">
-													<input type="text" id="directStock" name="directStock" value="${direct.directStock}" readonly>
-											</div>
-										</c:forEach>
+													<input type="text" id="directStock" name="directStock" readonly>
 										<div class="optionArea">
 											<div class="product-option-item color">
 										   		<div class="option-title-area">
@@ -237,19 +338,19 @@
 												</div>
 											<div>
 												<span>
-												  <input type="radio" hidden name="saveCapacity" value="128">
+												  <input type="radio" hidden name="saveCapacity" id="caOption1" value="128">
 												  <label for="saveCapacity" class="btn btn-outline-custom m-1 capacity">
 												    <span>128G</span>
 												  </label>
 												</span>
 												<span>
-												  <input type="radio" hidden name="saveCapacity" value="256">
+												  <input type="radio" hidden name="saveCapacity" id="caOption2" value="256">
 												  <label for="saveCapacity" class="btn m-1 btn-outline-custom capacity">
 												    <span>256G</span>
 												  </label>
 												</span>
 												<span>
-												  <input type="radio" hidden name="saveCapacity" value="512">
+												  <input type="radio" hidden name="saveCapacity" id="caOption3" value="512">
 												  <label for="saveCapacity" class="btn m-1 btn-outline-custom capacity">
 												    <span>512G</span>
 												  </label>
@@ -291,19 +392,19 @@
 											</div>
 										<div class="option-types mb-3" id="payType">
 											<span class="c-ick-btn lg">
-												<input type="radio" hidden name="_payType" id="payType1">
+												<input type="radio" hidden name="disKind" id="payType1" value="1">
 												<label for="payType1" class="btn m-1 btn-outline-custom payType">
 													<span class="labelin">12개월<br>약정할인</span>
 												</label>
 											</span>
 											<span class="c-ick-btn lg checked">
-												<input type="radio" hidden name="_payType" id="payType2" >
+												<input type="radio" hidden name="disKind" id="payType2" value="2">
 												<label for="payType2" class="btn m-1 btn-outline-custom payType">
 													<span class="labelin">24개월<br>약정할인</span>
 												</label>
 											</span>
 											<span class="c-ick-btn lg">
-												<input type="radio" hidden name="_payType" id="payType3">
+												<input type="radio" hidden name="disKind" id="payType3" value="0">
 												<label for="payType3" class="btn btn-outline-custom m-1 payType">
 													<span class="labelin">24개월<br>공시지원금</span>
 												</label>
@@ -324,7 +425,8 @@
 										<div class="info">
 											<div class="tit">
 												<span class="sub-tit" id="selectedPlanName" style="overflow: hidden; font-size: 22px; font-weight: 700; letter-spacing: -0.5px; 
-												text-overflow: ellipsis;" data-plan-name="">선택된 요금제 이름</span>
+												text-overflow: ellipsis;" data-plan-name="" value="">선택된 요금제 이름</span>
+												<input type="text" id="planNum" name="planNum" value="" >
 												<br>
 												<h2 class="main-tit" id="dataDefaultQty" style="margin: 3px 0 3px; font-size: 16px; font-weight: 400; letter-spacing: -0.56px; 
 												padding-right: 100px;"> 데이터 <span id="dataGB"></span> </h2>                                                            
@@ -750,7 +852,7 @@
                                           	<c:forEach items="${gList}" var="i" varStatus="status">
                                           	<div class="mt-1" style="border-box:0px; box-shadow:1px 1px 2px 0px gray;  width:97%;">
                                            	<div class="form-check custome-radio-box mt-1">
-                                         				<input type="radio" name="planNum" class="form-check-input my-2" id="${i.planNum}" value="${i.planNum}"data-gb-value="${i.dataCapacity}"  data-plan-price="${i.planPrice}" data-dp="${i.disPercent}"/>
+                                         				<input type="radio" name="planNum" class="form-check-input my-2" id="${i.planNum}" value="${i.planNum}"data-gb-value="${i.dataCapacity}"  data-plan-price="${i.planPrice}" data-dp="${i.disCode}"/>
                                          				<label class="form-check-label fs-5" for="${i.planNum}">${i.planName}</label>
                                                   </div>
                                                   <div class="d-flex justify-content-between mb-1">
@@ -784,7 +886,7 @@
                                           	<c:forEach items="${sList}" var="i" varStatus="status">
                                           		<div class="mt-1" style="border-box:0px; box-shadow:1px 1px 2px 0px gray;  width:97%;">
                                            	<div class="form-check custome-radio-box mt-1">
-                                         				<input type="radio" name="planNum" class="form-check-input my-2" id="${i.planNum}" value="${i.planNum}" data-plan-price="${i.planPrice}" data-dp="${i.disPercent}"/>
+                                         				<input type="radio" name="planNum" class="form-check-input my-2" id="${i.planNum}" value="${i.planNum}" data-plan-price="${i.planPrice}" data-dp="${i.disCode}"/>
                                          				<label class="form-check-label fs-5" for="${i.planNum}">${i.planName}</label>
                                                   </div>
                                                   <div class="d-flex justify-content-between mb-1">
@@ -817,7 +919,7 @@
                                           	<c:forEach items="${tList}" var="i" varStatus="status">
                                            	<div class="mt-1" style="border-box:0px; box-shadow:1px 1px 2px 0px gray;  width:97%;">
                                            	<div class="form-check custome-radio-box mt-1">
-                                         				<input type="radio" name="planNum" class="form-check-input my-2" id="${i.planNum}" value="${i.planNum}" data-plan-price="${i.planPrice}" data-dp="${i.disPercent}"/>
+                                         				<input type="radio" name="planNum" class="form-check-input my-2" id="${i.planNum}" value="${i.planNum}" data-plan-price="${i.planPrice}" data-dp="${i.disCode}"/>
                                          				<label class="form-check-label fs-5" for="${i.planNum}">${i.planName}</label>
                                                   </div>
                                                   <div class="d-flex justify-content-between mb-1">
@@ -851,7 +953,7 @@
                                           	<c:forEach items="${zList}" var="i" varStatus="status">
                                            	<div class="mt-1" style="border-box:0px; box-shadow:1px 1px 2px 0px gray;  width:97%;">
                                            	<div class="form-check custome-radio-box mt-1">
-                                         				<input type="radio" name="planNum" class="form-check-input my-2" id="${i.planNum}" value="${i.planNum}" data-plan-price="${i.planPrice}" data-dp="${i.disPercent}"/>
+                                         				<input type="radio" name="planNum" class="form-check-input my-2" id="${i.planNum}" value="${i.planNum}" data-plan-price="${i.planPrice}" data-dp="${i.disCode}"/>
                                          				<label class="form-check-label fs-5" for="${i.planNum}">${i.planName}</label>
                                                   </div>
                                                   <div class="d-flex justify-content-between mb-1">
@@ -884,7 +986,7 @@
                                           	<c:forEach items="${wList}" var="i" varStatus="status">
                                            	<div class="mt-1" style="border-box:0px; box-shadow:1px 1px 2px 0px gray;  width:97%;">
                                            	<div class="form-check custome-radio-box mt-1">
-                                         				<input type="radio" name="planNum" class="form-check-input my-2" id="${i.planNum}" value="${i.planNum}" data-plan-price="${i.planPrice}" data-dp="${i.disPercent}"/>
+                                         				<input type="radio" name="planNum" class="form-check-input my-2" id="${i.planNum}" value="${i.planNum}" data-plan-price="${i.planPrice}" data-dp="${i.disCode}"/>
                                          				<label class="form-check-label fs-5" for="${i.planNum}">${i.planName}</label>
                                                   </div>
                                                   <div class="d-flex justify-content-between mb-1">
@@ -917,7 +1019,7 @@
                                           	<c:forEach items="${hList}" var="i" varStatus="status">
                                            	<div class="mt-1" style="border-box:0px; box-shadow:1px 1px 2px 0px gray;  width:97%;">
                                            	<div class="form-check custome-radio-box mt-1">
-                                         				<input type="radio" name="planNum" class="form-check-input my-2" id="${i.planNum}" value="${i.planNum}" data-plan-price="${i.planPrice}" data-dp="${i.disPercent}"/>
+                                         				<input type="radio" name="planNum" class="form-check-input my-2" id="${i.planNum}" value="${i.planNum}" data-plan-price="${i.planPrice}" data-dp="${i.disCode}"/>
                                          				<label class="form-check-label fs-5" for="${i.planNum}">${i.planName}</label>
                                                   </div>
                                                   <div class="d-flex justify-content-between mb-1">
@@ -1139,39 +1241,38 @@
             <div class="cart-content">
                 <div class="l-grid" style="margin-left: 102px; height: 90px; width: 1180px; margin: 0 auto;">            
                     <div id="paySummary" class="price-area" style="width: 680px; float: left; padding-top: 28px; line-height: normal;">
-                        
-                        <p class="price-opt" style="position: relative; padding-top: 28px; min-width: 113px; height: 38px; line-height: normal; display: inline-block; vertical-align: middle; margin: 0; padding: 0; margin-block-start: 1em; margin-block-end: 1em; margin-inline-start: 0px; margin-inline-end: 0px;">
-                            <span class="title" style="position: absolute; bottom: 3px; left: 0; color: #cdcdcd; font-size: 14px; white-space: nowrap; line-height: normal;">휴대폰 월 할부금</span>
+                        <p class="price-opt">
+                            <span class="title" style=" ">휴대폰 월 할부금</span>
                             <em class="price" style="font-style: normal;">		
-                                <span class="num" style="font-family: TgothicBlack, Roboto, sans-serif; letter-spacing: 0; font-size: 26px; letter-spacing: -1px; color: #fff; font-weight: 700;">70,814</span>		
-                                <span class="unit" style="color: #fff; font-size: 16px;">원</span>	
+                                <span class="num" id="out_phonePayPrice"></span>		
+                                <span class="unit">원</span>	
                             </em>
                         </p>
-                        <span class="ico-plus" style="font-weight: bolder; font-size: 20px; color: white; width: 20px; height: 20px; background-position: -446px -546px; margin: -10px 28px 0 18px; display: inline-block; vertical-align: middle; overflow: hidden; display: inline-block; background-image: url(../img/spr_img_v3.png); background-repeat: no-repeat;">+</span>
+                        <span class="ico-plus">+</span>
                         
-                        <p class="price-opt" style="position: relative; padding-top: 28px; min-width: 113px; height: 38px; line-height: normal; display: inline-block; vertical-align: middle; margin: 0; padding: 0; margin-block-start: 1em; margin-block-end: 1em; margin-inline-start: 0px; margin-inline-end: 0px;">	
-                            <span class="title" style="position: absolute; bottom: 3px; left: 0; color: #cdcdcd; font-size: 14px; white-space: nowrap;">월 통신요금</span>	
+                        <p class="price-opt">	
+                            <span class="title">월 통신요금</span>	
                             <em class="price" style="font-style: normal;">		
-                                <span class="num" style="font-family: TgothicBlack, Roboto, sans-serif; font-size: 26px; letter-spacing: -1px; color: #fff; font-weight: 700;">69,000</span>
-                                <span class="unit" style="color: #fff; font-size: 16px;">원</span>	
+                                <span class="num" id="out_planPrice"></span>
+                                <span class="unit">원</span>	
                             </em>
                         </p>
-                        <span class="ico-equal" style="font-weight: bolder; font-size: 20px; color: white; width: 20px; height: 20px; background-position: -470px -546px; margin: -10px 28px 0 18px; display: inline-block; vertical-align: middle; overflow: hidden;  background-image: url(../img/spr_img_v3.png); background-repeat: no-repeat;">=</span>
-                        <div class="price-sum" style="position: absolute; padding-top: 28px; min-width: 113px; height: 38px; line-height: normal; display: inline-block; vertical-align: middle; margin: 0; padding: 0; margin-block-start: 1em; margin-block-end: 1em; margin-inline-start: 0px; margin-inline-end: 0px;">	
-                            <span class="title" style="position: absolute; bottom: 3px; left: 0; color: #cdcdcd; font-size: 14px; white-space: nowrap;">예상 월 납부 금액</span>	
+                        <span class="ico-equal">=</span>
+                        <div class="price-opt">	
+                            <span class="title">예상 월 납부 금액</span>	
                             <strong class="price" style="display: inline-block; font-weight: bolder;">		
-                                <span class="num" style="font-family: TgothicBlack, Roboto, sans-serif; font-size: 26px; letter-spacing: -1px; color: #fff; font-weight: 700;">139,814</span>		
-                                <span class="unit" style="font-size: 22px; font-weight: 400; color: #fff;">원</span>	
+                                <span class="num" id="totalPrice"></span>		
+                                <span class="unit" >원</span>	
                             </strong>	
                             <span class="dsc" style="margin-left: 5px; color: #959595; font-size: 12px;">
-                                <button type="button" class="btn-text" id="feeDetail" style="color: #3b98e6; cursor: pointer; -webkit-appearance: button; padding: 0; border: 0; background-color: transparent; text-transform: none; overflow: visible; font: inherit; margin: 0; writing-mode: horizontal-tb !important; letter-spacing: normal; word-spacing: normal; text-indent: 0px; text-shadow: none; display: inline-block; text-align: center; box-sizing: border-box;">할부 수수료</button> 
+                                <button type="button" class="btn-text" id="feeDetail" style="">할부 수수료</button> 
                                 5.9%포함
                             </span>
                         </div>
                     </div>
                     <div class="btn-area" style="position: relative; padding-top:17px; float: right;"> 
                         <div class="product-buttons">                      
-                        <button type="button" class="btn btn-solid" id="orderBtn" style= "width: 200px; height: 54px; font-size: 18px; display: inline-block; padding: 0 10px; text-align: center; ">주문하기</button>
+                        <button type="button" class="btn btn-solid" id="orderBtn">주문하기</button>
                     </div> 
                     </div>
                 </div>                    
@@ -1229,73 +1330,9 @@
 
 <script src="/assets/js/newDirectCode.js"></script>
 <script src="/assets/js/updateReview.js"></script>
+<script src="/assets/js/phoneDetailPay.js"></script>
     <!-- 버튼 select js -->
-    <script>
-        const capacity = document.getElementsByClassName('capacity');
-        for(let capacity2 of capacity){
-            capacity2.addEventListener('click', function(){
-                if(capacity2.classList.contains('btn-outline-custom')){
-                    for(let capacity3 of capacity){
-                        if(capacity3.classList.contains('btn-solid-after')){
-                            capacity3.classList.remove('btn-solid-after');
-                            capacity3.classList.add('btn-outline-custom');
-                        }
-                    }
-                    capacity2.classList.remove('btn-outline-custom');
-                    capacity2.classList.add('btn-solid-after');
-                }
-                else{
-                    capacity2.classList.remove('btn-solid-after');
-                    capacity2.classList.add('btn-outline-custom');
-                }
-            })
-        }
-
-        const joinType = document.getElementsByClassName('joinType');
-        for(let joinType2 of joinType){
-            joinType2.addEventListener('click', function(){
-                if(joinType2.classList.contains('btn-outline-custom')){
-                    for(let joinType3 of joinType){
-                        if(joinType3.classList.contains('btn-solid-after')){
-                            joinType3.classList.remove('btn-solid-after');
-                            joinType3.classList.add('btn-outline-custom');
-                        }
-                    }
-
-                    joinType2.classList.remove('btn-outline-custom');
-                    joinType2.classList.add('btn-solid-after');
-                }
-                else{
-                    joinType2.classList.remove('btn-solid-after');
-                    joinType2.classList.add('btn-outline-custom');
-                }
-            })
-        }
-
-        const payType = document.getElementsByClassName('payType');
-        for(let payType2 of payType){
-            payType2.addEventListener('click', function(){
-                if(payType2.classList.contains('btn-outline-custom')){
-                    for(let payType3 of payType){
-                        if(payType3.classList.contains('btn-solid-after')){
-                            payType3.classList.remove('btn-solid-after');
-                            payType3.classList.add('btn-outline-custom');
-                        }
-                    }
-
-                    payType2.classList.remove('btn-outline-custom');
-                    payType2.classList.add('btn-solid-after');
-                }
-                else{
-                    payType2.classList.remove('btn-solid-after');
-                    payType2.classList.add('btn-outline-custom');
-                }
-            })
-        }
         
-</script>
-
-
 <!--  하단 금액 바 고정하는 JS -->
 <script>
    window.addEventListener('scroll', function() {
@@ -1334,35 +1371,6 @@
 	});
 </script>
 
-<script type="text/javascript">
-  // 모달창에서 값을 선택하고 확인 버튼을 클릭했을 때 호출되는 함수
-  function onSelectConfirm() {
-    // 선택한 값을 가져오기
-    const selectedValue = document.querySelector('input[name="planNum"]:checked');
-    const planNameLabel = document.querySelector('label[for="' + selectedValue.id + '"]');
-    const planName = planNameLabel.innerText;
-    const planPrice = selectedValue.getAttribute('data-plan-price');
-    const dataGB = selectedValue.getAttribute('data-gb-value');
-    
-    // 가져온 값을 입력하기
-    setSelectedPlan(planName, planPrice, dataGB);
-  }
-  
-//모달창에서 선택한 값을 입력하는 함수
-  function setSelectedPlan(planName, planPrice, dataGB) {
-    // 선택한 요금제, 가격, 데이터 정보 가져오기
-    document.getElementById('selectedPlanName').textContent = planName;
-    document.getElementById('planPrice').textContent = planPrice;
-    
-    // 데이터 정보 처리
-    const dataGBElement = document.getElementById('dataGB');
-    if (dataGB === '무제한') {
-      dataGBElement.innerText = dataGB + '& 음성통화/문자 기본제공';
-    } else {
-      dataGBElement.innerText = dataGB + 'GB & 음성통화/문자 기본제공';
-    }
-  }
-</script>
 
 
 <!--<script>

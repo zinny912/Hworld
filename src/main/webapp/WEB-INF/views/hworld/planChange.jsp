@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,40 +28,7 @@
 
 <body class="theme-color2 light ltr">
 <c:import url="../temp/header.jsp"></c:import>
-    <!-- Breadcrumb section start -->
-    <section class="breadcrumb-section section-b-space">
-        <ul class="circles">
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-        </ul>
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <h3>요금제 변경</h3>
-                    <nav>
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item">
-                                <a href="index.html">
-                                    <i class="fas fa-home"></i>
-                                </a>
-                            </li>
-                            <li class="breadcrumb-item active" aria-current="page">기존 H world를 이용하고 계셨던 고객</li>
-                        </ol>
-                    </nav>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Breadcrumb section end -->
-
+  
     <!-- Contact Section Start -->
     <section class="contact-section">
         <div class="container">
@@ -68,69 +37,76 @@
                     <div class="materialContainer">
                         <div class="material-details">
                             <div class="title title1 title-effect mb-1 title-left">
-                                <h2>5G 프리미어 (변경할 요금제 이름)</h2>
-                                <p class="fs-3 w-100 text-center">000 고객님, 사용중인 상품과 변경하실 상품을 확인하세요.</p>
+                                <h2>${planVO.planName}</h2>
+                                <p class="fs-3 w-100 text-center">${memberVO.name}님, 사용중인 상품과 변경하실 상품을 확인하세요.</p>
+                                <input type="text" id="days" value="${days}">
                             </div>
                         </div>
-                    <div class="">
+                 <div class="container-fluid">
                     <div class="row mb-5 justify-content-center">
-                        <div class="col-lg-5 text-center">
+                        <div class="col-lg-4 text-center">
                             <div class="contact-details rounded-3 mt-3 mb-3 ">
                                 <div class="container">
-                                    <button class="btn rounded-pill m-1 btn-outline-secondary mb-3"> <h6>사용중인 요금상품</h6></button>
-                                    <h2 class="fw-bolder">5G 기존 요금제명</h2>
+                                    <button class="btn rounded-pill m-1 btn-secondary mb-3"> <h6>사용중인 요금상품</h6></button>
+                                    <h2 class="fw-bolder">${bfPlan.planName}</h2>
                                     <div class="container">
-                                        <p class="font-light" >010-0000-0000 </p>
-                                    </div>
-                                    <div class="contact-box justify-content-center" style="border-bottom:2px solid; border-color:#fff; padding-bottom:20px;">
-                                        <div class="mx-4">
-                                            <img class="mb-2"src="/assets/images/zinny/5g.png">
-                                            <h4>무제한</h4>
-                                        </div>   
-                                        <div class="mx-4">
-                                            <img class="mb-2"src="/assets/images/zinny/phone.png">
-                                            <h4>무제한</h4>
-                                        </div> 
-                                        <div class="mx-4">
-                                            <img class="mb-2"src="/assets/images/zinny/message.png">
-                                            <h4>무제한</h4>
-                                        </div> 
-                                    </div>
+                                        <c:set var="phoneNum" value="${bfPlan.phoneNum}" />
+											<c:set var="formattedPhoneNum" value="${fn:substring(phoneNum, 0, 3)}-${fn:substring(phoneNum, 3, 7)}-${fn:substring(phoneNum, 7,11)}" />
+											<p class="font-light fs-6" >${formattedPhoneNum} </p>
+                                       
+                                        </div>
+                                     <div class="contact-box justify-content-center" style="border-bottom:2px solid; border-color:#fff; padding-bottom:20px;">
+                                            <div class="mx-4">
+                                                <img class="mb-2"src="/assets/images/5g.png">
+                                                <h4>무제한</h4>
+                                            </div>   
+                                            <div class="mx-4">
+                                                <img class="mb-2"src="/assets/images/phone.png">
+                                                <h4>무제한</h4>
+                                            </div> 
+                                            <div class="mx-4">
+                                                <img class="mb-2"src="/assets/images/message.png">
+                                                <h4>무제한</h4>
+                                            </div> 
+                                        </div>
         
                                     <div class="contact-box justify-content-center">
                                         <div class="contact-title text-center">
                                             <div class="flex-container">
-                                            <p style="margin-right:-15px; font-size:17px;">월</p>
-                                                <h2 class="fs-1 mb-0 theme-color" >55,000</h2>
-                                            <p style="margin-left:-15px; font-size:17px;">원</p>
+                                            <p style="margin-right:-7%; margin-top:1%; font-size:20px;">월</p>
+                                            <h2 class="fs-2 mb-0 theme-color"><fmt:formatNumber value="${bfPlan.planPrice}" pattern="#,###"/></h2>
+                                            <p style="margin-left:-7%; margin-top:1%; font-size:20px;">원</p>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-2 d-flex justify-content-center align-items-center" style="padding:0; margin-left:-120px; margin-right:-120px; z-index: 100;">
-                            <img class="img-fluid" style="max-width: 60%;" src="/assets/images/zinny/right-arrowp.png">
+                        <div class="col-2 d-flex justify-content-center align-items-center" style="padding:%; margin-left:-3%; margin-right:-3%; z-index: 100;">
+                            <img class="img-fluid" style="max-width: 60%;" src="/assets/images/simplearrow.png">
                         </div>
-                            <div class="col-lg-5 text-center">
+                            <div class="col-lg-4 text-center">
                                 <div class="contact-details rounded-3 mt-3 mb-3" >
                                     <div class="container">
                                         <button class="btn m-1 rounded-pill default-theme text-light mb-3"> <h6>변경 요금상품</h6></button>
-                                        <h2 class="fw-bolder">5G 프리미어</h2>
+                                        <h2 class="fw-bolder">${planVO.planName}</h2>
                                         <div class="container">
-                                            <p class="font-light" >010-0000-0000 </p>
+                                        <c:set var="phoneNum" value="${bfPlan.phoneNum}" />
+											<c:set var="formattedPhoneNum" value="${fn:substring(phoneNum, 0, 3)}-${fn:substring(phoneNum, 3, 7)}-${fn:substring(phoneNum, 7,11)}" />
+											<p class="font-light fs-6" >${formattedPhoneNum} </p>
+                                       
                                         </div>
                                         <div class="contact-box justify-content-center" style="border-bottom:2px solid; border-color:#fff; padding-bottom:20px;">
                                             <div class="mx-4">
-                                                <img class="mb-2"src="/assets/images/zinny/5g.png">
+                                                <img class="mb-2"src="/assets/images/5g.png">
                                                 <h4>무제한</h4>
                                             </div>   
                                             <div class="mx-4">
-                                                <img class="mb-2"src="/assets/images/zinny/phone.png">
+                                                <img class="mb-2"src="/assets/images/phone.png">
                                                 <h4>무제한</h4>
                                             </div> 
                                             <div class="mx-4">
-                                                <img class="mb-2"src="/assets/images/zinny/message.png">
+                                                <img class="mb-2"src="/assets/images/message.png">
                                                 <h4>무제한</h4>
                                             </div> 
                                         </div>
@@ -138,9 +114,9 @@
                                         <div class="contact-box justify-content-center">
                                             <div class="contact-title text-center">
                                                 <div class="flex-container">
-                                                <p style="margin-right:-15px; font-size:17px;">월</p>
-                                                    <h2 class="fs-1 theme-color mb-0">88,000</h2>
-                                                <p style="margin-left:-15px; font-size:17px;">원</p>
+                                                <p style="margin-right:-7%; margin-top:1%; font-size:20px;">월</p>
+                                                <h2 class="fs-2 mb-0 theme-color"><fmt:formatNumber value="${planVO.planPrice}" pattern="#,###"/></h2>
+                                                <p style="margin-left:-7%; margin-top:1%; font-size:20px;">원</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -148,13 +124,18 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="">
+                    </div>
+                    <form action="./planChange" method="Post">
+                    <input type="hidden" name="serialNum" value="${bfPlan.serialNum}">
+                    <input type="hidden" name="planNum" value="${planVO.planNum}">
+                    <input type="hidden" name="nowDate" id="now" value="">
+                        
                             <div class="row mb-5 justify-content-center">
-                                <div class="col-lg-10">
+                                <div class="col-lg-9">
                                     <div class="contact-details rounded-3 mt-3 mb-3">
                                         <div class="container">
                                             
-                                            <h2 class="fw-bolder"><img class="mb-1"src="/assets/images/zinny/warning.png">
+                                            <h2 class="fw-bolder"><img class="mb-1"src="/assets/images/redwarning.png">
                                                 이것만은 꼭 확인하세요</h2>
                                             <div class="container">
                                                 <p class="font-light fs-6 " >	
@@ -172,19 +153,47 @@
                                                 <label class="form-check-label fw-bolder fs-6" for="flexCheckDefault1">위 안내사항을 확인했습니다.</label>
                                                
                                             </div>
-                    </div>
-                </div>
-            </div>
-        </div>                  
-    </section>
-    <div class="container">
-    <div class="col-12 mb-3 container justify-content-center" style="width: 17.66667%">
-    <button onclick="location.href = 'zsuccess_modify.html';" type="button" class="btn rounded-3 btn-solid-default">변경하기</button>
-    <button onclick="location.href = '#';" type="button" class="btn rounded-3 btn-secondary">취소</button>
-    </div>  
-    </div>
+					                    </div>
+					                </div>
+					            </div>
+					        </div>                  
+   
+    				<div class="container">
+    					<div class="col-12 mb-3 container justify-content-center" style="width: 17.66667%">
+					    <button type="submit" class="btn rounded-3 btn-solid-default">변경하기</button>
+					    <button onclick="location.href = '#';" type="button" class="btn rounded-3 btn-secondary">취소</button>
+				    </div>  
+				    </div>
+				    </form>
+				 </div>
+				 </div>
+				 </div>
+				 </div>   
+				    
+				    
+ </section>
     <!-- Contact Section End -->    
 <c:import url="../temp/footer.jsp"></c:import>
+
+<script>
+const currentDate = new Date();
+
+const year = currentDate.getFullYear();
+const month = currentDate.getMonth() + 1;
+const day = currentDate.getDate();
+
+const formattedDate = new Date(year, month - 1, day);
+
+console.log(formattedDate);
+
+const formattedDateString = formattedDate.toISOString().slice(0, 10);
+
+console.log("현재 날짜: " + formattedDateString);
+
+document.getElementById('now').value = formattedDateString;
+
+</script>
+
 </body>
 
 </html>

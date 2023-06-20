@@ -61,6 +61,12 @@ public class DirectService {
 	    return directDAO.getDetail(slicedCode);
 	}
 	
+	//getMonthlyPay 월 예상 요금 조회
+	public Map<?, ?> getMonthlyPay(Map<String, Object> monthlyPay) throws Exception{
+		return directDAO.getMonthlyPay(monthlyPay);
+	}
+	
+	// 악세사리상세페이지 
 	public List<DirectVO> getAccDetail(String slicedCode) throws Exception {
 		return directDAO.getAccDetail(slicedCode);
 	}

@@ -1,16 +1,5 @@
 $(document).ready(function() {
-  //가격에 1000단위로 , 표시
-  // function commaPrice(){
-  // const prices = document.querySelectorAll('[id^="renewPrice"]');
-  // //let prices = document.getElementsByClassName("renewPrice");
-  // for (let i = 0; i < prices.length; i++) {
-  //   let price = parseInt(prices[i].innerHTML);
-  //   let formattedPrice = price.toLocaleString();
-  //   prices[i].innerHTML = formattedPrice;
-  //   }
-  // };
-  // commaPrice();
-
+ 
 
 // 리스트 요소 중 첫번째 보여주기 (가격이 제일 저렴한 상품)
 $('.titlebox:first').show();
@@ -107,15 +96,25 @@ $('#optionAdd').on('click', function() {
   let optionPrice = $('#optionPrice').val();
   let optionAmount = parseInt($('#optionQuantity').val());
   let calPrice = optionPrice * optionAmount;
+  let stock = $('#optionStock2').val();
+  if(stock==0){
+		alert("품절된 상품입니다. 다른 옵션을 선택해주세요.");
+	}	
+	
+	if(stock<optionAmount){
+		   alert("수량 추가가 불가합니다. 해당 제품은 "+stock+"개 구매가능합니다.");
+	   }
+		
 
   //값 존재여부 확인
   codeCheck = isEmpty(directCode);
   colorCheck = isEmpty(optionColor);
   priceCheck = isEmpty(optionPrice);
   amountCheck = isEmpty(optionAmount);
+  stockCheck = isEmpty(stock);
 
   //값이 존재하는 경우, HTML을 추가하지 않고 기존 요소 업데이트
-  if (optionColor != '' && priceCheck == true && amountCheck == true && optionAmount != 0) {
+  if (optionColor != '' && priceCheck == true && amountCheck == true && optionAmount != 0 && stock >= optionAmount) {
     // 기존 optionOne의 존재여부 체크
     let existingOption = $('#selectedOptionList').find('div[id^="optionOne"]').filter(function() {
       return $(this).find('input[name="directCode"]').val() === directCode;
@@ -123,16 +122,26 @@ $('#optionAdd').on('click', function() {
 
     if (existingOption.length > 0) {
       //기존 요소의 optionAmount와 calPrice 값을 업데이트
-      let existingOptionAmount = parseInt(existingOption.find('.option-amount').text());
-      let existingCalPrice = parseInt(existingOption.find('.option-price').text());
-      let updatedOptionAmount = existingOptionAmount + optionAmount;
-      let updatedCalPrice = existingCalPrice + calPrice;
+    let existingOptionAmount = parseInt(existingOption.find('.option-amount').text());
+    let existingCalPrice = parseInt(existingOption.find('.option-price').text().replace(/[,]/g, ''));
+    let updatedOptionAmount = existingOptionAmount + optionAmount;
+    let updatedCalPrice = existingCalPrice + calPrice;
 
+	let selectedAmount = updatedOptionAmount; 
+       
+       if(stock<selectedAmount){
+		   alert("수량 추가가 불가합니다. 해당 제품은 "+stock+"개 구매가능합니다.");
+		   updatedOptionAmount=updatedOptionAmount-optionAmount;
+		   updatedCalPrice = updatedCalPrice - calPrice;
+	   }
       //optionAmount와 calPrice 값을 업데이트
       existingOption.find('.option-amount').text(updatedOptionAmount);
       existingOption.find('.option-price').text(updatedCalPrice);
       existingOption.find('input[name="orderAmount"]').val(updatedOptionAmount);
+      existingOption.find('input[name="cartAmount"]').val(updatedOptionAmount);
       existingOption.find('input[name="calPrice"]').val(updatedCalPrice);
+       
+	
     } else {
       //값이 존재하지 않는 경우, HTML을 추가
       let setHtml = '<div id="optionOne' + idx + '">';
@@ -143,6 +152,7 @@ $('#optionAdd').on('click', function() {
       setHtml += '</div>';
       setHtml += '<div class="col-3 my-auto d-flex justify-content-end">';
       setHtml += '<span class="option-amount">' + optionAmount + '</span>';
+      setHtml += '<input id="testAmount" type="hidden">';
       setHtml += '<span>개</span>';
       setHtml += '</div>';
       setHtml += '<div class="col-3 my-auto d-flex justify-content-end">';
@@ -158,25 +168,31 @@ $('#optionAdd').on('click', function() {
       setHtml += '<div class="orderInfos">';
       setHtml += '<input type="hidden" name="directCode" value="' + directCode + '">';
       setHtml += '<input type="hidden" name="orderAmount" value="' + optionAmount + '">';
+      setHtml += '<input type="hidden" name="cartAmount" value="' + optionAmount + '">';
       setHtml += '<input type="hidden" name="calPrice" value="' + calPrice + '">';
       setHtml += '</div>';
       setHtml += '</div>';
+	
 
       //태그 추가
       $('#selectedOptionList').append(setHtml);
       idx++;
+
     }
 
-    //totalPrice 계산
-    let totalPrice = 0;
-    $('.option-price').each(function() {
-      let price = $(this).text();
-      let priceValue = parseInt(price);
-      totalPrice += priceValue;
-      //계산 결과 세팅
-      $('#totalPriceSpan').text(totalPrice);
-      $('#totalPrice').val(totalPrice);
-    });
+    // totalPrice 계산
+		let totalPrice = 0;
+		$('.option-price').each(function() {
+		  let price = $(this).text();
+		  let priceValue = parseInt(price.replace(/[,]/g, ""));
+		  totalPrice += priceValue;
+		  // 계산 결과 세팅
+		  let formattedPrice = priceValue.toLocaleString();
+		  $(this).text(formattedPrice);
+		  $('#totalPriceSpan').text(totalPrice.toLocaleString());
+		  $('#totalPrice').val(totalPrice);
+		});
+		
 
     //옵션 초기화
     $('#optionQuantity').val('0');
@@ -191,27 +207,41 @@ $(document).on('click', '.fa-times', function() {
   let idx = $(this).attr('data-idx');
   $('#optionOne'+idx).remove();
 
-  //totalPrice 계산
-  let totalPrice = 0;
-  $('.option-price').each(function() {
-    let price = $(this).text();
-    let priceValue = parseInt(price);
-    totalPrice += priceValue;
-    //계산 결과 세팅
-    $('#totalPriceSpan').text(totalPrice);
-    $('#totalPrice').val(totalPrice);
-  });
+  // totalPrice 계산
+let totalPrice = 0;
+$('.option-price').each(function() {
+  let price = $(this).text();
+  let priceValue = parseInt(price.replace(/[,]/g, "").trim());  // 쉼표(,) 제거 후 정수로 변환
+  totalPrice += priceValue;
+  // 계산 결과 세팅
+  let formattedPrice = priceValue.toLocaleString();
+  $(this).text(formattedPrice);
+  $('#totalPriceSpan').text(totalPrice.toLocaleString());
+  $('#totalPrice').val(totalPrice);
+});
 });
 
 
-//주문하기 버튼
-$('#orderBtn').click(function(){
-  //위에 필요한 검증
-  //console.log('주문하기 버튼');
 
-  //폼 넘기기
+$('#orderBtn').click(function(){
+
+  // 폼의 action 속성 변경
+  $('#orderForm').attr('action', '/orderInfo');
+
+  // 폼 넘기기
   $('#orderForm').submit();
-})
+});
+
+$('.btn_cart').click(function(){
+  // 필요한 검증 및 처리 로직
+
+  // 폼의 action 속성 변경
+  $('#orderForm').attr('action', '/cart/add');
+
+  // 폼 넘기기
+  $('#orderForm').submit();
+});
+
 
 
 //필요한 값이 입력되어있는지 확인하는 함수
@@ -229,9 +259,12 @@ function setOptionPrice(directCode){
   let initPrice = item.attr("data-direct-price");
   let initStock = item.attr("data-direct-stock");
 
+	
   //옵션창에 값, 재고 세팅
   $('#optionPrice').val(initPrice);
   $('#optionStock').val(initStock);
+  $('#optionStock2').val(initStock);
+  
 }
 
 

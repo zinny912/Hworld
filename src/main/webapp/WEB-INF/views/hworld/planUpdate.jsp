@@ -4,17 +4,36 @@
 <!DOCTYPE html>
 
 <html lang="en">
-
 <head>
 	<meta charset="UTF-8">
     <c:import url="../temp/style.jsp"></c:import>
-    <title>요금 추가 페이지</title>
+ 
+ <style>
+    .input-container {
+        position: relative;
+    }
+    
+    .input-container::before {
+        content: "원";
+        position: absolute;
+        top: 50%;
+        right: 10px;
+        transform: translateY(-50%);
+        color: #999999;
+    }
+    
+    .input-field {
+        padding-right: 30px; /* '원' 글자를 고려하여 오른쪽 padding 추가 */
+    }
+</style>
+ 
+ 
 </head>
 
 <body class="theme-color2 light ltr">
 <c:import url="../temp/header.jsp"></c:import>
     <!-- Breadcrumb section start -->
-    <section class="breadcrumb-section section-b-space">
+        <section class="breadcrumb-section section-b-space">
         <ul class="circles">
             <li></li>
             <li></li>
@@ -30,7 +49,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <h3>요금제 수정 페이지</h3>
+                    <h3>요금제 등록</h3>
                     <nav>
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item">
@@ -38,7 +57,7 @@
                                     <i class="fas fa-home"></i>
                                 </a>
                             </li>
-                            <li class="breadcrumb-item active" aria-current="page">5G</li>
+                            <li class="breadcrumb-item active" aria-current="page">요금제</li>
                         </ol>
                     </nav>
                 </div>
@@ -53,78 +72,188 @@
             <div class="row g-4 justify-content-center">
                 <div class="col-lg-6" >
                     <h3 class="mb-3 fw-bold">요금제</h3>
-                    <form class="needs-validation">
+                    <form action="./planUpdate" method="POST" class="planUpdate">
                         <div class="row g-4">
                             <!-- 요금제 정보 -->
+                            <table id="commonCodeTable">
+                               <thead>
+                               <tr class="table-head col-md-12">
+                               <th class="col-3">Type </th>
+                               <th class="col-3">Code</th> 
+                               <th class="col-3">Value</th> 
+                               <th class="col-3">Note</th>
+                                </tr>
+                               </thead>
+                               <tbody>
+                               
+                                <c:forEach items="${commonCode}" var="common">
+                                <tr class="code-row">	
+                                		<td class="code-row">${common.type}</td>
+                                		<td class="code-row">${common.code}</td>
+                                		<td class="code-row">${common.value}</td>
+                                		<td class="code-row">${common.note}</td>
+                                </tr>
+                                </c:forEach>
+                                
+                                </tbody>
+                                </table> 
+                                
+                              	<input type="text" id="note" name="note" value="" placeholder="노트">
+                              	<input type="text" id="type" name="type" value="" placeholder="타입">
+                              	<input type="text" id="code" name="code" value="" placeholder="코드">
+                              	<input type="text" id="value" name="value" value="" placeholder="밸류">
+                              	
                             <div class="col-md-6">
                                 <label for="validationCustom04" class="form-label" >종류</label>
+                                
                                 <div class="col-12">
                                     <select class="form-select custome-form-select" id="validationCustom04">
-                                        <option selected="" value="5G 요금제">5G 요금제</option>
-                                        <option>시니어 요금제</option>
-                                        <option>청소년 요금제</option>
-                                        <option>ZEM 요금제</option>
-                                        <option>군인 요금제</option>
-                                        <option>복지 요금제</option>
+                                        <option selected="" value="G">5G 요금제</option>
+                                        <option value="S">시니어 요금제</option>
+                                        <option value="T">청소년 요금제</option>
+                                        <option value="Z">ZEM 요금제</option>
+                                        <option value="H">군인 요금제</option>
+                                        <option value="W">복지 요금제</option>
                                     </select>
                                 </div>
+                               
+                              <input type="hidden" id="planNum" name="planNum" value=""> 
+                              <input type="hidden" id="categoryCode" name="categoryCode" value="">
+                              
+                              
+                              
                             </div>
                              <!-- 월요금 -->
                              <div class="col-md-6">
-                                <label for="fname" class="form-label">월 가격</label>
-                                <input type="text" class="form-control" id="fname" placeholder="Enter First Name" value="88,000원">
+                                <label for="planPrice" class="form-label">월 가격</label>
+                                <input type="text" class="form-control" id="planPrice" name="planPrice" placeholder="월 요금제">
                             </div>
                             <div class="col-md-6">
-                                <label for="fname" class="form-label">이름</label>
-                                <input type="text" class="form-control" id="fname" value="5G 프리미어">
+                                <label for="planName" class="form-label">이름</label>
+                                <input type="text" class="form-control" id="planName" name="planName" placeholder="요금제명">
                             </div>
                             <div class="col-md-6">
-                                <label for="fname" class="form-label">이름2</label>
-                                <input type="text" class="form-control" id="fname" value="(데이터 + 문자 + 통화 무제한)">
+                                <label for="planExplainS" class="form-label">부가설명</label>
+                                <input type="text" class="form-control" id="planExplainS" name="planExplainS" placeholder="간략소개">
                             </div>
                             <!-- 한 줄 -->
                             <div class="col-md-12">
-                                <label for="fnum" class="form-label">한 줄 설명</label>
-                                <input type="text" class="form-control" id="fnum" value="속도제한 없이 진짜 무제한" >
+                                <label for="planExplain" class="form-label">한 줄 설명</label>
+                                <input type="text" class="form-control" id="planExplain" name="planExplain">
                             </div>
                             <!-- 데이터량 -->
                             
                             <div class="col-md-4">
-                                <label for="lnum" class="form-label">데이터량</label>
-                                <input type="text" class="form-control" id="fnum" value="무제한">
+                                <label for="dataCapacity" class="form-label">데이터량</label>
+                                <input type="text" class="form-control" id="dataCapacity" name="dataCapacity" value="">
                             </div>
                             <div class="col-md-4">
-                                <label for="lnum" class="form-label">통화량</label>
-                                <input type="text" class="form-control disabled" id="fnum" value="기본제공" >
+                                <label for="tel" class="form-label">통화량</label>
+                                <input type="text" class="form-control disabled" id="tel" value="기본제공" >
                             </div>
                             <div class="col-md-4">
-                                <label for="lnum" class="form-label">문자량</label>
-                                <input type="text" class="form-control" id="fnum" value="기본제공">
+                                <label for="sms" class="form-label">문자량</label>
+                                <input type="text" class="form-control" id="sms" value="기본제공">
                             </div>
-                            
-                           
-                            <!-- 한 줄 유의사항 -->
-                            <div class="col-md-12">
-                                <label for="fnum" class="form-label">한 줄 유의사항</label>
-                                <input type="text" class="form-control" id="fnum" value="기존 이용고객분들은 위약금 발생에 유의해주세요.">
-                            </div>
+                          
                             <!-- 상세정보 서머노트하자 -->
                             <div class="col-md-12">
-                                <label for="fnum" class="form-label">상세정보</label>
-                                <textarea class="form-control col-md-12" name="" id="" cols="100" rows="10" value="" >국내에서 속도 제한 없이 데이터 무제한 이용 가능합니다.</textarea>
+                                <label for="planExplain" class="form-label">상세정보</label>
+                                <textarea class="form-control col-md-12" name="planExplain" id="planExplain" cols="100" rows="10" readonly> 서머노트로 상세정보 입력할예정</textarea>
                             </div>
 
                             <!-- 확인버튼 -->
                             <div class="col-12 d-flex justify-content-center">
-                                <button class="btn btn-solid-default mx-auto" id="btn2">등록하기</button>
+                                <button type="submit" class="btn btn-solid-default mx-auto" id="btn2">등록하기</button>
                             </div>     
                         </div>
+                        </form>
                     </div>
                 </div>
             </div>
-        </section>  
-    <!-- Shop Section end -->
-<c:import url="../temp/footer.jsp"></c:import>    
+        </section>
+
+
+<c:import url="../temp/footer.jsp"></c:import>
+
+<script>
+$(document).ready(function() {
+	  // 셀렉트 박스 선택 시 공통 코드 리스트 가져오기
+	  $("#validationCustom04").on("change", function() {
+	    var selectedType = $(this).val();
+	    loadCommonCodes(selectedType);
+	    generatePlanNum(selectedType);
+	  });
+	});
+
+	// AJAX 호출하여 공통 코드 리스트 가져오기
+	function loadCommonCodes(selectedType) {
+	  $.ajax({
+	    url: "./getCommonCode",
+	    method: "POST",
+	    data: { type: selectedType },
+	    dataType: "json",
+	    success: function(commonCodeList) {
+	      displayCommonCode(commonCodeList);
+	    },
+	    error: function() {
+	      console.error("Failed to get common code list.");
+	    }
+	  });
+	}
+
+	// 가져온 공통 코드 리스트를 동적으로 표시
+function displayCommonCode(commonCodeList) {
+  const tableBody = $("#commonCodeTable tbody");
+  tableBody.empty();
+  let lastCode = "";
+  let lastNote = "";
+  for (let i = 0; i < commonCodeList.length; i++) {
+    const type = commonCodeList[i].type;
+    const code = commonCodeList[i].code;
+    console.log(code);
+    const value = commonCodeList[i].value;
+    const note = commonCodeList[i].note;
+    const row = $("<tr>").addClass("code-row");
+    $("<td>").text(type).appendTo(row);
+    $("<td>").addClass("code-cell").text(code).appendTo(row); // 코드 셀에 클래스 추가
+    $("<td>").text(value).appendTo(row);
+    $("<td>").text(note).appendTo(row);
+    row.appendTo(tableBody);
+    
+    // 마지막 코드 값 갱신
+    lastCode = code;
+    lastNote = note;
+    $('#note').val(lastNote);
+  }
+  
+  // 생성한 planNum을 hidden 필드에 설정
+  generatePlanNum(lastCode);
+}
+
+	
+function generatePlanNum(lastCode) {
+	  let nextCode = parseInt(lastCode) + 1; // 마지막 코드 값의 다음 값 계산
+	  let selectedType = $("#validationCustom04").val(); // 선택한 타입 값 가져오기
+	  let planNum = selectedType + ("0" + nextCode).slice(-2); // 새로운 planNum 생성
+		let zeroCode = ("0" + nextCode).slice(-2);
+	  $("#planNum").val(planNum); // 생성한 planNum을 hidden 필드에 설정
+	  $('#code').val(zeroCode);
+	  $('#categoryCode').val(zeroCode);
+	  $('#type').val(selectedType);
+	  
+	}	
+	
+
+
+
+$('#planName').blur(function(){
+	$('#value').val($('#planName').val());
+})
+</script>
+
+
+
 </body>
 
 </html>

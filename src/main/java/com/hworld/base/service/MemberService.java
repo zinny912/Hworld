@@ -108,10 +108,6 @@ public class MemberService {
 		return result;
 	}
 	
-	public int setMemberInitUpdate(MemberVO memberVO) throws Exception{
-		return memberDAO.setMemberInitUpdate(memberVO);
-	}
-	
 	public MemberVO emailCheck(MemberVO memberVO) throws Exception {
 		return memberDAO.emailCheck(memberVO);
 	}
