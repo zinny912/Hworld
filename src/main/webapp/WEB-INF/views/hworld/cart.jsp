@@ -125,7 +125,7 @@
 					         <!-- 체크박스 전체 여부 -->
 					         <div class="all_check_input_div form-check custome-form-check">
 					            <input type="checkbox" class="all_check_input checkbox_animated check-it" checked="checked" id="checkAll" name="checkAll" value="1"><span class="all_chcek_span">            
-                                <a class="text-decoration-underline theme-color d-flex" >선택 삭제</a>
+                                <a class="text-decoration-underline theme-color d-flex delete-selected" >선택 삭제</a>
 					         	</span>
 					         </div>            
          
@@ -354,6 +354,49 @@
           updateTotalPrice(); // 총 결제 예상금액 업데이트
         });
       });
+      
+      
+   // 선택 삭제 링크 클릭 이벤트 핸들러
+      $('.delete-selected').click(function() {
+        // 선택된 체크박스 가져오기
+        var checkedItems = $('.individual_cart_checkbox:checked');
+
+        if (checkedItems.length > 0) {
+          // 확인 메시지 출력
+          if (confirm('선택한 항목을 삭제하시겠습니까?')) {
+            // 선택된 항목 삭제
+            checkedItems.each(function() {
+                var cartItem = $(this).closest('tr');
+                var directCode = cartItem.find('input[name="directCode"]').val();
+                var memberNum = '<%= session.getAttribute("memberNum") %>';
+
+
+              // AJAX 요청을 통해 서버에 선택된 항목 삭제 요청 보내기
+              $.ajax({
+                url: './cartDelete',
+                type: 'POST',
+                data: { directCode: directCode},
+                success: function(response) {
+                  // 삭제 성공 시 해당 항목 제거
+        		if (response === 'success') {
+                    cartItem.remove();
+                  } else {
+                    alert('삭제 중 오류가 발생했습니다.');
+                  }
+                },
+                error: function() {
+                  alert('삭제 중 오류가 발생했습니다.');
+                }
+              });
+            });
+          }
+        } else {
+          alert('삭제할 항목을 선택해주세요.');
+        }
+      });
+
+
+
 
       // 총 결제 예상금액 업데이트 함수
       function updateTotalPrice() {

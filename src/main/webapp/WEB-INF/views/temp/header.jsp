@@ -5,6 +5,9 @@
 
 <!DOCTYPE html>
 <html>
+    <script src="https://code.jquery.com/jquery-latest.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 
     <!-- header start - 절대경로 사용 -->
     <header class="header-style-2" id="home">
@@ -248,3 +251,4 @@
         });
     })
 </script>
+</html>

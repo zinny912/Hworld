@@ -463,7 +463,6 @@
 							 <c:set var="orderFinalPrice" value="0" />
 							<c:forEach items="${orderList}" var="ol">
 							  <c:set var="orderFinalPrice" value="${orderFinalPrice + ol.calPrice}" />
-							  <input type="hidden" name="orderFinalPrice" value="${orderFinalPrice + ol.calPrice}">
 							</c:forEach>
 							
 							<li class="list-group-item d-flex lh-condensed justify-content-between active" style="padding: 20px 20px 15px;">
@@ -475,6 +474,7 @@
 							  <span class="fw-bold">총 결제 금액</span>
 							  <h2 class="title title1" style="color: var(--theme-color); margin-bottom: 0;">
 							    <fmt:formatNumber value="${orderFinalPrice}" pattern="#,### 원"/>
+							  <input type="hidden" name="orderFinalPrice" value="${orderFinalPrice}">
 							  </h2>
 							</li>
                         </ul>
