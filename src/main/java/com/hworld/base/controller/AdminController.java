@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -126,6 +127,19 @@ public class AdminController {
 		List<QnaVO> generalInquiryDetail = adminService.generalInquiryDetail(qnaVO);
 		modelAndView.addObject("generalInquiryDetail", generalInquiryDetail);
 		modelAndView.setViewName("admin/generalInquiryDetail");
+		return modelAndView;
+	}
+	
+	// 일반 문의 상세 페이지 - 답변 Update
+	@PostMapping("generalInquiryDetail")
+	public ModelAndView generalInquiryReply(QnaVO qnaVO) throws Exception {
+		
+		ModelAndView modelAndView = new ModelAndView();
+		
+		int result = adminService.generalInquiryReply(qnaVO);		
+		
+		modelAndView.setViewName("admin/generalInquiry");
+				
 		return modelAndView;
 	}
 	

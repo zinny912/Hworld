@@ -57,6 +57,9 @@ public interface AdminDAO {
 	// 일반 문의 상세 
 	public List<QnaVO> generalInquiryDetail(QnaVO qnaVO) throws Exception;
 	
+	// 일반 문의 상세 - 답변 Update
+	public int generalInquiryReply(QnaVO qnaVO) throws Exception;
+	
 //	// 납부 목록
 //	public Long getTotalPL(Pager pager) throws Exception;
 //	

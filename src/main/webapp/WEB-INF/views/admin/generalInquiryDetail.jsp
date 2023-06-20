@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
@@ -24,55 +25,50 @@
                                 <div class="col-sm-12">
                                     <div class="card">
                                         <div class="card-body">
-                                            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-                                                <li class="nav-item" role="presentation">
-                                                    <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button">문의 내용</button>
-                                                </li>
-                                            </ul>
-											<c:forEach var="gid" items="${generalInquiryDetail}">
-                                            <c:forEach var="memberVOs" items="${gid.memberVOs}">
-	                                            <div class="tab-content" id="pills-tabContent">
-	                                                <form class="theme-form theme-form-2 mega-form radio-section">
+                                        	<form:form cssClass="theme-form theme-form-2 mega-form radio-section" action="./generalInquiryDetail" id="update_btn" method="post" modelAttribute="qnaVO">											
+	                                            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+	                                                <li class="nav-item" role="presentation">
+	                                                    <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button">문의 내용</button>
+	                                                </li>
+	                                            </ul>
+												<c:forEach var="gid" items="${generalInquiryDetail}">	
+	                                            <c:forEach var="memberVOs" items="${gid.memberVOs}">
+		                                            <div class="tab-content" id="pills-tabContent">		                                               
 	                                                    <div class="row">
 	                                                        <div class="mb-4 row align-items-center">
-	                                                            <label
-	                                                                class="form-label-title col-lg-2 col-md-3 mb-0">작성자</label>
-	                                                                ${memberVOs.email}
+	                                                            <label class="form-label-title col-lg-2 col-md-3 mb-0">작성자</label>
+	                                                            ${memberVOs.email}
 	                                                        </div>
 	                                                        <div class="mb-4 row align-items-center">
-	                                                            <label
-	                                                                class="form-label-title col-lg-2 col-md-3 mb-0">작성날짜</label>
-	                                                                ${gid.regDate}
+	                                                            <label class="form-label-title col-lg-2 col-md-3 mb-0">작성날짜</label>
+	                                                            ${gid.regDate}
 	                                                        </div>
 	                                                        <div class="mb-4 row align-items-center">
-	                                                            <label
-	                                                                class="form-label-title col-lg-2 col-md-3 mb-0">제목</label>
-	                                                                ${gid.title}
+	                                                            <label class="form-label-title col-lg-2 col-md-3 mb-0">제목</label>
+	                                                            ${gid.title}
 	                                                        </div>
 	
 	                                                        <div class="mb-4 row align-items-center">
-	                                                            <label
-	                                                                class="col-lg-2 col-md-3 col-form-label form-label-title">내용</label>
+	                                                            <label class="col-lg-2 col-md-3 col-form-label form-label-title">내용</label>
 	                                                            ${gid.contents}
 	                                                        </div>
 	
 	                                                        <div class="mb-4 row align-items-center">
-	                                                            <label
-	                                                                class="col-lg-2 col-md-3 col-form-label form-label-title">답변</label>
+	                                                            <label class="col-lg-2 col-md-3 col-form-label form-label-title">답변</label>
 	                                                            <div class="col-md-9 col-lg-9">
-	                                                                <textarea class="row" rows="14" style = "width: 100%;" ></textarea>
+	                                                                <textarea class="row" rows="14" style = "width: 100%;" id="reply" name="reply"></textarea>
 	                                                            </div>
 	                                                        </div>                                                        
 	                                                    </div>
-	                                                </form>
-	                                            </div>
-                                            </c:forEach>
-                                            </c:forEach>
-
-                                            <div class="card-footer text-end border-0 pt-0" style="padding-right: 8%">
-                                                <button class="btn btn-primary me-3" type="submit">답변 작성</button>
-                                                <!-- <button class="btn btn-outline-primary" type="button">취소</button> -->
-                                            </div>                                            
+		                                            </div>
+	                                            </c:forEach>
+	                                            </c:forEach>
+												
+	                                            <div class="card-footer text-end border-0 pt-0" style="padding-right: 8%">
+	                                                <button class="btn btn-primary me-3 update_btn " type="submit">답변 작성</button>
+	                                                <!-- <button class="btn btn-outline-primary" type="button">취소</button> -->
+	                                            </div>                              
+                                            </form:form>              
                                         </div>
                                     </div>
                                 </div>

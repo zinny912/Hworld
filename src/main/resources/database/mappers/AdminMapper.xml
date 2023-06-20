@@ -243,4 +243,8 @@
   		</collection>  		
 	</resultMap>
 	
+	<update id="generalInquiryReply" parameterType="QnaVO">
+		UPDATE QNA SET REPLY = #{reply}, STATE = 1, REPLYDATE = now()
+		WHERE NUM = #{num}
+	</update>
 </mapper>

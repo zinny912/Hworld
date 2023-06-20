@@ -2,9 +2,12 @@ package com.hworld.base.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.hworld.base.dao.AdminDAO;
 import com.hworld.base.util.Pager;
@@ -87,6 +90,11 @@ public class AdminService {
 	// 일반 문의 상세
 	public List<QnaVO> generalInquiryDetail(QnaVO qnaVO) throws Exception { 		 
 		return adminDAO.generalInquiryDetail(qnaVO);
+	}
+	
+	// 일반 문의 상세 페이지 - 답변 Update
+	public int generalInquiryReply(QnaVO qnaVO) throws Exception {
+		return adminDAO.generalInquiryReply(qnaVO);
 	}
 	
 //	// 납부 목록
