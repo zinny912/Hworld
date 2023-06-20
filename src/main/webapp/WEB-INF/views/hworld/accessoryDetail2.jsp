@@ -93,8 +93,6 @@
   color: #ffa202;
 }
 
-
-
      .btn-solid-after {
         background-color: #e22454; 
         color: #fff; 
@@ -286,9 +284,11 @@
 
                         <div class="tab-content" id="nav-tabContent">
                             <div id="desc" class="tab-pane fade show active">
-									<div class="p_description">
-	                                    ${directVO.directContents}
+									<div class="summerNote-css">
+									<div style="width:100%; height:auto; align-items:center;">
+	                                   ${list.get(0).directContents}
 	                                </div>  
+	                                </div>
                             </div>
 
                             <!-- 상품 문의 nav tap -->

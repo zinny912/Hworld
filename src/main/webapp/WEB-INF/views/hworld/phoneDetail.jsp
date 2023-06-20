@@ -300,7 +300,7 @@
 												<div class="brand" style="font-size: 27px; color: gray;" id="productCode"
 												data-direct-code="${direct.directCode}" data-direct-price="${direct.directPrice}" data-brand-code="${direct.brandCode}"
 												data-direct-stock="${direct.directStock}" data-sliced-code="${direct.slicedCode}" data-category-code="${direct.categoryCode}" data-brand-Code="${direct.brandCode}">
-													${direct.value} ${direct.slicedCode} ${direct.directCode}
+													${direct.value}
 												</div>
 													<div class="details-image-concept mt-0" style="font-size: 35px;" id="directName">
 														<span class="directNameValue" data-direct-name="${direct.directName}">${direct.directName}</span>
@@ -312,16 +312,30 @@
 														<span class="price-detail theme-color fw-bold data-comma" id="renewPrice" >${direct.directPrice}</span>
 														<span class="unit">원</span>
 														</p>
-													<div class="direct-item" id="item_${direct.directCode}" data-direct-code="${direct.directCode}" data-category-code="${direct.categoryCode}" data-brand-code="${direct.brandCode}" data-sliced-code="${direct.slicedCode}" data-direct-stock="${direct.directStock}" data-direct-price="${direct.directPrice}"></div>
+													<div class="direct-item" id="item_${direct.directCode}" data-direct-code="${direct.directCode}" data-category-code="${direct.categoryCode}" data-brand-code="${direct.brandCode}" data-sliced-code="${direct.slicedCode}" data-direct-stock="${direct.directStock}" data-direct-price="${direct.directPrice}" data-direct-name="${direct.directName}"></div>
 											</div>
 										</c:forEach>
-											<input type="hidden" id="colorCode">
-											<input type="hidden" id="saveCapacity">
-											<input type="hidden" id="directCode" name="directCode">
+										<form action="./phoneOrder" method="get" id="buyForm">
+											<input type="text" id="colorCode" name="colorCode">
+											<input type="text" id="saveCapacity" name="saveCapacity">
+											<input type="text" id="directCode" name="directCode">
 											<input type="hidden" id="directStock" name="directStock" readonly>
+											<input type="text" id="selectedDirectName" name="directName">
+											<input type="text" id="planNum" name="planNum" value="">
+											<input type="text" id="planName2" name="planName" >
+											<input type="text" id="planPrice1" name="planPrice">
+											<input type="text" id="disKind" name="disKind">
+											<input type="text" id="joinType" name="joinType" >
+											<input type="text" id="totalPriceAll" name="totalPrice">
+											<input type="text" id="outPhonePrice" name="out_phonePayPrice">
+											<input type="text" id="outplanPrice" name="out_planPrice">
+											
+											<!-- <input type="text" id="" -->
+										
 											<!-- <input type="hidden" id="categoryCode" name="categoryCode" value="${direct.categoryCode}">
 											<input type="hidden" id="brandCode" name="brandCode" value="${direct.brandCode}">
 											<input type="hidden" id="slicedCode" name="slicedCode" value="${direct.slicedCode}"> -->
+										</form>
 										<div class="optionArea">
 											<div class="product-option-item color">
 										   		<div class="option-title-area">
@@ -369,19 +383,19 @@
 											</div>
 											<div class="option-types" id="joinType">
 												<span class="c-ick-btn">
-													<input type="radio" hidden name="_joinType" id="joinType1">
+													<input type="radio" hidden name="joinType" id="joinType1" value="0">
 													<label for="joinType1" class="btn m-1 btn-outline-custom joinType">
 														<span class="labelin">기기변경</span>
 													</label>
 												</span>
 												<span class="c-ick-btn">
-													<input type="radio" hidden name="_joinType" id="joinType2">
+													<input type="radio" hidden name="joinType" id="joinType2" value="1">
 													<label for="joinType2" class="btn m-1 btn-outline-custom joinType">
 														<span class="labelin">번호이동</span>
 													</label>
 												</span>
 												<span class="c-ick-btn">
-													<input type="radio" hidden name="_joinType" id="joinType3">
+													<input type="radio" hidden name="joinType" id="joinType3" value="2">
 													<label for="joinType3" class="btn m-1 btn-outline-custom joinType">
 														<span class="labelin">신규가입</span>
 													</label>
@@ -431,7 +445,6 @@
 												<span class="sub-tit" id="selectedPlanName" style="overflow: hidden; font-size: 22px; font-weight: 700; letter-spacing: -0.5px; 
 												text-overflow: ellipsis;" data-plan-name="" value=""></span>
 												<!-- 체크용 planNum -->
-												<input type="hidden" id="planNum" name="planNum" value="">
 												<br>
 												<h2 class="main-tit" id="dataDefaultQty" style="margin: 3px 0 3px; font-size: 16px; font-weight: 400; letter-spacing: -0.56px; 
 												padding-right: 100px;"> 데이터 <span id="dataGB"></span> </h2>                                                            
@@ -439,7 +452,7 @@
 											<div class="data" style="position: absolute; top: 35px; right: 0; text-align: right;">
 												<!-- 선택된 요금제 금액 h2의 text에 삽입 -->
 												<h2 class="price theme-color" id="planPrice" style="letter-spacing: -0.2px; display: block; margin-top: 4px; margin-right:50px; 
-												color: #000; font-weight: 700;" data-plan-price="" data-dp=""></h2> 
+												color: #000; font-weight: 700;" data-plan-price2="" data-dp=""></h2> 
 												<p style="color:black; font-size:15px; margin-top:-20px;" class="fw-bold">원/월</p>
 											</div> 
 											<div class="d-flex justify-content-end">
@@ -1278,7 +1291,7 @@
                     </div>
                     <div class="btn-area" style="position: relative; padding-top:17px; float: right;"> 
                         <div class="product-buttons">                      
-                        <button type="button" class="btn btn-solid" id="orderBtn">주문하기</button>
+                        <button type="button" class="btn btn-solid orderBtn" id="orderBtn">주문하기</button>
                     </div> 
                     </div>
                 </div>                    

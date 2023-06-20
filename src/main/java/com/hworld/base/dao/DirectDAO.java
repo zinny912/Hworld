@@ -33,6 +33,8 @@ public interface DirectDAO {
 	//getMonthlyPay - ajax 상품 예상 월 요금 프로시저 
 	public Map<?, ?> getMonthlyPay(Map<String, Object> monthlyPay) throws Exception;
 	
+	//회원 기기변경 휴대폰 구매 시 기존 phoneNum 조회
+	public PlanVO getKingPhoneNum (Integer memberNum) throws Exception;
 	
 	//악세사리 상품 하나 옵션 다수 조회
 	public List<DirectVO> getAccDetail(String slicedCode) throws Exception;

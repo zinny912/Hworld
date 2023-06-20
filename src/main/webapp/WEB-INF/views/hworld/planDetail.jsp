@@ -758,9 +758,7 @@ $(document).ready(function() {
     $('input[name="telecomName"]').change(function() {
         // 선택된 통신사
         let telecomName = $('input[name="telecomName"]:checked').val();
-
-        
-    });
+    	});
     });
     // 조회 버튼 클릭 시 AJAX 요청 전송
     $('#btnQuery').click(function() {

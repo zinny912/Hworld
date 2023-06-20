@@ -96,41 +96,47 @@
                     <form class="needs-validation">
                         <div class="row g-4">
 
+
                             <!-- 가입자 정보 -->
 
                             <div class="col-md-12">
                                 <label for="fname" class="form-label">가입자 이름</label>
-                                <input type="text" class="form-control" id="fname" placeholder="Enter Your Name">
+                                <input type="text" class="form-control" id="name" value="${memberVO.name}">
+                                <input type="hidden" name="memberNum" value="${memberVO.memberNum}">
                             </div>
 
                             <!-- 주민등록번호 -->
-                            <div class="col-md-5">
-                                <label for="fnum" class="form-label">주민등록번호</label>
-                                <input type="text" class="form-control" id="fnum" >
+                            <div class="d-flex col-10">
+                            <div class="col-md-7">
+                                <label for="rrnf" class="form-label">주민등록번호</label>
+                                <input type="text" class="form-control" id="rrnf" value="${memberVO.rrnf}">
                             </div>
-                            <div class="col-md-1 float-bottom pt-2">
+                            <div class="mx-1 float-bottom pt-2">
                                 <label for="lname" class="form-label">&nbsp;</label>
-                                <h2 class="text-center">-</h2>
+                                <h2 class="text-center font-light">-</h2>
                             </div>
-                            <div class="col-md-2">
+                            
+                            <div class="col-md-7 float-bottom">
                                 <label for="lnum" class="form-label">&nbsp;</label>
-                                <input type="text" class="form-control text-center" style="padding : calc(8px + (14 - 8) * ((100vw - 320px) / (1920 - 320))) 10px;" id="lnum">
+                                <input type="password" class="form-control" id="rrnl">
                             </div>
-                            <div class="col-md-2 float-bottom pt-3">
-                                <label for="lnum" class="form-label">&nbsp;</label>
-                                <h6 style="letter-spacing: 10px;">●●●●●●</h6>
-                            </div>
-
+							</div>
                             <!-- 기기변경 폰 번호 -->
                             <div class="col-md-12">
-                                <label for="fname" class="form-label">휴대폰 번호(가입/변경)</label>
-                                <input type="text" class="form-control" id="fname" placeholder="Enter First Name" value="010-5439-7884">
+                            <c:if test="${map.joinType == 2 || map.joinType == 1}" >
+                                <label for="phoneNum" class="form-label">휴대폰 번호</label>
+                                <input type="text" class="form-control" id="phoneNum" placeholder="사용할 휴대폰 번호 입력" name="phoneNum">
+                            </c:if>
+                            <c:if test="${map.joinType == 0}" >
+                                <label for="phoneNum" class="form-label">휴대폰 번호</label>
+                                <input type="text" class="form-control" id="phoneNum" value="${phoneNum.phoneNum}" name="phoneNum">
+                            </c:if>
                             </div>
 
                             <!-- 본인 인증 -->
-                            <div class="col-md-9">
+                            <!-- <div class="col-md-9">
                                 <label for="valid1" class="form-label">본인 인증</label>
-                                <input type="text" class="form-control" id="valid1" placeholder="본인 휴대폰 번호 입력">
+                                <input type="text" class="form-control" id="valid1" placeholder="이메일 인증">
                             </div>
                             
                             <div class="col-md-3" style="padding-left: 0px;">
@@ -145,15 +151,7 @@
                             <div class="col-md-3" style="padding-left: 0px;">
                                 <button class="btn btn-solid-default btn-full" id="btn1" style="padding-left: 4px; padding-right: 4px;">인증번호 확인</button>
                             </div>
-
-                            <!-- <div class="row mt-3">
-                                <h4 class="col-2 my-auto">요금제 </h4>
-                                <h4 class="col-5 my-auto">LTE 데이터 33</h4>
-                                <a href="javascript:void(0)" class="btn btn-danger col-2 mx-auto" data-bs-toggle="modal"
-                                data-bs-target="#resetEmail">요금제 선택</a>
-                            </div> -->
-                            <!-- 수령 방법 -->
- 
+ -->
                             <div class="col-md-10">
                                 <div id="selectSize" class=" product-description border-product row">
                                     <label for="valid1" class="form-label">수령 방법</label>
@@ -165,7 +163,7 @@
                             <!-- 1. 우편번호  -->
                             <div class="col-md-9">
                                 <label for="address1" class="form-label">가입자 주소</label>
-                                <input type="text" class="form-control" id="address1">
+                                <input type="text" class="form-control" id="address1" value="${memberVO.address1}">
                             </div>
 
                             <div class="col-md-3" style="padding-left: 0px;">
@@ -175,21 +173,21 @@
 
                             <!-- 2. 도로명주소/지번  -->
                             <div class="col-md-12 mt-3">
-                                <input type="text" class="form-control" id="address2">
+                                <input type="text" class="form-control" id="address2" name="address2" value="${memberVO.address2}">
                             </div>
 
                             <!-- 3. 상세주소   -->
                             <div class="col-md-12 mt-3">
-                                <input type="text" class="form-control" id="address2">
+                                <input type="text" class="form-control" id="address3" name="address3" value="${memberVO.address3}">
                             </div>
 
                             <!-- 절차 끝 구분선 -->
-                            <hr class="my-lg-5 my-2">
+                            <hr class="my-lg-5">
 
                             <!-- 약관동의 및 가입버튼 -->
                             <div class="col-md-12">
 
-                                <div class="my-2">
+                                <div class="jutify-content-center ">
                                     <textarea class="form-control col-md-12" name="" id="" cols="100" rows="10" readonly>
                                         &lt;H World 본인확인서비스 이용약관 >
 
@@ -308,20 +306,56 @@
                     <div class="your-cart-box">
                         <ul class="list-group mb-3">
                             <li class="list-group-item lh-condensed active " style="background-color: #4f4f4f;">
-                                <h3 class="mt-3 mb-1 text-capitalize">iPhone 14 Plus</h3>
-                                <h4 class="my-1" style="color: #fff;">옐로 l 128G</h6>
-        
+                                <h3 class="mt-3 mb-1 text-capitalize">${map.directName}</h3>
+                                <c:if test="${map.colorCode == 'G'}">
+                                <h4 class="my-1" style="color: #fff;"> 그레이 l ${map.saveCapacity}GB</h4>
+        						</c:if>
+        						<c:if test="${map.colorCode == 'W'}">
+                                <h4 class="my-1" style="color: #fff;"> 화이트 l ${map.saveCapacity}GB</h4>
+        						</c:if>
+        						<c:if test="${map.colorCode == 'B'}">
+                                <h4 class="my-1" style="color: #fff;"> 블랙 l ${map.saveCapacity}GB</h4>
+        						</c:if>
+        						
+        						<c:if test="${map.joinType == 0}">
                                 <h6 class="mt-4" style="color: #fff;">기기변경</h6>
-                                <h6 class="my-1" style="color: #fff;">24개월 할부</h6>
-                                <h6 class="my-1" style="color: #fff;">시니어 요금제</h6>
-                                <h6 class="mt-1 mb-4" style="color: #fff;">요금할인</h6>
+        						</c:if>
+        						<c:if test="${map.joinType == 1}">
+                                <h6 class="mt-4" style="color: #fff;">번호이동</h6>
+        						</c:if>
+        						<c:if test="${map.joinType == 2}">
+                                <h6 class="mt-4" style="color: #fff;">신규가입</h6>
+        						</c:if>
+                                <c:if test="${map.disKind == 0 }">
+                                <h6 class="my-1" style="color: #fff;">24개월약정</h6>
+                                <h6 class="mt-1 mb-4" style="color: #fff;">공시지원금</h6>
+                                <input type="hidden" name="disKind" value="${map.disKind}">
+        						</c:if>
+        						
+        						<c:if test="${map.disKind == 1}">
+                                <h6 class="my-1" style="color: #fff;">12개월</h6>
+                                <h6 class="mt-1 mb-4" style="color: #fff;">선택약정할인</h6>
+                                <input type="hidden" name="disKind" value="${map.disKind}">
+        						</c:if>
+                                
+                                <c:if test="${map.disKind == 2 }">
+                                <h6 class="my-1" style="color: #fff;">24개월</h6>
+                                <h6 class="mt-1 mb-4" style="color: #fff;">선택약정할인</h6>
+                                <input type="hidden" name="disKind" value="${map.disKind}">
+                                </c:if>
+                                
+                               
+                                <h6 class="my-1" style="color: #fff;">${map.planName}</h6>
+                                <input type="hidden" name="palnNum" value="${map.planNum}">
+                                <input type="hidden" name="directCode" value="${map.directCode}">
+                                
                             </li>
                             <li class="list-group-item lh-condensed active">
                                 <div class="row">
                                     <div class="d-flex justify-content-between">
                                         <span class="fw-bold" >월 기기값</span>
                                         <span class="d-flex">
-                                            <h3 class="fw-bold" style="color: #7e7e7e;">153,123</h4>
+                                            <h3 class="fw-bold" style="color: #7e7e7e;" id="out_phonePayPrice"> ${map.out_phonePayPrice }</h3>
                                             <span class="fw-bold col-5">원</span>
                                         </span>
                                     </div>
@@ -330,7 +364,7 @@
                                     <div class="mt-2 d-flex justify-content-between">
                                         <span class="fw-bold" >월 통신요금</span>
                                         <span class="d-flex">
-                                            <h3 class="fw-bold" style="color: #7e7e7e;">153,123</h4>
+                                            <h3 class="fw-bold" style="color: #7e7e7e;" id="out_planPrice">${map.out_planPrice }</h3>
                                             <span class="fw-bold col-5">원</span>
                                         </span>
                                     </div>
@@ -338,7 +372,7 @@
                             </li>
                             <li class="list-group-item d-flex lh-condensed justify-content-between active" style="padding: 20px 20px 15px;">
                                 <span class="fw-bold">예상 월 납부금액</span>
-                                <h2 class="title title1" style="color: var(--theme-color); margin-bottom: 0;">153,123원</h2>
+                                <h2 class="title title1" style="color: var(--theme-color); margin-bottom: 0;" id="totalPrice">${map.totalPrice}원</h2>
                             </li>
         
                         </ul>
@@ -378,7 +412,40 @@
             </div>
         </div>
     </div>   
+    
 <c:import url="../temp/footer.jsp"></c:import>
+
+<script>
+$(document).ready(function() {
+	$.ajax({
+	    type: 'GET',
+	    url: './calMonthlyPay',
+	    dataType: 'JSON',
+	    data: {
+	        directCode: directCode,
+	        disKind: disKind,
+	        planNum: planNum
+	    },
+	    success: function(response) {
+	let out_phonePayPrice = response.out_phonePayPrice;
+	        let out_planPrice = response.out_planPrice;
+	        let totalPrice = (response.out_phonePayPrice*1 + response.out_planPrice*1);
+	        $('#out_phonePayPrice').text('');
+	        $('#out_planPrice').text('');
+	        $('#totalPrice').text('');
+	        $('#out_phonePayPrice').text(out_phonePayPrice.toLocaleString());
+	        $('#out_planPrice').text(out_planPrice.toLocaleString());
+	        $('#totalPrice').text(totalPrice.toLocaleString());
+	        
+	    },
+	    error: function(error) {
+	        // 에러 처리 로직 작성
+	        console.log(error);
+	    }
+	});
+
+});
+</script>
 </body>
 
 </html>

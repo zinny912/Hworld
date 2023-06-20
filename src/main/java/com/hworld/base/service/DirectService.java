@@ -66,6 +66,11 @@ public class DirectService {
 		return directDAO.getMonthlyPay(monthlyPay);
 	}
 	
+	//회원 휴대폰 기기변경 구매시 기존 kingPhoneNum 조회
+	public PlanVO getKingPhoneNum(Integer memberNum) throws Exception{
+		return directDAO.getKingPhoneNum(memberNum);
+	}
+	
 	// 악세사리상세페이지 
 	public List<DirectVO> getAccDetail(String slicedCode) throws Exception {
 		return directDAO.getAccDetail(slicedCode);

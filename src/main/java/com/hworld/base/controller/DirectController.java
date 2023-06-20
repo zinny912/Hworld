@@ -38,6 +38,7 @@ import com.hworld.base.service.DirectService;
 import com.hworld.base.service.OrderService;
 import com.hworld.base.util.Pager;
 import com.hworld.base.vo.DirectVO;
+import com.hworld.base.vo.MemberVO;
 import com.hworld.base.vo.OrderDirectVO;
 import com.hworld.base.vo.OrderVO;
 import com.hworld.base.vo.PlanVO;
@@ -351,6 +352,7 @@ public class DirectController {
 		mv.addObject("list", ar);
 		return mv;
 	}
+	
 	@PostMapping("accessoryUpdate")
 	public ModelAndView setUpdate(ModelAndView mv, String categoryCode, String brandCode, String directName, String directContents,
 			String[] colorCode, String[] saveCapacity, Integer[] directPrice, Integer[] directStock, String[] directCode, DirectVO directVO, MultipartFile[] multipartFiles, String slicedCode) throws Exception{
@@ -445,11 +447,19 @@ public class DirectController {
 	}
 	
 	// 휴대폰 주문 페이지
+	
 	@GetMapping("phoneOrder")
-	public ModelAndView d8() throws Exception{
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("hworld/phoneOrder");
-		return modelAndView;
+	public ModelAndView phoneOrder(@RequestParam Map<String, Object> map, HttpSession session) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		MemberVO memberVO = (MemberVO) session.getAttribute("memberVO");
+		Integer memberNum = memberVO.getMemberNum();
+		
+		PlanVO phoneNum = directService.getKingPhoneNum(memberNum);
+		log.error(phoneNum.toString());
+		mv.addObject("phoneNum", phoneNum);
+		mv.addObject("map", map);
+		mv.setViewName("hworld/phoneOrder");
+		return mv;
 	}
 	
 	
