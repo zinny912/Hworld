@@ -22,12 +22,11 @@
 	<select id="prcTest" statementType="CALLABLE" parameterType="hashMap" resultType="hashMap">
 	
 		{
-			CALL calc_totalPay (
-				#{param1, mode=IN, jdbcType=VARCHAR, javaType=STRING},
-				#{param2, mode=IN, jdbcType=INTEGER, javaType=INTEGER},
-				#{param3, mode=IN, jdbcType=VARCHAR, javaType=STRING},
-				#{out_phonePayPrice, mode=OUT, jdbcType=INTEGER, javaType=INTEGER},
-				#{out_planPrice, mode=OUT, jdbcType=INTEGER, javaType=INTEGER}   
+			CALL pmd_calc_bfPlanPrice (
+				#{param1, mode=IN, jdbcType=INTEGER, javaType=INTEGER},
+				#{param2, mode=IN, jdbcType=VARCHAR, javaType=STRING},
+				#{param3, mode=IN, jdbcType=DATE, javaType=java.util.Date},
+				#{out_result, mode=OUT, jdbcType=INTEGER, javaType=INTEGER}
 			)
 		}
 	</select>
