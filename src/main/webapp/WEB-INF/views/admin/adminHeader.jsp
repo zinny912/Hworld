@@ -83,8 +83,8 @@
                                     </a>
                                 </li>                                
                                 <li>
-                                    <a data-bs-toggle="modal" data-bs-target="#staticBackdrop"
-                                        href="javascript:void(0)">
+                                    <a  data-bs-target="#staticBackdrop"
+                                        href="/member/logout" class="d-block">
                                         <i data-feather="log-out"></i>
                                         <span>로그아웃</span>
                                     </a>

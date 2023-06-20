@@ -45,5 +45,9 @@ public class OrderVO {
     //최종 가격 
     private Integer orderFinalPrice;
     
+    private List<MemberVO> memberVOs;
+    
+    private List<DirectVO> directVOs;
+    
 	}
     
