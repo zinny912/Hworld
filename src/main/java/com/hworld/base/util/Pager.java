@@ -32,6 +32,7 @@ public class Pager {
    private String search;
    
    private String sortType;
+   private Integer memberNum;
 
       
    //시작 index 번호를 계산하는 메서드

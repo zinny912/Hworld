@@ -26,5 +26,7 @@ public class TelephoneVO {
 	private Date stopStartDate;
 	private Date stopEndDate;
 	private Integer disKind;
+	private String directCode;
+	private Date planChangeDate; //청구내역에 존재하는 요금 변경 날짜 입력
 	
 }	

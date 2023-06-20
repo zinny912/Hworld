@@ -1,7 +1,15 @@
 $(document).ready(function() {
 
+    console.log('myPage js 실행');
 
-
+    //대표회선의 납부금액 합계 구하기 - 미납금액의 총합
+    let totalPrice = 0;
+    $('.unpaid').each(function(){
+        let value = $(this).text().replace(/[^0-9]/g, '');
+        console.log(value);
+        totalPrice += parseInt(value);
+        $('#totalUnpaid').text(totalPrice.toLocaleString()+" 원");
+    })
 
 });
 //document.ready 끝
@@ -15,17 +23,90 @@ $('#insPayment').click(function(){
 })
 
 
+//비밀번호 변경 버튼을 누르고, 확인을 누른 경우
+$('#updatePwBtn').click(function(){
+    console.log('비밀번호 변경 클릭');
+
+    let pw = $('#pw').val();
+    let pwCheck = $('#pwCheck').val();
+
+    chkPw = isEmpty(pw);
+    chkPwCheck = isEmpty(pwCheck);
+
+    if(chkPw && chkPwCheck && pw == pwCheck){
+        //폼 전송
+        $('#updatePwForm').submit();
+    }else{
+        alert("값을 확인해주세요");S
+        $('#pw').val('');
+        $('#pwCheck').val('');
+    }
+
+})
+
+
+//정보 변경 버튼을 누르고, 확인을 누른 경우
+$('#updateInfoBtn').click(function(){
+    console.log('정보 변경 클릭');
+
+    let tel = $('#tel').val();
+    let address1 = $('#address1').val();
+    let address2 = $('#address2').val();
+    let address3 = $('#address3').val();
+
+    chkTel = isEmpty(tel);
+    chkAdd1 = isEmpty(address1);
+    chkAdd2 = isEmpty(address2);
+    chkAdd3 = isEmpty(address3);
+
+    if(chkTel && chkAdd1 && chkAdd2 && chkAdd3){
+        //폼 전송
+        $('#updateInfoForm').submit();
+    }else{
+        alert("값을 입력해주세요");
+        $('#tel').val('');
+        $('#address1').val('');
+        $('#address2').val('');
+        $('#address3').val('');
+    }
+
+})
 
 
 
+//유효성 검사
+//전화번호 11자리, 숫자만 입력
+$('#tel').on("blur", function() {
+    //숫자만 입력되게 하는 정규식
+    let checkValue = $(this).val().replace(/[^\d]/g, "");
+    $(this).val(checkValue);
+    
+    let length = checkValue.length;
 
-
-
-
+    if(length != 11) {
+        //this.setCustomValidity("전화번호는 11자리여야 합니다.");
+        //alert("전화번호는 11자리여야 합니다.");
+        $('#tel').val("");
+        $('#telResult').empty();
+        $('#telResult').append('<p class="theme-color">전화번호는 11자리여야 합니다.</p>');
+    }else{
+        $('#telResult').empty();
+    }
+});
 
 
 
 //////함수부
+
+
+//빈값 체크
+function isEmpty(value){
+    if(typeof value == "undefined" || value == null || value == '')
+        return false;
+    else
+        return true;
+}
+
 
 //비밀번호?
 function fnSubmit() {
@@ -108,4 +189,3 @@ function execution_daum_address(){
 }
 
 
-console.log('myPage js 실행');
