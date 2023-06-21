@@ -76,7 +76,7 @@ public class OrderController {
 		ModelAndView mv = new ModelAndView();
 		
 		payVO.setMemberNum(orderVO.getMemberNum());
-		payVO.setOrderFinalPrice(orderVO.getOrderFinalPrice());
+		payVO.setOrderFinalPrice(payVO.getOrderFinalPrice());
 		payVO.setOrderNum(orderVO.getOrderNum());
 	
 		
