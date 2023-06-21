@@ -35,7 +35,7 @@
 	
 	<!-- 회선이 있는 회원의 id/pw 업데이트 -->
 	<update id="setMemberInitUpdate" parameterType="MemberVO">
-		UPDATE MEMBER SET EMAIL=#{email}, PW=#{pw}
+		UPDATE MEMBER SET EMAIL=#{email}, PW=#{pw}, MEMBERSTATE=1
 		WHERE MEMBERNUM=#{memberNum}
 	</update>
 	

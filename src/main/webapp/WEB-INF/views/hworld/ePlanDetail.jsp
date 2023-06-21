@@ -120,28 +120,31 @@
                                 <div class="justify-content-start" style="margin-top:-20px;">
                                     <a href="zyougeumje2_detail_edit.html" class="me-3">수정</a>
                                     <a href="javascript:void(0)" data-bs-toggle="modal"
-                                                    data-bs-target="#bugadel">삭제</a>
+                                                    data-bs-target="#extraDel">삭제</a>
                                 </div>
                                 <div class="details-image-concept" >
-                                    <span class="text-start" style="font-size:30px; font-weight: 700;">V컬러링 </span>
-                                    <span style="font-size:30px; font-weight: 500;"> (보이는 컬러링)</span>
+                                    <span class="text-start" style="font-size:30px; font-weight: 700;">${eplan.extraPlanName}</span>
+                                    <span style="font-size:30px; font-weight: 500;"> </span>
                                 </div>
-                                <h3 class="text-start" style="color:gray;"> 이제는 눈으로 컬러링을 들어보세요 </h3>
+                                <h3 class="text-start" style="color:gray;"> ${eplan.extraPlanExplainS} </h3>
                                 <div class="container zcustom-box">
                                     <ul>
                                         <li class="">
-                                            <h3> 전화를 걸면 전화를 거는 사람에게 영상이 보이는 컬러링 </h3>
+                                        <div style="width:85%; height:30%; padding-left:30%; padding-right:10%;">
+                                        <img src="/assets/images/headphone.png">
+                                        </div>
+                                            <h3> ${eplan.extraPlanExplainM} </h3>
                                         </li>
                                         <li>  
                                             <div class="container text-center" style="margin-right:-140px;">
                                             <div>
-                                                <h2 class="theme-color">월 3,300원</h2> 
+                                                <h2 class="theme-color">월 ${eplan.extraPrice} 원</h2> 
                                                     <span class="label-text">(부가세 포함)</span>
                                                 <div class="" style="margin-top:30px;">
                                                 <div class="product-buttons justify-content-center">
                                                 <!-- 신청 모달 버튼  start -->
                                                 <a href="javascript:void(0)" data-bs-toggle="modal"
-                                                    data-bs-target="#bugajoin" class="btn btn-solid hover-solid btn-animation rounded-3">
+                                                    data-bs-target="#extraJoin" class="btn btn-solid hover-solid btn-animation rounded-3">
                                                     <span>신청하기</span> 
                                                 </a>
                                                 </div>
@@ -170,14 +173,16 @@
                             <div class="nav nav-tabs" id="nav-tab" role="tablist">
                                 <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab"
                                     data-bs-target="#desc" type="button">상세정보</button>
+                                    
                             </div>
                         <div class="tab-content" id="nav-tabContent">
                             <div class="tab-pane fade show active" id="desc">
                                 <div class="shipping-chart">
                                     <div class="part">
-                                        <h4 class="inner-title mb-2">유의사항 쓰세요</h4>
-                                        <p class="font-light fs-6">써.
-                                        </p>
+                                        <h4 class="inner-title mb-2">
+                                    ${eplan.extraPlanExplain}
+                                    </h4>
+                                   
                                     </div>
                                 </div>
                             </div>
@@ -191,7 +196,7 @@
     <!-- Shop Section end -->
 
 <!-- 부가서비스 신청 모달창 start -->
-    <div class="modal fade payment-modal" id="bugajoin">
+    <div class="modal fade payment-modal" id="extraJoin">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
@@ -200,7 +205,7 @@
                 <div class="modal-body">
                     <form>
                         <div class="mb-4">
-                            <p> 해당 부가서비스는 월 3,300원의 유료서비스로, 신청일부터 서비스가 시작되며 요금이 부과됩니다.</p>
+                            <p class="fs-5"> 
                             <div class="category-option">
                                 <div class="accordion category-name" id="accordionExample"> 
                                     <div class="accordion-item category-rating">
@@ -211,9 +216,11 @@
                                         </h4>
                                         <div id="collapseThree" class="accordion-collapse collapse show" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
                                             <div class="accordion-body category-scroll">
-                                                <ul class="category-list">
-                                                    <li>
-                                                        <p>요금제 변경일을 기준으로 1개월 내에는 <br>다른 요금제로 변경이 불가합니다.</p>
+                                                <ul class="category-list ">
+                                                    <li class="text-start">
+                                                    <p>해당 부가서비스는 <br>월 ${eplan.extraPrice}원의 유료서비스로,<br> 신청일부터 서비스가 시작되며 요금이 부과됩니다.</p>
+                                                        <p>부가서비스 신청 후 해지시 <br>요금은 일괄계산되어 청구금액에 포함됩니다.</p>
+                                                        
                                                     </li>
                                                 </ul>
                                             </div>
@@ -241,7 +248,7 @@
     <!-- Add number Modal End -->
 
     <!-- 부가서비스 삭제 모달창 start -->
-    <div class="modal fade payment-modal" id="bugadel">
+    <div class="modal fade payment-modal" id="extraDel">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
@@ -343,6 +350,14 @@
 </section>
 <!-- recommend product 1 end -->
 <c:import url="../temp/footer.jsp"></c:import>
+
+
+
+
+
+
+
+
 </body>
 
 </html>

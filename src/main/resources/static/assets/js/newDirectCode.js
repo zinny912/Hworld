@@ -77,6 +77,12 @@ $('.optionArea').on('click', 'li[name="colorCode"], label.capacity', function() 
           $('#saveCapacity').val(selCapacity);
           $('#directStock').val(directStock);
           $('#directCode').val(directCode); // directCode 값을 설정
+          
+          $('#colorCode').val(directCode.substring(6,7));
+          $('#saveCpapcity').val(directCode.substring(9,12));
+          let directName1 = $('#item_'+directCode).attr('data-direct-name');
+          $('#selectedDirectName').val(directName1);
+			
         }else{
           //재고 없으면 용량선택 옵션 해제 및 인접 label tag의 css 해제 + saveCapaicty 값 해제
           $('input[name=saveCapacity]').prop('checked', false);
@@ -95,12 +101,73 @@ $('.optionArea').on('click', 'li[name="colorCode"], label.capacity', function() 
     })
     //titlebox directCode와 madeCode가 일치하는 것 찾는 반복문 종료
 
+	  
     //월 요금계산 이벤트 강제 실행
     $('#directCode').trigger('change');
   }
 });
 //색상옵션을 선택하거나, 용량옵션을 선택한 경우 이벤트 끝
 
+
+// 체크박스 변경 이벤트 리스너 추가
+    let radioButtons = document.getElementsByName('disKind');
+    for (var i = 0; i < radioButtons.length; i++) {
+      radioButtons[i].addEventListener('change', disKindChange);
+    }
+    let radioButtons1 = document.getElementsByName('joinType');
+    for (var i = 0; i < radioButtons.length; i++) {
+      radioButtons1[i].addEventListener('change', joinTypeChange);
+    }
+
+    // 체크박스 변경 이벤트 핸들러
+    function disKindChange(event) {
+      var selectedValue = event.target.value;
+      
+      // 선택한 값에 따라 동작 수행
+      if (selectedValue === '1') {
+        // 12개월 할인 선택 시 수행할 동작
+        console.log('12개월 할인 선택');
+        $('#disKind').val(selectedValue);
+        
+      } else if (selectedValue === '2') {
+        // 24개월 할인 선택 시 수행할 동작
+        console.log('24개월 할인 선택');
+        $('#disKind').val(selectedValue);
+      } else if (selectedValue === '0') {
+		  console.log('공시지원금 선택')
+		  $('#disKind').val(selectedValue);
+	  } else {
+		  
+		 alert("할인유형을 선택하세요");
+	  }
+    }
+    
+    // 체크박스 변경 이벤트 핸들러
+    function joinTypeChange(event) {
+      var selectedValue1 = event.target.value;
+      
+      // 선택한 값에 따라 동작 수행
+      if (selectedValue1 === '1') {
+        // 12개월 할인 선택 시 수행할 동작
+        console.log('번호이동');
+        $('#joinType').val(selectedValue1, "번호이동");
+        
+      } else if (selectedValue1 === '2') {
+        // 24개월 할인 선택 시 수행할 동작
+        console.log('신규가입');
+        $('#joinType').val(selectedValue1);
+      } else if (selectedValue1 === '0') {
+		  console.log('기기변경')
+		  $('#joinType').val(selectedValue1);
+	  } else {
+		  
+		 alert("가입유형을 선택하세요");
+	  }
+    }
+    
+    
+    
+    
 
 //월 요금계산 준비
 $('#directCode, input[name="disKind"], input[name="planNum"]').on('change', function() {
@@ -132,15 +199,21 @@ $('#directCode, input[name="disKind"], input[name="planNum"]').on('change', func
               planNum: planNum
           },
           success: function(response) {
-      let out_phonePayPrice = response.out_phonePayPrice;
-              let out_planPrice = response.out_planPrice;
-              let totalPrice = (response.out_phonePayPrice*1 + response.out_planPrice*1);
+  			let out_phonePayPrice = response.out_phonePayPrice;
+          	let out_planPrice = response.out_planPrice;
+          	let totalPrice = (response.out_phonePayPrice*1 + response.out_planPrice*1);
               $('#out_phonePayPrice').text('');
               $('#out_planPrice').text('');
               $('#totalPrice').text('');
               $('#out_phonePayPrice').text(out_phonePayPrice.toLocaleString());
               $('#out_planPrice').text(out_planPrice.toLocaleString());
               $('#totalPrice').text(totalPrice.toLocaleString());
+              var totalPriceAll= $('#totalPrice').text();
+              $('#totalPriceAll').val(totalPriceAll);
+              var outPhonePrice = $('#out_phonePayPrice').text();
+              $('#outPhonePrice').val(outPhonePrice);
+              var outplanPrice = $('#out_planPrice').text();
+              $('#outplanPrice').val(outplanPrice);
               
           },
           error: function(error) {
@@ -157,13 +230,13 @@ $('#directCode, input[name="disKind"], input[name="planNum"]').on('change', func
 
   
 //가입하기 버튼 눌렀을 때
-$('#completeForm').click(function(){
-  console.log('가입하기 버튼');
+$('#orderBtn').click(function(){
+  console.log('주문하기 버튼');
   //let $frm = $('#appForm').serialize();
   //alert($frm);
 
   //가입폼 전송
-  $('#appForm').submit();
+  $('#buyForm').submit();
 })
 
 
@@ -195,9 +268,13 @@ function onSelectConfirm() {
 function setSelectedPlan(planName, planPrice, dataGB, planNum) {
   // 선택한 요금제, 가격, 데이터 정보 가져오기
   document.getElementById('selectedPlanName').textContent = planName;
-  document.getElementById('planPrice').textContent = planPrice;
+  document.getElementById('planPrice').setAttribute('data-plan-price2', planPrice);
+  document.getElementById('planPrice').textContent=planPrice;
   document.getElementById('planNum').value = planNum;
-  
+  var planPrice2 = $('#planPrice').attr('data-plan-price2');
+	$('#planPrice1').val(planPrice2);
+	$('#planName2').val(planName);
+          
   // 데이터 정보 처리
   const dataGBElement = document.getElementById('dataGB');
   if (dataGB === '무제한') {

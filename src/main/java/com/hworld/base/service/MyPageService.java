@@ -14,6 +14,7 @@ import com.hworld.base.dao.MyPageDAO;
 import com.hworld.base.util.Pager;
 import com.hworld.base.vo.BillVO;
 import com.hworld.base.vo.MemberVO;
+import com.hworld.base.vo.TelephoneVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -28,7 +29,21 @@ public class MyPageService {
 	private BCryptPasswordEncoder pwEncoder;
 	
 	//납부, 미납내역 출력하기
-	public List<BillVO> getPMDList(Pager pager, HttpSession session) throws Exception{
+//	public List<BillVO> getPMDList(Pager pager, HttpSession session) throws Exception{
+//		
+//		MemberVO memberVO = (MemberVO)session.getAttribute("memberVO");
+//		pager.setMemberNum(memberVO.getMemberNum());
+//		
+//		Long totalCount = myPageDAO.getTotalBill(pager);
+//		pager.makeNum(totalCount);
+//		pager.makeStartRow();
+//		
+//		
+//		return myPageDAO.getPMDList(pager);
+//	}
+	
+	//telephoneVO 기반 납부, 미납내역 출력하기
+	public List<TelephoneVO> getTPList(Pager pager, HttpSession session) throws Exception{
 		
 		MemberVO memberVO = (MemberVO)session.getAttribute("memberVO");
 		pager.setMemberNum(memberVO.getMemberNum());
@@ -37,8 +52,7 @@ public class MyPageService {
 		pager.makeNum(totalCount);
 		pager.makeStartRow();
 		
-		
-		return myPageDAO.getPMDList(pager);
+		return myPageDAO.getTPList(pager);
 	}
 	
 	
