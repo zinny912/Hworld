@@ -133,7 +133,7 @@ $('#productDelete').click(function() {
     });
 });
 
-// 휴대폰 상품 삭제 버튼 클릭 이벤트 처리
+// 악세사리 상품 삭제 버튼 클릭 이벤트 처리
 $('#productDelModal2').click(function() {
     const dc = $('.direct-item').data('direct-code');
     $('#modalDelId2').val(dc);

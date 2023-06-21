@@ -115,7 +115,7 @@
                                     <div class="front">
                                         <a href="./accessoryDetail?slicedCode=${direct.slicedCode}">
                                             <img src="/assets/images/electronics/product/${direct.slicedCode}thumb.jpg"
-                                                class="img-fluid" alt="">
+                                                class="bg-img" alt="">
                                         </a>
                                     </div>
                                 

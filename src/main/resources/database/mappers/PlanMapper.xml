@@ -72,6 +72,8 @@
 		{
 			CALL check_changePlan (
 			#{serialNum, mode=IN, jdbcType=INTEGER, javaType=INTEGER},
+			#{planNum, mode=IN, jdbcType=VARCHAR, javaType=STRING},
+			#{cancelPrice,mode=OUT, jdbcType=INTEGER, javaType=INTEGER},
 			#{result,mode=OUT, jdbcType=INTEGER, javaType=INTEGER}
 			 )
 		}
@@ -111,9 +113,11 @@ WHERE TAPHONENUM = #{taPhoneNum} AND TELECOMNAME = #{telecomName}
  	SET DISCODE=#{disCode}, PLANNAME=#{planName}, PLANPRICE=#{planPrice}, DATACAPACITY=#{dataCapacity},CATEGORYCODE=#{categoryCode}, PLANEXPLAIN=#{planExplain}, PLANEXPLAINS=#{planExplainS}
  </update>
  
- <delete id="setPlanDelete" parameterType="PlanVO">
- 	DELETE FROM PLAN WHERE PLANNUM=#{planNum}
- </delete>
+ <update id="setPlanDisabled" parameterType="PlanVO">
+ 	UPDATE PLAN 
+ 	SET DISABLED = 0 WHERE PLANNUM=#{planNum}
+ 	
+ </update>
  
  <!-- 부가서비스 -->
  
@@ -128,11 +132,20 @@ WHERE TAPHONENUM = #{taPhoneNum} AND TELECOMNAME = #{telecomName}
     WHERE EXTRAPLANNUM=#{extraPlanNum}
 </select>
 
-<select id="getNoteNameExtraPlan" resultType="ExtraPlanVO">
-    SELECT DISTINCT CC.NOTE AS note
-    FROM EPLAN EP
-    LEFT JOIN COMMONCODE CC ON (EP.CATEGORYCODE = CC.CODE) AND (CC.TYPE = SUBSTRING(#{extraPlanNum},1,1))
-    WHERE EP.EPLANNUM = #{extraPlanNum}
+<insert id="setAddServ" statementType="CALLABLE" parameterType="hashMap" >
+		{
+			CALL insert_addServ (
+				#{serialNum, mode=IN, jdbcType=INTEGER, javaType=INTEGER},
+				#{extraPlanNum, mode=IN, jdbcType=VARCHAR, javaType=STRING}
+			)
+		}
+</insert>
+
+<select id="searchExtraPlan" resultType="hashMap" parameterType="hashMap">
+	SELECT * FROM TELEPHONE_EPLAN TE
+	INNER JOIN TELEPHONE T ON T.SERIALNUM = TE.SERIALNUM 
+	WHERE T.SERIALNUM = #{serialNum} AND TE.EXTRAPLANNUM = #{extraPlanNum} 
+	AND T.MEMBERNUM = #{memberNum} AND T.KINGCHECK = 1
 </select>
 
 <insert id="setExtraPlanInsert" parameterType="ExtraPlanVO">
