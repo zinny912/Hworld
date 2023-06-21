@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 import com.hworld.base.util.Pager;
 import com.hworld.base.vo.BillVO;
 import com.hworld.base.vo.MemberVO;
+import com.hworld.base.vo.TelephoneVO;
 
 @Mapper
 public interface MyPageDAO {
@@ -17,6 +18,9 @@ public interface MyPageDAO {
 	
 	//회원의 모든 billVO 불러오기
 	public List<BillVO> getPMDList(Pager pager) throws Exception;
+	
+	//회원의 청구서가 있는 Telephone 정보 가져오기
+	public List<TelephoneVO> getTPList(Pager pager) throws Exception;
 	
 	//회원의 대표회선 정보 불러오기
 	public Map<String, Object> getKingDetail(MemberVO memberVO) throws Exception;

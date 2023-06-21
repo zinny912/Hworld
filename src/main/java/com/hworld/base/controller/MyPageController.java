@@ -17,6 +17,7 @@ import com.hworld.base.service.MyPageService;
 import com.hworld.base.util.Pager;
 import com.hworld.base.vo.BillVO;
 import com.hworld.base.vo.MemberVO;
+import com.hworld.base.vo.TelephoneVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -40,10 +41,11 @@ public class MyPageController {
 		//기능
 		////요금 청구/납부 - 납부내역, 미납내역, 대표회선정보를 나타내야함
 		//납부/미납 리스트
-		List<BillVO> billList = myPageService.getPMDList(pager, session);
+		//List<BillVO> billList = myPageService.getPMDList(pager, session);
+		List<TelephoneVO> TPList = myPageService.getTPList(pager, session);
 		
 		//대표회선 정보
-		Map<String, Object> kingNumInfo = myPageService.getKingDetail(session);
+		Map<String, Object> kingTP = myPageService.getKingDetail(session);
 		
 		////가입 정보
 		
@@ -58,8 +60,9 @@ public class MyPageController {
 		////회원 탈퇴
 		
 		//정보 담기
-		mv.addObject("billList", billList);
-		mv.addObject("kingVO", kingNumInfo);
+		//mv.addObject("billList", billList);
+		mv.addObject("TPList", TPList);
+		mv.addObject("kingTP", kingTP);
 		
 		mv.setViewName("hworld/myPage");
 		return mv;
@@ -68,9 +71,14 @@ public class MyPageController {
 	
 	//요금 청구/납부 - 즉시 납부 페이지(납부 영수증 표시)
 	@GetMapping("instantPay")
-	public ModelAndView setPaymentAdd(HttpSession session) throws Exception{
+	public ModelAndView setPaymentAdd(Pager pager, HttpSession session) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		
+		List<TelephoneVO> TPList = myPageService.getTPList(pager, session);
+		Map<String, Object> kingTP = myPageService.getKingDetail(session);
+		
+		mv.addObject("TPList", TPList);
+		mv.addObject("kingTP", kingTP);
 		mv.setViewName("hworld/invoiceInstantly");
 		return mv;
 	}

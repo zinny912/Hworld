@@ -7,9 +7,9 @@ import lombok.Setter;
 @Setter
 public class EPlanVO {
 	//부가서비스VO 
-    private Integer ePlanNum;
+    private String ePlanNum;
     private String ePlanName;
-    private Integer ePlanPrice;
+    private Integer ePrice;
     private String ePlanExplain;
     private String ePlanExplainS;
     private String ePlanExplainM;

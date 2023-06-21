@@ -290,7 +290,7 @@
                                 <c:if test="${memberVO.adminCheck == 0 }">
                                     <div class="admin-update-delete d-flex justify-content-end">
                                         <a href="./directUpdate?slicedCode=${param.slicedCode}" class="me-3">수정</a>
-                                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#productdel" >삭제</a>
+                                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#productdel" id="productDelModal">삭제</a>
                                     </div>    
                                 </c:if>
 								<div id="directList">
@@ -1322,12 +1322,13 @@
                     <div class="mb-4">
                      <h3>정말 삭제하시겠습니까? </h3> <h5>삭제 후에는 복구가 불가합니다.</h5>
                      <input type="hidden" id="modalDelId" name="directCode" value="">
-                     <input type="hidden" name="slicedCode" value="${param.slicedCode}">
+                     <input type="hidden" id="modalDelSC" name="slicedCode" value="${param.slicedCode}">
                     </div>
             </div>
             <div class="modal-footer pt-0 text-end d-block">
             	<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-                <button type="button" class="btn btn-solid-default rounded-1" id="productDelete" onclick="productDelete()">삭제</button>
+                <button type="button" class="btn btn-solid-default rounded-1" id="productDelete">삭제</button>
+				<!-- onclick="productDelete()" -->
             </div>
         </div>
     </div>

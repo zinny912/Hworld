@@ -13,6 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.hworld.base.util.Pager;
 import com.hworld.base.vo.BillVO;
 import com.hworld.base.vo.MemberVO;
+import com.hworld.base.vo.TelephoneVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -53,8 +54,33 @@ class MyPageDAOTest {
 	}
 	
 	
-	//getKingDetail
+	//getPMDList2
 	@Test
+	void getTPList() throws Exception{
+		Pager pager = new Pager();
+		
+		//pager 처리할 총 갯수 선택
+		pager.setMemberNum(98);
+		Long totalCount = myPageDAO.getTotalBill(pager);
+		
+		pager.makeNum(totalCount);
+		pager.makeStartRow();
+		List<TelephoneVO> ar =  myPageDAO.getTPList(pager);
+		
+		assertNotEquals(0, ar.size());
+		
+		for (TelephoneVO telephoneVO : ar) {
+			log.error(" ::::::::::::: phoneNum {} ", telephoneVO.getPhoneNum());
+			for (BillVO billVO : telephoneVO.getBillVOs()) {
+				log.error(" ::::::::::::::::::: billVO {} ", billVO.getPayMonth());
+			}
+		}
+		
+	}
+		
+	
+	//getKingDetail
+	//@Test
 	void getKingDetail() throws Exception{
 		MemberVO memberVO = new MemberVO();
 		memberVO.setMemberNum(98);

@@ -20,6 +20,7 @@ public class BillVO {
 	private Integer phonePayPrice; //월 기기 납부금액
 	private Integer phoneSplitTax; //단말기 분할 상환 수수료
 	private Integer phoneSplitPrice; //단말기 분할 상환금
+	private Integer disPlanPrice; //선택약정 받은 통신요금
 	private Integer ePlanPrice; //부가서비스 금액
 	private Integer totalPrice; //월 납부금액
 	private Integer overduePrice; //연체료
