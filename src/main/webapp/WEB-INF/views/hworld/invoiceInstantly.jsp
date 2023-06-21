@@ -76,8 +76,17 @@
 						<!-- form Start -->
 						<!-- 미납금이 있는 모든 회선 갯수 구하기 -->
 						<c:set var="TPCount" value="${TPList.size()}"/>
-						<%-- <p> 미납금이 있는 telephoneVO 개수 : ${TPCount}</p> --%>
+						<!-- <p> 미납금이 있는 telephoneVO 개수 : ${TPCount}</p> -->
 						
+						<!-- 작동 안하는 되돌리기 조건 -->
+						<!-- <c:if test="${TPCount ne 0}">
+							${kingTP.NAME}(${formattedPhoneNum}) 회원님의 미납 내역은 없습니다.
+							<div class="invoice-footer text-end">
+								<div class="text-end">
+									<a href="./home" class="btn btn-solid-default rounded-2">마이페이지</a>
+								</div>
+							</div>
+						</c:if> -->
 						
 						
 						<c:forEach begin="0" end="${TPCount - 1}" varStatus="tpStatus">
@@ -192,13 +201,14 @@
 							<form action="./instantPay" method="post" id="updateBill">
 								<input type="hidden" id="invoiceNum">
 								<input type="hidden" id="totalPrice">
-								<input type="text" id="billNums" name="billNum">
+								<input type="hidden" id="billNums" name="billNum">
 							</form>
 						</div>
 						<!-- 인풋값 끝 -->
 						<!-- form End -->
 						<div class="invoice-footer text-end">
 							<div class="text-end">
+								<a href="./home" class="btn btn-solid-default rounded-2 me-2">마이페이지</a>
 								<a href="javascript:void(0)" class="btn btn-solid-dark rounded-2 me-2"
 								onclick="window.print();">출력</a>
 								<a href="javascript:void(0)" class="btn btn-solid-default rounded-2" id="instantlyPay">즉시 납부</a>

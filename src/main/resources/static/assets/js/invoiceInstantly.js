@@ -26,10 +26,6 @@ $('#instantlyPay').click(function(){
     $('#totalPrice').val(total);
     $('#invoiceNum').val(formattedDateTime);
 
-    // console.log($('#totalPrice').val(total));
-    // console.log($('#invoiceNum').val(formattedDateTime));
-
-
     //결제 후 작업
     let billNums = [];
 
@@ -70,7 +66,7 @@ function iamport(){
 		msg += '카드 승인번호 : ' + response.apply_num;
 		console.log('성공');
 		alert(msg);
-        
+
         //업데이트를 수행할 updateBill form을 넘김
 		$('#updateBill').submit();
 		} else {

@@ -222,7 +222,7 @@
                                                         </tbody>
                                                     </table>
                                                     <!-- Pagination Box Start -->
-                                                    <nav class="page-section">
+                                                    <!-- <nav class="page-section">
                                                         <ul class="pagination">
                                                             <li class="page-item">
                                                                 <a class="page-link" href="javascript:void(0)" aria-label="Previous">
@@ -248,7 +248,7 @@
                                                                 </a>
                                                             </li>
                                                         </ul>
-                                                    </nav>
+                                                    </nav> -->
                                                     <!-- Pagination Box End -->
                                                 </div>
                                             </div> 
@@ -284,7 +284,7 @@
                                                         </tbody>
                                                     </table>
                                                     <!-- Pagination Box Start -->
-                                                    <nav class="page-section">
+                                                    <!-- <nav class="page-section">
                                                         <ul class="pagination">
                                                             <li class="page-item">
                                                                 <a class="page-link" href="javascript:void(0)" aria-label="Previous">
@@ -310,7 +310,7 @@
                                                                 </a>
                                                             </li>
                                                         </ul>
-                                                    </nav>
+                                                    </nav> -->
                                                     <!-- Pagination Box End -->
                                                 </div>
                                             </div>
