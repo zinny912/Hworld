@@ -236,23 +236,37 @@ public class MemberController {
 		return "/hworld/forgotResultPw";
 	}
 	
+	// 이메일 중복 체크
+	@PostMapping("emailCheck")
+	@ResponseBody
+	public String emailCheck(String email) throws Exception {
+		
+		int result = memberService.emailCheck(email);
+		
+		if(result != 0) {
+			return "fail"; // 중복 아이디 존재
+		} else {
+			return "success"; // 중복 아이디 없음
+		}
+	} // memberIdCheckPOST() 종료
+	
 	
 	
 	// 이메일(아이디) 중복체크(Get)
-	@GetMapping("emailCheck")
-	@ResponseBody
-	public boolean emailCheck(MemberVO memberVO) throws Exception {
-		log.debug("============ID 중복체크============");
-		boolean check = false;
-		
-		memberVO = memberService.emailCheck(memberVO);
-		
-		if(memberVO == null) {
-			check=true;
-		}
-		
-		return check;
-	}
+//	@GetMapping("emailCheck")
+//	@ResponseBody
+//	public boolean emailCheck(MemberVO memberVO) throws Exception {
+//		log.debug("============ID 중복체크============");
+//		boolean check = false;
+//		
+//		memberVO = memberService.emailCheck(memberVO);
+//		
+//		if(memberVO == null) {
+//			check=true;
+//		}
+//		
+//		return check;
+//	}
 	
 	// 로그인 페이지(Get)
 	@GetMapping("login")

@@ -20,7 +20,10 @@ public interface MemberDAO {
 	public int setMemberInitUpdate(MemberVO memberVO) throws Exception;
 	
 	//
-	public MemberVO emailCheck(MemberVO memberVO) throws Exception;
+//	public MemberVO emailCheck(MemberVO memberVO) throws Exception;
+	
+	/* 아이디 중복 검사 */
+	public int emailCheck(String email) throws Exception;
 	
 	public int memberPwCheck(MemberVO memberVO) throws Exception;
 	
