@@ -6,7 +6,7 @@
  <mapper namespace="com.hworld.base.dao.PlanDAO">
  
  <select id="getPlanList" resultType="PlanVO">
-		SELECT P.PLANNUM, P.PLANNAME, P.PLANPRICE, P.DATACAPACITY, P.CATEGORYCODE, P.PLANEXPLAIN, P.PLANEXPLAINS, D.DISPERCENT 
+		SELECT P.PLANNUM, P.PLANNAME, P.PLANPRICE, P.DATACAPACITY, P.CATEGORYCODE, P.PLANEXPLAIN, P.PLANEXPLAINS, D.DISPERCENT, P.DISABLED
 		FROM PLAN P
 		LEFT JOIN DISCODE D
 		ON(P.DISCODE=D.DISCODE)
@@ -23,6 +23,16 @@
  	SELECT * FROM PLAN
  	WHERE PLANNUM=#{planNum}
  </select>
+ 
+ <!-- 추천상품 -->
+ <select id="recommendPlan" resultType="PlanVO" parameterType="PlanVO">
+	SELECT *
+	FROM PLAN
+	WHERE NOT PLANNUM = #{planNum}
+	ORDER BY PLANPRICE DESC
+	LIMIT 5
+ </select>
+ 
 <!-- 요금제 대표회선인지 확인 -->
 <select id="getKingPlanNum" resultType="PlanVO" parameterType="Integer">
 	SELECT T.kingCheck, P.planNum
@@ -47,6 +57,25 @@
 	WHERE NAME=#{name} AND RRNF=#{rrnf} AND RRNL=#{rrnl}
 </select>
 
+<!-- 요금제 변경 프로시저 -->
+<insert id="setPlanChange" statementType="CALLABLE" parameterType="BillVO" >
+		{
+			CALL pmd_calc_bfPlanPrice (
+				#{serialNum, mode=IN, jdbcType=INTEGER, javaType=INTEGER},
+				#{planNum, mode=IN, jdbcType=VARCHAR, javaType=STRING},
+				#{nowDate, mode=IN, jdbcType=VARCHAR, javaType=STRING}
+			)
+		}
+</insert>
+
+<!-- 기존 사용중인 요금제 정보 회선번호까지 불러오기 -->
+<select id="getBeforePlan" resultType="PlanVO" parameterType="Integer">
+	SELECT P.PLANNUM, P.PLANNAME, P.PLANPRICE, P.DATACAPACITY, M.MEMBERNUM, T.SERIALNUM , T.PHONENUM FROM PLAN P
+	JOIN TELEPHONE T ON T.PLANNUM = P.PLANNUM 
+	JOIN MEMBER M ON T.MEMBERNUM = M.MEMBERNUM
+	WHERE T.KINGCHECK =1 AND M.MEMBERNUM = #{memberNum}
+</select>
+
   <!-- 요금제 추가하면 공통코드 테이블에도 insert 되어야해서 공통코드 테이블 값 가져오는 메서드 필요 -->
  <select id="getCommonCode" resultType="BaseVO">
  	SELECT * FROM COMMONCODE
@@ -58,8 +87,8 @@
  </insert>
  
  <insert id="setInsert" parameterType="PlanVO">
- 	INSERT INTO PLAN (PLANNUM, DISCODE, PLANNAME, PLANPRICE, DATACAPACITY, CATEGORYCODE, PLANEXPLAIN, PLANEXPLAINS)
- 	VALUES(#{planNum},#{disCode}, #{planName}, #{planPrice}, #{dataCapacity}, #{categoryCode}, #{planExplain}, #{planExplainS})
+ 	INSERT INTO PLAN (PLANNUM, DISCODE, PLANNAME, PLANPRICE, DATACAPACITY, CATEGORYCODE, PLANEXPLAIN, PLANEXPLAINS, DISABLED)
+ 	VALUES(#{planNum},#{disCode}, #{planName}, #{planPrice}, #{dataCapacity}, #{categoryCode}, #{planExplain}, #{planExplainS}, 1)
  </insert>
  
 <update id="setPlanUpdate" parameterType="PlanVO">

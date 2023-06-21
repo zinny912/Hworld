@@ -196,8 +196,8 @@
                                 </td>
                                 <td class="pt-3">
                                     <!-- 수량 버튼 만들어봄 -->
-                                    <div  >
-                                        <div class=" d-flex quantity-wrapper " style="padding:5px 0px; justify-content: start;">
+                                    <div>
+                                        <div class=" d-flex quantity-wrapper" style="padding:5px 0px; justify-content: start;">
                                             <button type="button" class="btn quantity-left-minus" style="height:5px; width:5px; padding:10px; margin-top:-6px; ">-</button>
                                             <span class="input-wrapper">
                                                 <input type="text" class="input-number text-center" style="width: 35px; padding:5px 5px; border:1px solid #c7c7c5; border-radius: 5px;"  value="${cart.cartAmount}">

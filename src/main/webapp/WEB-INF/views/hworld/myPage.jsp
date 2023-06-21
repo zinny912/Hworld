@@ -2,7 +2,9 @@
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<!DOCTYPE html>
+    <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+    <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="UTF-8">
@@ -32,7 +34,7 @@
                     <nav>
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item">
-                                <a href="index.html">
+                                <a href="#">
                                     <i class="fas fa-home"></i>
                                 </a>
                             </li>
@@ -122,17 +124,25 @@
                                                     <div class="box">
                                                         <div class="box-title d-flex">
                                                             <h5 class="me-1">대표회선</h5>
-                                                            <h6 class="font-light me-3">010-2222-2222</h6>
+                                                            <c:if test="${not empty kingVO}">
+                                                                <c:set var="phoneNum" value="${kingVO.PHONENUM}" />
+                                                                <c:set var="formattedPhoneNum" value="${fn:substring(phoneNum, 0, 3)}-${fn:substring(phoneNum, 3, 7)}-${fn:substring(phoneNum, 7,11)}" />
+                                                                <h6 class="font-light me-3">${formattedPhoneNum}</h6>
+                                                            </c:if>
                                                             <h5 class="me-1">요금제</h5>
-                                                            <h6 class="font-light me-3">5G 프리미어</h6>
+                                                            <h6 class="font-light me-3">
+                                                                ${kingVO.PLANNAME}
+                                                            </h6>
                                                             <h5 class="me-1">납부 예정 금액</h5>
-                                                            <h6 class="font-light me-3">234,000원</h6>
+                                                            <h6 class="font-light me-3" id="totalUnpaid">
+                                                                
+                                                            </h6>
                                                         </div>                                    
                                                     </div>
                                                 </div>
                                                 <div class="col-md-2">
                                                         <div class="d-flex justify-content-end">
-                                                        <button type="button" id="insPayment" class="btn btn-solid-default btn-sm fw-bold ms-auto" onclick="location.href = './instantPay';">즉시 납부</button>
+                                                        <button type="button" id="insPayment" class="btn btn-solid-default btn-sm fw-bold ms-auto" onclick="location.href = './instantPay';">전체 보기</button>
                                                         <!-- onclick="location.href = '../invoice/invoice-3-baro.html';" -->
                                                     </div>
                                                 </div>
@@ -148,8 +158,8 @@
                                                         type="button">미납 내역</button>
                                                 </div>
                                             </nav>
-                                        </div>           
-                                         
+                                        </div>
+                                        <!-- 대표회선의 내용 출력 -->
                                         <!-- 납부/미납 tab start -->
                                         <div class="tab-content" id="nav-tabContent">
                                         <!-- 납부내역 tab start -->   
@@ -166,40 +176,28 @@
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            <tr>
-                                                                <td>
-                                                                    <p class="m-0" style="color: black;">2023/04</p>
-                                                                </td>
-                                                                <td>
-                                                                    <p class="m-0" style="color: black;"></p>
-                                                                </td>
-
-                                                                <td>
-                                                                    <p class="m-0" style="color: #e22454;">232,000원</p>
-                                                                </td>
-                                                                <td>
-                                                                    <p class="m-0">미납</p>
-                                                                </td>
-                                                                <td>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <p class="m-0" style="color: black;">2023/03</p>
-                                                                </td>
-                                                                <td>
-                                                                    <p class="m-0" style="color: black;">2023/04/15</p>
-                                                                </td>
-                                                                <td>
-                                                                    <p class="m-0" style="color: #e22454;">123,222원</p>
-                                                                </td>
-                                                                <td>
-                                                                    <p class="m-0">납부</p>
-                                                                </td>
-                                                                <td>
-                                                                    <a href="../invoice/invoice-3.html" class="btn btn-light btn-sm">발급</a>
-                                                                </td>
-                                                            </tr>
+                                                            <!-- 납부금액 출력부 -->
+                                                            <c:forEach items="${billList}" var="i">
+                                                                <c:if test="${i.telephoneVO.kingCheck eq 1 && i.billCheck eq 1 && i.paidCheck eq 1}">
+                                                                <tr>
+                                                                    <td>
+                                                                        <p class="m-0" style="color: black;">20${i.payMonth}</p>
+                                                                    </td>
+                                                                    <td>
+                                                                        <p class="m-0" style="color: black;">${i.paidDate}</p>
+                                                                    </td>
+                                                                    <td>
+                                                                        <p class="m-0" style="color: #e22454;"><fmt:formatNumber value="${i.totalPrice}" pattern="#,### 원"/></p>
+                                                                    </td>
+                                                                    <td>
+                                                                        <p class="m-0">납부</p>
+                                                                    </td>
+                                                                    <td>
+                                                                        <a href="#" class="btn btn-light btn-sm">발급</a>
+                                                                    </td>
+                                                                </tr>
+                                                                </c:if>
+                                                            </c:forEach>
                                                         </tbody>
                                                     </table>
                                                     <!-- Pagination Box Start -->
@@ -245,22 +243,19 @@
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            <tr>
-                                                                <td>
-                                                                    <p class="m-0" style="color: black;">2023/05</p>
-                                                                </td>
-                                                                <td>
-                                                                    <p class="m-0" style="color: #e22454 ">232,000원</p>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <p class="m-0" style="color: black;">2023/04</p>
-                                                                </td>
-                                                                <td>
-                                                                    <p class="m-0" style="color: #e22454 ">123,222원</p>
-                                                                </td>
-                                                            </tr>
+                                                            <!-- 미납 금액 출력부 -->
+                                                            <c:forEach items="${billList}" var="i">
+                                                                <c:if test="${i.telephoneVO.kingCheck eq 1 && i.billCheck eq 1 && i.paidCheck eq 0}">
+                                                                <tr>
+                                                                    <td>
+                                                                        <p class="m-0" style="color: black;">20${i.payMonth}</p>
+                                                                    </td>
+                                                                    <td>
+                                                                        <p class="m-0 unpaid" style="color: #e22454;"><fmt:formatNumber value="${i.totalPrice}" pattern="#,### 원"/></p>
+                                                                    </td>
+                                                                </tr>
+                                                                </c:if>
+                                                            </c:forEach>
                                                         </tbody>
                                                     </table>
                                                     <!-- Pagination Box Start -->
@@ -605,7 +600,7 @@
                                         <!-- 상품문의내역 tab end -->
                                     </div>
                                     <!-- *** end -->
-                                 </div>
+                                </div>
                             </div>
                         </div>
                         <!-- 문의내역 end -->
@@ -616,9 +611,9 @@
                                 <div class="page-title title title1 title-effect">
                                     <h2>회선 관리</h2>
                                 </div>                                
-                                <button class="btn btn-solid-default btn-sm fw-bold ms-auto" data-bs-toggle="modal"
+                                <!-- <button class="btn btn-solid-default btn-sm fw-bold ms-auto" data-bs-toggle="modal"
                                     data-bs-target="#addNumber">
-                                    회선 등록</button>
+                                    회선 등록</button> -->
                             </div>
                             <!-- 회선 리스트 start -->
                             <div class="save-details-box">
@@ -839,17 +834,9 @@
                                         </div>
                                     </li>
 
-                                    <!-- <li>
-                                    <div class="left">
-                                        <h6 class="font-light">Password</h6>
-                                    </div>                                    
-                                    <a href="javascript:void(0)" data-bs-toggle="modal"
-                                        data-bs-target="#resetPassword">수정</a>
-                                    </li> -->
-
                                     <li>
                                         <div class="left">
-                                            <h6 class="font-light">번호</h6>
+                                            <h6 class="font-light">연락처</h6>
                                         </div>
                                         <div class="right">
                                             <h6>${memberVO.tel}</h6>
@@ -861,7 +848,11 @@
                                             <h6 class="font-light">생년월일</h6>
                                         </div>
                                         <div class="right">
-                                            <h6>1993/10/05</h6>
+                                            <c:if test="${not empty memberVO}">
+                                                <c:set var="birth" value="${memberVO.rrnf}"/>
+                                                <c:set var="formattedbirth" value="${fn:substring(birth, 0, 2)}/${fn:substring(birth, 2, 4)}/${fn:substring(birth, 4, 6)}" />
+                                                <h6 class="font-light">${formattedbirth}</h6>
+                                            </c:if>
                                         </div>
                                     </li>
 
@@ -870,18 +861,14 @@
                                             <h6 class="font-light">주소</h6>
                                         </div>
                                         <div class="right">
-                                        	
+                                        
                                             <h6>(${memberVO.address1}) ${memberVO.address2}, ${memberVO.address3}</h6>
                                         </div>
-                                        
-                                        <!-- <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#resetInfo">수정</a> -->
                                     </li>
                                     
                                     <li class="justify-content-center mt-5">                                    
-                                    	<button class="btn btn-solid-default btn-sm fw-bold ms-auto" data-bs-toggle="modal" data-bs-target="#resetPassword" style="margin-right: 5px">비밀번호 변경</button>
-	                                    <button class="btn btn-solid-default btn-sm fw-bold" data-bs-toggle="modal" data-bs-target="#resetInfo">가입 정보 변경</button>
-	                                    <!-- <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#resetPassword">비밀번호 변경</a>
-	                                    <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#resetInfo">가입 정보 변경</a> -->
+                                        <button class="btn btn-solid-default btn-sm fw-bold ms-auto" data-bs-toggle="modal" data-bs-target="#resetPassword" style="margin-right: 5px">비밀번호 변경</button>
+                                        <button class="btn btn-solid-default btn-sm fw-bold" data-bs-toggle="modal" data-bs-target="#resetInfo">정보 변경</button>
                                     </li>
                                 </ul>
                             </div>
@@ -902,7 +889,7 @@
                                 <div class="page-title">
                                     <h4 class="fw-bold">주의 사항</h4>
                                 </div>
-                                <p class="font-light">회원을 탈퇴하면 개인 설정 및 기타 모든 관련 정보가 영구적으로 제거됩니다. 회원 탈퇴를 하게 되면 로그아웃되며 다시 로그인할 수 없습니다.</p>
+                                <p class="font-light">회원을 탈퇴하면 회원 관련 정보가 영구적으로 제거됩니다. 회원 탈퇴를 하게 되면 로그아웃되며 다시 로그인할 수 없습니다.</p>
 
                                 <p class="font-light mb-4">위의 내용을 이해하고 동의하며 여전히 회원 탈퇴를 원하시면 아래를 클릭하십시오.
 
@@ -931,22 +918,18 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <form:form action="./myPage" id="pwUpdate" method="post" modelAttribute="memberVO">
-                        <!-- <div class="mb-3">
-                            <label for="pw" class="form-label font-light">현재 비밀번호</label>
-                            <input type="password" class="form-control" id="">
-                        </div> -->
+                    <form:form action="./updatePw" id="updatePwForm" method="post" modelAttribute="memberVO">
                         <div class="mb-3">
                             <label for="pw" class="form-label font-light">변경할 비밀번호</label>
-                            <input type="password" class="form-control" id="npw">
+                            <input type="password" class="form-control" id="pw" name="pw">
                         </div>
                         <div>
                             <label for="pwCheck" class="form-label font-light">변경할 비밀번호 확인</label>
-                            <input type="password" class="form-control" id="pwCheck" >
+                            <input type="password" class="form-control" id="pwCheck">
                         </div>
-		                <div class="modal-footer pt-0 text-end d-block">		                    
-		                    <button class="update_pw btn btn-solid-default rounded-1" type="submit" onclick="fnSubmit(); return false;">수정</button>
-		                </div>
+                        <div class="modal-footer pt-0 text-end d-block">		                    
+                            <button id="updatePwBtn" class="update_pw btn btn-solid-default rounded-1" type="button">수정</button>
+                        </div>
                     </form:form>
                 </div>
             </div>
@@ -963,29 +946,31 @@
                     <button type="submit" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                	<form:form action="./myPage" id="update_info" method="post" modelAttribute="memberVO">                    
-                        <div class="mb-3">
+                	<form:form action="./updateInfo" id="updateInfoForm" method="post" modelAttribute="memberVO">                    
+                        <!-- <div class="mb-3">
                             <label for="name" class="form-label font-light">이름</label>
-                            <input type="text" class="form-control" id="name" name="name" value="${memberVO.name}">
+                            <input type="text" class="form-control" id="name" name="name" readonly="readonly" value="${memberVO.name}">
                         </div>
                         <div class="mb-3">
                             <label for="email" class="form-label font-light">이메일(아이디)</label>
                             <input type="email" class="form-control" id="email" name="email" readonly="readonly" value="${memberVO.email}">
                         </div>
                         <div class="mb-3">
-                            <label for="tel" class="form-label font-light">번호</label>
-                            <input type="text" class="form-control" id="tel" name="tel" readonly="readonly" placeholder="회선 관리에서 바꿔주시길 바랍니다." value="${memberVO.tel}">
-                        </div>
-                        <div class="mb-3">
                             <label for="rrnf" class="form-label font-light">생년월일</label>
                             <input type="text" class="form-control" id="rrnf" name="rrnf" readonly="readonly" value="${memberVO.rrnf}">
+                        </div> -->
+                        <div class="mb-3">
+                            <label for="tel" class="form-label font-light">연락처</label>
+                            <input type="text" class="form-control" id="tel" name="tel" placeholder="연락가능한 연락처를 입력해주세요" value="${memberVO.tel}">
+                        </div>
+                        <div id="telResult">
                         </div>
                         <div class="mb-3 row">
-	                        <label for="address1" class="form-label font-light">우편번호</label>
-	                        <div class="col-9">
-	                            <input type="text" class="form-control address_input_1" id="address1" name="address1" readonly="readonly" value="${memberVO.address1}">
-	                        </div>
-	                        <button class="col-3 row btn btn-solid-default btn-sm fw-bold" type="button" onclick="execution_daum_address()">
+                            <label for="address1" class="form-label font-light">우편번호</label>
+                            <div class="col-9">
+                                <input type="text" class="form-control address_input_1" id="address1" name="address1" readonly="readonly" value="${memberVO.address1}">
+                            </div>
+                            <button class="col-3 row btn btn-solid-default btn-sm fw-bold" type="button" onclick="execution_daum_address()">
 								<span>주소 찾기</span>
 							</button>
 						</div>
@@ -998,9 +983,9 @@
                             <label for="address3" class="form-label font-light">상세주소</label>
                             <input type="text" class="form-control address_input_3" id="address3" name="address3" value="${memberVO.address3}">
                         </div>
-		                <div class="modal-footer pt-0 text-end d-block">
-		                    <button class="update_info btn btn-solid-default rounded-1" type="submit">수정</button>
-		                </div>
+                        <div class="modal-footer pt-0 text-end d-block">
+                            <button id="updateInfoBtn" class="update_info btn btn-solid-default rounded-1" type="button">수정</button>
+                        </div>
                     </form:form>
                 </div>
             </div>

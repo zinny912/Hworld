@@ -151,9 +151,7 @@
                                         <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#productdel">삭제</a>
                                     </div>    
 									<div id="directList">
-										<div class="noStock" style="display:none;">
-											<h2 class="theme-color">선택하신 제품은 재고가 없습니다.</h2>
-										</div>
+										
 										<c:forEach items="${list}" var="direct" varStatus="status">
 										<div class="titlebox" id="${direct.directCode}" data-selected="0">
 												<div class="brand" style="font-size: 27px; color: gray;" id="productCode${status.index}"
@@ -206,6 +204,7 @@
 												</div>
 												<div class="col-3 my-auto d-flex justify-content-end">
 													<input type="text" id="colorName" style="border:0px; font-size:15px;" readonly>
+													<input type="hidden" id="optionStock2" style="border:0px; font-size:15px;" readonly>
 												</div>
 												<!-- 수량 버튼 -->
 												<div class="d-flex quantity-wrapper my-auto">

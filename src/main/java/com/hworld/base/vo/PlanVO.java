@@ -23,6 +23,8 @@ public class PlanVO {
     //대표회선의 요금제 일치확인
     private Integer count;
     private Integer memberNum;
+    private String phoneNum;
+    private Integer serialNum;
     
     //commonCode 사용
     private String note;
