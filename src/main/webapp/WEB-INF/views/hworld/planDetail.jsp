@@ -241,7 +241,7 @@
                                     <div class="justify-content-start" style="margin-top:-20px;">
                                         <a href="./planUpdate" class="me-3">수정</a>
                                         <a href="javascript:void(0)" data-bs-toggle="modal"
-                                                        data-bs-target="#yogeumdel">비활성화</a>
+                                                        data-bs-target="#disabledBtn">비활성화</a>
                                     </div>
                                 </c:if>    
                                     <div class="details-image-concept" >
@@ -617,8 +617,8 @@
         </div>
 <!-- 번호이동 모달창 end -->
  <!-- 요금 삭제 모달창 start -->
- <div class="modal fade payment-modal" id="yogeumdel">
-    <div class="modal-dialog modal-dialog-centered">
+ <div class="modal fade payment-modal" id="disabledBtn">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
@@ -626,12 +626,13 @@
             <div class="modal-body">
                 <form>
                     <div class="mb-4">
-                     <h3>해당 요금제를 비활성화 하시겠습니까? </h3> <h5>비활성화 이후에는 활성화가 불가합니다.</h5>
+                     <h3 class="theme-color fw-bold">해당 요금제를 비활성화 하시겠습니까? </h3> <br> <h5>비활성화 이후에는 활성화가 불가합니다.</h5>
+                     <h5>해당요금제로는 더이상 신규가입이 불가하게 됩니다.</h5>
                     </div>
                 </form>
             </div>
             <div class="modal-footer pt-0 text-end d-block">
-                <a href="#" ><button class="btn btn-solid-default rounded-1">확인</button></a>
+                <a href="#" ><button type="button" id="confirmDisabled" class="btn btn-solid-default rounded-1">확인</button></a>
             </div>
         </div>
     </div>

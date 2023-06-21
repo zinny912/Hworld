@@ -49,7 +49,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <h3>요금제 등록</h3>
+                    <h3>요금제 수정</h3>
                     <nav>
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item">
@@ -75,7 +75,7 @@
                     <form action="./planUpdate" method="POST" class="planUpdate">
                         <div class="row g-4">
                             <!-- 요금제 정보 -->
-                            <table id="commonCodeTable">
+                            <table id="commonCodeTable" hidden>
                                <thead>
                                <tr class="table-head col-md-12">
                                <th class="col-3">Type </th>
@@ -98,10 +98,10 @@
                                 </tbody>
                                 </table> 
                                 
-                              	<input type="text" id="note" name="note" value="" placeholder="노트">
-                              	<input type="text" id="type" name="type" value="" placeholder="타입">
-                              	<input type="text" id="code" name="code" value="" placeholder="코드">
-                              	<input type="text" id="value" name="value" value="" placeholder="밸류">
+                              	<input type="hidden" id="note" name="note" value="" placeholder="노트">
+                              	<input type="hidden" id="type" name="type" value="" placeholder="타입">
+                              	<input type="hidden" id="code" name="code" value="" placeholder="코드">
+                              	<input type="hidden" id="value" name="value" value="" placeholder="밸류">
                               	
                             <div class="col-md-6">
                                 <label for="validationCustom04" class="form-label" >종류</label>

@@ -120,6 +120,7 @@
                                
                               <input type="hidden" id="planNum" name="planNum" value=""> 
                               <input type="hidden" id="categoryCode" name="categoryCode" value="">
+                              <input type="hidden" id="disabled" name="disabled" value="1">
                               
                             </div>
                              <!-- 월요금 -->
