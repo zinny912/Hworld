@@ -111,7 +111,7 @@ $('#productDelModal').click(function() {
 $('#productDelete').click(function() {
     let slicedId = $('#modalDelSC').val();
    
-    // POST 방식으로 수정된 데이터 전송
+    // POST 방식으로 삭제 전송
     $.ajax({
         url: "/direct/directDelete",
         type: "POST",

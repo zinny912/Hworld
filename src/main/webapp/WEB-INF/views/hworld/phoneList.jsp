@@ -285,8 +285,8 @@ h3.d-flex span {
 	                                <div class="img-wrapper">
 	                                    <div class="front">
 	                                        <a href="./phoneDetail?slicedCode=${direct.slicedCode}">
-	                                            <img src="/assets/images/electronics/product/${direct.slicedCode}thumb"
-	                                                class="bg-img  lazyload" alt="">
+	                                            <img src="/assets/images/electronics/product/${direct.slicedCode}thumb.jpg"
+	                                                class="img-fluid" alt="">
 	                                        </a>
 	                                    </div>
 	                                </div>
