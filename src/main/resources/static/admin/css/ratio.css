@@ -47,7 +47,7 @@
 }
 
 .ratio_landscape .bg-size:before {
-    padding-top: 75%;
+    padding-top: 0%;
     content: "";
     display: block
 }
@@ -65,7 +65,7 @@
 }
 
 .ratio_portrait .bg-size:before {
-    padding-top: 150%;
+    padding-top: 0%;
     content: "";
     display: block
 }
@@ -75,5 +75,6 @@
     content: "";
     display: block
 }
+
 
 /*# sourceMappingURL=ratio.css.map */

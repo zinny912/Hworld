@@ -71,9 +71,16 @@
         <div class="shipping-chart">
             <div class="part">                        
             <section>
+            <c:if test="${memberVO.adminCheck == 0 }">
                 <div class="d-flex justify-content-start mt-3 mb-1 mx-4">
                     <a href="./planAdd">추가</a>
                 </div>
+             </c:if>
+             <c:if test="${memberVO.adminCheck == 1 }">
+              <div class="d-flex justify-content-start mt-3 mb-1 mx-4 " >
+                    <br>
+                </div>
+             </c:if>
                 <div class="container">
                     <div class="category-option">
                     <!-- 5G 요금제 리스트 generalList -->
@@ -148,7 +155,7 @@
 										</c:forEach>
                                      </button>
                                 </h2>
-                                <div id="collapseThree2" class="accordion-collapse collapse show"
+                                <div id="collapseThree2" class="accordion-collapse collapse "
                                     aria-labelledby="headingThree2" data-bs-parent="#accordionExample2">
                                     <div class="accordion-body ">
                                         <ul class="category-list">
@@ -206,7 +213,7 @@
 										</c:forEach>
                                      </button>
                                 </h2>
-                                <div id="collapseThree3" class="accordion-collapse collapse show"
+                                <div id="collapseThree3" class="accordion-collapse collapse "
                                     aria-labelledby="headingThree3" data-bs-parent="#accordionExample3">
                                     <div class="accordion-body ">
                                         <ul class="category-list">
@@ -264,7 +271,7 @@
 										</c:forEach>
                                      </button>
                                 </h2>
-                                <div id="collapseThree4" class="accordion-collapse collapse show"
+                                <div id="collapseThree4" class="accordion-collapse collapse "
                                     aria-labelledby="headingThree4" data-bs-parent="#accordionExample4">
                                     <div class="accordion-body ">
                                         <ul class="category-list">
@@ -322,7 +329,7 @@
 										</c:forEach>
                                      </button>
                                 </h2>
-                                <div id="collapseThree5" class="accordion-collapse collapse show"
+                                <div id="collapseThree5" class="accordion-collapse collapse"
                                     aria-labelledby="headingThree5" data-bs-parent="#accordionExample5">
                                     <div class="accordion-body ">
                                         <ul class="category-list">
@@ -373,14 +380,14 @@
                                     <button class="accordion-button" style="background-color:#fff;" type="button" data-bs-toggle="collapse"
                                         data-bs-target="#collapseThree6">
                                         <c:forEach items="${planList}" var="plan">
-						             <c:if test="${plan.note eq '군인 요금제'}">
+						             <c:if test="${plan.note eq '복지 요금제'}">
 										    <h3 class="fs-4 fw-bolder">${plan.note}</h3>
-										        <span style="color:#7E7E7E; margin-left:10%; font-weight: 400; font-size:16px">충!성! 우리의 히어로 현역병사를 위한 H world의 요금제</span>
+										        <span style="color:#7E7E7E; margin-left:10%; font-weight: 400; font-size:16px">복지혜택을 받으시는 분들을 위한 요금제</span>
 										</c:if>
 										</c:forEach>
                                      </button>
                                 </h2>
-                                <div id="collapseThree6" class="accordion-collapse collapse show"
+                                <div id="collapseThree6" class="accordion-collapse collapse"
                                     aria-labelledby="headingThree5" data-bs-parent="#accordionExample6">
                                     <div class="accordion-body ">
                                         <ul class="category-list">
@@ -415,6 +422,7 @@
                                                 <td><strong class="fs-4 m-0 theme-color" id="commaPrice${plan.planNum}">${plan.planPrice}</strong><span class="fs-6">원</span></td>
                                             </tr>
                                             </c:forEach>
+                                            
                                         	</tbody>
                                            </table>
 	                                   	</li>
@@ -422,23 +430,30 @@
 	                            	</div>
 	                        	</div>
 	                    	</div>
-	                	</div>                	
-                     </div>
-                  </div>  
-</section>
-                            </div>
-                        </div>
-                    </div>  
+	                	</div>     
+	               <!-- 복지요금제 끝 -->     
+	              </section>      	
+	               </div>
+               </div>
+			</div>
+                     
 <!-- 요금제리스트 end -->
 
 <!-- 부가서비스 리스트 -->                 
               <div class="tab-pane fade" id="speci">
                    <div class="shipping-chart">
                        <div class="part">                        
-                            <section>
+                           <section>
+                             <c:if test="${memberVO.adminCheck == 0 }">
                                 <div class="d-flex justify-content-start mt-3 mb-1 mx-4">
                                     <a href="./ePlanAdd">추가</a>
                                 </div>
+                                </c:if>
+                                <c:if test="${memberVO.adminCheck == 1 }">
+                                <div class="d-flex justify-content-start mt-3 mb-1 mx-4">
+                                    <a href=""><br></a>
+                                </div>
+                                </c:if>
                                 <div class="container">
                                     <div class="category-option">
                                         <div class="accordion category-name" id="accordionExample">
@@ -449,7 +464,7 @@
                                                         <h3 class="fs-4 fw-bolder">부가서비스</h3> <span style="color:#7E7E7E; margin-left:10%; font-weight: 400; font-size:16px" >H world의 부가서비스와 함께 더욱 행복해지세요 </span>
                                                     </button>
                                                 </h2>
-                                                <div id="collapseThree" class="accordion-collapse collapse"
+                                                <div id="collapseThree" class="accordion-collapse collapse show"
                                                     aria-labelledby="headingThree" data-bs-parent="#accordionExample">
                                                     <div class="accordion-body ">
                                                         <ul class="category-list">
@@ -464,32 +479,19 @@
                                                                     <th scope="col" style="color:#7E7E7E;"><strong class="fs-5">월정액</strong></th>
                                                                 </tr>
                                                                 </thead>
+                                                                
                                                         <tbody> 
-                                                            <tr>
-                                                                <td> <a href="zplusservice_detail.html">
-                                                                        <strong class="text-left fs-4 m-0 ">V컬러링</strong></a></td>
-                                                                <td> <p class="fs-5 m-0"> </p></td>
-                                                                <td><p class="fs-5 m-0"> </p></td>
-                                                                <td> <p class="fs-5 m-0"> </p></td>
-                                                                <td><strong class="fs-4 m-0 theme-color">3,300</strong><span class="fs-6">원</span></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td> <a href="#">
-                                                                        <strong class="fs-4 m-0 ">매너콜</strong></a></td>
-                                                                <td><p class="fs-5 m-0"> </p></td>
-                                                                <td><p class="fs-5 m-0"> </p></td>
-                                                                <td><p class="fs-5 m-0"> </p></td>
-                                                                <td><strong class="fs-4 m-0 theme-color">1,100</strong><span class="fs-6">원</span></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td> <a href="#">
-                                                                        <strong class="fs-4 m-0">스마트 피싱보호</strong></a></td>
-                                                                <td><p class="fs-5 m-0"> </p></td>
-                                                                <td><p class="fs-5 m-0"> </p></td>
-                                                                <td><p class="fs-5 m-0"> </p></td>
-                                                                <td><strong class="fs-4 m-0 theme-color">1,650</strong><span class="fs-6">원</span></td>
-                                                            </tr>
-                                                            
+                                                      <c:forEach items="${ePlan}" var="i">
+					                                                       
+					                                  <tr>
+					                                      <td> <a href="./ePlanDetail?extraPlanNum=${i.extraPlanNum}">
+					                                              <strong class="text-left fs-4 m-0 ">${i.extraPlanName}</strong></a></td>
+					                                      <td> <p class="fs-5 m-0"> </p></td>
+					                                      <td><p class="fs-5 m-0"> </p></td>
+					                                      <td> <p class="fs-5 m-0"> </p></td>
+					                                      <td><strong class="fs-4 m-0 theme-color" id="commaPrice${i.extraPlanNum}">${i.extraPrice}</strong><span class="fs-6">원</span></td>
+					                                  </tr>
+                              							</c:forEach>
                                                         </tbody>
                                                             </table>
                                                     </li>
@@ -498,15 +500,15 @@
                                         </div>
                                     </div>
                                 </div>
-                                
-                            </div>
-                            </div>
-                            </div>
-                            </div>
-                            </div>
-                            </div>
-         
+                              </div>  
+                         </div>
     </section>
+                    </div>
+                    </div>
+                    </div>       
+                           
+         
+            
     <!-- Shop Section end -->    
  
   

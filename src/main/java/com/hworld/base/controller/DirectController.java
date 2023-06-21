@@ -38,8 +38,9 @@ import com.hworld.base.service.CartService;
 import com.hworld.base.service.DirectService;
 import com.hworld.base.service.OrderService;
 import com.hworld.base.util.Pager;
-import com.hworld.base.vo.CartVO;
+import com.hworld.base.vo.ApplicationVO;
 import com.hworld.base.vo.DirectVO;
+import com.hworld.base.vo.MemberVO;
 import com.hworld.base.vo.OrderDirectVO;
 import com.hworld.base.vo.OrderVO;
 import com.hworld.base.vo.PlanVO;
@@ -222,7 +223,6 @@ public class DirectController {
 	    	}
 	    }
 	    
-
 		mv.addObject("list", ar);		
 		mv.addObject("qnaList", accQna);
 		mv.addObject("review",accReview);
@@ -357,6 +357,7 @@ public class DirectController {
 		mv.addObject("list", ar);
 		return mv;
 	}
+	
 	@PostMapping("accessoryUpdate")
 	public ModelAndView setUpdate(ModelAndView mv, String categoryCode, String brandCode, String directName, String directContents,
 			String[] colorCode, String[] saveCapacity, Integer[] directPrice, Integer[] directStock, String[] directCode, DirectVO directVO, MultipartFile[] multipartFiles, String slicedCode) throws Exception{
@@ -384,7 +385,14 @@ public class DirectController {
 		return mv;
 	}
 
-	
+	@PostMapping("accessoryDelete")
+	public ModelAndView setDeleteAccessary(ModelAndView mv, @RequestParam("slicedCode") String slicedCode) throws Exception {
+
+		int result = directService.setDelete(slicedCode);
+		
+		mv.setViewName("redirect:./accessoryList");
+		return mv;
+	}
 	
 	//리뷰 추가
 	@PostMapping("reviewAdd")
@@ -442,24 +450,60 @@ public class DirectController {
 		
 	}
 	
-	// 상품 번호 이동 페이지
-	@GetMapping("directNumMove")
-	public ModelAndView d7() throws Exception{
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("hworld/directNumMove");
-		return modelAndView;
-	}
-	
 	// 휴대폰 주문 페이지
+	
 	@GetMapping("phoneOrder")
-	public ModelAndView d8() throws Exception{
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("hworld/phoneOrder");
-		return modelAndView;
+	public ModelAndView phoneOrder(@RequestParam Map<String, Object> map, HttpSession session) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		MemberVO memberVO = (MemberVO) session.getAttribute("memberVO");
+		Integer memberNum = memberVO.getMemberNum();
+		//회선이 없는 경우 null 뜨는거 방지해야해 진희야 까먹지마 
+		PlanVO phoneNum = directService.getKingPhoneNum(memberNum);
+		log.error(phoneNum.toString());
+		mv.addObject("phoneNum", phoneNum);
+		mv.addObject("map", map);
+		mv.setViewName("hworld/phoneOrder");
+		return mv;
 	}
 	
+	@PostMapping("formAdd")
+	public ModelAndView setFormAdd(@Valid ApplicationVO applicationVO, BindingResult bindingResult, HttpSession session) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		//에러가 발생한 경우 여기서 view 리턴
+		if(bindingResult.hasErrors()) {
+			log.info("========== 에러가 발생함 ==========");
+			mv.setViewName("hworld/phoneOrder");
+			return mv;
+		}
+
+		//에러가 없는경우 insert 작업
+		int result = directService.setFormAdd(applicationVO, session);
+		log.info("=============> result : {} ", result);
+		mv.setViewName("redirect:./phoneOrderResult");
+		//성공하면 결과에 따라 alert띄우기 해도 될듯. 나중에 index 등으로 바꾸기
+		return mv;
+	}
+	//휴대폰 상품 구매 후 결과 페이지
+	@GetMapping("phoneOrderResult")
+	public ModelAndView phoneOrderResult(@RequestParam Map<String, Object> map, HttpSession session) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		MemberVO memberVO = (MemberVO) session.getAttribute("memberVO");
+		Integer memberNum = memberVO.getMemberNum();
+		//회선이 없는 경우 null 뜨는거 방지해야해 진희야 까먹지마 
+		PlanVO phoneNum = directService.getMemberPlan(memberNum);
+		
+		mv.addObject("phon", phoneNum);
+		mv.setViewName("hworld/phoneOrderResult");
+		return mv;
+	}
 	
-
-
+	// 상품 번호 이동 페이지
+		@GetMapping("directNumMove")
+		public ModelAndView d7() throws Exception{
+			ModelAndView modelAndView = new ModelAndView();
+			modelAndView.setViewName("hworld/directNumMove");
+			return modelAndView;
+		}
 
 }

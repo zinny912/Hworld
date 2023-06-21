@@ -18,7 +18,9 @@ import com.hworld.base.util.SHA256Util;
 import com.hworld.base.vo.BaseVO;
 import com.hworld.base.vo.BillVO;
 import com.hworld.base.vo.DirectVO;
+import com.hworld.base.vo.ExtraPlanVO;
 import com.hworld.base.vo.MemberVO;
+import com.hworld.base.vo.OtherTelecomVO;
 import com.hworld.base.vo.PlanVO;
 
 import lombok.extern.slf4j.Slf4j;
@@ -39,6 +41,16 @@ public class PlanService {
 	public List<PlanVO> getExistPlanList() throws Exception {
 		return planDAO.getExistPlanList();
 	};
+	
+	//부가서비스 리스트 
+	public List<ExtraPlanVO> getExtraPlanList() throws Exception {
+		return planDAO.getExtraPlanList();
+	}
+	//부가서비스 상세
+	public ExtraPlanVO getDetailEPlan(ExtraPlanVO extraPlanVO) throws Exception{
+		return planDAO.getDetailExtraPlan(extraPlanVO);
+	}
+	
 	//요금제 이름 조회
 	public PlanVO getNoteName(PlanVO planVO) throws Exception{
 		return planDAO.getNoteName(planVO);
@@ -75,6 +87,12 @@ public class PlanService {
             return 0;
         }
     }
+	//요금제 변경 > 요금제 변경일 체크 프로시저 호출
+	public BillVO getCheckPlanChange(BillVO billVO) throws Exception{
+		return planDAO.getCheckPlanChange(billVO);
+	}
+	
+	
 	//요금제 변경 > 청구내역 업데이트 프로시저 호출
 	public int setPlanChange(BillVO billVO) throws Exception{
 		return planDAO.setPlanChange(billVO);
@@ -84,6 +102,17 @@ public class PlanService {
 		return planDAO.getBeforePlan(memberNum);
 	}
 	
+	//번호이동 타통신사 DB 조회
+	public boolean isOtherTelecom(String taPhoneNum, String telecomName) throws Exception{
+		boolean check = false;
+		
+		String result = planDAO.isOtherTelecom(taPhoneNum, telecomName);
+		if(result != null) {
+			check = true;
+		}
+		log.info(" :::::::::::::::::::: service check value : {} ", check);
+		return check;
+	}
 	
 	
 	// 선택된 타입의 공통코드 정보 가져오기 

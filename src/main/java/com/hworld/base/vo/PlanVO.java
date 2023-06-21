@@ -25,6 +25,7 @@ public class PlanVO {
     private Integer memberNum;
     private String phoneNum;
     private Integer serialNum;
+    private Integer kingCheck;
     
     //commonCode 사용
     private String note;

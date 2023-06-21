@@ -75,7 +75,7 @@
                     <form action="./planAdd" method="POST" class="planAdd">
                         <div class="row g-4">
                             <!-- 요금제 정보 -->
-                            <table id="commonCodeTable">
+                            <table id="commonCodeTable" hidden>
                                <thead>
                                <tr class="table-head col-md-12">
                                <th class="col-3">Type </th>
@@ -86,8 +86,8 @@
                                </thead>
                                <tbody>
                                
-                                <c:forEach items="${commonCode}" var="common">
-                                <tr class="code-row">	
+                                <c:forEach items="${commonCode}" var="common" >
+                                <tr class="code-row" >	
                                 		<td class="code-row">${common.type}</td>
                                 		<td class="code-row">${common.code}</td>
                                 		<td class="code-row">${common.value}</td>
@@ -98,17 +98,18 @@
                                 </tbody>
                                 </table> 
                                 
-                              	<input type="text" id="note" name="note" value="" placeholder="노트">
-                              	<input type="text" id="type" name="type" value="" placeholder="타입">
-                              	<input type="text" id="code" name="code" value="" placeholder="코드">
-                              	<input type="text" id="value" name="value" value="" placeholder="밸류">
+                              	<input type="hidden" id="note" name="note" value="" placeholder="노트">
+                              	<input type="hidden" id="type" name="type" value="" placeholder="타입">
+                              	<input type="hidden" id="code" name="code" value="" placeholder="코드">
+                              	<input type="hidden" id="value" name="value" value="" placeholder="밸류">
                               	
                             <div class="col-md-6">
                                 <label for="validationCustom04" class="form-label" >종류</label>
                                 
                                 <div class="col-12">
                                     <select class="form-select custome-form-select" id="validationCustom04">
-                                        <option selected="" value="G">5G 요금제</option>
+                                        <option selected="" value="">선택</option>
+                                        <option value="G">5G 요금제</option>
                                         <option value="S">시니어 요금제</option>
                                         <option value="T">청소년 요금제</option>
                                         <option value="Z">ZEM 요금제</option>
@@ -119,8 +120,6 @@
                                
                               <input type="hidden" id="planNum" name="planNum" value=""> 
                               <input type="hidden" id="categoryCode" name="categoryCode" value="">
-                              
-                              
                               
                             </div>
                              <!-- 월요금 -->
@@ -250,13 +249,13 @@ $('#planPrice').on('input', function() {
     const disCodeElement = $('input[name="disCode"]');
     
     if (planPrice >= 77000) {
-      disCodeElement.val('3');
+      disCodeElement.val('4');
     } else if (planPrice>=55000 && planPrice <77000){
-      disCodeElement.val('2');
+      disCodeElement.val('3');
     } else if (planPrice>=33000 && planPrice <55000){
-    	disCodeElement.val('1');
+    	disCodeElement.val('2');
     } else {
-    	disCodeElement.val('0');
+    	disCodeElement.val('1');
     }
   });
 
@@ -265,6 +264,8 @@ $('#planPrice').on('input', function() {
 $('#planName').blur(function(){
 	$('#value').val($('#planName').val());
 })
+
+
 </script>
 
 
