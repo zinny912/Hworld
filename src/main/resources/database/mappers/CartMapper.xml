@@ -24,6 +24,15 @@
 	</update>
 	
 	
+	<!-- 카트 수량 -->
+	<select id="getCartCount" resultType="CartVO">
+		SELECT COUNT(directCode) AS cartCount
+		FROM CART
+		WHERE memberNum = #{memberNum}
+	</select>
+	
+	
+	
 	<!-- 카트 목록 -->
 	<select id="getCartList" resultType="CartVO">
 		select a.CARTNUM, a.memberNum, a.directCode, a.cartAmount, b.directName, b.directPrice, b.brandCode, b.colorCode

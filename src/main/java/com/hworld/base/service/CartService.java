@@ -105,6 +105,13 @@ public class CartService {
 	}
 
 
+
+	public CartVO getCartCount(Integer memberNum) {
+		// TODO Auto-generated method stub
+		return cartDAO.getCartCount(memberNum);
+	}
+
+
 		
 	
 }
