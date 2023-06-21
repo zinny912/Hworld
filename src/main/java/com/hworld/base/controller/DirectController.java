@@ -34,9 +34,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.hworld.base.service.CartService;
 import com.hworld.base.service.DirectService;
 import com.hworld.base.service.OrderService;
 import com.hworld.base.util.Pager;
+import com.hworld.base.vo.CartVO;
 import com.hworld.base.vo.DirectVO;
 import com.hworld.base.vo.OrderDirectVO;
 import com.hworld.base.vo.OrderVO;
@@ -53,6 +55,8 @@ public class DirectController {
 	
 	@Autowired
 	private DirectService directService;
+	@Autowired
+	private CartService cartService;
 	
 	
 	// 휴대폰 리스트 페이지
@@ -311,6 +315,7 @@ public class DirectController {
 		
 		slicedCode = directVO.getDirectCode().substring(directVO.getDirectCode().length() - 5);
 		directService.setDelete(slicedCode);
+
 		
 		//반복문으로 directVO 하나 완성하기 + 완성될 때 서비스로 insert 메서드 호출
 		for(int i=0; i<directCode.length; i++) {
@@ -336,6 +341,7 @@ public class DirectController {
 	public ModelAndView setDelete(ModelAndView mv, @RequestParam("slicedCode") String slicedCode) throws Exception {
 
 		int result = directService.setDelete(slicedCode);
+		
 		
 		mv.setViewName("redirect:./phoneList");
 		return mv;
