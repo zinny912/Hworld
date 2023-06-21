@@ -25,11 +25,13 @@ public class MemberVO {
 	private String rrnf;
 	private String rrnl;
 	private Date joinDate;
-	private Date numberChangeDate;
+	//private Date numberChangeDate;
 	private Integer memberState;
 	private Integer adminCheck;
 	private String tel;
 	private Integer ownCheck;
+	
+	//
 	private List<TelephoneVO> telephoneVOs;
 	
 }

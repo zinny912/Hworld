@@ -39,8 +39,7 @@ public class MemberController {
 	
 	@Autowired
 	private MemberService memberService;
-	
-	@Autowired
+		@Autowired
 	private BCryptPasswordEncoder pwEncoder;
 	
 	@Autowired

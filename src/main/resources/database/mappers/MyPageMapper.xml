@@ -5,15 +5,209 @@
   
 <mapper namespace="com.hworld.base.dao.MyPageDAO">
 	
-	<!-- 가입 정보 변경 -->
-  	<update id="memberUpdate" parameterType="MemberVO">
-  		UPDATE MEMBER SET NAME=#{name}, ADDRESS1=#{address1}, ADDRESS2=#{address2}, ADDRESS3=#{address3}, PW=#{pw}
-  		WHERE EMAIL=#{email}
-  	</update>
+	<!-- 특정 회원의 전체 납부/미납 내역 -->
+	<select id="getTotalBill" parameterType="Pager" resultType="Long">
+		SELECT COUNT(*) FROM PAYMENTDETAILS A
+		LEFT OUTER JOIN TELEPHONE B ON A.serialNum = B.SERIALNUM 
+		LEFT OUTER JOIN MEMBER C ON B.MEMBERNUM = C.MEMBERNUM 
+		WHERE C.MEMBERNUM =#{memberNum}
+	</select>
+	
+	<!-- 회선 기준 납부/미납 내역 불러오기 -->
+	<!-- D.BILLCHECK=1 + D.PAIDCHECK=0(미납), D.PAIDCHECK=1(납부) -->
+	<select id="getTPList" parameterType="pager" resultMap="getTPResult">
+		SELECT A.*, B.*, C.*, D.* FROM TELEPHONE A
+			LEFT OUTER JOIN MEMBER B ON A.MEMBERNUM = B.MEMBERNUM
+			LEFT OUTER JOIN PLAN C ON A.PLANNUM = C.PLANNUM
+			LEFT OUTER JOIN PAYMENTDETAILS D ON A.SERIALNUM = D.SERIALNUM
+			<!-- LEFT OUTER JOIN TELEPHONE_EPLAN E ON A.SERIALNUM = E.SERIALNUM
+			LEFT OUTER JOIN EPLAN F ON E.EXTRAPLANNUM = F.EXTRAPLANNUM -->
+		WHERE B.MEMBERNUM = #{memberNum}
+		LIMIT #{startRow}, #{perPage}
+	</select>
+	<resultMap type="TelephoneVO" id="getTPResult">
+		<id property="serialNum" column="serialNum"/>
+		<result property="planNum" column="planNum"/>
+		<result property="memberNum" column="memberNum"/>
+		<result property="appNum" column="appNum"/>
+		<result property="phoneNum" column="phoneNum"/>
+		<result property="contractDate" column="contractDate"/>
+		<result property="expireDate" column="expireDate"/>
+		<result property="startDate" column="startDate"/>
+		<result property="endDate" column="endDate"/>
+		<result property="kingCheck" column="kingCheck"/>
+		<result property="directName" column="directName"/>
+		<result property="phoneOriPrice" column="phoneOriPrice"/>
+		<result property="phoneSubPrice" column="phoneSubPrice"/>
+		<result property="phoneTotalPrice" column="phoneTotalPrice"/>
+		<result property="phoneBalance" column="phoneBalance"/>
+		<result property="stopStartDate" column="stopStartDate"/>
+		<result property="stopEndDate" column="stopEndDate"/>
+		<result property="disKind" column="disKind"/>
+		<result property="directCode" column="directCode"/>
+		<result property="planChangeDate" column="planChangeDate"/>
+		<result property="numberChangeDate" column="numberChangeDate"/>
+		<result property="cancelPrice" column="cancelPrice"/>
+		
+		<collection property="billVOs" javaType="List" ofType="BillVO">
+			<id property="billNum" column="BILLNUM"/>
+			<result property="serialNum" column="serialNum"/>
+			<result property="planNum" column="planNum"/>
+			<result property="billCheck" column="billCheck"/>
+			<result property="paidCheck" column="paidCheck"/>
+			<result property="phonePayPrice" column="phonePayPrice"/>
+			<result property="phoneSplitTax" column="phoneSplitTax"/>
+			<result property="phoneSplitPrice" column="phoneSplitPrice"/>
+			<result property="disPlanPrice" column="disPlanPrice"/>
+			<result property="ePlanPrice" column="ePlanPrice"/>
+			<result property="totalPrice" column="totalPrice"/>
+			<result property="overduePrice" column="overduePrice"/>
+			<result property="payMaxDate" column="payMaxDate"/>
+			<result property="useDate" column="useDate"/>
+			<result property="payMonth" column="payMonth"/>
+			<result property="bfPlanPrice" column="bfPlanPrice"/>
+			<result property="planChangeDate" column="planChangeDate"/>
+			<result property="paidDate" column="paidDate"/>
+			<result property="cancelPrice" column="cancelPrice"/>
+			<result property="disPrice" column="disPrice"/>
+		</collection>
+		<collection property="planVO" javaType="PlanVO">
+			<id property="planNum" column="planNum"/>
+			<result property="disCode" column="disCode"/>
+			<result property="planName" column="planName"/>
+			<result property="planPrice" column="planPrice"/>
+			<result property="dataCapacity" column="dataCapacity"/>
+			<result property="categoryCode" column="categoryCode"/>
+			<result property="planExplain" column="planExplain"/>
+			<result property="planExplainS" column="planExplainS"/>
+			<result property="disabled" column="disabled"/>
+		</collection>
+		<collection property="memberVO" javaType="MemberVO">
+			<id property="memberNum" column="memberNum"/>
+			<result property="email" column="email"/>
+			<result property="pw" column="pw"/>
+			<result property="name" column="name"/>
+			<result property="address1" column="address1"/>
+			<result property="address2" column="address2"/>
+			<result property="address3" column="address3"/>
+			<result property="rrnf" column="rrnf"/>
+			<result property="rrnl" column="rrnl"/>
+			<result property="joinDate" column="joinDate"/>
+			<result property="memberState" column="memberState"/>
+			<result property="adminCheck" column="adminCheck"/>
+			<result property="tel" column="tel"/>
+			<result property="ownCheck" column="ownCheck"/>
+		</collection>
+		<collection property="extraPlanVOs" javaType="List" ofType="ExtraPlanVO">
+			<id property="extraPlanNum" column="extraPlanNum"/>
+			<result property="extraPlanName" column="extraPlanName"/>
+			<result property="extraPrice" column="extraPrice"/>
+			<result property="extraPlanExplain" column="extraPlanExplain"/>
+			<result property="extraPlanExplainS" column="extraPlanExplainS"/>
+			<result property="extraPlanExplainM" column="extraPlanExplainM"/>
+			<result property="categoryCode" column="categoryCode"/>
+		</collection>
+	</resultMap>
+	
+	
+	<!-- 요금 납부/미납 내역 불러오기 -->
+	<select id="getPMDList" parameterType="pager" resultMap="getBillResult">
+		<!-- SELECT B.name, A.memberNum, A.phoneNum, A.serialNum, A.planNum, C.billNum, C.billCheck, C.paidCheck -->
+		SELECT A.*, B.*, C.*
+			FROM TELEPHONE A
+			LEFT OUTER JOIN MEMBER B ON A.memberNum = B.memberNum
+			LEFT OUTER JOIN PAYMENTDETAILS C ON A.serialNum = C.serialNum
+		WHERE A.memberNum = #{memberNum}
+		LIMIT #{startRow}, #{perPage}
+	</select>
+	<resultMap type="BillVO" id="getBillResult">
+		<id property="billNum" column="BILLNUM"/>
+		<result property="serialNum" column="serialNum"/>
+		<result property="planNum" column="planNum"/>
+		<result property="billCheck" column="billCheck"/>
+		<result property="paidCheck" column="paidCheck"/>
+		<result property="phonePayPrice" column="phonePayPrice"/>
+		<result property="phoneSplitTax" column="phoneSplitTax"/>
+		<result property="phoneSplitPrice" column="phoneSplitPrice"/>
+		<result property="disPlanPrice" column="disPlanPrice"/>
+		<result property="ePlanPrice" column="ePlanPrice"/>
+		<result property="totalPrice" column="totalPrice"/>
+		<result property="overduePrice" column="overduePrice"/>
+		<result property="payMaxDate" column="payMaxDate"/>
+		<result property="useDate" column="useDate"/>
+		<result property="payMonth" column="payMonth"/>
+		<result property="bfPlanPrice" column="bfPlanPrice"/>
+		<result property="planChangeDate" column="planChangeDate"/>
+		<result property="paidDate" column="paidDate"/>
+		<result property="cancelPrice" column="cancelPrice"/>
+		
+		<association property="telephoneVO" javaType="TelephoneVO">
+			<id property="serialNum" column="serialNum"/>
+			<result property="planNum" column="planNum"/>
+			<result property="memberNum" column="memberNum"/>
+			<result property="appNum" column="appNum"/>
+			<result property="phoneNum" column="phoneNum"/>
+			<result property="contractDate" column="contractDate"/>
+			<result property="expireDate" column="expireDate"/>
+			<result property="startDate" column="startDate"/>
+			<result property="endDate" column="endDate"/>
+			<result property="kingCheck" column="kingCheck"/>
+			<result property="directName" column="directName"/>
+			<result property="phoneOriPrice" column="phoneOriPrice"/>
+			<result property="phoneSubPrice" column="phoneSubPrice"/>
+			<result property="phoneTotalPrice" column="phoneTotalPrice"/>
+			<result property="phoneBalance" column="phoneBalance"/>
+			<result property="stopStartDate" column="stopStartDate"/>
+			<result property="stopEndDate" column="stopEndDate"/>
+			<result property="disKind" column="disKind"/>
+			<result property="directCode" column="directCode"/>
+			<result property="planChangeDate" column="planChangeDate"/>	
+		</association>
+		<association property="memberVO" javaType="MemberVO">
+			<id property="memberNum" column="memberNum"/>
+			<result property="email" column="email"/>
+			<result property="pw" column="pw"/>
+			<result property="name" column="name"/>
+			<result property="address1" column="address1"/>
+			<result property="address2" column="address2"/>
+			<result property="address3" column="address3"/>
+			<result property="rrnf" column="rrnf"/>
+			<result property="rrnl" column="rrnl"/>
+			<result property="joinDate" column="joinDate"/>
+			<result property="numberChangeDate" column="numberChangeDate"/>
+			<result property="memberState" column="memberState"/>
+			<result property="adminCheck" column="adminCheck"/>
+			<result property="tel" column="tel"/>
+			<result property="ownCheck" column="ownCheck"/>
+		</association>
+	</resultMap>
+	
+	<!-- 회원의 대표 회선 정보 가져오기 -->
+	<select id="getKingDetail" parameterType="MemberVO" resultType="HashMap">
+		SELECT B.NAME, A.PHONENUM, C.PLANNAME FROM TELEPHONE A
+		LEFT OUTER JOIN MEMBER B ON A.MEMBERNUM = B.MEMBERNUM 
+		LEFT OUTER JOIN PLAN C ON A.PLANNUM = C.PLANNUM 
+		WHERE A.KINGCHECK = 1
+		AND B.MEMBERNUM = #{memberNum}
+	</select>
 	
 	<!-- 비밀번호 변경 -->
-	<update id="pwUpdate" parameterType="MemberVO">
-		UPDATE MEMBER SET PW=#{npw}
-		WHERE EMAIL=#{email}
+	<update id="setPasswordUpdate" parameterType="MemberVO">
+		UPDATE MEMBER SET PW=#{pw}
+		WHERE MEMBERNUM=#{memberNum}
 	</update>
+	
+	<!-- 회원 정보 변경 -->
+	<update id="setMemberUpdate" parameterType="MemberVO">
+		UPDATE MEMBER SET TEL=#{tel}, ADDRESS1=#{address1}, ADDRESS2=#{address2}, ADDRESS3=#{address3}
+		WHERE MEMBERNUM=#{memberNum}
+	</update>
+	
+	<!-- 새로 업데이트 된 정보로 세션 만들기 -->
+	<select id="getNewSession" parameterType="MemberVO" resultType="MemberVO">
+		SELECT * FROM MEMBER
+		WHERE MEMBERNUM=#{memberNum}
+	</select>
+
+
 </mapper>

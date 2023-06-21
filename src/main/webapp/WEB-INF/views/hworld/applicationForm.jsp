@@ -3,6 +3,7 @@
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
     <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+	<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -283,7 +284,7 @@
                                                   		</c:otherwise>
                                                   	</c:choose>
                                                   	
-                                                  	${modiCapacity}</span>, <span class="theme-color fw-bold" style="font-size:14px;">${i.planPrice}</span><span style="font-size:14px;">원</span>/월</label>
+                                                  	${modiCapacity}</span>, <span class="theme-color fw-bold" style="font-size:14px;"><fmt:formatNumber value="${i.planPrice}" pattern="#,###"/></span><span style="font-size:14px;">원</span>/월</label>
                                                   </div>                                       
                                                  </div>
                                           	</c:forEach>
@@ -316,7 +317,7 @@
                                                   		</c:otherwise>
                                                   	</c:choose>
                                                   	
-                                                  	${modiCapacity}</span>, <span class="theme-color fw-bold" style="font-size:14px;">${i.planPrice}</span><span style="font-size:14px;">원</span>/월</label>
+                                                  	${modiCapacity}</span>, <span class="theme-color fw-bold" style="font-size:14px;"><fmt:formatNumber value="${i.planPrice}" pattern="#,###"/></span><span style="font-size:14px;">원</span>/월</label>
                                                   </div>                                       
                                                  </div>
                                           	</c:forEach>
@@ -349,7 +350,7 @@
                                                   		</c:otherwise>
                                                   	</c:choose>
                                                   	
-                                                  	${modiCapacity}</span>, <span class="theme-color fw-bold" style="font-size:14px;">${i.planPrice}</span><span style="font-size:14px;">원</span>/월</label>
+                                                  	${modiCapacity}</span>, <span class="theme-color fw-bold" style="font-size:14px;"><fmt:formatNumber value="${i.planPrice}" pattern="#,###"/></span><span style="font-size:14px;">원</span>/월</label>
                                                   </div>                                       
                                                  </div>
                                           	</c:forEach>
@@ -382,7 +383,7 @@
                                                   		</c:otherwise>
                                                   	</c:choose>
                                                   	
-                                                  	${modiCapacity}</span>, <span class="theme-color fw-bold" style="font-size:14px;">${i.planPrice}</span><span style="font-size:14px;">원</span>/월</label>
+                                                  	${modiCapacity}</span>, <span class="theme-color fw-bold" style="font-size:14px;"><fmt:formatNumber value="${i.planPrice}" pattern="#,###"/></span><span style="font-size:14px;">원</span>/월</label>
                                                   </div>                                       
                                                  </div>
                                           	</c:forEach>
@@ -415,7 +416,7 @@
                                                   		</c:otherwise>
                                                   	</c:choose>
                                                   	
-                                                  	${modiCapacity}</span>, <span class="theme-color fw-bold" style="font-size:14px;">${i.planPrice}</span><span style="font-size:14px;">원</span>/월</label>
+                                                  	${modiCapacity}</span>, <span class="theme-color fw-bold" style="font-size:14px;"><fmt:formatNumber value="${i.planPrice}" pattern="#,###"/></span><span style="font-size:14px;">원</span>/월</label>
                                                   </div>                                       
                                                  </div>
                                           	</c:forEach>
@@ -448,7 +449,7 @@
                                                   		</c:otherwise>
                                                   	</c:choose>
                                                   	
-                                                  	${modiCapacity}</span>, <span class="theme-color fw-bold" style="font-size:14px;">${i.planPrice}</span><span style="font-size:14px;">원</span>/월</label>
+                                                  	${modiCapacity}</span>, <span class="theme-color fw-bold" style="font-size:14px;"><fmt:formatNumber value="${i.planPrice}" pattern="#,###"/></span><span style="font-size:14px;">원</span>/월</label>
                                                   </div>                                       
                                                  </div>
                                           	</c:forEach>
@@ -637,6 +638,14 @@
 	<!-- 다음 주소 찾기 API -->
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script>
+	$(document).ready(function(){
+	    let message = "${message}";
+		if(message!= ""){
+		    alert(message);
+		}
+	})
+	
+	
 	/* 다음 주소 연동 */
 	function execution_daum_address(){
 		

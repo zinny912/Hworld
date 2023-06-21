@@ -36,10 +36,10 @@
 		<c:set var="orderFinalPrice" value="0" />
 		<c:forEach items="${orderList}" var="ol">
 		  <c:set var="orderFinalPrice" value="${orderFinalPrice + ol.calPrice}" />
-		  <input type="hidden" name="orderFinalPrice" value="${orderFinalPrice}">
 		</c:forEach>
 		<input type="hidden" name="orderNum" value="${orderInfo.orderNum}">
 		<input type="hidden" name="memberNum" value="${memberVO.memberNum}">
+		  <input type="hidden" name="orderFinalPrice" value="${orderFinalPrice}">
 		
 
         <c:forEach items="${orderList}" var="ol">
@@ -49,8 +49,7 @@
 		<input type="hidden" name="orderAmount" value="${ol.orderAmount}">
 		<input type="hidden" name="calPrice" value="${ol.calPrice}">		
            </c:forEach>
-		
-		
+
 		
        </form>
   
@@ -76,9 +75,9 @@
          console.log(rsp);
          if ( rsp.success ) {
             let msg = '결제가 완료되었습니다.';
-            msg += '고유ID : ' + rsp.imp_uid;
-            msg += '상점 거래ID : ' + rsp.merchant_uid;
-            msg += '결제 금액 : ' + rsp.paid_amount;
+/*             msg += '고유ID : ' + rsp.imp_uid;
+ *//*             msg += '상점 거래ID : ' + rsp.merchant_uid;
+ */            msg += '결제 금액 : ' + rsp.paid_amount;
             msg += '카드 승인번호 : ' + rsp.apply_num;
             console.log('성공');
             alert(msg);

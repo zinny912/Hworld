@@ -93,8 +93,6 @@
   color: #ffa202;
 }
 
-
-
      .btn-solid-after {
         background-color: #e22454; 
         color: #fff; 
@@ -131,24 +129,16 @@
                 <div class="col-lg-12 col-12">
                     <div class="details-items">
                         <div class="row g-4">
-                            <div class="col-md-6">
-                                <div class="ratio_portrait">
-                                    <div class="row g-sm-3 g-2">
-                                        <div class="col-6">
-                                            <div>
-                                                <img src="assets/images/fashion/galaxy21u4.png"
-                                                    class="img-fluid bg-img blur-up lazyload" alt="">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
+                             <div class="col-md-6" style="display:block;">
+		                            	<div class="ratio_landscape">
+		                                <img src="/assets/images/electronics/product/${param.slicedCode}.jpg">
+										</div>	  
+		                            </div>
                             <div class="col-md-6">
                                 <div class="cloth-details-size">
                                     <div class="admin-update-delete d-flex justify-content-end">
                                         <a href="./accessoryUpdate?slicedCode=${directVO.slicedCode}" class="me-3">수정</a>
-                                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#productdel">삭제</a>
+                                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#productdel2" id="productDelModal2" >삭제</a>
                                     </div>    
 									<div id="directList">
 										
@@ -157,7 +147,7 @@
 												<div class="brand" style="font-size: 27px; color: gray;" id="productCode${status.index}"
 												data-direct-code="${direct.directCode}" data-direct-price="${direct.directPrice}"
 												data-direct-stock="${direct.directStock}">
-													${direct.value} ${direct.slicedCode} ${direct.directCode}
+													${direct.value} <%-- ${direct.slicedCode} ${direct.directCode} --%>
 												</div>
 													<div class="details-image-concept mt-0" style="font-size: 35px;" id="directName">
 														<span class="directNameValue" data-direct-name="${direct.directName}">${direct.directName}</span>
@@ -285,10 +275,14 @@
                         </nav>
 
                         <div class="tab-content" id="nav-tabContent">
-                            <div id="desc" class="tab-pane fade show active">
+								<div id="desc" class="tab-pane fade show active">
 									<div class="p_description">
-	                                    ${directVO.directContents}
+	                                    ${list.get(0).directContents}
+
 	                                </div>  
+
+                            </div>
+
                             </div>
 
                             <!-- 상품 문의 nav tap -->
@@ -539,7 +533,7 @@
 	                                                    	<p class="font-light" name="contents">${review.contents}</p>
 	                                                    <input type="hidden" id="orderNum" name="orderNum" value="${review.orderNum}">
 														<input type="hidden" id="memberNum" name="memberNum" value="${review.memberNum}">
-														<input type="hidden" name="slicedCode" value="${param.slicedCode}">
+														<input type="hidden" name="slicedCode" id="slicedCode" value="${param.slicedCode}">
 													<p class="date-custo font-light">
 														<fmt:formatDate value="${review.regDate}" pattern="yyyy/MM/dd" /><span></span></p>
                                                 	</div>
@@ -779,7 +773,7 @@
 					</div>
     <!-- 문의작성 모달 End -->
  <!-- 상품 삭제 모달창 start -->
- <div class="modal fade payment-modal" id="reviewdel">
+ <div class="modal fade payment-modal" id="productdel2">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
@@ -789,13 +783,14 @@
                 <form>
                     <div class="mb-4">
                      <h3>정말 삭제하시겠습니까? </h3> <h5>삭제 후에는 복구가 불가합니다.</h5>
-                     <input type="hidden" id="modalDelNum" name="num" value="">
+                     <input type="hidden" id="modalDelId2" name="directCode" value="">
+                      <input type="hidden" id="modalDelSC2" value="${param.slicedCode}">
                     </div>
                 </form>
             </div>
             <div class="modal-footer pt-0 text-end d-block">
             	<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-                <button type="button" class="btn btn-solid-default rounded-1" id="confirmDelete" onclick="confirmDelete()">삭제</button>
+                <button type="button" class="btn btn-solid-default rounded-1" id="productDelete2" >삭제</button>
             </div>
         </div>
     </div>

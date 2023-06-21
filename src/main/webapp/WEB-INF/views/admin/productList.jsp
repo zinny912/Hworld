@@ -16,13 +16,17 @@
             <div class="page-body">
                 <div class="title-header title-header-1">
                     <h5>상품 목록</h5>
-                    <div class="col-lg-6 col-md-8 mx-6">
+                    <div class="col-lg-6 col-md-8 mx-6 d-flex justify-content-end">
                         <div class="search-bar">
                             <div class="input-group search-bar w-100">
-                                <input type="search" class="form-control" placeholder="Search">
-                                <button class="input-group-text" id="basic-addon3">
-                                    <i class="fas fa-search"></i>
-                                </button>
+                            	<form action="./productList" method="get">
+	                            	<div class="d-inline-flex input-group search-bar" style="width: 750px">
+		                                <input type="search" name="search" value="${pager.search}" class="form-control" placeholder="Search : 상품 코드, 이름, 용량">
+		                                <button class="input-group-text" id="basic-addon3">
+		                                    <i class="fas fa-search"></i>
+		                                </button>
+		                            </div>
+		                        </form>
                             </div>
                         </div>
                     </div>
@@ -38,107 +42,57 @@
                                             <table class="table table-1d all-package">
                                                 <thead>
                                                     <tr>
-                                                        <th>상품 이미지</th>
-                                                        <th><b>이름/용량/색상</b> <i class="fa fa-fw fa-sort"></i></th>
-                                                        <th><b>브랜드</b> <i class="fa fa-fw fa-sort"></i></th>
-                                                        <th><b>재고</b> <i class="fa fa-fw fa-sort"></i></th>
-                                                        <th><b>가격</b> <i class="fa fa-fw fa-sort"></i></th>
-                                                        <th><b>판매유무</b> <i class="fa fa-fw fa-sort"></i></th>
+                                                        <th>상품 코드</th>
+                                                        <th><b>이름/용량/색상</b> <!-- <i class="fa fa-fw fa-sort"></i> --></th>
+                                                        <th><b>브랜드</b> <!-- <i class="fa fa-fw fa-sort"></i> --></th>
+                                                        <th><b>재고</b> <!-- <i class="fa fa-fw fa-sort"></i> --></th>
+                                                        <th><b>가격</b> <!-- <i class="fa fa-fw fa-sort"></i> --></th>
+                                                        
                                                     </tr>
                                                 </thead>
 
                                                 <tbody>
-                                                    <tr>
-                                                        <td>
-                                                            <img src="/admin/images/profile/4.jpg" class="img-fluid"
-                                                                alt="">
-                                                        </td>
-
-                                                        <td>
-                                                            <a href="javascript:void(0)">아이폰 14 256GB Black</a>
-                                                            
-                                                        </td>
-
-                                                        <td>
-                                                            <a href="javascript:void(0)">apple</a>
-                                                        </td>
-
-                                                        <td >
-                                                            <div class="mx-auto col-lg-3">
-                                                                <input class="form-control" type="number" value="1">
-                                                            </div>
-                                                        </td>
-
-                                                        <td class="td-price">140</td>
-
-                                                        <td class="td-cross">
-                                                            <span class="lnr lnr-cross-circle"></span>
-                                                        </td>
-
-                                                       
-                                                    </tr>
-
-                                                    <tr>
-                                                        <td>
-                                                            <img src="/admin/images/profile/2.jpg" class="img-fluid"
-                                                                alt="">
-                                                        </td>
-
-                                                        <td>
-                                                            <a href="javascript:void(0)">아이폰 14 512GB Black</a>
-                                                            
-                                                        </td>
-
-                                                        <td>
-                                                            <a href="javascript:void(0)">apple</a>
-                                                        </td>
-
-                                                        <td >
-                                                            <div class="mx-auto col-lg-3">
-                                                                <input class="form-control" type="number" value="2">
-                                                            </div>
-                                                        </td>
-
-                                                        <td class="td-price">160</td>
-
-                                                        <td class="td-check">
-                                                            <span class="lnr lnr-checkmark-circle"></span>
-                                                        </td>
-
-                                                       
-                                                    </tr>
-
-                                                    <tr>
-                                                        <td>
-                                                            <img src="/admin/images/profile/3.jpg" class="img-fluid"
-                                                                alt="">
-                                                        </td>
-
-                                                        <td>
-                                                            <a href="javascript:void(0)">갤럭시 s23 256GB black</a>
-                                                        </td>
-
-                                                        <td>
-                                                            <a href="javascript:void(0)">samsung</a>
-                                                        </td>
-
-                                                        <td >
-                                                            <div class="mx-auto col-lg-3">
-                                                                <input class="form-control" type="number" value="1">
-                                                            </div>
-                                                        </td>
-
-                                                        <td class="td-price">130</td>
-
-                                                        <td class="td-check">
-                                                            <span class="lnr lnr-checkmark-circle"></span>
-                                                        </td>
-
-                                                        
-                                                    </tr>
-
-                                                    
-                                                    </tr>
+                                                	<c:forEach var="directVO" items="${productList}">
+	                                                    <tr>
+	                                                        <td>
+	                                                             <%-- <a href="/direct/phoneDetail?slicedCode=${direct }"></a> --%><b>${directVO.directCode}</b>
+	                                                        </td>
+	
+	                                                        <td>
+	                                                            ${directVO.directName} / ${directVO.saveCapacity} / 
+	                                                            <c:if test="${directVO.colorCode eq 'W'}">
+	                                                            	White
+	                                                           	</c:if>
+	                                                           	<c:if test="${directVO.colorCode eq 'B'}">
+	                                                            	Black
+	                                                           	</c:if>
+	                                                           	<c:if test="${directVO.colorCode eq 'G'}">
+	                                                            	Gray
+	                                                           	</c:if>
+	                                                        </td>
+	
+	                                                        <td class="td-price">
+	                                                        	<c:if test="${directVO.brandCode eq 'S'}">
+	                                                            	<span>삼성</span>                                            
+	                                                           	</c:if>
+	                                                           	<c:if test="${directVO.brandCode eq 'A'}">
+	                                                            	<span>애플</span>
+	                                                           	</c:if>
+	                                                           	<c:if test="${directVO.brandCode eq '0'}">
+	                                                            	<span>기타</span>
+	                                                           	</c:if>	                                                            
+	                                                        </td>
+	
+	                                                        <td >
+	                                                            <!-- <div class="mx-auto col-lg-3">
+	                                                                <input class="form-control" type="number" value="">
+	                                                            </div> -->
+	                                                            ${directVO.directStock}
+	                                                        </td>
+																														
+	                                                        <td class="td-price">${directVO.directPrice}</td>		                                                       
+	                                                    </tr>		                                                    
+                                                    </c:forEach>
                                                 </tbody>
                                             </table>
                                         </div>
@@ -150,7 +104,7 @@
                                     <nav class="ms-auto me-auto " aria-label="...">
 						                <ul class="pagination pagination-primary">
 						                    <li class="page-item ${pager.pre ? '' : 'disabled' }">
-						                        <a class="page-link" href="memberList?page=${pager.startNum-1}&search=${pager.search}" aria-label="Previous">
+						                        <a class="page-link" href="productList?page=${pager.startNum-1}&search=${pager.search}" aria-label="Previous">
 						                            <span aria-hidden="true">
 						                                <i class="fas fa-chevron-left"></i>
 						                            </span>
@@ -158,11 +112,11 @@
 						                    </li>
 						                    <c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
 						   	                    <li class="page-item">
-						                        	<a class="page-link" href="memberList?page=${i}&search=${pager.search}">${i}</a>
+						                        	<a class="page-link" href="productList?page=${i}&search=${pager.search}">${i}</a>
 						                    	</li>
 						                    </c:forEach>
 						                    <li class="page-item ${pager.next ? '' : 'disabled' }">
-						                        <a class="page-link" href="memberList?page=${pager.lastNum+1}&search=${pager.search}" aria-label="Next">
+						                        <a class="page-link" href="productList?page=${pager.lastNum+1}&search=${pager.search}" aria-label="Next">
 						                            <span aria-hidden="true">
 						                                <i class="fas fa-chevron-right"></i>
 						                            </span>

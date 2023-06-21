@@ -245,9 +245,9 @@ $('input[name="planNum"], select[name="directCode"]').change(function() {
         disPlan12 = Math.floor(disPlan12 / 10) * 10;
         disPlan24 = Math.floor(disPlan24 / 10) * 10;
 
-        let nPrice0 = "-"+disPrice;
-        let nPrice1 = "-"+disPlan12;
-        let nPrice2 = "-"+disPlan24;
+        let nPrice0 = "-"+disPrice.toLocaleString();
+        let nPrice1 = "-"+disPlan12.toLocaleString();
+        let nPrice2 = "-"+disPlan24.toLocaleString();
 
         //할인 가격을 표시
         $('#dis0').empty();
@@ -266,7 +266,7 @@ $('#directCode, input[name=planNum], input[name=disKind]').change(function() {
     const directCode = $('#directCode option:selected').val(); // 기기코드
     const planNum = $('input[name=planNum]:checked').val(); // 요금제번호
     const disKind = $('input[name=disKind]:checked').val(); // 할인유형
-
+    
     directCheck = isEmpty(directCode);
     planCheck = isEmpty(planNum);
     disKindCheck = isEmpty(disKind);
@@ -284,21 +284,23 @@ $('#directCode, input[name=planNum], input[name=disKind]').change(function() {
                 planNum: planNum
             },
             success: function(response) {
+                let out_phonePayPrice = response.out_phonePayPrice;
+                let out_planPrice = response.out_planPrice;
+                let totalPrice = (response.out_phonePayPrice*1 + response.out_planPrice*1);
                 $('#out_phonePayPrice').text('');
                 $('#out_planPrice').text('');
                 $('#totalPrice').text('');
-                $('#out_phonePayPrice').text(response.out_phonePayPrice);
-                $('#out_planPrice').text(response.out_planPrice);
-                $('#totalPrice').text(response.out_phonePayPrice*1 + response.out_planPrice*1);
+                $('#out_phonePayPrice').text(out_phonePayPrice.toLocaleString());
+                $('#out_planPrice').text(out_planPrice.toLocaleString());
+                $('#totalPrice').text(totalPrice.toLocaleString());
             },
             error: function(error) {
                 // 에러 처리 로직 작성
                 console.log(error);
             }
         });
-        
     }
-  });
+});
 
 
 //가입하기 버튼 눌렀을 때
@@ -307,8 +309,18 @@ $('#completeForm').click(function(){
     //let $frm = $('#appForm').serialize();
     //alert($frm);
 
+    //약관 동의 체크
+    let terms = $('#checkTerms:checked').val();
+    chkTerms = isEmpty(terms);
+
+    if(chkTerms){
+        $('#appForm').submit();
+    }else{
+        alert('약관에 동의해 주세요');
+    }
+
     //가입폼 전송
-    $('#appForm').submit();
+    //$('#appForm').submit();
 })
 
 
@@ -357,4 +369,4 @@ $('#phoneNum').on("blur", function() {
         });
     }
 
-})
+});

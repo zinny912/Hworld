@@ -49,7 +49,7 @@ public class ApplicationService {
 		
 		//신청서 db에 insert
 		int result = applicationDAO.setFormAdd(applicationVO);
-		log.error(">>>>>>>>>>>>>>>>>>>>>>>>>> appNum: {} ", applicationVO.getAppNum());
+		log.info(">>>>>>>>>>>>>>>>>>>>>>>>>> appNum: {} ", applicationVO.getAppNum());
 		
 		//고려할점) 방금 auto_increment로 생성한 appNum을 어케 알지?
 		//useGenerateKeys, keyProperty 사용하기
@@ -63,7 +63,7 @@ public class ApplicationService {
 			check=true;
 		}
 		
-		log.error(">>>>>>>>>>>>>>>>>>>>>>>>>> 일치여부: {} ", check);
+		log.info(">>>>>>>>>>>>>>>>>>>>>>>>>> 일치여부: {} ", check);
 		
 		//고려할점) 주민번호는 똑같은데 이름이 다른 경우 어떻게 처리?
 		

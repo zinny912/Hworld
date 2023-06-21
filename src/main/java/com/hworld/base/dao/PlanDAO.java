@@ -1,14 +1,16 @@
 package com.hworld.base.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
 import com.hworld.base.util.Pager;
 import com.hworld.base.vo.BaseVO;
 import com.hworld.base.vo.BillVO;
-import com.hworld.base.vo.EPlanVO;
+import com.hworld.base.vo.ExtraPlanVO;
 import com.hworld.base.vo.MemberVO;
+import com.hworld.base.vo.OtherTelecomVO;
 import com.hworld.base.vo.PlanVO;
 
 @Mapper
@@ -44,9 +46,16 @@ public interface PlanDAO {
     //요금제 변경 페이지에서 이전 요금제 정보 불러오기
     public PlanVO getBeforePlan(Integer memberNum) throws Exception;
     
+    //요금제 변경 페이지에서 요금제 변경일 체크 
+    public BillVO getCheckPlanChange(BillVO billVO) throws Exception;
+    
     //요금제 변경 후 청구내역 변경되는 프로시저 호출
     public int setPlanChange(BillVO billVO) throws Exception;
     
+    
+    
+    //타통신사 조회 
+    public String isOtherTelecom(String taPhoneNum, String telecomName) throws Exception;
     
     
     // 공통코드 정보 가져오고 insert 
@@ -68,21 +77,21 @@ public interface PlanDAO {
 	//public Long getTotalCount(Pager pager) throws Exception;
 	
 	// 부가서비스 리스트 조회
-	public List<EPlanVO> EPlanList(EPlanVO ePlanVO) throws Exception;
+	public List<ExtraPlanVO> getExtraPlanList() throws Exception;
 	
 	// 부가서비스 하나 조회
-	public EPlanVO getDetailEPlan(EPlanVO ePlanVO) throws Exception;
+	public ExtraPlanVO getDetailExtraPlan(ExtraPlanVO extraPlanVO) throws Exception;
 	
-	public EPlanVO getNoteNameEPlan(EPlanVO eplanVO) throws Exception;
+	public ExtraPlanVO getNoteNameExtraPlan(ExtraPlanVO extraPlanVO) throws Exception;
 
 	// 부가서비스 추가
-	public int setEPlanInsert(EPlanVO ePlanVO) throws Exception;
+	public int setEPlanInsert(ExtraPlanVO extraPlanVO) throws Exception;
 	
 	// 부가서비스 수정
-	public int setEPlanUpdate(EPlanVO ePlanVO) throws Exception;
+	public int setExtraPlanUpdate(ExtraPlanVO extraPlanVO) throws Exception;
 	
 	// 부가서비스 삭제
-	public int setEPlanDelete(EPlanVO ePlanVO) throws Exception;
+	public int setExtraPlanDelete(ExtraPlanVO extraPlanVO) throws Exception;
 
 	
 }
