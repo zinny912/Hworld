@@ -9,11 +9,13 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.hworld.base.dao.MyPageDAO;
 import com.hworld.base.util.Pager;
 import com.hworld.base.vo.BillVO;
 import com.hworld.base.vo.MemberVO;
+import com.hworld.base.vo.TelephoneVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -28,7 +30,21 @@ public class MyPageService {
 	private BCryptPasswordEncoder pwEncoder;
 	
 	//납부, 미납내역 출력하기
-	public List<BillVO> getPMDList(Pager pager, HttpSession session) throws Exception{
+//	public List<BillVO> getPMDList(Pager pager, HttpSession session) throws Exception{
+//		
+//		MemberVO memberVO = (MemberVO)session.getAttribute("memberVO");
+//		pager.setMemberNum(memberVO.getMemberNum());
+//		
+//		Long totalCount = myPageDAO.getTotalBill(pager);
+//		pager.makeNum(totalCount);
+//		pager.makeStartRow();
+//		
+//		
+//		return myPageDAO.getPMDList(pager);
+//	}
+	
+	//telephoneVO 기반 납부, 미납내역 출력하기
+	public List<TelephoneVO> getTPList(Pager pager, HttpSession session) throws Exception{
 		
 		MemberVO memberVO = (MemberVO)session.getAttribute("memberVO");
 		pager.setMemberNum(memberVO.getMemberNum());
@@ -37,8 +53,7 @@ public class MyPageService {
 		pager.makeNum(totalCount);
 		pager.makeStartRow();
 		
-		
-		return myPageDAO.getPMDList(pager);
+		return myPageDAO.getTPList(pager);
 	}
 	
 	
@@ -82,7 +97,7 @@ public class MyPageService {
 		//저장된 memberVO로 업데이트 실행
 		int result = myPageDAO.setMemberUpdate(memberVO);
 		
-		//업데이트 된 정보로 세션 업데이트 - 될지 모르겠음
+		//업데이트 된 정보로 세션 업데이트
 		memberVO = myPageDAO.getNewSession(memberVO);
 		session.setAttribute("memberVO", memberVO);
 		
@@ -90,6 +105,24 @@ public class MyPageService {
 	}
 	
 	
-	
+	//미납금 납부 후 bill 업데이트
+	public int setBillUpdate(@RequestParam("billNum") String[] billNums) throws Exception{
+		
+//		for (String string : billNums) {
+//			log.error(" :::::::::::::::::::: billnum : {}", string);
+//		}
+		
+		int result = 0;
+		
+		//billNum 숫자만큼 업데이트
+		for (String stringbillNum : billNums) {
+			BillVO billVO = new BillVO();
+			Integer billNum = Integer.parseInt(stringbillNum);
+			billVO.setBillNum(billNum);
+			result = myPageDAO.setBillUpdate(billVO);
+		}
+		
+		return result;
+	}
 	
 }

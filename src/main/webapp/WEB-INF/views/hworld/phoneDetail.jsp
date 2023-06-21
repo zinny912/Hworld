@@ -272,17 +272,10 @@
                     <div class="details-items">
                         <div class="row g-4">
                         <!-- 상품 사진 이미지 div 태그 -->
-		                            <div class="col-md-6">
-		                                <div class="ratio_portrait">
-		                                    <div class="row g-sm-3 g-2">
-		                                        <div class="col-6">
-		                                            <div>
-		                                                <img src="/assets/images/fashion/galaxy21u1.png"
-		                                                    class="img-fluid bg-img blur-up lazyload" alt="">
-		                                            </div>
-		                                        </div>
-		                                    </div>
-		                                </div>
+		                            <div class="col-md-6" style="display:block;">
+		                            	<div class="ratio_landscape">
+		                                <img src="/assets/images/electronics/product/${param.slicedCode}.jpg">
+										</div>	  
 		                            </div>
                        <!-- 상품 사진 이미지 div 태그 end -->
                             <div class="col-md-6">
@@ -290,7 +283,7 @@
                                 <c:if test="${memberVO.adminCheck == 0 }">
                                     <div class="admin-update-delete d-flex justify-content-end">
                                         <a href="./directUpdate?slicedCode=${param.slicedCode}" class="me-3">수정</a>
-                                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#productdel" >삭제</a>
+                                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#productdel" id="productDelModal" >삭제</a>
                                     </div>    
                                 </c:if>
 								<div id="directList">
@@ -300,7 +293,7 @@
 												<div class="brand" style="font-size: 27px; color: gray;" id="productCode"
 												data-direct-code="${direct.directCode}" data-direct-price="${direct.directPrice}" data-brand-code="${direct.brandCode}"
 												data-direct-stock="${direct.directStock}" data-sliced-code="${direct.slicedCode}" data-category-code="${direct.categoryCode}" data-brand-Code="${direct.brandCode}">
-													${direct.value} ${direct.slicedCode} ${direct.directCode}
+													${direct.value}
 												</div>
 													<div class="details-image-concept mt-0" style="font-size: 35px;" id="directName">
 														<span class="directNameValue" data-direct-name="${direct.directName}">${direct.directName}</span>
@@ -312,16 +305,30 @@
 														<span class="price-detail theme-color fw-bold data-comma" id="renewPrice" >${direct.directPrice}</span>
 														<span class="unit">원</span>
 														</p>
-													<div class="direct-item" id="item_${direct.directCode}" data-direct-code="${direct.directCode}" data-category-code="${direct.categoryCode}" data-brand-code="${direct.brandCode}" data-sliced-code="${direct.slicedCode}" data-direct-stock="${direct.directStock}" data-direct-price="${direct.directPrice}"></div>
+													<div class="direct-item" id="item_${direct.directCode}" data-direct-code="${direct.directCode}" data-category-code="${direct.categoryCode}" data-brand-code="${direct.brandCode}" data-sliced-code="${direct.slicedCode}" data-direct-stock="${direct.directStock}" data-direct-price="${direct.directPrice}" data-direct-name="${direct.directName}"></div>
 											</div>
 										</c:forEach>
-											<input type="hidden" id="colorCode">
-											<input type="hidden" id="saveCapacity">
+										<form action="./phoneOrder" method="get" id="buyForm">
+											<input type="hidden" id="colorCode" name="colorCode">
+											<input type="hidden" id="saveCapacity" name="saveCapacity">
 											<input type="hidden" id="directCode" name="directCode">
 											<input type="hidden" id="directStock" name="directStock" readonly>
+											<input type="hidden" id="selectedDirectName" name="directName">
+											<input type="hidden" id="planNum" name="planNum" value="">
+											<input type="hidden" id="planName2" name="planName" >
+											<input type="hidden" id="planPrice1" name="planPrice">
+											<input type="hidden" id="disKind" name="disKind">
+											<input type="hidden" id="joinType" name="joinType" >
+											<input type="hidden" id="totalPriceAll" name="totalPrice">
+											<input type="hidden" id="outPhonePrice" name="out_phonePayPrice">
+											<input type="hidden" id="outplanPrice" name="out_planPrice">
+											
+											<!-- <input type="text" id="" -->
+										
 											<!-- <input type="hidden" id="categoryCode" name="categoryCode" value="${direct.categoryCode}">
 											<input type="hidden" id="brandCode" name="brandCode" value="${direct.brandCode}">
 											<input type="hidden" id="slicedCode" name="slicedCode" value="${direct.slicedCode}"> -->
+										</form>
 										<div class="optionArea">
 											<div class="product-option-item color">
 										   		<div class="option-title-area">
@@ -369,19 +376,19 @@
 											</div>
 											<div class="option-types" id="joinType">
 												<span class="c-ick-btn">
-													<input type="radio" hidden name="_joinType" id="joinType1">
+													<input type="radio" hidden name="joinType" id="joinType1" value="0">
 													<label for="joinType1" class="btn m-1 btn-outline-custom joinType">
 														<span class="labelin">기기변경</span>
 													</label>
 												</span>
 												<span class="c-ick-btn">
-													<input type="radio" hidden name="_joinType" id="joinType2">
+													<input type="radio" hidden name="joinType" id="joinType2" value="1">
 													<label for="joinType2" class="btn m-1 btn-outline-custom joinType">
 														<span class="labelin">번호이동</span>
 													</label>
 												</span>
 												<span class="c-ick-btn">
-													<input type="radio" hidden name="_joinType" id="joinType3">
+													<input type="radio" hidden name="joinType" id="joinType3" value="2">
 													<label for="joinType3" class="btn m-1 btn-outline-custom joinType">
 														<span class="labelin">신규가입</span>
 													</label>
@@ -431,7 +438,6 @@
 												<span class="sub-tit" id="selectedPlanName" style="overflow: hidden; font-size: 22px; font-weight: 700; letter-spacing: -0.5px; 
 												text-overflow: ellipsis;" data-plan-name="" value=""></span>
 												<!-- 체크용 planNum -->
-												<input type="hidden" id="planNum" name="planNum" value="">
 												<br>
 												<h2 class="main-tit" id="dataDefaultQty" style="margin: 3px 0 3px; font-size: 16px; font-weight: 400; letter-spacing: -0.56px; 
 												padding-right: 100px;"> 데이터 <span id="dataGB"></span> </h2>                                                            
@@ -439,7 +445,7 @@
 											<div class="data" style="position: absolute; top: 35px; right: 0; text-align: right;">
 												<!-- 선택된 요금제 금액 h2의 text에 삽입 -->
 												<h2 class="price theme-color" id="planPrice" style="letter-spacing: -0.2px; display: block; margin-top: 4px; margin-right:50px; 
-												color: #000; font-weight: 700;" data-plan-price="" data-dp=""></h2> 
+												color: #000; font-weight: 700;" data-plan-price2="" data-dp=""></h2> 
 												<p style="color:black; font-size:15px; margin-top:-20px;" class="fw-bold">원/월</p>
 											</div> 
 											<div class="d-flex justify-content-end">
@@ -479,7 +485,9 @@
 	                        <div class="tab-content" id="nav-tabContent">
 	                            <div id="desc" class="tab-pane fade show active">
 	                                <div class="p_description">
-	                                    ${directVO.directContents}
+	                                <c:forEach items="${list }">
+	                                    ${list.get(0).directContents}
+	                                    </c:forEach>
 	                                </div>
 	                            </div>
 	                           
@@ -1278,7 +1286,7 @@
                     </div>
                     <div class="btn-area" style="position: relative; padding-top:17px; float: right;"> 
                         <div class="product-buttons">                      
-                        <button type="button" class="btn btn-solid" id="orderBtn">주문하기</button>
+                        <button type="button" class="btn btn-solid orderBtn" id="orderBtn">주문하기</button>
                     </div> 
                     </div>
                 </div>                    
@@ -1320,12 +1328,12 @@
                     <div class="mb-4">
                      <h3>정말 삭제하시겠습니까? </h3> <h5>삭제 후에는 복구가 불가합니다.</h5>
                      <input type="hidden" id="modalDelId" name="directCode" value="">
-                     <input type="hidden" name="slicedCode" value="${param.slicedCode}">
+                     <input type="hidden" id="modalDelSC" value="${param.slicedCode}">
                     </div>
             </div>
             <div class="modal-footer pt-0 text-end d-block">
             	<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-                <button type="button" class="btn btn-solid-default rounded-1" id="productDelete" onclick="productDelete()">삭제</button>
+                <button type="button" class="btn btn-solid-default rounded-1" id="productDelete">삭제</button>
             </div>
         </div>
     </div>
@@ -1375,6 +1383,7 @@
 	  $(this).find('#modelQnaContents').val(qnaContents);
 	});
 </script>
+
 <script>
 const capacity = document.getElementsByClassName('capacity');
 for(let capacity2 of capacity){

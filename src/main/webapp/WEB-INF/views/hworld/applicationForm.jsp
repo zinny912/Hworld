@@ -638,6 +638,14 @@
 	<!-- 다음 주소 찾기 API -->
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script>
+	$(document).ready(function(){
+	    let message = "${message}";
+		if(message!= ""){
+		    alert(message);
+		}
+	})
+	
+	
 	/* 다음 주소 연동 */
 	function execution_daum_address(){
 		
