@@ -34,14 +34,14 @@
  </select>
  
 <!-- 요금제 대표회선인지 확인 -->
-<select id="getKingPlanNum" resultType="PlanVO" parameterType="Integer">
+<!-- <select id="getKingPlanNum" resultType="PlanVO" parameterType="Integer">
 	SELECT T.kingCheck, P.planNum
 	FROM TELEPHONE T
 	LEFT OUTER JOIN PLAN P on T.planNum=P.planNum
 	WHERE T.kingCheck = 1 
 	AND T.planNum=P.planNum
 	AND T.memberNum = #{memberNum};
-</select>
+</select> -->
 
 <!-- 요금제 이름 가져오기 -->
  <select id="getNoteName" resultType="PlanVO">
@@ -67,13 +67,28 @@
 			)
 		}
 </insert>
+<!-- 요금제 변경일 Check 프로시저 -->
+<select id="getCheckPlanChange" statementType="CALLABLE" parameterType="BillVO" >
+		{
+			CALL check_changePlan (
+			#{serialNum, mode=IN, jdbcType=INTEGER, javaType=INTEGER},
+			#{result,mode=OUT, jdbcType=INTEGER, javaType=INTEGER}
+			 )
+		}
+</select>
 
 <!-- 기존 사용중인 요금제 정보 회선번호까지 불러오기 -->
 <select id="getBeforePlan" resultType="PlanVO" parameterType="Integer">
-	SELECT P.PLANNUM, P.PLANNAME, P.PLANPRICE, P.DATACAPACITY, M.MEMBERNUM, T.SERIALNUM , T.PHONENUM FROM PLAN P
+	SELECT P.PLANNUM, P.PLANNAME, P.PLANPRICE, P.DATACAPACITY, M.MEMBERNUM, T.SERIALNUM , T.PHONENUM, T.KINGCHECK FROM PLAN P
 	JOIN TELEPHONE T ON T.PLANNUM = P.PLANNUM 
 	JOIN MEMBER M ON T.MEMBERNUM = M.MEMBERNUM
-	WHERE T.KINGCHECK =1 AND M.MEMBERNUM = #{memberNum}
+	WHERE M.MEMBERNUM = #{memberNum}
+</select>
+
+<!-- 번호이동 타통신사 조회 -->
+<select id="isOtherTelecom" resultType="String" parameterType="String">
+SELECT * FROM OTHERTELECOM
+WHERE TAPHONENUM = #{taPhoneNum} AND TELECOMNAME = #{telecomName}
 </select>
 
   <!-- 요금제 추가하면 공통코드 테이블에도 insert 되어야해서 공통코드 테이블 값 가져오는 메서드 필요 -->
@@ -102,36 +117,36 @@
  
  <!-- 부가서비스 -->
  
- <select id="getEPlanList" resultType="EPlanVO">
-    SELECT DISTINCT C.NOTE
+ <select id="getExtraPlanList" resultType="ExtraPlanVO">
+    SELECT EP.*, C.NOTE 
     FROM EPLAN EP
-    INNER JOIN COMMONCODE C ON SUBSTRING(EP.EPLANNUM, 1, 1) = C.TYPE
+    INNER JOIN COMMONCODE C ON SUBSTRING(EP.EXTRAPLANNUM, 1, 1) = C.TYPE AND SUBSTRING(EP.EXTRAPLANNUM, -2) = C.CODE
 </select>
  
-<select id="getDetailEPlan" resultType="EPlanVO" parameterType="EPlanVO">
+<select id="getDetailExtraPlan" resultType="ExtraPlanVO" parameterType="ExtraPlanVO">
     SELECT * FROM EPLAN
-    WHERE EPLANNUM=#{ePlanNum}
+    WHERE EXTRAPLANNUM=#{extraPlanNum}
 </select>
 
-<select id="getNoteNameEPlan" resultType="EPlanVO">
+<select id="getNoteNameExtraPlan" resultType="ExtraPlanVO">
     SELECT DISTINCT CC.NOTE AS note
     FROM EPLAN EP
-    LEFT JOIN COMMONCODE CC ON (EP.CATEGORYCODE = CC.CODE) AND (CC.TYPE = SUBSTRING(#{ePlanNum},1,1))
-    WHERE EP.EPLANNUM = #{ePlanNum}
+    LEFT JOIN COMMONCODE CC ON (EP.CATEGORYCODE = CC.CODE) AND (CC.TYPE = SUBSTRING(#{extraPlanNum},1,1))
+    WHERE EP.EPLANNUM = #{extraPlanNum}
 </select>
 
-<insert id="setEPlanInsert" parameterType="EPlanVO">
-    INSERT INTO EPLAN (EPLANNUM, NAME, PRICE, EPLANEXPLAIN, EPLANEXPLAINS, EPLANEXPLAINM, CATEGORYCODE)
-    VALUES(#{ePlanNum}, #{name}, #{price}, #{categoryCode}, #{ePlanExplain}, #{ePlanExplainS}, #{ePlanExplainM}, #{categoryCode})
+<insert id="setExtraPlanInsert" parameterType="ExtraPlanVO">
+    INSERT INTO EPLAN (EXTRAPLANNUM, EXTRANAME, EXTRAPRICE, EXTRAPLANEXPLAIN, EXTRAPLANEXPLAINS, EXTRAPLANEXPLAINM, CATEGORYCODE)
+    VALUES(#{extraPlanNum}, #{extraPlanName}, #{extraPrice}, #{categoryCode}, #{extraPlanExplain}, #{extraPlanExplainS}, #{extraPlanExplainM}, #{categoryCode})
 </insert>
 
-<update id="setEPlanUpdate" parameterType="EPlanVO">
+<update id="setExtraPlanUpdate" parameterType="ExtraPlanVO">
     UPDATE EPLAN 
-    SET NAME=#{name}, PRICE=#{price}, CATEGORYCODE=#{categoryCode}, EPLANEXPLAIN=#{ePlanExplain}, EPLANEXPLAINS=#{ePlanExplainS}, EPLANEXPLAINM=#{ePlanExplainM}
+    SET NAME=#{extraPlanName}, EXTRAPRICE=#{extraPrice}, CATEGORYCODE=#{categoryCode}, EXTRAPLANEXPLAIN=#{extraPlanExplain}, EXTRAPLANEXPLAINS=#{extraPlanExplainS}, EXTRAPLANEXPLAINM=#{extraPlanExplainM}
 </update>
 
-<delete id="setEPlanDelete" parameterType="EPlanVO">
-    DELETE FROM EPLAN WHERE EPLANNUM=#{ePlanNum}
+<delete id="setExtraPlanDelete" parameterType="ExtraPlanVO">
+    DELETE FROM EPLAN WHERE EXTRAPLANNUM=#{extraPlanNum}
 </delete>
 
 </mapper>

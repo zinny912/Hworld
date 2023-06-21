@@ -123,7 +123,7 @@
                                                     data-bs-target="#bugadel">삭제</a>
                                 </div>
                                 <div class="details-image-concept" >
-                                    <span class="text-start" style="font-size:30px; font-weight: 700;">V컬러링 </span>
+                                    <span class="text-start" style="font-size:30px; font-weight: 700;">${eplan.extraPlanName}</span>
                                     <span style="font-size:30px; font-weight: 500;"> (보이는 컬러링)</span>
                                 </div>
                                 <h3 class="text-start" style="color:gray;"> 이제는 눈으로 컬러링을 들어보세요 </h3>

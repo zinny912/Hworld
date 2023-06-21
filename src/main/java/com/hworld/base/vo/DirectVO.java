@@ -40,6 +40,7 @@ public class DirectVO {
     //업로드 날짜 
     private Timestamp uploadDate;
     
+    
     //리뷰 별점 가져오기 위한 VO 설정 (쿼리에서 받아옴)
     private Double rate;
     
@@ -50,6 +51,8 @@ public class DirectVO {
     private String initPrice;
     
     private String value;
+    
+    private String phoneNum;
     
     //요금제 리스트 가져오기 위한 VO 설정 (요금제 선택)
     private List<PlanVO> planList;
