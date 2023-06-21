@@ -9,6 +9,7 @@ import javax.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -47,10 +48,7 @@ public class CartController {
 	    mv.setViewName("redirect:/cart/cartInfo");
 
 		return mv;
-		
-		
-		
-		
+
 	}
 	
 	
@@ -75,4 +73,21 @@ public class CartController {
 
 		return mv;
 	}
+	
+	
+	@PostMapping("cartDelete")
+	@ResponseBody
+	public String cartDelete(@ModelAttribute("cartVO") CartVO cartVO, HttpSession session) throws Exception {
+	    MemberVO memberVO = (MemberVO) session.getAttribute("memberVO");
+	    cartVO.setMemberNum(memberVO.getMemberNum());
+	    int deleteResult = cartService.setDelete(cartVO);
+
+	    if (deleteResult == 1) {
+	        return "success"; // Deletion succeeded
+	    } else {
+	        return "failure"; // Deletion failed
+	    }
+	}
+
+	
 }
