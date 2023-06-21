@@ -47,10 +47,19 @@ public class PlanService {
 		return planDAO.getExtraPlanList();
 	}
 	//부가서비스 상세
-	public ExtraPlanVO getDetailEPlan(ExtraPlanVO extraPlanVO) throws Exception{
+	public ExtraPlanVO getDetailExtraPlan(ExtraPlanVO extraPlanVO) throws Exception{
 		return planDAO.getDetailExtraPlan(extraPlanVO);
 	}
 	
+	//부가서비스 신청
+	public int setAddServ(Map<String, Object> map) throws Exception{
+		return planDAO.setAddServ(map);
+	}
+	//부가서비스 신청여부 확인 
+	public Map<String, Object> searchExtraPlan(Map<String, Object> map) throws Exception{
+		return planDAO.searchExtraPlan(map);
+	}
+
 	//요금제 이름 조회
 	public PlanVO getNoteName(PlanVO planVO) throws Exception{
 		return planDAO.getNoteName(planVO);
@@ -133,8 +142,8 @@ public class PlanService {
 		return planDAO.setPlanUpdate(planVO);
 	}
 	//요금제 삭제 
-	public int setDelete(PlanVO planVO) throws Exception{
-		return planDAO.setPlanDelete(planVO);
+	public int setPlanDisabled(PlanVO planVO) throws Exception{
+		return planDAO.setPlanDisabled(planVO);
 	}
 	
 	
