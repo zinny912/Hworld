@@ -115,7 +115,7 @@
                                     <div class="front">
                                         <a href="./accessoryDetail?slicedCode=${direct.slicedCode}">
                                             <img src="/assets/images/electronics/product/${direct.slicedCode}thumb.jpg"
-                                                class="bg-img lazyload" alt="">
+                                                class="img-fluid" alt="">
                                         </a>
                                     </div>
                                 
@@ -167,15 +167,10 @@
                                     </span>
                                 </a>
                             </li>
-                            <li class="page-item active">
+                            <li class="page-item ">
                                 <a class="page-link" href="javascript:void(0)">1</a>
                             </li>
-                            <li class="page-item">
-                                <a class="page-link" href="javascript:void(0)">2</a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link" href="javascript:void(0)">3</a>
-                            </li>
+                            
                             <li class="page-item">
                                 <a class="page-link" aria-label="Next">
                                     <span aria-hidden="true">
@@ -184,7 +179,9 @@
                                 </a>
                             </li>
                         </ul>
+                        <c:if test="${memberVO.adminCheck ==0}">
                         <a href="accessoryAdd" class="btn btn-solid-default m-1" style="position: absolute">상품 등록</a>
+                        </c:if>
                     </nav>
                 </div>
 
@@ -212,7 +209,7 @@
                                             <h3>${direct.directName}</h3>
                                         </a>
                                         <h4> <span
-                                                class="theme-color" id="renewPrice">${direct.directPrice}</span>
+                                                class="theme-color" id="renewPrice">${direct.directPrice} </span>
                                         </h4>
                                     </div>
                                 </div>
@@ -235,145 +232,7 @@
     <!-- Shop Section end -->
 
 
-    <!-- Cart Successful Start -->
-    <div class="modal fade cart-modal" id="addtocart" tabindex="-1" role="dialog" aria-label="myModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-            <div class="modal-content ">
-                <div class="modal-header">
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-
-                <div class="modal-body">
-                    <div class="modal-contain">
-                        <div>
-                            <div class="modal-messages">
-                                <i class="fas fa-check"></i> 3-stripes full-zip hoodie successfully added to
-                                you cart.
-                            </div>
-                            <div class="modal-product">
-                                <div class="modal-contain-img">
-                                    <img src="/assets/images/fashion/instagram/4.jpg" class="img-fluid blur-up lazyload"
-                                        alt="">
-                                </div>
-                                <div class="modal-contain-details">
-                                    <h4>Premier Cropped Skinny Jean</h4>
-                                    <p class="font-light my-2">Yellow, Qty : 3</p>
-                                    <div class="product-total">
-                                        <h5>TOTAL : <span>$1,140.00</span></h5>
-                                    </div>
-                                    <div class="shop-cart-button mt-3">
-                                        <a href="shop-left-sidebar.html"
-                                            class="btn default-light-theme conti-button default-theme default-theme-2 rounded">CONTINUE
-                                            SHOPPING</a>
-                                        <a href="cart.html"
-                                            class="btn default-light-theme conti-button default-theme default-theme-2 rounded">VIEW
-                                            CART</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="ratio_asos mt-4">
-                        <div class="container">
-                            <div class="row m-0">
-                                <div class="col-sm-12 p-0">
-                                    <div
-                                        class="product-wrapper product-style-2 slide-4 p-0 light-arrow bottom-space spacing-slider">
-                                        <div>
-                                            <div class="product-box">
-                                                <div class="img-wrapper">
-                                                    <div class="front">
-                                                        <a href="product-left-sidebar.html">
-                                                            <img src="/assets/images/fashion/product/front/1.jpg"
-                                                                class="bg-img blur-up lazyload" alt="">
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                                <div class="product-details text-center">
-                                                    <div class="rating-details d-block text-center">
-                                                        <span class="font-light grid-content">B&Y Jacket</span>
-                                                    </div>
-                                                    <div class="main-price mt-0 d-block text-center">
-                                                        <h3 class="theme-color">$78.00</h3>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div>
-                                            <div class="product-box">
-                                                <div class="img-wrapper">
-                                                    <div class="front">
-                                                        <a href="product-left-sidebar.html">
-                                                            <img src="/assets/images/fashion/product/front/2.jpg"
-                                                                class="bg-img blur-up lazyload" alt="">
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                                <div class="product-details text-center">
-                                                    <div class="rating-details d-block text-center">
-                                                        <span class="font-light grid-content">B&Y Jacket</span>
-                                                    </div>
-                                                    <div class="main-price mt-0 d-block text-center">
-                                                        <h3 class="theme-color">$78.00</h3>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div>
-                                            <div class="product-box">
-                                                <div class="img-wrapper">
-                                                    <div class="front">
-                                                        <a href="product-left-sidebar.html">
-                                                            <img src="/assets/images/fashion/product/front/3.jpg"
-                                                                class="bg-img blur-up lazyload" alt="">
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                                <div class="product-details text-center">
-                                                    <div class="rating-details d-block text-center">
-                                                        <span class="font-light grid-content">B&Y Jacket</span>
-                                                    </div>
-                                                    <div class="main-price mt-0 d-block text-center">
-                                                        <h3 class="theme-color">$78.00</h3>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div>
-                                            <div class="product-box">
-                                                <div class="img-wrapper">
-                                                    <div class="front">
-                                                        <a href="product-left-sidebar.html">
-                                                            <img src="/assets/images/fashion/product/front/4.jpg"
-                                                                class="bg-img blur-up lazyload" alt="">
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                                <div class="product-details text-center">
-                                                    <div class="rating-details d-block text-center">
-                                                        <span class="font-light grid-content">B&Y Jacket</span>
-                                                    </div>
-                                                    <div class="main-price mt-0 d-block text-center">
-                                                        <h3 class="theme-color">$78.00</h3>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Cart Successful End -->
+    
 <c:import url="../temp/footer.jsp"></c:import>
 
 
@@ -400,7 +259,7 @@ $(document).ready(function() {
     for (var i = 0; i < prices.length; i++) {
         const price = parseInt(prices[i].innerHTML);
         const renewPrice = price.toLocaleString();
-        prices[i].innerHTML =renewPrice + '<span class="price-unit" style="text-decoration:none; color:black;">원</span>';
+        prices[i].innerHTML =renewPrice + '<span class="price-unit mt-1" style="text-decoration:none; color:black;">원</span>';
        	
     }
 });
