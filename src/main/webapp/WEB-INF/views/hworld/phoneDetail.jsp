@@ -272,17 +272,10 @@
                     <div class="details-items">
                         <div class="row g-4">
                         <!-- 상품 사진 이미지 div 태그 -->
-		                            <div class="col-md-6">
-		                                <div class="ratio_portrait">
-		                                    <div class="row g-sm-3 g-2">
-		                                        <div class="col-6">
-		                                            <div>
-		                                                <img src="/assets/images/fashion/galaxy21u1.png"
-		                                                    class="img-fluid bg-img blur-up lazyload" alt="">
-		                                            </div>
-		                                        </div>
-		                                    </div>
-		                                </div>
+		                            <div class="col-md-6" style="display:block;">
+		                            	<div class="ratio_landscape">
+		                                <img src="/assets/images/electronics/product/${param.slicedCode}.jpg">
+										</div>	  
 		                            </div>
                        <!-- 상품 사진 이미지 div 태그 end -->
                             <div class="col-md-6">
@@ -290,7 +283,7 @@
                                 <c:if test="${memberVO.adminCheck == 0 }">
                                     <div class="admin-update-delete d-flex justify-content-end">
                                         <a href="./directUpdate?slicedCode=${param.slicedCode}" class="me-3">수정</a>
-                                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#productdel" >삭제</a>
+                                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#productdel" id="productDelModal" >삭제</a>
                                     </div>    
                                 </c:if>
 								<div id="directList">
@@ -316,19 +309,19 @@
 											</div>
 										</c:forEach>
 										<form action="./phoneOrder" method="get" id="buyForm">
-											<input type="text" id="colorCode" name="colorCode">
-											<input type="text" id="saveCapacity" name="saveCapacity">
-											<input type="text" id="directCode" name="directCode">
+											<input type="hidden" id="colorCode" name="colorCode">
+											<input type="hidden" id="saveCapacity" name="saveCapacity">
+											<input type="hidden" id="directCode" name="directCode">
 											<input type="hidden" id="directStock" name="directStock" readonly>
-											<input type="text" id="selectedDirectName" name="directName">
-											<input type="text" id="planNum" name="planNum" value="">
-											<input type="text" id="planName2" name="planName" >
-											<input type="text" id="planPrice1" name="planPrice">
-											<input type="text" id="disKind" name="disKind">
-											<input type="text" id="joinType" name="joinType" >
-											<input type="text" id="totalPriceAll" name="totalPrice">
-											<input type="text" id="outPhonePrice" name="out_phonePayPrice">
-											<input type="text" id="outplanPrice" name="out_planPrice">
+											<input type="hidden" id="selectedDirectName" name="directName">
+											<input type="hidden" id="planNum" name="planNum" value="">
+											<input type="hidden" id="planName2" name="planName" >
+											<input type="hidden" id="planPrice1" name="planPrice">
+											<input type="hidden" id="disKind" name="disKind">
+											<input type="hidden" id="joinType" name="joinType" >
+											<input type="hidden" id="totalPriceAll" name="totalPrice">
+											<input type="hidden" id="outPhonePrice" name="out_phonePayPrice">
+											<input type="hidden" id="outplanPrice" name="out_planPrice">
 											
 											<!-- <input type="text" id="" -->
 										
@@ -492,7 +485,9 @@
 	                        <div class="tab-content" id="nav-tabContent">
 	                            <div id="desc" class="tab-pane fade show active">
 	                                <div class="p_description">
-	                                    ${directVO.directContents}
+	                                <c:forEach items="${list }">
+	                                    ${list.get(0).directContents}
+	                                    </c:forEach>
 	                                </div>
 	                            </div>
 	                           
@@ -1333,12 +1328,12 @@
                     <div class="mb-4">
                      <h3>정말 삭제하시겠습니까? </h3> <h5>삭제 후에는 복구가 불가합니다.</h5>
                      <input type="hidden" id="modalDelId" name="directCode" value="">
-                     <input type="hidden" name="slicedCode" value="${param.slicedCode}">
+                     <input type="hidden" id="modalDelSC" value="${param.slicedCode}">
                     </div>
             </div>
             <div class="modal-footer pt-0 text-end d-block">
             	<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-                <button type="button" class="btn btn-solid-default rounded-1" id="productDelete" onclick="productDelete()">삭제</button>
+                <button type="button" class="btn btn-solid-default rounded-1" id="productDelete">삭제</button>
             </div>
         </div>
     </div>
@@ -1388,6 +1383,7 @@
 	  $(this).find('#modelQnaContents').val(qnaContents);
 	});
 </script>
+
 <script>
 const capacity = document.getElementsByClassName('capacity');
 for(let capacity2 of capacity){

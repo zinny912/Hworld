@@ -117,36 +117,36 @@ WHERE TAPHONENUM = #{taPhoneNum} AND TELECOMNAME = #{telecomName}
  
  <!-- 부가서비스 -->
  
- <select id="getEPlanList" resultType="EPlanVO">
-    SELECT DISTINCT C.NOTE
+ <select id="getExtraPlanList" resultType="ExtraPlanVO">
+    SELECT EP.*, C.NOTE 
     FROM EPLAN EP
-    INNER JOIN COMMONCODE C ON SUBSTRING(EP.EPLANNUM, 1, 1) = C.TYPE
+    INNER JOIN COMMONCODE C ON SUBSTRING(EP.EXTRAPLANNUM, 1, 1) = C.TYPE AND SUBSTRING(EP.EXTRAPLANNUM, -2) = C.CODE
 </select>
  
-<select id="getDetailEPlan" resultType="EPlanVO" parameterType="EPlanVO">
+<select id="getDetailExtraPlan" resultType="ExtraPlanVO" parameterType="ExtraPlanVO">
     SELECT * FROM EPLAN
-    WHERE EPLANNUM=#{ePlanNum}
+    WHERE EXTRAPLANNUM=#{extraPlanNum}
 </select>
 
-<select id="getNoteNameEPlan" resultType="EPlanVO">
+<select id="getNoteNameExtraPlan" resultType="ExtraPlanVO">
     SELECT DISTINCT CC.NOTE AS note
     FROM EPLAN EP
-    LEFT JOIN COMMONCODE CC ON (EP.CATEGORYCODE = CC.CODE) AND (CC.TYPE = SUBSTRING(#{ePlanNum},1,1))
-    WHERE EP.EPLANNUM = #{ePlanNum}
+    LEFT JOIN COMMONCODE CC ON (EP.CATEGORYCODE = CC.CODE) AND (CC.TYPE = SUBSTRING(#{extraPlanNum},1,1))
+    WHERE EP.EPLANNUM = #{extraPlanNum}
 </select>
 
-<insert id="setEPlanInsert" parameterType="EPlanVO">
-    INSERT INTO EPLAN (EPLANNUM, NAME, PRICE, EPLANEXPLAIN, EPLANEXPLAINS, EPLANEXPLAINM, CATEGORYCODE)
-    VALUES(#{ePlanNum}, #{name}, #{price}, #{categoryCode}, #{ePlanExplain}, #{ePlanExplainS}, #{ePlanExplainM}, #{categoryCode})
+<insert id="setExtraPlanInsert" parameterType="ExtraPlanVO">
+    INSERT INTO EPLAN (EXTRAPLANNUM, EXTRANAME, EXTRAPRICE, EXTRAPLANEXPLAIN, EXTRAPLANEXPLAINS, EXTRAPLANEXPLAINM, CATEGORYCODE)
+    VALUES(#{extraPlanNum}, #{extraPlanName}, #{extraPrice}, #{categoryCode}, #{extraPlanExplain}, #{extraPlanExplainS}, #{extraPlanExplainM}, #{categoryCode})
 </insert>
 
-<update id="setEPlanUpdate" parameterType="EPlanVO">
+<update id="setExtraPlanUpdate" parameterType="ExtraPlanVO">
     UPDATE EPLAN 
-    SET NAME=#{name}, PRICE=#{price}, CATEGORYCODE=#{categoryCode}, EPLANEXPLAIN=#{ePlanExplain}, EPLANEXPLAINS=#{ePlanExplainS}, EPLANEXPLAINM=#{ePlanExplainM}
+    SET NAME=#{extraPlanName}, EXTRAPRICE=#{extraPrice}, CATEGORYCODE=#{categoryCode}, EXTRAPLANEXPLAIN=#{extraPlanExplain}, EXTRAPLANEXPLAINS=#{extraPlanExplainS}, EXTRAPLANEXPLAINM=#{extraPlanExplainM}
 </update>
 
-<delete id="setEPlanDelete" parameterType="EPlanVO">
-    DELETE FROM EPLAN WHERE EPLANNUM=#{ePlanNum}
+<delete id="setExtraPlanDelete" parameterType="ExtraPlanVO">
+    DELETE FROM EPLAN WHERE EXTRAPLANNUM=#{extraPlanNum}
 </delete>
 
 </mapper>

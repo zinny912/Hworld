@@ -90,35 +90,30 @@
 
     <!-- Cart Section Start -->
     <section class="section-b-space">
+                        <form action="./formAdd" method="post" id="appForm">
         <div class="container" style="padding: 0px 130px;">
             <div class="row g-4">
                 <div class="col-lg-7">
-                    <form class="needs-validation">
                         <div class="row g-4">
-
-
                             <!-- 가입자 정보 -->
-
                             <div class="col-md-12">
-                                <label for="fname" class="form-label">가입자 이름</label>
-                                <input type="text" class="form-control" id="name" value="${memberVO.name}">
+                                <label for="name" class="form-label">가입자 이름</label>
+                                <input type="text" class="form-control" id="name" value="${memberVO.name}" name="name">
                                 <input type="hidden" name="memberNum" value="${memberVO.memberNum}">
                             </div>
-
                             <!-- 주민등록번호 -->
                             <div class="d-flex col-10">
                             <div class="col-md-7">
                                 <label for="rrnf" class="form-label">주민등록번호</label>
-                                <input type="text" class="form-control" id="rrnf" value="${memberVO.rrnf}">
+                                <input type="text" class="form-control" id="rrnf" value="${memberVO.rrnf}" name="rrnf">
                             </div>
                             <div class="mx-1 float-bottom pt-2">
                                 <label for="lname" class="form-label">&nbsp;</label>
                                 <h2 class="text-center font-light">-</h2>
                             </div>
-                            
                             <div class="col-md-7 float-bottom">
-                                <label for="lnum" class="form-label">&nbsp;</label>
-                                <input type="password" class="form-control" id="rrnl">
+                                <label for="rrnl" class="form-label">&nbsp;</label>
+                                <input type="password" class="form-control" id="rrnl" name="rrnl">
                             </div>
 							</div>
                             <!-- 기기변경 폰 번호 -->
@@ -165,25 +160,20 @@
                                 <label for="address1" class="form-label">가입자 주소</label>
                                 <input type="text" class="form-control" id="address1" value="${memberVO.address1}">
                             </div>
-
                             <div class="col-md-3" style="padding-left: 0px;">
                                 <label for="btn2" class="form-label">&nbsp;&nbsp;&nbsp;</label>
                                 <button class="btn btn-solid-default btn-full" id="btn2" style="padding-left: 4px; padding-right: 4px; height: 61%; font-size: calc(12px + (13 - 12) * ((100vw - 320px) / (1920 - 320)));">주소 찾기</button>
                             </div>
-
                             <!-- 2. 도로명주소/지번  -->
                             <div class="col-md-12 mt-3">
                                 <input type="text" class="form-control" id="address2" name="address2" value="${memberVO.address2}">
                             </div>
-
                             <!-- 3. 상세주소   -->
                             <div class="col-md-12 mt-3">
                                 <input type="text" class="form-control" id="address3" name="address3" value="${memberVO.address3}">
                             </div>
-
                             <!-- 절차 끝 구분선 -->
                             <hr class="my-lg-5">
-
                             <!-- 약관동의 및 가입버튼 -->
                             <div class="col-md-12">
 
@@ -292,7 +282,7 @@
                                         <label class="form-check-label checkout-label" for="flexCheckDefault11" style="font-weight: bolder;">약관에 동의했습니다.</label>
                                 </div>
                                 <div class="my-3 mx-auto col-6 row">
-                                    <button class="btn btn-solid-default w-75 mx-auto" id="btn2" style="padding-left: 4px; padding-right: 4px; height: 61%; font-size: calc(12px + (13 - 12) * ((100vw - 320px) / (1920 - 320)));">                                        
+                                    <button class="btn btn-solid-default w-75 mx-auto" id="completeForm" style="padding-left: 4px; padding-right: 4px; height: 61%; font-size: calc(12px + (13 - 12) * ((100vw - 320px) / (1920 - 320)));">                                        
                                         가입하기
                                     </button>
                                 </div>
@@ -301,12 +291,12 @@
                 </div>
                     
 
-
                 <div class="col-lg-5">
                     <div class="your-cart-box">
                         <ul class="list-group mb-3">
                             <li class="list-group-item lh-condensed active " style="background-color: #4f4f4f;">
                                 <h3 class="mt-3 mb-1 text-capitalize">${map.directName}</h3>
+                                <input type="hidden" name="directName" value="${map.directName}">
                                 <c:if test="${map.colorCode == 'G'}">
                                 <h4 class="my-1" style="color: #fff;"> 그레이 l ${map.saveCapacity}GB</h4>
         						</c:if>
@@ -346,7 +336,7 @@
                                 
                                
                                 <h6 class="my-1" style="color: #fff;">${map.planName}</h6>
-                                <input type="hidden" name="palnNum" value="${map.planNum}">
+                                <input type="hidden" name="planNum" value="${map.planNum}">
                                 <input type="hidden" name="directCode" value="${map.directCode}">
                                 
                             </li>
@@ -374,78 +364,32 @@
                                 <span class="fw-bold">예상 월 납부금액</span>
                                 <h2 class="title title1" style="color: var(--theme-color); margin-bottom: 0;" id="totalPrice">${map.totalPrice}원</h2>
                             </li>
-        
                         </ul>
                     </div>
                 </div>
+                </div>
+                </div>
+        </form>
     </section>
     <!-- Cart Section End -->
 
-    <!-- 요금제 선택 모달 -->
-    <div class="modal fade reset-email-modal" id="resetEmail">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h3 class="modal-title" id="exampleModalLabel">요금제 선택</h3>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body pt-3">
-                    <form>
-                        <div class="mb-3">
-                            <label for="email" class="form-label font-light">Email address</label>
-                            <input type="email" class="form-control" id="email">
-                        </div>
-                        <div class="mb-3">
-                            <label for="comfirmEmail" class="form-label font-light">Comfirm Email address</label>
-                            <input type="email" class="form-control" id="comfirmEmail">
-                        </div>
-                        <div>
-                            <label for="exampleInputPassword1" class="form-label font-light">Password</label>
-                            <input type="password" class="form-control" id="exampleInputPassword1">
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer pt-0">
-                    <button class="btn bg-secondary rounded-1 modal-close-button" data-bs-dismiss="modal">Close</button>
-                    <button class="btn btn-solid-default rounded-1" data-bs-dismiss="modal">Save changes</button>
-                </div>
-            </div>
-        </div>
-    </div>   
+    
     
 <c:import url="../temp/footer.jsp"></c:import>
-
 <script>
-$(document).ready(function() {
-	$.ajax({
-	    type: 'GET',
-	    url: './calMonthlyPay',
-	    dataType: 'JSON',
-	    data: {
-	        directCode: directCode,
-	        disKind: disKind,
-	        planNum: planNum
-	    },
-	    success: function(response) {
-	let out_phonePayPrice = response.out_phonePayPrice;
-	        let out_planPrice = response.out_planPrice;
-	        let totalPrice = (response.out_phonePayPrice*1 + response.out_planPrice*1);
-	        $('#out_phonePayPrice').text('');
-	        $('#out_planPrice').text('');
-	        $('#totalPrice').text('');
-	        $('#out_phonePayPrice').text(out_phonePayPrice.toLocaleString());
-	        $('#out_planPrice').text(out_planPrice.toLocaleString());
-	        $('#totalPrice').text(totalPrice.toLocaleString());
-	        
-	    },
-	    error: function(error) {
-	        // 에러 처리 로직 작성
-	        console.log(error);
-	    }
-	});
+//가입하기 버튼 눌렀을 때
+$('#completeForm').click(function(){
+    console.log('가입하기 버튼');
+    
+    //가입폼 전송
+    $('#appForm').submit();
+    location.href="./orderSuccess";
+})
 
-});
+
+
 </script>
+
 </body>
 
 </html>

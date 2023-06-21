@@ -21,6 +21,7 @@ import com.hworld.base.service.PlanService;
 import com.hworld.base.util.Pager;
 import com.hworld.base.vo.BaseVO;
 import com.hworld.base.vo.BillVO;
+import com.hworld.base.vo.ExtraPlanVO;
 import com.hworld.base.vo.MemberVO;
 import com.hworld.base.vo.OtherTelecomVO;
 import com.hworld.base.vo.PlanVO;
@@ -50,7 +51,11 @@ public class PlanController {
 		List<PlanVO> zList = new ArrayList<>();
 		List<PlanVO> wList = new ArrayList<>();
 		List<PlanVO> hList = new ArrayList<>();
-
+		List<ExtraPlanVO> ePlanList = planService.getExtraPlanList(); 
+		
+		
+		
+		
 	    for (PlanVO plan : planList) {
 		    String planNum = plan.getPlanNum();
 		    if (planNum.startsWith("G")) {
@@ -67,7 +72,7 @@ public class PlanController {
 		        hList.add(plan);
 		    }
 		}
-//        
+        
 //		
 		mv.addObject("gList", gList);
 		mv.addObject("sList", sList);
@@ -76,6 +81,8 @@ public class PlanController {
 		mv.addObject("wList", wList);
 		mv.addObject("hList", hList);
 		mv.addObject("planList",existPlanList);
+		
+		mv.addObject("ePlan", ePlanList);
 		mv.setViewName("hworld/planList");
 		return mv;
 	}
@@ -152,8 +159,7 @@ public class PlanController {
 		planVO.setPlanNum(planNum);		
 		planVO=planService.getDetail(planVO);
 		
-		
-		
+
 		if(result==1) {
 			String message="확인이 완료되었습니다.";
 			mv.addObject("url","./planChange");
@@ -177,7 +183,6 @@ public class PlanController {
 		MemberVO sessionMember = (MemberVO)session.getAttribute("memberVO");
 		memberNum = sessionMember.getMemberNum();
 		
-
 		PlanVO planVO = planService.getBeforePlan(memberNum);
 		mv.addObject("bfPlan", planVO);
 		mv.setViewName("hworld/planChange");
@@ -198,8 +203,6 @@ public class PlanController {
 		
 		mv.addObject("phoneNum", phoneNum);
 		mv.setViewName("hworld/planResult");
-		
-		
 		
 		 // 세션에서 선택한 요금제 데이터 삭제
 	    session.removeAttribute("planVO");
@@ -224,44 +227,48 @@ public class PlanController {
 		return modelAndView;
 	}
 	
+	// 부가서비스 디테일
+	@GetMapping("ePlanDetail")
+	public ModelAndView getDetailExtraPlan(ExtraPlanVO extraPlanVO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		ExtraPlanVO eplanVO = planService.getDetailEPlan(extraPlanVO);
+		mv.addObject("eplan", eplanVO);
+		mv.setViewName("hworld/ePlanDetail");
+		return mv;
+	}
+		
+	
 	// 부가서비스 디테일 > 신청하기
 	@GetMapping("ePlanApply")
 	public ModelAndView e3() throws Exception{
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("hworld/ePlanApply");
-		return modelAndView;
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("hworld/ePlanApply");
+		return mv;
 	}
 	
 	// 부가서비스 추가
 	@GetMapping("ePlanAdd")
 	public ModelAndView e4() throws Exception{
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("hworld/ePlanAdd");
-		return modelAndView;
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("hworld/ePlanAdd");
+		return mv;
 	}
 	
-	// 부가서비스 디테일
-	@GetMapping("ePlanDetail")
-	public ModelAndView e5() throws Exception{
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("hworld/ePlanDetail");
-		return modelAndView;
-	}
 	
 	// 부가서비스 수정
 	@GetMapping("ePlanUpdate")
 	public ModelAndView e6() throws Exception{
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("hworld/ePlanUpdate");
-		return modelAndView;
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("hworld/ePlanUpdate");
+		return mv;
 	}
 	
 	// 부가서비스 디테일 >> 신청 성공
 	@GetMapping("planResult")
 	public ModelAndView e7() throws Exception{
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("hworld/planResult");
-		return modelAndView;
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("hworld/planResult");
+		return mv;
 	}
 	
 	

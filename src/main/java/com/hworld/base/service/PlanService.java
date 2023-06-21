@@ -18,6 +18,7 @@ import com.hworld.base.util.SHA256Util;
 import com.hworld.base.vo.BaseVO;
 import com.hworld.base.vo.BillVO;
 import com.hworld.base.vo.DirectVO;
+import com.hworld.base.vo.ExtraPlanVO;
 import com.hworld.base.vo.MemberVO;
 import com.hworld.base.vo.OtherTelecomVO;
 import com.hworld.base.vo.PlanVO;
@@ -40,6 +41,16 @@ public class PlanService {
 	public List<PlanVO> getExistPlanList() throws Exception {
 		return planDAO.getExistPlanList();
 	};
+	
+	//부가서비스 리스트 
+	public List<ExtraPlanVO> getExtraPlanList() throws Exception {
+		return planDAO.getExtraPlanList();
+	}
+	//부가서비스 상세
+	public ExtraPlanVO getDetailEPlan(ExtraPlanVO extraPlanVO) throws Exception{
+		return planDAO.getDetailExtraPlan(extraPlanVO);
+	}
+	
 	//요금제 이름 조회
 	public PlanVO getNoteName(PlanVO planVO) throws Exception{
 		return planDAO.getNoteName(planVO);

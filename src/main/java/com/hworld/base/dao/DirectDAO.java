@@ -5,11 +5,14 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.apache.ibatis.annotations.Mapper;
 
 import com.hworld.base.util.Pager;
+import com.hworld.base.vo.ApplicationVO;
 import com.hworld.base.vo.DirectVO;
+import com.hworld.base.vo.MemberVO;
 import com.hworld.base.vo.PlanVO;
 import com.hworld.base.vo.QnaVO;
 import com.hworld.base.vo.ReviewVO;
@@ -93,6 +96,14 @@ public interface DirectDAO {
 	//plan 선택된거 가져오기
 	public PlanVO getSelectedPlan(PlanVO planVO) throws Exception;
 
+	public int setFormAdd(@Valid ApplicationVO applicationVO) throws Exception;
+
+	//2.신청서 기반(주민번호)으로 일치하는 회원정보가 있는지 검색 - 앞자리는 세션에서 받아오고 뒷자리 입력해서 검증
+	public MemberVO getMemberSearch(ApplicationVO applicationVO) throws Exception;
+	//프로시저로 회선 테이블에 add
+	public int setTelephoneInitAdd(Map<String, Integer> telephone) throws Exception;
 	
+	//구매완료(가입완료 후 결과안내 창)
+	public PlanVO getMemberPlan(Integer memberNum) throws Exception;
 	
 }

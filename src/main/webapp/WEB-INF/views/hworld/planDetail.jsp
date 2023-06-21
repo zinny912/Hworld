@@ -253,7 +253,7 @@
                                         <span class="fs-3" style="font-weight: 500;"> (데이터 ${planVO.dataCapacity}GB + 통화 & 문자 무제한)</span>
                                         </c:if>
                                     </div>
-                                    <h3 class="text-start" style="color:gray;"> ${planVO.planExplain} </h3>
+                                    <h3 class="text-start" style="color:gray;"> ${planVO.planExplainS} </h3>
                                         <div class="container ">
                                         	<div class="zcustom-box">
 											    <div class="boxone">
@@ -364,7 +364,7 @@
                                     <div class="shipping-chart">
                                     <div class="part">
                                         <h4 class="inner-title mb-2">상세정보 쓰세요</h4>
-                                        <p class="font-light fs-6">국내에서 속도 제한 없이 데이터 무제한 이용 가능합니다.</p>
+                                        <p class="font-light fs-6">${planVO.planExplain}</p>
                                 	</div>
                              		</div>
                         			</div>

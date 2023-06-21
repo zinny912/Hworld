@@ -101,15 +101,14 @@ $('#confirmDelete').click(function() {
         }
     });
 });
-
-// 상품 삭제 버튼 클릭 이벤트 처리
-$('#productdel').click(function() {
+// 휴대폰 상품 삭제 버튼 클릭 이벤트 처리
+$('#productDelModal').click(function() {
     const dc = $('.direct-item').data('direct-code');
     $('#modalDelId').val(dc);
 });
 
 $('#productDelete').click(function() {
-    let slicedId = $('#slicedCode').val();
+    let slicedId = $('#modalDelSC').val();
    
     // POST 방식으로 수정된 데이터 전송
     $.ajax({
@@ -123,7 +122,38 @@ $('#productDelete').click(function() {
             // 응답 데이터 확인
           
             $('#productdel').modal('hide');
-            alert("삭제가 완료되었습니다.^^*");
+            alert("삭제가 완료되었습니다.");
+           location.href="./phoneList";
+        },
+        error: function(xhr, status, error) {
+           //  오류 처리
+            console.log(error);
+        }
+    });
+});
+
+// 휴대폰 상품 삭제 버튼 클릭 이벤트 처리
+$('#productDelModal2').click(function() {
+    const dc = $('.direct-item').data('direct-code');
+    $('#modalDelId2').val(dc);
+});
+
+$('#productDelete2').click(function() {
+    let slicedId = $('#modalDelSC2').val();
+   
+    // POST 방식으로 수정된 데이터 전송
+    $.ajax({
+        url: "/direct/accessoryDelete",
+        type: "POST",
+        data: {
+            slicedCode: slicedId,
+            
+        },
+        success: function(response) {
+            // 응답 데이터 확인
+          
+            $('#productdel2').modal('hide');
+            alert("삭제가 완료되었습니다.");
            location.href="./phoneList";
         },
         error: function(xhr, status, error) {

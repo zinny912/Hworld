@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 import com.hworld.base.util.Pager;
 import com.hworld.base.vo.BaseVO;
 import com.hworld.base.vo.BillVO;
-import com.hworld.base.vo.EPlanVO;
+import com.hworld.base.vo.ExtraPlanVO;
 import com.hworld.base.vo.MemberVO;
 import com.hworld.base.vo.OtherTelecomVO;
 import com.hworld.base.vo.PlanVO;
@@ -77,21 +77,21 @@ public interface PlanDAO {
 	//public Long getTotalCount(Pager pager) throws Exception;
 	
 	// 부가서비스 리스트 조회
-	public List<EPlanVO> EPlanList(EPlanVO ePlanVO) throws Exception;
+	public List<ExtraPlanVO> getExtraPlanList() throws Exception;
 	
 	// 부가서비스 하나 조회
-	public EPlanVO getDetailEPlan(EPlanVO ePlanVO) throws Exception;
+	public ExtraPlanVO getDetailExtraPlan(ExtraPlanVO extraPlanVO) throws Exception;
 	
-	public EPlanVO getNoteNameEPlan(EPlanVO eplanVO) throws Exception;
+	public ExtraPlanVO getNoteNameExtraPlan(ExtraPlanVO extraPlanVO) throws Exception;
 
 	// 부가서비스 추가
-	public int setEPlanInsert(EPlanVO ePlanVO) throws Exception;
+	public int setEPlanInsert(ExtraPlanVO extraPlanVO) throws Exception;
 	
 	// 부가서비스 수정
-	public int setEPlanUpdate(EPlanVO ePlanVO) throws Exception;
+	public int setExtraPlanUpdate(ExtraPlanVO extraPlanVO) throws Exception;
 	
 	// 부가서비스 삭제
-	public int setEPlanDelete(EPlanVO ePlanVO) throws Exception;
+	public int setExtraPlanDelete(ExtraPlanVO extraPlanVO) throws Exception;
 
 	
 }

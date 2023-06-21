@@ -49,8 +49,7 @@
 		<input type="hidden" name="orderAmount" value="${ol.orderAmount}">
 		<input type="hidden" name="calPrice" value="${ol.calPrice}">		
            </c:forEach>
-		
-		
+
 		
        </form>
   
