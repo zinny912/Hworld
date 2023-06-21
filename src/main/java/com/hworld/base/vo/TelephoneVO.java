@@ -35,6 +35,6 @@ public class TelephoneVO {
 	private List<BillVO> billVOs;
 	private PlanVO planVO;
 	private MemberVO memberVO;
-	private List<EPlanVO> ePlanVOs;
+	private List<ExtraPlanVO> extraPlanVOs;
 	
 }	

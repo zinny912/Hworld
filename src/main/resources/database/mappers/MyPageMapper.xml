@@ -16,7 +16,7 @@
 	<!-- 회선 기준 납부/미납 내역 불러오기 -->
 	<!-- D.BILLCHECK=1 + D.PAIDCHECK=0(미납), D.PAIDCHECK=1(납부) -->
 	<select id="getTPList" parameterType="pager" resultMap="getTPResult">
-		SELECT A.*, B.*, C.*, D.*, F.* FROM TELEPHONE A
+		SELECT A.*, B.*, C.*, D.* FROM TELEPHONE A
 			LEFT OUTER JOIN MEMBER B ON A.MEMBERNUM = B.MEMBERNUM
 			LEFT OUTER JOIN PLAN C ON A.PLANNUM = C.PLANNUM
 			LEFT OUTER JOIN PAYMENTDETAILS D ON A.SERIALNUM = D.SERIALNUM
@@ -69,6 +69,7 @@
 			<result property="planChangeDate" column="planChangeDate"/>
 			<result property="paidDate" column="paidDate"/>
 			<result property="cancelPrice" column="cancelPrice"/>
+			<result property="disPrice" column="disPrice"/>
 		</collection>
 		<collection property="planVO" javaType="PlanVO">
 			<id property="planNum" column="planNum"/>
@@ -97,13 +98,13 @@
 			<result property="tel" column="tel"/>
 			<result property="ownCheck" column="ownCheck"/>
 		</collection>
-		<collection property="ePlanVOs" javaType="List" ofType="EPlanVO">
-			<id property="ePlanNum" column="ePlanNum"/>
-			<result property="ePlanName" column="ePlanName"/>
-			<result property="ePrice" column="ePrice"/>
-			<result property="ePlanExplain" column="ePlanExplain"/>
-			<result property="ePlanExplainS" column="ePlanExplainS"/>
-			<result property="ePlanExplainM" column="ePlanExplainM"/>
+		<collection property="extraPlanVOs" javaType="List" ofType="ExtraPlanVO">
+			<id property="extraPlanNum" column="extraPlanNum"/>
+			<result property="extraPlanName" column="extraPlanName"/>
+			<result property="extraPrice" column="extraPrice"/>
+			<result property="extraPlanExplain" column="extraPlanExplain"/>
+			<result property="extraPlanExplainS" column="extraPlanExplainS"/>
+			<result property="extraPlanExplainM" column="extraPlanExplainM"/>
 			<result property="categoryCode" column="categoryCode"/>
 		</collection>
 	</resultMap>

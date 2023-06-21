@@ -57,19 +57,20 @@
 		
 			<p> 회선번호 : ${telephoneVO.phoneNum}</p>
 			
+			
 		<!-- 각 telephoneVO 안의 billVO 갯수만큼 반복문 돌리기 -->
 		<c:forEach begin="0" end="${billCount - 1}" varStatus="billStatus">
 			<!-- billVO의 index 사용 -->
 			<c:set var="billVO" value="${telephoneVO.billVOs[billStatus.index]}"/>
 			<p> billVO 번호 : ${billStatus.index} <p>
 			
+			
 			<!-- 여기서 조건 걸어서 즉시 납부에 출력할 미납 영수증만 가져오기 -->
 			<c:if test="${billVO.billCheck eq 1 && billVO.paidCheck eq 0}">
 				<p> 조건에 맞는 bill번호 : ${billStatus.index} <p>
 				<p> 요금제 : ${telephoneVO.planVO.planName}</p>
 				<p> 납부날 : ${billVO.payMonth} </p>
-				<p> 부가서비스 사용료: ${billVO.ePlanPrice}</p>
-				
+				<p> 부가서비스 사용료: ${billVO.EPlanPrice}</p>
 				
 				
 				<!-- invoice 1 -->
@@ -82,8 +83,8 @@
 	                        <tr>
 	                            <th scope="col">분류</th>
 	                            <th scope="col">내용</th>
-	                            <th scope="col">청구금액</th>
-	                            <th scope="col">할인액</th>
+	                            <th scope="col">금액</th>
+	                            <th scope="col">할인</th>
 	                            <th scope="col">비고</th>
 	                        </tr>
 	                    </thead>
@@ -94,19 +95,40 @@
 	                            <td>${telephoneVO.directName}</td>
 	                            <td>${billVO.phonePayPrice}</td>
 	                            <td></td>
-	                            <td>할부</td>
+	                            <td>
+	                            	<c:if test="${telephoneVO.disKind eq 0}">
+	                            		공시지원금
+	                            	</c:if>
+	                            </td>
+	                        </tr>
+	                        <tr>
+	                            <th scope="row"></th>
+	                            <td></td>
+	                            <td>
+	                            	<p>단말기 분할 상환금 ${ }</p>
+	                            	<p>단말기 분할 상환 수수료</p>
+	                            </td>
+	                            <td></td>
+	                            <td></td>
 	                        </tr>
 	                        <tr>
 	                            <th scope="row">요금제</th>
 	                            <td>${telephoneVO.planVO.planName}</td>
-	                            <td>${billVO.disPlanPrice}</td>
-	                            <td>${telephoneVO.planVO.planPrice}-${billVO.disPlanPrice}</td>
-	                            <td>${telephoneVO.disKind}</td>
+	                            <td>${telephoneVO.planVO.planPrice}</td>
+	                            <td>-${billVO.disPrice}</td>
+	                            <td>
+	                            	<c:if test="${telephoneVO.disKind eq 1}">
+	                            		선택약정(12개월)
+	                            	</c:if>
+	                            	<c:if test="${telephoneVO.disKind eq 2}">
+	                            		선택약정(24개월)
+	                            	</c:if>
+	                            </td>
 	                        </tr>
 	                        <tr>
 	                            <th scope="row">부가서비스</th>
-	                            <td>매너콜</td>
-	                            <td>1,100원</td>
+	                            <td>총 금액</td>
+	                            <td>${billVO.EPlanPrice}</td>
 	                            <td></td>
 	                            <td></td>
 	                        </tr>
@@ -115,7 +137,7 @@
 	                        <tr>
 	                            <td colspan="1"></td>
 	                            <td class="font-bold text-dark" colspan="1">총 금액</td>
-	                            <td class="font-bold text-theme">108,700원</td>
+	                            <td class="font-bold text-theme">${billVO.phonePayPrice + billVO.disPlanPrice + billVO.overduePrice}</td>
 	                        </tr>
 	                    </tfoot>
 	                </table>
@@ -145,6 +167,7 @@
             <tr>
                 <td>
                     <p class="m-0" style="color: black;">20${billVO.payMonth}</p>
+                    <p class="m-0" style="color: black;">20---${billVO.EPlanPrice}</p>
                 </td>
                 <td>
                     <p class="m-0 unpaid" style="color: #e22454;"><fmt:formatNumber value="${billVO.totalPrice}" pattern="#,### 원"/></p>

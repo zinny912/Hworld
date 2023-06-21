@@ -1,6 +1,7 @@
 package com.hworld.base.controller;
 
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -76,6 +77,13 @@ public class MyPageController {
 		
 		List<TelephoneVO> TPList = myPageService.getTPList(pager, session);
 		Map<String, Object> kingTP = myPageService.getKingDetail(session);
+		
+		for (TelephoneVO telephoneVO : TPList) {
+			for (BillVO billVO : telephoneVO.getBillVOs()) {
+				log.error(" :::::::::::::::: ePlanPrice : {} ", billVO.getEPlanPrice());
+				
+			}
+		}
 		
 		mv.addObject("TPList", TPList);
 		mv.addObject("kingTP", kingTP);

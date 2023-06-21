@@ -20,7 +20,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<!-- Direct -->
 		<typeAlias type="com.hworld.base.vo.DirectVO" alias="DirectVO"/>
 		<typeAlias type="com.hworld.base.vo.PlanVO" alias="PlanVO"/>
-		<typeAlias type="com.hworld.base.vo.EPlanVO" alias="EPlanVO"/>
+		<typeAlias type="com.hworld.base.vo.ExtraPlanVO" alias="ExtraPlanVO"/>
 		
 		<typeAlias type="com.hworld.base.vo.ReviewVO" alias="ReviewVO"/>
 		<typeAlias type="com.hworld.base.vo.OrderVO" alias="OrderVO"/>

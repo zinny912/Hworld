@@ -31,6 +31,7 @@ public class BillVO {
 	private Date planChangeDate; //요금제 변경 날짜
 	private Date paidDate; //납부일
 	private Integer cancelPrice; //위약금 내용
+	private Integer disPrice;
 	
 	//청구내역은 하나의 회선에 대한 청구정보
 	//billVO에 포함된 serialNum 으로 telephoneVO detail을 조회해서 billVO에 넣어두면 쉽게사용할 수 있을거같음
