@@ -94,22 +94,15 @@
 	                            <th scope="row">기기</th>
 	                            <td>${telephoneVO.directName}</td>
 	                            <td>${billVO.phonePayPrice}</td>
-	                            <td></td>
 	                            <td>
 	                            	<c:if test="${telephoneVO.disKind eq 0}">
 	                            		공시지원금
 	                            	</c:if>
 	                            </td>
-	                        </tr>
-	                        <tr>
-	                            <th scope="row"></th>
-	                            <td></td>
 	                            <td>
-	                            	<p>단말기 분할 상환금 ${ }</p>
-	                            	<p>단말기 분할 상환 수수료</p>
+	                            	<p>단말기 분할 상환금 ${billVO.phoneSplitPrice}</p>
+	                            	<p>단말기 분할 상환 수수료 ${billVO.phoneSplitTax}</p>
 	                            </td>
-	                            <td></td>
-	                            <td></td>
 	                        </tr>
 	                        <tr>
 	                            <th scope="row">요금제</th>
