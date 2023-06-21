@@ -299,9 +299,8 @@ $('#directCode, input[name=planNum], input[name=disKind]').change(function() {
                 console.log(error);
             }
         });
-        
     }
-  });
+});
 
 
 //가입하기 버튼 눌렀을 때
@@ -310,8 +309,18 @@ $('#completeForm').click(function(){
     //let $frm = $('#appForm').serialize();
     //alert($frm);
 
+    //약관 동의 체크
+    let terms = $('#checkTerms:checked').val();
+    chkTerms = isEmpty(terms);
+
+    if(chkTerms){
+        $('#appForm').submit();
+    }else{
+        alert('약관에 동의해 주세요');
+    }
+
     //가입폼 전송
-    $('#appForm').submit();
+    //$('#appForm').submit();
 })
 
 

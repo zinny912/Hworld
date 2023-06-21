@@ -14,7 +14,7 @@ public class PlanVO {
     private String categoryCode;
     private String planExplain;
     private String planExplainS;
-    private String planExplainM;
+    private Integer disabled;
     
     //할인요금 계산을 위한 disPercent 추가
     private Integer disCode;

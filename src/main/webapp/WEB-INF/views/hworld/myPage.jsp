@@ -124,19 +124,34 @@
                                                     <div class="box">
                                                         <div class="box-title d-flex">
                                                             <h5 class="me-1">대표회선</h5>
-                                                            <c:if test="${not empty kingVO}">
-                                                                <c:set var="phoneNum" value="${kingVO.PHONENUM}" />
+                                                            <c:forEach items="${TPList}" var="telephoneVO">
+                                                            	<c:if test="${telephoneVO.kingCheck eq 1}">
+                                                            		<c:set var="phoneNum" value="${telephoneVO.phoneNum}" />
+	                                                                <c:set var="formattedPhoneNum" value="${fn:substring(phoneNum, 0, 3)}-${fn:substring(phoneNum, 3, 7)}-${fn:substring(phoneNum, 7,11)}" />
+	                                                                <h6 class="font-light me-3">${formattedPhoneNum}</h6>
+	                                                                <h5 class="me-1">요금제</h5>
+		                                                            <h6 class="font-light me-3">
+		                                                                ${telephoneVO.planVO.planName}
+		                                                            </h6>
+		                                                            <h5 class="me-1">납부 예정 금액</h5>
+		                                                            <h6 class="font-light me-3" id="totalUnpaid">
+		                                                                
+		                                                            </h6>
+                                                            	</c:if>
+                                                            </c:forEach>
+                                                            <%-- <c:if test="${not empty kingTP}">
+                                                                <c:set var="phoneNum" value="${kingTP.PHONENUM}" />
                                                                 <c:set var="formattedPhoneNum" value="${fn:substring(phoneNum, 0, 3)}-${fn:substring(phoneNum, 3, 7)}-${fn:substring(phoneNum, 7,11)}" />
                                                                 <h6 class="font-light me-3">${formattedPhoneNum}</h6>
                                                             </c:if>
                                                             <h5 class="me-1">요금제</h5>
                                                             <h6 class="font-light me-3">
-                                                                ${kingVO.PLANNAME}
+                                                                ${kingTP.PLANNAME}
                                                             </h6>
                                                             <h5 class="me-1">납부 예정 금액</h5>
                                                             <h6 class="font-light me-3" id="totalUnpaid">
                                                                 
-                                                            </h6>
+                                                            </h6> --%>
                                                         </div>                                    
                                                     </div>
                                                 </div>
@@ -177,26 +192,31 @@
                                                         </thead>
                                                         <tbody>
                                                             <!-- 납부금액 출력부 -->
-                                                            <c:forEach items="${billList}" var="i">
-                                                                <c:if test="${i.telephoneVO.kingCheck eq 1 && i.billCheck eq 1 && i.paidCheck eq 1}">
-                                                                <tr>
-                                                                    <td>
-                                                                        <p class="m-0" style="color: black;">20${i.payMonth}</p>
-                                                                    </td>
-                                                                    <td>
-                                                                        <p class="m-0" style="color: black;">${i.paidDate}</p>
-                                                                    </td>
-                                                                    <td>
-                                                                        <p class="m-0" style="color: #e22454;"><fmt:formatNumber value="${i.totalPrice}" pattern="#,### 원"/></p>
-                                                                    </td>
-                                                                    <td>
-                                                                        <p class="m-0">납부</p>
-                                                                    </td>
-                                                                    <td>
-                                                                        <a href="#" class="btn btn-light btn-sm">발급</a>
-                                                                    </td>
-                                                                </tr>
-                                                                </c:if>
+                                                            <!-- list안의 list 값 꺼내기 -->
+                                                            <c:forEach items="${TPList}" var="telephoneVO">
+                                                            	<c:if test="${telephoneVO.kingCheck eq 1}">
+                                                            	<c:forEach items="${telephoneVO.billVOs}" var="billVO">
+                                                            		<c:if test="${billVO.billCheck eq 1 && billVO.paidCheck eq 1}">
+	                                                        		<tr>
+	                                                                    <td>
+	                                                                        <p class="m-0" style="color: black;">20${billVO.payMonth}</p>
+	                                                                    </td>
+	                                                                    <td>
+	                                                                        <p class="m-0" style="color: black;">${billVO.paidDate}</p>
+	                                                                    </td>
+	                                                                    <td>
+	                                                                        <p class="m-0" style="color: #e22454;"><fmt:formatNumber value="${billVO.totalPrice}" pattern="#,### 원"/></p>
+	                                                                    </td>
+	                                                                    <td>
+	                                                                        <p class="m-0">납부</p>
+	                                                                    </td>
+	                                                                    <td>
+	                                                                        <a href="#" class="btn btn-light btn-sm">발급</a>
+	                                                                    </td>
+	                                                                </tr>
+                                                            		</c:if>
+                                                            	</c:forEach>
+                                                            	</c:if>
                                                             </c:forEach>
                                                         </tbody>
                                                     </table>
@@ -244,17 +264,21 @@
                                                         </thead>
                                                         <tbody>
                                                             <!-- 미납 금액 출력부 -->
-                                                            <c:forEach items="${billList}" var="i">
-                                                                <c:if test="${i.telephoneVO.kingCheck eq 1 && i.billCheck eq 1 && i.paidCheck eq 0}">
-                                                                <tr>
-                                                                    <td>
-                                                                        <p class="m-0" style="color: black;">20${i.payMonth}</p>
-                                                                    </td>
-                                                                    <td>
-                                                                        <p class="m-0 unpaid" style="color: #e22454;"><fmt:formatNumber value="${i.totalPrice}" pattern="#,### 원"/></p>
-                                                                    </td>
-                                                                </tr>
-                                                                </c:if>
+                                                            <c:forEach items="${TPList}" var="telephoneVO">
+                                                            	<c:if test="${telephoneVO.kingCheck eq 1}">
+                                                            	<c:forEach items="${telephoneVO.billVOs}" var="billVO">
+                                                            		<c:if test="${billVO.billCheck eq 1 && billVO.paidCheck eq 0}">
+	                                                        		<tr>
+	                                                                    <td>
+	                                                                        <p class="m-0" style="color: black;">20${billVO.payMonth}</p>
+	                                                                    </td>
+	                                                                    <td>
+	                                                                        <p class="m-0 unpaid" style="color: #e22454;"><fmt:formatNumber value="${billVO.totalPrice}" pattern="#,### 원"/></p>
+	                                                                    </td>
+	                                                                </tr>
+                                                            		</c:if>
+                                                            	</c:forEach>
+                                                            	</c:if>
                                                             </c:forEach>
                                                         </tbody>
                                                     </table>
@@ -1211,7 +1235,7 @@
     </div>
     <!-- Comfirm stop Modal End -->
 
-    <!-- Comfirm cancle Modal Start -->
+    <!-- Comfirm cancel Modal Start -->
     <div class="modal delete-account-modal fade" id="cancelModal">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -1231,12 +1255,12 @@
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="/assets/js/myPage.js"></script>
 <script>
-let path = "${pageContext.request.contextPath }";
+let path = "${pageContext.request.contextPath}";
 $(document).ready(function(){
     //메시지 출력 - 이거 필요없으면 document.ready 여긴 없애고 js에 넣기
     let msg = "${msg}";
 	if(msg != ""){
-	    alert(msg);    
+        alert(msg);    
 	}
 })
 </script>

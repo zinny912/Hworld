@@ -80,6 +80,7 @@ $('#reviewDel').click(function() {
 });
 
 $('#confirmDelete').click(function() {
+    console.log('123');
     let reviewId = $('#modalDelNum').val();
     alert(reviewId);
     // POST 방식으로 수정된 데이터 전송
