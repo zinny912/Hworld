@@ -43,6 +43,8 @@ public class CartController {
 	    
 		List<CartVO> ar = cartService.getCartList(memberVO.getMemberNum());
 		session.setAttribute("cartInfo", ar);
+		cartVO = cartService.getCartCount(memberVO.getMemberNum());
+		session.setAttribute("cartCount", cartVO);
 
 
 	    mv.setViewName("redirect:/cart/cartInfo");
@@ -60,6 +62,8 @@ public class CartController {
 		Integer memberNum = memberVO.getMemberNum();
 
 		List<CartVO> ar = cartService.getCartList(memberNum);
+		cartVO = cartService.getCartCount(memberVO.getMemberNum());
+		session.setAttribute("cartCount", cartVO);
 
 	    if (ar.isEmpty()) {
 	        // 카트 리스트가 비어있을 경우, 알람창을 사용하여 메시지를 알림

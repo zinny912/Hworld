@@ -24,4 +24,7 @@ public interface CartDAO {
 	/* 카트 확인 */
 	public CartVO checkCart(CartVO cartVO) throws Exception;
 
+	//카트 갯수 확인 
+	public CartVO getCartCount(Integer memberNum);
+
 }

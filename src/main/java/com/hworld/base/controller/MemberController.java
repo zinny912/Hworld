@@ -278,7 +278,10 @@ public class MemberController {
 				membercheck.setPw(""); // 인코딩된 비밀번호 정보 지움				
 				session.setAttribute("memberVO", membercheck); // session에 사용자의 정보 저장
 				MemberVO memVo = (MemberVO) session.getAttribute("memberVO");
-				List<CartVO> ar = cartService.getCartList(memVo.getMemberNum());
+				List<CartVO> ar = cartService.getCartList(memVo.getMemberNum());//카트 정보 불러오기 
+				CartVO cartVO = cartService.getCartCount(memVo.getMemberNum());
+				session.setAttribute("cartCount", cartVO);
+				
 				session.setAttribute("cartInfo", ar);
 				return "redirect:/"; // 메인페이지로 이동
 			} else {
@@ -332,8 +335,10 @@ public class MemberController {
 			session.setAttribute("memberVO", membercheck); // session에 사용자의 정보 저장
 			MemberVO memVo = (MemberVO) session.getAttribute("memberVO");
 			System.out.println(memVo.getMemberNum());
-			List<CartVO> ar = cartService.getCartList(memVo.getMemberNum());
+			List<CartVO> ar = cartService.getCartList(memVo.getMemberNum()); //카트 정보 불러오기 
+			CartVO cartVO = cartService.getCartCount(memVo.getMemberNum());
 			session.setAttribute("cartInfo", ar);
+			session.setAttribute("cartCount", cartVO);
 		} else {
 			rttr.addFlashAttribute("result", 0);
 			result="failure";
