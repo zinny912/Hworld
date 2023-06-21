@@ -86,6 +86,9 @@
                                                 <li class="">
                                                     <a href="/etc/findShop" class="nav-link menu-title fw-bold fs-6">매장찾기</a>
                                                 </li>
+                                                <li class="">
+                                                    <a href="/form/application" class="nav-link menu-title fw-bold fs-6">가입신청서</a>
+                                                </li>
                 <!-- 관리자/회원 테스트용 로그인 버튼 시작, 테스트 후 필요없으면 삭제 -->
                 <li>
                     <a href="javascript:void(0)" class="d-block fw-bold fs-6 me-3" id="testAdmin">관리자</a>

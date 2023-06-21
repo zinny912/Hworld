@@ -1,19 +1,14 @@
 package com.hworld.base.controller;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -40,8 +35,8 @@ public class ApplicationController {
 	public ModelAndView setFormAdd() throws Exception{
 		ModelAndView mv = new ModelAndView();
 		
-		//검증을 위한 빈 application 객체 보내기
-		//mv.addObject(new ApplicationVO());
+		//검증을 위한 빈 application 객체 보내기 - jsp에 modelAttribute를 써서 있어야함.
+		mv.addObject(new ApplicationVO());
 		
 		//페이지 로딩시 필요한 정보
 		//요금제 정보 호출, 담기

@@ -208,6 +208,12 @@
 		SELECT * FROM MEMBER
 		WHERE MEMBERNUM=#{memberNum}
 	</select>
+	
+	<!-- 미납금 납부 후 paidCheck, paidDate 업데이트 -->
+	<update id="setBillUpdate" parameterType="BillVO">
+		UPDATE PAYMENTDETAILS SET PAIDCHECK=1, PAIDDATE=NOW()
+		WHERE BILLNUM=#{billNum}
+	</update>
 
 
 </mapper>

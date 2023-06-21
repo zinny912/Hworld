@@ -157,7 +157,7 @@
                                                 </div>
                                                 <div class="col-md-2">
                                                         <div class="d-flex justify-content-end">
-                                                        <button type="button" id="insPayment" class="btn btn-solid-default btn-sm fw-bold ms-auto" onclick="location.href = './instantPay';">전체 보기</button>
+                                                        <button type="button" id="insPayment" class="btn btn-solid-default btn-sm fw-bold ms-auto" onclick="location.href = './instantPay';">즉시 납부</button>
                                                         <!-- onclick="location.href = '../invoice/invoice-3-baro.html';" -->
                                                     </div>
                                                 </div>
@@ -211,7 +211,8 @@
 	                                                                        <p class="m-0">납부</p>
 	                                                                    </td>
 	                                                                    <td>
-	                                                                        <a href="#" class="btn btn-light btn-sm">발급</a>
+	                                                                    	<!-- 영수증 발급이 가능하면 보여주기 -->
+	                                                                        <!-- <a href="#" class="btn btn-light btn-sm">발급</a> -->
 	                                                                    </td>
 	                                                                </tr>
                                                             		</c:if>

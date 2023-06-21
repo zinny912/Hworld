@@ -93,24 +93,25 @@ $('#tel').on("blur", function() {
 });
 
 
+
 //유효성 검사
 //rrnl 7자리, 숫자만 입력
-$('#rrnl').on("blur", function() {
-    //숫자만 입력되게 하는 정규식
-    let checkValue = $(this).val().replace(/[^\d]/g, "");
-    $(this).val(checkValue);
+// $('#rrnl').on("blur", function() {
+//     //숫자만 입력되게 하는 정규식
+//     let checkValue = $(this).val().replace(/[^\d]/g, "");
+//     $(this).val(checkValue);
     
-    let length = checkValue.length;
+//     let length = checkValue.length;
 
-    if(length != 7) {
-        $('#rrnl').val("");
-        $('#rrnlResult').empty();
-        $('#rrnlResult').append('<p class="theme-color">주민번호 뒷자리는 7자리여야 합니다.</p>');
-        //유효성검사용 체크값 false로 입력
-    }else{
-        $('#rrnlResult').empty();
-    }
-});
+//     if(length != 7) {
+//         $('#rrnl').val("");
+//         $('#rrnlResult').empty();
+//         $('#rrnlResult').append('<p class="theme-color">주민번호 뒷자리는 7자리여야 합니다.</p>');
+//         //유효성검사용 체크값 false로 입력
+//     }else{
+//         $('#rrnlResult').empty();
+//     }
+// });
 
 
 

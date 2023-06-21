@@ -33,4 +33,7 @@ public interface MyPageDAO {
 	
 	//세션 업데이트
 	public MemberVO getNewSession(MemberVO memberVO) throws Exception;
+	
+	//미납금 납부 후 billVO 업데이트
+	public int setBillUpdate(BillVO billVO) throws Exception;
 }

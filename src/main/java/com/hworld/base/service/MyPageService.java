@@ -9,6 +9,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.hworld.base.dao.MyPageDAO;
 import com.hworld.base.util.Pager;
@@ -96,7 +97,7 @@ public class MyPageService {
 		//저장된 memberVO로 업데이트 실행
 		int result = myPageDAO.setMemberUpdate(memberVO);
 		
-		//업데이트 된 정보로 세션 업데이트 - 될지 모르겠음
+		//업데이트 된 정보로 세션 업데이트
 		memberVO = myPageDAO.getNewSession(memberVO);
 		session.setAttribute("memberVO", memberVO);
 		
@@ -104,6 +105,24 @@ public class MyPageService {
 	}
 	
 	
-	
+	//미납금 납부 후 bill 업데이트
+	public int setBillUpdate(@RequestParam("billNum") String[] billNums) throws Exception{
+		
+//		for (String string : billNums) {
+//			log.error(" :::::::::::::::::::: billnum : {}", string);
+//		}
+		
+		int result = 0;
+		
+		//billNum 숫자만큼 업데이트
+		for (String stringbillNum : billNums) {
+			BillVO billVO = new BillVO();
+			Integer billNum = Integer.parseInt(stringbillNum);
+			billVO.setBillNum(billNum);
+			result = myPageDAO.setBillUpdate(billVO);
+		}
+		
+		return result;
+	}
 	
 }
