@@ -67,10 +67,10 @@
 			
 			<!-- 여기서 조건 걸어서 즉시 납부에 출력할 미납 영수증만 가져오기 -->
 			<c:if test="${billVO.billCheck eq 1 && billVO.paidCheck eq 0}">
-				<p> 조건에 맞는 bill번호 : ${billStatus.index} <p>
-				<p> 요금제 : ${telephoneVO.planVO.planName}</p>
+				<p> 조건에 맞는 bill번호 : ${billStatus.index} </p>
+				<p> 요금제 : ${telephoneVO.planVO.planName} </p>
 				<p> 납부날 : ${billVO.payMonth} </p>
-				<p> 부가서비스 사용료: ${billVO.EPlanPrice}</p>
+				<p> 부가서비스 사용료: ${billVO.EPlanPrice} </p>
 				
 				
 				<!-- invoice 1 -->
@@ -95,9 +95,6 @@
 	                            <td>${telephoneVO.directName}</td>
 	                            <td>${billVO.phonePayPrice}</td>
 	                            <td>
-	                            	<c:if test="${telephoneVO.disKind eq 0}">
-	                            		공시지원금
-	                            	</c:if>
 	                            </td>
 	                            <td>
 	                            	<p>단말기 분할 상환금 ${billVO.phoneSplitPrice}</p>
@@ -154,7 +151,7 @@
 	</c:forEach>
     
 
-    <c:forEach items="${TPList}" var="telephoneVO">
+    <%-- <c:forEach items="${TPList}" var="telephoneVO">
         <c:forEach items="${telephoneVO.billVOs}" var="billVO">
             <c:if test="${billVO.billCheck eq 1 && billVO.paidCheck eq 0}">
             <tr>
@@ -168,7 +165,7 @@
             </tr>
             </c:if>
         </c:forEach>
-    </c:forEach>
+    </c:forEach> --%>
     
         <!-- invoice 1 start -->
         <section class="theme-invoice-1 section-b-space">
