@@ -31,4 +31,6 @@ public class CartVO {
 	
 	private String colorCode;
 	
+	private Integer cartCount;
+	
 }
