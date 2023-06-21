@@ -114,7 +114,7 @@
                                 <div class="img-wrapper">
                                     <div class="front">
                                         <a href="./accessoryDetail?slicedCode=${direct.slicedCode}">
-                                            <img src="/assets/images/fashion/product/${direct.slicedCode}thumb"
+                                            <img src="/assets/images/electronics/product/${direct.slicedCode}thumb.jpg"
                                                 class="bg-img lazyload" alt="">
                                         </a>
                                     </div>
@@ -203,7 +203,7 @@
                             <div class="col-12">
                                 <div class="product-image">
 	                                <a href="./accessoryDetail?slicedCode=${direct.slicedCode}">
-                                        <img src="/assets/images/fashion/product/${direct.slicedCode}thumb"
+                                        <img src="/assets/images/electronics/product/${direct.slicedCode}thumb.jpg"
                                             class="lazyload" alt="">
                                     </a>
                                     <div class="product-details">

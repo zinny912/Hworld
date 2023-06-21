@@ -93,11 +93,17 @@ public class CartService {
 	}
 
 	
-	//상품 삭제 
-	public int setDelete(CartVO cartVO) throws Exception{
-		
-		return cartDAO.setDelete(cartVO);
+	// 상품 삭제
+	public int setDelete(CartVO cartVO) throws Exception {
+	    try {
+	        cartDAO.setDelete(cartVO);
+	        return 1; // Deletion successful
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        return 0; // Deletion failed
+	    }
 	}
+
 
 		
 	

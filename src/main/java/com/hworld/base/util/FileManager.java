@@ -86,11 +86,12 @@ public class FileManager extends AbstractView {
 		    	}
 		    	
 		    	//2. 저장할 파일 이름 생성(directCode의 끝 5자리) 
+		    	
 		    	String fileName = directVO.getDirectCode().substring(directVO.getDirectCode().length() - 5);
 		    	
 		    	// 썸네일 파일 저장
 		    	if (multipartFiles != null && multipartFiles.length > 0 && multipartFiles[0] != null) {
-		    		String thumbFileName = fileName + "thumb";
+		    		String thumbFileName = fileName + "thumb.jpg";
 		    		File thumbFile = new File(folder, thumbFileName); // 썸네일 파일 경로 생성
 		    		
 		    		// 파일이 이미 존재하는 경우 건너뛰기 
@@ -102,7 +103,8 @@ public class FileManager extends AbstractView {
 		    	
 		    	// 파일 저장
 		    	if (multipartFiles != null && multipartFiles.length > 0 && multipartFiles[1] != null) {
-		    		File file = new File(folder, fileName); // 저장할 파일 경로 생성
+		    		String fileNameJPG = fileName + ".jpg";
+		    		File file = new File(folder, fileNameJPG); // 저장할 파일 경로 생성
 		    		
 		    		// 파일이 이미 존재하는 경우 건너뛰기
 		    		if (!file.exists()) {
