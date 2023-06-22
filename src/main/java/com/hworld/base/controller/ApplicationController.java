@@ -1,19 +1,14 @@
 package com.hworld.base.controller;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -40,7 +35,7 @@ public class ApplicationController {
 	public ModelAndView setFormAdd() throws Exception{
 		ModelAndView mv = new ModelAndView();
 		
-		//검증을 위한 빈 application 객체 보내기
+		//검증을 위한 빈 application 객체 보내기 - jsp에 modelAttribute를 써서 있어야함.
 		mv.addObject(new ApplicationVO());
 		
 		//페이지 로딩시 필요한 정보
@@ -102,50 +97,6 @@ public class ApplicationController {
 		//에러가 발생한 경우 여기서 view 리턴
 //		if(bindingResult.hasErrors()) {
 //			log.info("========== 에러가 발생함 ==========");
-//			
-//			List<PlanVO> existPlanList = applicationService.getExistPlanList();
-//			List<PlanVO> planList = applicationService.getPlanList();
-//			
-//			//상품 정보 호출
-//			List<DirectVO> directList = applicationService.getDirectList();
-//
-//			List<PlanVO> gList = new ArrayList<>();
-//			List<PlanVO> sList = new ArrayList<>();
-//			List<PlanVO> tList = new ArrayList<>();
-//			List<PlanVO> zList = new ArrayList<>();
-//			List<PlanVO> wList = new ArrayList<>();
-//			List<PlanVO> hList = new ArrayList<>();
-//
-//			//패턴별로 리스트를 분류
-//			for (PlanVO plan : planList) {
-//			    String planNum = plan.getPlanNum();
-//			    if (planNum.startsWith("G")) {
-//			        gList.add(plan);
-//			    } else if (planNum.startsWith("S")) {
-//			        sList.add(plan);
-//			    } else if (planNum.startsWith("T")) {
-//			        tList.add(plan);
-//			    } else if (planNum.startsWith("Z")) {
-//			        zList.add(plan);
-//			    } else if (planNum.startsWith("W")) {
-//			        wList.add(plan);
-//			    } else if (planNum.startsWith("H")) {
-//			        hList.add(plan);
-//			    }
-//			}
-//			
-//			//
-//			mv.addObject("existList", existPlanList);
-//			mv.addObject("gList", gList);
-//			mv.addObject("sList", sList);
-//			mv.addObject("tList", tList);
-//			mv.addObject("zList", zList);
-//			mv.addObject("wList", wList);
-//			mv.addObject("hList", hList);
-//			mv.addObject("directList", directList);
-//			
-//			String message = "가입신청에 실패했습니다. 정보를 확인해주세요";
-//			mv.addObject("message", message);
 //			mv.setViewName("hworld/applicationForm");
 //			return mv;
 //		}
@@ -156,12 +107,54 @@ public class ApplicationController {
 		log.info("=============> result : {} ", result);
 		
 		String message = "";
-		if(result > 0) {
+		if(result==-1) {
 			//이게 아니라 가입신청 완료 페이지로 가야겠다
 			message = "가입신청에 성공했습니다. 축하합니다.";
-			mv.setViewName("redirect:./application");
+			mv.setViewName("hworld/applicationFormResult");
 		}else {
 			message = "가입신청에 실패했습니다. 정보를 확인해주세요";
+			List<PlanVO> existPlanList = applicationService.getExistPlanList();
+			List<PlanVO> planList = applicationService.getPlanList();
+			
+			//상품 정보 호출
+			List<DirectVO> directList = applicationService.getDirectList();
+
+			List<PlanVO> gList = new ArrayList<>();
+			List<PlanVO> sList = new ArrayList<>();
+			List<PlanVO> tList = new ArrayList<>();
+			List<PlanVO> zList = new ArrayList<>();
+			List<PlanVO> wList = new ArrayList<>();
+			List<PlanVO> hList = new ArrayList<>();
+
+			//패턴별로 리스트를 분류
+			for (PlanVO plan : planList) {
+			    String planNum = plan.getPlanNum();
+			    if (planNum.startsWith("G")) {
+			        gList.add(plan);
+			    } else if (planNum.startsWith("S")) {
+			        sList.add(plan);
+			    } else if (planNum.startsWith("T")) {
+			        tList.add(plan);
+			    } else if (planNum.startsWith("Z")) {
+			        zList.add(plan);
+			    } else if (planNum.startsWith("W")) {
+			        wList.add(plan);
+			    } else if (planNum.startsWith("H")) {
+			        hList.add(plan);
+			    }
+			}
+			
+			//
+			mv.addObject("existList", existPlanList);
+			mv.addObject("gList", gList);
+			mv.addObject("sList", sList);
+			mv.addObject("tList", tList);
+			mv.addObject("zList", zList);
+			mv.addObject("wList", wList);
+			mv.addObject("hList", hList);
+			
+			//
+			mv.addObject("directList", directList);
 			mv.setViewName("hworld/applicationForm");
 		}
 		

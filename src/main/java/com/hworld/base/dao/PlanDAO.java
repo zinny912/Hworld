@@ -69,7 +69,7 @@ public interface PlanDAO {
     public int setPlanUpdate(PlanVO planVO) throws Exception;
 	
 	// 요금제 삭제
-    public int setPlanDelete(PlanVO planVO) throws Exception;
+    public int setPlanDisabled(PlanVO planVO) throws Exception;
     
     
 
@@ -82,7 +82,11 @@ public interface PlanDAO {
 	// 부가서비스 하나 조회
 	public ExtraPlanVO getDetailExtraPlan(ExtraPlanVO extraPlanVO) throws Exception;
 	
-	public ExtraPlanVO getNoteNameExtraPlan(ExtraPlanVO extraPlanVO) throws Exception;
+	// 부가서비스 신청 프로시저 
+	public int setAddServ(Map<String, Object> map) throws Exception;
+	
+	// 부가서비스 신청 여부 확인
+	public Map<String, Object> searchExtraPlan(Map<String, Object> map) throws Exception;
 
 	// 부가서비스 추가
 	public int setEPlanInsert(ExtraPlanVO extraPlanVO) throws Exception;
@@ -92,6 +96,8 @@ public interface PlanDAO {
 	
 	// 부가서비스 삭제
 	public int setExtraPlanDelete(ExtraPlanVO extraPlanVO) throws Exception;
+
+	
 
 	
 }

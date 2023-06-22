@@ -1,7 +1,9 @@
 package com.hworld.base.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -52,10 +54,7 @@ public class PlanController {
 		List<PlanVO> wList = new ArrayList<>();
 		List<PlanVO> hList = new ArrayList<>();
 		List<ExtraPlanVO> ePlanList = planService.getExtraPlanList(); 
-		
-		
-		
-		
+	
 	    for (PlanVO plan : planList) {
 		    String planNum = plan.getPlanNum();
 		    if (planNum.startsWith("G")) {
@@ -95,23 +94,29 @@ public class PlanController {
 		
 		List<PlanVO> recommend = planService.recommendPlan(planVO); // 추천상품 
 		MemberVO memberVO = (MemberVO) session.getAttribute("memberVO");
-		Integer memberNum = memberVO.getMemberNum();
-		log.error("{}<=======",memberNum);
 		
-		
+		if(memberVO ==null) {
+			mv.setViewName("hworld/login");
+			return mv;
+		}else {
+			Integer memberNum = memberVO.getMemberNum();
+		//이전 요금제 정보 가져오기
 		PlanVO bfPlan = planService.getBeforePlan(memberNum);
-		//log.error("{}<========",bfPlan.getSerialNum());
+		
 		if(bfPlan!=null && bfPlan.getSerialNum()!=null) {
 		billVO.setSerialNum(bfPlan.getSerialNum());
-		planService.getCheckPlanChange(billVO);
 		
-		log.error("{}<===========",billVO.getResult());
+		billVO.setPlanNum(planVO.getPlanNum());
+		
+		planService.getCheckPlanChange(billVO);
+
+		
 		int changeOk=billVO.getResult();
 		
 		mv.addObject("ok", changeOk);
 		
 		}
-		
+
 		mv.addObject("bfPlan", bfPlan);
 		
 		mv.addObject("planNote", note);
@@ -119,6 +124,8 @@ public class PlanController {
         mv.addObject("recommend", recommend);
         
         mv.setViewName("hworld/planDetail");
+		
+		}
 		return mv;
 	}
 	//요금제 추가 및 수정 시 필요한 공통코드 테이블 데이터 
@@ -210,6 +217,7 @@ public class PlanController {
 		return mv;
 	}
 	
+	//타통신사 조회
 	@ResponseBody
 	@PostMapping("otherTelecom")
 	public boolean isOtherTelecom(String taPhoneNum, String telecomName) throws Exception{
@@ -227,24 +235,77 @@ public class PlanController {
 		return modelAndView;
 	}
 	
+	//요금제 비활성화 - 관리자는 리스트나 디테일 확인 가능 / 소비자는 확인 불가능
+	@PostMapping("planDisabled")
+	public ModelAndView setPlanDisabled(PlanVO planVO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		int result = planService.setPlanDisabled(planVO);
+		
+		mv.setViewName("hworld/planList");
+		return mv;
+	}
+	
+	
+	
 	// 부가서비스 디테일
 	@GetMapping("ePlanDetail")
-	public ModelAndView getDetailExtraPlan(ExtraPlanVO extraPlanVO) throws Exception{
+	public ModelAndView getDetailExtraPlan(@RequestParam("extraPlanNum") String extraPlanNum, ExtraPlanVO extraPlanVO, Map<String, Object> map, HttpSession session) throws Exception{
 		ModelAndView mv = new ModelAndView();
-		ExtraPlanVO eplanVO = planService.getDetailEPlan(extraPlanVO);
+		ExtraPlanVO eplanVO = planService.getDetailExtraPlan(extraPlanVO);
+		
+		//세션에서 멤버넘 받아서 시리얼넘, 가져오기
+		MemberVO sessionMember = (MemberVO)session.getAttribute("memberVO");
+		PlanVO planVO = new PlanVO();
+		
+		if(sessionMember==null) {
+			mv.setViewName("hworld/login");
+		
+		} else {
+		Integer memberNum = sessionMember.getMemberNum();
+		planVO =planService.getBeforePlan(memberNum);
+		
+		
+		if(planVO==null) {
+			mv.addObject("eplan", eplanVO);
+			mv.setViewName("hworld/ePlanDetail");
+			return mv;
+		} else {
+		
+		map.put("memberNum", memberNum);
+		map.put("serialNum", planVO.getSerialNum());
+		map.put("extraPlanNum", extraPlanNum);
+
+		map = planService.searchExtraPlan(map);
+		
+		mv.addObject("map",map);
 		mv.addObject("eplan", eplanVO);
 		mv.setViewName("hworld/ePlanDetail");
+		
+			}
+		}
 		return mv;
 	}
 		
 	
 	// 부가서비스 디테일 > 신청하기
-	@GetMapping("ePlanApply")
-	public ModelAndView e3() throws Exception{
+	@PostMapping("ePlanApply")
+	public ModelAndView setAddServ(@RequestParam Map<String, Object> map, HttpSession session) throws Exception{
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("hworld/ePlanApply");
+		
+		MemberVO sessionMember = (MemberVO)session.getAttribute("memberVO");
+		Integer memberNum = sessionMember.getMemberNum();
+		PlanVO planVO =planService.getBeforePlan(memberNum);
+		
+		map.put("phoneNum", planVO.getPhoneNum());
+		map.put("serialNum", planVO.getSerialNum());
+
+		int result=planService.setAddServ(map);
+
+		mv.addObject("map", map);
+		mv.setViewName("hworld/extraResult");
 		return mv;
 	}
+	
 	
 	// 부가서비스 추가
 	@GetMapping("ePlanAdd")

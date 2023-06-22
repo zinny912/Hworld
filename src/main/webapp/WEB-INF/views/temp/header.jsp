@@ -86,13 +86,19 @@
                                                 <li class="">
                                                     <a href="/etc/findShop" class="nav-link menu-title fw-bold fs-6">매장찾기</a>
                                                 </li>
+                                                <li class="">
+                                                    <a href="/form/application" class="nav-link menu-title fw-bold fs-6">가입신청서</a>
+                                                </li>
                 <!-- 관리자/회원 테스트용 로그인 버튼 시작, 테스트 후 필요없으면 삭제 -->
-                <li>
-                    <a href="javascript:void(0)" class="d-block fw-bold fs-6 me-3" id="testAdmin">관리자</a>
-                </li>
-                <li>
-                    <a href="javascript:void(0)" class="d-block fw-bold fs-6 me-3" id="testMember">일반회원</a>
-                </li>
+                <li class="dropdown">
+				    <a class="nav-link menu-title fw-bold fs-6">빠른로그인</a>
+				    <ul class="nav-submenu menu-content fw-bold">
+				        <li>
+				            <a href="javascript:void(0)" class="d-block fw-bold fs-6 me-3" id="testAdmin">관리자</a>
+				        </li>
+				        <li>
+				            <a href="javascript:void(0)" class="d-block fw-bold fs-6 me-3" id="testMember">일반회원</a>
+				        </li>
                 <!-- 관리자/회원 테스트용 로그인 버튼 끝, 테스트 후 필요없으면 삭제 -->
                                             </ul>
                                         </div>
@@ -139,7 +145,7 @@
                                                     <div class="cart-title" style="background-color:#fff; padding:0px;">
                                                         <h6 >
                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-bag"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
-                                                            <span class="label label-theme rounded-pill">5</span>
+                                                            <span class="label label-theme rounded-pill">${cartCount.cartCount}</span>
                                                         </h6>
                                                     </div>
                                                     <div class="onhover-div">
