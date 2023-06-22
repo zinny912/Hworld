@@ -105,4 +105,18 @@ public class CustomerSupportController {
 		mv.setViewName("hworld/prcTest");
 		return mv;
 	}
+	
+	@GetMapping("prcTest2")
+	public ModelAndView prcTest2() throws Exception {
+		ModelAndView mv = new ModelAndView();
+		Map<String, Object> map =  csService.prcTest2();		
+			
+			
+			log.error("===============================> {}", map.toString());
+			
+		
+//		mv.addObject("list", map);
+//		mv.setViewName("hworld/prcTest");
+		return mv;
+	}
 }
