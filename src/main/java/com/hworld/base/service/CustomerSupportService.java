@@ -57,6 +57,7 @@ public class CustomerSupportService {
 	
 	public int setQnaInsert(QnaVO qnaVO, HttpSession session, MultipartFile multipartFile) throws Exception {
 		//qnaVO.setMemberNum(1);
+		qnaVO.setMemberNum(((MemberVO)(session.getAttribute("memberVO"))).getMemberNum());
 		return qnaDAO.setInsert(qnaVO);
 	}
 	

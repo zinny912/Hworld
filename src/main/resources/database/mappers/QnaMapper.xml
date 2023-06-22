@@ -6,12 +6,8 @@
 <mapper namespace="com.hworld.base.dao.QnaDAO">
 
 	<insert id="setInsert" parameterType="QnaVO">
-		INSERT INTO QNA (MEMBERNUM, TITLE, CONTENTS, REGDATE, STATE, CATEGORYCODE)
-		VALUES (#{memberNum}, 
-		<if test="serialNum != null">
-			#{serialNum},
-		</if>
-		#{title}, #{contents}, NOW(), 1, #{categoryCode})
+		INSERT INTO QNA (MEMBERNUM, SERIALNUM , TITLE, CONTENTS,  REGDATE, STATE, CATEGORYCODE)
+		VALUES (#{memberNum}, #{serialNum, jdbcType=VARCHAR}, #{title}, #{contents}, NOW(), 0, #{categoryCode})
 	</insert>
 	
 	<select id="getTelephoneList" parameterType="TelephoneVO" resultType="TelephoneVO">
