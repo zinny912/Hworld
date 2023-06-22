@@ -286,7 +286,7 @@ h3.d-flex span {
 	                                    <div class="front">
 	                                        <a href="./phoneDetail?slicedCode=${direct.slicedCode}">
 	                                            <img src="/assets/images/electronics/product/${direct.slicedCode}thumb.jpg"
-	                                                class="img-fluid" alt="">
+	                                                class="bg-img"" alt="">
 	                                        </a>
 	                                    </div>
 	                                </div>
@@ -345,12 +345,7 @@ h3.d-flex span {
                                 <li class="page-item active">
                                     <a class="page-link" href="javascript:void(0)">1</a>
                                 </li>
-                                <li class="page-item">
-                                    <a class="page-link" href="javascript:void(0)">2</a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link" href="javascript:void(0)">3</a>
-                                </li>
+
                                 <li class="page-item">
                                     <a class="page-link" aria-label="Next">
                                         <span aria-hidden="true">
