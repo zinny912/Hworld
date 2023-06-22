@@ -333,7 +333,13 @@
                                         </div>  -->
                                         
                                         <td>
-                                            <input type="checkbox" class="checkbox_animated check-it" name="" id="">
+	                                        <c:choose>
+	                        					<c:when test="${memberVO.adminCheck eq 0}">
+	                                            <input type="checkbox" class="checkbox_animated check-it" name="" id="">
+	                                            </c:when>
+					                        	<c:otherwise>
+					                        	</c:otherwise>
+					                        </c:choose>
                                         </td>
                                         <td>
                                             <p>H World 가산점</p>
@@ -348,7 +354,13 @@
 
                                     <tr>
                                         <td>
-                                            <input type="checkbox" class="checkbox_animated check-it" name="" id="">
+                                            <c:choose>
+	                        					<c:when test="${memberVO.adminCheck eq 0}">
+	                                            <input type="checkbox" class="checkbox_animated check-it" name="" id="">
+	                                            </c:when>
+					                        	<c:otherwise>
+					                        	</c:otherwise>
+					                        </c:choose>
                                         </td>
                                         <td>
                                             <p>H World 금천구청점</p>
@@ -363,7 +375,13 @@
 
                                     <tr>
                                         <td>
-                                            <input type="checkbox" class="checkbox_animated check-it" name="" id="">
+                                            <c:choose>
+	                        					<c:when test="${memberVO.adminCheck eq 0}">
+	                                            <input type="checkbox" class="checkbox_animated check-it" name="" id="">
+	                                            </c:when>
+					                        	<c:otherwise>
+					                        	</c:otherwise>
+					                        </c:choose>
                                         </td>
                                         <td>
                                             <p>H World 계양점</p>
@@ -378,7 +396,13 @@
 
                                     <tr>
                                         <td>
-                                            <input type="checkbox" class="checkbox_animated check-it" name="" id="">
+                                            <c:choose>
+	                        					<c:when test="${memberVO.adminCheck eq 0}">
+	                                            <input type="checkbox" class="checkbox_animated check-it" name="" id="">
+	                                            </c:when>
+					                        	<c:otherwise>
+					                        	</c:otherwise>
+					                        </c:choose>
                                         </td>
                                         <td>
                                             <p>H World 부평구청점</p>
@@ -393,7 +417,13 @@
 
                                     <tr>
                                         <td>
-                                            <input type="checkbox" class="checkbox_animated check-it" name="" id="">
+                                            <c:choose>
+	                        					<c:when test="${memberVO.adminCheck eq 0}">
+	                                            <input type="checkbox" class="checkbox_animated check-it" name="" id="">
+	                                            </c:when>
+					                        	<c:otherwise>
+					                        	</c:otherwise>
+					                        </c:choose>
                                         </td>
                                         <td>
                                             <p>H World 독산점</p>
