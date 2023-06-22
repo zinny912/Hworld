@@ -241,7 +241,7 @@ public class PlanController {
 		ModelAndView mv = new ModelAndView();
 		int result = planService.setPlanDisabled(planVO);
 		
-		mv.setViewName("hworld/planList");
+		mv.setViewName("redirect:./planList");
 		return mv;
 	}
 	

@@ -368,31 +368,6 @@ function isEmpty(value){
 
 
 
-/* $('#extraApplyCheck').click(function() {
-    let extraPlanNum = $('#modalPlanNum').val();
-   
-    // POST 방식으로 삭제 전송
-    $.ajax({
-        url: "./plan/ePlanApply",
-        type: "POST",
-        data: {
-            extraPlanNum : extraPlanNum
- 
-        },
-        success: function(response) {
-            // 응답 데이터 확인
-          
-            $('#extraJoin').modal('hide');
-            alert("신청이 완료되었습니다.");
-           location.href="./ePlanDetail?extraPlanNum="+extraPlanNum;
-        },
-        error: function(xhr, status, error) {
-           //  오류 처리
-            console.log(error);
-        }
-    }); */
-/* }); */
-
 </script>
 
 
