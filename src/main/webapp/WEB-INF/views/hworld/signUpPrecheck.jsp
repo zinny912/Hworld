@@ -53,12 +53,12 @@
                 </div>
 
                 <!-- 나중에 지울 버튼 -->
-                <div class="button login">
+                <!-- <div class="button login">
                     <button onclick="location.href = '/etc/findShop';">
-                        <span>대리점 위치안내(회선 X)</span>
+                        <span>대리점 위치안내</span>
                         <i class="fa fa-check"></i>
                     </button>
-                </div>
+                </div> -->
                 </form>
             </div>
         </div>

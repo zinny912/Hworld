@@ -122,3 +122,109 @@ function execution_daum_address(){
         }
     }).open();   
 }
+
+/* 유효성 검사 통과유무 변수 */
+/*var emailCheck = false;			// 이메일
+var emailckCheck = false;		// 이메일 중복 검사
+var pwCheck = false;			// 비번
+var pwckCheck = false;			// 비번 확인
+var pwckCheck2 = false;		// 비번 확인 일치 확인
+// var emailCheck = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+
+$(document).ready(function(){
+	//회원가입 버튼(회원가입 기능 작동)
+	$(".login_btn").click(function(){
+		
+		// 입력값 변수
+		var emaild = $('.email_input').val(); 		// 이메일 입력란
+		var pwd = $('.pw_input').val();				// 비밀번호 입력란
+		var pwckd = $('.pwck_input').val();			// 비밀번호 확인 입력란
+		
+		// 이메일 유효성검사
+		if(emaild == ""){
+			$('.final_email_ck').css('display','block');
+			idCheck = false;
+		}else{
+			$('.final_email_ck').css('display', 'none');
+			idCheck = true;
+		}
+		
+		// 비밀번호 유효성 검사
+		if(pwd == ""){
+			$('.final_pw_ck').css('display','block');
+			pwCheck = false;
+		}else{
+			$('.final_pw_ck').css('display', 'none');
+			pwCheck = true;
+		}
+		
+		// 비밀번호 확인 유효성 검사
+		if(pwckd == ""){
+			$('.final_pwck_ck').css('display','block');
+			pwckCheck = false;
+		}else{
+			$('.final_pwck_ck').css('display', 'none');
+			pwckCheck = true;
+		}	
+			
+		// 최종 유효성 검사
+		if(emailCheck&&emailckCheck&&pwCheck&&pwckCheck&&pwckCheck2){
+			$("#signUpForm").attr("action", "/member/signUp");
+			$("#signUpForm").submit();									
+		}		
+		
+		return false;
+	});
+});*/
+//아이디 중복검사
+$('.email_input').on("propertychange change keyup paste input", function(){
+	
+	var email = $('.email_input').val();
+	var data = {email : email}
+	
+	$.ajax({
+		type : "post",
+		url : "/member/emailCheck",
+		data : data,
+		success : function(result){
+			if(result != 'fail'){
+				$('.email_input_re_1').css("display","inline-block");
+				$('.email_input_re_2').css("display", "none");	
+				idckCheck = true;
+			} else {
+				$('.email_input_re_2').css("display","inline-block");
+				$('.email_input_re_1').css("display", "none");
+				idckCheck = false;
+			}	
+		}// success 종료
+	}); // ajax 종료	
+});// function 종료
+
+/* 비밀번호 확인 일치 유효성 검사 */
+$('.pwck_input').on("propertychange change keyup paste input", function(){
+	
+	var pwd = $('.pw_input').val();
+	var pwckd = $('.pwck_input').val();
+	$('.final_pwck_ck').css('display', 'none');
+	
+	if(pwd == pwckd){
+		$('.pwck_input_re_1').css('display','block');
+		$('.pwck_input_re_2').css('display','none');
+		pwckCheck2 = true;
+	}else{
+		$('.pwck_input_re_1').css('display','none');
+		$('.pwck_input_re_2').css('display','block');
+		pwckCheck2 = false;
+	}
+	
+	
+});
+
+btn.addEventListener("click", function() {
+    if(!checks.includes(false)) {
+        alert('회원가입 성공');
+        frm.submit();
+    } else {
+        alert("필수 사항을 입력해주세요.");
+    }
+});

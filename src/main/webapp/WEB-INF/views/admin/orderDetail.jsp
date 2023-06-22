@@ -71,32 +71,14 @@
                                                                 </td>
                                                                 <td>
                                                                     <p>가격</p>
-                                                                    <h5>${directVOs.directPrice}</h5>
+                                                                    <h5>${directVOs.directPrice * orderDirectVOs.orderAmount}</h5>
                                                                 </td>
                                                                 <td>
                                                                 </td>
                                                             </tr>                                                            
                                                         </tbody>
 
-                                                        <tfoot>
-                                                            <tr class="table-order">
-                                                                <td colspan="3">
-                                                                    <h5>상품 가격 :</h5>
-                                                                </td>
-                                                                <td>
-                                                                    <h4>$55.00</h4>
-                                                                </td>
-                                                            </tr>
-
-                                                            <tr class="table-order">
-                                                                <td colspan="3">
-                                                                    <h5>부가세 :</h5>
-                                                                </td>
-                                                                <td>
-                                                                    <h4>$12.00</h4>
-                                                                </td>
-                                                            </tr>
-
+                                                        <tfoot>                                                            
                                                             <tr class="table-order">
                                                                 <td colspan="3">
                                                                     <h4 class="theme-color fw-bold">총 액 :</h4>

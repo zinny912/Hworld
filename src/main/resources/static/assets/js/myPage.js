@@ -93,24 +93,73 @@ $('#tel').on("blur", function() {
 });
 
 
+
+//번호변경 모달창 검사
 //유효성 검사
-//rrnl 7자리, 숫자만 입력
-$('#rrnl').on("blur", function() {
+//전화번호 11자리, 숫자만 입력 + 중복검사까지 ajax로 실행
+$('#numChangeValue').on("blur", function() {
     //숫자만 입력되게 하는 정규식
     let checkValue = $(this).val().replace(/[^\d]/g, "");
     $(this).val(checkValue);
     
     let length = checkValue.length;
 
-    if(length != 7) {
-        $('#rrnl').val("");
-        $('#rrnlResult').empty();
-        $('#rrnlResult').append('<p class="theme-color">주민번호 뒷자리는 7자리여야 합니다.</p>');
-        //유효성검사용 체크값 false로 입력
+    if(length != 11) {
+        //this.setCustomValidity("전화번호는 11자리여야 합니다.");
+        //alert("전화번호는 11자리여야 합니다.");
+        $('#numChange').val("");
+        $('#searchResult').empty();
+        $('#searchResult').append('<p class="theme-color">전화번호는 11자리여야 합니다.</p>');
     }else{
-        $('#rrnlResult').empty();
+        //11자리인 경우 번호 중복체크
+        //responseBody에 담겨져 응답 돌아옴
+        $.ajax({
+            type: 'GET',
+            url: './isDuplicatePhoneNum',
+            dataType: 'JSON',
+            data: {
+                phoneNum: checkValue
+            },
+            success: function(response) {
+                console.log('요청 성공');
+                console.log(response);
+                if(response == true){
+                    $('#searchResult').empty();
+                    $('#searchResult').append('<p class="theme-color">사용 불가능한 번호입니다</p>');
+                }else if(response == false){
+                    $('#searchResult').empty();
+                    $('#searchResult').append('<p>사용 가능한 번호입니다</p>');
+                }else{
+                    $('#searchResult').empty();
+                }
+            },
+            error: function(error) {
+                console.log('요청 실패');
+            }
+        });
     }
+
 });
+
+
+//유효성 검사
+//rrnl 7자리, 숫자만 입력
+// $('#rrnl').on("blur", function() {
+//     //숫자만 입력되게 하는 정규식
+//     let checkValue = $(this).val().replace(/[^\d]/g, "");
+//     $(this).val(checkValue);
+    
+//     let length = checkValue.length;
+
+//     if(length != 7) {
+//         $('#rrnl').val("");
+//         $('#rrnlResult').empty();
+//         $('#rrnlResult').append('<p class="theme-color">주민번호 뒷자리는 7자리여야 합니다.</p>');
+//         //유효성검사용 체크값 false로 입력
+//     }else{
+//         $('#rrnlResult').empty();
+//     }
+// });
 
 
 

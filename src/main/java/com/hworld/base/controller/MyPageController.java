@@ -12,6 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hworld.base.service.MyPageService;
@@ -31,6 +33,7 @@ public class MyPageController {
 	
 	@Autowired
 	private MyPageService myPageService;
+	
 	
 	
 	//마이 페이지 홈
@@ -70,7 +73,7 @@ public class MyPageController {
 	}
 	
 	
-	//요금 청구/납부 - 즉시 납부 페이지(납부 영수증 표시)
+	//요금 청구/납부 - 즉시 납부 페이지(납부 영수증 표시), 결제API 호출
 	@GetMapping("instantPay")
 	public ModelAndView setPaymentAdd(Pager pager, HttpSession session) throws Exception{
 		ModelAndView mv = new ModelAndView();
@@ -94,10 +97,25 @@ public class MyPageController {
 	
 	//납부 전체 보기 페이지
 	@PostMapping("instantPay")
-	public ModelAndView setPaymentAdd2(HttpSession session) throws Exception{
+	public ModelAndView setPaymentAdd(HttpSession session, @RequestParam("billNum") String[] billNums) throws Exception{
+		//납부 후 해당 billVO에 paidCheck = 1, paidDate = now()로 업데이트 하기
+		//처리 후 미납 영역에서 안보이는지도 확인
 		ModelAndView mv = new ModelAndView();
 		
+//		for (String stringbillNum : billNums) {
+//			BillVO billVO = new BillVO();
+//			Integer billNum = Integer.parseInt(stringbillNum);
+//			billVO.setBillNum(billNum);
+//			
+//		}
 		
+		//원래는 여기서 결제테이블에 insert 하고 billUpdate까지 service에서 하기
+		//setPaymentAdd
+		
+		//setBillUpdate
+		int result = myPageService.setBillUpdate(billNums);
+		
+		mv.setViewName("redirect:./home");
 		return mv;
 	}
 	
@@ -128,7 +146,12 @@ public class MyPageController {
 	}
 	
 	
-
+	//isDuplicatePhoneNum
+	@ResponseBody
+	@GetMapping("isDuplicatePhoneNum")
+	public boolean isDuplicatePhoneNum(String phoneNum) throws Exception{
+		return myPageService.isDuplicatePhoneNum(phoneNum);
+	}
 	
 	
 }

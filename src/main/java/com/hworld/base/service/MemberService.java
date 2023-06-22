@@ -108,9 +108,14 @@ public class MemberService {
 		return result;
 	}
 	
-	public MemberVO emailCheck(MemberVO memberVO) throws Exception {
-		return memberDAO.emailCheck(memberVO);
+	/* 이메일 중복 체크 */
+	public int emailCheck(String email) throws Exception {
+		return memberDAO.emailCheck(email);
 	}
+	
+//	public MemberVO emailCheck(MemberVO memberVO) throws Exception {
+//		return memberDAO.emailCheck(memberVO);
+//	}
 	
 	public int memberPwCheck(MemberVO memberVO) throws Exception {
 		return memberDAO.memberPwCheck(memberVO);

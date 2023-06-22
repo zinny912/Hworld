@@ -33,4 +33,13 @@ public interface MyPageDAO {
 	
 	//세션 업데이트
 	public MemberVO getNewSession(MemberVO memberVO) throws Exception;
+	
+	//미납금 납부 후 billVO 업데이트
+	public int setBillUpdate(BillVO billVO) throws Exception;
+	
+	//checkOurNum - ajax
+	public String isDuplicatePhoneNum(String phoneNum) throws Exception;
+	
+	//checkOtherTP - 서비스에서 타통신사 번호 체크 실행
+	public String isDuplicatePhoneNumOT(String phoneNum) throws Exception;
 }
