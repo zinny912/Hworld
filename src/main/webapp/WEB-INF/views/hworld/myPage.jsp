@@ -643,19 +643,22 @@
                             <!-- 회선 리스트 start -->
                             <div class="save-details-box">
                                 <div class="row g-3">
-                                    <!-- 대표회선 card start -->
-                                        <div class="col-xl-4 col-md-6">
+                                
+                                <c:forEach items="${TPList}" var="telephoneVO">
+                                <c:choose>
+                                	<c:when test="${telephoneVO.kingCheck eq 1}">
+                                		<div class="col-xl-4 col-md-6">
                                             <div class="save-details">
                                                 <div class="save-name">
-                                                    <h5>010-2222-2222</h5>
+                                                    <h5>${telephoneVO.phoneNum}</h5>
                                                     <div class="save-position">
                                                         <h6>대표회선</h6>
                                                     </div>
                                                 </div>
                                                 <div class="save-address">
-                                                    <p class="font-light">요금제 : 5G 프리미어</p>
-                                                    <p class="font-light">기기명 : 갤럭시 s23</p>
-                                                    <p class="font-light">개통일 : 2023/05/23</p>
+                                                    <p class="font-light">요금제 : ${telephoneVO.planVO.planName}</p>
+                                                    <p class="font-light">기기명 : ${telephoneVO.directName}</p>
+                                                    <p class="font-light">개통일 : ${telephoneVO.startDate}</p>
                                                 </div>
 
                                                 <div class="page-view-filter">
@@ -682,6 +685,15 @@
                                                 </div>
                                             </div>
                                         </div>
+                                	</c:when>
+                                </c:choose>
+                                	<c:if test="${telephoneVO.kingCheck eq 0}">
+                                		나머지: ${telephoneVO.phoneNum}
+                                	</c:if>
+                                </c:forEach>
+                                
+                                    <!-- 대표회선 card start -->
+                                        
                                     <!-- 대표회선 card end -->
                                     <!-- 일반회선1 card start -->
                                         <div class="col-xl-4 col-md-6">
