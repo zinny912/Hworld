@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+        <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+    
 <!DOCTYPE html>
 <html lang="en">
 
@@ -132,24 +134,17 @@
                                                                 <li>
                                                                     <a href="shop-left-sidebar.html"
                                                                         data-source="assets/images/electronics/slider/1.jpg">
-                                                                        <img src="assets/images/electronics/slider/2.jpg"
-                                                                            class="img-fluid" alt="">
+                                                                        
                                                                     </a>
                                                                 </li>
-                                                                <li>
-                                                                    <a href="shop-left-sidebar.html"
-                                                                        data-source="assets/images/electronics/slider/1.jpg">
-                                                                        <img src="assets/images/electronics/slider/3.jpg"
-                                                                            class="img-fluid" alt="">
-                                                                    </a>
-                                                                </li>
+                                                                
                                                             </ul>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="group-btn">
-                                                <button onclick="location.href = 'shop-left-sidebar.html';"
+                                                <button onclick="location.href = '/direct/phoneDetail?slicedCode=I1401';"
                                                     type="button" class="btn btn-solid-default">제품 구매하기</button>
                                             </div>
                                             
@@ -246,11 +241,12 @@
                     </div>
 
                     <div class="product-wrapper slide-three ratio_asos">
+                        <c:forEach items="${phoneList}" var="pl">
                         <div>
                             <div class="product-box">
                                 <div class="img-wrapper">
-                                    <a href="product-left-sidebar.html">
-                                        <img src="assets/images/flower/popular/1.jpg"
+	                                <a href="./direct/phoneDetail?slicedCode=${pl.slicedCode}">
+                                        <img src="/assets/images/electronics/product/${pl.slicedCode}thumb.jpg"
                                             class="img-fluid bg-img blur-up lazyload" alt="">
                                     </a>
                                     <div class="label-block">
@@ -260,111 +256,35 @@
                                 </div>
                                 <div class="product-details text-center">
                                     <h3 class="theme-color">
-                                        $49.00
+									  <fmt:formatNumber value="${pl.directPrice}" pattern="#,### 원" />
                                     </h3>
                                     <a href="product-left-sidebar.html" class="font-default">
-                                        <h5>Beautiful and Fresh Bookey</h5>
+                                        <h5>${pl.directName}</h5>
                                     </a>
-                                    <ul class="rating">
-                                        <li>
-                                            <i class="fas fa-star theme-color"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fas fa-star theme-color"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fas fa-star theme-color"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fas fa-star"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fas fa-star"></i>
-                                        </li>
-                                    </ul>
+                                    <ul class="rating mt-0">
+			                          	<li>
+							                <i class="fas fa-star ${direct.rate >= 0.5 ? 'theme-color' : ''}"></i>
+									    </li>
+									    <li>
+							                <i class="fas fa-star ${direct.rate >= 1.5 ? 'theme-color' : ''}"></i>
+							            </li>
+							            <li>
+							                <i class="fas fa-star ${direct.rate >= 2.5 ? 'theme-color' : ''}"></i>
+							            </li>
+							            <li>
+							                <i class="fas fa-star ${direct.rate >= 3.5 ? 'theme-color' : ''}"></i>
+							            </li>
+							            <li>
+							                <i class="fas fa-star ${direct.rate >= 4.5 ? 'theme-color' : ''}"></i>
+							            </li>
+							        </ul>   
                                 </div>
                             </div>
                         </div>
+					</c:forEach>
+                        
 
-                        <div>
-                            <div class="product-box">
-                                <div class="img-wrapper">
-                                    <a href="product-left-sidebar.html">
-                                        <img src="assets/images/flower/popular/2.jpg"
-                                            class="img-fluid bg-img blur-up lazyload" alt="">
-                                    </a>
-                                    <div class="label-block">
-                                        <span class="label label-theme">New</span>
-                                    </div>
-                                
-                                </div>
-                                <div class="product-details text-center">
-                                    <h3 class="theme-color">
-                                        $49.00
-                                    </h3>
-                                    <a href="product-left-sidebar.html" class="font-default">
-                                        <h5>Beautiful and Fresh Bookey</h5>
-                                    </a>
-                                    <ul class="rating">
-                                        <li>
-                                            <i class="fas fa-star theme-color"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fas fa-star theme-color"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fas fa-star theme-color"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fas fa-star theme-color"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fas fa-star"></i>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div>
-                            <div class="product-box">
-                                <div class="img-wrapper">
-                                    <a href="product-left-sidebar.html">
-                                        <img src="assets/images/flower/popular/3.jpg"
-                                            class="img-fluid bg-img blur-up lazyload" alt="">
-                                    </a>
-                                    <div class="label-block">
-                                        <span class="label label-theme">New</span>
-                                    </div>
-                                    
-                                </div>
-                                <div class="product-details text-center">
-                                    <h3 class="theme-color">
-                                        $49.00
-                                    </h3>
-                                    <a href="product-left-sidebar.html" class="font-default">
-                                        <h5>Beautiful and Fresh Bookey</h5>
-                                    </a>
-                                    <ul class="rating">
-                                        <li>
-                                            <i class="fas fa-star theme-color"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fas fa-star theme-color"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fas fa-star theme-color"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fas fa-star theme-color"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fas fa-star theme-color"></i>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
+                        
                     </div>
                 </div>
 
@@ -377,92 +297,44 @@
 
                         <div>
                             <div class="row g-3">
+                              <c:forEach items="${accList}" var="al" end="4">
+                            
                                 <div class="col-lg-12 col-md-6 col-12">
                                     <div class="product-image">
-                                        <a href="product-left-sidebar.html">
-                                            <img src="assets/images/flower/product/1.jpg" class="blur-up lazyload"
+	                                <a href="./direct/accDetail?slicedCode=${al.slicedCode}">
+                                        <img src="/assets/images/electronics/product/${al.slicedCode}thumb.jpg"
                                                 alt="">
                                         </a>
                                         <div class="product-details">
-                                            <h6 class="font-light">apple</h6>
-                                            <a href="product-left-sidebar.html" class="">
-                                                <h3>airpods</h3>
+                                            <h6 class="font-light">
+                                            	<c:choose>
+											        <c:when test="${al.brandCode == 'S'}">
+											            삼성
+											        </c:when>
+											        <c:when test="${al.brandCode == 'A'}">
+											            애플
+											        </c:when>
+											        <c:when test="${al.brandCode == '0'}">
+											            기타
+											        </c:when>
+											        <c:otherwise>
+											            기타
+											        </c:otherwise>
+											    </c:choose>
+                                            
+                                            </h6>
+	                                		<a href="./direct/accDetail?slicedCode=${al.slicedCode}">
+                                       			<h5>${al.directName}</h5>
                                             </a>
-                                            <h4 class="theme-color mt-1">$49.00
+                                            <h4 class="theme-color">
+                                            	<fmt:formatNumber value="${al.directPrice}" pattern="#,### 원" />
                                             </h4>
                                         </div>
                                     </div>
                                 </div>
+                                </c:forEach>
 
-                                <div class="col-lg-12 col-md-6 col-12">
-                                    <div class="product-image">
-                                        <a href="product-left-sidebar.html">
-                                            <img src="assets/images/flower/product/2.jpg" class="blur-up lazyload"
-                                                alt="">
-                                        </a>
-                                        <div class="product-details">
-                                            <h6 class="font-light">Fully Confirtable</h6>
-                                            <a href="product-left-sidebar.html" class="">
-                                                <h3>Beautiful and Fresh Bookey</h3>
-                                            </a>
-                                            <h4 class="theme-color mt-1">$49.00
-                                            </h4>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-12 col-md-6 col-12">
-                                    <div class="product-image">
-                                        <a href="product-left-sidebar.html">
-                                            <img src="assets/images/flower/product/3.jpg" class="blur-up lazyload"
-                                                alt="">
-                                        </a>
-                                        <div class="product-details">
-                                            <h6 class="font-light">Fully Confirtable</h6>
-                                            <a href="product-left-sidebar.html" class="">
-                                                <h3>Beautiful and Fresh Bookey</h3>
-                                            </a>
-                                            <h4 class="theme-color mt-1">$49.00
-                                            </h4>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-12 col-md-6 col-12">
-                                    <div class="product-image">
-                                        <a href="product-left-sidebar.html">
-                                            <img src="assets/images/flower/product/4.jpg" class="blur-up lazyload"
-                                                alt="">
-                                        </a>
-                                        <div class="product-details">
-                                            <h6 class="font-light">Fully Confirtable</h6>
-                                            <a href="product-left-sidebar.html" class="">
-                                                <h3>Beautiful and Fresh Bookey</h3>
-                                            </a>
-                                            <h4 class="font-light mt-1"><del>$49.00</del> <span
-                                                    class="theme-color">$35.50</span>
-                                            </h4>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-12 col-md-6 col-12">
-                                    <div class="product-image">
-                                        <a href="product-left-sidebar.html">
-                                            <img src="assets/images/flower/product/5.jpg" class="blur-up lazyload"
-                                                alt="">
-                                        </a>
-                                        <div class="product-details">
-                                            <h6 class="font-light">Fully Confirtable</h6>
-                                            <a href="product-left-sidebar.html" class="">
-                                                <h3>Beautiful and Fresh Bookey</h3>
-                                            </a>
-                                            <h4 class="font-light mt-1"><del>$49.00</del> <span
-                                                    class="theme-color">$35.50</span>
-                                            </h4>
-                                        </div>
-                                    </div>
-                                </div>
+                                
                             </div>
                         </div>
 
@@ -489,92 +361,78 @@
             <div class="category-wrapper category-slider white-arrow mb-5">
                 <div>
                     <div class="category-wrap category-color">
-                        <a href="shop-category-slider.html">
-                            <img src="assets/images/shoes/category/1.png" class="img-fluid blur-up lazyload"
+                            <img src="assets/images/electronics/category/r.png" class="img-fluid blur-up lazyload"
                                 alt="category image">
                             <div class="category-content category-text t-text">
                                 <h3>5G 프리미어</h3>
                                 <span>88,000원</span>
                             </div>
-                        </a>
                     </div>
                 </div>
 
                 <div>
                     <div class="category-wrap category-color">
-                        <a href="shop-category-slider.html">
-                            <img src="assets/images/shoes/category/2.png" class="img-fluid blur-up lazyload"
+                            <img src="assets/images/electronics/category/f.png" class="img-fluid blur-up lazyload"
                                 alt="category image">
                             <div class="category-content category-text t-text">
                                 <h3>5G 베이직</h3>
                                 <span>77,000원</span>
                             </div>
-                        </a>
                     </div>
                 </div>
 
                 <div>
                     <div class="category-wrap category-color">
-                        <a href="shop-category-slider.html">
-                            <img src="assets/images/shoes/category/3.png" class="img-fluid blur-up lazyload"
+                            <img src="assets/images/electronics/category/w.png" class="img-fluid blur-up lazyload"
                                 alt="category image">
                             <div class="category-content category-text t-text">
                                 <h3>5G 심플</h3>
                                 <span>66,000원</span>
                             </div>
-                        </a>
                     </div>
                 </div>
 
                 <div>
                     <div class="category-wrap category-color">
-                        <a href="shop-category-slider.html">
-                            <img src="assets/images/shoes/category/4.png" class="img-fluid blur-up lazyload"
+                            <img src="assets/images/electronics/category/i.png" class="img-fluid blur-up lazyload"
                                 alt="category image">
                             <div class="category-content category-text t-text">
                                 <h3>5G 슬림</h3>
                                 <span>55,000원</span>
                             </div>
-                        </a>
                     </div>
                 </div>
 
                 <div>
                     <div class="category-wrap category-color">
-                        <a href="shop-category-slider.html">
-                            <img src="assets/images/shoes/category/5.png" class="img-fluid blur-up lazyload"
+                            <img src="assets/images/electronics/category/hi.png" class="img-fluid blur-up lazyload"
                                 alt="category image">
                             <div class="category-content category-text t-text">
                                 <h3>H틴</h3>
                                 <span>33,000원</span>
                             </div>
-                        </a>
                     </div>
                 </div>
 
                 <div>
                     <div class="category-wrap category-color">
-                        <a href="shop-category-slider.html">
-                            <img src="assets/images/shoes/category/6.png" class="img-fluid blur-up lazyload"
+                            <img src="assets/images/electronics/category/zem.png" class="img-fluid blur-up lazyload"
                                 alt="category image">
                             <div class="category-content category-text t-text">
                                 <h3>ZEM 베이직</h3>
                                 <span>33,000원</span>
                             </div>
-                        </a>
                     </div>
                 </div>
 
                 <div>
                     <div class="category-wrap category-color">
-                        <a href="shop-category-slider.html">
-                            <img src="assets/images/shoes/category/7.png" class="img-fluid blur-up lazyload"
+                            <img src="assets/images/electronics/category/s.png" class="img-fluid blur-up lazyload"
                                 alt="category image">
                             <div class="category-content category-text t-text">
                                 <h3>Hero 55</h3>
                                 <span>55,000원</span>
                             </div>
-                        </a>
                     </div>
                 </div>
             </div>
