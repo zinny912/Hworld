@@ -116,9 +116,9 @@
 		WHERE RRNF = #{rrnf} AND RRNL = #{rrnl}
 	</select>
 	<!-- 번호이동 타통신사 조회 -->
-	<select id="isOtherTelecom" resultType="String" parameterType="String">
+	<select id="isOtherTelecom" resultType="OtherTelecomVO" parameterType="String">
 	SELECT * FROM OTHERTELECOM
-	WHERE TAPHONENUM = #{taPhoneNum} AND TELECOMNAME = #{telecomName}
+	WHERE TAPHONENUM = #{taPhoneNum} 
 	</select>
 	
 	<!-- 프로시저 호출, memberNum, appNum만 입력해주면 계산해줌 -->

@@ -13,6 +13,7 @@ import com.hworld.base.util.Pager;
 import com.hworld.base.vo.ApplicationVO;
 import com.hworld.base.vo.DirectVO;
 import com.hworld.base.vo.MemberVO;
+import com.hworld.base.vo.OtherTelecomVO;
 import com.hworld.base.vo.PlanVO;
 import com.hworld.base.vo.QnaVO;
 import com.hworld.base.vo.ReviewVO;
@@ -105,5 +106,7 @@ public interface DirectDAO {
 	
 	//구매완료(가입완료 후 결과안내 창)
 	public PlanVO getMemberPlan(Integer memberNum) throws Exception;
+	//타 통신사 번호 조회
+	public OtherTelecomVO isOtherTelecom(String phoneNum);
 	
 }

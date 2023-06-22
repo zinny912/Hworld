@@ -126,7 +126,7 @@ public class DirectController {
 	    List<ReviewVO> pReview = new ArrayList<>();
 	    for(ReviewVO review : reviews) {
 	    	String categoryCode = review.getCategoryCode();
-	    	if(categoryCode.equals("01")) {
+	    	if(categoryCode.equals("00")) {
 	    		pReview.add(review);
 	    	}
 	    }

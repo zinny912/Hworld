@@ -7,7 +7,10 @@
 <head>
 	<meta charset="UTF-8">
     <c:import url="../temp/style.jsp"></c:import>
+<style>
 
+
+</style>
     
 </head>
 
@@ -114,7 +117,30 @@
 	                                        </thead>
                                        	 	<tbody> 
                                         	 <c:forEach items="${gList}"  var="plan">
-                                                        <tr>
+                                        	 	<c:choose>
+    												<c:when test="${plan.disabled == 0 && memberVO.adminCheck == 1}">
+		                                        	 <input type="hidden" name="disabled" value="${plan.disabled}">
+		                                               <tr style="display:none;">
+		                                                <td> <a href="./planDetail?planNum=${plan.planNum}">
+		                                                        <strong class="text-left fs-4 m-0 ">${plan.planName }</strong></a></td>
+		                                                <td> 
+		                                                	<p class="fs-5 m-0">
+		                                                	<c:choose>
+														      <c:when test="${plan.dataCapacity eq '무제한'}">
+														        무제한
+														      </c:when>
+														      <c:otherwise>
+														        ${plan.dataCapacity} GB
+														      </c:otherwise>
+														    </c:choose></td>
+		                                                <td><p class="fs-5 m-0">기본제공</p></td>
+		                                                <td> <p class="fs-5 m-0">기본제공</p></td>
+		                                                <td><strong class="fs-4 m-0 theme-color" id="commaPrice${plan.planNum}">${plan.planPrice}</strong><span class="fs-6">원</span></td>
+		                                            </tr>
+		                                            </c:when>
+                                            	<c:otherwise>
+                                            		<input type="hidden" name="disabled" value="${plan.disabled}">
+                                               <tr>
                                                 <td> <a href="./planDetail?planNum=${plan.planNum}">
                                                         <strong class="text-left fs-4 m-0 ">${plan.planName }</strong></a></td>
                                                 <td> 
@@ -131,6 +157,8 @@
                                                 <td> <p class="fs-5 m-0">기본제공</p></td>
                                                 <td><strong class="fs-4 m-0 theme-color" id="commaPrice${plan.planNum}">${plan.planPrice}</strong><span class="fs-6">원</span></td>
                                             </tr>
+                                            		</c:otherwise>
+                                            	</c:choose>
                                             </c:forEach>
                                         	</tbody>
                                            </table>
@@ -172,6 +200,29 @@
 	                                        </thead>
                                        	 	<tbody> 
                                         	 <c:forEach items="${sList}"  var="plan">
+                                        	 <c:choose>
+    											<c:when test="${plan.disabled == 0 && memberVO.adminCheck == 1}">
+                                        	 <input type="hidden" name="disabled" value="${plan.disabled}">
+                                                        <tr style="display:none;">
+                                                <td> <a href="./planDetail?planNum=${plan.planNum}">
+                                                        <strong class="text-left fs-4 m-0 ">${plan.planName }</strong></a></td>
+                                                <td> 
+                                                	<p class="fs-5 m-0">
+                                                	<c:choose>
+												      <c:when test="${plan.dataCapacity eq '무제한'}">
+												        무제한
+												      </c:when>
+												      <c:otherwise>
+												        ${plan.dataCapacity} GB
+												      </c:otherwise>
+												    </c:choose></td>
+                                                <td><p class="fs-5 m-0">기본제공</p></td>
+                                                <td> <p class="fs-5 m-0">기본제공</p></td>
+                                                <td><strong class="fs-4 m-0 theme-color" id="commaPrice${plan.planNum}">${plan.planPrice}</strong><span class="fs-6">원</span></td>
+                                            </tr>
+                                            </c:when>
+                                            <c:otherwise>
+                                            <input type="hidden" name="disabled" value="${plan.disabled}">
                                                         <tr>
                                                 <td> <a href="./planDetail?planNum=${plan.planNum}">
                                                         <strong class="text-left fs-4 m-0 ">${plan.planName }</strong></a></td>
@@ -189,6 +240,8 @@
                                                 <td> <p class="fs-5 m-0">기본제공</p></td>
                                                 <td><strong class="fs-4 m-0 theme-color" id="commaPrice${plan.planNum}">${plan.planPrice}</strong><span class="fs-6">원</span></td>
                                             </tr>
+                                            </c:otherwise>
+                                            </c:choose>
                                             </c:forEach>
                                         	</tbody>
                                            </table>
@@ -230,6 +283,29 @@
 	                                        </thead>
                                        	 	<tbody> 
                                         	 <c:forEach items="${tList}" var="plan">
+                                        	 <c:choose>
+    											<c:when test="${plan.disabled == 0 && memberVO.adminCheck == 1}">
+                                        	 <input type="hidden" name="disabled" value="${plan.disabled}">
+                                                      <tr style="display:none;">
+                                                <td> <a href="./planDetail?planNum=${plan.planNum}">
+                                                        <strong class="text-left fs-4 m-0 ">${plan.planName}</strong></a></td>
+                                                <td> 
+                                                	<p class="fs-5 m-0">
+                                                	<c:choose>
+												      <c:when test="${plan.dataCapacity eq '무제한'}">
+												        무제한
+												      </c:when>
+												      <c:otherwise>
+												        ${plan.dataCapacity} GB
+												      </c:otherwise>
+												    </c:choose></td>
+                                                <td><p class="fs-5 m-0">기본제공</p></td>
+                                                <td> <p class="fs-5 m-0">기본제공</p></td>
+                                                <td><strong class="fs-4 m-0 theme-color" id="commaPrice${plan.planNum}">${plan.planPrice}</strong><span class="fs-6">원</span></td>
+                                            </tr>
+                                            </c:when>
+                                            <c:otherwise>
+                                            <input type="hidden" name="disabled" value="${plan.disabled}">
                                                         <tr>
                                                 <td> <a href="./planDetail?planNum=${plan.planNum}">
                                                         <strong class="text-left fs-4 m-0 ">${plan.planName}</strong></a></td>
@@ -247,6 +323,8 @@
                                                 <td> <p class="fs-5 m-0">기본제공</p></td>
                                                 <td><strong class="fs-4 m-0 theme-color" id="commaPrice${plan.planNum}">${plan.planPrice}</strong><span class="fs-6">원</span></td>
                                             </tr>
+                                            </c:otherwise>
+                                            </c:choose>
                                             </c:forEach>
                                         	</tbody>
                                            </table>
@@ -288,6 +366,29 @@
 	                                        </thead>
                                        	 	<tbody> 
                                         	 <c:forEach items="${zList}" var="plan">
+                                        	 <c:choose>
+    											<c:when test="${plan.disabled == 0 && memberVO.adminCheck == 1}">
+                                        	 <input type="hidden" name="disabled" value="${plan.disabled}">
+                                                        <tr style="display:none;">
+                                                <td> <a href="./planDetail?planNum=${plan.planNum}">
+                                                        <strong class="text-left fs-4 m-0 ">${plan.planName}</strong></a></td>
+                                                <td> 
+                                                	<p class="fs-5 m-0">
+                                                	<c:choose>
+												      <c:when test="${plan.dataCapacity eq '무제한'}">
+												        무제한
+												      </c:when>
+												      <c:otherwise>
+												        ${plan.dataCapacity} GB
+												      </c:otherwise>
+												    </c:choose></td>
+                                                <td><p class="fs-5 m-0">기본제공</p></td>
+                                                <td> <p class="fs-5 m-0">기본제공</p></td>
+                                                <td><strong class="fs-4 m-0 theme-color" id="commaPrice${plan.planNum}">${plan.planPrice}</strong><span class="fs-6">원</span></td>
+                                            </tr>
+                                            </c:when>
+                                            <c:otherwise>
+                                            <input type="hidden" name="disabled" value="${plan.disabled}">
                                                         <tr>
                                                 <td> <a href="./planDetail?planNum=${plan.planNum}">
                                                         <strong class="text-left fs-4 m-0 ">${plan.planName}</strong></a></td>
@@ -305,6 +406,8 @@
                                                 <td> <p class="fs-5 m-0">기본제공</p></td>
                                                 <td><strong class="fs-4 m-0 theme-color" id="commaPrice${plan.planNum}">${plan.planPrice}</strong><span class="fs-6">원</span></td>
                                             </tr>
+                                            </c:otherwise>
+                                            </c:choose>
                                             </c:forEach>
                                         	</tbody>
                                            </table>
@@ -346,6 +449,29 @@
 	                                        </thead>
                                        	 	<tbody> 
                                         	 <c:forEach items="${hList}" var="plan">
+                                        	 <c:choose>
+    											<c:when test="${plan.disabled == 0 && memberVO.adminCheck == 1}">
+                                        	 <input type="hidden" name="disabled" value="${plan.disabled}">
+                                                        <tr style="display:none;">
+                                                <td> <a href="./planDetail?planNum=${plan.planNum}">
+                                                        <strong class="text-left fs-4 m-0 ">${plan.planName}</strong></a></td>
+                                                <td> 
+                                                	<p class="fs-5 m-0">
+                                                	<c:choose>
+												      <c:when test="${plan.dataCapacity eq '무제한'}">
+												        무제한
+												      </c:when>
+												      <c:otherwise>
+												        ${plan.dataCapacity} GB
+												      </c:otherwise>
+												    </c:choose></td>
+                                                <td><p class="fs-5 m-0">기본제공</p></td>
+                                                <td> <p class="fs-5 m-0">기본제공</p></td>
+                                                <td><strong class="fs-4 m-0 theme-color" id="commaPrice${plan.planNum}">${plan.planPrice}</strong><span class="fs-6">원</span></td>
+                                            </tr>
+                                            </c:when>
+                                            <c:otherwise>
+                                             <input type="hidden" name="disabled" value="${plan.disabled}">
                                                         <tr>
                                                 <td> <a href="./planDetail?planNum=${plan.planNum}">
                                                         <strong class="text-left fs-4 m-0 ">${plan.planName}</strong></a></td>
@@ -363,6 +489,8 @@
                                                 <td> <p class="fs-5 m-0">기본제공</p></td>
                                                 <td><strong class="fs-4 m-0 theme-color" id="commaPrice${plan.planNum}">${plan.planPrice}</strong><span class="fs-6">원</span></td>
                                             </tr>
+                                            </c:otherwise>
+                                            </c:choose>
                                             </c:forEach>
                                         	</tbody>
                                            </table>
@@ -404,7 +532,12 @@
 	                                        </thead>
                                        	 	<tbody> 
                                         	 <c:forEach items="${wList}" var="plan">
-                                                        <tr>
+                                        	  <c:choose>
+    											<c:when test="${plan.disabled == 0 && memberVO.adminCheck == 1}">
+    
+                                        	 <input type="hidden" name="disabled" value="${plan.disabled}">
+                                               <tr style="display:none;">
+                                               
                                                 <td> <a href="./planDetail?planNum=${plan.planNum}">
                                                         <strong class="text-left fs-4 m-0 ">${plan.planName}</strong></a></td>
                                                 <td> 
@@ -421,6 +554,29 @@
                                                 <td> <p class="fs-5 m-0">기본제공</p></td>
                                                 <td><strong class="fs-4 m-0 theme-color" id="commaPrice${plan.planNum}">${plan.planPrice}</strong><span class="fs-6">원</span></td>
                                             </tr>
+                                            </c:when>
+                                            <c:otherwise>
+                                            <input type="hidden" name="disabled" value="${plan.disabled}">
+                                               <tr >
+                                                <td> <a href="./planDetail?planNum=${plan.planNum}">
+                                                        <strong class="text-left fs-4 m-0 ">${plan.planName}</strong></a></td>
+                                                <td> 
+                                                	<p class="fs-5 m-0">
+                                                	<c:choose>
+												      <c:when test="${plan.dataCapacity eq '무제한'}">
+												        무제한
+												      </c:when>
+												      <c:otherwise>
+												        ${plan.dataCapacity} GB
+												      </c:otherwise>
+												    </c:choose></td>
+                                                <td><p class="fs-5 m-0">기본제공</p></td>
+                                                <td> <p class="fs-5 m-0">기본제공</p></td>
+                                                <td><strong class="fs-4 m-0 theme-color" id="commaPrice${plan.planNum}">${plan.planPrice}</strong><span class="fs-6">원</span></td>
+                                            </tr>
+                                    
+                                            </c:otherwise>
+                                            </c:choose>
                                             </c:forEach>
                                             
                                         	</tbody>
@@ -500,18 +656,22 @@
                                         </div>
                                     </div>
                                 </div>
-                              </div>  
-                         </div>
-    </section>
+                              </div>
+                          </div>
+                       </section>
                     </div>
-                    </div>
-                    </div>       
-                           
-         
+                 </div>
+              </div>
+		</div>
+	</div>
+	</div>
+	</div>
+	</div>    
+
+</section>
             
     <!-- Shop Section end -->    
  
-  
 <c:import url="../temp/footer.jsp"></c:import>
 
       <script>
@@ -524,6 +684,8 @@ $(document).ready(function() {
        	
     }
 });
+
+
 </script> 
   
 </body>
