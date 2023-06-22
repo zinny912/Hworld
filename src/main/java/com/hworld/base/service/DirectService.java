@@ -30,6 +30,7 @@ import com.hworld.base.util.SHA256Util;
 import com.hworld.base.vo.ApplicationVO;
 import com.hworld.base.vo.DirectVO;
 import com.hworld.base.vo.MemberVO;
+import com.hworld.base.vo.OtherTelecomVO;
 import com.hworld.base.vo.PlanVO;
 import com.hworld.base.vo.QnaVO;
 import com.hworld.base.vo.ReviewVO;
@@ -270,20 +271,29 @@ public class DirectService {
 		//-> 1.2 번호이동 : 타통신사 DB에는 있고, 우리 DB에 없는 번호로 가입가능 
 		//세션에서 정보 받아오기때문에 주민등록번호 뒷자리로만 본인정보 조회 
 		
-				//평문 주민뒷자리를 rrnlOrigin에 저장 -> 나중에 실제로 사용할땐 지우면 됨 -----> 진희 코멘트 : 일단 ㄱㄱ하나요? 
+				//평문 주민뒷자리를 rrnlOrigin에 저장 -> 나중에 실제로 사용할땐 지우면 됨 
 				applicationVO.setRrnlOrigin(applicationVO.getRrnl());
 				
 				//SHA256Util을 이용해서 RRNL 암호화(RRN 값 기반)
 				String RRN = applicationVO.getRrnf()+"-"+applicationVO.getRrnl();
 				applicationVO.setRrnl(SHA256Util.encryptMD5(RRN));
 				
-				//신청서 db에 insert ->  진희 코멘트 : appNum 생성되는것 같군요 
+				//신청서 db에 insert  appNum 생성
 				int result = directDAO.setFormAdd(applicationVO);
 				log.error(">>>>>>>>>>>>>>>>>>>>>>>>>> appNum: {} ", applicationVO.getAppNum());
 
 				
-				//회원번호 조회하기 ( 주민번호 뒷자리 입력하면 그 값으로 )
+				//회원번호 조회하기 ( 주민번호 뒷자리 입력하면 그 값으로 ) 
 				MemberVO memberVO = directDAO.getMemberSearch(applicationVO);
+				
+//				//OtherTelecomVO otTel = new OtherTelecomVO();
+//				boolean checkNum = false;
+//				//타통신사 번호 조회 
+//				String check = directDAO.isOtherTelecom();
+//				if(check != null) {
+//					checkNum = true; //타 통신사 번호임 
+//				}
+				
 				
 				//세션에서 정보 가져오기 (회원번호)
 				

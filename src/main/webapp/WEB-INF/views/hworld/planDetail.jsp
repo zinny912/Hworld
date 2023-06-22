@@ -226,7 +226,8 @@
     <!-- Shop Section start -->
     <section>
         <div class="container">
-        <input type="hidden" value="${param.planNum}" name="planNum">
+        <input type="hidden" value="${param.planNum}" id="planNum1" name="planNum">
+        <input type="hidden" value="${plan.planNum}" id="planNum2" name="planNum">
             <div class="material-details">
                 <div class="title title1 title-effect title-left">
                     <h2>${planNote.note}</h2>
@@ -241,7 +242,7 @@
                                     <div class="justify-content-start" style="margin-top:-20px;">
                                         <a href="./planUpdate" class="me-3">수정</a>
                                         <a href="javascript:void(0)" data-bs-toggle="modal"
-                                                        data-bs-target="#disabledBtn">비활성화</a>
+                                                        data-bs-target="#disabledBtn" id="xBtn">비활성화</a>
                                     </div>
                                 </c:if>    
                                     <div class="details-image-concept" >
@@ -624,15 +625,16 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
-                <form>
+                <form action = "./planDisabled" method="POST" id="disabledPlan">
                     <div class="mb-4">
                      <h3 class="theme-color fw-bold">해당 요금제를 비활성화 하시겠습니까? </h3> <br> <h5>비활성화 이후에는 활성화가 불가합니다.</h5>
                      <h5>해당요금제로는 더이상 신규가입이 불가하게 됩니다.</h5>
+                     <input type="text" name="planNum" id="modalPlanNum">
                     </div>
                 </form>
             </div>
             <div class="modal-footer pt-0 text-end d-block">
-                <a href="#" ><button type="button" id="confirmDisabled" class="btn btn-solid-default rounded-1">확인</button></a>
+                <button type="button" id="confirmDisabled" class="btn btn-solid-default rounded-1">확인</button></a>
             </div>
         </div>
     </div>
@@ -741,10 +743,10 @@
   changeTelecomModal.addEventListener('shown.bs.modal', handleModalShown);
 
   // changeTelecom 버튼에 이벤트 리스너 추가
-  const changeTelecomBtn = document.getElementById('changeTelecomBtn');
-  changeTelecomBtn.addEventListener('click', () => {
+  //const changeTelecomBtn = document.getElementById('changeTelecomBtn');
+  //changeTelecomBtn.addEventListener('click', () => {
     // 모달을 열기 전에 필요한 동작을 수행할 수 있습니다
-  });
+  //});
 </script>
 
 <script>
@@ -829,6 +831,26 @@ $(document).ready(function() {
         console.log('24개월 할인 선택');
       }
     }
+    
+ // 비활성화 버튼 클릭 이벤트 처리
+    $('#xBtn').click(function() {
+    	console.log('eventOn');
+        const planNum = $('#planNum1').val();
+       console.log(planNum);
+        $('#modalPlanNum').val(planNum);
+        
+    });
+
+    $('#confirmDisabled').click(function() {
+        let confirm = $('#modalPlanNum').val();
+      console.log(confirm);
+    	   $('#disabledPlan').submit();
+    	   console.log("확인")
+    });
+
+    
+    
+    
 });
 
 </script>
