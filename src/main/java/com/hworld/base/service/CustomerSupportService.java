@@ -46,6 +46,11 @@ public class CustomerSupportService {
 		
 	}
 	
+	public BoardVO getNoticeDetail(BoardVO boardVO) throws Exception {
+			return noticeDAO.getDetail(boardVO);
+	}
+	
+	
 	public List<TelephoneVO> setQnaInsert(HttpSession session) throws Exception {
 		TelephoneVO telephoneVO = new TelephoneVO();
 		//telephoneVO.setMemberNum(1);
