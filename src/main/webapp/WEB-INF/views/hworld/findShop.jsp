@@ -283,23 +283,26 @@
                     <!-- 추가/수정/삭제 버튼 -->
                     <div class="d-flex justify-content-end mb-1" style="height: 49px;">
                         <!-- 버튼 ㅇ -->
-                        <div class="product-buttons">
-                            <a href="javascript:void(0)" data-bs-toggle="modal"
-                                data-bs-target="#shop-add" class="btn btn-solid-default btn-sm fw-bold">
-                                <span>등록</span> 
-                            </a>
-                            <a href="javascript:void(0)" data-bs-toggle="modal"
-                                data-bs-target="#shop-update" class="btn btn-solid-default btn-sm fw-bold ms-1">
-                                <span>수정</span> 
-                            </a>
-                            <a href="javascript:void(0)" data-bs-toggle="modal"
-                                data-bs-target="#shop-delete" class="btn btn-solid-default btn-sm fw-bold ms-1">
-                                <span>삭제</span> 
-                            </a>
-                        </div>
-                        <!-- <button onclick="location.href='shop-add.html';" class="btn btn-solid-default btn-sm fw-bold ms-auto"><i class="fas fa-plus"></i>추가</button>
-                        <button onclick="location.href='shop-update.html';" class="btn btn-solid-default btn-sm fw-bold ms-auto"><i class="fas fa-eraser"></i>수정</button>
-                        <button onclick="location.href='shop-delete.html';" class="btn btn-solid-default btn-sm fw-bold ms-auto"><i class="fas fa-minus"></i>삭제</button> -->
+                        <c:choose>
+                        	<c:when test="${memberVO.adminCheck eq 0}">
+		                        <div class="product-buttons">
+		                            <a href="javascript:void(0)" data-bs-toggle="modal"
+		                                data-bs-target="#shop-add" class="btn btn-solid-default btn-sm fw-bold">
+		                                <span>등록</span> 
+		                            </a>
+		                            <a href="javascript:void(0)" data-bs-toggle="modal"
+		                                data-bs-target="#shop-update" class="btn btn-solid-default btn-sm fw-bold ms-1">
+		                                <span>수정</span> 
+		                            </a>
+		                            <a href="javascript:void(0)" data-bs-toggle="modal"
+		                                data-bs-target="#shop-delete" class="btn btn-solid-default btn-sm fw-bold ms-1">
+		                                <span>삭제</span> 
+		                            </a>
+		                        </div>
+                        	</c:when>
+                        	<c:otherwise>
+                        	</c:otherwise>
+                        </c:choose>
                     </div>
                     
                     <!-- 대리점 리스트(5개씩) -->
@@ -562,7 +565,6 @@
                                     <!-- 전체 덮개 -->
                                     <div class="row my-3">
                                         <h3>선택된 대리점 정보를 삭제하시겠습니까?</h3><br>
-                                        <h3>(삭제 또는 disabled로 업데이트)</h3>
                                     </div>
                                 </div>
                                 <div class="product-btns d-flex justify-content-center">

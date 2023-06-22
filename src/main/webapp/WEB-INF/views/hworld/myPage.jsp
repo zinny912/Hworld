@@ -183,10 +183,10 @@
                                                     <table class="table cart-table">
                                                         <thead>
                                                             <tr class="table-head">
+                                                                <th scope="col">청구번호</th>
                                                                 <th scope="col">청구 월</th>
                                                                 <th scope="col">납부일</th>
                                                                 <th scope="col">납부금액</th>
-                                                                <th scope="col">납부상태</th>
                                                                 <th scope="col">납부내역</th>
                                                             </tr>
                                                         </thead>
@@ -199,6 +199,9 @@
                                                             		<c:if test="${billVO.billCheck eq 1 && billVO.paidCheck eq 1}">
 	                                                        		<tr>
 	                                                                    <td>
+	                                                                        <p class="m-0" style="color: black;">${billVO.billNum}</p>
+	                                                                    </td>
+	                                                                    <td>
 	                                                                        <p class="m-0" style="color: black;">20${billVO.payMonth}</p>
 	                                                                    </td>
 	                                                                    <td>
@@ -206,9 +209,6 @@
 	                                                                    </td>
 	                                                                    <td>
 	                                                                        <p class="m-0" style="color: #e22454;"><fmt:formatNumber value="${billVO.totalPrice}" pattern="#,### 원"/></p>
-	                                                                    </td>
-	                                                                    <td>
-	                                                                        <p class="m-0">납부</p>
 	                                                                    </td>
 	                                                                    <td>
 	                                                                    	<!-- 영수증 발급이 가능하면 보여주기 -->
@@ -222,7 +222,7 @@
                                                         </tbody>
                                                     </table>
                                                     <!-- Pagination Box Start -->
-                                                    <nav class="page-section">
+                                                    <!-- <nav class="page-section">
                                                         <ul class="pagination">
                                                             <li class="page-item">
                                                                 <a class="page-link" href="javascript:void(0)" aria-label="Previous">
@@ -248,7 +248,7 @@
                                                                 </a>
                                                             </li>
                                                         </ul>
-                                                    </nav>
+                                                    </nav> -->
                                                     <!-- Pagination Box End -->
                                                 </div>
                                             </div> 
@@ -284,7 +284,7 @@
                                                         </tbody>
                                                     </table>
                                                     <!-- Pagination Box Start -->
-                                                    <nav class="page-section">
+                                                    <!-- <nav class="page-section">
                                                         <ul class="pagination">
                                                             <li class="page-item">
                                                                 <a class="page-link" href="javascript:void(0)" aria-label="Previous">
@@ -310,7 +310,7 @@
                                                                 </a>
                                                             </li>
                                                         </ul>
-                                                    </nav>
+                                                    </nav> -->
                                                     <!-- Pagination Box End -->
                                                 </div>
                                             </div>
@@ -1073,7 +1073,7 @@
     </div>
     <!-- qna Modal End -->
 
-     <!-- change Number Modal Start -->
+     <!-- 설정 - 번호변경 Start -->
      <div class="modal fade payment-modal" id="changeNumber">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -1083,8 +1083,10 @@
                 <div class="modal-body">
                     <form>
                         <div class="mb-4">
-                            <label for="card" class="form-label">변경 번호</label>
-                            <input type="text" class="form-control" id="card" placeholder="번호만 입력하세요">
+                            <label for="numChangeValue" class="form-label">번호 변경</label>
+                            <input type="text" class="form-control" id="numChangeValue" name="phoneNum" placeholder="번호만 입력하세요">
+                            <div class="my-2" id="searchResult">
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -1094,6 +1096,7 @@
             </div>
         </div>
     </div>
+    <!-- 번호 변경 확인 -->
     <div class="modal delete-account-modal fade" id="changeDoneModal">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -1110,7 +1113,7 @@
             </div>
         </div>
     </div>
-    <!-- change number Modal End -->
+    <!-- 설정 - 번호변경 End -->
 
      <!-- change king Number Modal Start -->
      <div class="modal fade payment-modal" id="kingModal">

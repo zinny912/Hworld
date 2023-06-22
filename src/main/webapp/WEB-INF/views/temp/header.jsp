@@ -90,12 +90,15 @@
                                                     <a href="/form/application" class="nav-link menu-title fw-bold fs-6">가입신청서</a>
                                                 </li>
                 <!-- 관리자/회원 테스트용 로그인 버튼 시작, 테스트 후 필요없으면 삭제 -->
-                <li>
-                    <a href="javascript:void(0)" class="d-block fw-bold fs-6 me-3" id="testAdmin">관리자</a>
-                </li>
-                <li>
-                    <a href="javascript:void(0)" class="d-block fw-bold fs-6 me-3" id="testMember">일반회원</a>
-                </li>
+                <li class="dropdown">
+				    <a class="nav-link menu-title fw-bold fs-6">빠른로그인</a>
+				    <ul class="nav-submenu menu-content fw-bold">
+				        <li>
+				            <a href="javascript:void(0)" class="d-block fw-bold fs-6 me-3" id="testAdmin">관리자</a>
+				        </li>
+				        <li>
+				            <a href="javascript:void(0)" class="d-block fw-bold fs-6 me-3" id="testMember">일반회원</a>
+				        </li>
                 <!-- 관리자/회원 테스트용 로그인 버튼 끝, 테스트 후 필요없으면 삭제 -->
                                             </ul>
                                         </div>

@@ -26,10 +26,6 @@ $('#instantlyPay').click(function(){
     $('#totalPrice').val(total);
     $('#invoiceNum').val(formattedDateTime);
 
-    // console.log($('#totalPrice').val(total));
-    // console.log($('#invoiceNum').val(formattedDateTime));
-
-
     //결제 후 작업
     let billNums = [];
 
@@ -59,7 +55,7 @@ function iamport(){
 		pay_method : 'card',
 		merchant_uid : 'merchant_' + invoiceNum,
 		name : '(주)H world', //결제창에서 보여질 이름
-		amount : 100 //실제 결제되는 가격
+		amount : totalPrice //실제 결제되는 가격
 	}, function(response) {
 		console.log(response);
 		if (response.success) {
@@ -70,7 +66,7 @@ function iamport(){
 		msg += '카드 승인번호 : ' + response.apply_num;
 		console.log('성공');
 		alert(msg);
-        
+
         //업데이트를 수행할 updateBill form을 넘김
 		$('#updateBill').submit();
 		} else {
