@@ -50,6 +50,15 @@ public class CustomerSupportController {
 		return modelAndView;
 	}
 	
+	@GetMapping("noticeDetail")
+	public ModelAndView getNoticeDetail(NoticeVO noticeVO) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		mv.addObject("vo", csService.getNoticeDetail(noticeVO));
+		mv.setViewName("hworld/noticeDetail");
+		return mv;
+	}
+	
 	
 	// 1:1 문의
 	@GetMapping("qna")
