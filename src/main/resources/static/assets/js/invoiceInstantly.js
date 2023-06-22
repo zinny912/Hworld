@@ -55,7 +55,7 @@ function iamport(){
 		pay_method : 'card',
 		merchant_uid : 'merchant_' + invoiceNum,
 		name : '(주)H world', //결제창에서 보여질 이름
-		amount : 100 //실제 결제되는 가격
+		amount : totalPrice //실제 결제되는 가격
 	}, function(response) {
 		console.log(response);
 		if (response.success) {
