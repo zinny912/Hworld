@@ -145,7 +145,7 @@ public class MyPageService {
 			//타회사 검증
 			result = myPageDAO.isDuplicatePhoneNumOT(phoneNum);
 			if(result != null) {
-				
+				check = true;
 			}
 		}
 		
