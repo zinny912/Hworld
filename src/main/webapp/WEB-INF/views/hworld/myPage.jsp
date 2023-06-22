@@ -644,13 +644,15 @@
                             <div class="save-details-box">
                                 <div class="row g-3">
                                 
-                                <c:forEach items="${TPList}" var="telephoneVO">
+                                <c:forEach items="${TPList}" var="telephoneVO" varStatus="i">
                                 <c:choose>
                                 	<c:when test="${telephoneVO.kingCheck eq 1}">
                                 		<div class="col-xl-4 col-md-6">
                                             <div class="save-details">
                                                 <div class="save-name">
-                                                    <h5>${telephoneVO.phoneNum}</h5>
+                                                	<c:set var="phoneNum" value="${telephoneVO.phoneNum}" />
+                                                    <c:set var="formattedPhoneNum" value="${fn:substring(phoneNum, 0, 3)}-${fn:substring(phoneNum, 3, 7)}-${fn:substring(phoneNum, 7,11)}" />
+                                                    <h5>${formattedPhoneNum}</h5>
                                                     <div class="save-position">
                                                         <h6>대표회선</h6>
                                                     </div>
@@ -688,24 +690,18 @@
                                 	</c:when>
                                 </c:choose>
                                 	<c:if test="${telephoneVO.kingCheck eq 0}">
-                                		나머지: ${telephoneVO.phoneNum}
-                                	</c:if>
-                                </c:forEach>
-                                
-                                    <!-- 대표회선 card start -->
-                                        
-                                    <!-- 대표회선 card end -->
-                                    <!-- 일반회선1 card start -->
-                                        <div class="col-xl-4 col-md-6">
+                                	<div class="col-xl-4 col-md-6">
                                             <div class="save-details">
                                                 <div class="save-name">
-                                                    <h5>010-3333-3333</h5>
+                                                    <c:set var="phoneNum" value="${telephoneVO.phoneNum}" />
+                                                    <c:set var="formattedPhoneNum" value="${fn:substring(phoneNum, 0, 3)}-${fn:substring(phoneNum, 3, 7)}-${fn:substring(phoneNum, 7,11)}" />
+                                                    <h5>${formattedPhoneNum}</h5>
                                                 </div>
 
                                                 <div class="save-address">
-                                                    <p class="font-light">요금제 : 5G 프리미어</p>
-                                                    <p class="font-light">기기명 : 갤럭시 s23</p>
-                                                    <p class="font-light">개통일 : 2023/05/23</p>
+                                                    <p class="font-light">요금제 : ${telephoneVO.planVO.planName}</p>
+                                                    <p class="font-light">기기명 : ${telephoneVO.directName}</p>
+                                                    <p class="font-light">개통일 : ${telephoneVO.startDate}</p>
                                                 </div>
 
                                                 <div class="page-view-filter">
@@ -718,7 +714,7 @@
                                                                 <a class="dropdown-item" href="javascript:void(0)"  data-bs-toggle="modal"
                                                                 data-bs-target="#kingModal">대표회선 설정</a>
                                                             </li>
-                                                            <li>
+                                                            <!-- <li>
                                                                 <a class="dropdown-item" href="javascript:void(0)">번호 변경</a>
                                                             </li>
                                                             <li>
@@ -726,48 +722,23 @@
                                                             </li>
                                                             <li>
                                                                 <a class="dropdown-item" href="javascript:void(0)">해지</a>
-                                                            </li>
+                                                            </li> -->
 
                                                         </ul>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
+                                	</c:if>
+                                </c:forEach>
+                                
+                                    <!-- 대표회선 card start -->
+                                        
+                                    <!-- 대표회선 card end -->
+                                    <!-- 일반회선1 card start -->
+                                        
                                         <!-- 일반회선1 card end -->
                                         <!-- 일반회선2 card start -->
-                                        <div class="col-xl-4 col-md-6">
-                                            <div class="save-details">
-                                                <div class="save-name">
-                                                    <h5>010-4444-4444</h5>
-                                                </div>
-                                                <div class="save-address">
-                                                    <p class="font-light">요금제 : 5G 프리미어</p>
-                                                    <p class="font-light">기기명 : 갤럭시 s23</p>
-                                                    <p class="font-light">개통일 : 2023/05/23</p>
-                                                </div>
-                                                <div class="page-view-filter">
-                                                    <div class="button">
-                                                        <a href="javascript:void(0)" class="btn btn-sm" 
-                                                        id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">설정</a>
-                                                    
-                                                        <ul class="dropdown-menu col-md-6" aria-labelledby="dropdownMenuButton1">
-                                                            <li>
-                                                                <a class="dropdown-item" href="javascript:void(0)">대표회선 설정</a>
-                                                            </li>
-                                                            <li>
-                                                                <a class="dropdown-item" href="javascript:void(0)">번호 변경</a>
-                                                            </li>
-                                                            <li>
-                                                                <a class="dropdown-item" href="javascript:void(0)">일시정지</a>
-                                                            </li>
-                                                            <li>
-                                                                <a class="dropdown-item" href="javascript:void(0)">해지</a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
                                         <!-- 일반회선2 card end -->
                                     </div>
                                 </div>
@@ -1136,24 +1107,18 @@
                 </div>
                 <div class="modal-body">
                 대표회선 설정
-                    <div class="form-check mt-4">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                        <label class="form-check-label" for="flexRadioDefault1">
-                            010-2222-2222
-                        </label>
-                    </div>
-                    <div class="form-check mt-2">
-                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                            <label class="form-check-label" for="flexRadioDefault1">
-                                010-3333-3333
-                            </label>
-                    </div>
-                    <div class="form-check mt-2">
-                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                            <label class="form-check-label" for="flexRadioDefault1">
-                                010-4444-4444
-                            </label>
-                    </div>
+                <c:forEach items="${TPList}" var="telephoneVO">
+                	<c:if test="${telephoneVO.kingCheck eq 0}">
+	                    <div class="form-check mt-2">
+	                    <input class="form-check-input" type="radio" name="phoneNum" id="flexRadioDefault1">
+	                        <label class="form-check-label" for="flexRadioDefault1">
+	                            <c:set var="phoneNum" value="${telephoneVO.phoneNum}" />
+                                <c:set var="formattedPhoneNum" value="${fn:substring(phoneNum, 0, 3)}-${fn:substring(phoneNum, 3, 7)}-${fn:substring(phoneNum, 7,11)}" />
+                                ${formattedPhoneNum}
+	                        </label>
+	                    </div>
+                    </c:if>
+                </c:forEach>
                 </div>
                 <div class="modal-footer pt-0 text-end d-block">
                     <button class="btn btn-solid-default rounded-1" data-bs-target="#kingchangeDoneModal" data-bs-toggle="modal" data-bs-dismiss="modal">변경</button>
