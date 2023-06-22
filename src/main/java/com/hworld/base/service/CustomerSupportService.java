@@ -1,5 +1,7 @@
 package com.hworld.base.service;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -55,6 +57,7 @@ public class CustomerSupportService {
 	
 	public int setQnaInsert(QnaVO qnaVO, HttpSession session, MultipartFile multipartFile) throws Exception {
 		//qnaVO.setMemberNum(1);
+		qnaVO.setMemberNum(((MemberVO)(session.getAttribute("memberVO"))).getMemberNum());
 		return qnaDAO.setInsert(qnaVO);
 	}
 	
@@ -63,7 +66,7 @@ public class CustomerSupportService {
 		
 		
 		Map<String, Object> map1 = new HashMap<>();
-		map1.put("param1", "P01BACBV512I1402");
+		map1.put("param1", "237");
 		map1.put("param2", 2);
 		map1.put("param3", "G01");
 		
@@ -85,5 +88,21 @@ public class CustomerSupportService {
 
 		
 		return list;
+	}
+	
+	public Map<String, Object> prcTest2 () throws Exception {
+		
+		
+		
+		Map<String, Object> map1 = new HashMap<>();
+		map1.put("param1", 237);
+		map1.put("param2", "G01");
+		map1.put("param3", new java.util.Date());
+		
+		qnaDAO.prcTest(map1);
+		
+
+		
+		return map1;
 	}
 }
