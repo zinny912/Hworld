@@ -139,20 +139,22 @@ public class MyPageService {
 		if(result != null) {
 			//자회사 회선있음
 			check = true;
-		}else {
-			//자회사 회선없음
-			
-			//타회사 검증
-			result = myPageDAO.isDuplicatePhoneNumOT(phoneNum);
-			if(result != null) {
-				check = true;
-			}
+			return check;
 		}
+		log.info(" :::::::::::::::::::: service check value 자회사 : {} ", check);
+		
+		//타회사 검증
+		result = myPageDAO.isDuplicatePhoneNumOT(phoneNum);
+		if(result != null) {
+			//타회사 회선있음
+			check = true;
+			return check;
+		}
+		log.info(" :::::::::::::::::::: service check value 타회사 : {} ", check);
 		
 		
 		
 		
-		log.info(" :::::::::::::::::::: service check value : {} ", check);
 		return check;
 	}
 	
