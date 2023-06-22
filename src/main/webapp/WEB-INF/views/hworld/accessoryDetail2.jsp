@@ -277,13 +277,13 @@
                         <div class="tab-content" id="nav-tabContent">
 								<div id="desc" class="tab-pane fade show active">
 									<div class="p_description">
-	                                    ${list.get(0).directContents}
+	                                    ${list[0].directContents}
 
 	                                </div>  
 
                             </div>
 
-                            </div>
+                            
 
                             <!-- 상품 문의 nav tap -->
 							<div class="tab-pane fade" id="question">
@@ -574,7 +574,9 @@
                                         </div>
                                     </div>
                             	</div>
+                            	
                             	<!-- 구매후기 end -->
+                        </div></div>
                         </div>
                     </div>
 		</div>

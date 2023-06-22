@@ -126,7 +126,7 @@ public class DirectController {
 	    List<ReviewVO> pReview = new ArrayList<>();
 	    for(ReviewVO review : reviews) {
 	    	String categoryCode = review.getCategoryCode();
-	    	if(categoryCode.equals("01")) {
+	    	if(categoryCode.equals("00")) {
 	    		pReview.add(review);
 	    	}
 	    }
@@ -456,14 +456,38 @@ public class DirectController {
 	public ModelAndView phoneOrder(@RequestParam Map<String, Object> map, HttpSession session) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		MemberVO memberVO = (MemberVO) session.getAttribute("memberVO");
-		Integer memberNum = memberVO.getMemberNum();
+		
+		
+		if(memberVO == null) {
+			
+			mv.setViewName("hworld/login");
+			return mv;
+		}else {
+		
+			Integer memberNum = memberVO.getMemberNum();
+		
+
+		
 		//회선이 없는 경우 null 뜨는거 방지해야해 진희야 까먹지마 
 		PlanVO phoneNum = directService.getKingPhoneNum(memberNum);
-		log.error(phoneNum.toString());
+		
+		if(phoneNum != null) {
+		
 		mv.addObject("phoneNum", phoneNum);
 		mv.addObject("map", map);
 		mv.setViewName("hworld/phoneOrder");
 		return mv;
+
+		
+		} else {
+			
+			
+			mv.addObject("map", map);
+			mv.setViewName("hworld/phoneOrder");
+			return mv;
+			
+		}
+		}
 	}
 	
 	@PostMapping("formAdd")
@@ -480,6 +504,7 @@ public class DirectController {
 		//에러가 없는경우 insert 작업
 		int result = directService.setFormAdd(applicationVO, session);
 		log.info("=============> result : {} ", result);
+		
 		mv.setViewName("redirect:./phoneOrderResult");
 		//성공하면 결과에 따라 alert띄우기 해도 될듯. 나중에 index 등으로 바꾸기
 		return mv;
@@ -493,7 +518,7 @@ public class DirectController {
 		//회선이 없는 경우 null 뜨는거 방지해야해 진희야 까먹지마 
 		PlanVO phoneNum = directService.getMemberPlan(memberNum);
 		
-		mv.addObject("phon", phoneNum);
+		mv.addObject("phone", phoneNum);
 		mv.setViewName("hworld/phoneOrderResult");
 		return mv;
 	}

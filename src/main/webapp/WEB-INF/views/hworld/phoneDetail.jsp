@@ -302,7 +302,7 @@
 														<h3 class="mt-3 ">출고가</h3>
 													</div>
 														<p>
-														<span class="price-detail theme-color fw-bold data-comma" id="renewPrice" >${direct.directPrice}</span>
+														<span class="price-detail theme-color fw-bold data-comma" id="commaPrice${direct.directCode}" >${direct.directPrice}</span>
 														<span class="unit">원</span>
 														</p>
 													<div class="direct-item" id="item_${direct.directCode}" data-direct-code="${direct.directCode}" data-category-code="${direct.categoryCode}" data-brand-code="${direct.brandCode}" data-sliced-code="${direct.slicedCode}" data-direct-stock="${direct.directStock}" data-direct-price="${direct.directPrice}" data-direct-name="${direct.directName}"></div>
@@ -446,7 +446,7 @@
 												<!-- 선택된 요금제 금액 h2의 text에 삽입 -->
 												<h2 class="price theme-color" id="planPrice" style="letter-spacing: -0.2px; display: block; margin-top: 4px; margin-right:50px; 
 												color: #000; font-weight: 700;" data-plan-price2="" data-dp=""></h2> 
-												<p style="color:black; font-size:15px; margin-top:-20px;" class="fw-bold">원/월</p>
+												<p style="color:black; font-size:15px; margin-top:-20px;" class="fw-bold" >원/월</p>
 											</div> 
 											<div class="d-flex justify-content-end">
 											    <a href="javascript:void(0)" data-bs-toggle="modal" id="cartEffect" data-bs-target="#quick-view2"
@@ -485,9 +485,9 @@
 	                        <div class="tab-content" id="nav-tabContent">
 	                            <div id="desc" class="tab-pane fade show active">
 	                                <div class="p_description">
-	                                <c:forEach items="${list }">
-	                                    ${list.get(0).directContents}
-	                                    </c:forEach>
+	                                
+	                                    ${list[0].directContents}
+	                                    
 	                                </div>
 	                            </div>
 	                           
@@ -805,7 +805,7 @@
 
 <!-- 변경하기 모달창 start -->
 <div class="modal fade quick-view-modal" id="quick-view2">
-    <div class="modal-dialog modal-lg modal-dialog-centered col-12">
+    <div class="modal-dialog modal-xl modal-dialog-centered col-12">
         <div class="modal-content">
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             <div class="modal-body">
@@ -814,17 +814,17 @@
                              <div class="col-12">
                                  <div class="product-right">
                                      <div class="size-detail">
-                                         <h6 class="mb-3 fw-bolder">요금제 선택</h6>
+                                         <h6 class="mb-3 mx-3 fw-bolder">요금제 선택</h6>
                                          <!-- 요금제 유형 영역, 주석처리한거 써도 되기는한데 순서가 안맞을 수 있어서 아래처럼 처리함 -->
                                          <ul class="nav border-0" style="color:black;">
                                          <c:forEach items="${existList}" var="i">
                                          	<c:if test="${i.note eq '5G 요금제'}">
-                                         		<li class="nav-item">
+                                         		<li class="nav-item" style="margin-left:1.5%;">
                                           		<a class="nav-link" style="color:black;" data-bs-toggle="tab" href="#tab-1" id="">${i.note}</a>
                                           	</li>
                                          	</c:if>
                                          	<c:if test="${i.note eq '시니어 요금제'}">
-                                         		<li class="nav-item">
+                                         		<li class="nav-item ">
                                           		<a class="nav-link" style="color:black;" data-bs-toggle="tab" href="#tab-2" id="tab-s">${i.note}</a>
                                           	</li>
                                          	</c:if>
@@ -885,7 +885,7 @@
                                                   		</c:otherwise>
                                                   	</c:choose>
                                                   	
-                                                  	${modiCapacity}</span>, <span class="theme-color fs-6 fw-bold">${i.planPrice}</span><span class="fs-6">원</span>/월</label>
+                                                  	${modiCapacity}</span>, <span class="theme-color fs-6 fw-bold" id="commaPrice${i.planNum}">${i.planPrice}</span><span class="fs-6">원</span>/월</label>
                                                   </div>                                       
                                                  </div>
                                                  
@@ -919,7 +919,7 @@
                                                   		</c:otherwise>
                                                   	</c:choose>
                                                   	
-                                                  	${modiCapacity}</span>, <span class="theme-color fs-6 fw-bold">${i.planPrice}</span><span class="fs-6">원</span>/월</label>
+                                                  	${modiCapacity}</span>, <span class="theme-color fs-6 fw-bold" id="commaPrice${i.planNum}">${i.planPrice}</span><span class="fs-6">원</span>/월</label>
                                                   </div>                                       
                                                  </div>
                                           	</c:forEach>
@@ -952,7 +952,7 @@
                                                   		</c:otherwise>
                                                   	</c:choose>
                                                   	
-                                                  	${modiCapacity}</span>, <span class="theme-color fs-6 fw-bold">${i.planPrice}</span><span class="fs-6">원</span>/월</label>
+                                                  	${modiCapacity}</span>, <span class="theme-color fs-6 fw-bold"id="commaPrice${i.planNum}">${i.planPrice}</span><span class="fs-6">원</span>/월</label>
                                                   </div>                                       
                                                  </div>
                                           	</c:forEach>
@@ -986,7 +986,7 @@
                                                   		</c:otherwise>
                                                   	</c:choose>
                                                   	
-                                                  	${modiCapacity}</span>, <span class="theme-color fs-6 fw-bold">${i.planPrice}</span><span class="fs-6">원</span>/월</label>
+                                                  	${modiCapacity}</span>, <span class="theme-color fs-6 fw-bold" id="commaPrice${i.planNum}">${i.planPrice}</span><span class="fs-6">원</span>/월</label>
                                                   </div>                                       
                                                  </div>
                                           	</c:forEach>
@@ -1019,7 +1019,7 @@
                                                   		</c:otherwise>
                                                   	</c:choose>
                                                   	
-                                                  	${modiCapacity}</span>, <span class="theme-color fs-6 fw-bold">${i.planPrice}</span><span class="fs-6">원</span>/월</label>
+                                                  	${modiCapacity}</span>, <span class="theme-color fs-6 fw-bold" id="commaPrice${i.planNum}">${i.planPrice}</span><span class="fs-6">원</span>/월</label>
                                                   </div>                                       
                                                  </div>
                                           	</c:forEach>
@@ -1052,7 +1052,7 @@
                                                   		</c:otherwise>
                                                   	</c:choose>
                                                   	
-                                                  	${modiCapacity}</span>, <span class="theme-color fs-6 fw-bold">${i.planPrice}</span><span class="fs-6">원</span>/월</label>
+                                                  	${modiCapacity}</span>, <span class="theme-color fs-6 fw-bold" id="commaPrice${i.planNum}">${i.planPrice}</span><span class="fs-6">원</span>/월</label>
                                                   </div>                                       
                                                  </div>
                                           	</c:forEach>
@@ -1447,7 +1447,24 @@ for(let payType2 of payType){
     })
 }
 </script>
+<script>
 
+$(document).ready(function() {
+    const prices = document.querySelectorAll('[id^="commaPrice"]');
+    for (var i = 0; i < prices.length; i++) {
+        const price = parseInt(prices[i].innerHTML);
+        const commaPrice = price.toLocaleString();
+        prices[i].innerHTML =commaPrice ;
+       	
+    }
+});
+
+var priceElement = document.getElementById("planPrice");
+var price = parseInt(priceElement.textContent);
+var formattedPrice = price.toLocaleString(); // 쉼표를 추가한 형식으로 변환
+priceElement.textContent = formattedPrice; 
+
+</script>
 
 
 <!--<script>

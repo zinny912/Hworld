@@ -118,11 +118,11 @@
 							</div>
                             <!-- 기기변경 폰 번호 -->
                             <div class="col-md-12">
-                            <c:if test="${map.joinType == 2 || map.joinType == 1}" >
+                            <c:if test="${map.joinType == 2 || map.joinType == 1}" > <!-- 회선이 없는 경우 : 번호이동 / 신규가입 -->
                                 <label for="phoneNum" class="form-label">휴대폰 번호</label>
                                 <input type="text" class="form-control" id="phoneNum" placeholder="사용할 휴대폰 번호 입력" name="phoneNum">
                             </c:if>
-                            <c:if test="${map.joinType == 0}" >
+                            <c:if test="${map.joinType == 0}" > <!-- 회선이 있는경우 : 기기변경 -->
                                 <label for="phoneNum" class="form-label">휴대폰 번호</label>
                                 <input type="text" class="form-control" id="phoneNum" value="${phoneNum.phoneNum}" name="phoneNum">
                             </c:if>
