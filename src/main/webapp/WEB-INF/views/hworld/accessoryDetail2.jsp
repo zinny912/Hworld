@@ -283,7 +283,7 @@
 
                             </div>
 
-                            </div>
+                            
 
                             <!-- 상품 문의 nav tap -->
 							<div class="tab-pane fade" id="question">
@@ -574,7 +574,9 @@
                                         </div>
                                     </div>
                             	</div>
+                            	
                             	<!-- 구매후기 end -->
+                        </div></div>
                         </div>
                     </div>
 		</div>
