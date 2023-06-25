@@ -49,7 +49,7 @@
                     </a>
                 </div>
                 <div class="login-title">
-                    <h2 style="margin-top: 15px;">조회 결과</h2>
+                    <h2 style="margin-top: 15px;">임시 비밀번호</h2>
                 </div>
 
                 <!-- <div class="login-title mb-3">
@@ -74,7 +74,7 @@
 
                 <div class="search-result my-2" style="text-align: center;">
                     <h3>새로운 비밀번호는 ${newPw} 입니다.</h3>
-                    <h3>등록된 이메일로 임시 비밀번호를 발송했습니다.</h3>
+                    <!-- <h3>등록된 이메일로 임시 비밀번호를 발송했습니다.</h3> -->
                 </div>
 
                 <!-- 버튼 영역 -->

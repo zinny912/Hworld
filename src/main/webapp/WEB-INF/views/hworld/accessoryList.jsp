@@ -201,7 +201,7 @@
                                 <div class="product-image">
 	                                <a href="./accessoryDetail?slicedCode=${direct.slicedCode}">
                                         <img src="/assets/images/electronics/product/${direct.slicedCode}thumb.jpg"
-                                            class="lazyload" alt="">
+                                            class="lazyload" alt="" style="max-width: 100%; height: auto">
                                     </a>
                                     <div class="product-details">
                                         <h6 class="font-light">${direct.slicedCode}</h6>
