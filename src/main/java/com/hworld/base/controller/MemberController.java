@@ -191,6 +191,7 @@ public class MemberController {
 		
 		try {
 		    
+			//이거 바꿔야함. tel로 검색하려면 다른방식으로.
 		    memberVO.setName(name);
 		    memberVO.setTel(tel);
 		    MemberVO memberSearch = memberService.emailSearch(memberVO);
