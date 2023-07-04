@@ -169,15 +169,30 @@ public class MemberController {
 		return modelAndView;
 	}
 	
-	// 아이디 찾기 페이지(Get)
+	//아이디 찾기 페이지(Get)
 	@GetMapping("forgotId")
 	public ModelAndView getForgotId(HttpServletRequest request, MemberVO memberVO) throws Exception{
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("hworld/forgotId");
-		return modelAndView;
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("hworld/forgotId");
+		return mv;
 	}
 	
-	//아이디 찾기 조회결과 페이지(post)
+	//아이디 찾기 페이지 조회결과(post)
+	@PostMapping("forgotId")
+	public ModelAndView getForgotId(MemberVO memberVO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		log.error(" ::::::::::::::::: {}", memberVO.getName());
+		log.error(" ::::::::::::::::: {}", memberVO.getRrnf());
+		log.error(" ::::::::::::::::: {}", memberVO.getRrnl());
+		
+		MemberVO data = memberService.getSearchId(memberVO);
+		
+		mv.addObject("memberVO", data);
+		
+		mv.setViewName("hworld/forgotResultEmail");
+		return mv;
+	}
 	
 	// 비밀번호 찾기 페이지(Get)
 	@GetMapping("forgotPw")
@@ -188,25 +203,25 @@ public class MemberController {
 	}
 	
 	// 아이디 찾기 조회결과 페이지(Post)
-	@PostMapping("forgotResultEmail")
-	public String forgotResultEmail(HttpServletRequest request, Model model, @RequestParam(required = true, value = "name") String name, @RequestParam(required = true, value = "tel") String tel, MemberVO memberVO) throws Exception{
-		
-		try {
-		    
-			//이거 바꿔야함. tel로 검색하려면 다른방식으로.
-		    memberVO.setName(name);
-		    memberVO.setTel(tel);
-		    MemberVO memberSearch = memberService.emailSearch(memberVO);
-		    
-		    model.addAttribute("memberVO", memberSearch);
-		 
-		} catch (Exception e) {
-		    System.out.println(e.toString());
-		    model.addAttribute("msg", "오류가 발생되었습니다.");
-		}
-		
-		return "/hworld/forgotResultEmail";
-	}
+//	@PostMapping("forgotResultEmail")
+//	public String forgotResultEmail(HttpServletRequest request, Model model, @RequestParam(required = true, value = "name") String name, @RequestParam(required = true, value = "tel") String tel, MemberVO memberVO) throws Exception{
+//		
+//		try {
+//		    
+//			//이거 바꿔야함. tel로 검색하려면 다른방식으로.
+//		    memberVO.setName(name);
+//		    memberVO.setTel(tel);
+//		    MemberVO memberSearch = memberService.emailSearch(memberVO);
+//		    
+//		    model.addAttribute("memberVO", memberSearch);
+//		 
+//		} catch (Exception e) {
+//		    System.out.println(e.toString());
+//		    model.addAttribute("msg", "오류가 발생되었습니다.");
+//		}
+//		
+//		return "/hworld/forgotResultEmail";
+//	}
 	
 	// 비밀번호 찾기 조회결과 페이지(Post)
 	@PostMapping("forgotResultPw")
