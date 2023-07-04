@@ -171,11 +171,13 @@ public class MemberController {
 	
 	// 아이디 찾기 페이지(Get)
 	@GetMapping("forgotId")
-	public ModelAndView forgotId(HttpServletRequest request, MemberVO memberVO) throws Exception{
+	public ModelAndView getForgotId(HttpServletRequest request, MemberVO memberVO) throws Exception{
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("hworld/forgotId");
 		return modelAndView;
 	}
+	
+	//아이디 찾기 조회결과 페이지(post)
 	
 	// 비밀번호 찾기 페이지(Get)
 	@GetMapping("forgotPw")
@@ -185,7 +187,7 @@ public class MemberController {
 		return modelAndView;
 	}
 	
-	// 이메일 찾기 조회결과 페이지(Post)
+	// 아이디 찾기 조회결과 페이지(Post)
 	@PostMapping("forgotResultEmail")
 	public String forgotResultEmail(HttpServletRequest request, Model model, @RequestParam(required = true, value = "name") String name, @RequestParam(required = true, value = "tel") String tel, MemberVO memberVO) throws Exception{
 		
