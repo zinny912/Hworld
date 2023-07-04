@@ -50,6 +50,15 @@ public class CustomerSupportController {
 		return modelAndView;
 	}
 	
+	@GetMapping("noticeDetail")
+	public ModelAndView getNoticeDetail(NoticeVO noticeVO) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		mv.addObject("vo", csService.getNoticeDetail(noticeVO));
+		mv.setViewName("hworld/noticeDetail");
+		return mv;
+	}
+	
 	
 	// 1:1 문의
 	@GetMapping("qna")
@@ -103,6 +112,20 @@ public class CustomerSupportController {
 		}
 		mv.addObject("list", mapList);
 		mv.setViewName("hworld/prcTest");
+		return mv;
+	}
+	
+	@GetMapping("prcTest2")
+	public ModelAndView prcTest2() throws Exception {
+		ModelAndView mv = new ModelAndView();
+		Map<String, Object> map =  csService.prcTest2();		
+			
+			
+			log.error("===============================> {}", map.toString());
+			
+		
+//		mv.addObject("list", map);
+//		mv.setViewName("hworld/prcTest");
 		return mv;
 	}
 }

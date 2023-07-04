@@ -278,7 +278,7 @@
 	                                                                                </th>
 	                                                                                <td colspan="5">
 	                                                                                    <div class="col-md-12">
-	                                                                                        <input type="text" class="form-control" id="fname">
+	                                                                                        <input type="text" class="form-control" id="fname" name="title">
 	                                                                                    </div>
 	                                                                                </td>
 	                                                                            </tr>
@@ -292,7 +292,7 @@
 	                                                                                </th>
 	                                                                                <td colspan="5">
 	                                                                                    <div class="col-md-12">
-	                                                                                        <textarea class="form-control" name="" id="" cols="30" rows="10"></textarea>
+	                                                                                        <textarea class="form-control" name="contents" id="" cols="30" rows="10"></textarea>
 	                                                                                    </div>
 	                                                                                    <div class="col-md-12">
 	                                                                                        <p style="text-align: right;">0 자 입력 / 최대 12,000 자</p>
@@ -330,7 +330,7 @@
 	                                                            </div>
 	                                                        </div>
 	                                                        <div class="col-md-12 d-flex justify-content-center me-5 my-lg-5">
-	                                                            <button class="btn btn-solid-default mx-2 " type="button">작성 완료</button>
+	                                                            <button class="btn btn-solid-default mx-2 " type="submit">작성 완료</button>
 	                                                            <button class="btn btn-solid-default " type="button">취소</button>
 	                                                        </div>
 	                                                    </div>
@@ -393,7 +393,7 @@
 	                                                                                </th>
 	                                                                                <td colspan="5">
 	                                                                                    <div class="col-md-12">
-	                                                                                        <input type="text" class="form-control" id="fname">
+	                                                                                        <input type="text" class="form-control" id="fname" name="title">
 	                                                                                    </div>
 	                                                                                </td>
 	                                                                            </tr>
@@ -407,7 +407,7 @@
 	                                                                                </th>
 	                                                                                <td colspan="5">
 	                                                                                    <div class="col-md-12">
-	                                                                                        <textarea class="form-control" name="" id="" cols="30" rows="10"></textarea>
+	                                                                                        <textarea class="form-control" name="contents" id="" cols="30" rows="10"></textarea>
 	                                                                                    </div>
 	                                                                                    <div class="col-md-12">
 	                                                                                        <p style="text-align: right;">0 자 입력 / 최대 12,000 자</p>
@@ -445,7 +445,7 @@
 	                                                            </div>
 	                                                        </div>
 	                                                        <div class="col-md-12 d-flex justify-content-center me-5 my-lg-5">
-	                                                            <button class="btn btn-solid-default mx-2 " type="button">작성 완료</button>
+	                                                            <button class="btn btn-solid-default mx-2 " type="submit">작성 완료</button>
 	                                                            <button class="btn btn-solid-default " type="button">취소</button>
 	                                                        </div>
 	                                                    </div>
@@ -505,7 +505,7 @@
 	                                                                                </th>
 	                                                                                <td colspan="5">
 	                                                                                    <div class="col-md-12">
-	                                                                                        <input type="text" class="form-control" id="fname">
+	                                                                                        <input type="text" class="form-control" id="fname" name="title">
 	                                                                                    </div>
 	                                                                                </td>
 	                                                                            </tr>
@@ -519,7 +519,7 @@
 	                                                                                </th>
 	                                                                                <td colspan="5">
 	                                                                                    <div class="col-md-12">
-	                                                                                        <textarea class="form-control" name="" id="" cols="30" rows="10"></textarea>
+	                                                                                        <textarea class="form-control" name="contents" id="" cols="30" rows="10"></textarea>
 	                                                                                    </div>
 	                                                                                    <div class="col-md-12">
 	                                                                                        <p style="text-align: right;">0 자 입력 / 최대 12,000 자</p>
@@ -557,7 +557,7 @@
 	                                                            </div>
 	                                                        </div>
 	                                                        <div class="col-md-12 d-flex justify-content-center me-5 my-lg-5">
-	                                                            <button class="btn btn-solid-default mx-2 " type="button">작성 완료</button>
+	                                                            <button class="btn btn-solid-default mx-2 " type="submit">작성 완료</button>
 	                                                            <button class="btn btn-solid-default " type="button">취소</button>
 	                                                        </div>
 	                                                    </div>
@@ -617,7 +617,7 @@
 	                                                                                </th>
 	                                                                                <td colspan="5">
 	                                                                                    <div class="col-md-12">
-	                                                                                        <input type="text" class="form-control" id="fname">
+	                                                                                        <input type="text" class="form-control" id="fname" name="title">
 	                                                                                    </div>
 	                                                                                </td>
 	                                                                            </tr>
@@ -631,7 +631,7 @@
 	                                                                                </th>
 	                                                                                <td colspan="5">
 	                                                                                    <div class="col-md-12">
-	                                                                                        <textarea class="form-control" name="" id="" cols="30" rows="10"></textarea>
+	                                                                                        <textarea class="form-control" name="contents" id="" cols="30" rows="10"></textarea>
 	                                                                                    </div>
 	                                                                                    <div class="col-md-12">
 	                                                                                        <p style="text-align: right;">0 자 입력 / 최대 12,000 자</p>
@@ -669,7 +669,7 @@
 	                                                            </div>
 	                                                        </div>
 	                                                        <div class="col-md-12 d-flex justify-content-center me-5 my-lg-5">
-	                                                            <button class="btn btn-solid-default mx-2 " type="button">작성 완료</button>
+	                                                            <button class="btn btn-solid-default mx-2 " type="submit">작성 완료</button>
 	                                                            <button class="btn btn-solid-default " type="button">취소</button>
 	                                                        </div>
 	                                                    </div>
@@ -693,7 +693,7 @@
 	                                                                                </th>
 	                                                                                <td colspan="5">
 	                                                                                    <div class="col-md-12">
-	                                                                                        <input type="text" class="form-control" id="fname">
+	                                                                                        <input type="text" class="form-control" id="fname" name="title">
 	                                                                                    </div>
 	                                                                                </td>
 	                                                                            </tr>
@@ -707,7 +707,7 @@
 	                                                                                </th>
 	                                                                                <td colspan="5">
 	                                                                                    <div class="col-md-12">
-	                                                                                        <textarea class="form-control" name="" id="" cols="30" rows="10"></textarea>
+	                                                                                        <textarea class="form-control" name="contents" id="" cols="30" rows="10"></textarea>
 	                                                                                    </div>
 	                                                                                    <div class="col-md-12">
 	                                                                                        <p style="text-align: right;">0 자 입력 / 최대 12,000 자</p>
@@ -745,7 +745,7 @@
 	                                                            </div>
 	                                                        </div>
 	                                                        <div class="col-md-12 d-flex justify-content-center me-5 my-lg-5">
-	                                                            <button class="btn btn-solid-default mx-2 " type="button">작성 완료</button>
+	                                                            <button class="btn btn-solid-default mx-2 " type="submit">작성 완료</button>
 	                                                            <button class="btn btn-solid-default " type="button">취소</button>
 	                                                        </div>
 	                                                    </div>

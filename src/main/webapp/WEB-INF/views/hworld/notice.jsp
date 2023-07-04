@@ -11,6 +11,7 @@
     <style>
         .search-section .search-bar .input-group {
            margin : 0 0;
+           width: 100%;
         }
 
         .tracker-table {

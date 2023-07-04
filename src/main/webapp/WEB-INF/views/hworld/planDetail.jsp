@@ -407,7 +407,7 @@
 										        <div class="input col-md-3">
 										            <label class="fs-6"for="rrnl">주민등록번호 뒤 7자리</label>
 										            <!-- 유효성 넣고 주민번호 뒤에자리 2******걸어줘야함 -->
-										            <input type="text" name="rrnl" id="rrnl">
+										            <input type="password" name="rrnl" id="rrnl">
 										            <span class="spin"></span>
 										        </div>
 										    </div>
