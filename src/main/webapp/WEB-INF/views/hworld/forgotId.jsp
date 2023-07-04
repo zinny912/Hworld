@@ -19,11 +19,14 @@
 	        <div class="materialContainer">
 	            <div class="box">
 	                <!-- 홈 버튼 -->
-	                <div class="d-flex justify-content-center">
-	                    <a href="/">
-	                        <h2><img src="/assets/images/logos/2.png"></h2>
-	                    </a>
-	                </div>
+	                <div class="brand-logo d-flex justify-content-center">
+						<svg class="svg-icon my-auto">
+							<use class="fill-color" xlink:href="/assets/svg/icons.svg#logo"></use>
+						</svg>
+						<a href="/">
+							<h2><img src="/assets/images/logo.png"></h2>
+						</a>
+					</div>
 	                <div class="login-title">
 	                    <h2 style="margin-top: 15px;">아이디 찾기</h2>
 	                </div>
@@ -38,10 +41,22 @@
 	                    <input type="text" name="name" class="is-invalid" id="name" placeholder="이름을 입력하세요">
 	                    <span class="spin"></span>
 	                </div>
-	                <div class="input">	                    
+					<!-- <div class="input">	                    
+	                    <input type="text" name="tel" class="is-invalid" id="tel" placeholder="연락처( '-' 빼고 입력해주세요 ) ">
+	                    <span class="spin"></span>
+	                </div> -->
+					<div class="input row mx-auto">
+						<div class="col-6" style="padding-right: 6px">
+							<input class="form-control" type="text" name="rrnf" id="rrnf" placeholder="주민등록번호 앞자리">
+						</div>
+						<div class="col-6" style="padding-left: 6px">
+							<input class="form-control" type="password" name="rrnl" id="rrnl" placeholder="주민등록번호 뒷자리">
+						</div>
+					</div>
+	                <!-- <div class="input">	                    
 	                    <input type="text" name="phoneNum" class="is-invalid" id="phoneNum" placeholder="연락처( '-' 빼고 입력해주세요 ) ">
 	                    <span class="spin"></span>
-	                </div>
+	                </div> -->
 	                
 	                <div class="g-recaptcha" data-sitekey="6LfiGXwmAAAAAGV4y7cC0tEowoX-87amSkjeNVTi" style="margin-left: 50px; padding-top: 210px;"></div>
 	
@@ -93,7 +108,7 @@ $(document).ready(function() {
 function findBtn() {
  
 	var email_rule =  /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-	var phoneNum_rule = /^\d{2,3}\d{3,4}\d{4}$/;
+	var tel_rule = /^\d{2,3}\d{3,4}\d{4}$/;
 	 
 	if ($("#name").val() == null || $("#name").val() == "") {
 	alert("이름을 입력해주세요.");
@@ -102,14 +117,14 @@ function findBtn() {
 	return false;
 	}
  
-	if ($("#phoneNum").val() == null || $("#phoneNum").val() == "") {
+	if ($("#tel").val() == null || $("#tel").val() == "") {
 	alert("연락처를 입력해주세요.");
-	$("#phoneNum").focus();
+	$("#tel").focus();
 	 
 	return false;
 	}
 	 
-	if(!phoneNum_rule.test($("#phoneNum").val())){
+	if(!tel_rule.test($("#tel").val())){
 	alert("전화번호 형식에 맞게 입력해주세요.");
 	
 	return false;
