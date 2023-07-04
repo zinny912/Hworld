@@ -218,7 +218,7 @@
 	<!-- 상품문의 추가 -->
 	<insert id="setQnaAdd" parameterType="QnaVO">
 	INSERT INTO QNA (MEMBERNUM, SLICEDCODE, ORDERNUM, SERIALNUM, TITLE, CONTENTS, REPLY, REGDATE, STATE, CATEGORYCODE, FILEPATH, REPLYDATE)
-	VALUES(#{memberNum}, #{slicedCode} ,NULL, NULL, NULL, #{contents}, NULL, now(), 0, '03', NULL, NULL);
+	VALUES(#{memberNum}, #{slicedCode} ,NULL, NULL, NULL, #{contents}, NULL, now(), 0, '00', NULL, NULL);
 	</insert>
 	
 	<!-- 상품문의 답글 업데이트 -->
