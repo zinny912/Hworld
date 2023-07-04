@@ -24,11 +24,14 @@
             <div class="materialContainer">
                 <div class="box">
                     <!-- 홈 버튼 -->
-                    <div class="d-flex justify-content-center">
-                        <a href="/">
-                            <h2><img src="/assets/images/logos/2.png"></h2>
-                        </a>
-                    </div>
+                    <div class="brand-logo d-flex justify-content-center">
+						<svg class="svg-icon my-auto">
+							<use class="fill-color" xlink:href="/assets/svg/icons.svg#logo"></use>
+						</svg>
+						<a href="/">
+							<h2><img src="/assets/images/logo.png"></h2>
+						</a>
+					</div>
                     <div class="login-title mb-5">
                         <h2 style="margin-top: 15px;">회원 가입</h2>
                     </div>

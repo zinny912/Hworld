@@ -39,6 +39,15 @@
 		WHERE MEMBERNUM=#{memberNum}
 	</update>
 	
+	<!-- 아이디 찾기 -->
+	<select id="getSearchId" parameterType="MemberVO" resultType="MemberVO">
+		SELECT * FROM MEMBER
+		WHERE NAME=#{name} AND RRNF=#{rrnf} AND RRNL=#{rrnl}
+	</select>
+	
+	
+	<!--  -->
+	
 	<!-- 이메일 중복검사 -->
   	<select id="emailCheck" resultType="int">
   		SELECT COUNT(*) FROM MEMBER WHERE EMAIL = #{email}  		  	
@@ -56,12 +65,12 @@
 	</select>
 	
 	<!-- 이메일 찾기 -->
-	<select id="emailSearch" parameterType="MemberVO" resultType="MemberVO">
+<!-- 	<select id="emailSearch" parameterType="MemberVO" resultType="MemberVO">
 		<![CDATA[
 		    SELECT * FROM MEMBER
 		    WHERE NAME = #{name} AND TEL = #{tel}
 		]]>    
-	</select>
+	</select> -->
 	
 	<!-- 비밀번호 찾기 -->
 	<select id="memberPwCheck" parameterType="MemberVO" resultType="java.lang.Integer">
