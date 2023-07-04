@@ -249,42 +249,6 @@ function isEmpty(value){
 }
 
 
-// 모달창에서 값을 선택하고 확인 버튼을 클릭했을 때 호출되는 함수
-function onSelectConfirm() {
-  // 선택한 값을 가져오기
-  const selectedValue = document.querySelector('input[name="planNum"]:checked');
-  const planNameLabel = document.querySelector('label[for="' + selectedValue.id + '"]');
-  const planName = planNameLabel.innerText;
-  const planPrice = selectedValue.getAttribute('data-plan-price');
-  const dataGB = selectedValue.getAttribute('data-gb-value');
-  const planNum = selectedValue.getAttribute('value');
-  
-  // 가져온 값을 입력하기
-  setSelectedPlan(planName, planPrice, dataGB, planNum);
-}
-
-
-//모달창에서 선택한 값을 입력하는 함수
-function setSelectedPlan(planName, planPrice, dataGB, planNum) {
-  // 선택한 요금제, 가격, 데이터 정보 가져오기
-  document.getElementById('selectedPlanName').textContent = planName;
-  document.getElementById('planPrice').setAttribute('data-plan-price2', planPrice);
-  document.getElementById('planPrice').textContent=planPrice;
-  document.getElementById('planNum').value = planNum;
-  var planPrice2 = $('#planPrice').attr('data-plan-price2');
-	$('#planPrice1').val(planPrice2);
-	$('#planName2').val(planName);
-          
-  // 데이터 정보 처리
-  const dataGBElement = document.getElementById('dataGB');
-  if (dataGB === '무제한') {
-    dataGBElement.innerText = dataGB + '& 음성통화/문자 기본제공';
-  } else {
-    dataGBElement.innerText = dataGB + 'GB & 음성통화/문자 기본제공';
-  }
-}
-
-
 //색상별 용량 옵션 존재 여부 체크
 function updateCapacityOptions(colorCode) {
   const capacityOptions = $('.optionArea input[name="saveCapacity"]');

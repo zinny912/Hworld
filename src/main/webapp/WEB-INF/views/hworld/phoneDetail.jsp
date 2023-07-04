@@ -445,7 +445,7 @@
 											<div class="data" style="position: absolute; top: 35px; right: 0; text-align: right;">
 												<!-- 선택된 요금제 금액 h2의 text에 삽입 -->
 												<h2 class="price theme-color" id="planPrice" style="letter-spacing: -0.2px; display: block; margin-top: 4px; margin-right:50px; 
-												color: #000; font-weight: 700;" data-plan-price2="" data-dp=""></h2> 
+												color: #000; font-weight: 700;" data-plan-price2="" data-dp="">${monthlyPay.planNum}</h2> 
 												<p style="color:black; font-size:15px; margin-top:-20px;" class="fw-bold" >원/월</p>
 											</div> 
 											<div class="d-flex justify-content-end">
@@ -1449,6 +1449,8 @@ for(let payType2 of payType){
 </script>
 <script>
 
+
+
 $(document).ready(function() {
     const prices = document.querySelectorAll('[id^="commaPrice"]');
     for (var i = 0; i < prices.length; i++) {
@@ -1457,12 +1459,73 @@ $(document).ready(function() {
         prices[i].innerHTML =commaPrice ;
        	
     }
-});
+ // 세션에서 ownCheck 값 가져오기
+    const ownCheck = ${memberVO.ownCheck};
+	console.log(ownCheck);
+    // 해당 ownCheck에 따라 라디오 버튼의 disabled 속성 설정
+    // 해당 ownCheck에 따라 라디오 버튼의 disabled 속성 설정
+  if (ownCheck == 0) {
+    $('#joinType1').prop('disabled', true).addClass('btn-disabled');
+  } else if (ownCheck == 1) {
+    $('#joinType2').prop('disabled', true).addClass('btn-disabled');
+  }
+   
+    	  // 세션에서 planNum 값 가져오기
+    	  const splanNum = '${monthlyPay.planNum}';
+
+    	  // 해당 planNum에 해당하는 라디오 버튼을 선택 상태로 변경
+    	  $('input[name="planNum"][value="' + splanNum + '"]').prop('checked', true);
+
+    	  // 초기값에 해당하는 요금제 정보를 보여주기
+    	  const selectedValue = document.querySelector('input[name="planNum"]:checked');
+    	  setSelectedPlan(selectedValue);
+    	});
+
+    	// 모달창에서 값을 선택하고 확인 버튼을 클릭했을 때 호출되는 함수
+    	function onSelectConfirm() {
+    	  // 선택한 값을 가져오기
+    	  const selectedValue = document.querySelector('input[name="planNum"]:checked');
+    	  setSelectedPlan(selectedValue);
+    	}
+
+    	// 선택한 요금제 정보를 보여주는 함수
+    	function setSelectedPlan(selectedValue) {
+    	  const planNameLabel = document.querySelector('label[for="' + selectedValue.id + '"]');
+    	  const planName = planNameLabel.innerText;
+    	  const planPrice = selectedValue.getAttribute('data-plan-price');
+    	  const dataGB = selectedValue.getAttribute('data-gb-value');
+    	  const planNum = selectedValue.getAttribute('value');
+
+    	  // 가져온 값을 입력하기
+    	  document.getElementById('selectedPlanName').textContent = planName;
+    	  // 가져온 값을 입력하기
+    	  document.getElementById('selectedPlanName').textContent = planName;
+
+    	  // `,`를 추가하여 표시
+    	  const formattedPlanPrice = parseInt(planPrice).toLocaleString();
+    	  document.getElementById('planPrice').setAttribute('data-plan-price2', formattedPlanPrice);
+    	  document.getElementById('planPrice').textContent = formattedPlanPrice;
+
+    	  document.getElementById('planNum').value = planNum;
+
+    	  // 데이터 정보 처리
+    	  const dataGBElement = document.getElementById('dataGB');
+    	  if (dataGB === '무제한') {
+    	    dataGBElement.innerText = dataGB + '& 음성통화/문자 기본제공';
+    	  } else {
+    	    dataGBElement.innerText = dataGB + 'GB & 음성통화/문자 기본제공';
+    	  }
+    	}
+
 
 var priceElement = document.getElementById("planPrice");
 var price = parseInt(priceElement.textContent);
 var formattedPrice = price.toLocaleString(); // 쉼표를 추가한 형식으로 변환
 priceElement.textContent = formattedPrice; 
+
+
+
+
 
 </script>
 

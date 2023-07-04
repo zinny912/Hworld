@@ -296,6 +296,16 @@ public class PlanController {
 		Integer memberNum = sessionMember.getMemberNum();
 		PlanVO planVO =planService.getBeforePlan(memberNum);
 		
+		if (planVO == null || planVO.getSerialNum() == null) {
+	        // serialNum이 없는 경우, 클라이언트에게 메시지를 보냅니다.
+			String message="휴대폰 개통 및 회선 등록 후 사용 가능합니다.";
+			
+			mv.addObject("url", "/direct/phoneList"); 
+		    mv.addObject("result", message);
+	        mv.setViewName("common/result");
+	        return mv;
+	    }
+		
 		map.put("phoneNum", planVO.getPhoneNum());
 		map.put("serialNum", planVO.getSerialNum());
 
