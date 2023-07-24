@@ -22,6 +22,7 @@ import com.hworld.base.service.OrderService;
 import com.hworld.base.vo.MemberVO;
 import com.hworld.base.vo.OrderDirectVO;
 import com.hworld.base.vo.OrderVO;
+import com.hworld.base.vo.PayVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -38,7 +39,7 @@ public class OrderController {
 	private DirectService directService;
 	
 	
-	@GetMapping("/order")
+	@PostMapping("/orderInfo")
 	public ModelAndView getOrderInfo(OrderDirectVO orderDirectVO, HttpSession session) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		
@@ -54,27 +55,44 @@ public class OrderController {
 
 	
 	@PostMapping("/order")
-	public ModelAndView getOrderInfo(OrderVO orderVO, HttpSession session)throws Exception{
+	public ModelAndView getOrderInfo(OrderDirectVO orderDirectVO, MemberVO memberVO, OrderVO orderVO)throws Exception{
 		ModelAndView mv = new ModelAndView();
-		MemberVO memberVO = (MemberVO) session.getAttribute("memberVO");
 
-		orderService.order(orderVO, memberVO);
+
+		orderService.order(orderDirectVO, memberVO, orderVO);
+		List<OrderDirectVO> ar = orderService.getOrderInfo(orderDirectVO);
 		
-		mv.setViewName("/orderSuccess");
+		mv.setViewName("hworld/pay");
+		mv.addObject("orderList", ar);
+		mv.addObject("memberVO", memberVO);
+		mv.addObject("orderInfo", orderVO);
+		
 		return mv;
 	}
+
 	
-//	
-//	
-//	
-//	@GetMapping("/order/orderSuccess")
-//	public ModelAndView getOrderDetail(OrderVO orderVO, OrderDirectVO orderDirectVO) throws Exception{
-//		ModelAndView mv = new ModelAndView();
-//		
-//		mv.setViewName("hworld/orderSuccess");
-//		return mv;
-//	}
-//
+	@PostMapping("/payment")
+	public ModelAndView setOrderPayment(OrderDirectVO orderDirectVO, OrderVO orderVO, PayVO payVO, MemberVO memberVO)throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		payVO.setMemberNum(orderVO.getMemberNum());
+		payVO.setOrderFinalPrice(payVO.getOrderFinalPrice());
+		payVO.setOrderNum(orderVO.getOrderNum());
+	
+		
+		
+		
+		orderService.setOrderPayment(payVO);
+		
+		List<OrderDirectVO> ar = orderService.getOrderInfo(orderDirectVO);
+		mv.setViewName("hworld/orderSuccess");
+		mv.addObject("orderList", ar);
+		mv.addObject("memberVO", memberVO);
+		mv.addObject("orderInfo", orderVO);
+		
+		return mv;
+		
+	}
 //	
 //	@GetMapping("refund")
 //	public ModelAndView o2() throws Exception{

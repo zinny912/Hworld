@@ -108,9 +108,32 @@ public class MemberService {
 		return result;
 	}
 	
-	public MemberVO emailCheck(MemberVO memberVO) throws Exception {
-		return memberDAO.emailCheck(memberVO);
+	
+	//아이디 찾기
+	public MemberVO getSearchId(MemberVO memberVO) throws Exception{
+		
+		//rrnl 암호화
+		String RRN = memberVO.getRrnf()+"-"+memberVO.getRrnl();
+		memberVO.setRrnl(SHA256Util.encryptMD5(RRN));
+		
+		MemberVO data = memberDAO.getSearchId(memberVO);
+		
+		return data;
 	}
+	
+	
+	
+	
+	
+	
+	/* 이메일 중복 체크 */
+	public int emailCheck(String email) throws Exception {
+		return memberDAO.emailCheck(email);
+	}
+	
+//	public MemberVO emailCheck(MemberVO memberVO) throws Exception {
+//		return memberDAO.emailCheck(memberVO);
+//	}
 	
 	public int memberPwCheck(MemberVO memberVO) throws Exception {
 		return memberDAO.memberPwCheck(memberVO);
@@ -128,7 +151,7 @@ public class MemberService {
 		return memberDAO.getMemberLogout(memberVO);
 	}
 	
-	public MemberVO emailSearch(MemberVO memberVO) throws Exception {
-		return memberDAO.emailSearch(memberVO);
-	}
+//	public MemberVO emailSearch(MemberVO memberVO) throws Exception {
+//		return memberDAO.emailSearch(memberVO);
+//	}
 }

@@ -84,6 +84,62 @@
 		ORDER BY D.DIRECTPRICE ASC
 	</select>
 	
+	<!-- 휴대폰 디테일 월 예상 요금 계산 프로시저 호출 -->
+	<!-- parameter 이름은 바꿔서 넣어도 됨, 단 순서는 지켜야한다. 1=directCode, 2=disKind, 3=planNum, 4=월기기가격, 5=월요금가격 -->
+	<select id="getMonthlyPay" statementType="CALLABLE" parameterType="hashMap" resultType="hashMap">
+		{
+			CALL calc_monthlyPay (
+				#{directCode, mode=IN, jdbcType=VARCHAR, javaType=STRING},
+				#{disKind, mode=IN, jdbcType=INTEGER, javaType=INTEGER},
+				#{planNum, mode=IN, jdbcType=VARCHAR, javaType=STRING},
+				#{out_phonePayPrice, mode=OUT, jdbcType=INTEGER, javaType=INTEGER},
+				#{out_planPrice, mode=OUT, jdbcType=INTEGER, javaType=INTEGER}   
+			)
+		}
+	</select>
+	<!-- 휴대폰 주문시 기기변경 기존 회원 대표회선 휴대폰번호 가져오기 -->
+	<select id="getKingPhoneNum" resultType="PlanVO" parameterType="Integer">
+		SELECT T.PHONENUM FROM MEMBER M
+		INNER JOIN TELEPHONE T ON T.MEMBERNUM = M.MEMBERNUM 
+		WHERE M.MEMBERNUM = #{memberNum} AND T.KINGCHECK =1;
+	</select>
+	
+	<!-- useGenerateKeys를 사용하고, 해당 옵션으로 생성된 값을 넣을 변수명을 keyProperty에 입력해준다. 값이 생성되었으므로 아래의 쿼리문을 사용한다. -->
+	<insert id="setFormAdd" parameterType="ApplicationVO" useGeneratedKeys="true" keyProperty="appNum">
+		INSERT INTO APPLICATIONFORM(APPNUM, NAME, RRNF, RRNL, ADDRESS1, ADDRESS2, ADDRESS3, PLANNUM, PHONENUM, DISKIND, PHONESUBPRICE, STARTDATE, DIRECTNAME, DIRECTCODE, RRNLORIGIN)
+		VALUES(#{appNum}, #{name}, #{rrnf}, #{rrnl}, #{address1}, #{address2}, #{address3}, #{planNum}, #{phoneNum}, #{disKind}, 0, NOW(), #{directName}, #{directCode}, #{rrnlOrigin})
+	</insert>
+	
+	<!-- 신청서VO의 주민번호와 회원 테이블의 주민번호가 일치하는 정보가 있는지 확인 -->
+	<select id="getMemberSearch" parameterType="ApplicationVO" resultType="MemberVO">
+		SELECT MEMBERNUM FROM MEMBER
+		WHERE RRNF = #{rrnf} AND RRNL = #{rrnl}
+	</select>
+	<!-- 번호이동 타통신사 조회 -->
+	<select id="isOtherTelecom" resultType="OtherTelecomVO" parameterType="String">
+	SELECT * FROM OTHERTELECOM
+	WHERE TAPHONENUM = #{taPhoneNum} 
+	</select>
+	
+	<!-- 프로시저 호출, memberNum, appNum만 입력해주면 계산해줌 -->
+	<!-- parameter 이름은 바꿔서 넣어도 됨, 단 순서는 지켜야한다. 1=directCode, 2=disKind, 3=planNum, 4=월기기가격, 5=월요금가격 -->
+	<insert id="setTelephoneInitAdd" statementType="CALLABLE" parameterType="HashMap">
+		{
+			CALL insert_telephone (
+				#{appNum, mode=IN, jdbcType=INTEGER, javaType=INTEGER},
+				#{memberNum, mode=IN, jdbcType=INTEGER, javaType=INTEGER}
+			)
+		}
+	</insert>
+	
+	<!-- 상품 구매 완료 후 회원 정보 불러오는 -->
+	<select id="getMemberPlan" resultType="PlanVO" parameterType="Integer">
+		SELECT P.PLANNUM, P.PLANNAME, P.PLANPRICE, P.DATACAPACITY, M.MEMBERNUM, T.SERIALNUM , T.PHONENUM, T.KINGCHECK FROM PLAN P
+		JOIN TELEPHONE T ON T.PLANNUM = P.PLANNUM 
+		JOIN MEMBER M ON T.MEMBERNUM = M.MEMBERNUM
+		WHERE M.MEMBERNUM = #{memberNum} AND T.KINGCHECK = 1
+	</select>
+	
 	<!-- 악세사리 상품 디테일 페이지 상품 하나 다중 옵션 리스트 -->
 	<select id="getAccDetail" parameterType="DirectVO" resultType="DirectVO"> 
 	   SELECT D.*, CC.VALUE AS value, RIGHT(D.DIRECTCODE, 5) AS slicedCode
@@ -101,8 +157,8 @@
 	 	
   	<!-- 상품 삭제 -->
 	<delete id="setDelete" parameterType="DirectVO">
-	  DELETE FROM DIRECT
-	  WHERE SUBSTRING(DIRECTCODE,-5) = #{slicedCode}
+    DELETE FROM DIRECT
+    WHERE SUBSTRING(DIRECTCODE, -5) = #{slicedCode}
 	</delete>
 	
 	<!-- 상품 수정 -->
@@ -162,7 +218,7 @@
 	<!-- 상품문의 추가 -->
 	<insert id="setQnaAdd" parameterType="QnaVO">
 	INSERT INTO QNA (MEMBERNUM, SLICEDCODE, ORDERNUM, SERIALNUM, TITLE, CONTENTS, REPLY, REGDATE, STATE, CATEGORYCODE, FILEPATH, REPLYDATE)
-	VALUES(#{memberNum}, #{slicedCode} ,NULL, NULL, NULL, #{contents}, NULL, now(), 0, '03', NULL, NULL);
+	VALUES(#{memberNum}, #{slicedCode} ,NULL, NULL, NULL, #{contents}, NULL, now(), 0, '00', NULL, NULL);
 	</insert>
 	
 	<!-- 상품문의 답글 업데이트 -->

@@ -6,25 +6,93 @@
  <mapper namespace="com.hworld.base.dao.PlanDAO">
  
  <select id="getPlanList" resultType="PlanVO">
- 	SELECT P.*, CC.NOTE AS note, CC.TYPE AS type
-	FROM PLAN P
-	INNER JOIN COMMONCODE CC ON (P.CATEGORYCODE = CC.CODE)
-	WHERE (P.PLANNUM LIKE CONCAT(CC.TYPE, '%'))
- </select>
+		SELECT P.PLANNUM, P.PLANNAME, P.PLANPRICE, P.DATACAPACITY, P.CATEGORYCODE, P.PLANEXPLAIN, P.PLANEXPLAINS, D.DISPERCENT, P.DISABLED
+		FROM PLAN P
+		LEFT JOIN DISCODE D
+		ON(P.DISCODE=D.DISCODE)
+		WHERE PLANNUM LIKE 'G%' OR PLANNUM LIKE 'S%' OR PLANNUM LIKE 'T%' OR PLANNUM LIKE 'Z%' OR PLANNUM LIKE 'W%' OR PLANNUM LIKE 'H%'
+	</select>
+ 
+ <select id="getExistPlanList" resultType="PlanVO">
+		SELECT DISTINCT C.NOTE
+		FROM PLAN P
+		INNER JOIN COMMONCODE C ON SUBSTRING(P.PLANNUM, 1, 1) = C.TYPE
+</select>
  
  <select id="getDetail" resultType="PlanVO" parameterType="PlanVO">
  	SELECT * FROM PLAN
  	WHERE PLANNUM=#{planNum}
  </select>
+ 
+ <!-- 추천상품 -->
+ <select id="recommendPlan" resultType="PlanVO" parameterType="PlanVO">
+	SELECT *
+	FROM PLAN
+	WHERE NOT PLANNUM = #{planNum}
+	ORDER BY PLANPRICE DESC
+	LIMIT 5
+ </select>
+ 
+<!-- 요금제 대표회선인지 확인 -->
+<!-- <select id="getKingPlanNum" resultType="PlanVO" parameterType="Integer">
+	SELECT T.kingCheck, P.planNum
+	FROM TELEPHONE T
+	LEFT OUTER JOIN PLAN P on T.planNum=P.planNum
+	WHERE T.kingCheck = 1 
+	AND T.planNum=P.planNum
+	AND T.memberNum = #{memberNum};
+</select> -->
 
+<!-- 요금제 이름 가져오기 -->
  <select id="getNoteName" resultType="PlanVO">
  	SELECT DISTINCT CC.NOTE AS note
  	FROM PLAN P
  	LEFT JOIN COMMONCODE CC ON (P.CATEGORYCODE = CC.CODE) AND (CC.TYPE = SUBSTRING(#{planNum},1,1))
  	WHERE P.PLANNUM = #{planNum}
- 
  </select>
  
+<!-- 로그인 후 가입자 본인인증 (요금제 변경) -->
+<select id="getMemberInput" parameterType="MemberVO" resultType="MemberVO">
+	SELECT MEMBERNUM FROM MEMBER
+	WHERE NAME=#{name} AND RRNF=#{rrnf} AND RRNL=#{rrnl}
+</select>
+
+<!-- 요금제 변경 프로시저 -->
+<insert id="setPlanChange" statementType="CALLABLE" parameterType="BillVO" >
+		{
+			CALL pmd_calc_bfPlanPrice (
+				#{serialNum, mode=IN, jdbcType=INTEGER, javaType=INTEGER},
+				#{planNum, mode=IN, jdbcType=VARCHAR, javaType=STRING},
+				#{nowDate, mode=IN, jdbcType=VARCHAR, javaType=STRING}
+			)
+		}
+</insert>
+<!-- 요금제 변경일 Check 프로시저 -->
+<select id="getCheckPlanChange" statementType="CALLABLE" parameterType="BillVO" >
+		{
+			CALL check_changePlan (
+			#{serialNum, mode=IN, jdbcType=INTEGER, javaType=INTEGER},
+			#{planNum, mode=IN, jdbcType=VARCHAR, javaType=STRING},
+			#{cancelPrice,mode=OUT, jdbcType=INTEGER, javaType=INTEGER},
+			#{result,mode=OUT, jdbcType=INTEGER, javaType=INTEGER}
+			 )
+		}
+</select>
+
+<!-- 기존 사용중인 요금제 정보 회선번호까지 불러오기 -->
+<select id="getBeforePlan" resultType="PlanVO" parameterType="Integer">
+	SELECT P.PLANNUM, P.PLANNAME, P.PLANPRICE, P.DATACAPACITY, M.MEMBERNUM, T.SERIALNUM , T.PHONENUM, T.KINGCHECK FROM PLAN P
+	JOIN TELEPHONE T ON T.PLANNUM = P.PLANNUM 
+	JOIN MEMBER M ON T.MEMBERNUM = M.MEMBERNUM
+	WHERE M.MEMBERNUM = #{memberNum}
+</select>
+
+<!-- 번호이동 타통신사 조회 -->
+<select id="isOtherTelecom" resultType="String" parameterType="String">
+SELECT * FROM OTHERTELECOM
+WHERE TAPHONENUM = #{taPhoneNum} AND TELECOMNAME = #{telecomName}
+</select>
+
   <!-- 요금제 추가하면 공통코드 테이블에도 insert 되어야해서 공통코드 테이블 값 가져오는 메서드 필요 -->
  <select id="getCommonCode" resultType="BaseVO">
  	SELECT * FROM COMMONCODE
@@ -36,77 +104,62 @@
  </insert>
  
  <insert id="setInsert" parameterType="PlanVO">
- 	INSERT INTO PLAN (PLANNUM, DISCODE, PLANNAME, PLANPRICE, DATACAPACITY, CATEGORYCODE, PLANEXPLAIN, PLANEXPLAINS, PLANEXPLAINM)
- 	VALUES(#{planNum},#{disCode}, #{planName}, #{planPrice}, #{dataCapacity}, #{categoryCode}, #{planExplain}, #{planExplainS}, #{planExplainM})
+ 	INSERT INTO PLAN (PLANNUM, DISCODE, PLANNAME, PLANPRICE, DATACAPACITY, CATEGORYCODE, PLANEXPLAIN, PLANEXPLAINS, DISABLED)
+ 	VALUES(#{planNum},#{disCode}, #{planName}, #{planPrice}, #{dataCapacity}, #{categoryCode}, #{planExplain}, #{planExplainS}, 1)
  </insert>
  
- <update id="setPlanUpdate" parameterType="PlanVO">
+<update id="setPlanUpdate" parameterType="PlanVO">
  	UPDATE PLAN 
- 	SET DISCODE=#{disCode}, PLANNAME=#{planName}, PLANPRICE=#{planPrice}, DATACAPACITY=#{dataCapacity},CATEGORYCODE=#{categoryCode}, PLANEXPLAIN=#{planExplain}, PLANEXPLAINS=#{planExplainS},PLANEXPLAINM=#{planExplainM})
+ 	SET DISCODE=#{disCode}, PLANNAME=#{planName}, PLANPRICE=#{planPrice}, DATACAPACITY=#{dataCapacity},CATEGORYCODE=#{categoryCode}, PLANEXPLAIN=#{planExplain}, PLANEXPLAINS=#{planExplainS}
  </update>
  
- <delete id="setPlanDelete" parameterType="PlanVO">
- 	DELETE FROM PLAN WHERE PLANNUM=#{planNum}
- </delete>
+ <update id="setPlanDisabled" parameterType="PlanVO">
+ 	UPDATE PLAN 
+ 	SET DISABLED = 0 WHERE PLANNUM=#{planNum}
+ 	
+ </update>
  
+ <!-- 부가서비스 -->
  
- <select id="getEPlanList" resultType="EPlanVO">
- 	SELECT * FROM EPLAN;
- </select>
+ <select id="getExtraPlanList" resultType="ExtraPlanVO">
+    SELECT EP.*, C.NOTE 
+    FROM EPLAN EP
+    INNER JOIN COMMONCODE C ON SUBSTRING(EP.EXTRAPLANNUM, 1, 1) = C.TYPE AND SUBSTRING(EP.EXTRAPLANNUM, -2) = C.CODE
+</select>
  
- <select id="getEPlanDetail" resultType="EPlanVO" parameterType="EPlanVO">
- 	SELECT * FROM EPLAN
- 	WHERE EPLANNUM=#{ePlanNum}
- 
- </select>
- 
- <!-- <insert id="setEPlanAdd" parameterType="EPlanVO">
- 	INSERT INTO EPLAN
- 	VALUES()
- </insert>
-  -->
-  <!--  5G요금제 -->
- <!--<select id="getGeneralList" resultType="PlanVO" >
- 	SELECT P.*, CC.NOTE AS note, CC.TYPE AS type
-	FROM PLAN2 P
-	INNER JOIN COMMONCODE CC ON (P.CATEGORYCODE = CC.CODE)
-	WHERE P.PLANNUM LIKE 'G%' AND CC.TYPE = 'G'
- </select>
-  시니어 요금제
- <select id="getSeniorList" resultType="PlanVO">
- 	SELECT P.*, CC.NOTE AS note, CC.TYPE AS type
-	FROM PLAN2 P
-	INNER JOIN COMMONCODE CC ON (P.CATEGORYCODE = CC.CODE)
-	WHERE P.PLANNUM LIKE 'S%' AND CC.TYPE = 'S'
- </select>
- 
- Teen 요금제
- <select id="getTeenList" resultType="PlanVO">
- 	SELECT P.*, CC.NOTE AS note, CC.TYPE AS type
-	FROM PLAN2 P
-	INNER JOIN COMMONCODE CC ON (P.CATEGORYCODE = CC.CODE)
-	WHERE P.PLANNUM LIKE 'T%' AND CC.TYPE = 'T'
- </select>
-  	 ZEM 요금제
- <select id="getZemList" resultType="PlanVO">
- 	SELECT P.*, CC.NOTE AS note, CC.TYPE AS type
-	FROM PLAN2 P
-	INNER JOIN COMMONCODE CC ON (P.CATEGORYCODE = CC.CODE)
-	WHERE P.PLANNUM LIKE 'Z%' AND CC.TYPE = 'Z'
- </select>
-  	 복지 요금제
-  <select id="getWelfareList" resultType="PlanVO">
- 	SELECT P.*, CC.NOTE AS note, CC.TYPE AS type
-	FROM PLAN2 P
-	INNER JOIN COMMONCODE CC ON (P.CATEGORYCODE = CC.CODE)
-	WHERE P.PLANNUM LIKE 'W%' AND CC.TYPE = 'W'
- </select>
-  	군인요금제
- <select id="getHeroList" resultType="PlanVO">
- 	SELECT P.*, CC.NOTE AS note, CC.TYPE AS type
-	FROM PLAN2 P
-	INNER JOIN COMMONCODE CC ON (P.CATEGORYCODE = CC.CODE)
-	WHERE P.PLANNUM LIKE 'H%' AND CC.TYPE = 'H'
- </select> -->
+<select id="getDetailExtraPlan" resultType="ExtraPlanVO" parameterType="ExtraPlanVO">
+    SELECT * FROM EPLAN
+    WHERE EXTRAPLANNUM=#{extraPlanNum}
+</select>
+
+<insert id="setAddServ" statementType="CALLABLE" parameterType="hashMap" >
+		{
+			CALL insert_addServ (
+				#{serialNum, mode=IN, jdbcType=INTEGER, javaType=INTEGER},
+				#{extraPlanNum, mode=IN, jdbcType=VARCHAR, javaType=STRING}
+			)
+		}
+</insert>
+
+<select id="searchExtraPlan" resultType="hashMap" parameterType="hashMap">
+	SELECT * FROM TELEPHONE_EPLAN TE
+	INNER JOIN TELEPHONE T ON T.SERIALNUM = TE.SERIALNUM 
+	WHERE T.SERIALNUM = #{serialNum} AND TE.EXTRAPLANNUM = #{extraPlanNum} 
+	AND T.MEMBERNUM = #{memberNum} AND T.KINGCHECK = 1
+</select>
+
+<insert id="setExtraPlanInsert" parameterType="ExtraPlanVO">
+    INSERT INTO EPLAN (EXTRAPLANNUM, EXTRANAME, EXTRAPRICE, EXTRAPLANEXPLAIN, EXTRAPLANEXPLAINS, EXTRAPLANEXPLAINM, CATEGORYCODE)
+    VALUES(#{extraPlanNum}, #{extraPlanName}, #{extraPrice}, #{categoryCode}, #{extraPlanExplain}, #{extraPlanExplainS}, #{extraPlanExplainM}, #{categoryCode})
+</insert>
+
+<update id="setExtraPlanUpdate" parameterType="ExtraPlanVO">
+    UPDATE EPLAN 
+    SET NAME=#{extraPlanName}, EXTRAPRICE=#{extraPrice}, CATEGORYCODE=#{categoryCode}, EXTRAPLANEXPLAIN=#{extraPlanExplain}, EXTRAPLANEXPLAINS=#{extraPlanExplainS}, EXTRAPLANEXPLAINM=#{extraPlanExplainM}
+</update>
+
+<delete id="setExtraPlanDelete" parameterType="ExtraPlanVO">
+    DELETE FROM EPLAN WHERE EXTRAPLANNUM=#{extraPlanNum}
+</delete>
 
 </mapper>

@@ -15,9 +15,12 @@
         <div class="materialContainer">
             <div class="box">
                 <!-- 홈 버튼 -->
-                <div class="d-flex justify-content-center">
+                <div class="brand-logo d-flex justify-content-center">
+                    <svg class="svg-icon my-auto">
+                        <use class="fill-color" xlink:href="/assets/svg/icons.svg#logo"></use>
+                    </svg>
                     <a href="/">
-                        <h2><img src="/assets/images/logos/2.png"></h2>
+                        <h2><img src="/assets/images/logo.png"></h2>
                     </a>
                 </div>
                 <div class="login-title">
@@ -53,12 +56,12 @@
                 </div>
 
                 <!-- 나중에 지울 버튼 -->
-                <div class="button login">
+                <!-- <div class="button login">
                     <button onclick="location.href = '/etc/findShop';">
-                        <span>대리점 위치안내(회선 X)</span>
+                        <span>대리점 위치안내</span>
                         <i class="fa fa-check"></i>
                     </button>
-                </div>
+                </div> -->
                 </form>
             </div>
         </div>

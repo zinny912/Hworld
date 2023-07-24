@@ -83,8 +83,8 @@
                                     </a>
                                 </li>                                
                                 <li>
-                                    <a data-bs-toggle="modal" data-bs-target="#staticBackdrop"
-                                        href="javascript:void(0)">
+                                    <a  data-bs-target="#staticBackdrop"
+                                        href="/member/logout" class="d-block">
                                         <i data-feather="log-out"></i>
                                         <span>로그아웃</span>
                                     </a>
@@ -198,7 +198,7 @@
                                     </ul>
                                 </li>
                         
-                                <li class="sidebar-list">
+                                <!-- <li class="sidebar-list">
                                     <a class="linear-icon-link sidebar-link sidebar-title" href="javascript:void(0)">
                                         <i data-feather="archive"></i>
                                         <span>납부</span>
@@ -211,7 +211,7 @@
                                             <a href="unpaidList">미납 목록</a>
                                         </li>
                                     </ul>
-                                </li>                                
+                                </li> -->                                
                             </ul>
                         </div>
                         <div class="right-arrow" id="right-arrow">

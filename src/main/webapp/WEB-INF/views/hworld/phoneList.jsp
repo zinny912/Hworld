@@ -149,27 +149,26 @@ h3.d-flex span {
                                         </div>
                                     </li>
 
-                                    <div class="mx-2 col-2">
-                                        <li class="onclick-title">
-                                            <h6 class="text-center">제조사</h6>
-                                            <ul class="onclick-content">
-                                                <li>
-                                                    <div class="form-check ps-0 custome-form-check">
-                                                        <input class="checkbox_animated check-it" type="checkbox"
-                                                            id="flexCheckDefault">
-                                                        <label class="form-check-label" for="flexCheckDefault">Apple</label>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="form-check ps-0 custome-form-check">
-                                                        <input class="checkbox_animated check-it" type="checkbox"
-                                                            id="flexCheckDefault">
-                                                        <label class="form-check-label" for="flexCheckDefault">삼성</label>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                    </div>
+                                   <div class="mx-2 col-2">
+									    <li class="onclick-title">
+									        <h6 class="text-center">제조사</h6>
+									        <ul class="onclick-content">
+									            <li>
+									                <div class="form-check ps-0 custome-form-check">
+									                    <input class="checkbox_animated check-it" type="checkbox" id="appleCheck" name="brandCode" value="A">
+									                    <label class="form-check-label" for="appleCheck">Apple</label>
+									                </div>
+									            </li>
+									            <li>
+									                <div class="form-check ps-0 custome-form-check">
+									                    <input class="checkbox_animated check-it" type="checkbox" id="samsungCheck" name="brandCode" value="S">
+									                    <label class="form-check-label" for="samsungCheck">삼성</label>
+									                </div>
+									            </li>
+									        </ul>
+									    </li>
+									</div>
+
                                 	<div class="mx-2 col-2">
 	                                    <li class="onclick-title text-center">                                    
 	                                        <a href="javascript:void(0)" style="color: black;" data-bs-toggle="modal" id="cartEffect" data-bs-target="#palnTB"> 
@@ -184,22 +183,22 @@ h3.d-flex span {
 	                                            <li>
 	                                                <div class="form-check ps-0 custome-form-check">
 	                                                    <input class="checkbox_animated check-it" type="checkbox"
-	                                                        id="flexCheckDefault19">
-	                                                    <label class="form-check-label" for="flexCheckDefault19">선택약정 (12개월)</label>
+	                                                        id="disKind1" name="disKind" value="1">
+	                                                    <label class="form-check-label" for="disKind">선택약정 (12개월)</label>
 	                                                </div>
 		                                            </li>
 	                                            <li>
 	                                                <div class="form-check ps-0 custome-form-check">
 	                                                    <input class="checkbox_animated check-it" type="checkbox"
-	                                                        id="flexCheckDefault19">
-	                                                    <label class="form-check-label" for="flexCheckDefault19">선택약정 (24개월)</label>
+	                                                        id="disKind2"  name="disKind" value="2">
+	                                                    <label class="form-check-label" for="disKind">선택약정 (24개월)</label>
 	                                                </div>
 	                                            </li>
 	                                            <li>
 	                                                <div class="form-check ps-0 custome-form-check">
 	                                                    <input class="checkbox_animated check-it" type="checkbox"
-	                                                        id="flexCheckDefault19">
-	                                                    <label class="form-check-label" for="flexCheckDefault19">공시지원금 (24개월)</label>
+	                                                        id="disKind3" name="disKind" value="0">
+	                                                    <label class="form-check-label" for="disKind">공시지원금 (24개월)</label>
 	                                                </div>
 	                                            </li>
                                            
@@ -285,8 +284,8 @@ h3.d-flex span {
 	                                <div class="img-wrapper">
 	                                    <div class="front">
 	                                        <a href="./phoneDetail?slicedCode=${direct.slicedCode}">
-	                                            <img src="/assets/images/electronics/product/${direct.slicedCode}thumb"
-	                                                class="bg-img  lazyload" alt="">
+	                                            <img src="/assets/images/electronics/product/${direct.slicedCode}thumb.jpg"
+	                                                class="bg-img"" alt="">
 	                                        </a>
 	                                    </div>
 	                                </div>
@@ -345,12 +344,7 @@ h3.d-flex span {
                                 <li class="page-item active">
                                     <a class="page-link" href="javascript:void(0)">1</a>
                                 </li>
-                                <li class="page-item">
-                                    <a class="page-link" href="javascript:void(0)">2</a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link" href="javascript:void(0)">3</a>
-                                </li>
+
                                 <li class="page-item">
                                     <a class="page-link" aria-label="Next">
                                         <span aria-hidden="true">
@@ -494,6 +488,15 @@ $(document).ready(function() {
        	
     }
 });
+</script>
+<script>
+    // 체크박스 변경 이벤트 리스너 등록
+    const checkboxes = document.querySelectorAll('input[name="brandCode"]');
+    checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', function() {
+            this.form.submit();
+        });
+    });
 </script>
 
     

@@ -1,8 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html>
+    <script src="https://code.jquery.com/jquery-latest.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 
     <!-- header start - 절대경로 사용 -->
     <header class="header-style-2" id="home">
@@ -81,13 +86,19 @@
                                                 <li class="">
                                                     <a href="/etc/findShop" class="nav-link menu-title fw-bold fs-6">매장찾기</a>
                                                 </li>
+                                                <li class="">
+                                                    <a href="/form/application" class="nav-link menu-title fw-bold fs-6">가입신청서</a>
+                                                </li>
                 <!-- 관리자/회원 테스트용 로그인 버튼 시작, 테스트 후 필요없으면 삭제 -->
-                <li>
-                    <a href="javascript:void(0)" class="d-block fw-bold fs-6 me-3" id="testAdmin">관리자</a>
-                </li>
-                <li>
-                    <a href="javascript:void(0)" class="d-block fw-bold fs-6 me-3" id="testMember">일반회원</a>
-                </li>
+                <!-- <li class="dropdown">
+				    <a class="nav-link menu-title fw-bold fs-6">빠른로그인</a>
+				    <ul class="nav-submenu menu-content fw-bold">
+				        <li>
+				            <a href="javascript:void(0)" class="d-block fw-bold fs-6 me-3" id="testAdmin">관리자</a>
+				        </li>
+				        <li>
+				            <a href="javascript:void(0)" class="d-block fw-bold fs-6 me-3" id="testMember">일반회원</a>
+				        </li> -->
                 <!-- 관리자/회원 테스트용 로그인 버튼 끝, 테스트 후 필요없으면 삭제 -->
                                             </ul>
                                         </div>
@@ -120,7 +131,7 @@
 															</li>												
 														</c:if>
                                                         <li>
-                                                            <a href="/myPage" class="d-block">마이페이지</a>
+                                                            <a href="/myPage/home" class="d-block">마이페이지</a>
                                                         </li>
                                                         <li>
                                                             <a href="/member/logout" class="d-block">로그아웃</a>
@@ -134,54 +145,45 @@
                                                     <div class="cart-title" style="background-color:#fff; padding:0px;">
                                                         <h6 >
                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-bag"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
-                                                            <span class="label label-theme rounded-pill">5</span>
+                                                            <span class="label label-theme rounded-pill">${cartCount.cartCount}</span>
                                                         </h6>
                                                     </div>
                                                     <div class="onhover-div">
                                                         <ul class="custom-scroll">
-                                                            <li>
-                                                            <div class="media">
-                                                                <img src="/assets/images/fashion/product/front/1.jpg"
-                                                                class="img-fluid blur-up lazyload" alt="">
-                                                                <div class="media-body">
-                                                                    <h6>Slim Fit Plastic Coat</h6>
-                                                                    <div class="qty-with-price">
-                                                                        <span>$78.00</span>
-                                                                        <span>
-                                                                            <input type="number" class="form-control"
-                                                                                value="1">
-                                                                        </span>
-                                                                    </div>
-                                                                </div>
-                                                                <button type="button" class="btn-close d-block d-md-none"
-                                                                    aria-label="Close">
-                                                                    <i class="fas fa-times"></i>
-                                                                </button>
-                                                            </div>
-                                                            </li>
+                                                            <c:forEach items="${cartInfo}" var="ci">
                                                             <li>
                                                                 <div class="media">
-                                                                <img src="/assets/images/fashion/product/front/7.jpg"
-                                                                    class="img-fluid blur-up lazyload" alt="">
+                                                                
                                                                     <div class="media-body">
-                                                                        <h6>Womens Stylish Jacket</h6>
+                                                                        <h6>${ci.directName}
+						                                                                        
+                                                                        
+                                                                        </h6>
                                                                         <div class="qty-with-price">
-                                                                            <span>$24.00</span>
                                                                             <span>
-                                                                                <input type="number" class="form-control"
-                                                                                    value="1">
+                                                                        <c:choose>
+																	        <c:when test="${ci.colorCode == 'G'}">
+																	            그레이 
+																	        </c:when>
+																	        <c:when test="${ci.colorCode == 'B'}">
+																	            블랙
+																	        </c:when>
+																	        <c:when test="${ci.colorCode == 'W'}">
+																	           	화이트
+																	        </c:when>
+																	        <c:otherwise>
+																	            기타
+																	        </c:otherwise>
+																	    </c:choose>
+                                                                            	<fmt:formatNumber value="${ci.directPrice}" pattern=" / #,### 원" />
                                                                             </span>
                                                                         </div>
                                                                     </div>
-                                                                    <button type="button" class="btn-close d-block d-md-none"
-                                                                        aria-label="Close">
-                                                                        <i class="fas fa-times"></i>
-                                                                    </button>
+                                                                    
                                                                 </div>
                                                             </li>
+                                                            </c:forEach>
                                                             <div class="cart-btn">
-                                                                <h6 class="cart-total"><span class="font-light">Total:</span> $
-                                                                    542.00</h6>
                                                                 <button onclick="location.href = '/cart/cartInfo';" type="button"
                                                                     class="btn btn-solid-default btn-block">
                                                                     구매하기
@@ -232,7 +234,7 @@
 
     $('#testMember').click(function(){
         console.log("member");
-        const email = "zinnybot5@gmail.com";
+        const email = "zinny@gmail.com";
         const pw = "12345";
 
         $.ajax({
@@ -255,3 +257,4 @@
         });
     })
 </script>
+</html>

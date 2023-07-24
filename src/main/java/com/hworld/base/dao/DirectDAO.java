@@ -5,11 +5,15 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.apache.ibatis.annotations.Mapper;
 
 import com.hworld.base.util.Pager;
+import com.hworld.base.vo.ApplicationVO;
 import com.hworld.base.vo.DirectVO;
+import com.hworld.base.vo.MemberVO;
+import com.hworld.base.vo.OtherTelecomVO;
 import com.hworld.base.vo.PlanVO;
 import com.hworld.base.vo.QnaVO;
 import com.hworld.base.vo.ReviewVO;
@@ -29,6 +33,12 @@ public interface DirectDAO {
 	
 	//상품 하나 옵션 다수 조회
 	public List<DirectVO> getDetail(String slicedCode) throws Exception;
+	
+	//getMonthlyPay - ajax 상품 예상 월 요금 프로시저 
+	public Map<?, ?> getMonthlyPay(Map<String, Object> monthlyPay) throws Exception;
+	
+	//회원 기기변경 휴대폰 구매 시 기존 phoneNum 조회
+	public PlanVO getKingPhoneNum (Integer memberNum) throws Exception;
 	
 	//악세사리 상품 하나 옵션 다수 조회
 	public List<DirectVO> getAccDetail(String slicedCode) throws Exception;
@@ -87,6 +97,16 @@ public interface DirectDAO {
 	//plan 선택된거 가져오기
 	public PlanVO getSelectedPlan(PlanVO planVO) throws Exception;
 
+	public int setFormAdd(@Valid ApplicationVO applicationVO) throws Exception;
+
+	//2.신청서 기반(주민번호)으로 일치하는 회원정보가 있는지 검색 - 앞자리는 세션에서 받아오고 뒷자리 입력해서 검증
+	public MemberVO getMemberSearch(ApplicationVO applicationVO) throws Exception;
+	//프로시저로 회선 테이블에 add
+	public int setTelephoneInitAdd(Map<String, Integer> telephone) throws Exception;
 	
+	//구매완료(가입완료 후 결과안내 창)
+	public PlanVO getMemberPlan(Integer memberNum) throws Exception;
+	//타 통신사 번호 조회
+	public OtherTelecomVO isOtherTelecom(String phoneNum);
 	
 }

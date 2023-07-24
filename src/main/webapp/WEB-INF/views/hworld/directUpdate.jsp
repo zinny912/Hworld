@@ -8,6 +8,7 @@
 <head>
 	<meta charset="UTF-8">
     <c:import url="../temp/style.jsp"></c:import>
+
     <title>상품 수정</title>
  <style>
     .boxone {
@@ -278,19 +279,27 @@ $('#optionAdd').click(()=>{
 
 <script>
 	//썸머노트 
-	$('#directContents').summernote({
-        placeholder: '상세 내용을 입력해주세요.',
-        tabsize: 2,
-        height: 300,
-        toolbar: [
-          ['style', ['style']],
-          ['font', ['bold', 'underline', 'clear']],
-          ['color', ['color']],
-          ['para', ['ul', 'ol', 'paragraph']],
-          ['table', ['table']],
-          ['insert', ['link', 'picture', 'video']],
-        ]
-      });
+$('#directContents').summernote({
+  placeholder: '상세 내용을 입력해주세요.',
+  tabsize: 2,
+  height: 300,
+  toolbar: [
+    ['style', ['style']],
+    ['font', ['bold', 'underline', 'clear']],
+    ['color', ['color']],
+    ['para', ['ul', 'ol', 'paragraph']],
+    ['table', ['table']],
+    ['insert', ['link', 'picture', 'video']],
+    ['align', ['align']],
+  ],
+  callbacks: {
+    onInit: function() {
+      // Set the default alignment to center
+      $(this).summernote('editor').body.style.paragraph = 'center';
+    }
+  }
+});
+
 </script>
 
 </body>

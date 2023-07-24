@@ -60,20 +60,28 @@ public class CartService {
 
 		
 	//장바구니에 상품 추가 
-	public int setInsert(CartVO cartVO)throws Exception{
-		CartVO checkCart = cartDAO.checkCart(cartVO);
+	public int setInsert(CartVO cartVO, MemberVO memberVO)throws Exception{
 		
-		//장바구니에 있는 데이터인지 먼저 확인 
-		if(checkCart != null) {
-			return 2;
+		List<CartVO> ar = new ArrayList<>();
+		
+		String []directCode = cartVO.getDirectCode().split(",");
+		String []orderAmount = cartVO.getCartAmount().split(",");
+		
+		for(int i = 0 ; i < directCode.length ; i++) {
+			CartVO vo = new CartVO();
+
+			vo.setDirectCode(directCode[i]);
+			vo.setCartAmount(orderAmount[i]);
+			vo.setMemberNum(memberVO.getMemberNum());
+			CartVO checkCart = cartDAO.checkCart(vo);
+			if(checkCart == null) {
+				ar.add(vo);
+				cartDAO.setInsert(vo);
+			}		
 		}
 		
-		//장바구니 등록 / 에러시 0 반환
-		try {
-			return cartDAO.setInsert(cartVO);
-		} catch (Exception e) {
-			return 0;
-		}
+		return 5;
+		
        		
 	}
 
@@ -85,11 +93,24 @@ public class CartService {
 	}
 
 	
-	//상품 삭제 
-	public int setDelete(CartVO cartVO) throws Exception{
-		
-		return cartDAO.setDelete(cartVO);
+	// 상품 삭제
+	public int setDelete(CartVO cartVO) throws Exception {
+	    try {
+	        cartDAO.setDelete(cartVO);
+	        return 1; // Deletion successful
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        return 0; // Deletion failed
+	    }
 	}
+
+
+
+	public CartVO getCartCount(Integer memberNum) {
+		// TODO Auto-generated method stub
+		return cartDAO.getCartCount(memberNum);
+	}
+
 
 		
 	

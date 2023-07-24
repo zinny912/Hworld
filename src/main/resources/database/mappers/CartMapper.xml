@@ -10,16 +10,27 @@
 		values(#{memberNum}, #{directCode}, #{cartAmount}) 
 	</insert>
 	
-	
-	<!-- 카트 삭제 -->
-	<delete id="setDelete">
-		delete from CART where cartNum = #{cartNum}
+	<!--카트 항목 삭제 -->
+	<delete id="setDelete" parameterType="CartVO">
+	  delete from CART where directCode = #{directCode} 
+	  and memberNum = #{memberNum}
 	</delete>
+	
+
 	
 	<!-- 카트 수량 수정 -->
 	<update id="setUpdate">
 		update CART set cartAmount=#{cartAmount} where cartNum = #{cartNum}
 	</update>
+	
+	
+	<!-- 카트 수량 -->
+	<select id="getCartCount" resultType="CartVO">
+		SELECT COUNT(directCode) AS cartCount
+		FROM CART
+		WHERE memberNum = #{memberNum}
+	</select>
+	
 	
 	
 	<!-- 카트 목록 -->

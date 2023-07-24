@@ -24,11 +24,14 @@
             <div class="materialContainer">
                 <div class="box">
                     <!-- 홈 버튼 -->
-                    <div class="d-flex justify-content-center">
-                        <a href="/">
-                            <h2><img src="/assets/images/logos/2.png"></h2>
-                        </a>
-                    </div>
+                    <div class="brand-logo d-flex justify-content-center">
+						<svg class="svg-icon my-auto">
+							<use class="fill-color" xlink:href="/assets/svg/icons.svg#logo"></use>
+						</svg>
+						<a href="/">
+							<h2><img src="/assets/images/logo.png"></h2>
+						</a>
+					</div>
                     <div class="login-title mb-5">
                         <h2 style="margin-top: 15px;">회원 가입</h2>
                     </div>
@@ -38,11 +41,13 @@
                     	<c:when test="${map.opt1 eq 3}">
                     		<div class="mb-4 row">
 		                        <div class="col-9">
-		                            <input class="form-control" type="email" name="email" id="email" placeholder="사용자 계정(이메일)">
+		                            <input class="email_input form-control" type="email" name="email" id="email" placeholder="사용자 계정(이메일)">		                            
 		                        </div>
 		                        <button class="col-3 row btn btn-solid-default btn-sm fw-bold" name="sendBtn" id="sendBtn" type="button" onclick="sendNumber()">
 		                            인증번호 전송
 		                        </button>
+		                        <span class="email_input_re_1 mx-2 mt-2" style="display: none;">사용 가능한 이메일입니다.</span>
+								<span class="email_input_re_2 mx-2 mt-2" style="display: none;">사용중인 이메일입니다.</span>
 		                    </div>
 		                    <div class="mb-4 row" id="emailNumber" name="emailNumber" style="display: none;">
 		                        <div class="col-9">
@@ -55,23 +60,28 @@
 		                    <input type="text" id="Confirm" name="Confirm" style="display: none" value="">
 		                    <div class="mb-4 row">
 		                        <div class="col-12">
-		                            <input class="form-control" type="password" name="pw" id="pw" placeholder="비밀번호">
+		                            <input class="pw_input form-control" type="password" name="pw" id="pw" placeholder="비밀번호">
 		                        </div>
 		                    </div>
 		                    <div class="mb-4 row">
 		                        <div class="col-12">
-		                            <input class="form-control" type="password" name="pwCheck" id="pwCheck" placeholder="비밀번호 확인">
+		                            <input class="pwck_input form-control" type="password" name="pwck" id="pwck" placeholder="비밀번호 확인">		                            
+		                            <span class="final_pwck_ck mx-2 mt-2" style="display: none;">비밀번호를 한 번 더 입력해 주세요.</span>
+									<span class="pwck_input_re_1 mx-2 mt-2" style="display: none;">비밀번호가 일치합니다.</span>
+									<span class="pwck_input_re_2 mx-2 mt-2" style="display: none;">비밀번호가 일치하지 않습니다.</span>
 		                        </div>
 		                    </div>
                     	</c:when>
                     	<c:otherwise>
 	                    	<div class="mb-4 row">
 		                        <div class="col-9">
-		                            <input class="form-control" type="email" name="email" id="email" placeholder="사용자 계정(이메일)">
+		                            <input class="email_input form-control" type="email" name="email" id="email" placeholder="사용자 계정(이메일)">		                            
 		                        </div>
 		                        <button class="col-3 row btn btn-solid-default btn-sm fw-bold" name="sendBtn" id="sendBtn" type="button" onclick="sendNumber()">
 		                            인증번호 전송
 		                        </button>
+		                        <span class="email_input_re_1 mx-2 mt-2" style="display: none;">사용 가능한 이메일입니다.</span>
+								<span class="email_input_re_2 mx-2 mt-2" style="display: none;">사용중인 이메일입니다.</span>
 		                    </div>
 		                    <div class="mb-4 row" id="emailNumber" name="emailNumber" style="display: none;">
 		                        <div class="col-9">
@@ -84,12 +94,15 @@
 		                    <input type="text" id="Confirm" name="Confirm" style="display: none" value="">
 		                    <div class="mb-4 row">
 		                        <div class="col-12">
-		                            <input class="form-control" type="password" name="pw" id="pw" placeholder="비밀번호">
+		                            <input class="pw_input form-control" type="password" name="pw" id="pw" placeholder="비밀번호">
 		                        </div>
 		                    </div>
 		                    <div class="mb-4 row">
 		                        <div class="col-12">
-		                            <input class="form-control" type="password" name="pwCheck" id="pwCheck" placeholder="비밀번호 확인">
+		                            <input class="pwck_input form-control" type="password" name="pwck" id="pwck" placeholder="비밀번호 확인">
+		                            <span class="final_pwck_ck mx-2 mt-2" style="display: none;">비밀번호를 한 번 더 입력해 주세요.</span>
+									<span class="pwck_input_re_1 mx-2 mt-2" style="display: none;">비밀번호가 일치합니다.</span>
+									<span class="pwck_input_re_2 mx-2 mt-2" style="display: none;">비밀번호가 일치하지 않습니다.</span>
 		                        </div>
 		                    </div>
 		                            
@@ -142,7 +155,7 @@
                     </c:choose>
                     
                     <div class="button login">
-                        <button type="submit">
+                        <button type="submit" class="login_btn">
                             <span>가입하기</span>
                             <i class="fa fa-check"></i>
                         </button>
@@ -162,47 +175,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
-/* var timer = null;
-var isRunning = false;
-
-$(".email_btn").on("click", function() {
-  var display = $(".time");
-  // 유효시간 설정
-  var leftSec = 5;
-
-  // 버튼 클릭 시 시간 연장
-  if (isRunning){
-    clearInterval(timer);
-    display.html("");
-    startTimer(leftSec, display);
-  }else{
-  	startTimer(leftSec, display);
-  }
-});
-    
-function startTimer(count, display) {  
-  var minutes, seconds;
-  timer = setInterval(function () {
-    minutes = parseInt(count / 60, 10);
-    seconds = parseInt(count % 60, 10);
-
-    minutes = minutes < 10 ? "0" + minutes : minutes;
-    seconds = seconds < 10 ? "0" + seconds : seconds;
-
-    display.html(minutes + ":" + seconds);
-
-    // 타이머 끝
-    if (--count < 0) {
-    clearInterval(timer);
-    alert("시간초과");
-    display.html("시간초과");
-//      $("button").attr("disabled", true);
-    isRunning = false;
-}
-}, 1000);
-isRunning = true;
-}
- */
 
 </script>
 </body>

@@ -11,7 +11,7 @@ public class CartVO {
 
 	private Integer cartNum;
     //장바구니 수량
-    private Integer cartAmount;
+    private String cartAmount;
 
 	private Integer memberNum;
 	
@@ -23,12 +23,14 @@ public class CartVO {
 	
 	private Integer totalPrice;
 	
-	public void initTotal() {
-		this.totalPrice = this.directPrice*this.cartAmount;
-	}
+//	public void initTotal() {
+//		this.totalPrice = this.directPrice*this.cartAmount;
+//	}
 	
 	private String brandCode;
 	
 	private String colorCode;
+	
+	private Integer cartCount;
 	
 }

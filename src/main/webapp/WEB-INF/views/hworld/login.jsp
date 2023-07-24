@@ -18,9 +18,12 @@
         <div class="materialContainer">
             <div class="box">
                 <!-- 홈 이동 - 2안 -->
-                <div class="d-flex justify-content-center">
+                <div class="brand-logo d-flex justify-content-center">
+                    <svg class="svg-icon my-auto">
+                        <use class="fill-color" xlink:href="/assets/svg/icons.svg#logo"></use>
+                    </svg>
                     <a href="/">
-                        <h2><img src="/assets/images/logos/2.png"></h2>
+                        <h2><img src="/assets/images/logo.png"></h2>
                     </a>
                 </div>
                 <div class="login-title">
@@ -75,7 +78,7 @@
 	                </div> -->
 	
 	                <div class="button login">
-	                    <button onclick="location.href = 'log-in-dormant-account.html';" type="submit">
+	                    <button onclick="location.href = 'log-in-dormant-account.html';" type="button">
 	                        <span>로그인(휴면계정)</span>
 	                        <i class="fa fa-check"></i>	                		
 	                    </button>
@@ -84,7 +87,7 @@
                 <!-- 나중에 지울 버튼 끝 -->
 
                 <!-- 회원가입 페이지 이동 -->
-                <p style="margin-top: 0px">아직 회원이 아니신가요? <a href="signUpPrecheck" class="theme-color">가입하기</a></p>
+                <p style="margin-top: 0px">아직 회원이 아니신가요? <a href="precheck" class="theme-color">가입하기</a></p>
 				<div class="g-recaptcha" data-sitekey="6LfiGXwmAAAAAGV4y7cC0tEowoX-87amSkjeNVTi" style="margin-left: 50px; padding-top: 465px;"></div>
             </div>
         </div>
