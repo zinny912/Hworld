@@ -31,6 +31,8 @@ public class MemberVO {
 	private String tel;
 	private Integer ownCheck;
 	
+	private String phoneNum;
+	
 	//
 	private List<TelephoneVO> telephoneVOs;
 	
