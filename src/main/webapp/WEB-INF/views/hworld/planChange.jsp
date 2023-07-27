@@ -243,11 +243,11 @@ data: {
 success: function(response) {
 	let cancelPrice = response.cancelPrice;
 	
+	if(cancelPrice >0){
 	$('#cancelPrice').text(cancelPrice.toLocaleString());
 	$('.cancelFeeIs').html('<p class="fs-3 w-100 text-center">${memberVO.name}님, 요금제 변경시 위약금이 발생합니다.</p>');
 	$('.changebtn').prop('disabled', true);
-	
-	if(cancelPrice<0 || cancelPrice==0){
+	}else if(cancelPrice<0 || cancelPrice==0){
 		$('.cancelFee').hide();
 		$('.changebtn').prop('disabled', false);
 		
