@@ -3,6 +3,7 @@ package com.hworld.base.service;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -89,6 +90,22 @@ public class DirectService {
 	// 상품 리뷰 작성 
 	public int setReviewAdd(ReviewVO reviewVO) throws Exception {
 		return directDAO.setReviewAdd(reviewVO);
+	}
+	
+	//리뷰 작성 가능여부 체크 
+	public List<Map<String, Object>> checkOrder(int memberNum, String directCode, String slicedCode) throws Exception {
+	    List<Map<String, Object>> orderList = directDAO.getOrderList(memberNum, slicedCode);
+
+	    List<Map<String, Object>> responseList = new ArrayList<>();
+	    for (Map<String, Object> order : orderList) {
+	        Map<String, Object> response = new HashMap<>();
+	        response.put("orderNum", order.get("orderNum"));
+	        response.put("isReviewAvailable", true);
+	        response.put("hasReview", order.get("hasReview")); // hasReview를 불리언 값으로 설정
+	        responseList.add(response);
+	    }
+	    log.error("{}<==========responseList",responseList);
+	    return responseList;
 	}
 	
 
@@ -262,23 +279,21 @@ public class DirectService {
 				//신청서 db에 insert  appNum 생성
 				int result = directDAO.setFormAdd(applicationVO);
 				log.error(">>>>>>>>>>>>>>>>>>>>>>>>>> appNum: {} ", applicationVO.getAppNum());
-
 				
 				//회원번호 조회하기 ( 주민번호 뒷자리 입력하면 그 값으로 ) 
-				MemberVO memberVO = directDAO.getMemberSearch(applicationVO);
-				
-				
+				MemberVO member = directDAO.getMemberSearch(applicationVO);
 				
 				//세션에서 정보 가져오기 (회원번호)
 				
 				MemberVO sessionMember = (MemberVO) session.getAttribute("memberVO");
 				Integer sessionMemberNum = sessionMember.getMemberNum();
 				
-				log.error("{}<============멤버넘 ",memberVO.getMemberNum());
+				log.error("{}<============멤버넘 ",member.getMemberNum());
 				log.error("{}<=========세션멤버",sessionMemberNum);
 				
+				applicationVO.setMemberNum(sessionMemberNum);
 				
-				applicationVO.setMemberNum(memberVO.getMemberNum());
+				
 				//3-2b.회원번호(신청서VO)로 회선VO 만들기
 				//프로시저 호출해서 회선VO INSERT
 				Map<String, Integer> telephone = new HashMap<>();

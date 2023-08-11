@@ -258,6 +258,11 @@
         margin: -1px 0px 3px 0px;
 
     }
+    
+    .ta-select li input[type="radio"]:checked + label {
+    font-weight: bold;
+    color: #e22454; /* 선택된 라벨의 색상 설정 */
+}
 </style>
 
 </head>
@@ -322,6 +327,7 @@
 											<input type="hidden" id="totalPriceAll" name="totalPrice">
 											<input type="hidden" id="outPhonePrice" name="out_phonePayPrice">
 											<input type="hidden" id="outplanPrice" name="out_planPrice">
+											<input type="hidden" id="bunho" name="taPhoneNum" >
 											
 											<!-- <input type="text" id="" -->
 										
@@ -376,7 +382,7 @@
 												<h3 class="option-title mt-3 mb-2">가입유형</h3>
 											</div>
 											
-											<div class="option-types" id="joinType">
+											<div class="option-types" id="joinTypes">
 											<c:choose>
 											<c:when test="${memberVO.ownCheck == 0}">
 												<span class="c-ick-btn">
@@ -395,24 +401,14 @@
 												</span>
 											</c:otherwise>
 											</c:choose>
-											<c:choose>
-											<c:when test="${memberVO.ownCheck == 1}">
-												<span class="c-ick-btn">
-													<input type="radio" hidden name="joinType" id="joinType2" value="1">
-													<label for="joinType2" class="btn m-1 btn-outline-custom joinType btn-disabled">
-														<span class="labelin">번호이동</span>
-													</label>
-												</span>
-											</c:when>
-											<c:otherwise>
+											
 											<span class="c-ick-btn">
 													<input type="radio" hidden name="joinType" id="joinType2" value="1">
 													<label for="joinType2" class="btn m-1 btn-outline-custom joinType">
 														<span class="labelin">번호이동</span>
 													</label>
 												</span>
-												</c:otherwise>
-											</c:choose>
+
 												<span class="c-ick-btn">
 													<input type="radio" hidden name="joinType" id="joinType3" value="2">
 													<label for="joinType3" class="btn m-1 btn-outline-custom joinType">
@@ -747,9 +743,9 @@
 										</c:if> --%>
 										
 											<div class="box-head">
-											    <button class="btn btn-solid-default btn-sm fw-bold writeReview" data-bs-toggle="modal"
-											        data-bs-target="#addReview">후기 작성</button>
+											    <button class="btn btn-solid-default btn-sm fw-bold writeReview" onclick="checkReview()">후기 작성</button>
 											</div>
+											
 										</div>
                                             <h2 class="col-md-7" style="margin-top:-50px;">구매 후기</h2>
 											<c:choose>
@@ -843,6 +839,10 @@
                                      <div class="size-detail">
                                          <h6 class="mb-3 mx-3 fw-bolder">요금제 선택</h6>
                                          <input type="text" id="age">
+                                         <input type="text" id="joinnn" placeholder="가입유형">
+                                         
+                                         <input type="text" value="${memberVO.welfare}" id="welfare" name="welfare" placeholder="복지">
+        								<input type="text" value="${memberVO.welExpire}" id="welExpire" name="welExpire" placeholder="군인">
                                          <!-- 요금제 유형 영역, 주석처리한거 써도 되기는한데 순서가 안맞을 수 있어서 아래처럼 처리함 -->
                                          <ul class="nav border-0" style="color:black;">
                                          <c:forEach items="${existList}" var="i">
@@ -1034,6 +1034,7 @@
                                            	<div class="form-check custome-radio-box mt-1">
                                          				<input type="radio" name="planNum" class="form-check-input my-2" id="${i.planNum}" value="${i.planNum}" data-gb-value="${i.dataCapacity}" data-plan-price="${i.planPrice}" data-dp="${i.disCode}"/>
                                          				<label class="form-check-label fs-5" for="${i.planNum}">${i.planName}</label>
+                                         				<div class="noti" style="margin-top:-10px; margin-left:10px; display:inline-block;"></div>
                                                   </div>
                                                   <div class="d-flex justify-content-between mb-1">
                                                   	<label class="form-check-label ellipsis fs-6 mx-3" style="color:gray;">
@@ -1067,6 +1068,7 @@
                                            	<div class="form-check custome-radio-box mt-1">
                                          				<input type="radio" name="planNum" class="form-check-input my-2" id="${i.planNum}" value="${i.planNum}" data-gb-value="${i.dataCapacity}" data-plan-price="${i.planPrice}" data-dp="${i.disCode}"/>
                                          				<label class="form-check-label fs-5" for="${i.planNum}">${i.planName}</label>
+                                         				<div class="noti" style="margin-top:-10px; margin-left:10px; display:inline-block;"></div>
                                                   </div>
                                                   <div class="d-flex justify-content-between mb-1">
                                                   	<label class="form-check-label ellipsis fs-6 mx-3" style="color:gray;">
@@ -1144,11 +1146,14 @@
                             <label for="contents" class="form-label" >구매 후기</label>
                             <textarea class="form-control col-12"  placeholder="간단한 후기를 작성해주세요." id="contents" name="contents" value=""></textarea>
                         </div>
+                         <div id="orderNumContainer"></div>
                     </div>
                         
-                        <input type="text" id="orderNum" name="orderNum">
-                        <input type="text" id="memberNum" name="memberNum">
+                        <input type="hidden" id="orderNum2" name="orderNum">
+                        <input type="hidden" id="memberNum" name="memberNum" value="${memberVO.memberNum}">
                         <input type="hidden" name="slicedCode" value="${param.slicedCode}">
+                        
+                       
                     <div class="modal-footer pt-0 text-end d-block">
                         <button type="button" class="btn btn-solid-default btn-sm" data-bs-dismiss="modal" onclick="form.submit()">작성</button>
                     </div>
@@ -1371,6 +1376,61 @@
     </div>
 </div>
 <!-- 상품 삭제 모달창 End -->
+ <!-- 번호이동 모달창 start -->
+    <div class="modal fade quick-view-modal" id="changeTelecom">
+        <div class="modal-dialog modal-md modal-dialog-centered col-12">
+            <div class="modal-content">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="modal-body">
+                    <div class="row gy-4">
+                        <div class="col-12">
+                            <div class="product-right">
+                                <div class="size-detail">
+                                <h2 class="mb-3 fw-bolder">이전 통신사 정보</h2>
+										<ul class="radio-select ta-select">
+										  <li>
+										    <input type="radio" id="skt" name="telecomName" value="0" hidden> 
+										    <label for="skt">SKT</label>
+										  </li>
+										  <li>
+										    <input type="radio" id="kt" name="telecomName" value="1" hidden>
+										    <label for="kt">KT</label>
+										  </li>
+										  <li>
+										    <input type="radio" id="lgu" name="telecomName" value="2" hidden>
+										    <label for="lgu">LGU+</label>
+										  </li>
+										  <li>
+										    <input type="radio" id="etc" name="telecomName" value="3" hidden>
+										    <label for="etc">알뜰폰</label>
+										  </li>
+										</ul>
+                                </div>
+                                <div class="d-flex">
+	                                <div class="col-md-10">
+	                                    <input type="text" class="form-control mb-3" id="taPhoneNum" name="taPhoneNum" placeholder="휴대폰 번호 '-'없이 숫자만 입력" value="">
+	                                   
+	                                </div>
+                                	<button type="button" class="btn btn-solid-default btn-sm mt-1" id="btnQuery" style="height:50%; width:100%;"> 조회 </button>
+                                </div>
+                                	<div class="text-center fw-bold theme-color" id="addText"></div>
+                                
+        
+                                    <div class="product-btns d-flex justify-content-center">
+                                        <button type="button" class="btn btn-solid-default btn-lg col-md-6 bunhoContinue"
+                                            data-bs-dismiss="modal">번호이동 계속하기</button>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+<!-- 번호이동 모달창 end -->
+
+
 
 <c:import url="../temp/footer.jsp"></c:import>
 
@@ -1392,11 +1452,81 @@
 });
 </script>
 <script>
-  // 후기 작성 버튼 클릭 시 모달 창이 열릴 때 실행되는 함수
-  $('#addReview').on('show.bs.modal', function (event) {
+
+$('#addReview').on('hidden.bs.modal', function () {
+    $('#orderNumContainer').empty();
+});
+//후기 작성 버튼 클릭 시 모달 창이 열릴 때 실행되는 함수
+$('.writeReview').on('click', function (event) {
+    event.preventDefault();
     const directName = $('.directNameValue').data('direct-name'); // 해당 후기 작성 버튼에 연결된 제품의 directName 값을 가져옴
-    $('#directName2').text(directName); // 모달 창 내에서 제품명을 표시하는 곳에 directName 값을 설정
-  });
+    $('#directName2').text(directName);
+    // 리뷰 작성 가능 여부를 조회하고 주문 정보를 가져오는 함수 호출
+    checkReview(function (responseList) {
+        if (responseList.length > 0) {
+            const reviewableOrders = responseList.filter(order => order.hasReview === 1);
+
+            if (reviewableOrders.length > 0) {
+                if (reviewableOrders.length === 1) {
+                    const orderNum = reviewableOrders[0].orderNum;
+                   
+                    $('#addReview').modal('show');
+                } else {
+                	// 여러 주문 중 선택할 수 있도록 처리
+                	const hr = $('<hr>');
+                	 const info = $('<span class="fs-6 theme-color mb-1">').text("구매내역 중 구매후기를 작성할 주문번호를 선택해주세요.");
+  					$('#orderNumContainer').append(info).append($('<br>'));
+                	   for (const order of reviewableOrders) {
+					    const orderNum = order.orderNum;
+					   
+					    const radioBtn = $('<div class="form-check custome-radio-box mx-2">')
+					        .append($('<input class="form-check-input" type="radio" name="selectedOrderNum" required>').attr('id', orderNum).val(orderNum))
+					        .append($('<label class="form-check-label">').attr('for', orderNum).text('주문번호: ' + orderNum));
+					    $('#orderNumContainer').append(radioBtn).append($('<br>'));
+					}
+
+ 					 $('#orderNumContainer').append(hr);
+                	   $('input[name="selectedOrderNum"]').on('change', function() {
+                		    const selectedOrderNum = $('input[name="selectedOrderNum"]:checked').val();
+                		    $('#orderNum2').val(selectedOrderNum); 
+                		});
+
+                    alert("주문내역이 1건 이상 존재합니다.");
+                    $('#addReview').modal('show'); // 모달 창을 엽니다.
+                }
+            } else {
+                alert("이미 리뷰를 작성하셨습니다."); // 모든 주문이 리뷰를 작성한 경우의 처리
+            }
+        } else {
+            alert("해당 상품을 구매한 후 리뷰를 작성할 수 있습니다.");
+        }
+    });
+});
+
+function checkReview(callback) {
+    const memberNum = ${memberVO.memberNum}; // 예시로 memberNum을 가져오는 코드
+    const directCode = $('.direct-item').data('direct-code');
+    const slicedCode = directCode.slice(-5);
+
+    $.ajax({
+        type: "GET",
+        url: "./checkOrder",
+        data: { memberNum: memberNum, directCode: directCode, slicedCode: slicedCode },
+        success: function (responseList) {
+        	 console.log(responseList);
+            
+             if (typeof callback === 'function') {
+                 callback(responseList);
+             }
+        },
+        error: function (error) {
+            console.log("Error occurred:", error);
+            alert("리뷰 작성 오류");
+        },
+    });
+}
+
+  
   //문의 작성 버튼 클릭 시 모달 창이 열릴 때 실행되는 함수
   $('#addQna').on('show.bs.modal', function (event) {
 	    const directName = $('.directNameValue').data('direct-name'); // 해당 후기 작성 버튼에 연결된 제품의 directName 값을 가져옴
@@ -1481,8 +1611,6 @@ for(let payType2 of payType){
 </script>
 <script>
 
-
-
 $(document).ready(function() {
     const prices = document.querySelectorAll('[id^="commaPrice"]');
     for (var i = 0; i < prices.length; i++) {
@@ -1491,7 +1619,7 @@ $(document).ready(function() {
         prices[i].innerHTML =commaPrice ;
        	
     }
- 
+
 // 세션에서 리스트에서 선택한 planNum 값 가져오기 ------------->
  	  const splanNum = '${monthlyPay.planNum}';
 
@@ -1548,14 +1676,20 @@ priceElement.textContent = formattedPrice;
 
 const memberBirth = '${memberVO.rrnf}';
 let age = calculateAge(memberBirth);
-console.log(age);
-
 
 $('#age').val(age);
 const radios = document.getElementsByName('planNum');
 for (let i = 0; i < radios.length; i++) {
     const radio = radios[i];
     const planNumAge = radio.value;
+    const wel =$('#welfare').val();
+    const soldier = $('#welExpire').val();
+    const join = $('#joinnn').val();
+    const result = ${result};
+    const serial =${serial.serialNum};
+    console.log(result);
+    console.log(serial);
+    
     
     let maxAge = "";
     let minAge = "";
@@ -1575,15 +1709,31 @@ for (let i = 0; i < radios.length; i++) {
 	   minAge = 80;
    }
     
-    if (age > maxAge && maxAge != 0) {
+ //기기변경:0 번호이동:1 신규가입:2
+   if(result!=0 && !planNumAge.includes('G')){
+    	radio.disabled = true;
+    	$(radio).siblings('.noti').text("1회선만 등록가능한 요금제입니다.");
+    } else if(wel==0 && planNumAge.includes('W') ){
+   	radio.disabled = true;
+   	$(radio).siblings('.noti').text("복지혜택 대상자만 가능합니다.");
+   } else if (!soldier && planNumAge.includes('H')){
+    	radio.disabled = true;
+    	$(radio).siblings('.noti').text("현역병사 대상자만 가능합니다.");
+    }else if (age > maxAge && maxAge != 0) {
         radio.disabled = true;
         $(radio).siblings('.noti').text("나이제한으로 선택이 불가합니다.");
     }
-    if (age < minAge && minAge != 0) { 
+    else if (age < minAge && minAge != 0) { 
         radio.disabled = true;
         $(radio).siblings('.noti').text("나이제한으로 선택이 불가합니다.");
-    }
+    } 
+   
+   
+   
 }
+
+
+
 //나이 계산 함수
 function calculateAge(memberBirth) {
     let birthYear = parseInt(memberBirth.substring(0, 2), 10);
@@ -1607,24 +1757,7 @@ function calculateAge(memberBirth) {
 
 
 
-
-
-
 </script>
-
-
-<!--<script>
-    // JavaScript를 사용하여 orderNum과 memberNum 값을 설정
-    const orderNumInput = document.getElementById('orderNum');
-    const memberNumInput = document.getElementById('memberNum');
-
-    // 로그인한 사용자의 구매내역에서 orderNum과 memberNum 값을 가져와서 설정
-    const orderNum = '구매 내역에서 가져온 값';
-    const memberNum = '구매 내역에서 가져온 값';
-
-    orderNumInput.value = orderNum;
-    memberNumInput.value = memberNum;
-</script> -->
 
 
 <c:import url="../temp/commonJS.jsp"></c:import>

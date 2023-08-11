@@ -114,7 +114,7 @@ public class PlanService {
 	public PlanVO getBeforePlan(Integer memberNum) throws Exception{
 		return planDAO.getBeforePlan(memberNum);
 	}
-	
+
 	//번호이동 타통신사 DB 조회
 	public boolean isOtherTelecom(String taPhoneNum, String telecomName) throws Exception{
 		boolean check = false;
@@ -136,7 +136,7 @@ public class PlanService {
 	public int setCommonCode(BaseVO baseVO) throws Exception{
 		return planDAO.setCommonCode(baseVO);
 	}
-	
+
 	//요금제 등록 
 	public int setInsert(PlanVO planVO)throws Exception{
 		return planDAO.setInsert(planVO);
@@ -145,10 +145,14 @@ public class PlanService {
 	public int setPlanUpdate(PlanVO planVO) throws Exception{
 		return planDAO.setPlanUpdate(planVO);
 	}
-	//요금제 삭제 
-	public int setPlanDisabled(PlanVO planVO) throws Exception{
-		return planDAO.setPlanDisabled(planVO);
+	
+	//부가서비스 등록
+	public int setExtraPlanInsert(ExtraPlanVO extraPlanVO)throws Exception{
+		return planDAO.setExtraPlanInsert(extraPlanVO);
 	}
 	
-	
+	//부가서비스 수정
+	public int setExtraPlanUpdate(ExtraPlanVO extraPlanVO) throws Exception{
+		return planDAO.setExtraPlanUpdate(extraPlanVO);
+	}
 }

@@ -25,6 +25,9 @@ public class MemberVO {
 	private String rrnf;
 	private String rrnl;
 	private Date joinDate;
+	private Integer welfare;
+	private Date welExpire;
+	
 	//private Date numberChangeDate;
 	private Integer memberState;
 	private Integer adminCheck;

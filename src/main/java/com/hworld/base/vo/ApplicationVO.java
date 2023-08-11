@@ -37,4 +37,6 @@ public class ApplicationVO {
 	//주고받는 내부용으로 사용
 	private Integer memberNum;
 	
+	private ApplicationVO applicationVO;
+	
 }

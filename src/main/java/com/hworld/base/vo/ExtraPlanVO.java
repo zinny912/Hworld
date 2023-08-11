@@ -14,4 +14,5 @@ public class ExtraPlanVO {
     private String extraPlanExplainS;
     private String extraPlanExplainM;
     private String categoryCode;
+    private Integer disabled;
 }

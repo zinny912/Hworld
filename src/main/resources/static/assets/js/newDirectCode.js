@@ -154,13 +154,70 @@ $('.optionArea').on('click', 'li[name="colorCode"], label.capacity', function() 
     // 체크박스 변경 이벤트 핸들러
     function joinTypeChange(event) {
       var selectedValue1 = event.target.value;
-      
+      $('#joinnn').val(selectedValue1);
       // 선택한 값에 따라 동작 수행
       if (selectedValue1 === '1') {
         // 12개월 할인 선택 시 수행할 동작
         console.log('번호이동');
         $('#joinType').val(selectedValue1, "번호이동");
         
+		    // 모달 열기
+		$('#changeTelecom').modal('show');
+		$('.bunhoContinue').prop('disabled', true); // 버튼 활성화
+		
+		// 조회 버튼 클릭 시 AJAX 요청 전송
+		$('#btnQuery').click(function() {
+		    // 선택된 통신사
+		    let telecomName = $('input[name="telecomName"]:checked').val();
+		    if (telecomName == 0) {
+		        telecomName="SKT";
+		    } else if (telecomName == 1) {
+		    	telecomName="KT";
+		    } else if (telecomName == 2) {
+		    	telecomName="LGU+";
+		    } else {
+		    	telecomName="알뜰폰";
+		    }
+		
+		    // 입력한 휴대폰 번호
+		    let phoneNum = $('#taPhoneNum').val();
+		    console.log(phoneNum);
+		
+		    // AJAX 요청 설정
+		    $.ajax({
+		        url: '/plan/otherTelecom',
+		        type: 'POST',
+		        dataType: 'json',
+		        contentType: 'application/json',
+		        data: JSON.stringify({
+                telecomName: telecomName,
+                taPhoneNum: phoneNum
+            	}),
+
+		        success: function(response) {
+		            // 응답 값에 따라 로직 처리
+		            if (response==true) {
+		                // 성공적인 처리 로직
+		                alert("번호이동 신청이 가능합니다.");
+		                $('#taPhoneNum').prop('readonly', true);
+		                $('#bunho').val(phoneNum);
+		                $('#addText').text(telecomName+" 통신사에서 Hworld로 번호이동이 진행됩니다.");
+		                $('.bunhoContinue').prop('disabled', false); // 버튼 활성화
+		                
+		            } else {
+		                // 실패한 처리 로직
+		                console.log('조회 실패');
+		                alert("일치하는 정보가 없습니다. 통신사 및 휴대폰번호 확인 후 다시 시도해주세요.");
+		            }
+		        },
+		        error: function(xhr, status, error) {
+		            // 오류 처리
+		            console.log('AJAX 오류:', error);
+		        }
+		     }); 
+		  });
+		  
+      
       } else if (selectedValue1 === '2') {
         // 24개월 할인 선택 시 수행할 동작
         console.log('신규가입');
@@ -169,14 +226,9 @@ $('.optionArea').on('click', 'li[name="colorCode"], label.capacity', function() 
 		  console.log('기기변경')
 		  $('#joinType').val(selectedValue1);
 	  } else {
-		  
 		 alert("가입유형을 선택하세요");
 	  }
     }
-    
-    
-    
-    
 
 //월 요금계산 준비
 $('#directCode, input[name="disKind"], input[name="planNum"]').on('change', function() {

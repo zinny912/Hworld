@@ -29,6 +29,9 @@ public class PlanVO {
     private Integer serialNum;
     private Integer kingCheck;
     
+    //조회용
+    private Integer disKind;
+    
     //commonCode 사용
     private String note;
     private String type;

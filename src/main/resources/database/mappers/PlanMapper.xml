@@ -18,6 +18,13 @@
 		FROM PLAN P
 		INNER JOIN COMMONCODE C ON SUBSTRING(P.PLANNUM, 1, 1) = C.TYPE
 </select>
+
+<select id="getPlanG" resultType="Integer">
+	SELECT SERIALNUM
+	FROM TELEPHONE
+	WHERE MEMBERNUM = #{memberNum}
+	AND (PLANNUM LIKE 'S%' OR PLANNUM LIKE 'T%' OR PLANNUM LIKE 'W%' OR PLANNUM LIKE 'Z%' OR PLANNUM LIKE 'H%')
+</select>
  
  <select id="getDetail" resultType="PlanVO" parameterType="PlanVO">
  	SELECT * FROM PLAN
@@ -92,6 +99,13 @@
 		}
 </select>
 
+<!-- 위약금 있을 경우 확인 버튼누르면 회선테이블에 위약금 update -->
+<update id="setInsertCancelFee" parameterType="BillVO">
+	UPDATE PAYMENTDETAILS
+	SET CANCELPRICE = #{cancelPrice}
+	WHERE SERIALNUM = #{serialNum} AND PLANCHANGEDATE = #{nowDate}
+</update>
+
 <!-- 대표회선 기존 사용중인 요금제 정보 회선번호까지 불러오기 -->
 <select id="getBeforePlan" resultType="PlanVO" parameterType="Integer">
 	SELECT P.PLANNUM, P.PLANNAME, P.PLANPRICE, P.DATACAPACITY, M.MEMBERNUM, T.SERIALNUM , T.PHONENUM, T.KINGCHECK, T.CONTRACTDATE, T.EXPIREDATE FROM PLAN P
@@ -102,8 +116,17 @@
 
 <!-- 번호이동 타통신사 조회 -->
 <select id="isOtherTelecom" resultType="String" parameterType="String">
-SELECT * FROM OTHERTELECOM
-WHERE TAPHONENUM = #{taPhoneNum} AND TELECOMNAME = #{telecomName}
+	SELECT * FROM OTHERTELECOM
+	WHERE TAPHONENUM = #{taPhoneNum} AND TELECOMNAME = #{telecomName}
+</select>
+
+<!-- 번호이동 완료 후 결과 값 조회 -->
+<select id="getChangeTelecomResult" resultType="PlanVO">
+	SELECT p.PLANNAME, p.PLANPRICE, t.PHONENUM, t.DISKIND, t.CONTRACTDATE, t.EXPIREDATE  FROM TELEPHONE t
+	INNER JOIN PLAN p ON t.PLANNUM = p.PLANNUM 
+	WHERE t.MEMBERNUM = #{memberNum}
+	ORDER BY t.SERIALNUM DESC
+	LIMIT 1
 </select>
 
   <!-- 요금제 추가하면 공통코드 테이블에도 insert 되어야해서 공통코드 테이블 값 가져오는 메서드 필요 -->
@@ -115,6 +138,15 @@ WHERE TAPHONENUM = #{taPhoneNum} AND TELECOMNAME = #{telecomName}
  	INSERT INTO COMMONCODE (TYPE, CODE, VALUE, NOTE)
  	VALUES(#{type}, #{code}, #{value}, #{note})
  </insert>
+ <delete id="setDeleteCommon" parameterType="String">
+ 	DELETE FROM COMMONCODE
+ 	WHERE TYPE = #{oldType} AND CODE = #{oldCode} 
+ </delete>
+ <update id="setUpdateCommon" parameterType="BaseVO">
+ 	UPDATE COMMONCODE
+ 	SET VALUE = #{value} 
+ 	WHERE TYPE=#{type} AND CODE=#{code} 
+ </update>
  
  <insert id="setInsert" parameterType="PlanVO">
  	INSERT INTO PLAN (PLANNUM, DISCODE, PLANNAME, PLANPRICE, DATACAPACITY, CATEGORYCODE, PLANEXPLAIN, PLANEXPLAINS, DISABLED)
@@ -124,7 +156,14 @@ WHERE TAPHONENUM = #{taPhoneNum} AND TELECOMNAME = #{telecomName}
 <update id="setPlanUpdate" parameterType="PlanVO">
  	UPDATE PLAN 
  	SET DISCODE=#{disCode}, PLANNAME=#{planName}, PLANPRICE=#{planPrice}, DATACAPACITY=#{dataCapacity},CATEGORYCODE=#{categoryCode}, PLANEXPLAIN=#{planExplain}, PLANEXPLAINS=#{planExplainS}
+ 	WHERE PLANNUM = #{planNum}
  </update>
+ 
+ <update id="updatePlanNum" parameterType="java.util.Map">
+    UPDATE PLAN 
+    SET PLANNUM = #{newPlanNum}
+    WHERE PLANNUM = #{oldPlanNum}
+</update>
  
  <update id="setPlanDisabled" parameterType="PlanVO">
  	UPDATE PLAN 
@@ -162,17 +201,19 @@ WHERE TAPHONENUM = #{taPhoneNum} AND TELECOMNAME = #{telecomName}
 </select>
 
 <insert id="setExtraPlanInsert" parameterType="ExtraPlanVO">
-    INSERT INTO EPLAN (EXTRAPLANNUM, EXTRANAME, EXTRAPRICE, EXTRAPLANEXPLAIN, EXTRAPLANEXPLAINS, EXTRAPLANEXPLAINM, CATEGORYCODE)
-    VALUES(#{extraPlanNum}, #{extraPlanName}, #{extraPrice}, #{categoryCode}, #{extraPlanExplain}, #{extraPlanExplainS}, #{extraPlanExplainM}, #{categoryCode})
+    INSERT INTO EPLAN (EXTRAPLANNUM, EXTRAPLANNAME, EXTRAPRICE, EXTRAPLANEXPLAIN, EXTRAPLANEXPLAINS, EXTRAPLANEXPLAINM, CATEGORYCODE, DISABLED)
+    VALUES(#{extraPlanNum}, #{extraPlanName}, #{extraPrice}, #{extraPlanExplain}, #{extraPlanExplainS}, #{extraPlanExplainM}, #{categoryCode}, #{disabled})
 </insert>
 
 <update id="setExtraPlanUpdate" parameterType="ExtraPlanVO">
     UPDATE EPLAN 
-    SET NAME=#{extraPlanName}, EXTRAPRICE=#{extraPrice}, CATEGORYCODE=#{categoryCode}, EXTRAPLANEXPLAIN=#{extraPlanExplain}, EXTRAPLANEXPLAINS=#{extraPlanExplainS}, EXTRAPLANEXPLAINM=#{extraPlanExplainM}
+    SET EXTRAPLANNAME=#{extraPlanName}, EXTRAPRICE=#{extraPrice}, CATEGORYCODE=#{categoryCode}, EXTRAPLANEXPLAIN=#{extraPlanExplain}, EXTRAPLANEXPLAINS=#{extraPlanExplainS}, EXTRAPLANEXPLAINM=#{extraPlanExplainM}
+	WHERE EXTRAPLANNUM = #{extraPlanNum}
 </update>
 
-<delete id="setExtraPlanDelete" parameterType="ExtraPlanVO">
-    DELETE FROM EPLAN WHERE EXTRAPLANNUM=#{extraPlanNum}
-</delete>
+
+<update id="setExtraPlanDisabled" parameterType="ExtraPlanVO">
+    UPDATE EPLAN SET DISABLED = 0 WHERE EXTRAPLANNUM=#{extraPlanNum}
+</update>
 
 </mapper>

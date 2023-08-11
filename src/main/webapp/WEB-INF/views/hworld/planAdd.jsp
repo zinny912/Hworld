@@ -139,8 +139,8 @@
                             </div>
                             <!-- 한 줄 -->
                             <div class="col-md-12">
-                                <label for="planExplain" class="form-label">한 줄 설명</label>
-                                <input type="text" class="form-control" id="planExplain" name="planExplain">
+                                <label for="planExplainS" class="form-label">한 줄 설명</label>
+                                <input type="text" class="form-control" id="planExplainS" name="planExplainS">
                             </div>
                             <!-- 데이터량 -->
                             
@@ -160,7 +160,7 @@
                             <!-- 상세정보 서머노트하자 -->
                             <div class="col-md-12">
                                 <label for="planExplain" class="form-label">상세정보</label>
-                                <textarea class="form-control col-md-12" name="planExplain" id="planExplain" cols="100" rows="10" readonly> 서머노트로 상세정보 입력할예정</textarea>
+                                <textarea class="form-control col-md-12" name="planExplain" id="planExplain" cols="100" rows="10"> </textarea>
                             </div>
 
                             <!-- 확인버튼 -->
@@ -268,7 +268,22 @@ $('#planName').blur(function(){
 
 
 </script>
-
+<script>
+	//썸머노트 
+	$('#planExplain').summernote({
+        placeholder: '상세 내용을 입력해주세요.',
+        tabsize: 2,
+        height: 300,
+        toolbar: [
+          ['style', ['style']],
+          ['font', ['bold', 'underline', 'clear']],
+          ['color', ['color']],
+          ['para', ['ul', 'ol', 'paragraph']],
+          ['table', ['table']],
+          ['insert', ['link', 'picture', 'video']],
+        ]
+      });
+</script>
 
 
 </body>

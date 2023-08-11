@@ -52,7 +52,7 @@
             <div class="row g-4 justify-content-center">
                 <div class="col-lg-6" >
                     <h3 class="mb-3 fw-bold">부가서비스</h3>
-                    <form class="needs-validation">
+                    <form action="./ePlanAdd" method="POST" class="planAdd">
                         <div class="row g-4">
                             <!-- 부가서비스 정보 -->
                             <div class="col-md-6">
