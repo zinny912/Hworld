@@ -67,9 +67,22 @@
 	    LIMIT #{startRow}, #{perPage}
 	</select>
 
-	<!-- 상품 개수 -->  	
+	<!-- 휴대폰 상품 개수 -->  	
 	<select id="getTotalCount" parameterType="Pager" resultType="Long">
-		SELECT COUNT(DIRECTCODE) FROM DIRECT
+		SELECT  COUNT(*) 
+			FROM (
+			    SELECT DISTINCT RIGHT(DIRECTCODE, 5) AS SLICEDCODE
+			    FROM DIRECT WHERE CATEGORYCODE = '01'
+			) AS SLICEDCODE
+		<include refid="search"></include>
+	</select> 
+	<!-- 악세사리 상품 개수 -->
+	<select id="getTotalCountAcc" parameterType="Pager" resultType="Long">
+		SELECT  COUNT(*) 
+			FROM (
+			    SELECT DISTINCT RIGHT(DIRECTCODE, 5) AS SLICEDCODE
+			    FROM DIRECT WHERE CATEGORYCODE != '01'
+			) AS SLICEDCODE
 		<include refid="search"></include>
 	</select> 
 	
@@ -237,7 +250,7 @@
 		LEFT JOIN DIRECT D ON D.DIRECTCODE =OD.DIRECTCODE
 		LEFT JOIN MEMBER M ON R.MEMBERNUM = M.MEMBERNUM
 		HAVING slicedCode = #{slicedCode}
-		ORDER BY R.REGDATE DESC;
+		ORDER BY R.REGDATE DESC
 	</select>
 
 	<!-- 리뷰 총 개수 가져오기 -->

@@ -1,9 +1,5 @@
 package com.hworld.base.service;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -11,7 +7,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.naming.spi.DirStateFactory.Result;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,7 +14,6 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -31,7 +25,6 @@ import com.hworld.base.util.SHA256Util;
 import com.hworld.base.vo.ApplicationVO;
 import com.hworld.base.vo.DirectVO;
 import com.hworld.base.vo.MemberVO;
-import com.hworld.base.vo.OtherTelecomVO;
 import com.hworld.base.vo.PlanVO;
 import com.hworld.base.vo.QnaVO;
 import com.hworld.base.vo.ReviewVO;
@@ -58,7 +51,7 @@ public class DirectService {
 	//악세사리 상품 리스트
 	public List<DirectVO> getAccList(Pager pager) throws Exception{
 		pager.makeStartRow();
-		pager.makeNum(directDAO.getTotalCount(pager));
+		pager.makeNum(directDAO.getTotalCountAcc(pager));
 		return directDAO.getAccList(pager);
 	}
 	
@@ -86,6 +79,8 @@ public class DirectService {
 	public List<ReviewVO> getReview(String slicedCode) throws Exception {
 		return directDAO.getReview(slicedCode);
 	}
+	
+	
 	
 	// 상품 리뷰 작성 
 	public int setReviewAdd(ReviewVO reviewVO) throws Exception {

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -118,7 +119,7 @@ public class DirectController {
 
 	// 휴대폰 상세 페이지
 	@GetMapping("phoneDetail")
-	public ModelAndView getDetail(String slicedCode, QnaVO qnaVO, HttpSession session) throws Exception{
+	public ModelAndView getDetail(String slicedCode, QnaVO qnaVO, HttpSession session, Pager pager) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		MemberVO memberVO = (MemberVO) session.getAttribute("memberVO");
 		if (memberVO == null || memberVO.getMemberNum() == null) {
@@ -168,6 +169,7 @@ public class DirectController {
 		}
 	    
 	    List<ReviewVO> reviews = directService.getReview(slicedCode);//slicedCode로 페이징된 리뷰 목록 조회
+
 	    Integer result = planDAO.getPlanG(memberVO.getMemberNum());
 	    if(result==null) {
 	    	result=0;
@@ -207,7 +209,7 @@ public class DirectController {
 
 		return mv;
 	}
-	
+
 	//월요금 계산하는 프로시저 호출 컨트롤러
 	@ResponseBody
 	@GetMapping("calMonthlyPay")
@@ -449,7 +451,7 @@ public class DirectController {
 		mv.setViewName("redirect:./accessoryList");
 		return mv;
 	}
-	
+
 	//리뷰 추가
 	@PostMapping("reviewAdd")
 	public ModelAndView setReviewAdd(ReviewVO reviewVO, ModelAndView mv) throws Exception {

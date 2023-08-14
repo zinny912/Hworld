@@ -121,6 +121,7 @@
                             <c:if test="${map.joinType == 2 }" > <!-- 신규가입 -->
                                 <label for="phoneNum" class="form-label">휴대폰 번호</label>
                                 <input type="text" class="form-control" id="phoneNum" placeholder="사용할 휴대폰 번호 입력" name="phoneNum">
+                                <input type="hidden" class="form-control" id="taPhoneNum" name="taPhoneNum" value="${taPhoneNum}">
                                 <div id="checkPhoneNum"></div>
                             </c:if>
                             <c:if test="${map.joinType == 1}" > <!-- 번호이동 -->
@@ -132,6 +133,7 @@
                             <c:if test="${map.joinType == 0}" > <!-- 회선이 있는경우 : 기기변경 -->
                                 <label for="phoneNum" class="form-label">휴대폰 번호</label>
                                 <input type="text" class="form-control" id="phoneNum" value="${phoneNum.phoneNum}" name="phoneNum">
+                                <input type="hidden" class="form-control" id="taPhoneNum" name="taPhoneNum" value="${taPhoneNum}" readOnly>
                                 <div id="checkPhoneNum"></div>
                             </c:if>
                             </div>

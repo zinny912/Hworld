@@ -158,27 +158,31 @@
                         <!-- Prodcut setion -->
                     </div>
 
-                    <nav class="page-section d-flex justify-content-end">
-                        <ul class="pagination mx-auto">
-                            <li class="page-item">
-                                <a class="page-link" href="javascript:void(0)" aria-label="Previous">
-                                    <span aria-hidden="true">
-                                        <i class="fas fa-chevron-left"></i>
-                                    </span>
-                                </a>
-                            </li>
-                            <li class="page-item ">
-                                <a class="page-link" href="javascript:void(0)">1</a>
-                            </li>
-                            
-                            <li class="page-item">
-                                <a class="page-link" aria-label="Next">
-                                    <span aria-hidden="true">
-                                        <i class="fas fa-chevron-right"></i>
-                                    </span>
-                                </a>
-                            </li>
-                        </ul>
+                   <nav class="page-section d-flex justify-content-end" style="position: relative;">
+                            <ul class="pagination mx-auto">
+                                <li class="page-item ${pager.pre ? '' : 'disabled' }">
+                                    <a class="page-link " href="accessoryList?page=${pager.startNum-1}" aria-label="Previous">
+                                        <span aria-hidden="true">
+                                            <i class="fas fa-chevron-left"></i>
+                                        </span>
+                                    </a>
+                                </li>
+                                <li class="page-item active">
+                                   <c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
+						   	                    <li class="page-item">
+						                        	<a class="page-link" href="phoneList?page=${i}">${i}</a>
+						                    	</li>
+						           </c:forEach>
+                                </li>
+
+                                <li class="page-item ${pager.next ? '' : 'disabled' }">
+                                    <a class="page-link" href="accessoryList?page=${pager.lastNum+1}" aria-label="Next">
+                                        <span aria-hidden="true">
+                                            <i class="fas fa-chevron-right"></i>
+                                        </span>
+                                    </a>
+                                </li>
+                            </ul>           
                         <c:if test="${memberVO.adminCheck ==0}">
                         <a href="accessoryAdd" class="btn btn-solid-default m-1" style="position: absolute">상품 등록</a>
                         </c:if>

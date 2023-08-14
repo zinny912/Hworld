@@ -201,6 +201,7 @@ $('.optionArea').on('click', 'li[name="colorCode"], label.capacity', function() 
 		                alert("번호이동 신청이 가능합니다.");
 		                $('#taPhoneNum').prop('readonly', true);
 		                $('#bunho').val(phoneNum);
+		               
 		                $('#addText').text(telecomName+" 통신사에서 Hworld로 번호이동이 진행됩니다.");
 		                $('.bunhoContinue').prop('disabled', false); // 버튼 활성화
 		                
@@ -221,10 +222,12 @@ $('.optionArea').on('click', 'li[name="colorCode"], label.capacity', function() 
       } else if (selectedValue1 === '2') {
         // 24개월 할인 선택 시 수행할 동작
         console.log('신규가입');
+        
         $('#joinType').val(selectedValue1);
       } else if (selectedValue1 === '0') {
 		  console.log('기기변경')
 		  $('#joinType').val(selectedValue1);
+		 
 	  } else {
 		 alert("가입유형을 선택하세요");
 	  }

@@ -3,6 +3,7 @@
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
     <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+    <%@ taglib prefix="math" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -526,13 +527,13 @@
                                     </div>
                                 </div>
                                 	<div class="container mb-5">
-                                	<c:forEach items="${qnaList}" var="qna">
+                                	<c:forEach items="${qnaList}" var="qna" varStatus="loop">
                                     	<div class="category-option" data-qna-num="${qna.num}" data-qna-member="${qna.memberNum}" data-qna-state="${qna.state}">
-                                        	<div class="accordion category-name" id="accordionExample">
+                                        	<div class="accordion category-name" id="accordionExample${loop.index}">
                                             	<div class="accordion-item category-rating">
-                                                	<h2 class="accordion-header"  id="headingThree" style="padding:0px;">
+                                                	<h2 class="accordion-header"  id="headingThree${loop.index}" style="padding:0px;">
                                                     	<button class="accordion-button" style="background-color:#fff; padding:0px;" type="button" data-bs-toggle="collapse"
-                                                       	 data-bs-target="#collapseThree">
+                                                       	 data-bs-target="#collapseThree${loop.index}">
                                                         	<div class="d-flex col-10">
 																
 																<c:if test="${qna.state == 0}">
@@ -555,8 +556,8 @@
                                                     	</button>
                                                 	</h2>
                                                 	
-                                                	<div id="collapseThree" class="accordion-collapse collapse"
-                                                    	aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                                                	<div id="collapseThree${loop.index}" class="accordion-collapse collapse"
+                                                    	aria-labelledby="headingThree${loop.index}" data-bs-parent="#accordionExample${loop.index}">
                                                     	<div class="accordion-body">
                                                         	<div class="card">
                                                             	<div class="card-body"><!----><!---->                                                            
@@ -729,19 +730,7 @@
 
 									<div class="customer-review-box col-md-9">
    										<div class="review-box d-flex justify-content-end">
-   										<%-- 오더 완성되면 사용할 예정<c:set var="hasPurchase" value="false" />
-
-										<c:forEach var="order" items="${orderList}">
-										    <c:if test="${order.directCode eq '해당 제품 코드' && not empty order.orderNum && order.memberNum eq '구매한 멤버 번호'}">
-										        <c:set var="hasPurchase" value="true" />
-										        <c:break />
-										    </c:if>
-										</c:forEach>
-										
-										<c:if test="${hasPurchase eq 'true'}">
-										    <button type="button" class="btn btn-primary">버튼</button>
-										</c:if> --%>
-										
+   										
 											<div class="box-head">
 											    <button class="btn btn-solid-default btn-sm fw-bold writeReview" onclick="checkReview()">후기 작성</button>
 											</div>
@@ -752,8 +741,15 @@
 											    <c:when test="${empty review}">
 											        <p>작성된 리뷰가 없습니다.</p>
 											    </c:when>
-											    <c:otherwise>
-											<c:forEach items="${review}" var="review">
+											    <c:otherwise> 
+											    <c:set var="perPage" value="5" /> <!-- 페이지당 표시할 리뷰 수 -->
+										        <c:set var="currentPage" value="1" /> <!-- 현재 페이지 -->
+										        <c:set var="startIdx" value="${(currentPage - 1) * perPage}" /> <!-- 시작 인덱스 -->
+										        <c:set var="totalPageL" value="${(fn:length(review) / perPage)+1}" />
+										        <c:set var="totalPage" value="${fn:substringBefore(totalPageL,'.') }"/>
+										        
+										<c:forEach items="${review}" var="review" varStatus="status">
+            								
 	                                             <div class="customer-section" data-review="${review.num}" data-rate="${review.rate}">
 	                                                <div class="customer-details">
 	                                                    <c:set var="username" value="${fn:substringBefore(review.email, '@')}" />
@@ -783,38 +779,102 @@
 														<fmt:formatDate value="${review.regDate}" pattern="yyyy/MM/dd" /><span></span></p>
                                                 	</div>
                                                	</div>
-											</c:forEach>
-											</c:otherwise>
+                                              
+											</c:forEach> 
+											<nav class="page-section d-flex justify-content-center mb-2 mt-2" style="position: relative;">
+										    <ul class="pagination mx-auto">
+										        <li class="page-item">
+										            <c:if test="${currentPage >= 1}">
+										            	<c:if test ="${currentPage >1 }">
+										                <a class="page-link" href="#" onclick="changePage(${currentPage - 1})">
+										                    <span aria-hidden="true">
+										                        <i class="fas fa-chevron-left"></i>
+										                    </span>
+										                </a>
+										                </c:if>
+										                <c:if test="${currentPage ==1 }">
+										                <a class="page-link" href="#" onclick="changePage(${currentPage})">
+										                    <span aria-hidden="true">
+										                        <i class="fas fa-chevron-left"></i>
+										                    </span>
+										                </a>
+										                </c:if>
+										            </c:if>
+										        </li>
+										        
+										        <c:forEach begin="1" end="${totalPage}" var="pageNum">
+												    <li class="page-item" id="pageNum${pageNum}">
+												        <a href="#" class="page-link" onclick="changePage(${pageNum})">${pageNum}</a>
+												    </li>
+												</c:forEach>
+										        
+										        <li class="page-item">
+										            <c:if test="${currentPage < totalPage}">
+										                <a class="page-link" href="#" onclick="changePage(${currentPage + 1})">
+										                    <span aria-hidden="true">
+										                        <i class="fas fa-chevron-right"></i>
+										                    </span>
+										                </a>
+										            </c:if>
+										            <c:if test="${currentPage == totalPage }">
+										                <a class="page-link" href="#" onclick="changePage(${currentPage})">
+										                    <span aria-hidden="true">
+										                        <i class="fas fa-chevron-right"></i>
+										                    </span>
+										                </a>
+										                </c:if>
+										        </li>
+										    </ul>
+										</nav>
+										
+										<script>
+										
+										const reviewTotal = ${totalPage};
+										console.log(reviewTotal);
+										const totalPage = Math.ceil(reviewTotal);
+										const totalPageL = ${totalPageL};
+										
+										console.log(totalPageL);
+										const perPage = 5;
+										
+										var currentPage = parseInt("${currentPage}");
+										/* var perPage = parseInt("${perPage}"); */
+										
+										function changePage(pageNum) {
+										// 현재 페이지 변경
+									    currentPage = pageNum;
+
+									    // 시작 인덱스 계산
+									    var startIdx = (currentPage - 1) * perPage;
+										var reviews = document.querySelectorAll('.customer-section');
+									    reviews.forEach(function(review, idx) {
+									        if (idx >= startIdx && idx < startIdx + perPage) {
+									            review.style.display = 'block';
+									        } else {
+									            review.style.display = 'none';
+									        }
+									        
+									    });
+									 	// 활성화 클래스 조작
+									    for (var i = 1; i <= totalPage; i++) {
+									        if (i === pageNum) {
+									            $("#pageNum" + i).addClass('active');
+									        } else {
+									            $("#pageNum" + i).removeClass('active');
+									        }
+									    }
+										}
+										 $(document).ready(function() {
+										        // 초기에 1페이지에 active 클래스 추가
+										        $("#pageNum1").addClass('active');
+										        changePage(1);
+										    });
+										
+										</script>
+											
+														
+										</c:otherwise>
 											</c:choose>
-                          <!-- paging --> <nav class="page-section d-flex justify-content-end"
-                                                style="position: relative;">
-                                                <ul class="pagination mx-auto">
-                                                    <li class="page-item">
-                                                        <a class="page-link" href="javascript:void(0)"
-                                                            aria-label="Previous">
-                                                            <span aria-hidden="true">
-                                                                <i class="fas fa-chevron-left"></i>
-                                                            </span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="page-item active">
-                                                        <a class="page-link" href="javascript:void(0)">1</a>
-                                                    </li>
-                                                    <li class="page-item">
-                                                        <a class="page-link" href="javascript:void(0)">2</a>
-                                                    </li>
-                                                    <li class="page-item">
-                                                        <a class="page-link" href="javascript:void(0)">3</a>
-                                                    </li>
-                                                    <li class="page-item">
-                                                        <a class="page-link" aria-label="Next">
-                                                            <span aria-hidden="true">
-                                                                <i class="fas fa-chevron-right"></i>
-                                                            </span>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </nav> <!-- paging -->
                                         </div>
                                     </div>
                             	</div>
@@ -1755,9 +1815,8 @@ function calculateAge(memberBirth) {
     return age;
 }
 
-
-
 </script>
+
 
 
 <c:import url="../temp/commonJS.jsp"></c:import>

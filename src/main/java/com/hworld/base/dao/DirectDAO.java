@@ -1,19 +1,15 @@
 package com.hworld.base.dao;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.apache.ibatis.annotations.Mapper;
-
 import com.hworld.base.util.Pager;
 import com.hworld.base.vo.ApplicationVO;
 import com.hworld.base.vo.DirectVO;
 import com.hworld.base.vo.MemberVO;
-import com.hworld.base.vo.OtherTelecomVO;
 import com.hworld.base.vo.PlanVO;
 import com.hworld.base.vo.QnaVO;
 import com.hworld.base.vo.ReviewVO;
@@ -22,8 +18,10 @@ import com.hworld.base.vo.ReviewVO;
 @Mapper
 public interface DirectDAO {
 		
-	//상품 수
+	//휴대폰 상품 수
 	public Long getTotalCount(Pager pager) throws Exception;
+	//악세사리 상품 수
+	public Long getTotalCountAcc(Pager pager) throws Exception;
 	
 	//휴대폰 상품 리스트 조회 
 	public List<DirectVO> getList(Pager pager) throws Exception;
@@ -68,7 +66,7 @@ public interface DirectDAO {
 	public List<ReviewVO> getReview(String slicedCode) throws Exception;	
 	
 	//리뷰 총 개수 가져오기
-	public  Long getReviewCount(DirectVO directVO) throws Exception;
+	public  Long getReviewCount(String slicedCode) throws Exception;
 	
 	//리뷰작성
 	public int setReviewAdd(ReviewVO reviewVO) throws Exception;
