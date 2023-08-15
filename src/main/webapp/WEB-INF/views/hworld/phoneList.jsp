@@ -331,22 +331,27 @@ h3.d-flex span {
                   </div>
                         
                     <!-- Prodcut setion -->
-                    <div class="">
+                   
+                    
                         <nav class="page-section d-flex justify-content-end" style="position: relative;">
-                            <ul class="pagination mx-auto">
-                                <li class="page-item">
-                                    <a class="page-link" href="javascript:void(0)" aria-label="Previous">
+                            <ul class="pagination ">
+                                <li class="page-item ${pager.pre ? '' : 'disabled' }">
+                                    <a class="page-link " href="phoneList?page=${pager.startNum-1}" aria-label="Previous">
                                         <span aria-hidden="true">
                                             <i class="fas fa-chevron-left"></i>
                                         </span>
                                     </a>
                                 </li>
                                 <li class="page-item active">
-                                    <a class="page-link" href="javascript:void(0)">1</a>
+                                   <c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
+						   	                    <li class="page-item">
+						                        	<a class="page-link" href="phoneList?page=${i}">${i}</a>
+						                    	</li>
+						           </c:forEach>
                                 </li>
 
-                                <li class="page-item">
-                                    <a class="page-link" aria-label="Next">
+                                <li class="page-item ${pager.next ? '' : 'disabled' }">
+                                    <a class="page-link" href="phoneList?page=${pager.lastNum+1}" aria-label="Next">
                                         <span aria-hidden="true">
                                             <i class="fas fa-chevron-right"></i>
                                         </span>
@@ -355,7 +360,7 @@ h3.d-flex span {
                             </ul>                            
                             <a href="directAdd" class="btn btn-solid-default m-1" style="position: absolute">상품 등록</a>
                         </nav>
-                    </div>
+                    
                 </div>
             </div>
         </div>

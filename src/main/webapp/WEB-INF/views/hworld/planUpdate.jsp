@@ -75,7 +75,7 @@
                     <form action="./planUpdate" method="POST" class="planUpdate">
                         <div class="row g-4">
                             <!-- 요금제 정보 -->
-                            <table id="commonCodeTable" hidden>
+                            <table id="commonCodeTable" >
                                <thead>
                                <tr class="table-head col-md-12">
                                <th class="col-3">Type </th>
@@ -98,10 +98,10 @@
                                 </tbody>
                                 </table> 
                                 
-                              	<input type="hidden" id="note" name="note" value="" placeholder="노트">
-                              	<input type="hidden" id="type" name="type" value="" placeholder="타입">
-                              	<input type="hidden" id="code" name="code" value="" placeholder="코드">
-                              	<input type="hidden" id="value" name="value" value="" placeholder="밸류">
+                              	<input type="text" id="note" name="note" value="" placeholder="노트">
+                              	<input type="text" id="type" name="type" value="" placeholder="타입">
+                              	<input type="text" id="code" name="code" value="" placeholder="코드">
+                              	<input type="text" id="value" name="value" value="" placeholder="밸류">
                               	
                             <div class="col-md-6">
                                 <label for="validationCustom04" class="form-label" >종류</label>
@@ -117,8 +117,12 @@
                                     </select>
                                 </div>
                                
-                              <input type="hidden" id="planNum" name="planNum" value=""> 
-                              <input type="hidden" id="categoryCode" name="categoryCode" value="">
+                              <input type="text" id="ori_planNum" name="oldPlanNum" value="${planVO.planNum}"> 
+                              <input type="text" id="planNum2" name="newPlanNum" > 
+                              <input type="text" id="planNum3" name="planNum" > 
+                              <input type="text" id="categoryCode" name="categoryCode" value="${plan.categoryCode}">
+                              <input type="text" id="newCode" value="${plan.categoryCode}">
+                              <input type="text" id="disCode" name="disCode" value="${plan.disCode}">
                               
                               
                               
@@ -126,26 +130,23 @@
                              <!-- 월요금 -->
                              <div class="col-md-6">
                                 <label for="planPrice" class="form-label">월 가격</label>
-                                <input type="text" class="form-control" id="planPrice" name="planPrice" placeholder="월 요금제">
+                                <input type="text" class="form-control" id="planPrice" name="planPrice" value="${plan.planPrice}">
                             </div>
                             <div class="col-md-6">
                                 <label for="planName" class="form-label">이름</label>
-                                <input type="text" class="form-control" id="planName" name="planName" placeholder="요금제명">
+                                <input type="text" class="form-control" id="planName" name="planName" value="${plan.planName}">
                             </div>
                             <div class="col-md-6">
                                 <label for="planExplainS" class="form-label">부가설명</label>
-                                <input type="text" class="form-control" id="planExplainS" name="planExplainS" placeholder="간략소개">
+                                <input type="text" class="form-control" id="planExplainS" name="planExplainS" value="${plan.planExplainS}">
                             </div>
                             <!-- 한 줄 -->
-                            <div class="col-md-12">
-                                <label for="planExplain" class="form-label">한 줄 설명</label>
-                                <input type="text" class="form-control" id="planExplain" name="planExplain">
-                            </div>
+
                             <!-- 데이터량 -->
                             
                             <div class="col-md-4">
                                 <label for="dataCapacity" class="form-label">데이터량</label>
-                                <input type="text" class="form-control" id="dataCapacity" name="dataCapacity" value="">
+                                <input type="text" class="form-control" id="dataCapacity" name="dataCapacity" value="${plan.dataCapacity}">
                             </div>
                             <div class="col-md-4">
                                 <label for="tel" class="form-label">통화량</label>
@@ -159,7 +160,7 @@
                             <!-- 상세정보 서머노트하자 -->
                             <div class="col-md-12">
                                 <label for="planExplain" class="form-label">상세정보</label>
-                                <textarea class="form-control col-md-12" name="planExplain" id="planExplain" cols="100" rows="10" readonly> 서머노트로 상세정보 입력할예정</textarea>
+                                <textarea class="form-control col-md-12" name="planExplain" id="planExplain" cols="100" rows="10"> </textarea>
                             </div>
 
                             <!-- 확인버튼 -->
@@ -167,10 +168,12 @@
                                 <button type="submit" class="btn btn-solid-default mx-auto" id="btn2">등록하기</button>
                             </div>     
                         </div>
+                        
                         </form>
+                        
                     </div>
                 </div>
-            </div>
+         </div>
         </section>
 
 
@@ -178,6 +181,13 @@
 
 <script>
 $(document).ready(function() {
+	const defTypes = $('#ori_planNum').val();
+	const defType = defTypes.slice(0,1);
+	
+	$("#validationCustom04").val(defType);
+	loadCommonCodes(defType);
+    generatePlanNum(defType);
+	
 	  // 셀렉트 박스 선택 시 공통 코드 리스트 가져오기
 	  $("#validationCustom04").on("change", function() {
 	    var selectedType = $(this).val();
@@ -230,26 +240,88 @@ function displayCommonCode(commonCodeList) {
   // 생성한 planNum을 hidden 필드에 설정
   generatePlanNum(lastCode);
 }
-
 	
 function generatePlanNum(lastCode) {
 	  let nextCode = parseInt(lastCode) + 1; // 마지막 코드 값의 다음 값 계산
 	  let selectedType = $("#validationCustom04").val(); // 선택한 타입 값 가져오기
 	  let planNum = selectedType + ("0" + nextCode).slice(-2); // 새로운 planNum 생성
 		let zeroCode = ("0" + nextCode).slice(-2);
-	  $("#planNum").val(planNum); // 생성한 planNum을 hidden 필드에 설정
+	  console.log(planNum)
+	
+	  	const newPlanInput = $('#planNum2');
+		const oldPlanInput = $('#planNum3');
+		newPlanInput.val(planNum); // 값을 설정
+		oldPlanInput.val(planNum); // 값을 설정
+	  console.log(newPlanInput.val());
+	  console.log(oldPlanInput.val());
 	  $('#code').val(zeroCode);
 	  $('#categoryCode').val(zeroCode);
 	  $('#type').val(selectedType);
+	  const oriPlanNum = $('#ori_planNum').val();
+	  console.log("기존 플랜넘",oriPlanNum);
+	  const newCode = $('#newCode').val();
+	  const getType=oriPlanNum.slice(0,1);
 	  
+	  console.log("sCode?",lastCode);
+	  if(selectedType == getType){ 
+		  newPlanInput.val(oriPlanNum);
+		  oldPlanInput.val(oriPlanNum);
+		  $('#code').val(newCode);
+		  $('#categoryCode').val(newCode);
+		  
+	  }
+	  $('#value').val($('#planName').val());
 	}	
 	
+$('#planPrice').on('input', function() {
+    const planPrice = Number($(this).val()); // 입력된 값에서 쉼표(,)를 제거하고 숫자로 변환
+    const disCodeElement = $('input[name="disCode"]');
+    
+    if (planPrice >= 77000) {
+      disCodeElement.val('4');
+    } else if (planPrice>=55000 && planPrice <77000){
+      disCodeElement.val('3');
+    } else if (planPrice>=33000 && planPrice <55000){
+    	disCodeElement.val('2');
+    } else {
+    	disCodeElement.val('1');
+    }
+  });
 
 
+</script>
+<script>
+$('#planExplain').summernote('code', '${plan.planExplain}');
+	//썸머노트 
+	//썸머노트 
+	$('#planExplain').summernote({
+        tabsize: 2,
+        height: 300,
+        toolbar: [
+          ['style', ['style']],
+          ['font', ['bold', 'underline', 'clear']],
+          ['color', ['color']],
+          ['para', ['ul', 'ol', 'paragraph']],
+          ['table', ['table']],
+          ['insert', ['link', 'picture', 'video']],
+        ],
+        callbacks: {
+        	onImageUpload: function(files, editor, welEditable) {
+        		for(var i = files.length -1; i>=0; i--) {
+        			sendFile(files[i], this);
+        		}
+        	}
+        }
+ });
+	
+	
+	// 썸머노트 에디터의 내용이 변경되었을 때 처리
+	  $('#planExplain').on('summernote.blur', function() {
+	    var summerContent = $(this).summernote('code');
+	    console.log('변경된 썸머노트 내용: ' + summerContent);
 
-$('#planName').blur(function(){
-	$('#value').val($('#planName').val());
-})
+	});
+
 </script>
 
 

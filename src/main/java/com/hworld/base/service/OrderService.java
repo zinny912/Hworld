@@ -17,6 +17,7 @@ import com.hworld.base.dao.CartDAO;
 import com.hworld.base.dao.DirectDAO;
 import com.hworld.base.dao.MemberDAO;
 import com.hworld.base.dao.OrderDAO;
+import com.hworld.base.vo.ApplicationVO;
 import com.hworld.base.vo.CartVO;
 import com.hworld.base.vo.DirectVO;
 import com.hworld.base.vo.MemberVO;
@@ -139,6 +140,38 @@ public class OrderService {
 
 	}
 	
+	public void orderPhone(OrderDirectVO orderDirectVO, MemberVO memberVO, OrderVO orderVO)throws Exception{
+		/* DB 주문, 주문상품(배송정보) 넣기 */
+		// orderNum 만들기 및 OrderDTO객체 orderNum에 저장
+		Date date = new Date();
+		SimpleDateFormat format = new SimpleDateFormat("_yyyyMMddHHmmss");
+		String orderNum = memberVO.getMemberNum()+format.format(date);
+		
+		orderDirectVO.setOrderNum(orderNum);
+		orderDirectVO.setOrderAmount("1");
+		orderVO.setOrderNum(orderNum);		
+		orderVO.setOrderDate(date);
+		orderVO.setOrderState(0);
+		
+		orderVO.setMemberNum(memberVO.getMemberNum());
+
+		orderDAO.setInsert(orderVO); //주문 테이블 등록 
+		orderDAO.setODInsert(orderDirectVO);
+	
+		
+			//재고 변동 
+			String directCode = orderDirectVO.getDirectCode();
+		 	DirectVO directVO = directDAO.getDetailPhone(directCode);
+
+			int directStockInt = directVO.getDirectStock();
+			int orderAmountInt = 1;
+			
+			int Stock = directStockInt-orderAmountInt;
+			directVO.setDirectStock(Stock);
+			
+			orderDAO.deductStock(directVO);
+	    }
+
 	
 	
 	public int setOrderPayment(PayVO payVO)throws Exception{

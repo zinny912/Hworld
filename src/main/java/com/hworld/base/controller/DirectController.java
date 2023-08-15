@@ -1,45 +1,35 @@
 package com.hworld.base.controller;
 
-import java.nio.charset.StandardCharsets;
-import java.util.stream.Collectors;
-import java.sql.Array;
-import java.sql.Date;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import javax.websocket.server.PathParam;
 
-import org.apache.catalina.util.URLEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.hworld.base.dao.DirectDAO;
+import com.hworld.base.dao.PlanDAO;
 import com.hworld.base.service.CartService;
 import com.hworld.base.service.DirectService;
 import com.hworld.base.service.OrderService;
+import com.hworld.base.service.PlanService;
 import com.hworld.base.util.Pager;
 import com.hworld.base.vo.ApplicationVO;
 import com.hworld.base.vo.DirectVO;
@@ -60,7 +50,13 @@ public class DirectController {
 	@Autowired
 	private DirectService directService;
 	@Autowired
+	private DirectDAO directDAO;
+	@Autowired
 	private CartService cartService;
+	@Autowired
+	private OrderService orderService;
+	@Autowired
+	private PlanDAO planDAO;
 	
 	
 	// 휴대폰 리스트 페이지
@@ -77,7 +73,7 @@ public class DirectController {
 	        }
 
 	        List<DirectVO> ar = directService.getList(pager); 
-	        log.error(ar.get(0).getDirectCode());
+	        
 	        List<PlanVO> existPlanList = directService.getExistPlanList();
 		    List<PlanVO> planList = directService.getPlanList();
 		    List<PlanVO> gList = new ArrayList<>();
@@ -103,8 +99,7 @@ public class DirectController {
 			        hList.add(plan);
 			    }
 			}
-	        
-	        
+
 	        mv.addObject("existList", existPlanList);
 			mv.addObject("gList", gList);
 			mv.addObject("sList", sList);
@@ -123,7 +118,7 @@ public class DirectController {
 
 	// 휴대폰 상세 페이지
 	@GetMapping("phoneDetail")
-	public ModelAndView getDetail(String slicedCode, QnaVO qnaVO, HttpSession session) throws Exception{
+	public ModelAndView getDetail(String slicedCode, QnaVO qnaVO, HttpSession session, Pager pager) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		MemberVO memberVO = (MemberVO) session.getAttribute("memberVO");
 		if (memberVO == null || memberVO.getMemberNum() == null) {
@@ -173,13 +168,16 @@ public class DirectController {
 		}
 	    
 	    List<ReviewVO> reviews = directService.getReview(slicedCode);//slicedCode로 페이징된 리뷰 목록 조회
-//	    List<ReviewVO> pReview = new ArrayList<>();
-//	    for(ReviewVO review : reviews) {
-//	    	String categoryCode = review.getCategoryCode();
-//	    	if(categoryCode.equals("00")) {
-//	    		pReview.add(review);
-//	    	}
-//	    }
+
+	    Integer result = planDAO.getPlanG(memberVO.getMemberNum());
+	    if(result==null) {
+	    	result=0;
+	    }
+	    PlanVO serial = directDAO.getKingPhoneNum(memberVO.getMemberNum());
+	    if(serial == null) {
+	        serial = new PlanVO(); 
+	        serial.setSerialNum(0);
+	    }
 	    
 	 // 세션에서 계산된 값(params)을 가져옴
 	    Map<String, Object> monthlyPay = (Map<String, Object>) session.getAttribute("monthlyPay");
@@ -203,6 +201,9 @@ public class DirectController {
 		
 	    mv.addObject("list", ar);
 	    mv.addObject("review",reviews);
+	    
+	    mv.addObject("result",result);
+	    mv.addObject("serial",serial);
 	    mv.setViewName("hworld/phoneDetail");
 
 		return mv;
@@ -449,7 +450,7 @@ public class DirectController {
 		mv.setViewName("redirect:./accessoryList");
 		return mv;
 	}
-	
+
 	//리뷰 추가
 	@PostMapping("reviewAdd")
 	public ModelAndView setReviewAdd(ReviewVO reviewVO, ModelAndView mv) throws Exception {
@@ -460,6 +461,23 @@ public class DirectController {
 		mv.setViewName("redirect:" + redirectUrl);  // 리다이렉트할 URL을 설정한다
 		return mv;
 	}
+	
+	@ResponseBody
+	@GetMapping("checkOrder")
+	public List<Map<String, Object>> checkOrder(@RequestParam int memberNum, @RequestParam String directCode, @RequestParam String slicedCode) throws Exception {
+		List<Map<String, Object>> orderList = directDAO.getOrderList(memberNum, slicedCode);
+		log.error("{}<=======orderList",orderList);
+	    List<Map<String, Object>> responseList = new ArrayList<>();
+	    for (Map<String, Object> order : orderList) {
+	        Map<String, Object> response = new HashMap<>();
+	        response.put("orderNum", order.get("ORDERNUM"));
+	        response.put("hasReview", order.get("hasReview")); // hasReview를 불리언 값으로 설정
+	        responseList.add(response);
+	    }
+	    log.error("{}<==========responseList",responseList);
+	    return responseList;
+	}
+
 		
 	// 리뷰 수정 처리
 	@PostMapping("reviewUpdate")
@@ -507,13 +525,11 @@ public class DirectController {
 	}
 	
 	// 휴대폰 주문 페이지
-	
 	@GetMapping("phoneOrder")
-	public ModelAndView phoneOrder(@RequestParam Map<String, Object> map, HttpSession session) throws Exception{
+	public ModelAndView phoneOrder(@RequestParam Map<String, Object> map, HttpSession session, @RequestParam String taPhoneNum) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		MemberVO memberVO = (MemberVO) session.getAttribute("memberVO");
-		
-		
+
 		if(memberVO == null) {
 			
 			mv.setViewName("hworld/login");
@@ -526,15 +542,14 @@ public class DirectController {
 		PlanVO phoneNum = directService.getKingPhoneNum(memberNum);
 		
 		if(phoneNum != null) {
-		
 		mv.addObject("phoneNum", phoneNum);
+		mv.addObject("taPhoneNum",taPhoneNum);
 		mv.addObject("map", map);
 		mv.setViewName("hworld/phoneOrder");
 		return mv;
 
-		
 		} else {
-
+			mv.addObject("taPhoneNum",taPhoneNum);
 			mv.addObject("map", map);
 			mv.setViewName("hworld/phoneOrder");
 			return mv;
@@ -544,7 +559,8 @@ public class DirectController {
 	}
 	@Transactional
 	@PostMapping("formAdd")
-	public ModelAndView setFormAdd(@Valid ApplicationVO applicationVO, BindingResult bindingResult, HttpSession session) throws Exception{
+	public ModelAndView setFormAdd(@Valid ApplicationVO applicationVO, BindingResult bindingResult, HttpSession session, OrderDirectVO orderDirectVO, @RequestParam("orderTelNum") String orderTelNum, @RequestParam("directCode") String directCode, 
+			@RequestParam("address1") String address1, @RequestParam("address2") String address2, @RequestParam("address3") String address3, @RequestParam("orderReceiver") String orderReceiver, @RequestParam("taPhoneNum") String taPhoneNum) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		
 		//에러가 발생한 경우 여기서 view 리턴
@@ -556,26 +572,49 @@ public class DirectController {
 
 		//에러가 없는경우 insert 작업
 		int result = directService.setFormAdd(applicationVO, session);
-		log.info("=============> result : {} ", result);
-		
 		
 		MemberVO memberVO = (MemberVO) session.getAttribute("memberVO");
 		Integer memberNum = memberVO.getMemberNum();
 		int ownResult = directService.setOwnCheck(memberNum);
 		
+		// 번호 삭제 호출
+	    if (!taPhoneNum.isEmpty()) {
+	        int removeResult = directDAO.removeTaPhone(taPhoneNum);
+	        log.error("{}========taPhone", taPhoneNum);
+	        log.error("{}<=========resultttt", removeResult);
+	    }
+		
+		 // orderVO 객체 생성 및 orderTelNum 설정
+	    OrderVO orderVO = new OrderVO();
+	    orderVO.setOrderTelNum(orderTelNum);
+	   
+	    orderVO.setOrderAddress1(address1);
+	    orderVO.setOrderAddress2(address2);
+	    orderVO.setOrderAddress3(address3);
+	    orderVO.setOrderReceiver(orderReceiver);
+
+	    orderDirectVO.setDirectCode(directCode);
+	    orderDirectVO.setMemberNum(memberNum);
+	    
+		// 휴대폰 주문이 성공했을 경우, orderPhone 메서드 호출
+        if (result == -1) {
+            orderService.orderPhone(orderDirectVO, memberVO, orderVO);
+        }
+		
 		mv.setViewName("redirect:./phoneOrderResult");
 		//성공하면 결과에 따라 alert띄우기 해도 될듯. 나중에 index 등으로 바꾸기
 		return mv;
 	}
+
+	//복지&군인 요금제 가입 가능 여부 확인
+	
 	
 	@ResponseBody
 	@GetMapping("checkPhoneNum")
 	public Map<String, Object> checkPhoneNum(String phoneNum, String rrnf, String rrnl, String name) throws Exception {
 	    return directService.checkPhoneNum(phoneNum, rrnf, rrnl, name);
 	}
-	
-	
-	
+
 	//휴대폰 상품 구매 후 결과 페이지
 	@GetMapping("phoneOrderResult")
 	public ModelAndView phoneOrderResult(@RequestParam Map<String, Object> map, HttpSession session) throws Exception{
@@ -587,7 +626,6 @@ public class DirectController {
 		PlanVO phoneNum = directService.getMemberPlan(memberNum);
 		
 		String directName = directService.getDirectName(memberNum);
-		log.error(directName);
 		mv.addObject("phone", phoneNum);
 		mv.addObject("directName", directName);
 		mv.setViewName("hworld/phoneOrderResult");

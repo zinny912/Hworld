@@ -1,19 +1,15 @@
 package com.hworld.base.dao;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.apache.ibatis.annotations.Mapper;
-
 import com.hworld.base.util.Pager;
 import com.hworld.base.vo.ApplicationVO;
 import com.hworld.base.vo.DirectVO;
 import com.hworld.base.vo.MemberVO;
-import com.hworld.base.vo.OtherTelecomVO;
 import com.hworld.base.vo.PlanVO;
 import com.hworld.base.vo.QnaVO;
 import com.hworld.base.vo.ReviewVO;
@@ -22,8 +18,10 @@ import com.hworld.base.vo.ReviewVO;
 @Mapper
 public interface DirectDAO {
 		
-	//상품 수
+	//휴대폰 상품 수
 	public Long getTotalCount(Pager pager) throws Exception;
+	//악세사리 상품 수
+	public Long getTotalCountAcc(Pager pager) throws Exception;
 	
 	//휴대폰 상품 리스트 조회 
 	public List<DirectVO> getList(Pager pager) throws Exception;
@@ -68,10 +66,13 @@ public interface DirectDAO {
 	public List<ReviewVO> getReview(String slicedCode) throws Exception;	
 	
 	//리뷰 총 개수 가져오기
-	public  Long getReviewCount(DirectVO directVO) throws Exception;
+	public  Long getReviewCount(String slicedCode) throws Exception;
 	
 	//리뷰작성
 	public int setReviewAdd(ReviewVO reviewVO) throws Exception;
+	
+	//리뷰 작성가능여부
+	public List<Map<String, Object>> getOrderList(int memberNum, String slicedCode) throws Exception;
 	
 	//리뷰수정
 	public int setReviewUpdate(ReviewVO reviewVO) throws Exception;
@@ -108,6 +109,9 @@ public interface DirectDAO {
 	//구매완료(가입완료 후 결과안내 창)
 	public PlanVO getMemberPlan(Integer memberNum) throws Exception;
 	
+	//구매 후 재고 수정위해 폰 디테일 불러오는 
+	public DirectVO getDetailPhone (String directCode) throws Exception;
+	
 	public String getDirectName(Integer memberNum) throws Exception;
 
 	//타 통신사 번호 조회
@@ -121,4 +125,7 @@ public interface DirectDAO {
 	
 	//휴대폰 구매 후 ownCheck 1로 업데이트
 	public int setOwnCheck(Integer memberNum) throws Exception;
+	
+	//번호이동시 타텔레콤 테이블에서 번호 삭제하기
+	public int removeTaPhone(String taPhoneNum) throws Exception;
 }

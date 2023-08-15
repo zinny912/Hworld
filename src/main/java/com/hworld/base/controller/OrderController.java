@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hworld.base.dao.DirectDAO;
+import com.hworld.base.dao.OrderDAO;
 import com.hworld.base.service.DirectService;
 import com.hworld.base.service.MemberService;
 import com.hworld.base.service.OrderService;
@@ -69,6 +70,16 @@ public class OrderController {
 		
 		return mv;
 	}
+	
+//	@PostMapping("/orderPhone")
+//	public ModelAndView getOrderPhone(OrderDirectVO orderDirectVO, MemberVO memberVO, OrderVO orderVO) throws Exception{
+//		ModelAndView mv = new ModelAndView();
+//		
+//		orderService.orderPhone(orderDirectVO,memberVO,orderVO);
+////		log.error("[}<===========order");
+//		
+//		return mv;
+//	}
 
 	
 	@PostMapping("/payment")

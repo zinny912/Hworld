@@ -11,15 +11,7 @@
     <c:import url="../temp/style.jsp"></c:import>    
     <title>부가서비스 상세페이지</title>
  <style>
-    .boxone {
-    width:50%;
-    padding-right: 5%;
-    }
-    .boxtwo {   
-    width:50%;
-    padding-left: 5%;
-    }
-
+  
     .login-section {
         background-color: #fff;
     }
@@ -33,24 +25,21 @@
         border-radius: 10px;
         box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
         border:1px solid darkgray;
-        padding:50px 10px 30px 170px;
+        padding:30px 20px 40px 30px;
         margin:40px;
         background-color: fff;
     }
     .zcustom-box h3 {
         color:black;
         text-align:center;
-        margin-right:30px;
-        margin-top:20px;
+       
     }
+   
     .zcustom-box li{
         margin-right:10px;
        
     }
-    .zcustom-box img {
-        width:70%;
-        position:al;
-    }
+   
     .hbox {
         border-right: 2px lightgray solid;
         margin-left :20px;
@@ -88,11 +77,13 @@
                     <div class="details-items">
                         <div class="row g-4">
                             <div class="col-md-12 ">
+                            <c:if test="${memberVO.adminCheck == 0}">
                                 <div class="justify-content-start" style="margin-top:-20px;">
-                                    <a href="./ePlanUpdate" class="me-3">수정</a>
+                                    <a href="./ePlanUpdate?extraPlanNum=${extraPlanVO.extraPlanNum }" class="me-3">수정</a>
                                     <a href="javascript:void(0)" data-bs-toggle="modal"
-                                                    data-bs-target="#extraDel">삭제</a>
+                                                    data-bs-target="#disabledBtn">비활성화</a>
                                 </div>
+                              </c:if>  
                                 <input type="hidden" id="extraPlanNum" name="extraPlanNum" value="${eplan.extraPlanNum}">
                                 <div class="details-image-concept" >
                                     <span class="text-start" style="font-size:30px; font-weight: 700;">${eplan.extraPlanName}</span>
@@ -100,22 +91,20 @@
                                     <span style="font-size:30px; font-weight: 500;"> </span>
                                 </div>
                                 <h3 class="text-start" style="color:gray;"> ${eplan.extraPlanExplainS} </h3>
-                                <div class="container zcustom-box">
-                                    <ul>
-                                        <li class="">
-                                        <div style="width:85%; height:30%; padding-left:30%; padding-right:10%;">
-                                        <img src="/assets/images/headphone.png">
-                                        </div>
-                                            <h3> ${eplan.extraPlanExplainM} </h3>
-                                        </li>
-                                        <li style="margin-left:15%;position: relative; top: -20px;">  
-                                            <div class="container text-center" >
-                                            <div  >
-                                               <h2 class="theme-color d-flex justify-content-center" >월 <fmt:formatNumber value="${eplan.extraPrice}" pattern="#,###" /> 원</h2> 
-                                                    <span class="label-text">(부가세 포함)</span>
-                                                <div class="" style="margin-top:10px;">
-                                            </div>    
-                                                <!-- 신청 모달 버튼  start -->
+									<div class="zcustom-box" style="display: flex;">
+									    <ul style="width: 100%; list-style-type: none; display: flex;">
+									        <li style="width: 50%; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+									            <img src="/assets/images/addition.png">
+									            <div style="width: 450px; display: flex; justify-content: center; align-items: center;">
+									                <h3>${eplan.extraPlanExplainM}</h3>
+									            </div>
+									        </li>
+									        <li style="width: 50%;">
+									            <div style="padding-top: 35px;">
+									                <h2 class="theme-color d-flex justify-content-center">월 <fmt:formatNumber value="${eplan.extraPrice}" pattern="#,###" /> 원</h2>
+									                <span class="label-text d-flex justify-content-center mb-2">(부가세 포함)</span>
+									            </div>
+									                    <!-- 신청 모달 버튼  start -->
                                                 <c:if test="${empty map.size() }">
                                                 <div class="product-buttons justify-content-center" >
                                                 <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#extraJoin" >
@@ -123,18 +112,15 @@
                                                 </a>
                                                 </div>
                                                 </c:if>
-                                                
                                                 <c:if test="${not empty map.size() }">
                                                 <div class="product-buttons justify-content-center">
                                                         <span class="btn btn-solid rounded-3 disabled">이미 사용중인 부가서비스입니다.</span> 
                                                 </div> 
                                                 </c:if>
-                                                </div>
-                                            </div> 
-                                            
-                                        </li> 
-                                    </ul>
-                                </div>
+										        </li> 
+										    </ul>
+										</div>                        
+                               
                             </div>
                         </div>
                     </div>
@@ -226,26 +212,28 @@
     </div>
     <!-- Add number Modal End -->
 
-    <!-- 부가서비스 삭제 모달창 start -->
-    <div class="modal fade payment-modal" id="extraDel">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="mb-4">
-                         <h3>정말 삭제하시겠습니까? </h3> <h5>삭제 후에는 복구가 불가합니다.</h5>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer pt-0 text-end d-block">
-                    <a href="#" ><button class="btn btn-solid-default rounded-1">확인</button></a>
-                </div>
+    <!-- 부가서비스 비활성화 모달창 start -->
+    <div class="modal fade payment-modal" id="disabledBtn">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form action = "./planDisabled" method="POST" id="disabledPlan">
+                    <div class="mb-4">
+                     <h3 class="theme-color fw-bold">해당 요금제를 비활성화 하시겠습니까? </h3> <br> <h5>비활성화 이후에는 활성화가 불가합니다.</h5>
+                     <h5>해당요금제로는 더이상 신규가입이 불가하게 됩니다.</h5>
+                     <input type="text" name="extraPlanNum" id="modalExtraPlanNum" value="${extraPlanVO.extraPlanNum}">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer pt-0 text-end d-block">
+                <button type="button" id="confirmDisabled" class="btn btn-solid-default rounded-1">확인</button></a>
             </div>
         </div>
     </div>
+</div>
     <!-- Add number Modal End -->
 
 <!-- Recommend product 1 -->
@@ -331,6 +319,14 @@
 
 <script>
 // 부가서비스 신청 버튼 클릭 이벤트 처리
+ $('#confirmDisabled').click(function() {
+        let confirm = $('#modalExtraPlanNum').val();
+      console.log(confirm);
+    	   $('#disabledPlan').submit();
+    	   console.log("확인")
+    });
+
+
 $('#extraApplyCheck').click(function() {
     const ep = $('#extraPlanNum').val();
     const en = $('#extraPlanName').val();

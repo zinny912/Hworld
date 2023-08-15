@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.http.ResponseEntity;
 
 import com.hworld.base.util.Pager;
 import com.hworld.base.vo.BaseVO;
@@ -21,7 +22,8 @@ public interface PlanDAO {
 	
 	// 요금제 리스트 조회
     public List<PlanVO> getPlanList() throws Exception;
-  //존재하는 plan 타입 가져오기
+    
+    //존재하는 plan 타입 가져오기
   	public List<PlanVO> getExistPlanList() throws Exception;
     public List<PlanVO> getGeneralList() throws Exception;
     public List<PlanVO> getSeniorList() throws Exception;
@@ -29,6 +31,9 @@ public interface PlanDAO {
     public List<PlanVO> getWelfareList() throws Exception;
     public List<PlanVO> getZemList() throws Exception;
     public List<PlanVO> getHeroList() throws Exception;
+    
+    //회원 회선 조회해서 제약걸린 요금제 있는지 조회
+    public Integer getPlanG(Integer memberNum) throws Exception;
 	
 	// 요금제 하나 조회
     public PlanVO getDetail(PlanVO planVO) throws Exception;
@@ -52,23 +57,34 @@ public interface PlanDAO {
     //위약금 조회 프로시저 호출
     public Map<?, ?> getCheckCancelFee(Map<String, Object> checkCancelFee) throws Exception;
     
+    //위약금 update 
+    public int setInsertCancelFee(BillVO billVO) throws Exception;
+    
     //요금제 변경 후 청구내역 변경되는 프로시저 호출
     public int setPlanChange(BillVO billVO) throws Exception;
     
     //타통신사 조회 
     public String isOtherTelecom(String taPhoneNum, String telecomName) throws Exception;
     
+    //번호이동 완료시 데이터 조회
+    public PlanVO getChangeTelecomResult(Integer memberNum) throws Exception;
+    
     // 공통코드 정보 가져오고 insert 
     public List<BaseVO> getCommonCode(BaseVO baseVO) throws Exception;
     public int setCommonCode(BaseVO baseVO) throws Exception;
+    public int setDeleteCommon(String oldType, String oldCode)throws Exception;
+    public int setUpdateCommon(BaseVO baseVO) throws Exception;
 	
 	// 요금제 등록
     public int setInsert(PlanVO planVO) throws Exception;
 	
 	// 요금제 수정
     public int setPlanUpdate(PlanVO planVO) throws Exception;
+    
+    // 요금제 수정 시 planNum 변경 로직
+    public int updatePlanNum(Map<String, Object> map) throws Exception;
 	
-	// 요금제 삭제
+	// 요금제 삭제(비활성화)
     public int setPlanDisabled(PlanVO planVO) throws Exception;
 
 	// 부가서비스 갯수
@@ -87,15 +103,13 @@ public interface PlanDAO {
 	public Map<String, Object> searchExtraPlan(Map<String, Object> map) throws Exception;
 
 	// 부가서비스 추가
-	public int setEPlanInsert(ExtraPlanVO extraPlanVO) throws Exception;
+	public int setExtraPlanInsert(ExtraPlanVO extraPlanVO) throws Exception;
 	
 	// 부가서비스 수정
 	public int setExtraPlanUpdate(ExtraPlanVO extraPlanVO) throws Exception;
 	
 	// 부가서비스 삭제
-	public int setExtraPlanDelete(ExtraPlanVO extraPlanVO) throws Exception;
-
-	
+	public int setExtraPlanDisabled(ExtraPlanVO extraPlanVO) throws Exception;
 
 	
 }

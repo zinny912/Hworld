@@ -211,6 +211,7 @@ h3.d-flex span {
                               <input type="hidden" id="planPrice" name="planPrice" data-plan-price2="" value="88000">
                               <input type="hidden" id="planNum" name="planNum" value="G01">
                               <input type="hidden" style="border:0; font-size:20px;" id="selectedPlanName" name="planName" value="5G 프리미어">
+	                         <input type="text" id="disKind" name="disKind" > 
 	                         </div>               
                             </div>
                         </div>
@@ -353,31 +354,35 @@ h3.d-flex span {
                   </div>
                         
                     <!-- Prodcut setion -->
-                    <div class="">
+                    
                         <nav class="page-section d-flex justify-content-end" style="position: relative;">
                             <ul class="pagination mx-auto">
-                                <li class="page-item">
-                                    <a class="page-link" href="javascript:void(0)" aria-label="Previous">
+                                <li class="page-item ${pager.pre ? '' : 'disabled' }">
+                                    <a class="page-link " href="phoneList?page=${pager.startNum-1}" aria-label="Previous">
                                         <span aria-hidden="true">
                                             <i class="fas fa-chevron-left"></i>
                                         </span>
                                     </a>
                                 </li>
                                 <li class="page-item active">
-                                    <a class="page-link" href="javascript:void(0)">1</a>
+                                   <c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
+						   	                    <li class="page-item">
+						                        	<a class="page-link" href="phoneList?page=${i}">${i}</a>
+						                    	</li>
+						           </c:forEach>
                                 </li>
 
-                                <li class="page-item">
-                                    <a class="page-link" aria-label="Next">
+                                <li class="page-item ${pager.next ? '' : 'disabled' }">
+                                    <a class="page-link" href="phoneList?pag=${pager.lastNum+1}" aria-label="Next">
                                         <span aria-hidden="true">
                                             <i class="fas fa-chevron-right"></i>
                                         </span>
                                     </a>
                                 </li>
-                            </ul>                            
+                            </ul>                    
                             <a href="directAdd" class="btn btn-solid-default m-1" style="position: absolute">상품 등록</a>
                         </nav>
-                    </div>
+                   
                 </div>
             </div>
         </div>
@@ -787,6 +792,7 @@ function setSelectedPlan(planName, planPrice, planNum) {
     // 할인유형 체크박스 변경 이벤트 핸들러
     $('input[name="disKind"]').change(function() {
         const selectedValue = $(this).val();
+        const disKindSelect = $('#disKind').val(selectedValue);
 
         // 다른 체크박스 해제
         $('input[name="disKind"]').not(this).prop('checked', false);

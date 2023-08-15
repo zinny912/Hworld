@@ -125,9 +125,7 @@
                             </div>
                         </div>
                     </div>
-                    <input type="hidden" id="seNum"name="serialNum" value="${bfPlan.serialNum}">
-                    <input type="hidden" id="plNum" name="planNum" value="${planVO.planNum}">
-                    <input type="hidden" name="nowDate" id="now" value="">
+                    
                     <input type="hidden" name="requestCode" id="requestCode" value="1">
                     <input type="hidden" id="expireDate" value="${bfPlan.expireDate}">
                     
@@ -137,7 +135,7 @@
                                         <div class="container">
                                             
                                             <h2 class="fw-bolder"><img class="mb-1"src="/assets/images/redwarning.png">
-                                                위약금 결제 후 요금제 변경이 가능합니다.</h2>
+                                                위약금이 청구금액에 포함됩니다.</h2>
                                             <div class="container">
                                                 <div class="font-light fs-6 mt-1 d-flex">	
 
@@ -149,7 +147,7 @@
                                                
                                             </div>
                                             <div class="form-check ps-0 custome-form-check justify-content-center">
-                                                <button class="btn rounded-3 btn-solid-default">일시불 결제하기</button>
+                                                <button class="goBtn btn rounded-3 btn-solid-default">진행하기</button>
                                                 
                                                
                                             </div>
@@ -162,7 +160,10 @@
                                 <div class="col-lg-9">
                                     <div class="contact-details rounded-3 mt-3 mb-3">
                                         <div class="container">
-                                            
+                                            <input type="hidden" id="seNum"name="serialNum" value="${bfPlan.serialNum}">
+						                    <input type="hidden" id="plNum" name="planNum" value="${planVO.planNum}">
+						                    <input type="hidden" id="cancelFee" name="cancelPrice" >
+						                    <input type="hidden" name="nowDate" id="now" value="">
                                             <h2 class="fw-bolder"><img class="mb-1"src="/assets/images/redwarning.png">
                                                 이것만은 꼭 확인하세요</h2>
                                             <div class="container">
@@ -216,7 +217,9 @@ const formattedDate = new Date(year, month - 1, day);
 
 const formattedDateString = formattedDate.toISOString().slice(0, 10);
 
-document.getElementById('now').value = formattedDateString;
+const formattedDate2 = year + "-" + (month < 10 ? "0" : "") + month + "-" + (day < 10 ? "0" : "") + day;
+document.getElementById('now').value = formattedDate2;
+
 </script>
 <script>
 
@@ -243,11 +246,11 @@ data: {
 success: function(response) {
 	let cancelPrice = response.cancelPrice;
 	
+	if(cancelPrice >0){
 	$('#cancelPrice').text(cancelPrice.toLocaleString());
 	$('.cancelFeeIs').html('<p class="fs-3 w-100 text-center">${memberVO.name}님, 요금제 변경시 위약금이 발생합니다.</p>');
 	$('.changebtn').prop('disabled', true);
-	
-	if(cancelPrice<0 || cancelPrice==0){
+	}else if(cancelPrice<0 || cancelPrice==0){
 		$('.cancelFee').hide();
 		$('.changebtn').prop('disabled', false);
 		
@@ -278,8 +281,20 @@ const days = Math.floor(remain / (1000 * 60 * 60 * 24)); // 밀리초(ms)를 일
 
 $('.remainDays').text(days);
 
+//'확인 후 진행하기' 버튼 클릭 이벤트 처리
+$('.goBtn').on('click', function () {
+	const cancelPriceText = $('#cancelPrice').text();
+    const cancel= parseInt(cancelPriceText.replace(/,/g, ''), 10);
+	
+		$('#cancelFee').val(cancel);
+		console.log(cancel);
+		$('.changebtn').prop('disabled', false);
+		alert("위약금 청구내역에 등록완료");
+		
+});
 
 </script>
+
 
 </body>
 

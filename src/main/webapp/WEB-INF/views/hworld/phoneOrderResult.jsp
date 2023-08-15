@@ -36,7 +36,7 @@
                         <div class="materialContainer">
                             <div class="material-details">
                                 <div class="title title1 title-effect mb-1 title-left">
-                                    <p class="fs-3 w-100 text-center">${memberVO.name} 님, <strong class="fs-2 theme-color">H world</strong>에 오신것을 환영합니다! <br> 선택하신 <strong class="fs-2 theme-color">${directName}</strong>으로 <strong class="fs-2 theme-color">가입</strong>이 완료되었습니다.</p>
+                                    <p class="fs-3 w-100 text-center">${memberVO.name} 님, <strong class="fs-2 theme-color">H world</strong>에 오신것을 환영합니다! <br> 선택하신 <strong class="fs-2 theme-color">${directName}</strong>제품으로 <strong class="fs-2 theme-color">가입</strong>이 완료되었습니다.</p>
                                 </div>
                             </div>
                             <div class="">
@@ -101,7 +101,7 @@ const formattedDateString = formattedDate.toLocaleDateString("ko-KR", options);
 const formattedDateStrings = formattedDates.toLocaleDateString("ko-KR", options);
 
 document.getElementById("nowDate").textContent = formattedDateString;
-document.getElementById("startDate").textContent = formattedDateStrings;
+/* document.getElementById("startDate").textContent = formattedDateStrings; */
 </script>
 </body>
 

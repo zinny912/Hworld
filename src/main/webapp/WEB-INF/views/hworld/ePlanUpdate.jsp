@@ -4,17 +4,36 @@
 <!DOCTYPE html>
 
 <html lang="en">
-
 <head>
 	<meta charset="UTF-8">
     <c:import url="../temp/style.jsp"></c:import>
-    <title>부가서비스 수정 페이지</title>
+ 
+ <style>
+    .input-container {
+        position: relative;
+    }
+    
+    .input-container::before {
+        content: "원";
+        position: absolute;
+        top: 50%;
+        right: 10px;
+        transform: translateY(-50%);
+        color: #999999;
+    }
+    
+    .input-field {
+        padding-right: 30px; /* '원' 글자를 고려하여 오른쪽 padding 추가 */
+    }
+</style>
+ 
+ 
 </head>
 
 <body class="theme-color2 light ltr">
 <c:import url="../temp/header.jsp"></c:import>
     <!-- Breadcrumb section start -->
-    <section class="breadcrumb-section section-b-space">
+        <section class="breadcrumb-section section-b-space">
         <ul class="circles">
             <li></li>
             <li></li>
@@ -30,7 +49,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <h3>부가서비스 수정 페이지</h3>
+                    <h3>부가서비스 수정</h3>
                     <nav>
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item">
@@ -53,54 +72,106 @@
             <div class="row g-4 justify-content-center">
                 <div class="col-lg-6" >
                     <h3 class="mb-3 fw-bold">부가서비스</h3>
-                    <form class="needs-validation">
+                    <form action="./ePlanUpdate" method="POST" class="ePlanUpdate">
                         <div class="row g-4">
-                            <!-- 부가서비스 정보 -->
+                            
+                                
+                              	<input type="text" id="note" name="note" value="부가서비스">
+                              	<input type="text" id="type" name="type" value="E" >
+                              	<input type="text" id="code" name="code" value="${extraPlan.categoryCode}" >
+                              	<input type="text" id="value" name="value">
+                              	
+                          
+                              <input type="text" id="extraPlanNum" name="extraPlanNum" value="${extraPlan.extraPlanNum}"> 
+                              <input type="text" id="categoryCode" name="categoryCode" value="${extraPlan.categoryCode}">
+                              <input type="text" id="disabled" name="disabled" value="1">
+                              
+                              
                             <div class="col-md-6">
-                                <label for="fname" class="form-label">이름</label>
-                                <input type="text" class="form-control" id="fname" value="V 컬러링">
+                                <label for="extraPlanName" class="form-label">부가서비스 이름</label>
+                                <input type="text" class="form-control" id="extraPlanName" name="extraPlanName" value="${extraPlan.extraPlanName}">
                             </div>
+                        
                              <!-- 월요금 -->
                              <div class="col-md-6">
-                                <label for="fname" class="form-label">이름2</label>
-                                <input type="text" class="form-control" id="fname" placeholder="(보이는 컬러링)" >
+                                <label for="extraPrice" class="form-label">월 가격</label>
+                                <input type="text" class="form-control" id="extraPrice" name="extraPrice" value="${extraPlan.extraPrice}">
                             </div>
+
                             <div class="col-md-6">
-                                <label for="fname" class="form-label">월 요금</label>
-                                <input type="text" class="form-control" id="fname" placeholder="3,300원">
-                            </div>
-                            <div class="col-md-6">
-                                <label for="fname" class="form-label">한줄설명 테이블</label>
-                                <input type="text" class="form-control" id="fname" placeholder="전화를 걸면 거는 사람에게 영상이 보이는 컬러링">
+                                <label for="extraPlanExplainS" class="form-label">간략설명</label>
+                                <input type="text" class="form-control" id="extraPlanExplainS" name="extraPlanExplainS" value="${extraPlan.extraPlanExplainS}">
                             </div>
                             <!-- 한 줄 -->
-                            <div class="col-md-12">
-                                <label for="fnum" class="form-label">한 줄 설명</label>
-                                <input type="text" class="form-control" id="fnum" value="이제는 눈으로 컬러링을 들어보세요">
+                            <div class="col-md-6">
+                                <label for="extraPlanExplainM" class="form-label">박스안 설명</label>
+                                <input type="text" class="form-control" id="extraPlanExplainM" name="extraPlanExplainM" value="${extraPlan.extraPlanExplainM}">
                             </div>
-
-                            <!-- 한 줄 유의사항 -->
+                            
                             <div class="col-md-12">
-                                <label for="fnum" class="form-label">한 줄 유의사항</label>
-                                <input type="text" class="form-control" id="fnum" value="부가서비스는 청구금액에 포함되어 계산됩니다.">
+                                <label for="extraPlanExplain" class="form-label">상세설명</label>
+                                <textarea class="form-control" id="extraPlanExplain" name="extraPlanExplain"></textarea>
+                                
                             </div>
-                            <!-- 상세정보 서머노트하자 -->
-                            <div class="col-md-12">
-                                <label for="fnum" class="form-label">상세정보</label>
-                                <textarea class="form-control col-md-12" name="" id="" cols="100" rows="10" readonly> 서머노트로 상세정보 입력할예정</textarea>
-                            </div>
-
+                            
                             <!-- 확인버튼 -->
                             <div class="col-12 d-flex justify-content-center">
-                                <button class="btn btn-solid-default mx-auto" id="btn2">등록하기</button>
+                                <button type="submit" class="btn btn-solid-default mx-auto" id="btn2">등록하기</button>
                             </div>     
                         </div>
+                        </form>
                     </div>
                 </div>
             </div>
-        </section> 
-    <!-- Shop Section end -->    
+        </section>
+
+
 <c:import url="../temp/footer.jsp"></c:import>
+
+<script>
+$(document).ready(function() {
+	const value= $('#extraPlanName').val();
+    $('#value').val(value);
+
+$('#extraPlanName').blur(function(){
+	const newValue = $('#extraPlanName').val();
+    $('#value').val(newValue);   
+	});
+});
+</script>
+<script>
+$('#extraPlanExplain').summernote('code', '${extraPlan.extraPlanExplain}');
+	//썸머노트 
+	//썸머노트 
+	$('#extraPlanExplain').summernote({
+        tabsize: 2,
+        height: 300,
+        toolbar: [
+          ['style', ['style']],
+          ['font', ['bold', 'underline', 'clear']],
+          ['color', ['color']],
+          ['para', ['ul', 'ol', 'paragraph']],
+          ['table', ['table']],
+          ['insert', ['link', 'picture', 'video']],
+        ],
+        callbacks: {
+        	onImageUpload: function(files, editor, welEditable) {
+        		for(var i = files.length -1; i>=0; i--) {
+        			sendFile(files[i], this);
+        		}
+        	}
+        }
+ });
+
+	// 썸머노트 에디터의 내용이 변경되었을 때 처리
+	  $('#extraPlanExplain').on('summernote.blur', function() {
+	    var summerContent = $(this).summernote('code');
+	    console.log('변경된 썸머노트 내용: ' + summerContent);
+
+	});
+
+</script>
+
 </body>
 
 </html>
