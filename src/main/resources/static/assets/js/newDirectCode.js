@@ -4,9 +4,71 @@ $(document).ready(function() {
   $('.titlebox:first').show();
   // 나머지 리스트 요소를 숨김
   $('.titlebox:not(:first)').hide();
+ // 첫 번째 titlebox의 direct-code 값을 가져옵니다.
+  const firstDirect = $('.titlebox:first .brand').data('direct-code');
+  const firstColor = firstDirect.substring(6,7);
+  const firstCapa = firstDirect.substring(8,11);
+  
+  const initialColor = firstColor; // 초기 색상 코드
+  const initialCapacity = firstCapa; // 초기 용량 코드
+  const colorOption = $(`.optionArea li[name="colorCode"][value="${initialColor}"]`);
+  const capacityOption = $(`.optionArea input[name="saveCapacity"][value="${initialCapacity}"]`);
 
+  // 강제 클릭 이벤트 트리거
+  colorOption.click();
+  capacityOption.next('label.capacity').click();
+ 
+  //영수증 가격 출력
+  let firstDirectCode = firstDirect; // 기기코드
+  let firstPlanNum = $('#splanNum').val(); // 요금제번호
+  let firstDisKind = $('#sdisKind').val(); // 할인유형
 
-}); 
+  directCheck = isEmpty(firstDirectCode);
+  planCheck = isEmpty(firstPlanNum);
+  disKindCheck = isEmpty(firstDisKind);
+  
+  $('#out_phonePayPrice').text('');
+  $('#out_planPrice').text('');
+  $('#totalPrice').text('');
+
+  if(directCheck == true && planCheck == true && disKindCheck == true){
+      //모든 값이 다 들어왔을 때 ajax 요청
+      //responseBody에 담겨져 응답 돌아옴
+      $.ajax({
+          type: 'GET',
+          url: './calMonthlyPay',
+          dataType: 'JSON',
+          data: {
+              directCode: firstDirectCode,
+              disKind: firstDisKind,
+              planNum: firstPlanNum
+          },
+          success: function(response) {
+  			let out_phonePayPrice = response.out_phonePayPrice;
+          	let out_planPrice = response.out_planPrice;
+          	let totalPrice = (response.out_phonePayPrice*1 + response.out_planPrice*1);
+              $('#out_phonePayPrice').text('');
+              $('#out_planPrice').text('');
+              $('#totalPrice').text('');
+              $('#out_phonePayPrice').text(out_phonePayPrice.toLocaleString());
+              $('#out_planPrice').text(out_planPrice.toLocaleString());
+              $('#totalPrice').text(totalPrice.toLocaleString());
+              var totalPriceAll= $('#totalPrice').text();
+              $('#totalPriceAll').val(totalPriceAll);
+              var outPhonePrice = $('#out_phonePayPrice').text();
+              $('#outPhonePrice').val(outPhonePrice);
+              var outplanPrice = $('#out_planPrice').text();
+              $('#outplanPrice').val(outplanPrice);
+              
+          },
+          error: function(error) {
+              // 에러 처리 로직 작성
+              console.log(error);
+          }
+      });
+      
+  }
+});
 
 
 //색상옵션을 선택하거나, 용량옵션을 선택한 경우 이벤트
@@ -115,6 +177,7 @@ $('.optionArea').on('click', 'li[name="colorCode"], label.capacity', function() 
     $('#directCode').trigger('change');
   }
 });
+
 //색상옵션을 선택하거나, 용량옵션을 선택한 경우 이벤트 끝
 
 
@@ -127,7 +190,7 @@ $('.optionArea').on('click', 'li[name="colorCode"], label.capacity', function() 
     for (var i = 0; i < radioButtons.length; i++) {
       radioButtons1[i].addEventListener('change', joinTypeChange);
     }
-
+ 	
     // 체크박스 변경 이벤트 핸들러
     function disKindChange(event) {
       var selectedValue = event.target.value;
@@ -150,7 +213,7 @@ $('.optionArea').on('click', 'li[name="colorCode"], label.capacity', function() 
 		 alert("할인유형을 선택하세요");
 	  }
     }
-    
+   
     // 체크박스 변경 이벤트 핸들러
     function joinTypeChange(event) {
       var selectedValue1 = event.target.value;

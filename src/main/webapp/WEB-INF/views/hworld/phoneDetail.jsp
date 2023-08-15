@@ -324,7 +324,7 @@
 											<input type="hidden" id="planName2" name="planName" >
 											<input type="hidden" id="planPrice1" name="planPrice">
 											<input type="hidden" id="disKind" name="disKind">
-											<input type="hidden" id="joinType" name="joinType" >
+											<input type="hidden" id="joinType" name="joinType" value="2" >
 											<input type="hidden" id="totalPriceAll" name="totalPrice">
 											<input type="hidden" id="outPhonePrice" name="out_phonePayPrice">
 											<input type="hidden" id="outplanPrice" name="out_planPrice">
@@ -384,6 +384,7 @@
 											</div>
 											
 											<div class="option-types" id="joinTypes">
+											
 											<c:choose>
 											<c:when test="${memberVO.ownCheck == 0}">
 												<span class="c-ick-btn">
@@ -412,7 +413,7 @@
 
 												<span class="c-ick-btn">
 													<input type="radio" hidden name="joinType" id="joinType3" value="2">
-													<label for="joinType3" class="btn m-1 btn-outline-custom joinType">
+													<label for="joinType3" class="btn m-1 btn-solid-after joinType">
 														<span class="labelin">신규가입</span>
 													</label>
 												</span>
@@ -421,6 +422,8 @@
 										</div>                                    
 							<!-- 할인유형 선택  -->
 									<div class="product-option-item pay installment">
+									<input type="hidden" id="sdisKind" value="${monthlyPay.disKind}">
+									<input type="hidden" id="splanNum" value="${monthlyPay.planNum }">
 											<div class="option-title-area">
 												<h3 class="option-title mt-3 mb-2">이용방법</h3>
 											</div>
@@ -484,7 +487,7 @@
 							</div>
                         </div>
                       <!-- 선택한 요금제 정보 end -->	  
-                    	</div> <!-- id = "diretList" div -->
+                    	</div> 
 	                </div>
 	            </div>
         	</div> 
@@ -828,25 +831,19 @@
 										</nav>
 										
 										<script>
-										
-										const reviewTotal = ${totalPage};
-										console.log(reviewTotal);
-										const totalPage = Math.ceil(reviewTotal);
+										// 리뷰 페이징 설정
 										const totalPageL = ${totalPageL};
-										
-										console.log(totalPageL);
 										const perPage = 5;
-										
-										var currentPage = parseInt("${currentPage}");
+										const currentPage = parseInt("${currentPage}");
 										/* var perPage = parseInt("${perPage}"); */
 										
 										function changePage(pageNum) {
 										// 현재 페이지 변경
 									    currentPage = pageNum;
 
-									    // 시작 인덱스 계산
-									    var startIdx = (currentPage - 1) * perPage;
-										var reviews = document.querySelectorAll('.customer-section');
+									    // 리뷰 시작 인덱스 계산
+									    const startIdx = (currentPage - 1) * perPage;
+										const reviews = document.querySelectorAll('.customer-section');
 									    reviews.forEach(function(review, idx) {
 									        if (idx >= startIdx && idx < startIdx + perPage) {
 									            review.style.display = 'block';
@@ -855,7 +852,7 @@
 									        }
 									        
 									    });
-									 	// 활성화 클래스 조작
+									 	// 페이징 버튼 활성화 설정
 									    for (var i = 1; i <= totalPage; i++) {
 									        if (i === pageNum) {
 									            $("#pageNum" + i).addClass('active');
@@ -1645,8 +1642,28 @@ for(let joinType2 of joinType){
             joinType2.classList.remove('btn-solid-after');
             joinType2.classList.add('btn-outline-custom');
         }
-    })
+    });
 }
+
+$(document).ready(function() {
+    $('.payType').click(function() {
+        $('.payType').removeClass('btn-solid-after').addClass('btn-outline-custom');
+        $(this).removeClass('btn-outline-custom').addClass('btn-solid-after'); 
+        const selectedDis = $(this).prev().val();
+        $('#sdisKind').val(selectedDis);
+    });
+    // 페이지 로드 시 초기화
+    const sdisKind = $('#sdisKind').val();
+    $('.payType').each(function() {
+        var radioValue = $(this).prev().val();
+        if (radioValue === sdisKind) {
+            $(this).removeClass('btn-outline-custom').addClass('btn-solid-after')
+            $('input[name="disKind"][value="' + radioValue + '"]').prop('checked', true);
+        }
+    });
+});
+
+/* 
 
 const payType = document.getElementsByClassName('payType');
 for(let payType2 of payType){
@@ -1667,7 +1684,7 @@ for(let payType2 of payType){
             payType2.classList.add('btn-outline-custom');
         }
     })
-}
+} */
 </script>
 <script>
 

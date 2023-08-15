@@ -211,6 +211,7 @@ h3.d-flex span {
                               <input type="hidden" id="planPrice" name="planPrice" data-plan-price2="" value="88000">
                               <input type="hidden" id="planNum" name="planNum" value="G01">
                               <input type="hidden" style="border:0; font-size:20px;" id="selectedPlanName" name="planName" value="5G 프리미어">
+	                         <input type="text" id="disKind" name="disKind" > 
 	                         </div>               
                             </div>
                         </div>
@@ -791,6 +792,7 @@ function setSelectedPlan(planName, planPrice, planNum) {
     // 할인유형 체크박스 변경 이벤트 핸들러
     $('input[name="disKind"]').change(function() {
         const selectedValue = $(this).val();
+        const disKindSelect = $('#disKind').val(selectedValue);
 
         // 다른 체크박스 해제
         $('input[name="disKind"]').not(this).prop('checked', false);

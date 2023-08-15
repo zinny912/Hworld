@@ -73,7 +73,7 @@ public class DirectController {
 	        }
 
 	        List<DirectVO> ar = directService.getList(pager); 
-	        log.error(ar.get(0).getDirectCode());
+	        
 	        List<PlanVO> existPlanList = directService.getExistPlanList();
 		    List<PlanVO> planList = directService.getPlanList();
 		    List<PlanVO> gList = new ArrayList<>();
@@ -99,8 +99,7 @@ public class DirectController {
 			        hList.add(plan);
 			    }
 			}
-	        
-	        
+
 	        mv.addObject("existList", existPlanList);
 			mv.addObject("gList", gList);
 			mv.addObject("sList", sList);
