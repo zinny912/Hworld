@@ -677,6 +677,11 @@
                                                                 <a class="dropdown-item" href="javascript:void(0)" data-bs-toggle="modal"
                                                                 data-bs-target="#stopModal">일시정지</a>
                                                             </li>
+                                                             <li>
+                                                                <a class="dropdown-item" href="javascript:void(0)" data-bs-toggle="modal"
+                                                                data-bs-target="#cancelService">부가서비스 해지</a>
+                                                            </li>
+                                                            
                                                             <li>
                                                                 <a class="dropdown-item" href="javascript:void(0)" data-bs-toggle="modal"
                                                                 data-bs-target="#cancelModal">해지</a>

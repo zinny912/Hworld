@@ -211,7 +211,7 @@ h3.d-flex span {
                               <input type="hidden" id="planPrice" name="planPrice" data-plan-price2="" value="88000">
                               <input type="hidden" id="planNum" name="planNum" value="G01">
                               <input type="hidden" style="border:0; font-size:20px;" id="selectedPlanName" name="planName" value="5G 프리미어">
-	                         <input type="text" id="disKind" name="disKind" > 
+	                         <input type="hidden" id="disKind" name="disKind" > 
 	                         </div>               
                             </div>
                         </div>
@@ -228,18 +228,19 @@ h3.d-flex span {
                                     <div class="page-view-filter">
                                         <div class="dropdown select-featured">
                                             <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1"
-                                                data-bs-toggle="dropdown" aria-expanded="false">
+                                                data-bs-toggle="dropdown" aria-expanded="true">
                                                 정렬
                                             </button>
+                                            <span id="addText"></span>
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
 								                <li>
-								                    <a class="dropdown-item"  href="phoneList">최신순</a>
+								                    <a class="dropdown-item"  href="phoneList" >최신순</a>
 								                </li>
 								                <li>
-								                    <a class="dropdown-item" href="phoneList?sortType=priceLow">낮은 가격순</a>
+								                    <a class="dropdown-item" href="phoneList?sortType=priceLow" >낮은 가격순</a>
 								                </li>
 								                <li>
-								                    <a class="dropdown-item" href="phoneList?sortType=priceHigh">높은 가격순</a>
+								                    <a class="dropdown-item" href="phoneList?sortType=priceHigh" >높은 가격순</a>
 								                </li>
 								            </ul>
                                         </div>
@@ -379,8 +380,10 @@ h3.d-flex span {
                                         </span>
                                     </a>
                                 </li>
-                            </ul>                    
+                            </ul>  
+                            <c:if test="${memberVO.adminCheck == 0 }">                  
                             <a href="directAdd" class="btn btn-solid-default m-1" style="position: absolute">상품 등록</a>
+                            </c:if>
                         </nav>
                    
                 </div>
@@ -707,43 +710,59 @@ checkboxes.forEach(checkbox => {
     });
 });
 
-//브랜드별로 리스트 필터링하는 함수
 function filterByBrand() {
     const selectedBrands = Array.from(document.querySelectorAll('input[name="brandCode"]:checked')).map(checkbox => checkbox.value);
     
-    const productList = document.querySelectorAll('.product-box');
-    productList.forEach(product => {
-        const directCode = product.querySelector('input[name="directCode"]').value;
-        const brandCode = directCode[4]; // directCode에서 다섯 번째 문자 추출
+    const productListContainer = $('.product-list-section');
+    const productList = productListContainer.find('.product-box');
+    
+    const visibleProducts = [];
+    const hiddenProducts = [];
+    
+    productList.each(function(index, product) {
+        const directCode = $(product).find('input[name="directCode"]').val();
+        const brandCode = directCode[4];
         
         if (selectedBrands.includes(brandCode)) {
-            // 선택된 브랜드가 포함되거나 전체 선택이면 보여줌
-            product.style.display = 'block';
-            
-            if (selectedBrands.includes('A') && selectedBrands.includes('S')) {
-                $('#selectedBrand').text('전체 브랜드').removeClass().addClass('text-center');
-            } else if (selectedBrands.includes('S')) {
-                $('#selectedBrand').text('삼성').addClass('theme-color');
-            } else if (selectedBrands.includes('A')) {
-                $('#selectedBrand').text('애플').addClass('theme-color');
-            } else {
-                $('#selectedBrand').text('선택없음');
-            }
+            visibleProducts.push(product);
         } else {
-        	product.style.display = 'none';
-        	if(selectedBrands.length===0){
-        		$('#selectedBrand').text('브랜드 선택').addClass('theme-color');
-            
-        	}
+            hiddenProducts.push(product);
         }
     });
+
+    // 보여지는 제품 정렬
+    visibleProducts.sort((a, b) => $(a).index() - $(b).index());
+
+    // 숨겨진 제품 숨기기
+    hiddenProducts.forEach(product => $(product).hide());
+
+    // 보여지는 제품 순서대로 추가
+    visibleProducts.forEach(product => $(product).appendTo(productListContainer).show());
+
+    // 선택된 브랜드에 따른 텍스트 업데이트
+    updateSelectedBrandText(selectedBrands);
 }
 
-// 페이지 로딩 후 초기 필터링 실행
-filterByBrand();
+function updateSelectedBrandText(selectedBrands) {
+    const selectedBrandText = $('#selectedBrand');
+
+    if (selectedBrands.includes('A') && selectedBrands.includes('S')) {
+        selectedBrandText.text('전체 브랜드').removeClass().addClass('text-center');
+    } else if (selectedBrands.includes('S')) {
+        selectedBrandText.text('삼성').addClass('theme-color');
+    } else if (selectedBrands.includes('A')) {
+        selectedBrandText.text('애플').addClass('theme-color');
+    } else {
+        selectedBrandText.text('선택없음');
+    }
+}
 
 // 체크박스 변경 이벤트 리스너 등록
 $('input[name="brandCode"]').on('change', filterByBrand);
+
+// 페이지 로딩 시 초기 필터링 실행
+filterByBrand();
+
 
 
 //모달창에서 값을 선택하고 확인 버튼을 클릭했을 때 호출되는 함수
@@ -886,7 +905,7 @@ function setSelectedPlan(planName, planPrice, planNum) {
     calculateMonthlyPay();
     
 });
-
+ 
  </script>
 
 

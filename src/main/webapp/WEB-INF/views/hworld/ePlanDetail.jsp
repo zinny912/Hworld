@@ -104,19 +104,37 @@
 									                <h2 class="theme-color d-flex justify-content-center">월 <fmt:formatNumber value="${eplan.extraPrice}" pattern="#,###" /> 원</h2>
 									                <span class="label-text d-flex justify-content-center mb-2">(부가세 포함)</span>
 									            </div>
+									            
+									            <input type="hidden" value="${map}">
+									            <input type="hidden" value="${map.EXTRAPLANNUM}" >
+									            <input type="hidden" value="${bfPlan.serialNum }">
+									            <input type="hidden" value="${map.SERIALNUM}">
 									                    <!-- 신청 모달 버튼  start -->
-                                                <c:if test="${empty map.size() }">
-                                                <div class="product-buttons justify-content-center" >
-                                                <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#extraJoin" >
-                                                    <span class="btn btn-solid rounded-3">이 부가서비스 신청하기</span> 
-                                                </a>
-                                                </div>
-                                                </c:if>
-                                                <c:if test="${not empty map.size() }">
+									            <c:choose>
+												    <c:when test="${not empty bfPlan.serialNum}">
+												        <c:choose>
+												            <c:when test="${map.EXTRAPLANNUM != param.extraPlanNum}">
+												                <div class="product-buttons justify-content-center">
+												                    <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#extraJoin">
+												                        <span class="btn btn-solid rounded-3">이 부가서비스 신청하기</span>
+												                    </a>
+												                </div>
+												            </c:when>
+												            <c:when test="${map.EXTRAPLANNUM == param.extraPlanNum}">
+												                <div class="product-buttons justify-content-center">
+												                    <span class="btn btn-solid rounded-3 disabled">이미 사용중인 부가서비스입니다.</span>
+												                </div>
+												            </c:when>
+												        </c:choose>
+												    </c:when>
+												    <c:otherwise>
+                                                <c:if test="${memberVO.adminCheck ==0}"> 
                                                 <div class="product-buttons justify-content-center">
-                                                        <span class="btn btn-solid rounded-3 disabled">이미 사용중인 부가서비스입니다.</span> 
+                                                        <span class="btn btn-solid rounded-3 disabled">휴대폰 개통 후 신청 가능합니다.</span> 
                                                 </div> 
-                                                </c:if>
+                                               </c:if>
+                                                </c:otherwise>
+                                                </c:choose>
 										        </li> 
 										    </ul>
 										</div>                        
@@ -184,8 +202,9 @@
                                                     <li class="text-start">
                                                     <p>해당 부가서비스는 <br> 월 ${eplan.extraPrice} 원의 유료서비스로,<br> 신청일부터 서비스가 시작되며 요금이 부과됩니다.</p>
                                                         <p>부가서비스 신청 후 해지시 <br>요금은 일괄계산되어 청구금액에 포함됩니다.</p>
-                                                        <input type="hidden" id="modalPlanNum" name="extraPlanNum">
-                                                        <input type="hidden" id="modalPlanName" name="extraPlanName">
+                                                        <input type="hidden" id="modalSerialNum" name="serialNum" value="${bfPlan.serialNum}">
+                                                        <input type="hidden" id="modalPlanNum" name="extraPlanNum" value="${param.extraPlanNum}">
+                                                        <input type="hidden" id="ePlanName" name="extraPlanName">
                                                     </li>
                                                 </ul>
                                             </div>
@@ -236,85 +255,7 @@
 </div>
     <!-- Add number Modal End -->
 
-<!-- Recommend product 1 -->
-<section class="left-sidebar-section masonary-blog-section">
-    <div class="container">
-        <div class="title title1 title-effect mb-4 title-left">
-            <h2>추천상품</h3>
-        </div>
-            <div class="col-lg-12 col-md-12 order-md-1 ratio_square">
-                    <div class="row mb-3 justify-content-center">
-                    <div class="col-2">
-                        <div class="masonary-blog box-shadow">
-                            <div class="card-body card-body-width">
-                                <a href="blog-details.html">
-                                    <h2 class="card-title">5G 슬림</h2>
-                                </a>
-                                <h3 class="masonary-name">월 55,000원</h3>
-                                <p class="font-light">데이터 8GB 가성비로 이용하는 5G
-                                </p>    
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-2">
-                        <div class="masonary-blog box-shadow">
-                            <div class="card-body card-body-width">
-                                <a href="blog-details.html">
-                                    <h2 class="card-title">5G 슬림</h2>
-                                </a>
-                                <h3 class="masonary-name">월 55,000원</h3>
-                                <p class="font-light">데이터 8GB 가성비로 이용하는 5G
-                                </p>    
-                            </div>
-                        </div>
-                    </div>
-                         
-                            <div class="col-2">
-                                <div class="masonary-blog box-shadow">
-                                    <div class="card-body card-body-width">
-                                        <a href="blog-details.html">
-                                            <h2 class="card-title">5G 슬림</h2>
-                                        </a>
-                                        <h3 class="masonary-name">월 55,000원</h3>
-                                        <p class="font-light">데이터 8GB 가성비로 이용하는 5G
-                                        </p>    
-                                    </div>
-                                </div>
-                            </div>
 
-                    <div class="col-2">
-                        <div class="masonary-blog box-shadow">
-                            <div class="card-body card-body-width">
-                                <a href="blog-details.html">
-                                    <h2 class="card-title">5G 슬림</h2>
-                                </a>
-                                <h3 class="masonary-name">월 55,000원</h3>
-                                <p class="font-light">데이터 8GB 가성비로 이용하는 5G
-                                </p>    
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="col-2">
-                        <div class="masonary-blog box-shadow">
-                            <div class="card-body card-body-width">
-                                <a href="blog-details.html">
-                                    <h2 class="card-title">5G 슬림</h2>
-                                </a>
-                                <h3 class="masonary-name">월 55,000원</h3>
-                                <p class="font-light">데이터 8GB 가성비로 이용하는 5G
-                                </p>    
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-         
-  
-</section>
-<!-- recommend product 1 end -->
 <c:import url="../temp/footer.jsp"></c:import>
 
 <script>
@@ -325,19 +266,20 @@
     	   $('#disabledPlan').submit();
     	   console.log("확인")
     });
+    
 
 
 $('#extraApplyCheck').click(function() {
     const ep = $('#extraPlanNum').val();
-    const en = $('#extraPlanName').val();
     $('#modalPlanNum').val(ep);
-    $('#modalPlanName').val(en);
+    const epn = $('#extraPlanName').val();
+    $('#ePlanName').val(epn);
 });
 
 $('#extraConfirm').click(function() {
-    let check = $('#extraApplyCheck:checked').val();
-   chk = isEmpty(check);
-   
+	let check = $('#extraApplyCheck:checked').val();
+   	chk = isEmpty(check);
+   	
    if(chk== true){
 	   $('#extraApplyForm').submit();
 	   console.log("확인")

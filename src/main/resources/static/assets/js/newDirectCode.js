@@ -290,8 +290,78 @@ $('.optionArea').on('click', 'li[name="colorCode"], label.capacity', function() 
       } else if (selectedValue1 === '0') {
 		  console.log('기기변경')
 		  $('#joinType').val(selectedValue1);
-		 
-	  } else {
+			const bfDisKind = $('#bfDisKind').val();
+			console.log(bfDisKind);
+			if(bfDisKind==0) {
+				$('#bfDisKind2').text("(공시지원금)");
+				$('.retrunText').text("위약금");
+			} else if( bfDisKind ==1){
+				$('#bfDisKind2').text("(선택약정12개월)");
+				$('.retrunText').text("할인반환금");
+			}else if(bfDisKind ==2){
+				$('#bfDisKind2').text("(선택약정24개월)");
+				$('.retrunText').text("할인반환금");
+			}else {
+				$('#bfDisKind2').text("무약정");
+			}
+			
+			//남은 약정일자 계산 (endDate - nowDate)
+			const nowDate = $('#nowDate').val();
+			const endDate = $('#expireDate').val();
+			const now = new Date(nowDate);
+			const expireDate = new Date(endDate);
+			const exyear = expireDate.getFullYear();
+			const exmonth = String(expireDate.getMonth() + 1).padStart(2, '0');
+			const exday = String(expireDate.getDate()).padStart(2, '0');
+			const koExpire = exyear + "년 " + exmonth + "월 " + exday + "일 ";
+			console.log("만료날짜 슬라이스 ",koExpire);
+			$('.expireDay').text(koExpire);
+			
+			const remain = expireDate.getTime() - now.getTime();
+			const days = Math.floor(remain / (1000 * 60 * 60 * 24)); // 밀리초(ms)를 일수로 변환
+			$('.remainDays').text(days);
+			 const serialNum = $('#serialNum').val();
+			 const newPlanNum = $('input[name=planNum]:checked').val();
+			 const requestCode = $('#requestCode').val();
+			 
+			 
+			 console.log("회선번호",serialNum);
+			 console.log("바꿀 요금제",newPlanNum);
+			 console.log("요청코드",requestCode);
+			 console.log("오늘날짜",nowDate);
+			  // AJAX 요청 설정
+				$.ajax({
+					type: 'GET',
+					url: '/plan/checkCancelFee',
+					dataType: 'JSON',
+					data: {
+					    serialNum: serialNum,
+					    nowDate: nowDate,
+					    requestCode: requestCode,
+					    planNum: newPlanNum,
+					   	
+					},
+					success: function(response) {
+						let cancelPrice = response.cancelPrice;
+						
+						if(cancelPrice >0){
+						$('#changePhone').modal('show');
+							
+						$('#cancelPrice2').val(cancelPrice.toLocaleString());
+						$('#cancelPrice').text(cancelPrice.toLocaleString());
+						$('#cancelFee').val(cancelPrice.toLocaleString());
+						$('#addText2').text("위약금/할인반환금이 청구월 청구내역에 포함됩니다.");
+						}else if(cancelPrice<0 || cancelPrice==0){
+						console.log("위약금없이 기기변경 가능");
+						}
+					
+					},
+					error: function(error) {
+					    // 에러 처리 로직 작성
+					    console.log(error);
+					}
+					});
+		  } else {
 		 alert("가입유형을 선택하세요");
 	  }
     }

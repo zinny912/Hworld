@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
     <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+    <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!DOCTYPE html>
 <html>
@@ -73,7 +74,7 @@
                                                     </ul>
                                                 </li>
                                                 <li class="dropdown">
-                                                    <a href="#" class="nav-link menu-title fw-bold fs-6">이벤트</a>
+                                                    <a  class="nav-link menu-title fw-bold fs-6">이벤트</a>
                                                     <ul class="nav-submenu menu-content fw-bold">
                                                         <li>
                                                             <a href="/event/present">진행중인 이벤트</a>
@@ -86,10 +87,31 @@
                                                 <li class="">
                                                     <a href="/etc/findShop" class="nav-link menu-title fw-bold fs-6">매장찾기</a>
                                                 </li>
-                                                 <li class="">
-                                                    <a href="/form/application" class="nav-link menu-title fw-bold fs-6">가입신청서</a>
+                                                 <li class="dropdown-sm">
+                                                 <a  class="nav-link menu-title fw-bold fs-6">My </a>
+                                                 <ul class="nav-submenu menu-content fw-bold">
+                                                        <li>
+													    <a class="fs-6">
+													        이용 회선정보
+													        <br>
+													        <img src="/assets/images/smartphone.png"> 
+													        <c:choose>
+													            <c:when test="${empty kingPhoneNum}">
+													                <span>이용중인 회선이 없습니다.</span>
+													            </c:when>
+													            <c:otherwise>
+													                <c:set var="formattedPhoneNum" value="${fn:substring(kingPhoneNum, 0, 3)}-${fn:substring(kingPhoneNum, 3, 5)}**-${fn:substring(kingPhoneNum, 7,9)}**" />
+													                <span> ${formattedPhoneNum}</span>
+													            </c:otherwise>
+													        </c:choose>
+													    </a>
+													</li>
+                                                    </ul>
                                                 </li>
-                <!-- 관리자/회원 테스트용 로그인 버튼 시작, 테스트 후 필요없으면 삭제 -->
+                                                <!--  <li class="">
+                                                    <a href="/form/application" class="nav-link menu-title fw-bold fs-6">가입신청서</a>
+                                                </li> -->
+                <!-- 관리자/회원 테스트용 로그인 버튼 시작, 테스트 후 필요없으면 삭제 
                   <li class="dropdown">
 				    <a class="nav-link menu-title fw-bold fs-6">빠른로그인</a>
 				    <ul class="nav-submenu menu-content fw-bold">
@@ -130,6 +152,7 @@
 																<a href="/admin/home" class="d-block">관리자 페이지</a>
 															</li>												
 														</c:if>
+														 
                                                         <li>
                                                             <a href="/myPage/home" class="d-block">마이페이지</a>
                                                         </li>

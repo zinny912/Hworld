@@ -133,6 +133,7 @@
  <select id="getCommonCode" resultType="BaseVO">
  	SELECT * FROM COMMONCODE
  	WHERE TYPE = #{type} 
+ 	ORDER BY CODE ASC
  </select>
  <insert id="setCommonCode" parameterType="BaseVO">
  	INSERT INTO COMMONCODE (TYPE, CODE, VALUE, NOTE)

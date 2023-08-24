@@ -127,13 +127,13 @@
                             <c:if test="${map.joinType == 1}" > <!-- 번호이동 -->
                                 <label for="phoneNum" class="form-label">휴대폰 번호</label>
                                 <input type="text" class="form-control" id="phoneNum" name="phoneNum" value="${taPhoneNum}" readOnly>
-                                <input type="hidden" class="form-control" id="taPhoneNum" name="taPhoneNum" value="${taPhoneNum}" readOnly>
+                                <input type="hidden" class="form-control" id="taPhoneNum" name="taPhoneNum" value="${taPhoneNum}" readonly>
                                 <div id="checkPhoneNum"></div>
                             </c:if>
                             <c:if test="${map.joinType == 0}" > <!-- 회선이 있는경우 : 기기변경 -->
                                 <label for="phoneNum" class="form-label">휴대폰 번호</label>
-                                <input type="text" class="form-control" id="phoneNum" value="${phoneNum.phoneNum}" name="phoneNum">
-                                <input type="hidden" class="form-control" id="taPhoneNum" name="taPhoneNum" value="${taPhoneNum}" readOnly>
+                                <input type="text" class="form-control" id="phoneNum" value="${phoneNum.phoneNum}" name="phoneNum" readonly>
+                                <input type="hidden" class="form-control" id="taPhoneNum" name="taPhoneNum" value="${taPhoneNum}" readonly>
                                 <div id="checkPhoneNum"></div>
                             </c:if>
                             </div>
@@ -310,12 +310,19 @@
         						</c:if>
         						
         						<c:if test="${map.joinType == 0}">
-                                <h6 class="mt-4" style="color: #fff;">기기변경</h6>
+        						
+        						<div class="mt-4 d-flex">
+        						<input type="hidden" name="joinType" value="0">
+                                <h6 class="" style="color: #fff;">기기변경</h6>
+                                <h6 class="mx-2" style="color: #fff;">(위약금/할인반환금 : ${map.cancelPrice }원)</h6>
+                               	</div>
         						</c:if>
         						<c:if test="${map.joinType == 1}">
+        						<input type="hidden" name="joinType" value="1">
                                 <h6 class="mt-4" style="color: #fff;">번호이동</h6>
         						</c:if>
         						<c:if test="${map.joinType == 2}">
+        						<input type="hidden" name="joinType" value="2">
                                 <h6 class="mt-4" style="color: #fff;">신규가입</h6>
         						</c:if>
                                 <c:if test="${map.disKind == 0 }">
@@ -338,6 +345,7 @@
                                 
                                
                                 <h6 class="my-1" style="color: #fff;">${map.planName}</h6>
+                                
                                 <input type="hidden" name="planNum" value="${map.planNum}">
                                 <input type="hidden" name="directCode" value="${map.directCode}">
                                 

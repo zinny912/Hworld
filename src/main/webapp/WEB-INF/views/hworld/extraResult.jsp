@@ -47,7 +47,7 @@
                                                 <button class="btn rounded-pill m-1 default-theme mb-3"> <h6>가입한 부가서비스</h6></button>
                                                 <h2 class="fw-bolder">${map.extraPlanName}</h2>
                                                 <div class="container">
-                                                 <c:set var="phoneNum" value="${map.phoneNum}" />
+                                                 <c:set var="phoneNum" value="${bfPlan.phoneNum}" />
 											<c:set var="formattedPhoneNum" value="${fn:substring(phoneNum, 0, 3)}-${fn:substring(phoneNum, 3, 7)}-${fn:substring(phoneNum, 7,11)}" />
                                                     <h2 class="font-light" >${formattedPhoneNum}</h2>
                                                 </div>

@@ -111,7 +111,10 @@ public class PlanController {
 		
 		List<PlanVO> recommend = planService.recommendPlan(planVO); // 추천상품 
 		MemberVO memberVO = (MemberVO) session.getAttribute("memberVO");
+		log.error("{}<==============welfare",memberVO.getWelfare());
 		
+		PlanVO phoneNum = directService.getKingPhoneNum(memberVO.getMemberNum());
+		session.setAttribute("serialNum", phoneNum != null ? phoneNum.getSerialNum() : null);
 		
 		if(memberVO ==null) {
 			mv.setViewName("hworld/login");
@@ -121,6 +124,11 @@ public class PlanController {
 		//이전 요금제 정보 가져오기
 		Integer memberNum = memberVO.getMemberNum();	
 		Integer result = planDAO.getPlanG(memberNum);
+		
+		log.error("{}<==============result 복지 가능하냐 ",result);
+		if(result ==null) {
+			result=-1;
+		}
 		PlanVO bfPlan = planService.getBeforePlan(memberNum);
 		
 		if(bfPlan!=null && bfPlan.getSerialNum()!=null) {
@@ -296,12 +304,14 @@ public class PlanController {
 	        return response;
 	    }
 
+	    session.setAttribute("joinType", 1);
 		//에러가 없는경우 insert 작업
 		int result = directService.setFormAdd(applicationVO, session);
 		
 		MemberVO memberVO = (MemberVO) session.getAttribute("memberVO");
 		Integer memberNum = memberVO.getMemberNum();
 		int ownResult = directService.setOwnCheck(memberNum);
+		
 		
 		// 번호 삭제 호출 & taPhoneNum이 존재하는 경우 directName 및 directCode 가 존재하지 않음 -> telecomName과 번호이동이라는 표시로 대체 
 	    if (!taPhoneNum.isEmpty()) {
@@ -390,49 +400,13 @@ public class PlanController {
 		//세션에서 멤버넘 받아서 시리얼넘, 가져오기
 		MemberVO sessionMember = (MemberVO)session.getAttribute("memberVO");
 		PlanVO planVO = new PlanVO();
-		
-		if(sessionMember==null) {
-			mv.setViewName("hworld/login");
-		
-		} else {
 		Integer memberNum = sessionMember.getMemberNum();
 		planVO =planService.getBeforePlan(memberNum);
 		
-		
-		if(planVO==null) {
-			mv.addObject("eplan", eplanVO);
-			mv.setViewName("hworld/ePlanDetail");
-			return mv;
-		} else {
-		
-		map.put("memberNum", memberNum);
-		map.put("serialNum", planVO.getSerialNum());
-		map.put("extraPlanNum", extraPlanNum);
 
-		map = planService.searchExtraPlan(map);
-		
-		mv.addObject("map",map);
-		mv.addObject("eplan", eplanVO);
-		mv.setViewName("hworld/ePlanDetail");
-		
-			}
-		}
-		return mv;
-	}
-		
-	
-	// 부가서비스 디테일 > 신청하기
-	@PostMapping("ePlanApply")
-	public ModelAndView setAddServ(@RequestParam Map<String, Object> map, HttpSession session) throws Exception{
-		ModelAndView mv = new ModelAndView();
-		
-		MemberVO sessionMember = (MemberVO)session.getAttribute("memberVO");
-		Integer memberNum = sessionMember.getMemberNum();
-		PlanVO planVO =planService.getBeforePlan(memberNum);
-		
 		if (planVO == null || planVO.getSerialNum() == null) {
 	        // serialNum이 없는 경우, 클라이언트에게 메시지를 보냅니다.
-			String message="휴대폰 개통 및 회선 등록 후 사용 가능합니다.";
+			String message="휴대폰 개통 및 회선 등록 후 가입 가능합니다.";
 			
 			mv.addObject("url", "/direct/phoneList"); 
 		    mv.addObject("result", message);
@@ -440,11 +414,52 @@ public class PlanController {
 	        return mv;
 	    }
 		
-		map.put("phoneNum", planVO.getPhoneNum());
+
 		map.put("serialNum", planVO.getSerialNum());
+		map.put("extraPlanNum", extraPlanNum);
+		map.put("memberNum", memberNum);
 
+
+		log.error("{}<===============map ",map.get("serialNum"));
+		log.error("{}<===============map ",map.get("memberNum"));
+		log.error("{}<===============map ",map.get("extraPlanNum"));
+		
+		
+		map = planService.searchExtraPlan(map);
+
+		log.error("{}<===========", map);
+
+		mv.addObject("map",map);
+		mv.addObject("eplan", eplanVO);
+		mv.addObject("bfPlan",planVO);
+		mv.setViewName("hworld/ePlanDetail");
+		
+			
+		
+		return mv;
+	}
+		
+	
+	// 부가서비스 디테일 > 신청하기
+	@PostMapping("ePlanApply")
+	public ModelAndView setAddServ(@RequestParam Map<String, Object> map, HttpSession session, @RequestParam("extraPlanNum") String extraPlanNum, @RequestParam("serialNum") String serialNum, @RequestParam("extraPlanName") String extraPlanName) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		MemberVO sessionMember = (MemberVO)session.getAttribute("memberVO");
+		Integer memberNum = sessionMember.getMemberNum();
+		PlanVO planVO =planService.getBeforePlan(memberNum);
+		
+		map.put("serialNum", planVO.getSerialNum());
+		map.put("extraPlanNum", extraPlanNum);
+		map.put("extraPlanName", extraPlanName);
+		//map.put("memberNum", sessionMember);
+		
+		
 		int result=planService.setAddServ(map);
-
+		
+		
+		mv.addObject("result",result);
+		mv.addObject("bfPlan",planVO);
 		mv.addObject("map", map);
 		mv.setViewName("hworld/extraResult");
 		return mv;

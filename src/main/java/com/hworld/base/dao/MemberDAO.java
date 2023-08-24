@@ -39,4 +39,7 @@ public interface MemberDAO {
 	public int getMemberLogout(MemberVO memberVO) throws Exception;
 	
 //	public MemberVO emailSearch(MemberVO memberVO) throws Exception;
+	
+	//대표회선 헤더에 표시하기 
+	public String viewKingNum(Integer memberNum) throws Exception;
 }

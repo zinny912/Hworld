@@ -154,4 +154,8 @@ public class MemberService {
 //	public MemberVO emailSearch(MemberVO memberVO) throws Exception {
 //		return memberDAO.emailSearch(memberVO);
 //	}
+	
+	public String viewKingNum(Integer memberNum) throws Exception{
+		return memberDAO.viewKingNum(memberNum);
+	}
 }

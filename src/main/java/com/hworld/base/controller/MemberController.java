@@ -24,6 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hworld.base.dao.CartDAO;
+import com.hworld.base.dao.MemberDAO;
 import com.hworld.base.service.CartService;
 import com.hworld.base.service.MemberService;
 import com.hworld.base.vo.ApplicationVO;
@@ -315,6 +316,10 @@ public class MemberController {
 				session.setAttribute("cartCount", cartVO);
 				
 				session.setAttribute("cartInfo", ar);
+				
+				String phoneNum = memberService.viewKingNum(memVo.getMemberNum());
+				log.error("{}<========대표회선",phoneNum);
+				session.setAttribute("kingPhoneNum", phoneNum);
 				return "redirect:/"; // 메인페이지로 이동
 			} else {
 				rttr.addFlashAttribute("result", 0);
@@ -347,6 +352,16 @@ public class MemberController {
 		return modelAndView;
 	}
 	
+	@GetMapping("viewKingNum")
+	public ModelAndView viewKingNum(MemberVO memberVO, HttpSession session) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		memberVO =(MemberVO)session.getAttribute("MemberVO");
+		Integer memberNum = memberVO.getMemberNum();
+		
+		
+		return mv;
+	}
 	
 	
 

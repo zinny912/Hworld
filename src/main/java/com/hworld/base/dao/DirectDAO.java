@@ -86,6 +86,12 @@ public interface DirectDAO {
 	//상품문의 작성
 	public int setQnaAdd(QnaVO qnaVO) throws Exception;
 	
+	//상품문의 수정
+	public int setQnaUpdate(QnaVO qnaVO) throws Exception;
+	
+	//상품문의 삭제
+	public int setQnaDelete(QnaVO qnaVO) throws Exception;
+	
 	//상품문의 답글 작성
 	public int setReplyAdd(QnaVO qnaVO) throws Exception;
 	
@@ -106,6 +112,12 @@ public interface DirectDAO {
 	//프로시저로 회선 테이블에 add
 	public int setTelephoneInitAdd(Map<String, Integer> telephone) throws Exception;
 	
+	//기기변경 시 회선 업데이트 
+	public int changeTelephone (Map<String, Integer> telephone)throws Exception;
+	
+	//기기변경 시 이전 회선에 휴대폰 번호 null 처리
+	public int setUpdateChangeTelephone (Integer serialNum) throws Exception;
+	
 	//구매완료(가입완료 후 결과안내 창)
 	public PlanVO getMemberPlan(Integer memberNum) throws Exception;
 	
@@ -116,10 +128,7 @@ public interface DirectDAO {
 
 	//타 통신사 번호 조회
 	public String isOtherTelecom(String phoneNum)throws Exception;
-	
-	//기기변경 시 정보 일치 조회 여부
-	public MemberVO getMemberInput (MemberVO memberVO)throws Exception;
-	
+
 	//휴대폰 번호 사용가능여부 조회 
 	public String checkPhoneNum(String phoneNum, String rrnf, String rrnl, String name)throws Exception;
 	

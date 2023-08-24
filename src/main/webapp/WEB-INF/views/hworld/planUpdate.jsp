@@ -75,7 +75,7 @@
                     <form action="./planUpdate" method="POST" class="planUpdate">
                         <div class="row g-4">
                             <!-- 요금제 정보 -->
-                            <table id="commonCodeTable" >
+                            <table id="commonCodeTable" hidden>
                                <thead>
                                <tr class="table-head col-md-12">
                                <th class="col-3">Type </th>
@@ -98,10 +98,10 @@
                                 </tbody>
                                 </table> 
                                 
-                              	<input type="text" id="note" name="note" value="" placeholder="노트">
-                              	<input type="text" id="type" name="type" value="" placeholder="타입">
-                              	<input type="text" id="code" name="code" value="" placeholder="코드">
-                              	<input type="text" id="value" name="value" value="" placeholder="밸류">
+                              	<input type="hidden" id="note" name="note" value="" placeholder="노트">
+                              	<input type="hidden" id="type" name="type" value="" placeholder="타입">
+                              	<input type="hidden" id="code" name="code" value="" placeholder="코드">
+                              	<input type="hidden" id="value" name="value" value="" placeholder="밸류">
                               	
                             <div class="col-md-6">
                                 <label for="validationCustom04" class="form-label" >종류</label>
@@ -117,12 +117,12 @@
                                     </select>
                                 </div>
                                
-                              <input type="text" id="ori_planNum" name="oldPlanNum" value="${planVO.planNum}"> 
-                              <input type="text" id="planNum2" name="newPlanNum" > 
-                              <input type="text" id="planNum3" name="planNum" > 
-                              <input type="text" id="categoryCode" name="categoryCode" value="${plan.categoryCode}">
-                              <input type="text" id="newCode" value="${plan.categoryCode}">
-                              <input type="text" id="disCode" name="disCode" value="${plan.disCode}">
+                              <input type="hidden" id="ori_planNum" name="oldPlanNum" value="${planVO.planNum}"> 
+                              <input type="hidden" id="planNum2" name="newPlanNum" > 
+                              <input type="hidden" id="planNum3" name="planNum" > 
+                              <input type="hidden" id="categoryCode" name="categoryCode" value="${plan.categoryCode}">
+                              <input type="hidden" id="newCode" value="${plan.categoryCode}">
+                              <input type="hidden" id="disCode" name="disCode" value="${plan.disCode}">
                               
                               
                               
@@ -165,7 +165,7 @@
 
                             <!-- 확인버튼 -->
                             <div class="col-12 d-flex justify-content-center">
-                                <button type="submit" class="btn btn-solid-default mx-auto" id="btn2">등록하기</button>
+                                <button type="submit" class="btn btn-solid-default mx-auto" id="btn2">수정등록하기</button>
                             </div>     
                         </div>
                         

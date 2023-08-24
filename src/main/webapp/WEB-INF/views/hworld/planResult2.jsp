@@ -90,9 +90,9 @@
     </section>
 
     <div class="container mb-4">
-        <div class="col-12 col-md-3 mb-3 container justify-content-center">
+        <div class="d-flex mb-3 container justify-content-center">
         <button onclick="location.href = './planList';" type="button" class="btn rounded-3 btn-solid-default">부가서비스 보러가기</button>
-        <button onclick="location.href = '../myPage/home';" type="button" class="btn rounded-3 btn-secondary">마이페이지</button>
+        <button onclick="location.href = '../myPage/home';" type="button" class="btn rounded-3 btn-secondary mx-1">마이페이지</button>
         </div>
     </div>
 <!-- Contact Section End -->    

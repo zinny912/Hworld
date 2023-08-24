@@ -329,6 +329,7 @@
 											<input type="hidden" id="outPhonePrice" name="out_phonePayPrice">
 											<input type="hidden" id="outplanPrice" name="out_planPrice">
 											<input type="hidden" id="bunho" name="taPhoneNum" >
+											<input type="hidden" id="cancelFee" name="cancelPrice">
 											
 											<!-- <input type="text" id="" -->
 										
@@ -386,7 +387,7 @@
 											<div class="option-types" id="joinTypes">
 											
 											<c:choose>
-											<c:when test="${memberVO.ownCheck == 0}">
+											<c:when test="${memberVO.ownCheck != 1}">
 												<span class="c-ick-btn">
 													<input type="radio" hidden name="joinType" id="joinType1" value="0">
 													<label for="joinType1" class="btn m-1 btn-outline-custom joinType btn-disabled">
@@ -401,6 +402,11 @@
 														<span class="labelin">기기변경</span>
 													</label>
 												</span>
+											<input type="hidden" id="requestCode" name="requestCode" value="2">
+											<input type="hidden" id="nowDate" name="nowDate">
+											<input type="hidden" id="serialNum" name="serialNum" value="${serial.serialNum}">
+												
+												
 											</c:otherwise>
 											</c:choose>
 											
@@ -423,6 +429,7 @@
 							<!-- 할인유형 선택  -->
 									<div class="product-option-item pay installment">
 									<input type="hidden" id="sdisKind" value="${monthlyPay.disKind}">
+									<input type="hidden" id="bfDisKind" value="${serial.disKind}">
 									<input type="hidden" id="splanNum" value="${monthlyPay.planNum }">
 											<div class="option-title-area">
 												<h3 class="option-title mt-3 mb-2">이용방법</h3>
@@ -531,7 +538,7 @@
                                 </div>
                                 	<div class="container mb-5">
                                 	<c:forEach items="${qnaList}" var="qna" varStatus="loop">
-                                    	<div class="category-option" data-qna-num="${qna.num}" data-qna-member="${qna.memberNum}" data-qna-state="${qna.state}">
+                                    	<div class="qnasection category-option" data-qna-num="${qna.num}" data-qna-member="${qna.memberNum}" data-qna-state="${qna.state}">
                                         	<div class="accordion category-name" id="accordionExample${loop.index}">
                                             	<div class="accordion-item category-rating">
                                                 	<h2 class="accordion-header"  id="headingThree${loop.index}" style="padding:0px;">
@@ -576,7 +583,7 @@
 						                                                    data-bs-target="#qnadel" onclick="qnaDelete()" data-qna-num="${qna.num}" id="qnaDel">삭제</a>
 	                                    					</div>    
 	                                                                </c:if>
-                                                                <div id="qnaContentsQ" >
+                                                                <div id="qnaContentsQ${qna.num}" >
                                                                 ${qna.contents} 
                                                                 </div>
                                                                 <c:if test="${memberVO.adminCheck eq 0 && empty qna.reply}">
@@ -834,12 +841,16 @@
 										// 리뷰 페이징 설정
 										const totalPageL = ${totalPageL};
 										const perPage = 5;
-										const currentPage = parseInt("${currentPage}");
+										const currentPage = ${currentPage};
+										const totalPage = ${totalPage};
+										console.log(currentPage);
+										
 										/* var perPage = parseInt("${perPage}"); */
 										
 										function changePage(pageNum) {
-										// 현재 페이지 변경
-									    currentPage = pageNum;
+										 // 현재 페이지 변경
+										 console.log(pageNum);
+									    const currentPage = pageNum; 
 
 									    // 리뷰 시작 인덱스 계산
 									    const startIdx = (currentPage - 1) * perPage;
@@ -895,11 +906,10 @@
                                  <div class="product-right">
                                      <div class="size-detail">
                                          <h6 class="mb-3 mx-3 fw-bolder">요금제 선택</h6>
-                                         <input type="text" id="age">
-                                         <input type="text" id="joinnn" placeholder="가입유형">
-                                         
-                                         <input type="text" value="${memberVO.welfare}" id="welfare" name="welfare" placeholder="복지">
-        								<input type="text" value="${memberVO.welExpire}" id="welExpire" name="welExpire" placeholder="군인">
+                                         <input type="hidden" id="age">
+                                         <input type="hidden" id="joinnn" placeholder="가입유형">
+                                         <input type="hidden" value="${memberVO.welfare}" id="welfare" name="welfare" placeholder="복지">
+        								<input type="hidden" value="${memberVO.welExpire}" id="welExpire" name="welExpire" placeholder="군인">
                                          <!-- 요금제 유형 영역, 주석처리한거 써도 되기는한데 순서가 안맞을 수 있어서 아래처럼 처리함 -->
                                          <ul class="nav border-0" style="color:black;">
                                          <c:forEach items="${existList}" var="i">
@@ -1206,7 +1216,7 @@
                          <div id="orderNumContainer"></div>
                     </div>
                         
-                        <input type="hidden" id="orderNum2" name="orderNum">
+                        <input type="hidden" id="orderNum2" name="orderNum" >
                         <input type="hidden" id="memberNum" name="memberNum" value="${memberVO.memberNum}">
                         <input type="hidden" name="slicedCode" value="${param.slicedCode}">
                         
@@ -1289,8 +1299,8 @@
 												<textarea class="form-control col-12"  placeholder="해당 상품과 관련하여 궁금한 점을 작성해주세요." id="qnaContents" name="contents"></textarea>
 											</div>
 											
-											<input type="text" name="memberNum" id="memberNumQ" value="${memberVO.memberNum}">
-											<input type="text" name="slicedCode" id="productNameQ" value="${param.slicedCode}">
+											<input type="hidden" name="memberNum" id="memberNumQ" value="${memberVO.memberNum}">
+											<input type="hidden" name="slicedCode" id="productNameQ" value="${param.slicedCode}">
 											
 										</div>
 									
@@ -1304,30 +1314,26 @@
 					</div>
     <!-- 문의작성 모달 End -->
     
-    <!-- 문의작성 모달 admin -->
-    				<div class="modal fade payment-modal" id="addReply">
+    <!-- 문의수정 모달 member -->
+    	<div class="modal fade payment-modal" id="updateQna">
 				        <div class="modal-dialog modal-dialog-centered">
 							<div class="modal-content">
 								<div class="modal-header">
 									<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
 								</div>
 									<div class="modal-body">
-									<form action="./directReplyAdd" method="POST">
+									<form action="./qnaUpdate" method="POST">
 										<div class="col-md-12 mt-1 mb-0">
 											<div class=""> 상품명
 												<span class="mx-3">|</span>
 												<span class="fw-bold" id="directName4"></span>
 											</div>
 											<div class="mt-2 mb-3">
-												<label for="contents" class="form-label">문의내용</label>
-												<textarea class="form-control col-12" id="modelQnaContents" name="contents" readonly> </textarea>
-											</div>
-											<div class="mt-2 mb-3">
-												<label for="reply" class="form-label">답변작성</label>
-												<textarea class="form-control col-12" id="modelQnaReply" name="reply"></textarea>
+												<label for="contents" class="form-label">상품 문의</label>
+												<textarea class="form-control col-12" id="modalQnaContents" name="contents" ></textarea>
 											</div>
 											
-											<input type="text" name="num" id="modalQnaNum" >
+											<input type="hidden" name="memberNum" value="${memberVO.memberNum}">
 											<input type="hidden" name="slicedCode" value="${param.slicedCode}">
 											
 										</div>
@@ -1340,7 +1346,69 @@
 					    	</div>
 						</div>
 					</div>
-    <!-- 문의작성 모달 End -->
+    
+    <!-- 문의수정 모달 End -->
+    
+    <!-- 문의 삭제 모달 -->
+ <div class="modal fade payment-modal" id="qnadel">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                    <div class="mb-4">
+                     <h3>정말 삭제하시겠습니까? </h3> <h5>삭제 후에는 복구가 불가합니다.</h5>
+                     <input type="hidden" id="modalDelNumQ" name="num" value="">
+                     <input type="hidden" id="modalDelslice" name="slicedCode" value="${param.slicedCode}">
+                    </div>
+            </div>
+            <div class="modal-footer pt-0 text-end d-block">
+            	<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                <button type="button" class="btn btn-solid-default rounded-1" id="qnaDelete" onclick="qnaDelete()">삭제</button>
+            </div>
+        </div>
+    </div>
+</div>
+    <!-- 문의 삭제 모달 end -->
+    
+    <!-- 문의작성 모달 admin -->
+    				<div class="modal fade payment-modal" id="addReply">
+				        <div class="modal-dialog modal-dialog-centered">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+								</div>
+									<div class="modal-body">
+									<form action="./directReplyAdd" method="POST">
+										<div class="col-md-12 mt-1 mb-0">
+											<div class=""> 상품명
+												<span class="mx-3">|</span>
+												<span class="fw-bold" id="directName5"></span>
+											</div>
+											<div class="mt-2 mb-3">
+												<label for="contents" class="form-label">문의내용</label>
+												<textarea class="form-control col-12" id="modelQnaContentsA" name="contents" readonly> </textarea>
+											</div>
+											<div class="mt-2 mb-3">
+												<label for="reply" class="form-label">답변작성</label>
+												<textarea class="form-control col-12" id="modelQnaReply" name="reply"></textarea>
+											</div>
+											
+											<input type="hidden" name="num" id="modalQnaNumA" >
+											<input type="hidden" name="slicedCode" value="${param.slicedCode}">
+											
+										</div>
+									
+										<div class="modal-footer d-flex justify-content-end">
+											<button class="btn btn-solid-default btn-sm" data-bs-dismiss="modal" type="button" onclick="form.submit()">작성</button>
+										</div>
+									</form>
+					        		</div>
+					    	</div>
+						</div>
+					</div>
+    <!-- 문의작성 모달 admin End -->
     
 
     <!-- sticky cart -->
@@ -1484,8 +1552,49 @@
                     </div>
                 </div>
             </div>
-        </div>
+      
 <!-- 번호이동 모달창 end -->
+<!-- 기기변경시 위약금 조회 모달창 -->
+<div class="modal fade quick-view-modal" id="changePhone">
+        <div class="modal-dialog modal-md modal-dialog-centered col-12">
+            <div class="modal-content">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="modal-body">
+                    <div class="row gy-4">
+                        <div class="col-12">
+                            <div class="product-right">
+                                <div class="size-detail">
+                                	<h4>안녕하세요. ${memberVO.name} 님! <br> 약정기간이 <span class="remainDays"></span>일 남아있어 기기변경 진행하시면,
+                                	<br> 이전 구매 당시 <span id="bfDisKind2" class="theme-color fw-bold"></span> 으로 받은 할인금액에 대해 
+                                	<br><span class="retrunText theme-color fw-bold"></span> 이 발생합니다. </h4> <hr>
+                                	
+                                	
+                                	
+                                	<input type="hidden" id="cancelPrice2" name="cancelPrice">
+                                	<span class="retrunText fs-5"></span> : <span id="cancelPrice" class="fs-5"></span><span class="fs-5">원</span>
+                                	<br>
+                                	<span class="fs-5">잔여약정기한 : <span class="remainDays"></span> 일</span>
+                                	<br>
+                                	<span class="fs-5">약정만료일 : <span class="expireDay"></span></span>
+                                	<input type="hidden" id="expireDate" value="${serial.expireDate}">
+                                	
+       							 </div>
+
+                                	<span class="text-center fw-bold theme-color" id="addText2"></span>
+                                
+                                    <div class="product-btns d-flex justify-content-center">
+                                        <button type="button" class="btn btn-solid-default btn-lg col-md-4 continueChange"
+                                            data-bs-dismiss="modal">기기변경 계속하기</button>
+                                        <button type="button" class="btn btn-secondary btn-lg col-md-4 mx-1 cancelChange"
+                                            data-bs-dismiss="modal">취소</button>     
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
 
 
@@ -1526,8 +1635,9 @@ $('.writeReview').on('click', function (event) {
             if (reviewableOrders.length > 0) {
                 if (reviewableOrders.length === 1) {
                     const orderNum = reviewableOrders[0].orderNum;
-                   
+                   console.log(orderNum);
                     $('#addReview').modal('show');
+                   $('#orderNum2').val(orderNum);
                 } else {
                 	// 여러 주문 중 선택할 수 있도록 처리
                 	const hr = $('<hr>');
@@ -1587,19 +1697,19 @@ function checkReview(callback) {
   //문의 작성 버튼 클릭 시 모달 창이 열릴 때 실행되는 함수
   $('#addQna').on('show.bs.modal', function (event) {
 	    const directName = $('.directNameValue').data('direct-name'); // 해당 후기 작성 버튼에 연결된 제품의 directName 값을 가져옴
-	    $('#directName3').text(directName); // 모달 창 내에서 제품명을 표시하는 곳에 directName 값을 설정
+	    $('#directName5').text(directName); // 모달 창 내에서 제품명을 표시하는 곳에 directName 값을 설정
 	  });
   
   $('#addReply').on('show.bs.modal', function(event) {
 	  const button = $(event.relatedTarget); // 클릭한 버튼 요소
 	  const qnaNum = button.data('qna-num'); // data-qna-num 속성 값 가져오기
-	  const qnaContents = button.closest('.accordion-item').find('#qnaContentsQ').text().trim(); // 문의 내용 가져오기
+	  const qnaContents = $('#qnaContentsQ' + qnaNum).text().trim(); // 문의 내용 가져오기
 	  const directName = $('.directNameValue').data('direct-name'); // 해당 후기 작성 버튼에 연결된 제품의 directName 값을 가져옴
-	    $('#directName4').text(directName); // 모달 창 내에서 제품명을 표시하는 곳에 directName 값을 설정
+	    $('#directName5').text(directName); // 모달 창 내에서 제품명을 표시하는 곳에 directName 값을 설정
 
 	  // 모달 내부 요소에 값 설정
-	  $(this).find('#modalQnaNum').val(qnaNum);
-	  $(this).find('#modelQnaContents').val(qnaContents);
+	  $(this).find('#modalQnaNumA').val(qnaNum);
+	  $(this).find('#modelQnaContentsA').val(qnaContents);
 	});
 </script>
 
@@ -1663,28 +1773,7 @@ $(document).ready(function() {
     });
 });
 
-/* 
 
-const payType = document.getElementsByClassName('payType');
-for(let payType2 of payType){
-    payType2.addEventListener('click', function(){
-        if(payType2.classList.contains('btn-outline-custom')){
-            for(let payType3 of payType){
-                if(payType3.classList.contains('btn-solid-after')){
-                    payType3.classList.remove('btn-solid-after');
-                    payType3.classList.add('btn-outline-custom');
-                }
-            }
-
-            payType2.classList.remove('btn-outline-custom');
-            payType2.classList.add('btn-solid-after');
-        }
-        else{
-            payType2.classList.remove('btn-solid-after');
-            payType2.classList.add('btn-outline-custom');
-        }
-    })
-} */
 </script>
 <script>
 
@@ -1725,8 +1814,7 @@ $(document).ready(function() {
 
  	  // 가져온 값을 입력하기
  	  document.getElementById('selectedPlanName').textContent = planName;
- 	  // 가져온 값을 입력하기
- 	  document.getElementById('selectedPlanName').textContent = planName;
+ 	  $('#planName2').val(planName);
 
  	  // `,`를 추가하여 표시
  	  const formattedPlanPrice = parseInt(planPrice).toLocaleString();
@@ -1831,6 +1919,22 @@ function calculateAge(memberBirth) {
 
     return age;
 }
+
+
+const toDate = new Date();
+
+const year = toDate.getFullYear();
+const month = toDate.getMonth() + 1;
+const day = toDate.getDate();
+
+const formattedDate = new Date(year, month - 1, day);
+
+const formattedDateString = formattedDate.toISOString().slice(0, 10);
+
+const formattedDate2 = year + "-" + (month < 10 ? "0" : "") + month + "-" + (day < 10 ? "0" : "") + day;
+$('#nowDate').val(formattedDate2);
+
+
 
 </script>
 

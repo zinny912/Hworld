@@ -271,6 +271,7 @@
 											                            <a type="button" class="btn btn-solid hover-solid btn-animation rounded-3 btn-disabled">
 											                                <span>이미 사용중인 요금제입니다.</span>
 											                            </a>
+											                            
 											                             <a href="javascript:void(0)" data-bs-toggle="modal" id="changeTelecoms"
 											                                        data-bs-target="#changeTelecom"
 											                                        class="btn btn-solid hover-solid btn-animation rounded-3">
@@ -293,7 +294,13 @@
 																            </c:when>
 																            
 											                                <c:otherwise>
-											                                	<c:if test="${ok == 0}">
+											                                	<c:if test="${!fn:contains(planVO.planNum, 'G') }">
+											                                    <c:if test="${result != -1 }">
+											                                    <a class="btn btn-outline-danger rounded-3 theme-color btn-disabled">
+																                    <span >1회선만 등록 가능한 요금제로 추가 등록이 불가합니다.</span></a>
+																                </c:if>
+																                </c:if>
+											                                	<c:if test="${ok == 0 && result == -1}">
 											                                	<a class="btn btn-outline-danger rounded-3 theme-color btn-disabled">
 																                    <span >요금제 변경일 1개월 이내에는 요금제 변경이 불가합니다.</span></a>
 																                <a href="javascript:void(0)" data-bs-toggle="modal" id="changeTelecoms"
@@ -303,7 +310,7 @@
 											                                    </a>
 																                    
 																                </c:if>
-																                <c:if test="${ok == 1 &&((result== bfPlan.serialNum || empty result) || fn:contains(planVO.planNum, 'G'))}">
+																                <c:if test="${ok == 1 &&((result== bfPlan.serialNum || result==-1) || fn:contains(planVO.planNum, 'G'))}">
 											                                    <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view"
 											                                        class="btn btn-solid hover-solid btn-animation rounded-3">
 											                                        <span>요금제 변경</span>
@@ -314,12 +321,7 @@
 											                                        <span>번호이동</span>
 											                                    </a>
 											                                    </c:if>
-											                                	<c:if test="${!fn:contains(planVO.planNum, 'G') }">
-											                                    <c:if test="${ok == 1 && not empty result }">
-											                                    <a class="btn btn-outline-danger rounded-3 theme-color btn-disabled">
-																                    <span >1회선만 등록 가능한 요금제로 추가 등록이 불가합니다.</span></a>
-																                </c:if>
-																                </c:if>
+											                                	
 																                
 											                                </c:otherwise>
 											                               
@@ -529,7 +531,7 @@
                     <div class="mb-4">
                      <h3 class="theme-color fw-bold">해당 요금제를 비활성화 하시겠습니까? </h3> <br> <h5>비활성화 이후에는 활성화가 불가합니다.</h5>
                      <h5>해당요금제로는 더이상 신규가입이 불가하게 됩니다.</h5>
-                     <input type="text" name="planNum" id="modalPlanNum">
+                     <input type="hidden" name="planNum" id="modalPlanNum">
                     </div>
                 </form>
             </div>
@@ -626,6 +628,7 @@
 	</script>
 
 <script>
+$(document).ready(function() {
   const memberBirth = '${memberVO.rrnf}';
   let age = calculateAge(memberBirth);
   console.log(age);
@@ -694,24 +697,27 @@
  
 const wel = $('#planNum1').val();
 const welfare = $('#welfare').val();
+console.log("복지요금제welfare",welfare);
 const welExpire = $('#welExpire').val();
 const result = ${result};
+console.log(result);
 
 //복지대상 0 인 경우 복지요금제 & 군인요금제 설정 
-   if (wel.includes('W') && (welfare == 0 || welExpire) && not empty result) {
+   if (wel.includes('W') && (welfare == 0 || welExpire) && result==-1) {
 	   $('.product-buttons').html('<a class="btn btn-outline-danger rounded-3 theme-color btn-disabled"><span >복지혜택 대상자만 신청가능합니다.</span></a>');
 	   $('.plus').html('<a class="btn" style="margin-top:-30px; color:lightgray; text-decoration:underline;">서류제출하기</a>');
-   } else if (wel.includes('H') && (welfare == 0 || welfare ==1) && (welExpire === null || welExpire === '') && not empty result){
+   } else if (wel.includes('H') && (welExpire === null || welExpire === '') && result==-1){
 	   $('.product-buttons').html('<a class="btn btn-outline-danger rounded-3 theme-color btn-disabled"><span >입영관련 서류 제출 후 신청 가능합니다.</span></a>');
 	   $('.plus').html('<a class="btn" style="margin-top:-30px; color:lightgray; text-decoration:underline;">서류제출하기</a>');
    } //복지대상 1인 경우 복지요금제 & 군인요금제 설정
    else if (wel.includes('W') && welfare == 1 && (welExpire === null || welExpire === '')){
-	   $('.product-buttons').html('<c:choose><c:when test="${bfPlan.planNum eq planVO.planNum}"><a type="button" class="btn btn-solid hover-solid btn-animation rounded-3 btn-disabled"><span>이미 사용중인 요금제입니다.</span></a></c:when><c:otherwise><c:choose><c:when test="${memberVO.ownCheck == 0 }"><a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view"class="btn btn-solid hover-solid btn-animation rounded-3 btn-disabled"><span>요금제 변경</span></a><a href="javascript:void(0)" data-bs-toggle="modal" id="changeTelecoms"data-bs-target="#changeTelecom"class="btn btn-solid hover-solid btn-animation rounded-3"><span>번호이동</span></a></c:when><c:otherwise><c:if test="${ok == 0}"><a class="btn btn-outline-danger rounded-3 theme-color btn-disabled"><span >요금제 변경일 1개월 이내에는 요금제 변경이 불가합니다.</span></a></c:if><c:if test="${ok == 1}"><a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view"class="btn btn-solid hover-solid btn-animation rounded-3"><span>요금제 변경</span></a><a href="javascript:void(0)" data-bs-toggle="modal" id="changeTelecoms"data-bs-target="#changeTelecom"class="btn btn-solid hover-solid btn-animation rounded-3 btn-disabled"><span>번호이동</span></a></c:if></c:otherwise></c:choose></c:otherwise></c:choose>');
+	   $('.product-buttons').html('<c:choose><c:when test="${bfPlan.planNum eq planVO.planNum}"><a type="button" class="btn btn-solid hover-solid btn-animation rounded-3 btn-disabled"><span>이미 사용중인 요금제입니다.</span></a></c:when><c:otherwise><c:choose><c:when test="${memberVO.ownCheck == 0 }"><a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view"class="btn btn-solid hover-solid btn-animation rounded-3 btn-disabled"><span>요금제 변경</span></a><a href="javascript:void(0)" data-bs-toggle="modal" id="changeTelecoms"data-bs-target="#changeTelecom"class="btn btn-solid hover-solid btn-animation rounded-3"><span>번호이동</span></a></c:when><c:otherwise><c:if test="${ok == 0}"><a class="btn btn-outline-danger rounded-3 theme-color btn-disabled"><span >요금제 변경일 1개월 이내에는 요금제 변경이 불가합니다.</span></a></c:if><c:if test="${ok == 1}"><a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view"class="btn btn-solid hover-solid btn-animation rounded-3"><span>요금제 변경</span></a><a href="javascript:void(0)" data-bs-toggle="modal" id="changeTelecoms"data-bs-target="#changeTelecom"class="btn btn-solid hover-solid btn-animation rounded-3 "><span>번호이동</span></a></c:if></c:otherwise></c:choose></c:otherwise></c:choose>');
   	$('.welfare_a').append('<span class="theme-color">복지요금제 신청 가능합니다.</span>');
    } else if (wel.includes('H') && welfare == 1 && welExpire ){
-	   $('.product-buttons').html('<c:choose><c:when test="${bfPlan.planNum eq planVO.planNum}"><a type="button" class="btn btn-solid hover-solid btn-animation rounded-3 btn-disabled"><span>이미 사용중인 요금제입니다.</span></a></c:when><c:otherwise><c:choose><c:when test="${memberVO.ownCheck == 0 }"><a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view"class="btn btn-solid hover-solid btn-animation rounded-3 btn-disabled"><span>요금제 변경</span></a><a href="javascript:void(0)" data-bs-toggle="modal" id="changeTelecoms"data-bs-target="#changeTelecom"class="btn btn-solid hover-solid btn-animation rounded-3"><span>번호이동</span></a></c:when><c:otherwise><c:if test="${ok == 0}"><a class="btn btn-outline-danger rounded-3 theme-color btn-disabled"><span >요금제 변경일 1개월 이내에는 요금제 변경이 불가합니다.</span></a></c:if><c:if test="${ok == 1}"><a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view"class="btn btn-solid hover-solid btn-animation rounded-3"><span>요금제 변경</span></a><a href="javascript:void(0)" data-bs-toggle="modal" id="changeTelecoms"data-bs-target="#changeTelecom"class="btn btn-solid hover-solid btn-animation rounded-3 btn-disabled"><span>번호이동</span></a></c:if></c:otherwise></c:choose></c:otherwise></c:choose>');
+	   $('.product-buttons').html('<c:choose><c:when test="${bfPlan.planNum eq planVO.planNum}"><a type="button" class="btn btn-solid hover-solid btn-animation rounded-3 btn-disabled"><span>이미 사용중인 요금제입니다.</span></a></c:when><c:otherwise><c:choose><c:when test="${memberVO.ownCheck == 0 }"><a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view"class="btn btn-solid hover-solid btn-animation rounded-3 btn-disabled"><span>요금제 변경</span></a><a href="javascript:void(0)" data-bs-toggle="modal" id="changeTelecoms"data-bs-target="#changeTelecom"class="btn btn-solid hover-solid btn-animation rounded-3"><span>번호이동</span></a></c:when><c:otherwise><c:if test="${ok == 0}"><a class="btn btn-outline-danger rounded-3 theme-color btn-disabled"><span >요금제 변경일 1개월 이내에는 요금제 변경이 불가합니다.</span></a></c:if><c:if test="${ok == 1}"><a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view"class="btn btn-solid hover-solid btn-animation rounded-3"><span>요금제 변경</span></a><a href="javascript:void(0)" data-bs-toggle="modal" id="changeTelecoms"data-bs-target="#changeTelecom"class="btn btn-solid hover-solid btn-animation rounded-3 "><span>번호이동</span></a></c:if></c:otherwise></c:choose></c:otherwise></c:choose>');
 	  	$('.welfare_a').append('<span class="theme-color">군인요금제 신청 가능합니다.</span>');
    }  
+});
    
 </script>
 
@@ -766,14 +772,14 @@ $(document).ready(function() {
                     let html = `<div class="size-detail">
                     	<h2 class="mb-3 fw-bolder">가입자 정보</h2>
                     	<div class="col-md-12">
-                    	<input type="text" class="form-control mb-3" id="name_bun" name="name" placeholder="이름" value="${memberVO.name}" >
+                    	<input type="text" class="form-control mb-3" id="name_bun2" name="name" placeholder="이름" value="${memberVO.name}" >
                     	</div>
                     	<div class="row">
                     	<div class="col-md-12">
                     	<div class="d-flex align-items-center justify-content-center">
-				        <input type="text" class="form-control me-3" id="rrnf2" name="rrnf" placeholder="주민번호 앞자리" value="${memberVO.rrnf}">
+				        <input type="text" class="form-control me-3" id="rrnf3" name="rrnf" placeholder="주민번호 앞자리" value="${memberVO.rrnf}">
 				        <p class="me-3 fs-6 mt-2">-</p>
-				        <input type="password" class="form-control" id="rrnl2" name="rrnl" placeholder="주민번호 뒷자리"></div></div></div>
+				        <input type="password" class="form-control" id="rrnl3" name="rrnl" placeholder="주민번호 뒷자리"></div></div></div>
                 <div class="col-md-12">
                     <div class=" d-flex">
                     <input type="text" class="form-control mt-2 " id="address1" name="address1" value="${memberVO.address1}" placeholder="주소입력" >
@@ -873,17 +879,21 @@ $(document).ready(function() {
          } else {
          	telecomName="알뜰폰";
          }
-    	let disKind = $('input[name="disKind"]:checked').val();
-    	let rrnf = $('#rrnf2').val();
-    	let rrnl = $('#rrnl2').val();
-    	let rrnlOrigin = rrnl;
-    	let address1 = $('#address1').val();
-    	let address2 = $('#address2').val();
-    	let address3 = $('#address3').val();
-    	let name = $('#name_bun').val();
-    	let planNum = $('#planNum1').val();
-    	let taPhoneNum = $('#taPhoneNum').val();
-    	let directCode = "번호이동";
+    	const disKind = $('input[name="disKind"]:checked').val();
+    	
+    	const rrnf2 = $('#rrnf3').val();
+    	const rrnl2 = $('#rrnl3').val();
+    	const rrnlOrigin = rrnl2;
+    	
+    	console.log(rrnf2);
+    	const address1 = $('#address1').val();
+    	const address2 = $('#address2').val();
+    	const address3 = $('#address3').val();
+    	const name2 = $('#name_bun2').val();
+    	const planNum = $('#planNum1').val();
+    	const taPhoneNum = $('#taPhoneNum').val();
+    	const directCode = "번호이동";
+    	const joinType="1";
     	
     	$.ajax({
     	    url: '/plan/formAdd', // 서버의 URL 주소
@@ -895,8 +905,8 @@ $(document).ready(function() {
     	        applicationVO: {
     	            directCode: directCode,
     	            directName: telecomName,
-    	            rrnf: rrnf,
-    	            rrnl: rrnl,
+    	            rrnf: rrnf2,
+    	            rrnl: rrnl2,
     	            address1: address1,
     	            address2: address2,
     	            address3: address3,
@@ -904,7 +914,8 @@ $(document).ready(function() {
     	            phoneNum: taPhoneNum,
     	            disKind: disKind,
     	            rrnlOrigin: rrnlOrigin,
-    	            name: name
+    	            name: name2,
+    	            joinType: joinType
     	        }
     	       
     	    }),

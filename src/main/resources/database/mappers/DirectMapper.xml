@@ -115,10 +115,26 @@
 	</select>
 	<!-- 휴대폰 주문시 기기변경 기존 회원 대표회선 휴대폰번호 가져오기 -->
 	<select id="getKingPhoneNum" resultType="PlanVO" parameterType="Integer">
-		SELECT T.PHONENUM, T.SERIALNUM FROM MEMBER M
+		SELECT T.PHONENUM, T.SERIALNUM, T.DISKIND, T.CONTRACTDATE, T.EXPIREDATE FROM MEMBER M
 		INNER JOIN TELEPHONE T ON T.MEMBERNUM = M.MEMBERNUM 
 		WHERE M.MEMBERNUM = #{memberNum} AND T.KINGCHECK =1;
 	</select>
+	<!-- 기기변경시 작동해야하는 app insert 로직 -->
+	 <select id="changeTelephone" statementType="CALLABLE" parameterType="HashMap">
+      {
+         CALL update_telePhone_change (
+           #{memberNum, mode=IN, jdbcType=INTEGER, javaType=INTEGER}, 
+		   #{oriSerialNum, mode=IN, jdbcType=INTEGER, javaType=INTEGER}, 
+		   #{newAppNum, mode=IN, jdbcType=INTEGER, javaType=INTEGER}, 
+		   #{out_result, mode=OUT, jdbcType=INTEGER, javaType=INTEGER}
+		   <!-- #{out_msg, mode=OUT, jdbcType=VARCHAR, javaType=STRING} -->
+         )
+      }
+ 	</select>   
+ 	<update id="setUpdateChangeTelephone" parameterType="Integer">
+ 		UPDATE TELEPHONE 
+		SET PHONENUM = null WHERE SERIALNUM = #{serialNum}; 
+ 	</update>
 	
 	<!-- useGenerateKeys를 사용하고, 해당 옵션으로 생성된 값을 넣을 변수명을 keyProperty에 입력해준다. 값이 생성되었으므로 아래의 쿼리문을 사용한다. -->
 	<insert id="setFormAdd" parameterType="ApplicationVO" useGeneratedKeys="true" keyProperty="appNum">
@@ -144,14 +160,6 @@
 		ORDER BY SERIALNUM DESC
 		LIMIT 1;
 	</select>
-	
-	<!-- 번이 / 기변 상품 구매 완료 후 회원 정보 불러오는 -->
-	<!-- <select id="getMemberPlan" resultType="PlanVO" parameterType="Integer">
-		SELECT P.PLANNUM, P.PLANNAME, P.PLANPRICE, P.DATACAPACITY, M.MEMBERNUM, T.SERIALNUM , T.PHONENUM, T.KINGCHECK FROM PLAN P
-		JOIN TELEPHONE T ON T.PLANNUM = P.PLANNUM 
-		JOIN MEMBER M ON T.MEMBERNUM = M.MEMBERNUM
-		WHERE M.MEMBERNUM = #{memberNum} AND T.KINGCHECK = 1
-	</select> -->
 	
 	<update id="setOwnCheck" parameterType="Integer">
 	UPDATE TELEPHONE T
@@ -304,6 +312,18 @@
 	INSERT INTO QNA (MEMBERNUM, SLICEDCODE, ORDERNUM, SERIALNUM, TITLE, CONTENTS, REPLY, REGDATE, STATE, CATEGORYCODE, FILEPATH, REPLYDATE)
 	VALUES(#{memberNum}, #{slicedCode} ,NULL, NULL, NULL, #{contents}, NULL, now(), 0, '00', NULL, NULL);
 	</insert>
+	<!-- 상품문의 수정 -->
+	<update id="setQnaUpdate" parameterType="QnaVO">
+		UPDATE QNA
+		SET CONTENTS=#{contents}
+		WHERE NUM=#{num}
+	</update>
+	
+	<!-- 상품문의 삭제 -->
+	<delete id="setQnaDelete" parameterType="QnaVO">
+		DELETE FROM QNA
+		WHERE NUM=#{num}
+	</delete>
 	
 	<!-- 상품문의 답글 업데이트 -->
 	<update id="setReplyAdd" parameterType="QnaVO">

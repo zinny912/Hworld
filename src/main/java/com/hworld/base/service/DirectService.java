@@ -274,7 +274,7 @@ public class DirectService {
 				//신청서 db에 insert  appNum 생성
 				int result = directDAO.setFormAdd(applicationVO);
 				log.error(">>>>>>>>>>>>>>>>>>>>>>>>>> appNum: {} ", applicationVO.getAppNum());
-				
+				log.error("{}<++++++++++++++++++++++++phoneNum", applicationVO.getPhoneNum());
 				//회원번호 조회하기 ( 주민번호 뒷자리 입력하면 그 값으로 ) 
 				MemberVO member = directDAO.getMemberSearch(applicationVO);
 				
@@ -286,9 +286,38 @@ public class DirectService {
 				log.error("{}<============멤버넘 ",member.getMemberNum());
 				log.error("{}<=========세션멤버",sessionMemberNum);
 				
+				Integer joinType =(Integer) session.getAttribute("joinType");
+				
+				log.error("{}<========",session.getAttribute("joinType"));
+				log.error("{}<---------=시리얼넘 있냐?",session.getAttribute("serialNum"));
+				
 				applicationVO.setMemberNum(sessionMemberNum);
 				
-				
+				if(joinType==0) {
+					Integer serialNum = (Integer) session.getAttribute("serialNum");
+					int nullResult = directDAO.setUpdateChangeTelephone(serialNum);
+					log.error("{}<========null 되냐? ",nullResult);
+					Map<String, Integer> telephone = new HashMap<>();
+					telephone.put("memberNum",applicationVO.getMemberNum());
+					telephone.put("oriSerialNum", serialNum);
+					telephone.put("newAppNum", applicationVO.getAppNum());
+					telephone.put("out_result", -1);
+
+					log.error("{}<==========out_result", (Integer)telephone.get("out_result"));
+
+					result =(Integer) directDAO.changeTelephone(telephone);
+					log.error("{}<===========멤버넘 ", telephone.get("memberNum"));
+					log.error("{}<===========원래 시리얼넘 ", telephone.get("oriSerialNum"));
+					log.error("{}<===========새앱넘 ", telephone.get("newAppNum"));
+					
+					log.error("{}<==========기기변경 ",result);
+				    
+				    Integer outResult = (Integer) telephone.get("out_result");
+	
+				    log.error("{}<=======outResult", outResult);
+					return result;
+				}else {
+
 				//3-2b.회원번호(신청서VO)로 회선VO 만들기
 				//프로시저 호출해서 회선VO INSERT
 				Map<String, Integer> telephone = new HashMap<>();
@@ -300,9 +329,11 @@ public class DirectService {
 				result = directDAO.setTelephoneInitAdd(telephone);
 				
 				log.info(" :::::::::::::::::::::::: {} ", result);
-				
-				
-				return result;
+				if(result ==-1) {
+					result =1;
+				}
+			return result;
+				}
 	}
 
 	//구매완료(가입완료 후 결과안내 창)

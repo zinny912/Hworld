@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -25,6 +26,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hworld.base.dao.DirectDAO;
+import com.hworld.base.dao.MemberDAO;
 import com.hworld.base.dao.PlanDAO;
 import com.hworld.base.service.CartService;
 import com.hworld.base.service.DirectService;
@@ -57,6 +59,8 @@ public class DirectController {
 	private OrderService orderService;
 	@Autowired
 	private PlanDAO planDAO;
+	@Autowired
+	private MemberDAO memberDAO;
 	
 	
 	// 휴대폰 리스트 페이지
@@ -168,7 +172,7 @@ public class DirectController {
 		}
 	    
 	    List<ReviewVO> reviews = directService.getReview(slicedCode);//slicedCode로 페이징된 리뷰 목록 조회
-
+	    
 	    Integer result = planDAO.getPlanG(memberVO.getMemberNum());
 	    if(result==null) {
 	    	result=0;
@@ -506,12 +510,34 @@ public class DirectController {
 	public ModelAndView setQnaAdd(QnaVO qnaVO, ModelAndView mv) throws Exception {
 		int result = directService.setQnaAdd(qnaVO);
 		String slicedCode = qnaVO.getSlicedCode();  // reviewVO에서 slicedCode 값을 가져온다
-		
-	    
+
 		String redirectUrl = "/direct/phoneDetail?slicedCode=" + slicedCode;  // 리다이렉트할 URL을 생성한다
 		mv.setViewName("redirect:" + redirectUrl);  // 리다이렉트할 URL을 설정한다
 		return mv;
 	}
+	//상품 문의 수정
+	@PostMapping("qnaUpdate")
+	public ModelAndView setQnaUpdate(QnaVO qnaVO, @RequestParam String slicedCode)throws Exception{
+		ModelAndView mv = new ModelAndView();
+		int result = directDAO.setQnaUpdate(qnaVO);
+
+		String redirectUrl = "/direct/phoneDetail?slicedCode=" + slicedCode;  // 리다이렉트할 URL을 생성한다
+		mv.setViewName("redirect:" + redirectUrl);  // 리다이렉트할 URL을 설정한다
+		return mv;
+	}
+	
+	//상품 문의 삭제
+	@ResponseBody
+	@PostMapping("qnaDelete")
+	public ModelAndView setQnaDelete(QnaVO qnaVO, @RequestParam String slicedCode) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		int result = directDAO.setQnaDelete(qnaVO);
+		
+	    String redirectUrl = "/direct/phoneDetail?slicedCode=" + slicedCode;  // 리다이렉트할 URL을 생성합니다.
+	    mv.setViewName("redirect:" + redirectUrl);  // 리다이렉트할 URL을 설정합니다.
+		return mv;
+	}
+	
 	//상품 답글 추가 (admin)
 	@PostMapping("directReplyAdd")
 	public ModelAndView setReplyAdd(QnaVO qnaVO) throws Exception{
@@ -526,7 +552,7 @@ public class DirectController {
 	
 	// 휴대폰 주문 페이지
 	@GetMapping("phoneOrder")
-	public ModelAndView phoneOrder(@RequestParam Map<String, Object> map, HttpSession session, @RequestParam String taPhoneNum) throws Exception{
+	public ModelAndView phoneOrder(@RequestParam Map<String, Object> map, HttpSession session, @RequestParam String taPhoneNum, @RequestParam String cancelPrice) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		MemberVO memberVO = (MemberVO) session.getAttribute("memberVO");
 
@@ -537,9 +563,9 @@ public class DirectController {
 		}else {
 		
 			Integer memberNum = memberVO.getMemberNum();
-		
 		//회선이 없는 경우 null 뜨는거 방지해야해 진희야 까먹지마 
 		PlanVO phoneNum = directService.getKingPhoneNum(memberNum);
+		session.setAttribute("serialNum", phoneNum != null ? phoneNum.getSerialNum() : null);
 		
 		if(phoneNum != null) {
 		mv.addObject("phoneNum", phoneNum);
@@ -560,7 +586,7 @@ public class DirectController {
 	@Transactional
 	@PostMapping("formAdd")
 	public ModelAndView setFormAdd(@Valid ApplicationVO applicationVO, BindingResult bindingResult, HttpSession session, OrderDirectVO orderDirectVO, @RequestParam("orderTelNum") String orderTelNum, @RequestParam("directCode") String directCode, 
-			@RequestParam("address1") String address1, @RequestParam("address2") String address2, @RequestParam("address3") String address3, @RequestParam("orderReceiver") String orderReceiver, @RequestParam("taPhoneNum") String taPhoneNum) throws Exception{
+			@RequestParam("address1") String address1, @RequestParam("address2") String address2, @RequestParam("address3") String address3, @RequestParam("orderReceiver") String orderReceiver, @RequestParam("taPhoneNum") String taPhoneNum, @RequestParam("joinType") Integer joinType) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		
 		//에러가 발생한 경우 여기서 view 리턴
@@ -569,13 +595,18 @@ public class DirectController {
 			mv.setViewName("hworld/phoneOrder");
 			return mv;
 		}
+		log.error("{}<========조인타입",joinType);
+		
+		session.setAttribute("joinType", joinType);
+		
 
-		//에러가 없는경우 insert 작업
-		int result = directService.setFormAdd(applicationVO, session);
+	   int result = directService.setFormAdd(applicationVO, session);
+	   log.error("{}<=======리절트 뭐냐" ,result);
 		
 		MemberVO memberVO = (MemberVO) session.getAttribute("memberVO");
 		Integer memberNum = memberVO.getMemberNum();
 		int ownResult = directService.setOwnCheck(memberNum);
+		
 		
 		// 번호 삭제 호출
 	    if (!taPhoneNum.isEmpty()) {
@@ -596,11 +627,14 @@ public class DirectController {
 	    orderDirectVO.setDirectCode(directCode);
 	    orderDirectVO.setMemberNum(memberNum);
 	    
+
 		// 휴대폰 주문이 성공했을 경우, orderPhone 메서드 호출
-        if (result == -1) {
+        if (result > 0) {
             orderService.orderPhone(orderDirectVO, memberVO, orderVO);
         }
-		
+		memberVO = memberDAO.getMemberDetail(memberVO);
+		session.setAttribute("memberVO", memberVO);
+        
 		mv.setViewName("redirect:./phoneOrderResult");
 		//성공하면 결과에 따라 alert띄우기 해도 될듯. 나중에 index 등으로 바꾸기
 		return mv;

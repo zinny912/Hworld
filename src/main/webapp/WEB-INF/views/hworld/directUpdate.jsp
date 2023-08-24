@@ -278,7 +278,7 @@ $('#optionAdd').click(()=>{
 </script>
 
 <script>
-	//썸머노트 
+/* 	//썸머노트 
 $('#directContents').summernote({
   placeholder: '상세 내용을 입력해주세요.',
   tabsize: 2,
@@ -298,6 +298,36 @@ $('#directContents').summernote({
       $(this).summernote('editor').body.style.paragraph = 'center';
     }
   }
+}); */
+$('#directContents').summernote('code', '${list.get(0).getDirectContents()}');
+ 
+//썸머노트 
+$('#directContents').summernote({
+    tabsize: 2,
+    height: 300,
+    toolbar: [
+      ['style', ['style']],
+      ['font', ['bold', 'underline', 'clear']],
+      ['color', ['color']],
+      ['para', ['ul', 'ol', 'paragraph']],
+      ['table', ['table']],
+      ['insert', ['link', 'picture', 'video']],
+    ],
+    callbacks: {
+    	onImageUpload: function(files, editor, welEditable) {
+    		for(var i = files.length -1; i>=0; i--) {
+    			sendFile(files[i], this);
+    		}
+    	}
+    }
+});
+
+
+// 썸머노트 에디터의 내용이 변경되었을 때 처리
+  $('#directContents').on('summernote.blur', function() {
+    var summerContent = $(this).summernote('code');
+    console.log('변경된 썸머노트 내용: ' + summerContent);
+
 });
 
 </script>

@@ -63,7 +63,6 @@ $('#updateReviewConfirm').click(function() {
    	 	console.log(response);
 		console.log('성공');
 		location.reload();
-		alert("수정이 완료되었습니다.^^*");
 	   
         },
         error: function(xhr, status, error) {
@@ -94,7 +93,6 @@ $('#confirmDelete').click(function() {
             // 응답 데이터 확인
           
             location.reload();
-            alert("삭제가 완료되었습니다.^^*");
         },
         error: function(xhr, status, error) {
             // 오류 처리
@@ -102,6 +100,49 @@ $('#confirmDelete').click(function() {
         }
     });
 });
+
+//문의 수정
+$('.qnaUpdate').click(function(){
+	const qnaNum = $(this).data('qna-num');
+    const directNameQ = $('.directNameValue').data('direct-name');
+    const contents = $('#qnaContentsQ' + qnaNum).text().trim();
+    $('#directName4').text(directNameQ);
+    $('#modalQnaContents').text(contents);
+ 
+});
+// 문의 삭제 버튼 클릭 이벤트 처리
+$('#qnaDel').click(function() {
+    const num = $(this).data('qna-num');
+    $('#modalDelNumQ').val(num);
+});
+
+$('#qnaDelete').click(function() {
+    console.log('삭제 클릭');
+    let qnaId = $('#modalDelNumQ').val();
+    const slice = $('#modalDelslice').val();
+    alert("qnaNum:"+qnaId+"slicedCode"+slice );
+    // POST 방식으로 수정된 데이터 전송
+    $.ajax({
+        url: "/direct/qnaDelete",
+        type: "POST",
+        data: {
+            num: qnaId,
+            slicedCode: slice
+        },
+        success: function(response) {
+            // 응답 데이터 확인
+          
+            location.reload();
+        },
+        error: function(xhr, status, error) {
+            // 오류 처리
+            console.log(error);
+        }
+    });
+});
+
+
+
 // 휴대폰 상품 삭제 버튼 클릭 이벤트 처리
 $('#productDelModal').click(function() {
     const dc = $('.direct-item').data('direct-code');

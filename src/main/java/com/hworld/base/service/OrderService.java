@@ -146,6 +146,7 @@ public class OrderService {
 		Date date = new Date();
 		SimpleDateFormat format = new SimpleDateFormat("_yyyyMMddHHmmss");
 		String orderNum = memberVO.getMemberNum()+format.format(date);
+		log.error("{}<=====================주문번호",orderNum);
 		
 		orderDirectVO.setOrderNum(orderNum);
 		orderDirectVO.setOrderAmount("1");
@@ -167,6 +168,7 @@ public class OrderService {
 			int orderAmountInt = 1;
 			
 			int Stock = directStockInt-orderAmountInt;
+			log.error("{}<====================stock ",Stock);
 			directVO.setDirectStock(Stock);
 			
 			orderDAO.deductStock(directVO);

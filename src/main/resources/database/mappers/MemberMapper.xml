@@ -92,5 +92,11 @@
 		WHERE EMAIL=#{email}
 	</update>
 	
+	<!-- 대표회선 헤더에 나타내기 -->
+	<select id="viewKingNum" parameterType="Integer" resultType="String">
+		SELECT t.PHONENUM , m.NAME FROM TELEPHONE t 
+		INNER JOIN MEMBER m ON m.MEMBERNUM =t.MEMBERNUM
+		WHERE t.KINGCHECK =1 AND m.MEMBERNUM=#{memberNum}
+	</select>
 	
 </mapper>
