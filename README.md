@@ -3,16 +3,18 @@
 통신사 홈페이지 구축 
 
 1. 기능정의서
-![image](https://github.com/zinny912/Hworld/assets/121842675/a6259bf0-f455-4002-a745-cc3c6f93eabc)
-![image](https://github.com/zinny912/Hworld/assets/121842675/05fd0865-8529-4caf-a0db-4e540b0c4928)
-![image](https://github.com/zinny912/Hworld/assets/121842675/eaeb69d2-8eec-4836-b46a-61688a8e4f7a)
-![image](https://github.com/zinny912/Hworld/assets/121842675/d4480662-3499-417b-9ac9-7cd5df06c5c1)
+![image](https://github.com/zinny912/Hworld/assets/121842675/0ebe56e6-c798-4909-9a33-75266645217f)
+![image](https://github.com/zinny912/Hworld/assets/121842675/ec89fa47-f466-4cd5-9b30-7a8f524b59d2)
+![image](https://github.com/zinny912/Hworld/assets/121842675/4a6d8787-4669-4bd5-add1-646200d1c721)
+![image](https://github.com/zinny912/Hworld/assets/121842675/68233559-c01d-4ff3-86cb-2c0885bd9279)
+
 
 
 
 2. WBS
-![image](https://github.com/zinny912/Hworld/assets/121842675/b1e1135e-cee6-4740-a7cc-f47a4396eb8f)
-![image](https://github.com/zinny912/Hworld/assets/121842675/b3b5e8ba-dbb6-4f09-aa3c-9a95588d71a8)
+![image](https://github.com/zinny912/Hworld/assets/121842675/43e8eda7-d894-498e-9ad5-bc93bc712652)
+![image](https://github.com/zinny912/Hworld/assets/121842675/a14a3020-51da-491e-9bfb-2e8d114a7348)
+
 
 
 3. 구현내용
