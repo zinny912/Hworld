@@ -2,10 +2,20 @@
 
 통신사 홈페이지 구축 
 
-1. 기술정의서
-2. WBS
-3. 화면정의서
+1. 기능정의서
+![image](https://github.com/zinny912/Hworld/assets/121842675/a6259bf0-f455-4002-a745-cc3c6f93eabc)
+![image](https://github.com/zinny912/Hworld/assets/121842675/05fd0865-8529-4caf-a0db-4e540b0c4928)
+![image](https://github.com/zinny912/Hworld/assets/121842675/eaeb69d2-8eec-4836-b46a-61688a8e4f7a)
+![image](https://github.com/zinny912/Hworld/assets/121842675/d4480662-3499-417b-9ac9-7cd5df06c5c1)
 
+
+
+2. WBS
+![image](https://github.com/zinny912/Hworld/assets/121842675/b1e1135e-cee6-4740-a7cc-f47a4396eb8f)
+![image](https://github.com/zinny912/Hworld/assets/121842675/b3b5e8ba-dbb6-4f09-aa3c-9a95588d71a8)
+
+
+3. 구현내용
 [Hworld.pptx](https://github.com/zinny912/Hworld/files/12428709/Hworld.pptx)
 ![001](https://github.com/zinny912/Hworld/assets/121842675/1a0c6153-b5fe-44d4-96f6-b982386fadd4)
 ![002](https://github.com/zinny912/Hworld/assets/121842675/1fa0c6ea-5547-43e7-9bbd-4d24ddecf2f1)
