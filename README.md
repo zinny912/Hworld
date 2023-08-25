@@ -1,8 +1,9 @@
 # H world
 
-통신사 홈페이지 구축 
+빌링시스템 통신사 홈페이지
 
 1. 기능정의서
+   
 ![image](https://github.com/zinny912/Hworld/assets/121842675/0ebe56e6-c798-4909-9a33-75266645217f)
 ![image](https://github.com/zinny912/Hworld/assets/121842675/ec89fa47-f466-4cd5-9b30-7a8f524b59d2)
 ![image](https://github.com/zinny912/Hworld/assets/121842675/4a6d8787-4669-4bd5-add1-646200d1c721)
@@ -12,12 +13,14 @@
 
 
 2. WBS
+   
 ![image](https://github.com/zinny912/Hworld/assets/121842675/43e8eda7-d894-498e-9ad5-bc93bc712652)
 ![image](https://github.com/zinny912/Hworld/assets/121842675/a14a3020-51da-491e-9bfb-2e8d114a7348)
 
 
 
 3. 구현내용
+
 [Hworld.pptx](https://github.com/zinny912/Hworld/files/12428709/Hworld.pptx)
 ![001](https://github.com/zinny912/Hworld/assets/121842675/1a0c6153-b5fe-44d4-96f6-b982386fadd4)
 ![002](https://github.com/zinny912/Hworld/assets/121842675/1fa0c6ea-5547-43e7-9bbd-4d24ddecf2f1)
